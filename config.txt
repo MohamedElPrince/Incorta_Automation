@@ -1,0 +1,32 @@
+# location for incorta home. Defaults to /home/Incorta if none specified
+incorta_home=/Users/ilyasreyhanoglu/Incorta Analytics
+
+#defaults to /home/tenant if none specified
+incorta_tenant=/Users/Super/Home/Demo
+
+# admin defaults to Super
+admin=Ilyas
+
+#defaults to none
+password=Nada
+
+#default is No
+load_users=No 
+
+#default is MySQL
+test_suite=Oracle
+
+#default is Yes
+skip_validation=Yes
+
+#default path to place working directory is /IncortaTesting/tmp/work
+wd_path=/Users/ilyasreyhanoglu/Desktop
+
+#This is import flag and set to false (-d)
+
+#This is data load flag and set to false (-l)
+
+#This is extract flag and set to false (-x)
+
+
+
