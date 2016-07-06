@@ -4,6 +4,12 @@ incorta_home=/Users/ilyasreyhanoglu/Incorta Analytics
 #defaults to /home/tenant if none specified
 incorta_tenant=/Users/Super/Home/Demo
 
+#tenant defaults to Demo
+tenant=TenantDemo
+
+#url defaults to Server
+url=http://localhost:8080/incorta/#/login
+
 # admin defaults to Super
 admin=Ilyas
 
@@ -27,6 +33,7 @@ wd_path=/Users/ilyasreyhanoglu/Desktop
 #This is data load flag and set to false (-l)
 
 #This is extract flag and set to false (-x)
+
 
 
 
