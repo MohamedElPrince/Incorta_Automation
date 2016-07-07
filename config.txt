@@ -20,7 +20,7 @@ password=Nada
 load_users=No 
 
 #default is MySQL
-test_suite=Oracle
+test_suite=CSV_DataSources
 
 #default is Yes
 skip_validation=Yes

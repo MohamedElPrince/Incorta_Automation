@@ -27,7 +27,7 @@ commands = sys.argv[2:]
 #Default variables and their values stored in a dictionary
 
 config_defaults = {'incorta_home':'/home/Incorta', 'tenant_home':'/home/tenants',
-				   'admin':'Super','password':'none', 'load_users': 'No', 'test_suite': 'MySQL',
+				   'admin':'Super','password':'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
 				   'skip_validation': 'Yes','import_object':'False','data_load':'False',
 				   'extract_csv':'False','wd_path':'/IncortaTesting/tmp/work', 'tenant':'Demo',
 				   'url':'http://localhost:8080/incorta/'}
