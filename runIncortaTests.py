@@ -6,12 +6,14 @@ import time
 # July 1 2016
 # By Ilyas Reyhanoglu
 
-#Arguments
-#-------------------------------------------
-#-d: import datasource/schema/dashboard
-#-l: load data
-#-x: extract files
-#-------------------------------------------
+"""
+Arguments
+-------------------------------------------
+-d: import datasource/schema/dashboard
+-l: load data
+-x: extract files
+-------------------------------------------
+"""
 
 #All the arguments which are passed in command line
 sys.argv[0:] = argv
