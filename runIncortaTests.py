@@ -30,13 +30,11 @@ config_defaults = {'incorta_home':'/home/Incorta', 'tenant_home':'/home/tenants'
 				   'admin':'Super','password':'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
 				   'skip_validation': 'Yes','import_object':'False','data_load':'False',
 				   'extract_csv':'False','wd_path':'/IncortaTesting/tmp/work', 'tenant':'Demo',
-				   'url':'http://localhost:8080/incorta/'}
+				   'url':'http://localhost:8080/incorta'}
 
-# The new_config_defaults dictionary stores the variables and their values from
-# the config file
+# The new_config_defaults dictionary stores the variables and their values from the config file
 
-# The variables corresponding to importing, loading data, and extracting files are by
-# default False
+# The variables corresponding to importing, loading data, and extracting files are by default False
 
 new_config_defaults={'import_object':'False','data_load':'False','extract_csv':'False'}
 
@@ -45,8 +43,7 @@ new_config_defaults={'import_object':'False','data_load':'False','extract_csv':'
 
 def set_command_value(commands):
 
-	# if no arguments other than config file are passed, importing, data loading, and extracting
-	# variables will be set to True
+	# if no arguments other than config file are passed, importing, data loading, and extracting variables will be set to True
 	if len(sys.argv) ==2:
 		new_config_defaults['data_load']=True
 		new_config_defaults['extract_csv']=True
@@ -62,7 +59,7 @@ def set_command_value(commands):
 				new_config_defaults['extract_csv']=True
 
 
-# Parses variables and their values from the config file and stores them in a dictionairy
+# Parses variables and their values from the config file and stores them in a dictionary
 
 def set_new_defaults(config_file):	
 	

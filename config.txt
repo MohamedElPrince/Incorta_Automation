@@ -1,20 +1,20 @@
-# location for incorta home. Defaults to /home/Incorta if none specified
-incorta_home=/Users/ilyasreyhanoglu/Incorta Analytics
+#location for incorta home. Defaults to /home/Incorta if none specified
+incorta_home=/Users/ilyasreyhanoglu/IncortaAnalytics
 
-#defaults to /home/tenant if none specified
-incorta_tenant=/Users/Super/Home/Demo
+#defaults to /home/tenants if none specified
+tenant_home=/Users/Super/Home/TenantDemo
 
 #tenant defaults to Demo
 tenant=TenantDemo
 
-#url defaults to Server
+#url defaults to http://localhost:8080/incorta
 url=http://localhost:8080/incorta/#/login
 
 # admin defaults to Super
 admin=Ilyas
 
 #defaults to none
-password=Nada
+password=Khi
 
 #default is No
 load_users=No 
