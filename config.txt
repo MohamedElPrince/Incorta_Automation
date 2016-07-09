@@ -5,16 +5,16 @@ incorta_home=/Users/ilyasreyhanoglu/IncortaAnalytics
 tenant_home=/Users/Super/Home/TenantDemo
 
 #tenant defaults to Demo
-tenant=TenantDemo
+tenant=demo
 
 #url defaults to http://localhost:8080/incorta
-url=http://localhost:8080/incorta/#/login
+url=http://localhost:8080/incorta
 
 # admin defaults to Super
-admin=Ilyas
+admin=super
 
 #defaults to none
-password=Khi
+password=mysql323
 
 #default is No
 load_users=No 
