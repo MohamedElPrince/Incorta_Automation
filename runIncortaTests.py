@@ -2,6 +2,8 @@ import sys
 from sys import argv
 import os.path
 import time
+import subprocess, os
+from shutil import copyfile	
 
 # July 1 2016
 # By Ilyas Reyhanoglu
@@ -130,5 +132,5 @@ incorta_module=incorta_home.rstrip()+os.sep+"bin".rstrip()
 sys.path.append(incorta_module)
 import incorta
 
-for key,value in new_config_defaults.items():
-	print(key,value)
+# for key,value in new_config_defaults.items():
+# 	print(key,value
