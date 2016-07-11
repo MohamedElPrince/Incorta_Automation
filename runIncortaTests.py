@@ -5,7 +5,7 @@ import time
 import subprocess, os
 from shutil import copyfile	
 
-# July 1 2016
+# July 8 2016
 # By Ilyas Reyhanoglu
 
 """
@@ -116,7 +116,6 @@ def set_new_defaults(config_file):
 		new_config_defaults['wd_path']+='/IncortaTesting/tmp/work'
 		add_time_stamp_to_wd(timestamp)
 
-
 def add_time_stamp_to_wd(timestamp):
 	date_and_time = time.strftime("%m/%d/%Y-%H:%M:%S")
 	new_config_defaults['wd_path']+='/'+date_and_time
@@ -128,9 +127,13 @@ set_new_defaults(config_file)
 locals().update(new_config_defaults)
 
 # importing the incorta module
-incorta_module=incorta_home.rstrip()+os.sep+"bin".rstrip()
-sys.path.append(incorta_module)
-import incorta
+def incorta_import(incorta_home):
+	incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
+	sys.path.append(incorta_module)
+	import incorta
+	global incorta
 
-# for key,value in new_config_defaults.items():
-# 	print(key,value
+incorta_import(incorta_home)
+
+for key,value in new_config_defaults.items():
+	print(key,value)
