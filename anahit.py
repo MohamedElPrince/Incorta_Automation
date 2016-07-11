@@ -1,6 +1,8 @@
 import os, sys
 import zipfile
 
+Debug = False   #Debug flag for print statements
+
 def incorta_import(incorta_home):
     """
     Function takes the incorta installation path to import Incorta API
@@ -79,8 +81,9 @@ def import_datafiles(session, test_suite):
                 if file.endswith(extension):
                     file_full_path = os.path.join(root, file)
                     upload_check.append(incorta.upload_data_file(session, file_full_path))
-    for checks in upload_check:
-        print checks,
+    if Debug == True:
+        for checks in upload_check:
+            print checks,
 
 def import_schema(session, test_suite):
     """
@@ -103,8 +106,9 @@ def import_schema(session, test_suite):
                 if file.endswith(extension):
                     file_full_path = os.path.join(root, file)
                     upload_check.append(incorta.import_tenant(session, file_full_path, True))
-    for checks in upload_check:
-        print checks,
+    if Debug == True:
+        for checks in upload_check:
+            print checks,
 
 def import_dashboard(session, test_suite):
     """
@@ -127,8 +131,9 @@ def import_dashboard(session, test_suite):
                 if file.endswith(extension):
                     file_full_path = os.path.join(root, file)
                     upload_check.append(incorta.import_tenant(session, file_full_path, True))
-    for checks in upload_check:
-        print checks,
+    if Debug == True:
+        for checks in upload_check:
+            print checks,
 
 
 def logout(session):
@@ -147,17 +152,23 @@ def logout(session):
         print 'Failed to logout'
         exit(1)
 
-
+# Temporary Definitions
 test_suite = '/CSV_DataSources'
 wd_path = "/Users/anahit/IncortaTesting/tmp/work/testingonly/"
 
+# Calls each function for testing in order
 incorta_import("/Users/anahit/Incorta Analytics")
+
 session = login('http://localhost:8080/incorta/', 'super', 'super', 'super')
+
 extract_test_suites(wd_path, test_suite)
+
 import_datafiles(session, test_suite)
+
 import_schema(session, test_suite)
+
 import_dashboard(session, test_suite)
 
-
 logout(session)
-session_id = session[21:53]
+
+session_id = session[21:53] # Session ID stripped from session var
