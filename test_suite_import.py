@@ -1,6 +1,15 @@
 import os, sys
 import zipfile
+"""
+Imports Incorta API from local installation
+Exports test suites to working directory
+Imports datafiles / schemas / dashboards to Incorta
+Login/Logout Functions
 
+TODO
+    Add log file dump for failure and success of each import and extract
+    Need more try/catch handling
+"""
 Debug = False   #Debug flag for print statements
 
 def incorta_import(incorta_home):
