@@ -1,11 +1,11 @@
 #location for incorta home. Defaults to /home/Incorta if none specified
-incorta_home=/Users/ilyasreyhanoglu/IncortaAnalytics
+incorta_home=/home/Incorta
 
 #defaults to /home/tenants if none specified
-tenant_home=/Users/Super/Home/TenantDemo
+tenant_home=/home/tenants
 
 #tenant defaults to Demo
-tenant=demo
+tenant=Demo
 
 #url defaults to http://localhost:8080/incorta
 url=http://localhost:8080/incorta
@@ -14,19 +14,19 @@ url=http://localhost:8080/incorta
 admin=super
 
 #defaults to none
-password=mysql323
+password=super
 
 #default is No
 load_users=No 
 
 #default is MySQL
-test_suite=CSV_DataSources
+test_suite=MySQL
 
 #default is Yes
 skip_validation=Yes
 
 #default path to place working directory is /IncortaTesting/tmp/work
-wd_path=/Users/ilyasreyhanoglu/Desktop
+wd_path=/IncortaTesting/tmp/work
 
 #This is import flag and set to false (-d)
 
