@@ -1,6 +1,11 @@
-import subprocess, os, time
+import subprocess, os, time, sys
 from shutil import copyfile	
 import runIncortaTests
+from runIncortaTests import incorta
+
+# July 8 2016
+# By Ilyas Reyhanoglu
+# Load users from LDAP
 
 #Modifies sync_directory_with_ldap.sh
 def edit_sync_directory(string_to_query, modification):
@@ -9,12 +14,12 @@ def edit_sync_directory(string_to_query, modification):
 	lines = f.readlines()
 	for line in lines:
 		if string_to_query in line:
-			var=line.rstrip()
+			replace_line=line.rstrip()
 	f.close()
 
 	f = open(path_incorta_bin+'/sync_directory_with_ldap.sh','r')
 	filedata=f.read()
-	update= filedata.replace(var,modification)
+	update= filedata.replace(replace_line,modification)
 	f.close()
 
 	f = open(path_incorta_bin+'/sync_directory_with_ldap.sh','w')
@@ -51,11 +56,11 @@ copyfile(path_dir_export+'/ldap-config.properties',path_incorta_bin+'/ldap-confi
 #Need to get into Incorta bin directory
 os.chdir(path_incorta_bin)
 
-#Hold the necessary changes to sync_directory_with_ldap.sh
-session='session=`$incorta_cmd login '+runIncortaTests.url+' '+runIncortaTests.tenant+' '+runIncortaTests.admin+' '+runIncortaTests.password+'`'
+#Holds the necessary changes to sync_directory_with_ldap.sh
+sync_session='session=`$incorta_cmd login '+runIncortaTests.url+' '+runIncortaTests.tenant+' '+runIncortaTests.admin+' '+runIncortaTests.password+'`'
 full_sync='$incorta_cmd sync_directory_with_ldap $session true'
 
-edit_sync_directory('session=', session)
+edit_sync_directory('session=', sync_session)
 edit_sync_directory('$incorta_cmd sync',full_sync)
 
 #import to Incorta
@@ -74,5 +79,12 @@ subprocess.call('kill -9 ps aux | grep '+runIncortaTests.incorta_home,shell=True
 subprocess.call('mysql.server start',shell=True)
 subprocess.call(runIncortaTests.incorta_home+'/./start.sh',shell=True)
 
+os.chdir(path_incorta_bin)
 
+#Assign roles
+session =incorta.login(runIncortaTests.url,runIncortaTests.tenant,runIncortaTests.admin,runIncortaTests.password)
+incorta.assign_role_to_group(session, 'executive', 'SuperRole')
+incorta.assign_role_to_group(session,'engineering','Analyze User')
+
+#End in original directory
 os.chdir(owd)
