@@ -126,11 +126,13 @@ locals().update(new_config_defaults)
 for key, value in new_config_defaults.items():
     print(key, value)
 
+test_suite = '/' + test_suite
+
 """
 #################################################### Functions ####################################################
 """
 
-Debug = False   #Debug flag for print statements
+Debug = True #Debug flag for print statements
 
 """
 #######################################
@@ -202,7 +204,6 @@ def extract_test_suites(wd_path, test_suite):
         prints:
             Nothing
     """
-    test_suite = '/'+ test_suite
     python_work_dir = os.getcwd()
     test_suite_path = python_work_dir + test_suite
     extension = '.zip'
@@ -458,13 +459,9 @@ session=login(url, tenant, admin, password)
 print session
 print wd_path
 extract_test_suites(wd_path, test_suite)
-
-
-
-
-
-
-
+import_datafiles(session, wd_path)
+import_schema(session, wd_path)
+import_dashboard(session, wd_path)
 
 
 
