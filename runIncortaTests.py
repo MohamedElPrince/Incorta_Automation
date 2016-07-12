@@ -459,9 +459,9 @@ session=login(url, tenant, admin, password)
 print session
 print wd_path
 extract_test_suites(wd_path, test_suite)
-import_datafiles(session, wd_path)
-import_schema(session, wd_path)
-import_dashboard(session, wd_path)
+import_datafiles(session, test_suite)
+import_schema(session, test_suite)
+import_dashboard(session, test_suite)
 
 
 
