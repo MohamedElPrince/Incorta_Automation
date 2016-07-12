@@ -104,11 +104,11 @@ def set_new_defaults(config_file):
 
     # creates the entire working directory path
 
-    if new_config_defaults['wd_path'] == '~/IncortaTesting/tmp/work':
+    if new_config_defaults['wd_path'] == '/IncortaTesting/tmp/work':
         pass
     else:
         timestamp = ''
-        new_config_defaults['wd_path'] += '~/IncortaTesting/tmp/work'
+        new_config_defaults['wd_path'] += '/IncortaTesting/tmp/work'
         add_time_stamp_to_wd(timestamp)
 
 
@@ -202,6 +202,7 @@ def extract_test_suites(wd_path, test_suite):
         prints:
             Nothing
     """
+    test_suite = '/'+ test_suite
     python_work_dir = os.getcwd()
     test_suite_path = python_work_dir + test_suite
     extension = '.zip'
@@ -453,6 +454,11 @@ Load Users From LDAP
 """
 
 incorta_import(incorta_home)
+session=login(url, tenant, admin, password)
+print session
+print wd_path
+extract_test_suites(wd_path, test_suite)
+
 
 
 
