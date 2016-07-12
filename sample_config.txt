@@ -26,6 +26,9 @@ test_suite=MySQL
 skip_validation=Yes
 
 #default path to place working directory is /IncortaTesting/tmp/work
+
+#when a custom working directory path is specified, /IncortaTesting/tmp/work will
+#be added to the end of the custom working directory path
 wd_path=/IncortaTesting/tmp/work
 
 #This is import flag and set to false (-d)

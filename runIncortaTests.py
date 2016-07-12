@@ -113,8 +113,8 @@ def set_new_defaults(config_file):
 
 
 def add_time_stamp_to_wd(timestamp):
-    date_and_time = time.strftime("%m/%d/%Y-%H:%M:%S")
-    new_config_defaults['wd_path'] += '/' + date_and_time
+    date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
+    new_config_defaults['wd_path'] += '/%s'%date_and_time
 
 
 set_command_value(commands)
