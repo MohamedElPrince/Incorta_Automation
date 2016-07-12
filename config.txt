@@ -1,8 +1,8 @@
 #location for incorta home. Defaults to /home/Incorta if none specified
-incorta_home=/home/Incorta
+incorta_home=/Users/anahit/Incorta Analytics
 
 #defaults to /home/tenants if none specified
-tenant_home=/home/tenants
+tenant_home=/Users/anahit/Incorta Analytics/tenants
 
 #tenant defaults to Demo
 tenant=Demo
@@ -26,7 +26,7 @@ test_suite=MySQL
 skip_validation=Yes
 
 #default path to place working directory is /IncortaTesting/tmp/work
-wd_path=/IncortaTesting/tmp/work
+wd_path=/Users/anahit/IncortaTesting/tmp/work
 
 #This is import flag and set to false (-d)
 
