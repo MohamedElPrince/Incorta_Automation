@@ -1,4 +1,4 @@
-import sys, os, subprocess, time, zipfile
+import sys, os, subprocess, time
 import os.path
 from sys import argv
 from shutil import copyfile
@@ -205,6 +205,7 @@ if Debug == True:
 locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
+session=incorta.login(url,tenant,admin,password,True)
 
 
 
