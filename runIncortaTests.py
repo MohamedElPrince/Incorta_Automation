@@ -1,8 +1,11 @@
 import sys, os, subprocess, time, zipfile
 import os.path
-
 from sys import argv
 from shutil import copyfile
+
+"""
+------------------------------------------Initialization----------------------------------------
+"""
 
 Debug = False #Debug flag for print statements
 
@@ -33,16 +36,22 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
 # The variables corresponding to importing, loading data, and extracting files are by default False
 new_config_defaults = {'import_object': 'False', 'data_load': 'False', 'extract_csv': 'False'}
 
+"""
+------------------------------------------Initialization----------------------------------------
+"""
+
+
+"""
+#################################################### Functions ####################################################
+"""
 # Checks which arguments after config file were passed. If an import, data load, or extract
 # file argument is passed, the variable corresponding to the action will be set to True. 
-
 def set_command_value(commands):
 	# if no arguments other than config file are passed, importing, data loading, and extracting variables will be set to True
 	if len(sys.argv) == 2:
 		new_config_defaults['data_load'] = True
 		new_config_defaults['extract_csv'] = True
 		new_config_defaults['import_object'] = True
-
 	else:
 		for command in commands:
 			if command == '-d':
@@ -57,7 +66,6 @@ def set_new_defaults(config_file):
 	f = open(config_file, "r")
 	lines = f.readlines()
 	f.close()
-
 	for line in lines:
 		for key, value in config_defaults.items():
 			# ignores comments in config file
@@ -104,18 +112,6 @@ def add_time_stamp_to_wd(timestamp):
 	date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
 	new_config_defaults['wd_path'] += '/%s'%date_and_time
 
-set_command_value(commands)
-set_new_defaults(config_file)
-
-# converts keys in a dictionary to variables
-locals().update(new_config_defaults)
-
-if Debug == True: #Prints configuration values
-	for key, value in new_config_defaults.items():
-		print(key, value)
-"""
-#################################################### Functions ####################################################
-"""
 def incorta_import(incorta_home):
 	"""
 	Function takes the incorta installation path to import Incorta API
@@ -264,6 +260,7 @@ def logout(session):
 		exit(1)
 
 def load_users_ldap():
+
 	#Modifies sync_directory_with_ldap.sh
 	def replace_line(file_path, string_to_query, modification):
 
@@ -350,22 +347,33 @@ def load_users_ldap():
 
 	#End in original directory
 	os.chdir(owd)
+
+def load_schema(session,schema_names):
+	for schema_name in schema_names:
+		return_value = incorta.load_schema(session,schema_name)
+		print return_value
+
 """
 #################################################### Functions ####################################################
 """
 
-def main():
-	
-	incorta_import(incorta_home)
-	session = login(url, tenant, admin, password)
-	extract_test_suites(wd_path, test_suite)
-	import_datafiles(session, test_suite)
-	import_schema(session, test_suite)
-	import_dashboard(session, test_suite)
-	load_users_ldap()
+set_command_value(commands)
+set_new_defaults(config_file)
 
+if Debug == True: 
+	for key, value in new_config_defaults.items():
+		print(key, value)
 
-if __name__ == '__main__':
-	main()
+# converts keys in a dictionary to variables
+locals().update(new_config_defaults)
+
+incorta_import(incorta_home)
+session = login(url, tenant, admin, password)
+schema_names=['Sales','HR','Sales2','A_06_HIERARCHY']
+extract_test_suites(wd_path, test_suite)
+import_datafiles(session, test_suite)
+import_schema(session, test_suite)
+import_dashboard(session, test_suite)
+load_users_ldap()
 
 
