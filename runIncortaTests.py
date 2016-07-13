@@ -33,7 +33,6 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
 # The variables corresponding to importing, loading data, and extracting files are by default False
 new_config_defaults = {'import_object': 'False', 'data_load': 'False', 'extract_csv': 'False'}
 
-
 # Checks which arguments after config file were passed. If an import, data load, or extract
 # file argument is passed, the variable corresponding to the action will be set to True. 
 
@@ -117,7 +116,6 @@ if Debug == True: #Prints configuration values
 """
 #################################################### Functions ####################################################
 """
-
 def incorta_import(incorta_home):
 	"""
 	Function takes the incorta installation path to import Incorta API
@@ -266,7 +264,6 @@ def logout(session):
 		exit(1)
 
 def load_users_ldap():
-
 	#Modifies sync_directory_with_ldap.sh
 	def replace_line(file_path, string_to_query, modification):
 
@@ -357,7 +354,6 @@ def load_users_ldap():
 #################################################### Functions ####################################################
 """
 
-
 def main():
 	
 	incorta_import(incorta_home)
@@ -366,6 +362,8 @@ def main():
 	import_datafiles(session, test_suite)
 	import_schema(session, test_suite)
 	import_dashboard(session, test_suite)
+	load_users_ldap()
+
 
 if __name__ == '__main__':
 	main()
