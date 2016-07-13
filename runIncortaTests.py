@@ -4,6 +4,7 @@ import os.path
 from sys import argv
 from shutil import copyfile
 
+Debug = False #Debug flag for print statements
 
 """
 Arguments
@@ -79,10 +80,6 @@ def set_new_defaults(config_file):
 					new_config_defaults[key] = value.rstrip()
 				else:
 					new_config_defaults[key] = what_is_after_var.rstrip()
-	
-	# if a default variable is missing in the config file, the variable will be created in the
-	# new_config_defaults dictionary and will be assigned its default value
-
 	new_key_list = []
 	old_key_list = []
 
@@ -97,7 +94,6 @@ def set_new_defaults(config_file):
 			new_config_defaults[key] = config_defaults[key]
 
 	# creates the entire working directory path
-
 	if new_config_defaults['wd_path'] == '/IncortaTesting/tmp/work':
 		pass
 	else:
@@ -115,13 +111,12 @@ set_new_defaults(config_file)
 # converts keys in a dictionary to variables
 locals().update(new_config_defaults)
 
-for key, value in new_config_defaults.items():
-	print(key, value)
-
+if Debug == True: #Prints configuration values
+	for key, value in new_config_defaults.items():
+		print(key, value)
 """
 #################################################### Functions ####################################################
 """
-Debug = True #Debug flag for print statements
 
 def incorta_import(incorta_home):
 	"""
@@ -364,11 +359,9 @@ def load_users_ldap():
 
 
 def main():
+	
 	incorta_import(incorta_home)
-	session=login(url, tenant, admin, password)
-	print session
-	print wd_path
-	print test_suite
+	session = login(url, tenant, admin, password)
 	extract_test_suites(wd_path, test_suite)
 	import_datafiles(session, test_suite)
 	import_schema(session, test_suite)
