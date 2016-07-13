@@ -155,6 +155,41 @@ def incorta_import(incorta_home):
 	import incorta
 	global incorta
 
+def login(url, tenant, admin, password):
+    """
+    Function takes in login information and attempts to login through Incorta API
+    	args:
+    		url: Url for the Incorta instance
+    		tenant: Tenant name for instance
+    		admin: Username for instance
+    		password: Password for instance
+    	returns:
+            The session for the Incorta instance is returned
+    	prints:
+            Handles exception case of login fails
+    """
+    try:
+        return incorta.login(url, tenant, admin, password, True)
+    except Exception, e:
+        print "Login Failed"
+        exit(1)
+
+def logout(session):
+    """
+    Function logs out of the instance of Incorta
+    	args:
+    		session: session var returned by login function
+    	returns:
+            Nothing
+    	prints:
+            Handles exception case of login fails
+    """
+    try:
+        incorta.logout(session)
+    except Exception, e:
+        print 'Failed to logout'
+        exit(1)
+
 """
 #################################################### Functions ####################################################
 """
