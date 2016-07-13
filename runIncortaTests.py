@@ -32,8 +32,10 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
 			   'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
 			   'url': 'http://localhost:8080/incorta'}
 
-# The new_config_defaults dictionary stores the variables and their values from the config file
-# The variables corresponding to importing, loading data, and extracting files are by default False
+# new_config_defaults will hold all of the keys from the above dictionary
+# The values of the keys in new_config_defaults will be parsed from the config file
+
+# The keys corresponding to importing, loading data, and extracting files are by default False
 new_config_defaults = {'import_object': 'False', 'data_load': 'False', 'extract_csv': 'False'}
 
 """
@@ -44,10 +46,18 @@ new_config_defaults = {'import_object': 'False', 'data_load': 'False', 'extract_
 """
 #################################################### Functions ####################################################
 """
-# Checks which arguments after config file were passed. If an import, data load, or extract
-# file argument is passed, the variable corresponding to the action will be set to True. 
 def set_command_value(commands):
-	# if no arguments other than config file are passed, importing, data loading, and extracting variables will be set to True
+	"""
+	Function checks if an import, data load, or extract file argument is passed after the config file
+	If so, the key corresponding to the action will be set to True
+		args:
+			commands: the arguments after the config file
+		returns:
+			Nothing
+		prints:
+			Nothing
+	"""
+	# If no arguments come after the config file, import, data load, and extract file keys will all be set to True
 	if len(sys.argv) == 2:
 		new_config_defaults['data_load'] = True
 		new_config_defaults['extract_csv'] = True
@@ -61,32 +71,40 @@ def set_command_value(commands):
 			if command == '-x':
 				new_config_defaults['extract_csv'] = True
 
-# Parses variables and their values from the config file and stores them in a dictionary
 def set_new_defaults(config_file):
+	"""
+	Function parses config file for keys and values and stores them in new_config_defualts 
+		args:
+			config_file: config file holds keys and values to be used
+		returns:
+			Nothing
+		prints:
+			Nothing
+	"""
 	f = open(config_file, "r")
 	lines = f.readlines()
 	f.close()
 	for line in lines:
 		for key, value in config_defaults.items():
-			# ignores comments in config file
 			if line[0] == '#':
 				pass
 			elif key in line:
 				var = key + '='
 				what_is_after_var = line[len(var):]
 				what_is_after_key = line[len(key):]
-				# if there is nothing after the equal sign of a variable in config file, the
-				# default value of the variable will be assigned
-				# Ex: admin=
+				# if there is nothing after an = of a key in config file, the default value of the key will be assigned
+				# Ex: admin=________ -> admin=Super
 				if len(what_is_after_var) == 1:
 					new_config_defaults[key] = value.rstrip()
-				# if there is nothing after the variable name in config file, the default value
-				# of the variable will be assigned
-				# Ex: admin
+				# if there is nothing after the name of a key in config file, the default value of the key will be assigned
+				# Ex: admin____ -> admin=Super
 				elif len(what_is_after_key) == 1:
 					new_config_defaults[key] = value.rstrip()
 				else:
 					new_config_defaults[key] = what_is_after_var.rstrip()
+	
+	#If a key from config_defaults is missing in the config file, the code below will create the key 
+	# in new_config_defaults and will assign that key its default value
 	new_key_list = []
 	old_key_list = []
 
@@ -100,7 +118,8 @@ def set_new_defaults(config_file):
 		if key not in new_key_list:
 			new_config_defaults[key] = config_defaults[key]
 
-	# creates the entire working directory path
+	# If a custom working directory path is specified, /IncortaTesting/tmp/work will
+	# be added to the end of the custom working directory path
 	if new_config_defaults['wd_path'] == '/IncortaTesting/tmp/work':
 		pass
 	else:
@@ -109,6 +128,15 @@ def set_new_defaults(config_file):
 		add_time_stamp_to_wd(timestamp)
 
 def add_time_stamp_to_wd(timestamp):
+	"""
+	Function adds a timestamp to the end of the working directory path
+		args:
+			timestamp: MM/DD/YY-HR/MIN/SEC
+		returns:
+			Nothing
+		prints:
+			Nothing
+	"""
 	date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
 	new_config_defaults['wd_path'] += '/%s'%date_and_time
 
@@ -127,232 +155,6 @@ def incorta_import(incorta_home):
 	import incorta
 	global incorta
 
-def login(url, tenant, admin, password):
-	"""
-	Function takes in login information and attempts to login through Incorta API
-		args:
-			url: Url for the Incorta instance
-			tenant: Tenant name for instance
-			admin: Username for instance
-			password: Password for instance
-		returns:
-			The session for the Incorta instance is returned
-		prints:
-			Handles exception case of login fails
-	"""
-	try:
-		return incorta.login(url, tenant, admin, password, True)
-	except Exception, e:
-		print "Login Failed"
-		exit(1)
-
-def extract_test_suites(wd_path, test_suite):
-	"""
-	Function extracts all files inside test suit to the working directory
-		args:
-			wd_path: working directory path
-			test_suite: test suite name
-		returns:
-			Nothing
-		prints:
-			Nothing
-	"""
-	python_work_dir = os.getcwd()
-	test_suite_path = python_work_dir + '/' + test_suite
-	extension = '.zip'
-	for root, dirs, files in os.walk(test_suite_path):
-		for file in files:
-			if file.endswith(extension):
-				file_raw_dir = os.path.join(root, file)
-				zip_ref = zipfile.ZipFile(file_raw_dir)
-				zip_ref.extractall(wd_path)
-				zip_ref.close()
-
-def import_datafiles(session, test_suite):
-	"""
-	Function imports all data files to Incorta from the designated test suite
-		args:
-			session: session var returned by login function
-			test_suite: test suite name from config file
-		returns:
-			Nothing
-		prints:
-			Nothing
-	"""
-	python_work_dir = os.getcwd()
-	test_suite_path = python_work_dir + '/' + test_suite
-	extension = '.zip'
-	upload_check = []
-	for root, dirs, files in os.walk(test_suite_path):
-		for file in files:
-			if 'datafile' in file:
-				if file.endswith(extension):
-					file_full_path = os.path.join(root, file)
-					upload_check.append(incorta.upload_data_file(session, file_full_path))
-	if Debug == True:
-		for checks in upload_check:
-			print checks,
-
-def import_schema(session, test_suite):
-	"""
-	Function imports all schemas to Incorta from the designated test suite
-		args:
-			session: session var returned by login function
-			test_suite: test suite name from config file
-		returns:
-			Nothing
-		prints:
-			Nothing
-	"""
-	python_work_dir = os.getcwd()
-	test_suite_path = python_work_dir + '/' + test_suite
-	extension = '.zip'
-	upload_check = []
-	for root, dirs, files in os.walk(test_suite_path):
-		for file in files:
-			if 'schema' in file:
-				if file.endswith(extension):
-					file_full_path = os.path.join(root, file)
-					upload_check.append(incorta.import_tenant(session, file_full_path, True))
-	if Debug == True:
-		for checks in upload_check:
-			print checks,
-
-def import_dashboard(session, test_suite):
-	"""
-	Function imports all dashboards to Incorta from the designated test suite
-		args:
-			session: session var returned by login function
-			test_suite: test suite name from config file
-		returns:
-			Nothing
-		prints:
-			Nothing
-	"""
-	python_work_dir = os.getcwd()
-	test_suite_path = python_work_dir + '/' + test_suite
-	extension = '.zip'
-	upload_check = []
-	for root, dirs, files in os.walk(test_suite_path):
-		for file in files:
-			if 'dashboard' in file:
-				if file.endswith(extension):
-					file_full_path = os.path.join(root, file)
-					upload_check.append(incorta.import_tenant(session, file_full_path, True))
-	if Debug == True:
-		for checks in upload_check:
-			print checks,
-
-def logout(session):
-	"""
-	Function logs out of the instance of Incorta
-		args:
-			session: session var returned by login function
-		returns:
-			Nothing
-		prints:
-			Handles exception case of login fails
-	"""
-	try:
-		incorta.logout(session)
-	except Exception, e:
-		print 'Failed to logout'
-		exit(1)
-
-def load_users_ldap():
-
-	#Modifies sync_directory_with_ldap.sh
-	def replace_line(file_path, string_to_query, modification):
-
-		os.chdir(file_path)
-
-		#If the string searched is in a line, the entire line will be selected for replacement
-		f= open(path_incorta_bin+'/sync_directory_with_ldap.sh','r')
-		lines = f.readlines()
-		for line in lines:
-			if string_to_query in line:
-				line_to_replace=line.rstrip()
-		f.close()
-
-		f = open(path_incorta_bin+'/sync_directory_with_ldap.sh','r')
-		filedata=f.read()
-		update= filedata.replace(line_to_replace,modification)
-		f.close()
-
-		f = open(path_incorta_bin+'/sync_directory_with_ldap.sh','w')
-		f.write(update)
-		f.close()
-
-	#Variables hold entire paths of the directories
-	path_incorta_bin=incorta_home+'/bin'
-	path_dir_export=incorta_home+'/dirExport'
-	path_tmt=incorta_home+'/tmt'
-
-	#import, export, and update_tenant_ldap commands stored in variables
-	run_sync_directory=path_incorta_bin+'/./sync_directory_with_ldap.sh'
-	run_dir_export=path_dir_export+'/./dirExport.sh -ldap '+path_dir_export+'/ldap-config.properties'
-	run_update_tenant_ldap=path_tmt+'/./tmt.sh -u '+tenant+' file '+path_tmt+'/ldap.properties -f'
-
-	# Original working directory
-	owd=os.getcwd()
-
-	#To determine the directory which will hold the content from run_dir_export
-	os.chdir(path_dir_export)
-
-	#Executes run_dir_export
-	subprocess.call(run_dir_export,shell = True)
-
-	#Creates backup of sync_directory_with_ldap.sh called sync_directory_with_ldap.sh.bak in Incorta bin
-	copyfile(path_incorta_bin+'/sync_directory_with_ldap.sh',path_incorta_bin+'/sync_directory_with_ldap.sh.bak')
-
-	#Creates a copy of exported zip file from dirExport in Incorta bin
-	copyfile(path_dir_export+'/directory.zip',path_incorta_bin+'/directory.zip')
-
-	#Creates a copy of ldap-config.properties files in Incorta bin
-	copyfile(path_dir_export+'/ldap-config.properties',path_incorta_bin+'/ldap-config.properties')
-
-	#Variables hold the necessary changes to make to sync_directory_with_ldap.sh
-	sync_session='session=`$incorta_cmd login '+url+' '+tenant+' '+admin+' '+password+'`'
-	full_sync='$incorta_cmd sync_directory_with_ldap $session true'
-
-	replace_line(path_incorta_bin,'session=', sync_session)
-	replace_line(path_incorta_bin,'$incorta_cmd sync',full_sync)
-
-	#import to Incorta
-	subprocess.call(run_sync_directory,shell = True)
-
-	#Update tenant_ldap properties
-	os.chdir(path_tmt)
-	subprocess.call(run_update_tenant_ldap,shell=True)
-
-	os.chdir(incorta_home)
-
-	# Kills the instance of Incorta
-	subprocess.call(incorta_home+'/./stop.sh',shell=True)
-	time.sleep(7)
-	subprocess.call("ps -ax |grep %s | awk '{print $1}' | xargs kill -9"%incorta_home,shell=True)
-
-	#Start a new instance of Incorta
-	subprocess.call('mysql.server start',shell=True)
-	subprocess.call(incorta_home+'/./start.sh',shell=True)
-
-	os.chdir(path_incorta_bin)
-
-	time.sleep(7)
-
-	#Assign roles
-	session = incorta.login(url,tenant,admin,password)
-	incorta.assign_role_to_group(session, 'executive', 'SuperRole')
-	incorta.assign_role_to_group(session,'engineering','Analyze User')
-
-	#End in original directory
-	os.chdir(owd)
-
-def load_schema(session,schema_names):
-	for schema_name in schema_names:
-		return_value = incorta.load_schema(session,schema_name)
-		print return_value
-
 """
 #################################################### Functions ####################################################
 """
@@ -368,12 +170,6 @@ if Debug == True:
 locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
-session = login(url, tenant, admin, password)
-schema_names=['Sales','HR','Sales2','A_06_HIERARCHY']
-extract_test_suites(wd_path, test_suite)
-import_datafiles(session, test_suite)
-import_schema(session, test_suite)
-import_dashboard(session, test_suite)
-load_users_ldap()
+
 
 
