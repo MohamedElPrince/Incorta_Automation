@@ -84,7 +84,7 @@ def extract_test_suites(wd_path, test_suite):
                 zip_ref.extractall(wd_path)
                 zip_ref.close()
 
-def import_datafiles(session, test_suite):
+def import_datafiles(incorta, session, test_suite):
     """
     Function imports all data files to Incorta from the designated test suite
     	args:
@@ -110,7 +110,7 @@ def import_datafiles(session, test_suite):
         for checks in upload_check:
             print checks,
 
-def import_schema(session, test_suite):
+def import_schema(incorta, session, test_suite):
     """
     Function imports all schemas to Incorta from the designated test suite
     	args:
@@ -136,7 +136,7 @@ def import_schema(session, test_suite):
         for checks in upload_check:
             print checks,
 
-def import_dashboard(session, test_suite):
+def import_dashboard(incorta, session, test_suite):
     """
     Function imports all dashboards to Incorta from the designated test suite
     	args:
