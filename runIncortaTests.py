@@ -2,9 +2,9 @@ import sys, os, subprocess, time, zipfile
 import os.path
 from sys import argv
 from shutil import copyfile
-# import Auto_Modules
-# from Auto_Modules import dataLoad
-# from Auto_Modules import loadUsers
+# import Auto_Module
+# from Auto_Module import dataLoad
+# from Auto_Module import loadUsers
 
 # July 13 2016
 # By Ilyas Reyhanoglu
@@ -181,3 +181,6 @@ schema_names=['Sales','HR','Sales2','A_06_HIERARCHY']
 
 # dataLoad.load_schema(incorta,session,schema_names)
 loadUsers.load_users_ldap(incorta)
+
+
+session_id = session[21:53] # Session ID stripped from session var
