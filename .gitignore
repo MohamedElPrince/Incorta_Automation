@@ -1,8 +1,5 @@
 .idea
 config.txt
 runIncortaTests.pyc
-<<<<<<< 3235d4377a7aae6c9ccde959fd1707c3e19d926f
-*.pyc
-=======
 test_suite_import.pyc
->>>>>>> Fixed mutiple functions in worker script
+*.pyc
