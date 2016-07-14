@@ -8,7 +8,7 @@ TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-Debug = False   #Debug flag for print statements
+Debug = True  #Debug flag for print statements
 
 def extract_test_suites(wd_path, test_suite):
     """
@@ -22,8 +22,7 @@ def extract_test_suites(wd_path, test_suite):
             Nothing
     """
     python_work_dir = os.getcwd()
-    parent_dir = os.path.abspath(python_work_dir + "/../")
-    test_suite_path = parent_dir + '/' + test_suite
+    test_suite_path = python_work_dir + '/' + test_suite
     extension = '.zip'
     for root, dirs, files in os.walk(test_suite_path):
         for file in files:
@@ -45,8 +44,7 @@ def import_datafiles(incorta, session, test_suite):
             Nothing
     """
     python_work_dir = os.getcwd()
-    parent_dir = os.path.abspath(python_work_dir + "/../")
-    test_suite_path = parent_dir + '/' + test_suite
+    test_suite_path = python_work_dir + '/' + test_suite
     extension = '.zip'
     upload_check = []
     for root, dirs, files in os.walk(test_suite_path):
@@ -71,8 +69,7 @@ def import_schema(incorta, session, test_suite):
             Nothing
     """
     python_work_dir = os.getcwd()
-    parent_dir = os.path.abspath(python_work_dir + "/../")
-    test_suite_path = parent_dir + '/' + test_suite
+    test_suite_path = python_work_dir+ '/' + test_suite
     extension = '.zip'
     upload_check = []
     for root, dirs, files in os.walk(test_suite_path):
@@ -97,8 +94,7 @@ def import_dashboard(incorta, session, test_suite):
             Nothing
     """
     python_work_dir = os.getcwd()
-    parent_dir = os.path.abspath(python_work_dir + "/../")
-    test_suite_path = parent_dir + '/' + test_suite
+    test_suite_path = python_work_dir + '/' + test_suite
     extension = '.zip'
     upload_check = []
     for root, dirs, files in os.walk(test_suite_path):
@@ -110,17 +106,3 @@ def import_dashboard(incorta, session, test_suite):
     if Debug == True:
         for checks in upload_check:
             print checks,
-# Temporary Definitions
-test_suite = 'CSV_DataSources'
-wd_path = "/Users/anahit/IncortaTesting/tmp/work/testingonly/"
-
-# Calls each function for testing in order
-
-extract_test_suites(wd_path, test_suite)
-
-# import_datafiles(session, test_suite)
-#
-# import_schema(session, test_suite)
-#
-# import_dashboard(session, test_suite)
-

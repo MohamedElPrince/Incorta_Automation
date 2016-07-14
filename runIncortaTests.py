@@ -6,6 +6,7 @@ import Auto_Module
 from Auto_Module import dataLoad
 from Auto_Module import loadUsers
 from Auto_Module import test_suite_import
+
 # July 13 2016
 # By Ilyas Reyhanoglu
 
@@ -13,7 +14,7 @@ from Auto_Module import test_suite_import
 ------------------------------------------Initialization----------------------------------------
 """
 
-Debug = False #Debug flag for print statements
+Debug = True #Debug flag for print statements
 
 """
 Arguments
@@ -203,7 +204,7 @@ def logout(session):
 set_command_value(commands)
 set_new_defaults(config_file)
 
-if Debug == False: 
+if Debug == True: 
 	for key, value in new_config_defaults.items():
 		print(key, value)
 
@@ -212,11 +213,10 @@ locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
 session=login(url,tenant,admin,password)
-schema_names=['Sales','HR','Sales2','A_06_HIERARCHY']
-
-# dataLoad.load_schema(incorta,session,schema_names)
-# loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
-# test_suite_import.extract_test_suites(wd_path, test_suite)
-# test_suite_import.import_datafiles(incorta, session, test_suite)
-# test_suite_import.import_schema(incorta, session, test_suite)
-# test_suite_import.import_dashboard(incorta, session, test_suite)
+schema_names=['Sales','HR','Sales2'] #list of schemas to be loaded
+loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
+test_suite_import.extract_test_suites(wd_path, test_suite)
+test_suite_import.import_datafiles(incorta, session, test_suite)
+test_suite_import.import_schema(incorta, session, test_suite)
+test_suite_import.import_dashboard(incorta, session, test_suite)
+dataLoad.load_schema(incorta,session,schema_names)
