@@ -6,7 +6,7 @@ import Auto_Module
 from Auto_Module import dataLoad
 from Auto_Module import loadUsers
 from Auto_Module import test_suite_import
-from Auto_Module import export
+#from Auto_Module import export
 
 # July 13 2016
 # By Ilyas Reyhanoglu
@@ -214,7 +214,7 @@ locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
 session=login(url,tenant,admin,password)
-schema_names=['HR','Sales2'] #list of schemas to be loaded
+schema_names=['A_01_CASE'] #list of schemas to be loaded
 #loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
 test_suite_import.extract_test_suites(wd_path, test_suite)
 test_suite_import.import_datafiles(incorta, session, test_suite)
