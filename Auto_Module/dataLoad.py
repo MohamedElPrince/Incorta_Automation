@@ -2,10 +2,19 @@ import runIncortaTests
 import os, sys
 
 def incorta_import(incorta_home):
-	incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
-	sys.path.append(incorta_module)
-	import incorta
-	global incorta
+    """
+    Function takes the incorta installation path to import Incorta API
+    	args:
+    		incorta_home: Incorta Home Directory Path
+    	returns:
+            Nothing
+    	prints:
+            Nothing
+    """
+    incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
+    sys.path.append(incorta_module)
+    import incorta
+    global incorta
 
 def load_schema(session,schema_name):
 	return_value = incorta.load_schema(session,schema_name)

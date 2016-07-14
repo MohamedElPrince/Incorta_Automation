@@ -1,32 +1,14 @@
 import os, sys
 import zipfile
 """
-Imports Incorta API from local installation
 Exports test suites to working directory
 Imports datafiles / schemas / dashboards to Incorta
-Login/Logout Functions
 
 TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-Debug = False   #Debug flag for print statements
-
-def incorta_import(incorta_home):
-    """
-    Function takes the incorta installation path to import Incorta API
-    	args:
-    		incorta_home: Incorta Home Directory Path
-    	returns:
-            Nothing
-    	prints:
-            Nothing
-    """
-    incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
-    sys.path.append(incorta_module)
-    import incorta
-    global incorta
-
+Debug = True   #Debug flag for print statements
 
 def login(url, tenant, admin, password):
     """
@@ -47,6 +29,37 @@ def login(url, tenant, admin, password):
         print "Login Failed"
         exit(1)
 
+def logout(session):
+    """
+    Function logs out of the instance of Incorta
+    	args:
+    		session: session var returned by login function
+    	returns:
+            Nothing
+    	prints:
+            Handles exception case of login fails
+    """
+    try:
+        incorta.logout(session)
+    except Exception, e:
+        print 'Failed to logout'
+        exit(1)
+
+def incorta_import(incorta_home):
+    """
+    Function takes the incorta installation path to import Incorta API
+    	args:
+    		incorta_home: Incorta Home Directory Path
+    	returns:
+            Nothing
+    	prints:
+            Nothing
+    """
+    incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
+    sys.path.append(incorta_module)
+    import incorta
+    global incorta
+
 def extract_test_suites(wd_path, test_suite):
     """
     Function extracts all files inside test suit to the working directory
@@ -58,8 +71,10 @@ def extract_test_suites(wd_path, test_suite):
     	prints:
             Nothing
     """
+    #os.chdir('..')
     python_work_dir = os.getcwd()
-    test_suite_path = python_work_dir + test_suite
+    parent_dir = os.path.abspath(python_work_dir + "/../")
+    test_suite_path = parent_dir + '/' + test_suite
     extension = '.zip'
     for root, dirs, files in os.walk(test_suite_path):
         for file in files:
@@ -81,7 +96,8 @@ def import_datafiles(session, test_suite):
             Nothing
     """
     python_work_dir = os.getcwd()
-    test_suite_path = python_work_dir + test_suite
+    parent_dir = os.path.abspath(python_work_dir + "/../")
+    test_suite_path = parent_dir + '/' + test_suite
     extension = '.zip'
     upload_check = []
     for root, dirs, files in os.walk(test_suite_path):
@@ -106,7 +122,8 @@ def import_schema(session, test_suite):
             Nothing
     """
     python_work_dir = os.getcwd()
-    test_suite_path = python_work_dir + test_suite
+    parent_dir = os.path.abspath(python_work_dir + "/../")
+    test_suite_path = parent_dir + '/' + test_suite
     extension = '.zip'
     upload_check = []
     for root, dirs, files in os.walk(test_suite_path):
@@ -131,7 +148,8 @@ def import_dashboard(session, test_suite):
             Nothing
     """
     python_work_dir = os.getcwd()
-    test_suite_path = python_work_dir + test_suite
+    parent_dir = os.path.abspath(python_work_dir + "/../")
+    test_suite_path = parent_dir + '/' + test_suite
     extension = '.zip'
     upload_check = []
     for root, dirs, files in os.walk(test_suite_path):
@@ -144,25 +162,8 @@ def import_dashboard(session, test_suite):
         for checks in upload_check:
             print checks,
 
-
-def logout(session):
-    """
-    Function logs out of the instance of Incorta
-    	args:
-    		session: session var returned by login function
-    	returns:
-            Nothing
-    	prints:
-            Handles exception case of login fails
-    """
-    try:
-        incorta.logout(session)
-    except Exception, e:
-        print 'Failed to logout'
-        exit(1)
-
 # Temporary Definitions
-test_suite = '/CSV_DataSources'
+test_suite = 'CSV_DataSources'
 wd_path = "/Users/anahit/IncortaTesting/tmp/work/testingonly/"
 
 # Calls each function for testing in order
@@ -177,7 +178,3 @@ import_datafiles(session, test_suite)
 import_schema(session, test_suite)
 
 import_dashboard(session, test_suite)
-
-logout(session)
-
-session_id = session[21:53] # Session ID stripped from session var
