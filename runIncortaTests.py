@@ -2,10 +2,10 @@ import sys, os, subprocess, time, zipfile
 import os.path
 from sys import argv
 from shutil import copyfile
-# import Auto_Module
-# from Auto_Module import dataLoad
-# from Auto_Module import loadUsers
-
+import Auto_Module
+from Auto_Module import dataLoad
+from Auto_Module import loadUsers
+from Auto_Module import test_suite_import
 # July 13 2016
 # By Ilyas Reyhanoglu
 
@@ -161,6 +161,41 @@ def incorta_import(incorta_home):
 	import incorta
 	global incorta
 
+def login(url, tenant, admin, password):
+    """
+    Function takes in login information and attempts to login through Incorta API
+    	args:
+    		url: Url for the Incorta instance
+    		tenant: Tenant name for instance
+    		admin: Username for instance
+    		password: Password for instance
+    	returns:
+            The session for the Incorta instance is returned
+    	prints:
+            Handles exception case of login fails
+    """
+    try:
+        return incorta.login(url, tenant, admin, password, True)
+    except Exception, e:
+        print "Login Failed"
+        exit(1)
+
+def logout(session):
+    """
+    Function logs out of the instance of Incorta
+    	args:
+    		session: session var returned by login function
+    	returns:
+            Nothing
+    	prints:
+            Handles exception case of login fails
+    """
+    try:
+        incorta.logout(session)
+    except Exception, e:
+        print 'Failed to logout'
+        exit(1)
+
 """
 #################################################### Functions ####################################################
 """
@@ -168,7 +203,7 @@ def incorta_import(incorta_home):
 set_command_value(commands)
 set_new_defaults(config_file)
 
-if Debug == True: 
+if Debug == False: 
 	for key, value in new_config_defaults.items():
 		print(key, value)
 
@@ -176,11 +211,12 @@ if Debug == True:
 locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
-session=incorta.login(url,tenant,admin,password,True)
+session=login(url,tenant,admin,password)
 schema_names=['Sales','HR','Sales2','A_06_HIERARCHY']
 
 # dataLoad.load_schema(incorta,session,schema_names)
-loadUsers.load_users_ldap(incorta)
-
-
-session_id = session[21:53] # Session ID stripped from session var
+# loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
+# test_suite_import.extract_test_suites(wd_path, test_suite)
+# test_suite_import.import_datafiles(incorta, session, test_suite)
+# test_suite_import.import_schema(incorta, session, test_suite)
+# test_suite_import.import_dashboard(incorta, session, test_suite)
