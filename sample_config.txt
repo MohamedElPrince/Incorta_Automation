@@ -1,0 +1,42 @@
+#location for incorta home. Defaults to /home/Incorta if none specified
+incorta_home=/home/Incorta
+
+#defaults to /home/tenants if none specified
+tenant_home=/home/tenants
+
+#tenant defaults to Demo
+tenant=Demo
+
+#url defaults to http://localhost:8080/incorta
+url=http://localhost:8080/incorta
+
+# admin defaults to Super
+admin=super
+
+#defaults to none
+password=super
+
+#default is No
+load_users=No 
+
+#default is MySQL
+test_suite=MySQL
+
+#default is Yes
+skip_validation=Yes
+
+#default path to place working directory is /IncortaTesting/tmp/work
+
+#when a custom working directory path is specified, /IncortaTesting/tmp/work will
+#be added to the end of the custom working directory path
+wd_path=/IncortaTesting/tmp/work
+
+#This is import flag and set to false (-d)
+
+#This is data load flag and set to false (-l)
+
+#This is extract flag and set to false (-x)
+
+
+
+
