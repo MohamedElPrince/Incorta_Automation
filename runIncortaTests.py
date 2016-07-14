@@ -205,7 +205,8 @@ if Debug == True:
 locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
-session=incorta.login(url,tenant,admin,password,True)
+session=incorta.login(url, tenant, admin, password, True)
+session_id = session[21:53] # Session ID stripped from session var
 
 
 
