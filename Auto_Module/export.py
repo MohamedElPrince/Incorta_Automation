@@ -18,6 +18,27 @@ def incorta_import(incorta_home):
     import incorta
     global incorta
 
+def login(url, tenant, admin, password):
+    """
+    Function takes in login information and attempts to login through Incorta API
+    	args:
+    		url: Url for the Incorta instance
+    		tenant: Tenant name for instance
+    		admin: Username for instance
+    		password: Password for instance
+    	returns:
+            The session for the Incorta instance is returned
+    	prints:
+            Handles exception case of login fails
+    """
+    try:
+        return incorta.login(url, tenant, admin, password, True)
+    except Exception, e:
+        print "Login Failed"
+        exit(1)
+
+def export_sources():
+
 
 
 
@@ -48,10 +69,3 @@ incorta_import("/Users/anahit/Incorta Analytics")
 
 session = login('http://localhost:8080/incorta/', 'super', 'super', 'super')
 
-extract_test_suites(wd_path, test_suite)
-
-import_datafiles(session, test_suite)
-
-import_schema(session, test_suite)
-
-import_dashboard(session, test_suite)
