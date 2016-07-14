@@ -213,8 +213,8 @@ locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
 session=login(url,tenant,admin,password)
-schema_names=['Sales','HR','Sales2'] #list of schemas to be loaded
-loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
+schema_names=['HR','Sales2'] #list of schemas to be loaded
+#loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
 test_suite_import.extract_test_suites(wd_path, test_suite)
 test_suite_import.import_datafiles(incorta, session, test_suite)
 test_suite_import.import_schema(incorta, session, test_suite)
