@@ -1,7 +1,13 @@
-import sys, os, subprocess, time
+import sys, os, subprocess, time, zipfile
 import os.path
 from sys import argv
 from shutil import copyfile
+# import Auto_Modules
+# from Auto_Modules import dataLoad
+# from Auto_Modules import loadUsers
+
+# July 13 2016
+# By Ilyas Reyhanoglu
 
 """
 ------------------------------------------Initialization----------------------------------------
@@ -155,41 +161,6 @@ def incorta_import(incorta_home):
 	import incorta
 	global incorta
 
-def login(url, tenant, admin, password):
-    """
-    Function takes in login information and attempts to login through Incorta API
-    	args:
-    		url: Url for the Incorta instance
-    		tenant: Tenant name for instance
-    		admin: Username for instance
-    		password: Password for instance
-    	returns:
-            The session for the Incorta instance is returned
-    	prints:
-            Handles exception case of login fails
-    """
-    try:
-        return incorta.login(url, tenant, admin, password, True)
-    except Exception, e:
-        print "Login Failed"
-        exit(1)
-
-def logout(session):
-    """
-    Function logs out of the instance of Incorta
-    	args:
-    		session: session var returned by login function
-    	returns:
-            Nothing
-    	prints:
-            Handles exception case of login fails
-    """
-    try:
-        incorta.logout(session)
-    except Exception, e:
-        print 'Failed to logout'
-        exit(1)
-
 """
 #################################################### Functions ####################################################
 """
@@ -205,8 +176,8 @@ if Debug == True:
 locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
-session=incorta.login(url, tenant, admin, password, True)
-session_id = session[21:53] # Session ID stripped from session var
+session=incorta.login(url,tenant,admin,password,True)
+schema_names=['Sales','HR','Sales2','A_06_HIERARCHY']
 
-
-
+# dataLoad.load_schema(incorta,session,schema_names)
+loadUsers.load_users_ldap(incorta)
