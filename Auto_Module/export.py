@@ -38,38 +38,30 @@ def login(url, tenant, admin, password):
         exit(1)
 
 def export_dashboards(session, wd_path, dashboards):
-
+    """
+    """
     export_check = incorta.export_dashboards(session, wd_path, dashboards)
+    if Debug == True:
+        print export_check
+
+def export_schemas(session, wd_path, schemas):
+    """
+    """
+    export_check = incorta.export_schemas(session, wd_path, schemas)
     if Debug == True:
         print export_check
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Temporary Definitions
 test_suite = 'CSV_DataSources'
-wd_path = "/Users/anahit/IncortaTesting/tmp/work/07:14:2016-12:03:11/scehmaname"
+wd_path = "/Users/anahit/IncortaTesting/tmp/work/07:14:2016-12:03:11/"
 
 # Calls each function for testing in order
 incorta_import("/Users/anahit/Incorta Analytics")
 
 session = login('http://localhost:8080/incorta/', 'super', 'super', 'super')
 dashboards = "A_01_CASE Dashboard"
-export_dashboards(session, wd_path, dashboards)
+schemas = 'A_01_CASE'
+#export_dashboards(session, wd_path, dashboards)
+export_schemas(session, wd_path, schemas)
