@@ -1,8 +1,8 @@
 from lxml import etree
-from subprocess import call
 import os
 import sys
-import difflib
+
+
 
 import_path = ('/Users/Nadim_Incorta/Desktop/Import_vs_Export_Validation/schema_to_be_imported/schemas/887_schema.xml')
 export_path = ('/Users/Nadim_Incorta/Desktop/Import_vs_Export_Validation/exported_schema/schemas/140_schema.xml')
@@ -55,7 +55,6 @@ if set1 != set2:
 	print "Data Corruption"
 	f = open('VALID_LOG_FILE.log', 'w')
 	log_header = ('Import_File ------------ Export File\n')
-	print "PRINTING DIFFERENCES"
 	f.write('Tracked Differences...\n')
 	f.writelines(log_header)
 	A = tree1_string.split()
@@ -73,8 +72,6 @@ if set1 != set2:
 		temp_string = temp1+'-------'+temp2
 		f.write(temp_string)
 		f.write('\n')
-
-		#f.writerow(temp1,"~", temp2)
 
 	f.close()
 
