@@ -125,3 +125,18 @@ def import_dashboard(incorta, session, test_suite):
     if Debug == True:
         for checks in upload_check:
             print checks,
+
+# Temporary Definitions
+test_suite = 'CSV_DataSources'
+wd_path = "/Users/anahit/IncortaTesting/tmp/work/testingonly/"
+
+# Calls each function for testing in order
+incorta_import("/Users/anahit/Incorta Analytics")
+
+extract_test_suites(wd_path, test_suite)
+
+# import_datafiles(session, test_suite)
+#
+# import_schema(session, test_suite)
+#
+# import_dashboard(session, test_suite)
