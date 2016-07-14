@@ -8,32 +8,17 @@ TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-Debug = True   #Debug flag for print statements
-
-def incorta_import(incorta_home):
-    """
-    Function takes the incorta installation path to import Incorta API
-    	args:
-    		incorta_home: Incorta Home Directory Path
-    	returns:
-            Nothing
-    	prints:
-            Nothing
-    """
-    incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
-    sys.path.append(incorta_module)
-    import incorta
-    global incorta
+Debug = False   #Debug flag for print statements
 
 def extract_test_suites(wd_path, test_suite):
     """
     Function extracts all files inside test suit to the working directory
-    	args:
-    		wd_path: working directory path
-    		test_suite: test suite name
-    	returns:
+        args:
+            wd_path: working directory path
+            test_suite: test suite name
+        returns:
             Nothing
-    	prints:
+        prints:
             Nothing
     """
     python_work_dir = os.getcwd()
@@ -51,12 +36,12 @@ def extract_test_suites(wd_path, test_suite):
 def import_datafiles(incorta, session, test_suite):
     """
     Function imports all data files to Incorta from the designated test suite
-    	args:
-    		session: session var returned by login function
-    		test_suite: test suite name from config file
-    	returns:
+        args:
+            session: session var returned by login function
+            test_suite: test suite name from config file
+        returns:
             Nothing
-    	prints:
+        prints:
             Nothing
     """
     python_work_dir = os.getcwd()
@@ -77,12 +62,12 @@ def import_datafiles(incorta, session, test_suite):
 def import_schema(incorta, session, test_suite):
     """
     Function imports all schemas to Incorta from the designated test suite
-    	args:
-    		session: session var returned by login function
-    		test_suite: test suite name from config file
-    	returns:
+        args:
+            session: session var returned by login function
+            test_suite: test suite name from config file
+        returns:
             Nothing
-    	prints:
+        prints:
             Nothing
     """
     python_work_dir = os.getcwd()
@@ -103,12 +88,12 @@ def import_schema(incorta, session, test_suite):
 def import_dashboard(incorta, session, test_suite):
     """
     Function imports all dashboards to Incorta from the designated test suite
-    	args:
-    		session: session var returned by login function
-    		test_suite: test suite name from config file
-    	returns:
+        args:
+            session: session var returned by login function
+            test_suite: test suite name from config file
+        returns:
             Nothing
-    	prints:
+        prints:
             Nothing
     """
     python_work_dir = os.getcwd()
@@ -125,3 +110,8 @@ def import_dashboard(incorta, session, test_suite):
     if Debug == True:
         for checks in upload_check:
             print checks,
+# extract_test_suites('/Users/ilyasreyhanoglu/Desktop/testingonly/', 'CSV_DataSources')
+
+
+
+
