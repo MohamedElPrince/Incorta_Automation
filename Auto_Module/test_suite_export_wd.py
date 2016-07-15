@@ -1,6 +1,5 @@
 import os
 import zipfile
-import errno
 
 """
 Exports test suites to working directory

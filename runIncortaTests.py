@@ -138,11 +138,11 @@ def set_new_defaults(config_file):
 
     # If a custom working directory path is specified, /IncortaTesting/tmp/work will
     # be added to the end of the custom working directory path
-    if new_config_defaults['wd_path'] == '/IncortaTesting/tmp/work':
+    if new_config_defaults['wd_path'] == '/IncortaTesting':
         pass
     else:
         timestamp = ''
-        new_config_defaults['wd_path'] += '/IncortaTesting/tmp/work'
+        new_config_defaults['wd_path'] += '/IncortaTesting'
         add_time_stamp_to_wd(timestamp)
 
 
@@ -241,7 +241,7 @@ wd_test_suite_path = Auto_Module.file_tools.create_directory(wd_path, test_suite
 test_suite_path = get_test_suite_path(test_suite)
 
 subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
-print test_suite_path
+
 Auto_Module.file_tools.create_subdirectories_wd(wd_test_suite_path, subdirectories)
 
 #Auto_Module.test_suite_export_wd.extract_test_suites(test_suite_path, subdirectories)
