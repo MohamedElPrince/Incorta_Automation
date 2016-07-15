@@ -211,28 +211,6 @@ def logout(session):
         print 'Failed to logout'
         exit(1)
 
-def create_wd(wd_path, test_suite):
-    """
-    """
-    wd_test_suite_path = wd_path + '/' + test_suite
-    try:
-        os.makedirs(wd_test_suite_path)
-        return wd_test_suite_path
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(wd_test_suite_path):
-            pass
-        else:
-            raise
-
-def get_subdirectories(test_suite_path):
-    """
-    """
-    subdirectories = os.listdir(test_suite_path)
-    for x in subdirectories:
-        if x == '.DS_Store':
-            subdirectories.remove(x)
-    return subdirectories
-
 def get_test_suite_path(test_suite):
     """
     """
