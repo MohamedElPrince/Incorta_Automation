@@ -21,6 +21,7 @@ def extract_test_suites(wd_path, test_suite):
         prints:
             Nothing
     """
+    wd_path = wd_path + '/pre_export_files'
     python_work_dir = os.getcwd()
     test_suite_path = python_work_dir + '/' + test_suite
     extension = '.zip'

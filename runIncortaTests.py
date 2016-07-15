@@ -7,6 +7,7 @@ from Auto_Module import dataLoad
 from Auto_Module import loadUsers
 from Auto_Module import test_suite_import
 #from Auto_Module import export
+import Auto_Module.export
 
 # July 13 2016
 # By Ilyas Reyhanoglu
@@ -216,8 +217,11 @@ incorta_import(incorta_home)
 session=login(url,tenant,admin,password)
 schema_names=['A_01_CASE'] #list of schemas to be loaded
 #loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
-test_suite_import.extract_test_suites(wd_path, test_suite)
+wd_path_appended = wd_path + '/' + test_suite
+test_suite_import.extract_test_suites(wd_path_appended, test_suite)
 test_suite_import.import_datafiles(incorta, session, test_suite)
 test_suite_import.import_schema(incorta, session, test_suite)
 test_suite_import.import_dashboard(incorta, session, test_suite)
 dataLoad.load_schema(incorta,session,schema_names)
+schemas = 'A_01_CASE'
+Auto_Module.export.export_schemas(incorta, session, wd_path_appended, schemas)
