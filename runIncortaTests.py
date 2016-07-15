@@ -211,25 +211,33 @@ def logout(session):
         print 'Failed to logout'
         exit(1)
 
-def create_wd(wd_path):
+def create_wd(wd_path, test_suite):
+    """
+    """
+    wd_test_suite_path = wd_path + '/' + test_suite
     try:
-        os.makedirs(wd_path)
+        os.makedirs(wd_test_suite_path)
+        return wd_test_suite_path
     except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(wd_path):
+        if exc.errno == errno.EEXIST and os.path.isdir(wd_test_suite_path):
             pass
         else:
             raise
 
-def get_subdirectories(wd_path, test_suite):
-    test_suite_path = os.getcwd() + '/' + test_suite
+def get_subdirectories(test_suite_path):
+    """
+    """
     subdirectories = os.listdir(test_suite_path)
     for x in subdirectories:
         if x == '.DS_Store':
             subdirectories.remove(x)
     return subdirectories
 
-def get_test_suite_path(wd_path, test_suite):
-    test_suite_path = wd_path + '/' + test_suite
+def get_test_suite_path(test_suite):
+    """
+    """
+    test_suite_path = os.getcwd()
+    test_suite_path = test_suite_path + '/' + test_suite
     return test_suite_path
 """
 #################################################### Functions ####################################################
@@ -246,19 +254,21 @@ if Debug == True:
 locals().update(new_config_defaults)
 
 incorta_import(incorta_home)
+
 session = login(url, tenant, admin, password)
 
-wd_path_appended = wd_path + '/' + test_suite
-
-create_wd(wd_path + '/' + test_suite)
-
-subdirectories = get_subdirectories(wd_path, test_suite)
-test_suite_path= get_test_suite_path(wd_path, test_suite)
-
-Auto_Module.test_suite_export_wd.create_subdirectories_wd(test_suite_path, subdirectories)
+wd_test_suite_path = create_wd(wd_path, test_suite)
 
 
-#test_suite_import.extract_test_suites(wd_path_appended, test_suite)
+test_suite_path = get_test_suite_path(test_suite)
+
+
+subdirectories = get_subdirectories(test_suite_path)
+
+
+#Auto_Module.test_suite_export_wd.create_subdirectories_wd(test_suite_path, subdirectories)
+#Auto_Module.test_suite_export_wd.extract_test_suites(test_suite_path, subdirectories)
+
 
 
 
