@@ -47,13 +47,13 @@ def schema_validaiton(schema_names):
 		f.write('Tracked Differences...\n')
 		f.writelines(log_header)
 		import_list = tree1_string.split()
-		B = tree2_string.split()
+		export_list = tree2_string.split()
 		C = []
 		D = []
 		for i in range(len(import_list)):
-			if import_list[i] != B[i]:
+			if import_list[i] != export_list[i]:
 				C.append(import_list[i])
-				D.append(B[i])
+				D.append(export_list[i])
 
 		for i in range(len(C)):
 			temp1 = C[i].replace("u'", "")
@@ -83,11 +83,11 @@ def grab_schema_names(unziped_path):
 		for directories in dirs:
 			temp = unziped_path+'/'+directories
 			if directories == 'dashboards':
-				import_list = os.listdir(temp)
+				dash_files = os.listdir(temp)
 			if directories == 'schemas':
-				B = os.listdir(temp)
+				schema_files = os.listdir(temp)
 
-	for x in B:
+	for x in schema_files:
 		if load not in x:
 			schema_list.append(x)
 
