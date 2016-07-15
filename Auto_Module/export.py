@@ -6,40 +6,6 @@ import errno
 """
 Debug = True    #Debug flag for print statements
 
-# def incorta_import(incorta_home):
-#     """
-#     Function takes the incorta installation path to import Incorta API
-#     	args:
-#     		incorta_home: Incorta Home Directory Path
-#     	returns:
-#             Nothing
-#     	prints:
-#             Nothing
-#     """
-#     incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
-#     sys.path.append(incorta_module)
-#     import incorta
-#     global incorta
-#
-# def login(url, tenant, admin, password):
-#     """
-#     Function takes in login information and attempts to login through Incorta API
-#     	args:
-#     		url: Url for the Incorta instance
-#     		tenant: Tenant name for instance
-#     		admin: Username for instance
-#     		password: Password for instance
-#     	returns:
-#             The session for the Incorta instance is returned
-#     	prints:
-#             Handles exception case of login fails
-#     """
-#     try:
-#         return incorta.login(url, tenant, admin, password, True)
-#     except Exception, e:
-#         print "Login Failed"
-#         exit(1)
-
 def export_dashboards(incorta, session, wd_path, dashboards):
     """
     """
@@ -58,12 +24,10 @@ def export_schemas(incorta, session, wd_path, schemas):
             pass
         else:
             raise
-    wd_path += '/so.zip'
+    wd_path += '/A_1_schema.zip'
     export_check = incorta.export_schemas(session, wd_path, schemas)
     if Debug == True:
         print export_check
-
-
 
 # Temporary Definitions
 # test_suite = 'CSV_DataSources'
