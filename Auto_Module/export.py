@@ -1,57 +1,43 @@
 import os, sys
+
+import errno
+
 """
 """
 Debug = True    #Debug flag for print statements
 
-def incorta_import(incorta_home):
+def export_dashboards(incorta, session, wd_path, dashboards):
     """
-    Function takes the incorta installation path to import Incorta API
-    	args:
-    		incorta_home: Incorta Home Directory Path
-    	returns:
-            Nothing
-    	prints:
-            Nothing
     """
-    incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
-    sys.path.append(incorta_module)
-    import incorta
-    global incorta
+    export_check = incorta.export_dashboards(session, wd_path, dashboards)
+    if Debug == True:
+        print export_check
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def export_schemas(incorta, session, wd_path, schemas):
+    """
+    """
+    wd_path = wd_path + '/exported_files'
+    try:
+        os.makedirs(wd_path)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(wd_path):
+            pass
+        else:
+            raise
+    wd_path += '/A_1_schema.zip'
+    export_check = incorta.export_schemas(session, wd_path, schemas)
+    if Debug == True:
+        print export_check
 
 # Temporary Definitions
-test_suite = 'CSV_DataSources'
-wd_path = "/Users/anahit/IncortaTesting/tmp/work/testingonly/"
-
-# Calls each function for testing in order
-incorta_import("/Users/anahit/Incorta Analytics")
-
-session = login('http://localhost:8080/incorta/', 'super', 'super', 'super')
-
-extract_test_suites(wd_path, test_suite)
-
-import_datafiles(session, test_suite)
-
-import_schema(session, test_suite)
-
-import_dashboard(session, test_suite)
+# test_suite = 'CSV_DataSources'
+# wd_path = "/Users/anahit/IncortaTesting/tmp/work/07:14:2016-12:03:11/"
+#
+# # Calls each function for testing in order
+# incorta_import("/Users/anahit/Incorta Analytics")
+#
+# session = login('http://localhost:8080/incorta/', 'super', 'super', 'super')
+# dashboards = "A_01_CASE Dashboard"
+# schemas = 'A_01_CASE'
+#export_dashboards(session, wd_path, dashboards)
+#export_schemas(session, wd_path, schemas)
