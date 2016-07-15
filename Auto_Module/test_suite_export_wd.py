@@ -11,18 +11,6 @@ TODO
 """
 Debug = True  #Debug flag for print statements
 
-def create_subdirectories_wd(test_suite_path, subdirectories):
-    """
-    """
-    try:
-        for dir in subdirectories:
-            os.makedirs(test_suite_path + '/' + dir)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(test_suite_path + '/' + dir):
-            pass
-        else:
-            raise
-
 def extract_test_suites(test_suite_path, subdirectories):
     """
     Function extracts all files inside test suit to the working directory

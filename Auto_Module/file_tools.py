@@ -30,3 +30,15 @@ def get_subdirectories(path):
         if x == '.DS_Store':
             subdirectories.remove(x)
     return subdirectories
+
+def create_subdirectories_wd(path, subdirectories):
+    """
+    """
+    try:
+        for dir in subdirectories:
+            os.makedirs(path + '/' + dir)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(path + '/' + dir):
+            pass
+        else:
+            raise
