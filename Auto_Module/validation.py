@@ -46,13 +46,13 @@ def schema_validaiton(schema_names):
 		log_header = ('Import_File ------------ Export File\n')
 		f.write('Tracked Differences...\n')
 		f.writelines(log_header)
-		A = tree1_string.split()
+		import_list = tree1_string.split()
 		B = tree2_string.split()
 		C = []
 		D = []
-		for i in range(len(A)):
-			if A[i] != B[i]:
-				C.append(A[i])
+		for i in range(len(import_list)):
+			if import_list[i] != B[i]:
+				C.append(import_list[i])
 				D.append(B[i])
 
 		for i in range(len(C)):
@@ -83,7 +83,7 @@ def grab_schema_names(unziped_path):
 		for directories in dirs:
 			temp = unziped_path+'/'+directories
 			if directories == 'dashboards':
-				A = os.listdir(temp)
+				import_list = os.listdir(temp)
 			if directories == 'schemas':
 				B = os.listdir(temp)
 
