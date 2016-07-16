@@ -1,7 +1,7 @@
 from xml.etree import ElementTree
 from lxml import etree
 import os
-
+import file_tools
 
 
 
@@ -114,9 +114,61 @@ def grab_schema_names(unziped_path):
 	print schema_names
 	return schema_names
 
+"""
+Returns both Export and Import paths per test case
+"""
 
-grab_schema_names('/Users/Nadim_Incorta/IncortaTesting/tmp/work/07:14:2016-13:57:00')
+def grab_import_path(wd_test_case_path):
 
+	sub_path  = file_tools.get_subdirectories(wd_test_case_path)
+	for x in sub_path:
+		if x == 'Import_Files':
+			import_path = x
+			import_path = wd_test_case_path+'/'+import_path
+	return import_path
+
+"""
+Returns dashboard Ids in a list depending on if export or import path is given
+"""
+
+def get_dashboard_ids(path):
+	data = file_tools.get_subdirectories(path)
+	id_list = []
+	#Dashboard/Schema/Data Sources Level
+	for x in data:
+		if x == 'dashboards':
+			dashboards_path = path+'/'+x
+			dashboard_names = file_tools.get_subdirectories(dashboards_path)
+			#Dashboard Zip File names Level
+			for y in dashboard_names:
+				dashboard_names_path = dashboards_path + '/' + y
+				dashboards = file_tools.get_subdirectories(dashboard_names_path)
+				#Dashboards/ Tenant Level
+				for z in dashboards:
+					if z == 'dashboards':
+						full_dash_path = dashboard_names_path+ '/' + z
+					dash_file_names =file_tools.get_subdirectories(full_dash_path)
+					#Dashboard File Name Level
+					for names in dash_file_names:
+						temp_full_path = full_dash_path+'/'+names
+						try:
+							with open(temp_full_path, 'rt') as f:
+								dash_tree = ElementTree.parse(f)
+						except Exception, e:
+							print "Unable to open dashboard", names
+						try:
+							#Inside of Dashboard
+							for node in dash_tree.iter('table'):
+								id_list.append(node.attrib.get('id'))
+						except Exception, e:
+							print "Unable to read dashboard", names
+	print id_list
+	return id_list
+
+
+
+import_path = grab_import_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
+get_dashboard_ids(import_path)
 
 
 
