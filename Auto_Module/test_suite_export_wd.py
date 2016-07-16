@@ -10,7 +10,7 @@ TODO
 """
 Debug = True  #Debug flag for print statements
 
-def extract_test_suite(test_suite_path, subdirectories):
+def extract_test_suite(test_suite_path, test_case_path_wd):
     """
     Function extracts all files inside test suit to the working directory
         args:
@@ -21,6 +21,8 @@ def extract_test_suite(test_suite_path, subdirectories):
         prints:
             Nothing
     """
+    print test_suite_path
+    print test_case_path_wd
 
     extension = '.zip'
     # for root, dirs, files in os.walk(test_suite_path):

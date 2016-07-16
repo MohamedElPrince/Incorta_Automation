@@ -243,13 +243,14 @@ test_suite_path = get_test_suite_path(test_suite)
 test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
 for dir in test_suite_subdirectories:
-    test_case_path = Auto_Module.file_tools.create_directory(wd_test_suite_path, dir)
-    Auto_Module.file_tools.create_directory(test_case_path, 'Export_files')
-    Auto_Module.file_tools.create_directory(test_case_path, 'Import_files')
-    test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
-    for dir in test_case_subdirectories:
-        if "Import_Files" in dir:
-            
+    test_case_path_wd = Auto_Module.file_tools.create_directory(wd_test_suite_path, dir)
+    Auto_Module.file_tools.create_directory(test_case_path_wd, 'Export_Files')
+    Auto_Module.file_tools.create_directory(test_case_path_wd, 'Import_Files')
+    test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
+    for dirs in test_case_subdirectories:
+        if 'Import_Files' in dirs:
+            Auto_Module.test_suite_export_wd.extract_test_suite(test_suite_path, test_case_path_wd)
+    
 
     #Auto_Module.test_suite_export_wd.extract_test_suite(wd_test_suite_path, subdirectories)
 
@@ -257,9 +258,6 @@ for dir in test_suite_subdirectories:
 
 #Auto_Module.test_suite_export_wd.extract_test_suites(test_suite_path, subdirectories)
 #Auto_Module.file_tools.create_subdirectories_wd(wd_test_suite_path, subdirectories)
-
-
-
 
 
 # schema_names = ['A_01_CASE']  # list of schemas to be loaded
