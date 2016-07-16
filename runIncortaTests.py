@@ -215,7 +215,7 @@ def logout(session):
 def get_test_suite_path(test_suite):
     """
     """
-    test_suite_path = os.getcwd()
+    test_suite_path = os.getcwd() + '/' + "TestSuites"
     test_suite_path = test_suite_path + '/' + test_suite
     return test_suite_path
 """
@@ -250,7 +250,7 @@ for dir in test_suite_subdirectories:
     for dirs in test_case_subdirectories:
         if 'Import_Files' in dirs:
             Auto_Module.test_suite_export_wd.extract_test_suite(test_suite_path, test_case_path_wd)
-    
+            
 
     #Auto_Module.test_suite_export_wd.extract_test_suite(wd_test_suite_path, subdirectories)
 
