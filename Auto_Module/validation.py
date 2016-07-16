@@ -68,51 +68,53 @@ def schema_validaiton(schema_names):
 		print "Data Validated"
 
 
-"""
-Grabs Schema Names from Schema Directory,
-Returns as list to be implemented in validation function
-"""
 
-def grab_schema_names(unziped_path):
 
-	schema_list = []
-	load = '_loader'
-	schema_names = []
 
-	for root, dirs, files in os.walk(unziped_path):
-		for directories in dirs:
-			temp = unziped_path+'/'+directories
-			if directories == 'dashboards':
-				dash_files = os.listdir(temp)
-			if directories == 'schemas':
-				schema_files = os.listdir(temp)
 
-	for x in schema_files:
-		if load not in x:
-			schema_list.append(x)
 
-	schema_path = unziped_path+'/'+'schemas'
-	print schema_path
 
-	for item in schema_list:
-		full_path = schema_path+'/'+item
 
-		try:
-			with open(full_path, 'rt') as f:
-				test_tree = ElementTree.parse(f)
-		except Exception, e:
-			print "Unable to open file", item
-
-		try:
-			for node in test_tree.iter('schema'):
-				name = node.attrib.get('name')
-			schema_names.append(name)
-		except Exception, e:
-			print "Unable to Read File", item
-
-	print "\n Returning names of schemas"
-	print schema_names
-	return schema_names
+# def grab_schema_names(unziped_path):
+#
+# 	schema_list = []
+# 	load = '_loader'
+# 	schema_names = []
+#
+# 	for root, dirs, files in os.walk(unziped_path):
+# 		for directories in dirs:
+# 			temp = unziped_path+'/'+directories
+# 			if directories == 'dashboards':
+# 				dash_files = os.listdir(temp)
+# 			if directories == 'schemas':
+# 				schema_files = os.listdir(temp)
+#
+# 	for x in schema_files:
+# 		if load not in x:
+# 			schema_list.append(x)
+#
+# 	schema_path = unziped_path+'/'+'schemas'
+# 	print schema_path
+#
+# 	for item in schema_list:
+# 		full_path = schema_path+'/'+item
+#
+# 		try:
+# 			with open(full_path, 'rt') as f:
+# 				test_tree = ElementTree.parse(f)
+# 		except Exception, e:
+# 			print "Unable to open file", item
+#
+# 		try:
+# 			for node in test_tree.iter('schema'):
+# 				name = node.attrib.get('name')
+# 			schema_names.append(name)
+# 		except Exception, e:
+# 			print "Unable to Read File", item
+#
+# 	print "\n Returning names of schemas"
+# 	print schema_names
+# 	return schema_names
 
 """
 Returns both Export and Import paths per test case
@@ -125,15 +127,19 @@ def grab_import_path(wd_test_case_path):
 		if x == 'Import_Files':
 			import_path = x
 			import_path = wd_test_case_path+'/'+import_path
-	return import_path
+		if x == 'Export_Files':
+			export_path = x
+			export_path = wd_test_case_path+'/'+export_path
+	return import_path, export_path
 
 """
-Returns dashboard Ids in a list depending on if export or import path is given
+Returns dashboard Ids in a dictionary depending on if export or import path is given
+Id serves as the key and the file name becomes the value
 """
 
 def get_dashboard_ids(path):
 	data = file_tools.get_subdirectories(path)
-	id_list = []
+	ids = {}
 	#Dashboard/Schema/Data Sources Level
 	for x in data:
 		if x == 'dashboards':
@@ -150,6 +156,7 @@ def get_dashboard_ids(path):
 					dash_file_names =file_tools.get_subdirectories(full_dash_path)
 					#Dashboard File Name Level
 					for names in dash_file_names:
+						#print names
 						temp_full_path = full_dash_path+'/'+names
 						try:
 							with open(temp_full_path, 'rt') as f:
@@ -159,18 +166,44 @@ def get_dashboard_ids(path):
 						try:
 							#Inside of Dashboard
 							for node in dash_tree.iter('table'):
-								id_list.append(node.attrib.get('id'))
+								ids[node.attrib.get('id')] = names
 						except Exception, e:
 							print "Unable to read dashboard", names
-	print id_list
-	return id_list
+
+	print ids
+	return ids
 
 
 
-import_path = grab_import_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
-get_dashboard_ids(import_path)
+"""
+Grabs Schema Names from Schema Directory,
+Returns as list to be implemented in validation function
+"""
+
+def grab_schema_names(path):
+
+	data_types = file_tools.get_subdirectories(path)
+	schema_names = {}
+
+	for folders in data_types:
+		if folders == 'schemas':
+			schemas_path = path + '/' + folders
+			
 
 
+
+
+
+
+
+import_dash_ids = {}
+export_dash_ids = {}
+
+import_path, export_path = grab_import_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
+print "Extracted Dash IDS from IMPORTS"
+import_dash_ids = get_dashboard_ids(import_path)
+print "Extracted Dash IDS from EXPORTS"
+export_dash_ids = get_dashboard_ids(export_path)
 
 
 
