@@ -11,6 +11,8 @@ Debug = True  #Debug flag for print statements
 
 def create_directory(path, folder_name):
     """
+    Documentation to come
+    Anahit Sarao
     """
     appended_path = path + os.sep + folder_name
     try:
@@ -24,6 +26,8 @@ def create_directory(path, folder_name):
 
 def get_subdirectories(path):
     """
+    Documentation to come
+    Anahit Sarao
     """
     subdirectories = os.listdir(path)
     for x in subdirectories:
@@ -33,6 +37,8 @@ def get_subdirectories(path):
 
 def create_subdirectories_wd(path, subdirectory):
     """
+    Documentation to come
+    Anahit Sarao
     """
     try:
             os.makedirs(path + os.sep + subdirectory)
@@ -44,6 +50,8 @@ def create_subdirectories_wd(path, subdirectory):
 
 def get_path (path, directory):
     """
+    Documentation to come
+    Anahit Sarao
     """
     appended_path = path + os.sep + directory
     return appended_path
