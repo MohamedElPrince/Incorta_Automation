@@ -23,7 +23,7 @@ import Auto_Module.file_tools
 ------------------------------------------Initialization----------------------------------------
 """
 
-Debug = True  # Debug flag for print statements
+Debug = False  # Debug flag for print statements
 
 """
 Arguments
@@ -243,13 +243,28 @@ test_suite_path = get_test_suite_path(test_suite)
 test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
 for dir in test_suite_subdirectories:
+    if Debug == True:
+        print test_suite_path
+    test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
+    if Debug == True:
+        print test_case_path
     test_case_path_wd = Auto_Module.file_tools.create_directory(wd_test_suite_path, dir)
-    Auto_Module.file_tools.create_directory(test_case_path_wd, 'Export_Files')
-    Auto_Module.file_tools.create_directory(test_case_path_wd, 'Import_Files')
+    if Debug == True:
+        print test_case_path_wd
+    export_test_case_wd = Auto_Module.file_tools.create_directory(test_case_path_wd, 'Export_Files')
+    import_test_case_wd = Auto_Module.file_tools.create_directory(test_case_path_wd, 'Import_Files')
+    if Debug == True:
+        print export_test_case_wd
+        print import_test_case_wd
+    test_case_subdirectories_wd = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
+    if Debug == True:
+        print test_case_subdirectories_wd
     test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
-    for dirs in test_case_subdirectories:
-        if 'Import_Files' in dirs:
-            Auto_Module.test_suite_export_wd.extract_test_suite(test_suite_path, test_case_path_wd)
+
+    for wd_dir in test_case_subdirectories_wd:
+        if 'Import_Files' in wd_dir:
+            test_case_import_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, wd_dir)
+            Auto_Module.test_suite_export_wd.extract_test_suite(test_case_path, test_case_import_path_wd)
 
 
     #Auto_Module.test_suite_export_wd.extract_test_suite(wd_test_suite_path, subdirectories)

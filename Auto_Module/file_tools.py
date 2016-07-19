@@ -12,7 +12,7 @@ Debug = True  #Debug flag for print statements
 def create_directory(path, folder_name):
     """
     """
-    appended_path = path + '/' + folder_name
+    appended_path = path + os.sep + folder_name
     try:
         os.makedirs(appended_path)
         return appended_path
@@ -35,9 +35,9 @@ def create_subdirectories_wd(path, subdirectory):
     """
     """
     try:
-            os.makedirs(path + '/' + subdirectory)
+            os.makedirs(path + os.sep + subdirectory)
     except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(path + '/' + dir):
+        if exc.errno == errno.EEXIST and os.path.isdir(path + os.sep + dir):
             pass
         else:
             raise
@@ -45,5 +45,5 @@ def create_subdirectories_wd(path, subdirectory):
 def get_path (path, directory):
     """
     """
-    appended_path = path + '/' + directory
+    appended_path = path + os.sep + directory
     return appended_path
