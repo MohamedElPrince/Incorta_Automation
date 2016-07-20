@@ -1,8 +1,6 @@
 import os, errno
 
 """
-
-
 TODO
     Add log file dump for failure and success
     Need more try/catch handling
@@ -42,3 +40,20 @@ def create_subdirectories_wd(path, subdirectories):
             pass
         else:
             raise
+
+def convert_dict_keys_to_list(dictionary):
+	"""
+	Converts Keys of Dictionary to List
+	"""
+
+	list = dictionary.keys()
+	return list
+
+
+def convert_dict_values_to_list(dictionary):
+	"""
+	Converts Values of Dictionary to List
+	"""
+
+	list = dictionary.values()
+	return list
