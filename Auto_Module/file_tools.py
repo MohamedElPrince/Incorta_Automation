@@ -1,7 +1,10 @@
 import os, errno
 """
 Tools and utilities for file and folder manipulation
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 TODO
     Add log file dump for failure and success
     Need more try/catch handling
@@ -58,3 +61,20 @@ def get_path (path, directory):
     """
     appended_path = path + os.sep + directory
     return appended_path
+
+def convert_dict_keys_to_list(dictionary):
+	"""
+	Converts Keys of Dictionary to List
+	"""
+
+	list = dictionary.keys()
+	return list
+
+
+def convert_dict_values_to_list(dictionary):
+	"""
+	Converts Values of Dictionary to List
+	"""
+
+	list = dictionary.values()
+	return list
