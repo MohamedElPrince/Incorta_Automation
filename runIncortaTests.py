@@ -220,6 +220,13 @@ def logout(session):
 
 def get_test_suite_path(test_suite):
     """
+    Function gets path of test suite within the AF
+    	args:
+    		test_suite: pass test suite name as string
+    	returns:
+            Path of test suite located within the AF
+    	prints:
+            Nothing
     """
     test_suite_path = os.getcwd() + '/' + "TestSuites"
     test_suite_path = test_suite_path + '/' + test_suite
@@ -239,25 +246,26 @@ if Debug == False:
 # converts keys in a dictionary to variables
 locals().update(config_defaults)
 
-incorta_api_import(incorta_home)
+incorta_api_import(incorta_home)    #Import Incorta API
 
-session = login(url, tenant, admin, password)
+session = login(url, tenant, admin, password)   # Login to Incorta
 
-wd_test_suite_path = Auto_Module.file_tools.create_directory(wd_path, test_suite)
+wd_test_suite_path = Auto_Module.file_tools.create_directory(wd_path, test_suite)   #Working Directory test suite path
 
-test_suite_path = get_test_suite_path(test_suite)
+test_suite_path = get_test_suite_path(test_suite)   #Path of test suite
 
+#Returns subdirectories of Path of test suite
 test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
-
 if Debug == False:
     print test_suite_subdirectories
 
-for dir in test_suite_subdirectories:
+for dir in test_suite_subdirectories:   #For loop for each test case inside test suite
     # Get path of test_case in test_suite
     test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
     if Debug == False:
         print test_case_path
 
+    #Get subdirectories of test case
     test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
     if Debug == False:
         print test_case_subdirectories
@@ -269,15 +277,26 @@ for dir in test_suite_subdirectories:
 
     #Creates Import and Export Folders in WD test case folder
     Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
+
+    #Extracts test suite to WD
     Auto_Module.test_suite_export_wd.extract_test_suite(test_case_path, test_case_path_wd)
+
+    #Import Datafiles to Incorta
     Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
+
+    #Import Schema to Incorta
     Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
+
+    #Import Dashboards to Incorta
     Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
+
+
+
+
 
 
 # schema_names = ['A_01_CASE']  # list of schemas to be loaded
 # loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
-
 # #dataLoad.load_schema(incorta,session,schema_names)
 # schemas = 'A_01_CASE'
 # Auto_Module.export.export_schemas(incorta, session, wd_path_appended, schemas)
