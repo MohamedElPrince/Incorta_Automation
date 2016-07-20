@@ -1,4 +1,5 @@
 import os, errno
+
 """
 Tools and utilities for file and folder manipulation
 <<<<<<< HEAD
@@ -9,7 +10,8 @@ TODO
     Add log file dump for failure and success
     Need more try/catch handling
 """
-Debug = True  #Debug flag for print statements
+Debug = True  # Debug flag for print statements
+
 
 def create_directory(path, folder_name):
     """
@@ -32,6 +34,7 @@ def create_directory(path, folder_name):
         else:
             raise
 
+
 def get_subdirectories(path):
     """
     Function gets all directories in a path
@@ -48,7 +51,8 @@ def get_subdirectories(path):
             subdirectories.remove(x)
     return subdirectories
 
-def get_path (path, directory):
+
+def get_path(path, directory):
     """
     Function can be used to return a path, does not create the directory
         args:
@@ -62,19 +66,19 @@ def get_path (path, directory):
     appended_path = path + os.sep + directory
     return appended_path
 
+
 def convert_dict_keys_to_list(dictionary):
-	"""
+    """
 	Converts Keys of Dictionary to List
 	"""
-
-	list = dictionary.keys()
-	return list
+    list = dictionary.keys()
+    return list
 
 
 def convert_dict_values_to_list(dictionary):
-	"""
+    """
 	Converts Values of Dictionary to List
 	"""
 
-	list = dictionary.values()
-	return list
+    list = dictionary.values()
+    return list
