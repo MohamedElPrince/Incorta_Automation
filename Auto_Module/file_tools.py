@@ -1,6 +1,10 @@
 import os, errno
 """
 Tools and utilities for file and folder manipulation
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 TODO
     Add log file dump for failure and success
     Need more try/catch handling
