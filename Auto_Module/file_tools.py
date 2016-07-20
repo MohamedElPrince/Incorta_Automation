@@ -10,8 +10,14 @@ Debug = True  #Debug flag for print statements
 
 def create_directory(path, folder_name):
     """
-    Documentation to come
-    Anahit Sarao
+    Function creates directory
+        args:
+            path: any path can be given
+            folder_name: name of the directory
+        returns:
+            The path of the new directory
+        prints:
+            Nothing
     """
     appended_path = path + os.sep + folder_name
     try:
@@ -25,8 +31,13 @@ def create_directory(path, folder_name):
 
 def get_subdirectories(path):
     """
-    Documentation to come
-    Anahit Sarao
+    Function gets all directories in a path
+        args:
+            path: any path can be given
+        returns:
+            List of the subdirectories
+        prints:
+            Nothing
     """
     subdirectories = os.listdir(path)
     for x in subdirectories:
@@ -34,23 +45,16 @@ def get_subdirectories(path):
             subdirectories.remove(x)
     return subdirectories
 
-def create_subdirectories_wd(path, subdirectory):
-    """
-    Documentation to come
-    Anahit Sarao
-    """
-    try:
-            os.makedirs(path + os.sep + subdirectory)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(path + os.sep + dir):
-            pass
-        else:
-            raise
-
 def get_path (path, directory):
     """
-    Documentation to come
-    Anahit Sarao
+    Function can be used to return a path, does not create the directory    
+        args:
+            path: any path can be given
+            folder_name: name of the directory
+        returns:
+            The path of the new directory
+        prints:
+            Nothing
     """
     appended_path = path + os.sep + directory
     return appended_path
