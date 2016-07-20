@@ -1,5 +1,4 @@
 import os, errno
-
 """
 Tools and utilities for file and folder manipulation
 

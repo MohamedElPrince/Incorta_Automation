@@ -279,7 +279,7 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
 
     #Extracts test suite to WD
-    Auto_Module.test_suite_export_wd.extract_test_suite(test_case_path, test_case_path_wd)
+    Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
 
     #Import Datafiles to Incorta
     Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)

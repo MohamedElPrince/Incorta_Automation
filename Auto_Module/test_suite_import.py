@@ -13,12 +13,13 @@ def import_datafiles(incorta, session, test_case_path):
     """
     Function imports all data files to Incorta from the designated test suite
         args:
+            incorta: Incorta API module
             session: session var returned by login function
-            test_suite: test suite name from config file
+            test_case_path: test suite directory path
         returns:
             Nothing
         prints:
-            Nothing
+            Can print debug statements if needed
     """
     extension = '.zip'
     upload_check = []
@@ -39,12 +40,13 @@ def import_schema(incorta, session, test_case_path):
     """
     Function imports all schemas to Incorta from the designated test suite
         args:
+            incorta: Incorta API module
             session: session var returned by login function
-            test_suite: test suite name from config file
+            test_case_path: test suite directory path
         returns:
             Nothing
         prints:
-            Nothing
+            Can print debug statements if needed
     """
     extension = '.zip'
     upload_check = []
@@ -65,12 +67,13 @@ def import_dashboard(incorta, session, test_case_path):
     """
     Function imports all dashboards to Incorta from the designated test suite
         args:
+            incorta: Incorta API module
             session: session var returned by login function
-            test_suite: test suite name from config file
+            test_case_path: test suite directory path
         returns:
             Nothing
         prints:
-            Nothing
+            Can print debug statements if needed
     """
     extension = '.zip'
     upload_check = []

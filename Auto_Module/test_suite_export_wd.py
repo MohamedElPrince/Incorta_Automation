@@ -9,12 +9,12 @@ TODO
 Debug = True  # Debug flag for print statements
 
 
-def extract_test_suite(test_case_path, test_case_path_wd):
+def extract_test_case(test_case_path, test_case_path_wd):
     """
-    Function extracts all files inside test suit to the working directory
+    Function extracts all files inside test case to the working directory
         args:
-            wd_path: working directory path
-            test_suite: test suite name
+            test_case_path: test case directory path
+            test_case_path_wd: test case working directory path
         returns:
             Nothing
         prints:
