@@ -47,7 +47,7 @@ def get_subdirectories(path):
 
 def get_path (path, directory):
     """
-    Function can be used to return a path, does not create the directory    
+    Function can be used to return a path, does not create the directory
         args:
             path: any path can be given
             folder_name: name of the directory
