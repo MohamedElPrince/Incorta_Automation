@@ -1,7 +1,7 @@
 import os, errno
 
 """
-
+Tools and utilities for file and folder manipulation
 
 TODO
     Add log file dump for failure and success
@@ -11,8 +11,10 @@ Debug = True  #Debug flag for print statements
 
 def create_directory(path, folder_name):
     """
+    Documentation to come
+    Anahit Sarao
     """
-    appended_path = path + '/' + folder_name
+    appended_path = path + os.sep + folder_name
     try:
         os.makedirs(appended_path)
         return appended_path
@@ -24,6 +26,8 @@ def create_directory(path, folder_name):
 
 def get_subdirectories(path):
     """
+    Documentation to come
+    Anahit Sarao
     """
     subdirectories = os.listdir(path)
     for x in subdirectories:
@@ -31,14 +35,23 @@ def get_subdirectories(path):
             subdirectories.remove(x)
     return subdirectories
 
-def create_subdirectories_wd(path, subdirectories):
+def create_subdirectories_wd(path, subdirectory):
     """
+    Documentation to come
+    Anahit Sarao
     """
     try:
-        for dir in subdirectories:
-            os.makedirs(path + '/' + dir)
+            os.makedirs(path + os.sep + subdirectory)
     except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(path + '/' + dir):
+        if exc.errno == errno.EEXIST and os.path.isdir(path + os.sep + dir):
             pass
         else:
             raise
+
+def get_path (path, directory):
+    """
+    Documentation to come
+    Anahit Sarao
+    """
+    appended_path = path + os.sep + directory
+    return appended_path

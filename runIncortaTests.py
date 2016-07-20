@@ -14,6 +14,9 @@ import errno
 import Auto_Module.export
 import Auto_Module.test_suite_export_wd
 import Auto_Module.file_tools
+import Auto_Module.test_suite_import
+from Auto_Module import *
+
 
 
 
@@ -34,7 +37,12 @@ Arguments
 -------------------------------------------
 """
 # All the arguments which are passed in command line
-sys.argv[0:] = argv
+# sys.argv[0:] = argv
+#
+# print "argv = %r" % argv
+# print "sysargv = %r" % sys.argv[0:]
+
+
 
 # sys.argv[1] is the config file
 config_file = sys.argv[1]
@@ -48,11 +56,9 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
                    'url': 'http://localhost:8080/incorta'}
 
-# new_config_defaults will hold all of the keys from the above dictionary
-# The values of the keys in new_config_defaults will be parsed from the config file
+# config_defaults will hold all of the keys from the above dictionary
+# The values of the keys in config_defaults will be parsed from the config file
 
-# The keys corresponding to importing, loading data, and extracting files are by default False
-new_config_defaults = {'import_object': 'False', 'data_load': 'False', 'extract_csv': 'False'}
 
 """
 ------------------------------------------Initialization----------------------------------------
@@ -63,7 +69,7 @@ new_config_defaults = {'import_object': 'False', 'data_load': 'False', 'extract_
 """
 
 
-def set_command_value(commands):
+def set_block_defaults(commands):
     """
     Function checks if an import, data load, or extract file argument is passed after the config file
     If so, the key corresponding to the action will be set to True
@@ -76,17 +82,17 @@ def set_command_value(commands):
     """
     # If no arguments come after the config file, import, data load, and extract file keys will all be set to True
     if len(sys.argv) == 2:
-        new_config_defaults['data_load'] = True
-        new_config_defaults['extract_csv'] = True
-        new_config_defaults['import_object'] = True
+        config_defaults['data_load'] = True
+        config_defaults['extract_csv'] = True
+        config_defaults['import_object'] = True
     else:
         for command in commands:
             if command == '-d':
-                new_config_defaults['import_object'] = True
+                config_defaults['import_object'] = True
             if command == '-l':
-                new_config_defaults['data_load'] = True
+                config_defaults['data_load'] = True
             if command == '-x':
-                new_config_defaults['extract_csv'] = True
+                config_defaults['extract_csv'] = True
 
 
 def set_new_defaults(config_file):
@@ -113,20 +119,20 @@ def set_new_defaults(config_file):
                 # if there is nothing after an = of a key in config file, the default value of the key will be assigned
                 # Ex: admin=________ -> admin=Super
                 if len(what_is_after_var) == 1:
-                    new_config_defaults[key] = value.rstrip()
+                    config_defaults[key] = value.rstrip()
                 # if there is nothing after the name of a key in config file, the default value of the key will be assigned
                 # Ex: admin____ -> admin=Super
                 elif len(what_is_after_key) == 1:
-                    new_config_defaults[key] = value.rstrip()
+                    config_defaults[key] = value.rstrip()
                 else:
-                    new_config_defaults[key] = what_is_after_var.rstrip()
+                    config_defaults[key] = what_is_after_var.rstrip()
 
     # If a key from config_defaults is missing in the config file, the code below will create the key
-    # in new_config_defaults and will assign that key its default value
+    # in config_defaults and will assign that key its default value
     new_key_list = []
     old_key_list = []
 
-    for new_key in new_config_defaults.keys():
+    for new_key in config_defaults.keys():
         new_key_list.append(new_key)
 
     for old_key in config_defaults.keys():
@@ -134,15 +140,15 @@ def set_new_defaults(config_file):
 
     for key in old_key_list:
         if key not in new_key_list:
-            new_config_defaults[key] = config_defaults[key]
+            config_defaults[key] = config_defaults[key]
 
     # If a custom working directory path is specified, /IncortaTesting/tmp/work will
     # be added to the end of the custom working directory path
-    if new_config_defaults['wd_path'] == '/IncortaTesting':
+    if config_defaults['wd_path'] == '/IncortaTesting':
         pass
     else:
         timestamp = ''
-        new_config_defaults['wd_path'] += '/IncortaTesting'
+        config_defaults['wd_path'] += '/IncortaTesting'
         add_time_stamp_to_wd(timestamp)
 
 
@@ -157,10 +163,10 @@ def add_time_stamp_to_wd(timestamp):
             Nothing
     """
     date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
-    new_config_defaults['wd_path'] += '/%s' % date_and_time
+    config_defaults['wd_path'] += '/%s' % date_and_time
 
 
-def incorta_import(incorta_home):
+def incorta_api_import(incorta_home):
     """
     Function takes the incorta installation path to import Incorta API
         args:
@@ -215,24 +221,25 @@ def logout(session):
 def get_test_suite_path(test_suite):
     """
     """
-    test_suite_path = os.getcwd()
+    test_suite_path = os.getcwd() + '/' + "TestSuites"
     test_suite_path = test_suite_path + '/' + test_suite
     return test_suite_path
+
 """
 #################################################### Functions ####################################################
 """
 
-set_command_value(commands)
+set_block_defaults(commands)
 set_new_defaults(config_file)
 
-if Debug == True:
-    for key, value in new_config_defaults.items():
+if Debug == False:
+    for key, value in config_defaults.items():
         print(key, value)
 
 # converts keys in a dictionary to variables
-locals().update(new_config_defaults)
+locals().update(config_defaults)
 
-incorta_import(incorta_home)
+incorta_api_import(incorta_home)
 
 session = login(url, tenant, admin, password)
 
@@ -240,23 +247,37 @@ wd_test_suite_path = Auto_Module.file_tools.create_directory(wd_path, test_suite
 
 test_suite_path = get_test_suite_path(test_suite)
 
-subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
+test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
-Auto_Module.file_tools.create_subdirectories_wd(wd_test_suite_path, subdirectories)
+if Debug == False:
+    print test_suite_subdirectories
 
-#Auto_Module.test_suite_export_wd.extract_test_suites(test_suite_path, subdirectories)
+for dir in test_suite_subdirectories:
+    # Get path of test_case in test_suite
+    test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
+    if Debug == False:
+        print test_case_path
 
+    test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
+    if Debug == False:
+        print test_case_subdirectories
 
+    # Creates test_suite folder in WD
+    test_case_path_wd = Auto_Module.file_tools.create_directory(wd_test_suite_path, dir)
+    if Debug == False:
+        print test_case_path_wd
 
-
+    #Creates Import and Export Folders in WD test case folder
+    Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
+    Auto_Module.test_suite_export_wd.extract_test_suite(test_case_path, test_case_path_wd)
+    Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
+    Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
+    Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
 
 
 # schema_names = ['A_01_CASE']  # list of schemas to be loaded
 # loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
 
-# test_suite_import.import_datafiles(incorta, session, test_suite)
-# test_suite_import.import_schema(incorta, session, test_suite)
-# test_suite_import.import_dashboard(incorta, session, test_suite)
 # #dataLoad.load_schema(incorta,session,schema_names)
 # schemas = 'A_01_CASE'
 # Auto_Module.export.export_schemas(incorta, session, wd_path_appended, schemas)

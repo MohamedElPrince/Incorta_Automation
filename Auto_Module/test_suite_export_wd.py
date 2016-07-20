@@ -1,16 +1,21 @@
 import os
 import zipfile
 
+import errno
+
+import file_tools
+
 """
-Exports test suites to working directory
+Exports test cases from a test suite to working directory
 
 TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-Debug = True  #Debug flag for print statements
+Debug = True  # Debug flag for print statements
 
-def extract_test_suites(test_suite_path, subdirectories):
+
+def extract_test_suite(test_case_path, test_case_path_wd):
     """
     Function extracts all files inside test suit to the working directory
         args:
@@ -21,15 +26,34 @@ def extract_test_suites(test_suite_path, subdirectories):
         prints:
             Nothing
     """
-    print test_suite_path
-    extract_test_suite_path = test_suite_path + '/pre_export_files'
-    python_work_dir = os.getcwd()
-    print extract_test_suite_path
+    if Debug == False:
+        print test_case_path, test_case_path_wd
+
+    #Need to fix this hard code
+    test_case_path_wd = test_case_path_wd + os.sep + 'Import_Files'
     extension = '.zip'
-    for root, dirs, files in os.walk(test_suite_path):
-        for file in files:
-            if file.endswith(extension):
-                file_raw_dir = os.path.join(root, file)
-                zip_ref = zipfile.ZipFile(file_raw_dir)
-                zip_ref.extractall(extract_test_suite_path)
-                zip_ref.close()
+    test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
+    for dir in test_case_subdirectories:
+        if 'datafiles' != dir:
+            test_case_subdirectories_path = file_tools.get_path(test_case_path, dir)
+            test_case_subdirectories_wd = file_tools.create_directory(test_case_path_wd, dir)
+            for files in os.listdir(test_case_subdirectories_path):
+                if not files.startswith('.'):
+                    if files.endswith(extension):
+                        file_name = os.path.splitext(files)[0]
+                        file_path_wd = file_tools.create_directory(test_case_subdirectories_wd, file_name)
+                        file_raw_path = os.path.join(test_case_subdirectories_path, files)
+                        zip_ref = zipfile.ZipFile(file_raw_path)
+                        zip_ref.extractall(file_path_wd)
+                        zip_ref.close()
+
+def create_standard_directory(test_case_path_wd):
+    """
+    Documentation to come
+    Anahit Sarao
+    """
+    try:
+        file_tools.create_directory(test_case_path_wd, 'Export_Files')
+        file_tools.create_directory(test_case_path_wd, 'Import_Files')
+    except OSError as e:
+        raise
