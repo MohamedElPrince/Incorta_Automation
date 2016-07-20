@@ -16,7 +16,7 @@ import Auto_Module.test_suite_export_wd
 import Auto_Module.file_tools
 import Auto_Module.test_suite_import
 from Auto_Module import *
-
+import Auto_Module.validation
 
 
 
@@ -289,6 +289,37 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
 
     #Import Dashboards to Incorta
     Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
+
+
+    import_dashboards = {}
+    import_dash_tenants = {}
+    dashboard_names_list = []
+
+    import_schemas = {}
+    import_schema_loaders = {}
+    import_schema_tenants = {}
+    schema_names_list = []
+
+
+    import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
+
+    import_dashboards, import_dash_tenants, dashboard_names_list = Auto_Module.validation.get_dashboards_info(import_path)
+    import_schemas, import_schema_loaders, import_schema_tenants, schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
+
+
+    print "IMPORTING TEST CASE", dir
+    print "\n\n\n"
+
+    print "-----Dashboard Info------\n"
+    print import_dashboards
+    print import_dash_tenants
+    print dashboard_names_list
+
+    print "\n --------Schema Info--------\n"
+    print import_schemas
+    print import_schema_loaders
+    print import_schema_tenants
+    print schema_names_list
 
 
 

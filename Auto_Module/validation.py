@@ -220,38 +220,38 @@ def get_schemas_info(path):
 	return schema_names, schema_loaders, schema_tenants, schema_name_list
 
 
-
-import_dash_ids = {}
-import_dash_tenants = {}
-export_dash_ids = {}
-
-import_schema_names = {}
-import_schema_loaders = {}
-import_schema_tenants = {}
-export_schema_names = {}
-
-dashboard_names_list = []
-schema_names_list = []
-
-
-import_path, export_path = grab_import_export_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
-
-print "Extracted from IMPORTS\n"
-import_dash_ids, import_dash_tenants, dashboard_names_list = get_dashboards_info(import_path)
-import_schema_names, import_schema_loaders, import_schema_tenants, schema_names_list = get_schemas_info(import_path)
-
-print "-------Dashboards--------\n"
-print "Imported dashboards: \n", import_dash_ids
-print "Imported Dashboard Tenants: \n", import_dash_tenants
-print "\n-------Schemas---------\n"
-print "Imported Schemas: \n", import_schema_names
-print "Imported Schema Loaders: \n", import_schema_loaders
-print "Imported Schema Tenants: \n", import_schema_tenants
-
-print "\nPrinting Dashboard Names \n"
-print dashboard_names_list
-print "\n Printing Schema Names List \n"
-print schema_names_list
+#
+# import_dash_ids = {}
+# import_dash_tenants = {}
+# export_dash_ids = {}
+#
+# import_schema_names = {}
+# import_schema_loaders = {}
+# import_schema_tenants = {}
+# export_schema_names = {}
+#
+# dashboard_names_list = []
+# schema_names_list = []
+#
+#
+# import_path, export_path = grab_import_export_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
+#
+# print "Extracted from IMPORTS\n"
+# import_dash_ids, import_dash_tenants, dashboard_names_list = get_dashboards_info(import_path)
+# import_schema_names, import_schema_loaders, import_schema_tenants, schema_names_list = get_schemas_info(import_path)
+#
+# print "-------Dashboards--------\n"
+# print "Imported dashboards: \n", import_dash_ids
+# print "Imported Dashboard Tenants: \n", import_dash_tenants
+# print "\n-------Schemas---------\n"
+# print "Imported Schemas: \n", import_schema_names
+# print "Imported Schema Loaders: \n", import_schema_loaders
+# print "Imported Schema Tenants: \n", import_schema_tenants
+#
+# print "\nPrinting Dashboard Names \n"
+# print dashboard_names_list
+# print "\n Printing Schema Names List \n"
+# print schema_names_list
 
 
 
