@@ -1,5 +1,6 @@
 import os, sys
 import zipfile
+import file_tools
 """
 Exports test suites to working directory
 Imports datafiles / schemas / dashboards to Incorta
@@ -23,12 +24,15 @@ def import_datafiles(incorta, session, test_case_path):
     """
     extension = '.zip'
     upload_check = []
-    for root, dirs, files in os.walk(test_case_path):
-        for file in files:
-            if 'datafile' in file:
-                if file.endswith(extension):
-                    file_full_path = os.path.join(root, file)
-                    upload_check.append(incorta.upload_data_file(session, file_full_path))
+    test_case_subdirectory = file_tools.get_subdirectories(test_case_path)
+    for dirs in test_case_subdirectory:
+        if 'datafiles' in dirs:
+            test_case_subdirectory_path = file_tools.get_path(test_case_path, dirs)
+            for files in os.listdir(test_case_subdirectory_path):
+                if not files.startswith('.'):
+                        if files.endswith(extension):
+                            file_full_path = os.path.join(test_case_subdirectory_path, files)
+                            upload_check.append(incorta.upload_data_file(session, file_full_path))
     if Debug == True:
         for checks in upload_check:
             print checks,
@@ -46,12 +50,15 @@ def import_schema(incorta, session, test_case_path):
     """
     extension = '.zip'
     upload_check = []
-    for root, dirs, files in os.walk(test_case_path):
-        for file in files:
-            if 'schema' in file:
-                if file.endswith(extension):
-                    file_full_path = os.path.join(root, file)
-                    upload_check.append(incorta.import_tenant(session, file_full_path, True))
+    test_case_subdirectory = file_tools.get_subdirectories(test_case_path)
+    for dirs in test_case_subdirectory:
+        if 'schema' in dirs:
+            test_case_subdirectory_path = file_tools.get_path(test_case_path, dirs)
+            for files in os.listdir(test_case_subdirectory_path):
+                if not files.startswith('.'):
+                    if files.endswith(extension):
+                        file_full_path = os.path.join(test_case_subdirectory_path, files)
+                        upload_check.append(incorta.import_tenant(session, file_full_path, True))
     if Debug == True:
         for checks in upload_check:
             print checks,
@@ -69,12 +76,15 @@ def import_dashboard(incorta, session, test_case_path):
     """
     extension = '.zip'
     upload_check = []
-    for root, dirs, files in os.walk(test_case_path):
-        for file in files:
-            if 'dashboard' in file:
-                if file.endswith(extension):
-                    file_full_path = os.path.join(root, file)
-                    upload_check.append(incorta.import_tenant(session, file_full_path, True))
+    test_case_subdirectory = file_tools.get_subdirectories(test_case_path)
+    for dirs in test_case_subdirectory:
+        if 'dashboards' in dirs:
+            test_case_subdirectory_path = file_tools.get_path(test_case_path, dirs)
+            for files in os.listdir(test_case_subdirectory_path):
+                if not files.startswith('.'):
+                    if files.endswith(extension):
+                        file_full_path = os.path.join(test_case_subdirectory_path, files)
+                        upload_check.append(incorta.import_tenant(session, file_full_path))
     if Debug == True:
         for checks in upload_check:
             print checks,

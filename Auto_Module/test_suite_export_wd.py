@@ -28,6 +28,8 @@ def extract_test_suite(test_case_path, test_case_path_wd):
     """
     if Debug == False:
         print test_case_path, test_case_path_wd
+
+    #Need to fix this hard code
     test_case_path_wd = test_case_path_wd + os.sep + 'Import_Files'
     extension = '.zip'
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)

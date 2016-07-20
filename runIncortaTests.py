@@ -14,6 +14,7 @@ import errno
 import Auto_Module.export
 import Auto_Module.test_suite_export_wd
 import Auto_Module.file_tools
+import Auto_Module.test_suite_import
 from Auto_Module import *
 
 
@@ -25,7 +26,7 @@ from Auto_Module import *
 ------------------------------------------Initialization----------------------------------------
 """
 
-Debug = False  # Debug flag for print statements
+Debug = True  # Debug flag for print statements
 
 """
 Arguments
@@ -231,7 +232,7 @@ def get_test_suite_path(test_suite):
 set_block_defaults(commands)
 set_new_defaults(config_file)
 
-if Debug == True:
+if Debug == False:
     for key, value in config_defaults.items():
         print(key, value)
 
@@ -248,48 +249,35 @@ test_suite_path = get_test_suite_path(test_suite)
 
 test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
-if Debug == True:
+if Debug == False:
     print test_suite_subdirectories
 
 for dir in test_suite_subdirectories:
     # Get path of test_case in test_suite
     test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
-    if Debug == True:
+    if Debug == False:
         print test_case_path
 
     test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
-    if Debug == True:
+    if Debug == False:
         print test_case_subdirectories
 
     # Creates test_suite folder in WD
     test_case_path_wd = Auto_Module.file_tools.create_directory(wd_test_suite_path, dir)
-    if Debug == True:
+    if Debug == False:
         print test_case_path_wd
 
     #Creates Import and Export Folders in WD test case folder
     Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
-
-    #for test_case_dir in test_case_subdirectories:
-
     Auto_Module.test_suite_export_wd.extract_test_suite(test_case_path, test_case_path_wd)
-    # Auto_Module.test_suite_export_wd.extract_test_suite(wd_test_suite_path, subdirectories)
-    # Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
-    # Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
-    # Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
-
-
-
-
-#Auto_Module.test_suite_export_wd.extract_test_suites(test_suite_path, subdirectories)
-#Auto_Module.file_tools.create_subdirectories_wd(wd_test_suite_path, subdirectories)
+    Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
+    Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
+    Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
 
 
 # schema_names = ['A_01_CASE']  # list of schemas to be loaded
 # loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
 
-# test_suite_import.import_datafiles(incorta, session, test_suite)
-# test_suite_import.import_schema(incorta, session, test_suite)
-# test_suite_import.import_dashboard(incorta, session, test_suite)
 # #dataLoad.load_schema(incorta,session,schema_names)
 # schemas = 'A_01_CASE'
 # Auto_Module.export.export_schemas(incorta, session, wd_path_appended, schemas)
