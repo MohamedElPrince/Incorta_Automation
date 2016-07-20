@@ -84,7 +84,7 @@ def import_dashboard(incorta, session, test_case_path):
                 if not files.startswith('.'):
                     if files.endswith(extension):
                         file_full_path = os.path.join(test_case_subdirectory_path, files)
-                        upload_check.append(incorta.import_tenant(session, file_full_path))
+                        upload_check.append(incorta.import_tenant(session, file_full_path, True))
     if Debug == True:
         for checks in upload_check:
             print checks,
