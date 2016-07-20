@@ -1,10 +1,4 @@
-import os
-import zipfile
-
-import errno
-
-import file_tools
-
+import os, zipfile, file_tools
 """
 Exports test cases from a test suite to working directory
 

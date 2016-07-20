@@ -1,6 +1,4 @@
-import os, sys
-import zipfile
-import file_tools
+import os, file_tools
 """
 Exports test suites to working directory
 Imports datafiles / schemas / dashboards to Incorta
