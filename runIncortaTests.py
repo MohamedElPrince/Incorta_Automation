@@ -250,7 +250,7 @@ incorta_api_import(incorta_home)    #Import Incorta API
 
 session = login(url, tenant, admin, password)   # Login to Incorta
 
-wd_test_suite_path = Auto_Module.file_tools.create_directory(wd_path, test_suite)   #Working Directory test suite path
+test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, test_suite)   #Working Directory test suite path
 
 test_suite_path = get_test_suite_path(test_suite)   #Path of test suite
 
@@ -271,7 +271,7 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
         print test_case_subdirectories
 
     # Creates test_suite folder in WD
-    test_case_path_wd = Auto_Module.file_tools.create_directory(wd_test_suite_path, dir)
+    test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
     if Debug == False:
         print test_case_path_wd
 
@@ -300,26 +300,41 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     import_schema_tenants = {}
     schema_names_list = []
 
-
     import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
-
     import_dashboards, import_dash_tenants, dashboard_names_list = Auto_Module.validation.get_dashboards_info(import_path)
     import_schemas, import_schema_loaders, import_schema_tenants, schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
 
 
-    print "IMPORTING TEST CASE", dir
-    print "\n\n\n"
+    # print "IMPORTING TEST CASE", dir
+    # print "\n"
+    # print "-----Dashboard Info------\n"
+    # print import_dashboards
+    # print import_dash_tenants
+    #print dashboard_names_list
+    # print "\n --------Schema Info--------\n"
+    # print import_schemas
+    # print import_schema_loaders
+    # print import_schema_tenants
+    # print schema_names_list
 
-    print "-----Dashboard Info------\n"
-    print import_dashboards
-    print import_dash_tenants
-    print dashboard_names_list
 
-    print "\n --------Schema Info--------\n"
-    print import_schemas
-    print import_schema_loaders
-    print import_schema_tenants
-    print schema_names_list
+
+
+    test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
+    for test_case_wd_dirs in test_case_wd_subdirectories:
+        if 'Export_Files' in test_case_wd_dirs:
+            test_case_export_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, test_case_wd_dirs)
+            export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
+            test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'dashboard')
+            test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'schema')
+            Auto_Module.export.export_dashboards(incorta, session, export_zips_path, dashboard_names_list)
+            Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path)
+            Auto_Module.export.export_schemas(incorta, session, export_zips_path, schema_names_list)
+            Auto_Module.export.export_zip(export_zips_path, test_case_wd_schema_path)
+            os.rmdir(export_zips_path)
+        #if 'Import_Files' in test_case_wd_dirs:
+
+
 
 
 
