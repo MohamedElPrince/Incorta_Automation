@@ -12,7 +12,7 @@ This file contains the validation between import and export test cases
 
 
 
-def validation(import_dictionary, export_dictionary, wd_path):
+def validation(import_dictionary, export_dictionary, wd_path, dictionary_type):
 
 	"""
 	Compares import and export files. If any differences are found
@@ -22,9 +22,11 @@ def validation(import_dictionary, export_dictionary, wd_path):
 	contained within the Output folder
 	"""
 
-	print "WD PATH", wd_path
-	output_path = wd_path+os.sep+'Output/'
-	print "OUTPUT PATH", output_path
+
+	output_path = wd_path+os.sep+'Output' + os.sep
+	file_tools.create_directory(output_path, dictionary_type)
+	output_path = output_path + dictionary_type + os.sep
+	#dump_path = output_path + os.sep + dictionary_type
 
 	for key in import_dictionary:
 		export_file_path = export_dictionary.get(key, None)
@@ -87,9 +89,7 @@ def validation(import_dictionary, export_dictionary, wd_path):
 				# print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
 				# print "\n"
 				temp_string = temp_string + '.suc'
-				print "TEMP STRING", temp_string
 				log_name = output_path + temp_string
-				print "LOG NAME", log_name
 				f = open(log_name, 'w')
 				f.close()
 
@@ -254,44 +254,44 @@ def get_schemas_info(path):
 
 
 #-----------------------------------------------TESTING------------------------------------------------------
-
-#IMPORT DATA STRUCTURES
-
-import_dash_ids = {}
-import_dash_tenants = {}
-import_dashboard_names_list = []
-
-import_schema_names = {}
-import_schema_loaders = {}
-import_schema_tenants = {}
-import_schema_names_list = []
-
-#EXPORT DATA STRUCTURES
-
-export_dash_ids = {}
-export_dash_tenants = {}
-export_dashboard_names_list = []
-
-export_schema_names = {}
-export_schema_loaders = {}
-export_schema_tenants = {}
-export_schema_names_list = []
-
-
-
-import_path, export_path = grab_import_export_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
-
-
-import_dash_ids, import_dash_tenants, import_dashboard_names_list = get_dashboards_info(import_path)
-import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = get_schemas_info(import_path)
-
-
-
-export_dash_ids, export_dash_tenants, export_dashboard_names_list = get_dashboards_info(export_path)
-export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = get_schemas_info(export_path)
-
-
-validation(import_dash_ids, export_dash_ids, '/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00')
+#
+# #IMPORT DATA STRUCTURES
+#
+# import_dash_ids = {}
+# import_dash_tenants = {}
+# import_dashboard_names_list = []
+#
+# import_schema_names = {}
+# import_schema_loaders = {}
+# import_schema_tenants = {}
+# import_schema_names_list = []
+#
+# #EXPORT DATA STRUCTURES
+#
+# export_dash_ids = {}
+# export_dash_tenants = {}
+# export_dashboard_names_list = []
+#
+# export_schema_names = {}
+# export_schema_loaders = {}
+# export_schema_tenants = {}
+# export_schema_names_list = []
+#
+#
+#
+# import_path, export_path = grab_import_export_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
+#
+#
+# import_dash_ids, import_dash_tenants, import_dashboard_names_list = get_dashboards_info(import_path)
+# import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = get_schemas_info(import_path)
+#
+#
+#
+# export_dash_ids, export_dash_tenants, export_dashboard_names_list = get_dashboards_info(export_path)
+# export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = get_schemas_info(export_path)
+#
+#
+# validation(import_dash_ids, export_dash_ids, '/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00')
 
 
 
