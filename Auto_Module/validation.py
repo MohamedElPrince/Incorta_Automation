@@ -22,8 +22,9 @@ def validation(import_dictionary, export_dictionary, wd_path):
 	contained within the Output folder
 	"""
 
+	print "WD PATH", wd_path
 	output_path = wd_path+os.sep+'Output/'
-
+	print "OUTPUT PATH", output_path
 
 	for key in import_dictionary:
 		export_file_path = export_dictionary.get(key, None)
@@ -41,7 +42,7 @@ def validation(import_dictionary, export_dictionary, wd_path):
 			set1 = set(etree.tostring(i, method='c14n') for i in import_tree.getroot())
 			set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
 
-			path_list = import_dictionary[key].split('/')
+			path_list = export_dictionary[key].split('/')
 			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9]
 
 			if set1 != set2:
@@ -86,7 +87,9 @@ def validation(import_dictionary, export_dictionary, wd_path):
 				# print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
 				# print "\n"
 				temp_string = temp_string + '.suc'
+				print "TEMP STRING", temp_string
 				log_name = output_path + temp_string
+				print "LOG NAME", log_name
 				f = open(log_name, 'w')
 				f.close()
 
@@ -292,6 +295,7 @@ validation(import_dash_ids, export_dash_ids, '/Users/Nadim_Incorta/IncortaTestin
 
 
 
+# print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
 
 #
 # print "Extracted from IMPORTS\n"
@@ -326,6 +330,7 @@ validation(import_dash_ids, export_dash_ids, '/Users/Nadim_Incorta/IncortaTestin
 # print "\n Printing Schema Names List \n"
 # print export_schema_names_list
 #
+# print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
 
 
 

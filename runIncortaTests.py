@@ -259,8 +259,12 @@ test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite
 if Debug == False:
     print test_suite_subdirectories
 
+# ENTERING TEST CASES
 for dir in test_suite_subdirectories:   #For loop for each test case inside test suite
     # Get path of test_case in test_suite
+
+    print "CURRENT TEST CASE", dir
+
     test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
     if Debug == False:
         print test_case_path
@@ -290,20 +294,21 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     #Import Dashboards to Incorta
     Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
 
+    # IMPORT DATA STRUCTURES
 
-    import_dashboards = {}
+    import_dash_ids = {}
     import_dash_tenants = {}
-    dashboard_names_list = []
+    import_dashboard_names_list = []
 
-    import_schemas = {}
+    import_schema_names = {}
     import_schema_loaders = {}
     import_schema_tenants = {}
-    schema_names_list = []
+    import_schema_names_list = []
 
     import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
-    import_dashboards, import_dash_tenants, dashboard_names_list = Auto_Module.validation.get_dashboards_info(import_path)
-    import_schemas, import_schema_loaders, import_schema_tenants, schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
 
+    import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(import_path)
+    import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
 
     # print "IMPORTING TEST CASE", dir
     # print "\n"
@@ -318,25 +323,93 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     # print schema_names_list
 
 
-
+    #EXPORTS
 
     test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
     for test_case_wd_dirs in test_case_wd_subdirectories:
         if 'Export_Files' in test_case_wd_dirs:
             test_case_export_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, test_case_wd_dirs)
             export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
-            test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'dashboard')
-            test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'schema')
-            Auto_Module.export.export_dashboards(incorta, session, export_zips_path, dashboard_names_list)
+            test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'dashboards')
+            test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'schemas')
+            Auto_Module.export.export_dashboards(incorta, session, export_zips_path, import_dashboard_names_list)
             Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path)
-            Auto_Module.export.export_schemas(incorta, session, export_zips_path, schema_names_list)
+            Auto_Module.export.export_schemas(incorta, session, export_zips_path, import_schema_names_list)
             Auto_Module.export.export_zip(export_zips_path, test_case_wd_schema_path)
             os.rmdir(export_zips_path)
         #if 'Import_Files' in test_case_wd_dirs:
 
 
+    #EXPORT DATA STRUCTURES
+
+    export_dash_ids = {}
+    export_dash_tenants = {}
+    export_dashboard_names_list = []
+
+    export_schema_names = {}
+    export_schema_loaders = {}
+    export_schema_tenants = {}
+    export_schema_names_list = []
+
+    export_dash_ids, export_dash_tenants, export_dashboard_names_list = Auto_Module.validation.get_dashboards_info(export_path)
+    export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(export_path)
 
 
+    # VALIDATION IMPLEMENTATION
+    Auto_Module.file_tools.create_directory(wd_path, 'Output')
+    #Comparing Dashboard Items
+    Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path)
+    Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path)
+
+    #Comparing Schema Items
+    Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path)
+    Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path)
+    Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path)
+
+
+
+
+
+
+
+    # TO BE USED FOR DEBUGGING PURPOSES
+    # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
+    #
+    #
+    # print "Extracted from IMPORTS\n"
+    #
+    #
+    # print "-------Dashboards--------\n"
+    # print "Imported dashboards: \n", import_dash_ids
+    # print "Imported Dashboard Tenants: \n", import_dash_tenants
+    # print "\n-------Schemas---------\n"
+    # print "Imported Schemas: \n", import_schema_names
+    # print "Imported Schema Loaders: \n", import_schema_loaders
+    # print "Imported Schema Tenants: \n", import_schema_tenants
+    #
+    # print "\nPrinting Dashboard Names \n"
+    # print import_dashboard_names_list
+    # print "\n Printing Schema Names List \n"
+    # print import_schema_names_list
+    #
+    #
+    # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
+    # print "\nExtracted from EXPORTS\n"
+    # print "-------Dashboards--------\n"
+    # print "Exported dashboards: \n", export_dash_ids
+    # print "Exported Dashboard Tenants: \n", export_dash_tenants
+    # print "\n-------Schemas---------\n"
+    # print "Exported Schemas: \n", export_schema_names
+    # print "Exported Schema Loaders: \n", export_schema_loaders
+    # print "Exported Schema Tenants: \n", export_schema_tenants
+    #
+    # print "\nPrinting Dashboard Names \n"
+    # print export_dashboard_names_list
+    # print "\n Printing Schema Names List \n"
+    # print export_schema_names_list
+    #
+    # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
+    #
 
 
 
