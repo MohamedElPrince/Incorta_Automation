@@ -45,9 +45,9 @@ def validation(import_dictionary, export_dictionary, wd_path):
 			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9]
 
 			if set1 != set2:
-				print "Data Corruption between"
-				print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
-				print "\n"
+				# print "Data Corruption between"
+				# print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
+				# print "\n"
 				temp_string = temp_string + '.dif'
 				log_name = output_path + temp_string
 
@@ -60,8 +60,10 @@ def validation(import_dictionary, export_dictionary, wd_path):
 				header_string = 'Imported File: \n' + import_dictionary[key] + '\nExported File: \n' + export_dictionary[key]
 				f.write(header_string)
 				f.write('\n\n')
-				header2_string = "IMPORT CONTENT:  " + '-----------------------------------------------' + " EXPORT CONTENT: "
+				header2_string = "\n\n Outputting Differences.... \n\n"
 				f.write(header2_string)
+				header3_string = "IMPORT CONTENT:  " + '-----------------------------------------------' + " EXPORT CONTENT: "
+				f.write(header3_string)
 				f.write('\n\n')
 
 				for i in range(len(import_list)):
@@ -80,16 +82,15 @@ def validation(import_dictionary, export_dictionary, wd_path):
 				# subprocess.call(diff_command, shell = True)
 
 			else:
-				print "Data Validated"
-				print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
-				print "\n"
+				# print "Data Validated"
+				# print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
+				# print "\n"
 				temp_string = temp_string + '.suc'
 				log_name = output_path + temp_string
 				f = open(log_name, 'w')
 				f.close()
 
 		else:
-			# generate a {TESTSUITE}_{TESTCASE}_{ARTIFACTNAME}_NF.dif
 			path_list = import_dictionary[key].split('/')
 			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9] + '_' + 'NF' + '.dif'
 			log_name = output_path + temp_string
