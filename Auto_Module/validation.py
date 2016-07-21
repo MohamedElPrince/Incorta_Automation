@@ -2,7 +2,6 @@ from xml.etree import ElementTree
 from lxml import etree
 import os
 import file_tools
-import subprocess
 
 """
 This file contains an array of functions to pull schema, dashboard, and tenant data.
@@ -12,7 +11,7 @@ This file contains the validation between import and export test cases
 
 
 
-def validation(import_dictionary, export_dictionary, wd_path):
+def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, dictionary_type):
 
 	"""
 	Compares import and export files. If any differences are found
@@ -22,11 +21,13 @@ def validation(import_dictionary, export_dictionary, wd_path):
 	contained within the Output folder
 	"""
 
-	print "WD PATH", wd_path
-	output_path = wd_path+os.sep+'Output/'
-	print "OUTPUT PATH", output_path
+	output_path = wd_path+os.sep+'Output' + os.sep + test_suite_name + '_Summary' + os.sep
+	file_tools.create_directory(output_path, dictionary_type)
+	output_path = output_path + dictionary_type + os.sep
 
 	for key in import_dictionary:
+
+
 		export_file_path = export_dictionary.get(key, None)
 		if export_file_path != None:
 
@@ -46,9 +47,7 @@ def validation(import_dictionary, export_dictionary, wd_path):
 			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9]
 
 			if set1 != set2:
-				# print "Data Corruption between"
-				# print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
-				# print "\n"
+				# FILES ARE DIFFERENT
 				temp_string = temp_string + '.dif'
 				log_name = output_path + temp_string
 
@@ -63,8 +62,10 @@ def validation(import_dictionary, export_dictionary, wd_path):
 				f.write('\n\n')
 				header2_string = "\n\n Outputting Differences.... \n\n"
 				f.write(header2_string)
-				header3_string = "IMPORT CONTENT:  " + '-----------------------------------------------' + " EXPORT CONTENT: "
+				header3_string = ">>> IMPORT CONTENT"
+				header4_string = "<<< EXPORT CONTENT"
 				f.write(header3_string)
+				f.write(header4_string)
 				f.write('\n\n')
 
 				for i in range(len(import_list)):
@@ -74,22 +75,21 @@ def validation(import_dictionary, export_dictionary, wd_path):
 				for i in range(len(import_contents)):
 					import_temp = import_contents[i].replace("u'", "")
 					export_temp = export_contents[i].replace("u'", "")
-					diff_string = import_temp + '------------------------' + export_temp
-					f.write(diff_string)
+					diff_imp_string = '>>> ' + import_temp
 					f.write('\n')
+					diff_exp_string = '<<< ' + export_temp
+					f.write(diff_imp_string)
+					f.write(diff_exp_string)
+					f.write('\n\n')
 				f.close()
 
 				# diff_command = 'diff ' + import_dictionary[key] + ' ' + export_dictionary[key] + ' > ' + log_name
 				# subprocess.call(diff_command, shell = True)
 
 			else:
-				# print "Data Validated"
-				# print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
-				# print "\n"
+				# FILES ARE THE SAME
 				temp_string = temp_string + '.suc'
-				print "TEMP STRING", temp_string
 				log_name = output_path + temp_string
-				print "LOG NAME", log_name
 				f = open(log_name, 'w')
 				f.close()
 
@@ -97,10 +97,11 @@ def validation(import_dictionary, export_dictionary, wd_path):
 			path_list = import_dictionary[key].split('/')
 			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9] + '_' + 'NF' + '.dif'
 			log_name = output_path + temp_string
-
-			f = open(log_name, 'w')
-			f.close()
-
+			try:
+				f = open(log_name, 'w')
+				f.close()
+			except Exception, e:
+				print "CANT CREATE FILE", log_name
 
 def grab_import_export_path(wd_test_case_path):
 	"""
@@ -251,89 +252,5 @@ def get_schemas_info(path):
 							print "Unable to read schema"
 
 	return schema_names, schema_loaders, schema_tenants, schema_name_list
-
-
-#-----------------------------------------------TESTING------------------------------------------------------
-
-#IMPORT DATA STRUCTURES
-
-import_dash_ids = {}
-import_dash_tenants = {}
-import_dashboard_names_list = []
-
-import_schema_names = {}
-import_schema_loaders = {}
-import_schema_tenants = {}
-import_schema_names_list = []
-
-#EXPORT DATA STRUCTURES
-
-export_dash_ids = {}
-export_dash_tenants = {}
-export_dashboard_names_list = []
-
-export_schema_names = {}
-export_schema_loaders = {}
-export_schema_tenants = {}
-export_schema_names_list = []
-
-
-
-import_path, export_path = grab_import_export_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
-
-
-import_dash_ids, import_dash_tenants, import_dashboard_names_list = get_dashboards_info(import_path)
-import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = get_schemas_info(import_path)
-
-
-
-export_dash_ids, export_dash_tenants, export_dashboard_names_list = get_dashboards_info(export_path)
-export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = get_schemas_info(export_path)
-
-
-validation(import_dash_ids, export_dash_ids, '/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00')
-
-
-
-# print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-
-#
-# print "Extracted from IMPORTS\n"
-#
-#
-# print "-------Dashboards--------\n"
-# print "Imported dashboards: \n", import_dash_ids
-# print "Imported Dashboard Tenants: \n", import_dash_tenants
-# print "\n-------Schemas---------\n"
-# print "Imported Schemas: \n", import_schema_names
-# print "Imported Schema Loaders: \n", import_schema_loaders
-# print "Imported Schema Tenants: \n", import_schema_tenants
-#
-# print "\nPrinting Dashboard Names \n"
-# print import_dashboard_names_list
-# print "\n Printing Schema Names List \n"
-# print import_schema_names_list
-#
-#
-# print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-# print "\nExtracted from EXPORTS\n"
-# print "-------Dashboards--------\n"
-# print "Exported dashboards: \n", export_dash_ids
-# print "Exported Dashboard Tenants: \n", export_dash_tenants
-# print "\n-------Schemas---------\n"
-# print "Exported Schemas: \n", export_schema_names
-# print "Exported Schema Loaders: \n", export_schema_loaders
-# print "Exported Schema Tenants: \n", export_schema_tenants
-#
-# print "\nPrinting Dashboard Names \n"
-# print export_dashboard_names_list
-# print "\n Printing Schema Names List \n"
-# print export_schema_names_list
-#
-# print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-
-
-
-
 
 

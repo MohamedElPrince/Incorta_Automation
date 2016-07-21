@@ -259,11 +259,13 @@ test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite
 if Debug == False:
     print test_suite_subdirectories
 
+
+current_test_suite = test_suite
+
 # ENTERING TEST CASES
 for dir in test_suite_subdirectories:   #For loop for each test case inside test suite
     # Get path of test_case in test_suite
 
-    print "CURRENT TEST CASE", dir
 
     test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
     if Debug == False:
@@ -310,18 +312,6 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(import_path)
     import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
 
-    # print "IMPORTING TEST CASE", dir
-    # print "\n"
-    # print "-----Dashboard Info------\n"
-    # print import_dashboards
-    # print import_dash_tenants
-    #print dashboard_names_list
-    # print "\n --------Schema Info--------\n"
-    # print import_schemas
-    # print import_schema_loaders
-    # print import_schema_tenants
-    # print schema_names_list
-
 
     #EXPORTS
 
@@ -355,16 +345,18 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(export_path)
 
 
+
     # VALIDATION IMPLEMENTATION
     Auto_Module.file_tools.create_directory(wd_path, 'Output')
+
     #Comparing Dashboard Items
-    Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path)
-    Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path)
+    Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite, 'dashboards')
+    Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite, 'dashboard_tenants')
 
     #Comparing Schema Items
-    Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path)
-    Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path)
-    Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path)
+    Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite, 'schemas')
+    Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path, current_test_suite, 'schema_loaders')
+    Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path, current_test_suite, 'schema_tenants')
 
 
 
