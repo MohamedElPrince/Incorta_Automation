@@ -26,65 +26,74 @@ def validation(import_dictionary, export_dictionary, wd_path):
 
 
 	for key in import_dictionary:
-		for jey in export_dictionary:
-			if key == jey:
-				print key, export_dictionary[key]
-				print key, import_dictionary[key]
-				print "--------------------"
+		export_file_path = export_dictionary.get(key, None)
+		if export_file_path != None:
 
-		import_tree = etree.parse(import_dictionary[key])
-		export_tree = etree.parse(export_dictionary[key])
+			import_tree = etree.parse(import_dictionary[key])
+			export_tree = etree.parse(export_dictionary[key])
 
-		import_tree_string = etree.tostring(import_tree, encoding="unicode", method="xml")
-		export_tree_string = etree.tostring(export_tree, encoding="unicode", method="xml")
+			import_tree_string = etree.tostring(import_tree, encoding="unicode", method="xml")
+			export_tree_string = etree.tostring(export_tree, encoding="unicode", method="xml")
 
-		import_tree_string = import_tree_string.replace("u'", "")
-		export_tree_string = export_tree_string.replace("u'", "")
+			import_tree_string = import_tree_string.replace("u'", "")
+			export_tree_string = export_tree_string.replace("u'", "")
 
-		set1 = set(etree.tostring(i, method='c14n') for i in import_tree.getroot())
-		set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
+			set1 = set(etree.tostring(i, method='c14n') for i in import_tree.getroot())
+			set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
 
-		path_list = import_dictionary[key].split('/')
-		temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9]
+			path_list = import_dictionary[key].split('/')
+			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9]
 
-		if set1 != set2:
-			print "Data Corruption between"
-			print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
-			print "\n"
-			temp_string = temp_string + '.dif'
-			log_name = output_path + temp_string
+			if set1 != set2:
+				print "Data Corruption between"
+				print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
+				print "\n"
+				temp_string = temp_string + '.dif'
+				log_name = output_path + temp_string
 
-			import_list = import_tree_string.split()
-			export_list = export_tree_string.split()
-			import_contents = []
-			export_contents = []
+				import_list = import_tree_string.split()
+				export_list = export_tree_string.split()
+				import_contents = []
+				export_contents = []
 
-			f = open(log_name, 'w')
-			header_string = 'Imported File: ' + os.path.basename(import_dictionary[key]) + '------------------------' + 'Exported File: ' + os.path.basename(export_dictionary[key])
-			f.write(header_string)
-			f.write('\n\n')
+				f = open(log_name, 'w')
+				header_string = 'Imported File: \n' + import_dictionary[key] + '\nExported File: \n' + export_dictionary[key]
+				f.write(header_string)
+				f.write('\n\n')
+				header2_string = "IMPORT CONTENT:  " + '-----------------------------------------------' + " EXPORT CONTENT: "
+				f.write(header2_string)
+				f.write('\n\n')
 
-			for i in range(len(import_list)):
-				if import_list[i] != export_list[i]:
-					import_contents.append(import_list[i])
-					export_contents.append(export_list[i])
-			for i in range(len(import_contents)):
-				import_temp = import_contents[i].replace("u'", "")
-				export_temp = export_contents[i].replace("u'", "")
-				diff_string = import_temp + '------------------------' + export_temp
-				f.write(diff_string)
-				f.write('\n')
-			f.close()
+				for i in range(len(import_list)):
+					if import_list[i] != export_list[i]:
+						import_contents.append(import_list[i])
+						export_contents.append(export_list[i])
+				for i in range(len(import_contents)):
+					import_temp = import_contents[i].replace("u'", "")
+					export_temp = export_contents[i].replace("u'", "")
+					diff_string = import_temp + '------------------------' + export_temp
+					f.write(diff_string)
+					f.write('\n')
+				f.close()
 
-			# diff_command = 'diff ' + import_dictionary[key] + ' ' + export_dictionary[key] + ' > ' + log_name
-			# subprocess.call(diff_command, shell = True)
+				# diff_command = 'diff ' + import_dictionary[key] + ' ' + export_dictionary[key] + ' > ' + log_name
+				# subprocess.call(diff_command, shell = True)
+
+			else:
+				print "Data Validated"
+				print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
+				print "\n"
+				temp_string = temp_string + '.suc'
+				log_name = output_path + temp_string
+				f = open(log_name, 'w')
+				f.close()
 
 		else:
-			print "Data Validated"
-			print "Import File: ", os.path.basename(import_dictionary[key]), "Export File: ", os.path.basename(export_dictionary[key])
-			print "\n"
-			temp_string = temp_string + '.suc'
+			# generate a {TESTSUITE}_{TESTCASE}_{ARTIFACTNAME}_NF.dif
+			path_list = import_dictionary[key].split('/')
+			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9] + '_' + 'NF' + '.dif'
 			log_name = output_path + temp_string
+
 			f = open(log_name, 'w')
 			f.close()
 
@@ -239,6 +248,9 @@ def get_schemas_info(path):
 
 	return schema_names, schema_loaders, schema_tenants, schema_name_list
 
+
+#-----------------------------------------------TESTING------------------------------------------------------
+
 #IMPORT DATA STRUCTURES
 
 import_dash_ids = {}
@@ -263,9 +275,6 @@ export_schema_names_list = []
 
 
 
-
-
-
 import_path, export_path = grab_import_export_path('/Users/Nadim_Incorta/IncortaTesting/07:14:2016-13:57:00/CSV_DataSources/BinFunction')
 
 
@@ -283,39 +292,39 @@ validation(import_dash_ids, export_dash_ids, '/Users/Nadim_Incorta/IncortaTestin
 
 
 
-
-print "Extracted from IMPORTS\n"
-
-
-print "-------Dashboards--------\n"
-print "Imported dashboards: \n", import_dash_ids
-print "Imported Dashboard Tenants: \n", import_dash_tenants
-print "\n-------Schemas---------\n"
-print "Imported Schemas: \n", import_schema_names
-print "Imported Schema Loaders: \n", import_schema_loaders
-print "Imported Schema Tenants: \n", import_schema_tenants
-
-print "\nPrinting Dashboard Names \n"
-print import_dashboard_names_list
-print "\n Printing Schema Names List \n"
-print import_schema_names_list
-
-
-print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-print "\nExtracted from EXPORTS\n"
-print "-------Dashboards--------\n"
-print "Exported dashboards: \n", export_dash_ids
-print "Exported Dashboard Tenants: \n", export_dash_tenants
-print "\n-------Schemas---------\n"
-print "Exported Schemas: \n", export_schema_names
-print "Exported Schema Loaders: \n", export_schema_loaders
-print "Exported Schema Tenants: \n", export_schema_tenants
-
-print "\nPrinting Dashboard Names \n"
-print export_dashboard_names_list
-print "\n Printing Schema Names List \n"
-print export_schema_names_list
-
+#
+# print "Extracted from IMPORTS\n"
+#
+#
+# print "-------Dashboards--------\n"
+# print "Imported dashboards: \n", import_dash_ids
+# print "Imported Dashboard Tenants: \n", import_dash_tenants
+# print "\n-------Schemas---------\n"
+# print "Imported Schemas: \n", import_schema_names
+# print "Imported Schema Loaders: \n", import_schema_loaders
+# print "Imported Schema Tenants: \n", import_schema_tenants
+#
+# print "\nPrinting Dashboard Names \n"
+# print import_dashboard_names_list
+# print "\n Printing Schema Names List \n"
+# print import_schema_names_list
+#
+#
+# print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
+# print "\nExtracted from EXPORTS\n"
+# print "-------Dashboards--------\n"
+# print "Exported dashboards: \n", export_dash_ids
+# print "Exported Dashboard Tenants: \n", export_dash_tenants
+# print "\n-------Schemas---------\n"
+# print "Exported Schemas: \n", export_schema_names
+# print "Exported Schema Loaders: \n", export_schema_loaders
+# print "Exported Schema Tenants: \n", export_schema_tenants
+#
+# print "\nPrinting Dashboard Names \n"
+# print export_dashboard_names_list
+# print "\n Printing Schema Names List \n"
+# print export_schema_names_list
+#
 
 
 
