@@ -50,4 +50,4 @@ def create_standard_directory(test_case_path_wd):
         file_tools.create_directory(test_case_path_wd, 'Export_Files')
         file_tools.create_directory(test_case_path_wd, 'Import_Files')
     except OSError as e:
-        raise
+        raise Exception('Can not Create Export/Import Folders')
