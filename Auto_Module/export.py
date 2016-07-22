@@ -29,22 +29,23 @@ def export_schemas(incorta, session, export_zips_path, schemas):
         if Debug == False:
             print export_check
 
-def export_zip(export_zips_path, test_case_export_path_wd):
+def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
+    """
+    Documentation to come
+    Anahit Sarao
+    """
     extension = '.zip'
-    for files in os.listdir(export_zips_path):
-        if not files.startswith('.'):
-            if files.endswith(extension):
-                file_name = os.path.splitext(files)[0]
-                file_path_wd = file_tools.create_directory(test_case_export_path_wd, file_name)
-                file_raw_path = os.path.join(export_zips_path, files)
-                zip_ref = zipfile.ZipFile(file_raw_path)
-                zip_ref.extractall(file_path_wd)
-                zip_ref.close()
+    for files in export_file_name:
+        file_path_wd = file_tools.create_directory(test_case_export_path_wd, files)
+        file_raw_path = os.path.join(export_zips_path, files + extension)
+        zip_ref = zipfile.ZipFile(file_raw_path)
+        zip_ref.extractall(file_path_wd)
+        zip_ref.close()
 
-    filelist = [f for f in os.listdir(export_zips_path) if f.endswith(".zip")]
-    for f in filelist:
-        file_deletion = file_tools.get_path(export_zips_path, f)
-        os.remove(file_deletion)
+    # filelist = [f for f in os.listdir(export_zips_path) if f.endswith(".zip")]
+    # for f in filelist:
+    #     file_deletion = file_tools.get_path(export_zips_path, f)
+    #     os.remove(file_deletion)
 
     # for files in file_tools.get_subdirectories(test_case_export_path_wd):
     #     os.re
