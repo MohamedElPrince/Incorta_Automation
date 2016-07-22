@@ -1,13 +1,15 @@
 import os, file_tools
+
 """
-Exports test suites to working directory
 Imports datafiles / schemas / dashboards to Incorta
 
 TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-Debug = False  #Debug flag for print statements
+
+Debug = False  # Debug flag for print statements
+
 
 def import_datafiles(incorta, session, test_case_path):
     """
@@ -29,12 +31,13 @@ def import_datafiles(incorta, session, test_case_path):
             test_case_subdirectory_path = file_tools.get_path(test_case_path, dirs)
             for files in os.listdir(test_case_subdirectory_path):
                 if not files.startswith('.'):
-                        if files.endswith(extension):
-                            file_full_path = os.path.join(test_case_subdirectory_path, files)
-                            upload_check.append(incorta.upload_data_file(session, file_full_path))
+                    if files.endswith(extension):
+                        file_full_path = os.path.join(test_case_subdirectory_path, files)
+                        upload_check.append(incorta.upload_data_file(session, file_full_path))
     if Debug == True:
         for checks in upload_check:
             print checks,
+
 
 def import_schema(incorta, session, test_case_path):
     """
@@ -62,6 +65,7 @@ def import_schema(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
+
 
 def import_dashboard(incorta, session, test_case_path):
     """

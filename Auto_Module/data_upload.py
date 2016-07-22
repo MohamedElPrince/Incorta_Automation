@@ -5,9 +5,11 @@ TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
+
 Debug = False  # Debug flag for print statements
 
-def Load_data(incorta , session, names_list):
+
+def Load_data(incorta, session, names_list):
     """
     Function loads all schemas to Incorta from the list of schemas
         args:

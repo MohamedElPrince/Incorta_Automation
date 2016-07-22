@@ -1,11 +1,14 @@
 import os, zipfile, file_tools
+
 """
 Exports test cases from a test suite to working directory
+Retains same file structure of the test case and suite to working directory
 
 TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
+
 Debug = True  # Debug flag for print statements
 
 
@@ -18,12 +21,12 @@ def extract_test_case(test_case_path, test_case_path_wd):
         returns:
             Nothing
         prints:
-            Nothing
+            Can print debug statements if needed
     """
     if Debug == False:
         print test_case_path, test_case_path_wd
 
-    #Need to fix this hard code
+    # Need to fix this hard code
     test_case_path_wd = test_case_path_wd + os.sep + 'Import_Files'
     extension = '.zip'
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
@@ -41,10 +44,17 @@ def extract_test_case(test_case_path, test_case_path_wd):
                         zip_ref.extractall(file_path_wd)
                         zip_ref.close()
 
+
 def create_standard_directory(test_case_path_wd):
     """
-    Documentation to come
-    Anahit Sarao
+    Function adds standard folders: Export_Files and Import_Files to working directory
+    Also handles exception case
+    args:
+        test_case_path_wd: test case working directory path
+    returns:
+        Nothing
+    prints:
+        Nothing
     """
     try:
         file_tools.create_directory(test_case_path_wd, 'Export_Files')

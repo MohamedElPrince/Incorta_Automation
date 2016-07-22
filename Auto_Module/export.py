@@ -1,15 +1,29 @@
-import os
-import zipfile
-
-import file_tools
+import os, file_tools, zipfile
 
 """
+Exports schema/dashboards from Incorta to temporary folder to hold zip files
+Exports zip files to working directory while retaining proper folder structure
+
+TODO
+    Add log file dump for failure and success of each import and extract
+    Need more try/catch handling
 """
+
 Debug = True  # Debug flag for print statements
 
 
 def export_dashboards(incorta, session, export_zips_path, dashboards):
     """
+    Function loads all dashboards to Incorta from the list of dashboards
+        args:
+            incorta: Incorta API module
+            session: session var returned by login function
+            export_zips_path: temporary zip file directory path
+            dashboards: list of dashboards to upload
+        returns:
+            Nothing
+        prints:
+            Can print debug statements if needed
     """
     for names in dashboards:
         temp_name = names
@@ -21,6 +35,16 @@ def export_dashboards(incorta, session, export_zips_path, dashboards):
 
 def export_schemas(incorta, session, export_zips_path, schemas):
     """
+    Function loads all schemas to Incorta from the list of schemas
+        args:
+            incorta: Incorta API module
+            session: session var returned by login function
+            export_zips_path: temporary zip file directory path
+            schemas: list of schemas to upload
+        returns:
+            Nothing
+        prints:
+            Can print debug statements if needed
     """
     for names in schemas:
         temp_name = names
@@ -29,10 +53,18 @@ def export_schemas(incorta, session, export_zips_path, schemas):
         if Debug == False:
             print export_check
 
+
 def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
     """
-    Documentation to come
-    Anahit Sarao
+    Function extracts zips files from working directory to export path
+        args:
+            export_zips_file_path: temporary zip file directory path
+            test_case_export_path_wd: path of zip uncompress and extraction
+            export_file_name: names of files to be extracted from temp to working directory
+        returns:
+            Nothing
+        prints:
+            Nothing
     """
     extension = '.zip'
     for files in export_file_name:
@@ -41,16 +73,3 @@ def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
         zip_ref = zipfile.ZipFile(file_raw_path)
         zip_ref.extractall(file_path_wd)
         zip_ref.close()
-
-    # filelist = [f for f in os.listdir(export_zips_path) if f.endswith(".zip")]
-    # for f in filelist:
-    #     file_deletion = file_tools.get_path(export_zips_path, f)
-    #     os.remove(file_deletion)
-
-    # for files in file_tools.get_subdirectories(test_case_export_path_wd):
-    #     os.re
-
-
-def create_temp_directory(test_case_path_wd):
-    temp_path = file_tools.create_directory(test_case_path_wd, 'zip_export')
-    return temp_path
