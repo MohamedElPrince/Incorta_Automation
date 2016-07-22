@@ -7,6 +7,7 @@ TODO
     Add log file dump for failure and success
     Need more try/catch handling
 """
+
 Debug = True  # Debug flag for print statements
 
 
@@ -54,7 +55,7 @@ def get_path(path, directory):
     Function can be used to return a path, does not create the directory
         args:
             path: any path can be given
-            folder_name: name of the directory
+            directory: name of the directory
         returns:
             The path of the new directory
         prints:
