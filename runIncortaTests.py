@@ -17,6 +17,7 @@ import Auto_Module.file_tools
 import Auto_Module.test_suite_import
 from Auto_Module import *
 import Auto_Module.validation
+import Auto_Module.data_upload
 
 
 
@@ -314,7 +315,6 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
 
 
     #EXPORTS
-
     test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
     for test_case_wd_dirs in test_case_wd_subdirectories:
         if 'Export_Files' in test_case_wd_dirs:
@@ -357,6 +357,12 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path, current_test_suite, 'schema_loaders')
     Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path, current_test_suite, 'schema_tenants')
 
+    #Load Data
+    table = None
+    incremental = False
+    snapshot = False
+    staging = False
+    Auto_Module.data_upload.Load_data(incorta , session, import_schema_names_list)
 
 
 
