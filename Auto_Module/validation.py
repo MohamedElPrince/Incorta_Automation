@@ -1,13 +1,56 @@
+
 from xml.etree import ElementTree
 from lxml import etree
 import os
 import file_tools
-
+import subprocess
+import json
+import glob
+import re
 """
 This file contains an array of functions to pull schema, dashboard, and tenant data.
 This file contains the validation between import and export test cases
 *NOTE* Many functions return multiple data structures
 """
+
+def tenant_editor(path):
+
+	#print "Editing tenants"
+	#print import_path
+
+
+
+	for root, dir, files in os.walk(path):
+		for file in files:
+			if file == 'tenant.xml':
+				a = re.escape('sed -i ""')
+				b = re.escape(' \'s/\(exportTime=\)"[^"]*"/\\1" "/g\' ')
+
+				c = a + b
+				# raw_path = os.path.join(root, file)
+				# print raw_path
+				# sub = subprocess.call(["sed"," -i "" ", ' \'s/\(exportTime=\)"[^"]*"/\\1" "/g\' ', os.path.join(root, file)], shell=True)
+				# print sub
+				#subprocess.call(c + os.path.join(root, file), shell=True)
+				#outfile.close()
+				#os.system(c + os.path.join(root, file))
+
+				#subprocess.check_call(['sed', ' -i "" \'s/\(exportTime=\)"[^"]*"/\\1" "/g\' ' + os.path.join(root, file)])
+
+				#subprocess.call(["sed", "-i "" ", 's/\(exportTime=\)"[^"]*"/\1" "/g ', os.path.join(root, file)])
+
+				z = """ -i "" 's/\(exportTime=\)"[^"]*"/\\1" "/g' """ + os.path.join(root, file)
+
+				#print z
+				w = "sed" + z
+				print "PRINTING PATH", os.path.join(root, file)
+				os.system(w)
+
+	print "-------------------------------------------------"
+
+
+
+
 
 
 
@@ -20,6 +63,27 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 	outputted to a log file as a .suc file. All log files will be
 	contained within the Output folder
 	"""
+
+	# #exportTime
+	# sed -i "" 's/\(exportTime=\)"[^"]*"/\1" "/g' tenant.xml
+	#
+	# DONT USE #Works for id -- need fix
+	# sed -i "" 's/\(id=\)"[^"]*"/\1" "/g' tenant.xml
+	#
+	# #fix
+	# sed -i "" 's/\( id=\)"[^"]*"/\1" "/g' tenant.xml
+	#
+	# #Owner-id
+	# sed -i "" 's/\(owner-id=\)"[^"]*"/\1" "/g' tenant.xml
+	#
+	# #PATH
+	# sed -i "" 's/\(path=\)"[^"]*"/\1" "/g' tenant.xml
+	#
+	# #HREF
+	# sed -i "" 's/\(href=\)"[^"]*"/\1" "/g' tenant.xml
+
+
+
 
 	output_path = wd_path+os.sep+'Output' + os.sep + test_suite_name + '_Summary' + os.sep
 	file_tools.create_directory(output_path, dictionary_type)
@@ -40,6 +104,20 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 			import_tree_string = import_tree_string.replace("u'", "")
 			export_tree_string = export_tree_string.replace("u'", "")
 
+			# if dictionary_type == 'dashboard_tenants' || dictionary_type == 'schema_tenants':
+			# 	print dictionary_type
+			# 	file_name = export_dictionary[key]
+			# 	print file_name
+			# 	cmd = """sed -i "" 's/\(exportTime=\)"[^"]*"/\1" "/g' """
+			# 	cmd_string = cmd + file_name
+			# 	subprocess.call(cmd_string, shell=True)
+            #
+
+
+
+
+
+#continue validation
 			set1 = set(etree.tostring(i, method='c14n') for i in import_tree.getroot())
 			set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
 
@@ -253,4 +331,4 @@ def get_schemas_info(path):
 
 	return schema_names, schema_loaders, schema_tenants, schema_name_list
 
-
+# TESTING

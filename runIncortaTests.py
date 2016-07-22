@@ -296,6 +296,10 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     #Import Dashboards to Incorta
     Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
 
+    import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
+
+
+
     # IMPORT DATA STRUCTURES
 
     import_dash_ids = {}
@@ -307,10 +311,13 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     import_schema_tenants = {}
     import_schema_names_list = []
 
-    import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
 
     import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(import_path)
     import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
+
+    # TENANT EDITOR
+
+    Auto_Module.validation.tenant_editor(import_path)
 
 
     #EXPORTS
@@ -344,7 +351,9 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     export_dash_ids, export_dash_tenants, export_dashboard_names_list = Auto_Module.validation.get_dashboards_info(export_path)
     export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(export_path)
 
-
+    # TENANT EDITOR
+    print "RUNNING EXPORT CHANGES"
+    Auto_Module.validation.tenant_editor(export_path)
 
     # VALIDATION IMPLEMENTATION
     Auto_Module.file_tools.create_directory(wd_path, 'Output')
@@ -357,8 +366,6 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite, 'schemas')
     Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path, current_test_suite, 'schema_loaders')
     Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path, current_test_suite, 'schema_tenants')
-
-
 
 
 
