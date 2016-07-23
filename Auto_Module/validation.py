@@ -28,7 +28,7 @@ def tenant_editor(path):
 
 				id_arg = """ sed -i "" 's/\( id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
 				os.system(id_arg)
-
+                
 				owner_id_arg = """ sed -i "" 's/\(owner-id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
 				os.system(owner_id_arg)
 
@@ -92,8 +92,10 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 				header2_string = "\n\n Outputting Differences.... \n\n"
 				f.write(header2_string)
 				header3_string = ">>> IMPORT CONTENT"
+				header_newline = '\n'
 				header4_string = "<<< EXPORT CONTENT"
 				f.write(header3_string)
+				f.write(header_newline)
 				f.write(header4_string)
 				f.write('\n\n')
 
@@ -105,9 +107,10 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 					import_temp = import_contents[i].replace("u'", "")
 					export_temp = export_contents[i].replace("u'", "")
 					diff_imp_string = '>>> ' + import_temp
-					f.write('\n')
+					f.write(header_newline)
 					diff_exp_string = '<<< ' + export_temp
 					f.write(diff_imp_string)
+					f.write(header_newline)
 					f.write(diff_exp_string)
 					f.write('\n\n')
 				f.close()
