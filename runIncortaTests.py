@@ -322,8 +322,8 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
             export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
             test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'dashboards')
             test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd, 'schemas')
-            Auto_Module.export.export_dashboards(incorta, session, export_zips_path, import_dashboard_names_list)
-            Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path, import_dashboard_names_list)
+            custom_export_dashboard_names_list = Auto_Module.export.export_dashboards(incorta, session, export_zips_path, import_dashboard_names_list)
+            Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path, custom_export_dashboard_names_list)
             Auto_Module.export.export_schemas(incorta, session, export_zips_path, import_schema_names_list)
             Auto_Module.export.export_zip(export_zips_path, test_case_wd_schema_path, import_schema_names_list)
         #if 'Import_Files' in test_case_wd_dirs:
