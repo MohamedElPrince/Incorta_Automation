@@ -317,7 +317,6 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
 
     # TENANT EDITOR
-
     Auto_Module.validation.tenant_editor(import_path)
 
 
@@ -351,7 +350,6 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(export_path)
 
     # TENANT EDITOR
-    print "RUNNING EXPORT CHANGES"
     Auto_Module.validation.tenant_editor(export_path)
 
     # VALIDATION IMPLEMENTATION
