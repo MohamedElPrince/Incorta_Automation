@@ -371,7 +371,8 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     staging = False
     Auto_Module.data_upload.Load_data(incorta , session, export_schema_names_list)
 
-
+    #LOAD VALIDATION
+    Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list)
 
 
     # TO BE USED FOR DEBUGGING PURPOSES

@@ -23,7 +23,6 @@ def tenant_editor(path):
 		for file in files:
 			if file == 'tenant.xml':
 				exportTime_arg = """ sed -i "" 's/\(exportTime=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
-
 				os.system(exportTime_arg)
 
 				id_arg = """ sed -i "" 's/\( id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
