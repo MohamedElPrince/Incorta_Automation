@@ -29,9 +29,15 @@ def export_dashboards(incorta, session, export_zips_path, dashboards):
     for names in dashboards:
         temp_name = names
         temp_path = export_zips_path + os.sep + temp_name + '.zip'
-        export_check = incorta.export_dashboards(session, temp_path, temp_name)
+        try:
+            export_check = incorta.export_dashboards(session, temp_path, temp_name)
+        except Exception, e:
+            print ('ERROR: Dashboard:', names, " Not Found")
+            dashboards.remove(names)
+            export_dashboards(incorta, session, export_zips_path, dashboards)
         if Debug == False:
             print export_check
+    return dashboards
 
 
 def export_schemas(incorta, session, export_zips_path, schemas):
