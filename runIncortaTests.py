@@ -362,7 +362,7 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     incremental = False
     snapshot = False
     staging = False
-    Auto_Module.data_upload.Load_data(incorta , session, import_schema_names_list)
+    Auto_Module.data_upload.Load_data(incorta , session, export_schema_names_list)
 
 
 

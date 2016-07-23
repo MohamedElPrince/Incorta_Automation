@@ -28,7 +28,10 @@ def export_dashboards(incorta, session, export_zips_path, dashboards):
     for names in dashboards:
         temp_name = names
         temp_path = export_zips_path + os.sep + temp_name + '.zip'
-        export_check = incorta.export_dashboards(session, temp_path, temp_name)
+        try:
+            export_check = incorta.export_dashboards(session, temp_path, temp_name)
+        except Exception:
+            print ('ERROR: Dashboard:', names, " Not Found")
         if Debug == False:
             print export_check
 
@@ -73,3 +76,7 @@ def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
         zip_ref = zipfile.ZipFile(file_raw_path)
         zip_ref.extractall(file_path_wd)
         zip_ref.close()
+
+def create_temp_directory(test_case_path_wd):
+    temp_path = file_tools.create_directory(test_case_path_wd, 'zip_export')
+    return temp_path
