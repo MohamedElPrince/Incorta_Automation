@@ -1,3 +1,4 @@
+
 from xml.etree import ElementTree
 from lxml import etree
 import os
@@ -9,6 +10,33 @@ This file contains the validation between import and export test cases
 *NOTE* Many functions return multiple data structures
 """
 
+def tenant_editor(path):
+
+	"""
+	Uses Regex Commands too suppress dynamic lines in tenant files
+	This is done to ensure the validator does not throw unnecessary
+	diffs
+	"""
+
+	# Takes Import or Export Path as parameter
+	for root, dir, files in os.walk(path):
+		for file in files:
+			if file == 'tenant.xml':
+				exportTime_arg = """ sed -i "" 's/\(exportTime=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+
+				os.system(exportTime_arg)
+
+				id_arg = """ sed -i "" 's/\( id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+				os.system(id_arg)
+                
+				owner_id_arg = """ sed -i "" 's/\(owner-id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+				os.system(owner_id_arg)
+
+				PATH_arg = """ sed -i "" 's/\(path=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+				os.system(PATH_arg)
+
+				Href_arg = """ sed -i "" 's/\(href=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+				os.system(Href_arg)
 
 
 def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, dictionary_type):
@@ -40,6 +68,7 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 			import_tree_string = import_tree_string.replace("u'", "")
 			export_tree_string = export_tree_string.replace("u'", "")
 
+			#VALIDATION
 			set1 = set(etree.tostring(i, method='c14n') for i in import_tree.getroot())
 			set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
 
@@ -63,8 +92,10 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 				header2_string = "\n\n Outputting Differences.... \n\n"
 				f.write(header2_string)
 				header3_string = ">>> IMPORT CONTENT"
+				header_newline = '\n'
 				header4_string = "<<< EXPORT CONTENT"
 				f.write(header3_string)
+				f.write(header_newline)
 				f.write(header4_string)
 				f.write('\n\n')
 
@@ -76,9 +107,10 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 					import_temp = import_contents[i].replace("u'", "")
 					export_temp = export_contents[i].replace("u'", "")
 					diff_imp_string = '>>> ' + import_temp
-					f.write('\n')
+					f.write(header_newline)
 					diff_exp_string = '<<< ' + export_temp
 					f.write(diff_imp_string)
+					f.write(header_newline)
 					f.write(diff_exp_string)
 					f.write('\n\n')
 				f.close()
@@ -252,5 +284,3 @@ def get_schemas_info(path):
 							print "Unable to read schema"
 
 	return schema_names, schema_loaders, schema_tenants, schema_name_list
-
-
