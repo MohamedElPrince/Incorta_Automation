@@ -425,13 +425,8 @@ Auto_Module.data_upload.schema_load_validatior(schema_list,full_schema_export_li
     #
     # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
     #
-
-
-<<<<<<< HEAD
     session_id = session[21:53]
-
-=======
->>>>>>> validation_dev
+    
 # schema_names = ['A_01_CASE']  # list of schemas to be loaded
 # loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
 # #dataLoad.load_schema(incorta,session,schema_names)
