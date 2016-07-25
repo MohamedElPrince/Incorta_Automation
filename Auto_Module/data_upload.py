@@ -33,8 +33,13 @@ def Load_data(incorta, session, names_list):
 
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
     schema_list = []
+
+    size = len(full_schema_export_list)
+    size = str(size)
+    size = '-' + size
+
     cat_string = "\"" + incorta_home + os.sep + 'server' + os.sep + 'logs' + os.sep + 'catalina.out' + "\""
-    cmd = 'grep "\*\*\* Load" ' + cat_string + """  | tail -5"""
+    cmd = 'grep "\*\*\* Load" ' + cat_string + """  | tail """ + size
     p = subprocess.check_output(cmd, stderr=subprocess.STDOUT, shell=True)
     output = p.split('\n')
 
