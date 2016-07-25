@@ -264,142 +264,143 @@ for sub_dir in test_suite_directories:
     temp_dir = Auto_Module.file_tools.get_subdirectories(temp_path)
     for names in temp_dir:
         if 'datafiles' in names:
-            test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
-
-            if Debug == False:
-                print test_suite_subdirectories
-
-            current_test_suite = test_suite
-
-            full_schema_export_list = []
-            # ENTERING TEST CASES
-            for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
-                # Get path of test_case in test_suite
-
-
-                test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
-                if Debug == False:
-                    print test_case_path
-
-                # Get subdirectories of test case
-                test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
-                if Debug == False:
-                    print test_case_subdirectories
-
-                # Creates test_suite folder in WD
-                test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
-                if Debug == False:
-                    print test_case_path_wd
-
-                # Creates Import and Export Folders in WD test case folder
-                Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
-
-                # Extracts test suite to WD
-                Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
-
-                # Import Datafiles to Incorta
-                Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
-
-                # Import Schema to Incorta
-                Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
-
-                # Import Dashboards to Incorta
-                Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
-
-                import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
-
-                # IMPORT DATA STRUCTURES
-
-                import_dash_ids = {}
-                import_dash_tenants = {}
-                import_dashboard_names_list = []
-
-                import_schema_names = {}
-                import_schema_loaders = {}
-                import_schema_tenants = {}
-                import_schema_names_list = []
-
-                import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
-                    import_path)
-                import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(
-                    import_path)
-
-                # TENANT EDITOR
-                Auto_Module.validation.tenant_editor(import_path)
-
-                # EXPORTS
-                test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
-                for test_case_wd_dirs in test_case_wd_subdirectories:
-                    if 'Export_Files' in test_case_wd_dirs:
-                        test_case_export_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, test_case_wd_dirs)
-                        export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
-                        test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
-                                                                                              'dashboards')
-                        test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
-                                                                                           'schemas')
-                        custom_export_dashboard_names_list = Auto_Module.export.export_dashboards(incorta, session,
-                                                                                                  export_zips_path,
-                                                                                                  import_dashboard_names_list)
-                        Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path,
-                                                      custom_export_dashboard_names_list)
-                        custom_export_schema_names_list = Auto_Module.export.export_schemas(incorta, session,
-                                                                                            export_zips_path,
-                                                                                            import_schema_names_list)
-                        Auto_Module.export.export_zip(export_zips_path, test_case_wd_schema_path,
-                                                      custom_export_schema_names_list)
-                        # if 'Import_Files' in test_case_wd_dirs:
-
-                # EXPORT DATA STRUCTURES
-
-                export_dash_ids = {}
-                export_dash_tenants = {}
-                export_dashboard_names_list = []
-
-                export_schema_names = {}
-                export_schema_loaders = {}
-                export_schema_tenants = {}
-                export_schema_names_list = []
-
-                export_dash_ids, export_dash_tenants, export_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
-                    export_path)
-                export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(
-                    export_path)
-
-                # TENANT EDITOR
-                Auto_Module.validation.tenant_editor(export_path)
-
-                # VALIDATION IMPLEMENTATION
-                Auto_Module.file_tools.create_directory(wd_path, 'Output')
-
-                # Comparing Dashboard Items
-                Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
-                                                  'dashboards')
-                Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
-                                                  'dashboard_tenants')
-
-                # Comparing Schema Items
-                Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
-                                                  'schemas')
-                Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
-                                                  current_test_suite, 'schema_loaders')
-                Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
-                                                  current_test_suite, 'schema_tenants')
-
-                # Load Data
-                table = None
-                incremental = False
-                snapshot = False
-                staging = False
-                Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
-
-                # LOAD VALIDATION
-
-                # Appends to list of loaded schemas as for loop goes through every test case
-                full_schema_export_list.extend(export_schema_names_list)
-                schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
-                                                                     full_schema_export_list)
-
-            Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list)
+            print "hello"
+            # test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
+            #
+            # if Debug == False:
+            #     print test_suite_subdirectories
+            #
+            # current_test_suite = sub_dir
+            #
+            # full_schema_export_list = []
+            # # ENTERING TEST CASES
+            # for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
+            #     # Get path of test_case in test_suite
+            #
+            #
+            #     test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
+            #     if Debug == False:
+            #         print test_case_path
+            #
+            #     # Get subdirectories of test case
+            #     test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
+            #     if Debug == False:
+            #         print test_case_subdirectories
+            #
+            #     # Creates test_suite folder in WD
+            #     test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
+            #     if Debug == False:
+            #         print test_case_path_wd
+            #
+            #     # Creates Import and Export Folders in WD test case folder
+            #     Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
+            #
+            #     # Extracts test suite to WD
+            #     Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
+            #
+            #     # Import Datafiles to Incorta
+            #     Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
+            #
+            #     # Import Schema to Incorta
+            #     Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
+            #
+            #     # Import Dashboards to Incorta
+            #     Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
+            #
+            #     import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
+            #
+            #     # IMPORT DATA STRUCTURES
+            #
+            #     import_dash_ids = {}
+            #     import_dash_tenants = {}
+            #     import_dashboard_names_list = []
+            #
+            #     import_schema_names = {}
+            #     import_schema_loaders = {}
+            #     import_schema_tenants = {}
+            #     import_schema_names_list = []
+            #
+            #     import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
+            #         import_path)
+            #     import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(
+            #         import_path)
+            #
+            #     # TENANT EDITOR
+            #     Auto_Module.validation.tenant_editor(import_path)
+            #
+            #     # EXPORTS
+            #     test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
+            #     for test_case_wd_dirs in test_case_wd_subdirectories:
+            #         if 'Export_Files' in test_case_wd_dirs:
+            #             test_case_export_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, test_case_wd_dirs)
+            #             export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
+            #             test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
+            #                                                                                   'dashboards')
+            #             test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
+            #                                                                                'schemas')
+            #             custom_export_dashboard_names_list = Auto_Module.export.export_dashboards(incorta, session,
+            #                                                                                       export_zips_path,
+            #                                                                                       import_dashboard_names_list)
+            #             Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path,
+            #                                           custom_export_dashboard_names_list)
+            #             custom_export_schema_names_list = Auto_Module.export.export_schemas(incorta, session,
+            #                                                                                 export_zips_path,
+            #                                                                                 import_schema_names_list)
+            #             Auto_Module.export.export_zip(export_zips_path, test_case_wd_schema_path,
+            #                                           custom_export_schema_names_list)
+            #             # if 'Import_Files' in test_case_wd_dirs:
+            #
+            #     # EXPORT DATA STRUCTURES
+            #
+            #     export_dash_ids = {}
+            #     export_dash_tenants = {}
+            #     export_dashboard_names_list = []
+            #
+            #     export_schema_names = {}
+            #     export_schema_loaders = {}
+            #     export_schema_tenants = {}
+            #     export_schema_names_list = []
+            #
+            #     export_dash_ids, export_dash_tenants, export_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
+            #         export_path)
+            #     export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(
+            #         export_path)
+            #
+            #     # TENANT EDITOR
+            #     Auto_Module.validation.tenant_editor(export_path)
+            #
+            #     # VALIDATION IMPLEMENTATION
+            #     Auto_Module.file_tools.create_directory(wd_path, 'Output')
+            #
+            #     # Comparing Dashboard Items
+            #     Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
+            #                                       'dashboards')
+            #     Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
+            #                                       'dashboard_tenants')
+            #
+            #     # Comparing Schema Items
+            #     Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
+            #                                       'schemas')
+            #     Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
+            #                                       current_test_suite, 'schema_loaders')
+            #     Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
+            #                                       current_test_suite, 'schema_tenants')
+            #
+            #     # Load Data
+            #     table = None
+            #     incremental = False
+            #     snapshot = False
+            #     staging = False
+            #     Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
+            #
+            #     # LOAD VALIDATION
+            #
+            #     # Appends to list of loaded schemas as for loop goes through every test case
+            #     full_schema_export_list.extend(export_schema_names_list)
+            #     schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
+            #                                                          full_schema_export_list)
+            #
+            # Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list)
 
             # TO BE USED FOR DEBUGGING PURPOSES
             # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
@@ -443,10 +444,10 @@ for sub_dir in test_suite_directories:
         if 'datasources' in names:
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
-            if Debug == True:
+            if Debug == False:
                 print test_suite_subdirectories
 
-            current_test_suite = test_suite
+            current_test_suite = sub_dir
 
             full_schema_export_list = []
             # ENTERING TEST CASES
@@ -455,7 +456,7 @@ for sub_dir in test_suite_directories:
 
 
                 test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
-                if Debug == True:
+                if Debug == False:
                     print test_case_path
 
                 # Get subdirectories of test case
@@ -474,8 +475,8 @@ for sub_dir in test_suite_directories:
                 # Extracts test suite to WD
                 Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
 
-                # Import Datafiles to Incorta
-                Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
+                # Import DataSources to Incorta
+                Auto_Module.test_suite_import.import_datasources(incorta, session, test_case_path)
 
                 # Import Schema to Incorta
                 Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
