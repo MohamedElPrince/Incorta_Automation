@@ -263,6 +263,10 @@ if Debug == False:
 
 current_test_suite = test_suite
 
+
+
+full_schema_export_list = []
+
 # ENTERING TEST CASES
 for dir in test_suite_subdirectories:   #For loop for each test case inside test suite
     # Get path of test_case in test_suite
@@ -372,7 +376,15 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     Auto_Module.data_upload.Load_data(incorta , session, export_schema_names_list)
 
     #LOAD VALIDATION
-    Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list)
+
+    #Appends to list of loaded schemas as for loop goes through every test case
+    full_schema_export_list.extend(export_schema_names_list)
+    schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list, full_schema_export_list)
+
+
+Auto_Module.data_upload.schema_load_validatior(schema_list,full_schema_export_list)
+
+
 
 
     # TO BE USED FOR DEBUGGING PURPOSES
@@ -413,8 +425,6 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
     #
     # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
     #
-
-
 
 
 # schema_names = ['A_01_CASE']  # list of schemas to be loaded
