@@ -401,9 +401,6 @@ for sub_dir in test_suite_directories:
 
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list)
 
-
-
-
             # TO BE USED FOR DEBUGGING PURPOSES
             # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
             #
@@ -441,7 +438,7 @@ for sub_dir in test_suite_directories:
             # print export_schema_names_list
             #
             # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-            #
+            # session_id = session[21:53]
 
         if 'datasources' in names:
             print test_suite_path
