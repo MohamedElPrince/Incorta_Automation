@@ -57,9 +57,15 @@ def export_schemas(incorta, session, export_zips_path, schemas):
     for names in schemas:
         temp_name = names
         temp_path = export_zips_path + os.sep + temp_name + '.zip'
-        export_check = incorta.export_schemas(session, temp_path, temp_name)
+        try:
+            export_check = incorta.export_schemas(session, temp_path, temp_name)
+        except Exception, e:
+            print ('ERROR: Dashboard:', names, " Not Found")
+            schemas.remove(names)
+            export_schemas(incorta, session, export_zips_path, schemas)
         if Debug == False:
             print export_check
+    return schemas
 
 
 def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
