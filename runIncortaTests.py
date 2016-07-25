@@ -415,7 +415,6 @@ for dir in test_suite_subdirectories:   #For loop for each test case inside test
 
 
     session_id = session[21:53]
-    print session_id
 
 # schema_names = ['A_01_CASE']  # list of schemas to be loaded
 # loadUsers.load_users_ldap(incorta,session,incorta_home,url,tenant,admin,password)
