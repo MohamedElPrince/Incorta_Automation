@@ -93,3 +93,17 @@ def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
 def create_temp_directory(test_case_path_wd):
     temp_path = file_tools.create_directory(test_case_path_wd, 'zip_export')
     return temp_path
+
+
+# def export_dashboards_json(session_id, dashboard_id, csrf_token):
+#
+#     cmd = """  """
+
+
+    # curl
+    # 'http://localhost:8080/incorta/service/viewer?layout=98e77650-bd45-45dd-b577-b447a781f8c0&prompts=&outputFormat=json&odbc=false&Save=View' - H
+    # 'Cookie: JSESSIONID=616A28AEE1CB0EBE153C8B4E8173C5E8; XSRF-TOKEN=45A25A5EE21DA8237F992520AB6F6FD4' - -compressed > table.json
+
+
+
+

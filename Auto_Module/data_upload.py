@@ -1,4 +1,4 @@
-
+import time
 import os
 import subprocess
 
@@ -32,23 +32,28 @@ def Load_data(incorta, session, names_list):
         print upload_check, "For:", names
 
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
-    schema_list = []
+    COUNT = 0
+    loaded = False
+    while loaded == False and COUNT < 30:
+        time.sleep(10)
+        schema_list = []
+        int_size = len(full_schema_export_list)
+        size = str(int_size)
+        size = '-' + size
+        cat_string = "\"" + incorta_home + os.sep + 'server' + os.sep + 'logs' + os.sep + 'catalina.out' + "\""
+        cmd = 'grep "\*\*\* Load" ' + cat_string + """  | tail """ + size
+        p = subprocess.check_output(cmd, stderr=subprocess.STDOUT, shell=True)
+        output = p.split('\n')
 
-    size = len(full_schema_export_list)
-    size = str(size)
-    size = '-' + size
+        for item in output:
+            string = item.split()
+            for index in range(len(string)):
+                if string[index] == 'completed!':
+                    schema_list.append(string[index-1])
 
-    cat_string = "\"" + incorta_home + os.sep + 'server' + os.sep + 'logs' + os.sep + 'catalina.out' + "\""
-    cmd = 'grep "\*\*\* Load" ' + cat_string + """  | tail """ + size
-    p = subprocess.check_output(cmd, stderr=subprocess.STDOUT, shell=True)
-    output = p.split('\n')
-
-    for item in output:
-        string = item.split()
-        for index in range(len(string)):
-            if string[index] == 'completed!':
-                schema_list.append(string[index-1])
-
+        if len(schema_list) == int_size:
+            loaded = True
+        COUNT += 1
 # Loaded schemas are stored in the variable schema_list
     return schema_list
 
