@@ -1,4 +1,4 @@
-import os, file_tools, zipfile
+import os, file_tools, zipfile, subprocess
 
 """
 Exports schema/dashboards from Incorta to temporary folder to hold zip files
@@ -95,16 +95,21 @@ def create_temp_directory(test_case_path_wd):
     return temp_path
 
 
-# def export_dashboards_json(session_id, dashboard_id, csrf_token):
-#
-#     cmd = """curl 'http://localhost:8080/incorta/service/viewer?layout=""" + dashboard_id \
-#     + """&prompts=&outputFormat=json&odbc="""
+def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path):
 
-
-    # curl
-    # 'http://localhost:8080/incorta/service/viewer?layout=98e77650-bd45-45dd-b577-b447a781f8c0&prompts=&outputFormat=json&odbc=false&Save=View' - H
-    # 'Cookie: JSESSIONID=616A28AEE1CB0EBE153C8B4E8173C5E8; XSRF-TOKEN=45A25A5EE21DA8237F992520AB6F6FD4' - -compressed > table.json
-
+    for dashboard in dashboard_id:
+        dash_id = str(dashboard)
+        print "exporting dashboard: ", dashboard
+        file_tools.create_directory(test_case_path, 'admin')
+        user_path = test_case_path + os.sep + 'admin' + os.sep
+        json_name = dash_id + '.json'
+        json_path = user_path + json_name
+        cmd = """curl 'http://localhost:8080/incorta/service/viewer?layout=""" + dash_id \
+        + """&prompts=&outputFormat=json&odbc=false&Save=View' -H 'Cookie: JSESSIONID=""" + session_id \
+        + """; XSRF-TOKEN=""" + csrf_token + """' --compressed > """ + json_path
+        subprocess.call(cmd, shell=True)
+        print "command ran"
+ 
 
 
 
