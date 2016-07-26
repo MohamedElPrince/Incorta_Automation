@@ -402,7 +402,7 @@ for sub_dir in test_suite_directories:
 
                 # JSON DASHBOARD EXPORT
                 test_case_dashboard_export_list = export_dash_ids.keys()
-                print "session: ", session, " \n\n\n"
+                print "session: ", session, " \n\n"
                 print "session id: ", session_id
                 print "dashboard id: ", test_case_dashboard_export_list
                 print "CSRF TOKEN", csrf_token
