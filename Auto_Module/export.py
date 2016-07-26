@@ -97,7 +97,8 @@ def create_temp_directory(test_case_path_wd):
 
 # def export_dashboards_json(session_id, dashboard_id, csrf_token):
 #
-#     cmd = """  """
+#     cmd = """curl 'http://localhost:8080/incorta/service/viewer?layout=""" + dashboard_id \
+#     + """&prompts=&outputFormat=json&odbc="""
 
 
     # curl

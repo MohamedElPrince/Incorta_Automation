@@ -34,8 +34,8 @@ def Load_data(incorta, session, names_list):
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
     COUNT = 0
     loaded = False
-    while loaded == False and COUNT < 30:
-        time.sleep(10)
+    while loaded == False and COUNT < 60:
+        time.sleep(5)
         schema_list = []
         int_size = len(full_schema_export_list)
         size = str(int_size)
