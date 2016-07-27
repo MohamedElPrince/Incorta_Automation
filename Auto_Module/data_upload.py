@@ -67,3 +67,14 @@ def schema_load_validatior(export_schema_names_list, full_schema_export_list):
         diff_set = set(full_schema_export_list) - set(export_schema_names_list)
         diff_list = list(diff_set)
         print diff_list
+
+def backup_catalina(incorta_home):
+    catalina_out = 'catalina.out'
+    timestr = time.strftime("%m%d%Y_%H%M%S")
+    catalina_path = incorta_home + os.sep + 'server' + os.sep + 'logs' + os.sep + catalina_out
+    catalina_out_timestamp = 'catalina-' + timestr + '.out'
+    catalina_backup_path = incorta_home + os.sep + 'server' + os.sep + 'logs' + os.sep + catalina_out_timestamp
+    catalina_cmd_path = "\"" + incorta_home + os.sep + 'server' + os.sep + 'logs' + os.sep + catalina_out_timestamp + "\""
+    shutil.copyfile(catalina_path, catalina_backup_path)
+    cmd = '\\cp /dev/null ' + catalina_path
+    subprocess.call(cmd, shell=True)
