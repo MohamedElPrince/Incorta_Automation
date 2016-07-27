@@ -42,7 +42,6 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
         size = '-' + size
         cat_string = "\"" + incorta_home + os.sep + 'server' + os.sep + 'logs' + os.sep + 'catalina.out' + "\""
         cmd = 'cat ' + cat_string + ' | tr -d \'\\000\' | ' + 'grep "\*\*\* Load" ' + """ | tail """ + size
-        print cmd
         p = subprocess.check_output(cmd, stderr=subprocess.STDOUT, shell=True)
         output = p.split('\n')
         print output
