@@ -18,6 +18,7 @@ import Auto_Module.test_suite_import
 from Auto_Module import *
 import Auto_Module.validation
 import Auto_Module.data_upload
+import Auto_Module.json_validation
 
 
 
@@ -255,6 +256,8 @@ csrf_token = session [63:95]
 test_suite_directory_path = os.getcwd() + '/' + "TestSuites"
 
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
+output_wd_path = Auto_Module.file_tools.create_directory(wd_path, 'Output')
+admin_wd_path = Auto_Module.file_tools.create_directory(output_wd_path, 'admin')
 
 for sub_dir in test_suite_directories:
     test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, sub_dir)   #Working Directory test suite path
@@ -263,8 +266,7 @@ for sub_dir in test_suite_directories:
     temp_path = Auto_Module.file_tools.get_path(test_suite_path, test_cases_dir[0])
     temp_dir = Auto_Module.file_tools.get_subdirectories(temp_path)
     for names in temp_dir:
-        if 'datafiles' in names:
-            print "hello"
+        if 'datafiles' == names:
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
@@ -370,8 +372,6 @@ for sub_dir in test_suite_directories:
                 Auto_Module.validation.tenant_editor(export_path)
 
                 # VALIDATION IMPLEMENTATION
-                Auto_Module.file_tools.create_directory(wd_path, 'Output')
-
                 # Comparing Dashboard Items
                 Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
                                                   'dashboards')
@@ -386,6 +386,8 @@ for sub_dir in test_suite_directories:
                 Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
                                                   current_test_suite, 'schema_tenants')
 
+                #Auto_Module.data_upload.backup_catalina(incorta_home)
+
                 # Load Data
                 table = None
                 incremental = False
@@ -394,7 +396,6 @@ for sub_dir in test_suite_directories:
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
 
                 # LOAD VALIDATION
-
                 # Appends to list of loaded schemas as for loop goes through every test case
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
@@ -402,15 +403,20 @@ for sub_dir in test_suite_directories:
 
                 # JSON DASHBOARD EXPORT
                 test_case_dashboard_export_list = export_dash_ids.keys()
-                print "session: ", session, " \n\n\n"
-                print "session id: ", session_id
-                print "dashboard id: ", test_case_dashboard_export_list
-                print "CSRF TOKEN", csrf_token
-                print "Test Case Path", test_case_path_wd
+                if Debug == False:
+                    print "session: ", session, " \n\n"
+                    print "session id: ", session_id
+                    print "dashboard id: ", test_case_dashboard_export_list
+                    print "CSRF TOKEN", csrf_token
+                    print "Test Case Path", test_case_path_wd
+                    print "Entering JSON DASH EXPORT"
 
-                print "Entering JSON DASH EXPORT"
-                Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token, test_case_path_wd)
-                print "Finished JSON DASH EXPORT"
+                Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
+                                                          test_case_path_wd, test_case_path)
+                print 'debug'
+                if Debug == False:
+                    print "\nFinished JSON DASH EXPORT"
+                Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, admin_wd_path)
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list)
 
             # TO BE USED FOR DEBUGGING PURPOSES
@@ -452,7 +458,8 @@ for sub_dir in test_suite_directories:
             # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
             # session_id = session[21:53]
 
-        if 'datasources' in names:
+        if 'datasourcess' == names:
+            print names
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
@@ -558,7 +565,6 @@ for sub_dir in test_suite_directories:
                 Auto_Module.validation.tenant_editor(export_path)
 
                 # VALIDATION IMPLEMENTATION
-                Auto_Module.file_tools.create_directory(wd_path, 'Output')
 
                 # Comparing Dashboard Items
                 Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
