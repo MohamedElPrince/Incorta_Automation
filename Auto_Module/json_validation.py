@@ -159,6 +159,8 @@ def validator ():
     file2 = '/Users/anahit/desktop/admin-changed/98e77650-bd45-45dd-b577-b447a781f8c0.json'
     json1 = getContentFromFile(file1)
     json2 = getContentFromFile(file2)
+    print json1['comp'][0]
+    print json1['comp'][1]
     # print json1
     # print json2
     json_temp_export_list = []
