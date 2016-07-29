@@ -260,13 +260,21 @@ output_wd_path = Auto_Module.file_tools.create_directory(wd_path, 'Output')
 admin_wd_path = Auto_Module.file_tools.create_directory(output_wd_path, 'admin')
 
 for sub_dir in test_suite_directories:
+
+    print "Current Test Suite: ", sub_dir
+
     test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, sub_dir)   #Working Directory test suite path
     test_suite_path = get_test_suite_path(sub_dir)   #Path of test suite
     test_cases_dir = Auto_Module.file_tools.get_subdirectories(test_suite_path)
     temp_path = Auto_Module.file_tools.get_path(test_suite_path, test_cases_dir[0])
     temp_dir = Auto_Module.file_tools.get_subdirectories(temp_path)
     for names in temp_dir:
+
+
+
         if 'datafiles' == names:
+
+            print "Entering datafiles"
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
@@ -279,6 +287,7 @@ for sub_dir in test_suite_directories:
             for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
                 # Get path of test_case in test_suite
 
+                print "Current Test Case: ", dir
 
                 test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
                 if Debug == False:
@@ -413,10 +422,18 @@ for sub_dir in test_suite_directories:
 
                 Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
                                                           test_case_path_wd, test_case_path)
-                print 'debug'
+
                 if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
-                Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, admin_wd_path)
+                # Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, admin_wd_path)
+
+                # LOAD VALIDATION
+
+                # Appends to list of loaded schemas as for loop goes through every test case
+                full_schema_export_list.extend(export_schema_names_list)
+                schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
+                                                                     full_schema_export_list)
+
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list)
 
             # TO BE USED FOR DEBUGGING PURPOSES
@@ -458,7 +475,7 @@ for sub_dir in test_suite_directories:
             # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
             # session_id = session[21:53]
 
-        if 'datasourcess' == names:
+        if 'datasources' == names:
             print names
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 

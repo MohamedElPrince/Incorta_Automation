@@ -33,7 +33,9 @@ def Load_data(incorta, session, names_list):
 
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
     COUNT = 0
+    LOAD_COUNTER = 0
     loaded = False
+
     while loaded == False and COUNT < 60:
         time.sleep(5)
         schema_list = []
@@ -44,16 +46,25 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
         cmd = 'cat ' + cat_string + ' | tr -d \'\\000\' | ' + 'grep "\*\*\* Load" ' + """ | tail """ + size
         p = subprocess.check_output(cmd, stderr=subprocess.STDOUT, shell=True)
         output = p.split('\n')
-        print output
-        for item in output:
-            string = item.split()
-            for index in range(len(string)):
-                if string[index] == 'completed!':
-                    schema_list.append(string[index-1])
 
-        if len(schema_list) == int_size:
-            loaded = True
-        COUNT += 1
+        # Waits for Schema to Load
+        if full_schema_export_list[-1] not in output[int_size-1]:
+            print "Still waiting for schema to load..", full_schema_export_list[-1]
+            LOAD_COUNTER += 1
+
+            if len(schema_list) == int_size:
+                loaded = True
+        # If schema is loaded, the schema name will be appended to schema_list
+        else:
+            for item in output:
+                string = item.split()
+                for index in range(len(string)):
+                    if string[index] == 'completed!':
+                        schema_list.append(string[index-1])
+
+            if len(schema_list) == int_size:
+                loaded = True
+            COUNT += 1
 # Loaded schemas are stored in the variable schema_list
     return schema_list
 
