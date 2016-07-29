@@ -100,9 +100,11 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
     """
     """
 
-    test_case_json_dict, test_case_wd_json_dict = get_paths(test_case_path, test_case_wd_path)
-    print test_case_json_dict
-    print test_case_wd_json_dict
+    #test_case_json_dict, test_case_wd_json_dict = get_paths(test_case_path, test_case_wd_path)
+    #print test_case_json_dict
+    #temp = output_wd_path + os.sep + test_suite + '_Summary'
+    #file_tools.create_directory(temp, 'admin')
+    #print test_case_wd_json_dict
     for (key, value), (key2, value2) in zip(test_case_json_dict.items(), test_case_wd_json_dict.items()):
         file_data1 = getContentFromFile(value)
         file_data2 = getContentFromFile(value2)
@@ -152,13 +154,33 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
             except Exception, e:
                 print "Error Unable to Create NF-DIFF File"
 
+def validator ():
+    file1 = '/Users/anahit/desktop/admin/98e77650-bd45-45dd-b577-b447a781f8c0.json'
+    file2 = '/Users/anahit/desktop/admin-changed/98e77650-bd45-45dd-b577-b447a781f8c0.json'
+    json1 = getContentFromFile(file1)
+    json2 = getContentFromFile(file2)
+    # print json1
+    # print json2
+    json_temp_export_list = []
+    json_temp_import_list = []
+    for key, value in json1.iteritems():
+        json_temp_export_list.append(json1[key])
+    string = str(json_temp_export_list)
+    for key, value in json1.iteritems():
+        json_temp_import_list.append(json2[key])
+    temp_import_string = str(json_temp_import_list)
+    temp_export_string = str(json_temp_export_list)
+    json_import_list = temp_import_string.split(',')
+    json_export_list = temp_export_string.split(',')
+    for item in json_import_list:
+        print item
+    for items in json_export_list:
+        print items
 
 
 
-
-
-
-    # test_case_dict_path = test_case_json_dict.values()
+validator()
+# test_case_dict_path = test_case_json_dict.values()
     # test_case_wd_dict_path = test_case_wd_json_dict.values()
     # print test_case_dict_path
     # print test_case_wd_dict_path
@@ -178,9 +200,7 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
 
 
 
-# file1 = '/Users/anahit/desktop/admin/98e77650-bd45-45dd-b577-b447a781f8c0.json'
-# file2 = '/Users/anahit/desktop/admin-changed/98e77650-bd45-45dd-b577-b447a781f8c0.json'
-#
+
 # data, data2 = getContentFromFile(file1, file2)
 #
 # result1 = ordered(data)
