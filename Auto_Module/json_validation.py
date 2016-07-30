@@ -145,8 +145,8 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
                 diffFile.write(header_newline)
                 diffFile.write(header4_string)
                 diffFile.write('\n\n')
-                temp_string = '>>> ' + import_diff + '\n'
-                temp_string2 = '<<< ' + export_diff + '\n'
+                temp_string = '>>> ' + str(import_diff) + '\n'
+                temp_string2 = '<<< ' + str(export_diff) + '\n'
                 diffFile.write(temp_string)
                 diffFile.write(temp_string2)
                 diffFile.close()
