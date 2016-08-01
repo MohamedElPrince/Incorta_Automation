@@ -325,7 +325,7 @@ for sub_dir in test_suite_directories:
 
                 import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
 
-                # IMPORT DATA STRUCTURES
+                # Define Import DATA STRUCTURES
 
                 import_dash_ids = {}
                 import_dash_tenants = {}
@@ -366,7 +366,7 @@ for sub_dir in test_suite_directories:
                                                       custom_export_schema_names_list)
                         # if 'Import_Files' in test_case_wd_dirs:
 
-                # EXPORT DATA STRUCTURES
+                # Define EXPORT DATA STRUCTURES
 
                 export_dash_ids = {}
                 export_dash_tenants = {}
@@ -403,8 +403,6 @@ for sub_dir in test_suite_directories:
                                                       current_test_suite, 'schema_loaders')
                     Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
                                                       current_test_suite, 'schema_tenants')
-
-                #Auto_Module.data_upload.backup_catalina(incorta_home)
 
                 # Load Data
                 table = None
