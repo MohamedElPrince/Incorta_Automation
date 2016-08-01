@@ -1,4 +1,3 @@
-import codecs
 import json, file_tools, os
 """
 """
@@ -99,23 +98,31 @@ def get_paths(test_case_path, test_case_path_wd):
 def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, admin_wd_path):
     """
     """
-
     test_case_json_dict, test_case_wd_json_dict = get_paths(test_case_path, test_case_wd_path)
-    print test_case_json_dict
-    print test_case_wd_json_dict
-    for (key, value), (key2, value2) in zip(test_case_json_dict.items(), test_case_wd_json_dict.items()):
-        file_data1 = getContentFromFile(value)
-        file_data2 = getContentFromFile(value2)
-        result1 = ordered(file_data1)
-        result2 = ordered(file_data2)
+    temp = output_wd_path + os.sep + test_suite + '_Summary'
+    file_tools.create_directory(temp, 'admin')
 
-        temp_path_list = test_case_json_dict[key].split('/')
-        temp_name = (temp_path_list[10].split('.'))[0]
-        file_name = temp_path_list[7] + '_' + temp_path_list[8] + '_' + temp_name
-        file_path = admin_wd_path + os.sep + file_name
-        #print file_name
-        if value2 != None:
-            if (result1 == result2) == True:
+    #for (key, value), (key2, value2) in zip(test_case_json_dict.items(), test_case_wd_json_dict.items()):
+
+    for key in test_case_json_dict:
+
+        export_file_path = test_case_wd_json_dict.get(key, None)
+        #print export_file_path
+        if export_file_path != None:
+
+            temp_path_list = test_case_json_dict[key].split('/')
+            #print temp_path_list
+            temp_name = (temp_path_list[10].split('.'))[0]
+            #print temp_name
+            file_name = temp_path_list[7] + '_' + temp_path_list[8] + '_' + temp_name
+            #print file_name
+            file_path = admin_wd_path + os.sep + file_name
+            #print file_path
+
+            import_diff, export_diff, import_diff_bool, export_diff_bool = validator(test_case_json_dict[key], test_case_wd_json_dict[key])
+            print import_diff_bool, export_diff_bool
+
+            if import_diff_bool == True and export_diff_bool == True:
                 file_path = file_path + '.suc'
                 try:
                     sucFile = open(file_path, 'w')
@@ -138,9 +145,8 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
                 diffFile.write(header_newline)
                 diffFile.write(header4_string)
                 diffFile.write('\n\n')
-                comparison1, comparison2 = comp(result1, result2)
-                temp_string = '>>> ' + str(comparison1) + '\n'
-                temp_string2 = '<<< ' + str(comparison2) + '\n'
+                temp_string = '>>> ' + str(import_diff) + '\n'
+                temp_string2 = '<<< ' + str(export_diff) + '\n'
                 diffFile.write(temp_string)
                 diffFile.write(temp_string2)
                 diffFile.close()
@@ -154,11 +160,39 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
 
 
 
+def validator (import_file_path, export_file_path):
+    print import_file_path
+    print export_file_path
+    import_dict = getContentFromFile(import_file_path)
+    export_dict = getContentFromFile(export_file_path)
+    json_temp_export_list = []
+    json_temp_import_list = []
+    for key, value in import_dict.iteritems():
+        json_temp_import_list.append(import_dict[key])
+    for key, value in export_dict.iteritems():
+        json_temp_export_list.append(export_dict[key])
+    temp_import_string = str(json_temp_import_list)
+    temp_export_string = str(json_temp_export_list)
+    json_import_list = temp_import_string.split(',')
+    json_export_list = temp_export_string.split(',')
+    # for item in json_import_list:
+    #     print item
+    # print "-----------------------------------------"
+    # for items in json_export_list:
+    #     print items
+    #import file diff
+    import_diff = set(json_import_list) - set(json_export_list)
+    import_diff_bool = set(json_import_list) == set(json_export_list)
+    #export file diff
+    export_diff = set(json_export_list) - set(json_import_list)
+    export_diff_bool = set(json_export_list) == set(json_import_list)
+    return import_diff, export_diff, import_diff_bool, export_diff_bool
 
 
-
-
-    # test_case_dict_path = test_case_json_dict.values()
+# file1 = '/Users/anahit/desktop/admin/98e77650-bd45-45dd-b577-b447a781f8c0.json'
+# file2 = '/Users/anahit/desktop/admin-changed/98e77650-bd45-45dd-b577-b447a781f8c0.json'
+# validator(file1, file2)
+# test_case_dict_path = test_case_json_dict.values()
     # test_case_wd_dict_path = test_case_wd_json_dict.values()
     # print test_case_dict_path
     # print test_case_wd_dict_path
@@ -178,9 +212,7 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
 
 
 
-# file1 = '/Users/anahit/desktop/admin/98e77650-bd45-45dd-b577-b447a781f8c0.json'
-# file2 = '/Users/anahit/desktop/admin-changed/98e77650-bd45-45dd-b577-b447a781f8c0.json'
-#
+
 # data, data2 = getContentFromFile(file1, file2)
 #
 # result1 = ordered(data)
