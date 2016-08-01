@@ -72,7 +72,14 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 			set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
 
 			path_list = export_dictionary[key].split('/')
-			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9]
+
+			COUNT = 0
+			for path in path_list:
+				if test_suite_name in path:
+					temp_start_index = COUNT
+				COUNT += 1
+
+			temp_string = path_list[temp_start_index] + '_' + path_list[temp_start_index+1] + '_' + path_list[temp_start_index+4]
 
 			if set1 != set2:
 				# FILES ARE DIFFERENT
