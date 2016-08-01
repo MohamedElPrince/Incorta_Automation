@@ -102,8 +102,6 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
     temp = output_wd_path + os.sep + test_suite + '_Summary'
     file_tools.create_directory(temp, 'admin')
 
-    #for (key, value), (key2, value2) in zip(test_case_json_dict.items(), test_case_wd_json_dict.items()):
-
     for key in test_case_json_dict:
 
         export_file_path = test_case_wd_json_dict.get(key, None)
@@ -111,15 +109,17 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
         if export_file_path != None:
 
             temp_path_list = test_case_json_dict[key].split('/')
-            temp_name = (temp_path_list[10].split('.'))[0]
+            #print temp_path_list
+            temp_path_list_size = len(temp_path_list)
+            temp_name = (temp_path_list[temp_path_list_size-1].split('.'))[0]
             #print temp_name
-            file_name = temp_path_list[7] + '_' + temp_path_list[8] + '_' + temp_name
+            file_name = temp_path_list[temp_path_list_size-3] + '_' + temp_path_list[temp_path_list_size-2] + '_' + temp_name
             #print file_name
             file_path = admin_wd_path + os.sep + file_name
             #print file_path
 
             import_diff, export_diff, import_diff_bool, export_diff_bool = validator(test_case_json_dict[key], test_case_wd_json_dict[key])
-            print import_diff_bool, export_diff_bool
+            #print import_diff_bool, export_diff_bool
 
             if import_diff_bool == True and export_diff_bool == True:
                 file_path = file_path + '.suc'
@@ -160,8 +160,8 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
 
 
 def validator (import_file_path, export_file_path):
-    print import_file_path
-    print export_file_path
+    # print import_file_path
+    # print export_file_path
     import_dict = getContentFromFile(import_file_path)
     export_dict = getContentFromFile(export_file_path)
     json_temp_export_list = []
@@ -182,7 +182,6 @@ def validator (import_file_path, export_file_path):
     #import file diff
     import_diff = set(json_import_list) - set(json_export_list)
     import_diff_bool = set(json_import_list) == set(json_export_list)
-    #export file diff
     export_diff = set(json_export_list) - set(json_import_list)
     export_diff_bool = set(json_export_list) == set(json_import_list)
     return import_diff, export_diff, import_diff_bool, export_diff_bool
