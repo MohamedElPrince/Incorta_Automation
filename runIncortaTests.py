@@ -425,7 +425,7 @@ for sub_dir in test_suite_directories:
 
                 if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
-                # Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, admin_wd_path)
+                Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, admin_wd_path)
 
                 # LOAD VALIDATION
 
