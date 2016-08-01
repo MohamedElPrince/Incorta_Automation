@@ -433,7 +433,7 @@ for sub_dir in test_suite_directories:
                 if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
 
-
+                print "testing new branch"
                 if config_defaults['skip_validation'] == 'False':
 
                     print "JSON Validation"
