@@ -111,7 +111,6 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
         if export_file_path != None:
 
             temp_path_list = test_case_json_dict[key].split('/')
-            #print temp_path_list
             temp_name = (temp_path_list[10].split('.'))[0]
             #print temp_name
             file_name = temp_path_list[7] + '_' + temp_path_list[8] + '_' + temp_name
