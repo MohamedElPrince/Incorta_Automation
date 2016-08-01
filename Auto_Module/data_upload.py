@@ -64,7 +64,8 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
 
             if len(schema_list) == int_size:
                 loaded = True
-            COUNT += 1
+        COUNT += 1
+        print COUNT*5, "seconds.."
 # Loaded schemas are stored in the variable schema_list
     return schema_list
 
