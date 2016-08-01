@@ -1,6 +1,12 @@
 import json, file_tools, os
 
 """
+JSON validation code to comapare two JSON files and return the differences
+Then to create a .suc file is no changes, .diff file if changes found, NF.diff if one file is not found
+
+TODO
+    Add log file dump for failure and success
+    Need more try/catch handling
 """
 
 
@@ -13,19 +19,6 @@ def getContentFromFile(filepath):
         return file_data
     except Exception, e:
         print "ERROR Unable to Open JSON File: ", filepath
-
-
-def compare_json(x, y):
-    """
-    """
-    for x_key in x:
-        if x_key in y and x[x_key] == y[x_key]:
-            print 'Match'
-        else:
-            print 'Not a match'
-    if any(k not in x for k in y):
-        print 'Not a match'
-
 
 def printDiffs(x, y):
     """
@@ -41,7 +34,6 @@ def printDiffs(x, y):
     if not diff:
         print "both files are identical"
 
-
 def dict_compare(d1, d2):
     """
     """
@@ -53,7 +45,6 @@ def dict_compare(d1, d2):
     modified = {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
     same = set(o for o in intersect_keys if d1[o] == d2[o])
     return added, removed, modified, same
-
 
 def ordered(obj):
     """
@@ -82,6 +73,14 @@ def comp(list1, list2):
 
 def get_paths(test_case_path, test_case_path_wd):
     """
+    Function gets paths for JSON files from benchmark JSONs and export JSONs
+        args:
+            test_case_path: Test case path from benchmarks
+            test_case_wd_path: Test case path from working directory
+        returns:
+            Dictionary of JSON files such as: key -> GUID, Value -> File Path
+        prints:
+            Nothing
     """
     test_case_json_dict = {}
     test_case_wd_json_dict = {}
@@ -112,6 +111,15 @@ def get_paths(test_case_path, test_case_path_wd):
 
 def validator(import_file_path, export_file_path):
     """
+    Function compares two JSON line by line to find differences
+        args:
+            import_file_path: Path for the JSON benchmark
+            export_file_path: Path for the exported JSON
+        returns:
+            Two lists of the changes inside the Import and Export Json Files
+            Two bools that either return True or False
+        prints:
+            Nothing
     """
     import_dict = getContentFromFile(import_file_path)
     export_dict = getContentFromFile(export_file_path)
@@ -134,10 +142,22 @@ def validator(import_file_path, export_file_path):
 
 def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, admin_wd_path):
     """
+    Function creates suc, diff, and NF.diff files after comparing the benchmark JSON and
+    exported JSON.
+        args:
+            test_case_path: Test case path from benchmarks
+            test_case_wd_path: Test case path from working directory
+            output_wd_path: Ouput folder path from working directory
+            test_suite: Current test suite names
+            admin_wd_path: Admin path for bechmark
+        returns:
+            Nothing
+        prints:
+            Can print debug statements if needed
     """
     test_case_json_dict, test_case_wd_json_dict = get_paths(test_case_path, test_case_wd_path)
     temp = output_wd_path + os.sep + test_suite + '_Summary'
-    file_tools.create_directory(temp, 'admin')
+    admin_testcase_name = file_tools.create_directory(temp, 'admin')
 
     for key in test_case_json_dict:
 
@@ -149,6 +169,7 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
             file_name = temp_path_list[temp_path_list_size - 3] + '_' + temp_path_list[
                 temp_path_list_size - 2] + '_' + temp_name
             file_path = admin_wd_path + os.sep + file_name
+            print file_path
             import_diff, export_diff, import_diff_bool, export_diff_bool = validator(test_case_json_dict[key],
                                                                                      test_case_wd_json_dict[key])
 
