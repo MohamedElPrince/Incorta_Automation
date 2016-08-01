@@ -160,7 +160,6 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
     admin_testcase_name = file_tools.create_directory(temp, 'admin')
 
     for key in test_case_json_dict:
-
         export_file_path = test_case_wd_json_dict.get(key, None)
         if export_file_path != None:
             temp_path_list = test_case_json_dict[key].split('/')
@@ -169,7 +168,6 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
             file_name = temp_path_list[temp_path_list_size - 3] + '_' + temp_path_list[
                 temp_path_list_size - 2] + '_' + temp_name
             file_path = admin_wd_path + os.sep + file_name
-            print file_path
             import_diff, export_diff, import_diff_bool, export_diff_bool = validator(test_case_json_dict[key],
                                                                                      test_case_wd_json_dict[key])
 
