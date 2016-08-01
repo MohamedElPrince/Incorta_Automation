@@ -38,7 +38,7 @@ def tenant_editor(path):
 				os.system(Href_arg)
 
 
-def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, dictionary_type):
+def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaData_Validation_Path, dictionary_type):
 
 	"""
 	Compares import and export files. If any differences are found
@@ -48,9 +48,22 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 	contained within the Output folder
 	"""
 
-	output_path = wd_path+os.sep+'Output' + os.sep + test_suite_name + '_Summary' + os.sep
-	file_tools.create_directory(output_path, dictionary_type)
-	output_path = output_path + dictionary_type + os.sep
+	#output_path = wd_path+os.sep+'Output' + os.sep + test_suite_name + '_Summary' + os.sep
+
+	meta_data_directory = file_tools.create_directory(XML_MetaData_Validation_Path, dictionary_type)
+	#print "METADATA OUTPUT PATH: ", meta_data_directory
+
+	if meta_data_directory == None:
+		#print "CHECKING"
+		meta_data_path = file_tools.get_path(XML_MetaData_Validation_Path, dictionary_type)
+		#print "New meta_data path", meta_data_path
+
+	else:
+		meta_data_path = str(meta_data_directory)
+
+	output_path = meta_data_path + os.sep
+	#print "OUTPUT PATH: ", output_path
+	#output_path = output_path + dictionary_type + os.sep
 
 	for key in import_dictionary:
 
@@ -127,7 +140,11 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 			else:
 				# FILES ARE THE SAME
 				temp_string = temp_string + '.suc'
+				#print "TEMP_STRING: ", temp_string
 				log_name = output_path + temp_string
+
+				#print "LOG_NAME: ", log_name
+
 				f = open(log_name, 'w')
 				f.close()
 

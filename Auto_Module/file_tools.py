@@ -22,6 +22,7 @@ def create_directory(path, folder_name):
         prints:
             Nothing
     """
+    #appended_path = ""
     appended_path = path + os.sep + folder_name
     try:
         os.makedirs(appended_path)
@@ -51,6 +52,7 @@ def get_subdirectories(path):
 
 
 def get_path(path, directory):
+    # Pass in path, name of subdirectory
     """
     Function can be used to return a path, does not create the directory
         args:

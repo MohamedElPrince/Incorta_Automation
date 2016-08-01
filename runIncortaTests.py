@@ -19,6 +19,7 @@ from Auto_Module import *
 import Auto_Module.validation
 import Auto_Module.data_upload
 import Auto_Module.json_validation
+import Auto_Module.output
 
 
 
@@ -261,8 +262,15 @@ csrf_token = session [63:95]
 test_suite_directory_path = os.getcwd() + '/' + "TestSuites"
 
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
-output_wd_path = Auto_Module.file_tools.create_directory(wd_path, 'Output')
-admin_wd_path = Auto_Module.file_tools.create_directory(output_wd_path, 'admin')
+
+#\todo - need to edit path
+#output_wd_path = Auto_Module.file_tools.create_directory(wd_path, 'Output')
+
+# Creates Output Directory
+output_wd_path = Auto_Module.output.create_output_folder(wd_path)
+
+#admin_wd_path = Auto_Module.file_tools.create_directory(output_wd_path, 'admin')
+
 
 for sub_dir in test_suite_directories:
 
@@ -273,12 +281,20 @@ for sub_dir in test_suite_directories:
     test_cases_dir = Auto_Module.file_tools.get_subdirectories(test_suite_path)
     temp_path = Auto_Module.file_tools.get_path(test_suite_path, test_cases_dir[0])
     temp_dir = Auto_Module.file_tools.get_subdirectories(temp_path)
+
+
+    # Creating Output Structure
+    #print "OUTPUT_WD_PATH: ", output_wd_path
+    test_suite_output_path = Auto_Module.output.create_test_suite_output_folder(output_wd_path, sub_dir)
+    #print "TEST SUITE OUTPUT PATH: ", test_suite_output_path
+    Data_Validation_Path, Loader_Validation_Path, XML_MetaData_Validation_Path = Auto_Module.output.create_test_suite_validation_folders(test_suite_output_path)
+
     for names in temp_dir:
 
 
 
         if 'datafiles' == names:
-
+            print "-----------------------------------------------------------------------------"
             print "Entering datafiles"
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
@@ -390,19 +406,35 @@ for sub_dir in test_suite_directories:
 
                 if config_defaults['skip_validation'] == 'False':
 
-                    # Comparing Dashboard Items
-                    Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
-                                                      'dashboards')
-                    Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
-                                                      'dashboard_tenants')
 
-                    # Comparing Schema Items
-                    Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
-                                                      'schemas')
-                    Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
-                                                      current_test_suite, 'schema_loaders')
-                    Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
-                                                      current_test_suite, 'schema_tenants')
+
+                    Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids, XML_MetaData_Validation_Path, 'dashboards')
+                    # # Comparing Dashboard Items
+                    # Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
+                    #                                   'dashboards')
+
+                    Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants, XML_MetaData_Validation_Path, 'dashboard_tenants')
+
+                    # Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
+                    #                                   'dashboard_tenants')
+                    #
+                    # # Comparing Schema Items
+
+                    Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names, XML_MetaData_Validation_Path, 'schemas')
+
+                    # Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
+                    #                                   'schemas')
+
+                    Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders, XML_MetaData_Validation_Path, 'schema_loaders')
+
+                    # Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
+                    #                                   current_test_suite, 'schema_loaders')
+
+                    Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants, XML_MetaData_Validation_Path, 'schema_tenants')
+
+
+                    # Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
+                    #                                   current_test_suite, 'schema_tenants')
 
                 # Load Data
                 table = None
@@ -411,11 +443,6 @@ for sub_dir in test_suite_directories:
                 staging = False
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
 
-                # LOAD VALIDATION
-                # Appends to list of loaded schemas as for loop goes through every test case
-                # full_schema_export_list.extend(export_schema_names_list)
-                # schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
-                #                                                      full_schema_export_list)
 
                 # JSON DASHBOARD EXPORT
                 test_case_dashboard_export_list = export_dash_ids.keys()
@@ -433,20 +460,23 @@ for sub_dir in test_suite_directories:
                 if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
 
-                print "testing new branch"
                 if config_defaults['skip_validation'] == 'False':
 
-                    print "JSON Validation"
-                    Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, admin_wd_path)
+                    output_test_case_path = Auto_Module.output.create_test_case_output_path(Data_Validation_Path, dir)
+                    output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, 'admin')
+
+
+
+                    print 'JSON Validation'
+                    Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, output_user_path)
 
                 # LOAD VALIDATION
-
                 # Appends to list of loaded schemas as for loop goes through every test case
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
-
-            Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list)
+            # Compares Loaded Schema List to Exported Schema List
+            Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
 
             # TO BE USED FOR DEBUGGING PURPOSES
             # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
@@ -488,7 +518,8 @@ for sub_dir in test_suite_directories:
             # session_id = session[21:53]
 
         if 'datasources' == names:
-            print names
+            print "-----------------------------------------------------------------------------"
+            print "Entering DataSources"
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
@@ -595,19 +626,37 @@ for sub_dir in test_suite_directories:
 
                 # VALIDATION IMPLEMENTATION
 
-                # Comparing Dashboard Items
-                Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
-                                                  'dashboards')
-                Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
-                                                  'dashboard_tenants')
+                Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids,
+                                                  XML_MetaData_Validation_Path, 'dashboards')
+                # # Comparing Dashboard Items
+                # Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
+                #                                   'dashboards')
 
-                # Comparing Schema Items
-                Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
-                                                  'schemas')
-                Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
-                                                  current_test_suite, 'schema_loaders')
-                Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
-                                                  current_test_suite, 'schema_tenants')
+                Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants,
+                                                  XML_MetaData_Validation_Path, 'dashboard_tenants')
+
+                # Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
+                #                                   'dashboard_tenants')
+                #
+                # # Comparing Schema Items
+
+                Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names,
+                                                  XML_MetaData_Validation_Path, 'schemas')
+
+                # Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
+                #                                   'schemas')
+
+                Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders,
+                                                  XML_MetaData_Validation_Path, 'schema_loaders')
+
+                # Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
+                #                                   current_test_suite, 'schema_loaders')
+
+                Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants,
+                                                  XML_MetaData_Validation_Path, 'schema_tenants')
+
+                # Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
+                #                                   current_test_suite, 'schema_tenants')
 
                 # Load Data
                 table = None
@@ -623,4 +672,4 @@ for sub_dir in test_suite_directories:
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
-            Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list)
+            Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)

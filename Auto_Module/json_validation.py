@@ -140,7 +140,7 @@ def validator(import_file_path, export_file_path):
     return import_diff, export_diff, import_diff_bool, export_diff_bool
 
 
-def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, admin_wd_path):
+def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, user_wd_path):
     """
     Function creates suc, diff, and NF.diff files after comparing the benchmark JSON and
     exported JSON.
@@ -156,8 +156,6 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
             Can print debug statements if needed
     """
     test_case_json_dict, test_case_wd_json_dict = get_paths(test_case_path, test_case_wd_path)
-    temp = output_wd_path + os.sep + test_suite + '_Summary'
-    admin_testcase_name = file_tools.create_directory(temp, 'admin')
 
     for key in test_case_json_dict:
 
@@ -168,8 +166,7 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, ad
             temp_name = (temp_path_list[temp_path_list_size - 1].split('.'))[0]
             file_name = temp_path_list[temp_path_list_size - 3] + '_' + temp_path_list[
                 temp_path_list_size - 2] + '_' + temp_name
-            file_path = admin_wd_path + os.sep + file_name
-            print file_path
+            file_path = user_wd_path + os.sep + file_name
             import_diff, export_diff, import_diff_bool, export_diff_bool = validator(test_case_json_dict[key],
                                                                                      test_case_wd_json_dict[key])
 
