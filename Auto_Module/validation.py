@@ -37,6 +37,9 @@ def tenant_editor(path):
 				Href_arg = """ sed -i "" 's/\(href=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
 				os.system(Href_arg)
 
+				Parent_arg = """ sed -i "" 's/\(parent=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+				os.system(Parent_arg)
+
 
 def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, dictionary_type):
 
