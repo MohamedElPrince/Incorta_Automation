@@ -50,7 +50,7 @@ config_file = sys.argv[1]
 commands = sys.argv[2:]
 
 config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenants',
-                   'admin': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
+                   'username': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
                    'skip_validation': 'False', 'import_object': 'False', 'data_load': 'False',
                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
                    'url': 'http://localhost:8080/incorta'}
@@ -250,7 +250,7 @@ locals().update(config_defaults)
 
 incorta_api_import(incorta_home)  # Import Incorta API
 
-session = login(url, tenant, admin, password)  # Login to Incorta
+session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
 test_suite_directory_path = os.getcwd() + '/' + "TestSuites"
