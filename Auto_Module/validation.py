@@ -1,7 +1,7 @@
 
 from xml.etree import ElementTree
 from lxml import etree
-import os
+import os, platform
 import file_tools
 
 """
@@ -11,34 +11,57 @@ This file contains the validation between import and export test cases
 """
 
 def tenant_editor(path):
-
 	"""
 	Uses Regex Commands too suppress dynamic lines in tenant files
 	This is done to ensure the validator does not throw unnecessary
 	diffs
+	Added functionality for multiple operating systems. Code now checks
+	for type of operating system to run distinct set of commands.
 	"""
-
 	# Takes Import or Export Path as parameter
-	for root, dir, files in os.walk(path):
-		for file in files:
-			if file == 'tenant.xml':
-				exportTime_arg = """ sed -i "" 's/\(exportTime=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
-				os.system(exportTime_arg)
+	system = platform.system()
+	if 'Darwin' in system:
+		for root, dir, files in os.walk(path):
+			for file in files:
+				if file == 'tenant.xml':
+					exportTime_arg = """ sed -i "" 's/\(exportTime=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(exportTime_arg)
 
-				id_arg = """ sed -i "" 's/\( id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
-				os.system(id_arg)
-                
-				owner_id_arg = """ sed -i "" 's/\(owner-id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
-				os.system(owner_id_arg)
+					id_arg = """ sed -i "" 's/\( id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(id_arg)
 
-				PATH_arg = """ sed -i "" 's/\(path=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
-				os.system(PATH_arg)
+					owner_id_arg = """ sed -i "" 's/\(owner-id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(owner_id_arg)
 
-				Href_arg = """ sed -i "" 's/\(href=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
-				os.system(Href_arg)
+					PATH_arg = """ sed -i "" 's/\(path=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(PATH_arg)
 
-				Parent_arg = """ sed -i "" 's/\(parent=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
-				os.system(Parent_arg)
+					Href_arg = """ sed -i "" 's/\(href=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(Href_arg)
+
+					Parent_arg = """ sed -i "" 's/\(parent=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(Parent_arg)
+	elif 'Linux' in system:
+		for root, dir, files in os.walk(path):
+			for file in files:
+				if file == 'tenant.xml':
+					exportTime_arg = """ sed -i 's/\(exportTime=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(exportTime_arg)
+
+					id_arg = """ sed -i 's/\( id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(id_arg)
+
+					owner_id_arg = """ sed -i 's/\(owner-id=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(owner_id_arg)
+
+					PATH_arg = """ sed -i 's/\(path=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(PATH_arg)
+
+					Href_arg = """ sed -i 's/\(href=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(Href_arg)
+
+					Parent_arg = """ sed -i 's/\(parent=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
+					os.system(Parent_arg)
 
 
 def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaData_Validation_Path, dictionary_type):
