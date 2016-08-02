@@ -10,8 +10,8 @@ tenant=Demo
 #url defaults to http://localhost:8080/incorta
 url=http://localhost:8080/incorta
 
-# admin defaults to Super
-admin=super
+#username defaults to Super
+username=super
 
 #defaults to none
 password=super
