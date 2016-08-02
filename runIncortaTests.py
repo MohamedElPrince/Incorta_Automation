@@ -24,9 +24,6 @@ import Auto_Module.output
 """
 ------------------------------------------Initialization----------------------------------------
 """
-
-Debug = True  # Debug flag for print statements
-
 """
 Arguments
 -------------------------------------------
@@ -35,6 +32,20 @@ Arguments
 -x: extract files
 -------------------------------------------
 """
+
+Debug = True  # Debug flag for print statements
+
+preCheckScriptPAth = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'automationCheck.sh'
+if os.path.isfile(preCheckScriptPAth):
+    try:
+        os.system(preCheckScriptPAth)
+    except Exception, e:
+        raise Exception ("Pre-Check Script Did Not Run")
+
+
+
+
+
 # All the arguments which are passed in command line
 # sys.argv[0:] = argv
 #
