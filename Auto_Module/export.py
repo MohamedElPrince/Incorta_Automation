@@ -114,7 +114,7 @@ def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_
     guid_Names = get_guid(test_case_path)
     for guid in guid_Names:
         dash_id = str(guid)
-        print "exporting dashboard: ", guid
+        #print "exporting dashboard: ", guid
         file_tools.create_directory(test_case_path_wd, 'admin')
         user_path = test_case_path_wd + os.sep + 'admin' + os.sep
         json_name = dash_id + '.json'

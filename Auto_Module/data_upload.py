@@ -71,8 +71,6 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
 
 def schema_load_validatior(export_schema_names_list, full_schema_export_list, Loader_Validation_Path):
 
-    print Loader_Validation_Path
-
     if set(export_schema_names_list) == set(full_schema_export_list):
         print "LOADED DATA VALIDATED\n"
         print "Successfully Loaded Schemas: ", export_schema_names_list
@@ -81,7 +79,6 @@ def schema_load_validatior(export_schema_names_list, full_schema_export_list, Lo
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
             f = open(log_name, 'w')
             f.close()
-
 
     else:
         print "ERROR IN LOADING DATA"
