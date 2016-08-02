@@ -14,9 +14,9 @@ def create_test_suite_output_folder(output_path, test_suite_name):
     return test_suite_output_path
 
 def create_test_suite_validation_folders(test_suite_output_path):
-    Data_Validation_Path = file_tools.create_directory(test_suite_output_path, 'DATA_VALIDATION')
-    Loader_Validation_Path = file_tools.create_directory(test_suite_output_path, 'LOADER_VALIDATION')
-    XML_MetaData_Validation_Path = file_tools.create_directory(test_suite_output_path, 'XML_METADATA_VALIDATION')
+    Data_Validation_Path = file_tools.create_directory(test_suite_output_path, 'Data_Validation')
+    Loader_Validation_Path = file_tools.create_directory(test_suite_output_path, 'Loader_Validation')
+    XML_MetaData_Validation_Path = file_tools.create_directory(test_suite_output_path, 'XML_Metadata_Validation')
     return Data_Validation_Path, Loader_Validation_Path, XML_MetaData_Validation_Path
 
 def create_test_case_output_path(Data_Validation_Path, test_case_name):

@@ -284,9 +284,8 @@ for sub_dir in test_suite_directories:
 
 
     # Creating Output Structure
-    #print "OUTPUT_WD_PATH: ", output_wd_path
     test_suite_output_path = Auto_Module.output.create_test_suite_output_folder(output_wd_path, sub_dir)
-    #print "TEST SUITE OUTPUT PATH: ", test_suite_output_path
+    # Validation Sub Directories
     Data_Validation_Path, Loader_Validation_Path, XML_MetaData_Validation_Path = Auto_Module.output.create_test_suite_validation_folders(test_suite_output_path)
 
     for names in temp_dir:
@@ -295,7 +294,7 @@ for sub_dir in test_suite_directories:
 
         if 'datafiles' == names:
             print "-----------------------------------------------------------------------------"
-            print "Entering datafiles"
+            print "ENTERING DATA FILES"
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
@@ -402,39 +401,21 @@ for sub_dir in test_suite_directories:
                 Auto_Module.validation.tenant_editor(export_path)
 
 
-                # VALIDATION IMPLEMENTATION
+                # META DATA VALIDATION IMPLEMENTATION
 
                 if config_defaults['skip_validation'] == 'False':
 
 
-
+                    # Comparing Dashboard Items
                     Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids, XML_MetaData_Validation_Path, 'dashboards')
-                    # # Comparing Dashboard Items
-                    # Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
-                    #                                   'dashboards')
-
                     Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants, XML_MetaData_Validation_Path, 'dashboard_tenants')
 
-                    # Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
-                    #                                   'dashboard_tenants')
-                    #
-                    # # Comparing Schema Items
+                    # Comparing Schema Items
 
                     Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names, XML_MetaData_Validation_Path, 'schemas')
-
-                    # Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
-                    #                                   'schemas')
-
                     Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders, XML_MetaData_Validation_Path, 'schema_loaders')
-
-                    # Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
-                    #                                   current_test_suite, 'schema_loaders')
-
                     Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants, XML_MetaData_Validation_Path, 'schema_tenants')
 
-
-                    # Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
-                    #                                   current_test_suite, 'schema_tenants')
 
                 # Load Data
                 table = None
@@ -464,10 +445,6 @@ for sub_dir in test_suite_directories:
 
                     output_test_case_path = Auto_Module.output.create_test_case_output_path(Data_Validation_Path, dir)
                     output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, 'admin')
-
-
-
-                    print 'JSON Validation'
                     Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, output_user_path)
 
                 # LOAD VALIDATION
@@ -478,48 +455,11 @@ for sub_dir in test_suite_directories:
             # Compares Loaded Schema List to Exported Schema List
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
 
-            # TO BE USED FOR DEBUGGING PURPOSES
-            # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-            #
-            #
-            # print "Extracted from IMPORTS\n"
-            #
-            #
-            # print "-------Dashboards--------\n"
-            # print "Imported dashboards: \n", import_dash_ids
-            # print "Imported Dashboard Tenants: \n", import_dash_tenants
-            # print "\n-------Schemas---------\n"
-            # print "Imported Schemas: \n", import_schema_names
-            # print "Imported Schema Loaders: \n", import_schema_loaders
-            # print "Imported Schema Tenants: \n", import_schema_tenants
-            #
-            # print "\nPrinting Dashboard Names \n"
-            # print import_dashboard_names_list
-            # print "\n Printing Schema Names List \n"
-            # print import_schema_names_list
-            #
-            #
-            # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-            # print "\nExtracted from EXPORTS\n"
-            # print "-------Dashboards--------\n"
-            # print "Exported dashboards: \n", export_dash_ids
-            # print "Exported Dashboard Tenants: \n", export_dash_tenants
-            # print "\n-------Schemas---------\n"
-            # print "Exported Schemas: \n", export_schema_names
-            # print "Exported Schema Loaders: \n", export_schema_loaders
-            # print "Exported Schema Tenants: \n", export_schema_tenants
-            #
-            # print "\nPrinting Dashboard Names \n"
-            # print export_dashboard_names_list
-            # print "\n Printing Schema Names List \n"
-            # print export_schema_names_list
-            #
-            # print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-            # session_id = session[21:53]
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
         if 'datasources' == names:
             print "-----------------------------------------------------------------------------"
-            print "Entering DataSources"
+            print "ENTERING DATA SOURCES"
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
@@ -624,39 +564,27 @@ for sub_dir in test_suite_directories:
                 # TENANT EDITOR
                 Auto_Module.validation.tenant_editor(export_path)
 
-                # VALIDATION IMPLEMENTATION
+                # META DATA VALIDATION IMPLEMENTATION
 
+                #Comparing Dashboard Items
                 Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids,
                                                   XML_MetaData_Validation_Path, 'dashboards')
-                # # Comparing Dashboard Items
-                # Auto_Module.validation.validation(import_dash_ids, export_dash_ids, wd_path, current_test_suite,
-                #                                   'dashboards')
+
 
                 Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants,
                                                   XML_MetaData_Validation_Path, 'dashboard_tenants')
 
-                # Auto_Module.validation.validation(import_dash_tenants, export_dash_tenants, wd_path, current_test_suite,
-                #                                   'dashboard_tenants')
-                #
-                # # Comparing Schema Items
 
                 Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names,
                                                   XML_MetaData_Validation_Path, 'schemas')
 
-                # Auto_Module.validation.validation(import_schema_names, export_schema_names, wd_path, current_test_suite,
-                #                                   'schemas')
 
                 Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders,
                                                   XML_MetaData_Validation_Path, 'schema_loaders')
 
-                # Auto_Module.validation.validation(import_schema_loaders, export_schema_loaders, wd_path,
-                #                                   current_test_suite, 'schema_loaders')
 
                 Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants,
                                                   XML_MetaData_Validation_Path, 'schema_tenants')
-
-                # Auto_Module.validation.validation(import_schema_tenants, export_schema_tenants, wd_path,
-                #                                   current_test_suite, 'schema_tenants')
 
                 # Load Data
                 table = None
@@ -665,6 +593,28 @@ for sub_dir in test_suite_directories:
                 staging = False
 
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
+
+                # JSON DASHBOARD EXPORT
+                test_case_dashboard_export_list = export_dash_ids.keys()
+                if Debug == False:
+                    print "session: ", session, " \n\n"
+                    print "session id: ", session_id
+                    print "dashboard id: ", test_case_dashboard_export_list
+                    print "CSRF TOKEN", csrf_token
+                    print "Test Case Path", test_case_path_wd
+                    print "Entering JSON DASH EXPORT"
+
+                Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
+                                                          test_case_path_wd, test_case_path)
+
+                if Debug == False:
+                    print "\nFinished JSON DASH EXPORT"
+
+                if config_defaults['skip_validation'] == 'False':
+                    output_test_case_path = Auto_Module.output.create_test_case_output_path(Data_Validation_Path, dir)
+                    output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, 'admin')
+                    Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
+                                                           current_test_suite, output_user_path)
 
                 # LOAD VALIDATION
 
