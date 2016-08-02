@@ -69,12 +69,45 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
     # Loaded schemas are stored in the variable schema_list
     return schema_list
 
-def schema_load_validatior(export_schema_names_list, full_schema_export_list):
+def schema_load_validatior(export_schema_names_list, full_schema_export_list, Loader_Validation_Path):
+
+    print Loader_Validation_Path
+
     if set(export_schema_names_list) == set(full_schema_export_list):
         print "LOADED DATA VALIDATED\n"
         print "Successfully Loaded Schemas: ", export_schema_names_list
+
+        for schema in export_schema_names_list:
+            log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
+            f = open(log_name, 'w')
+            f.close()
+
+
     else:
         print "ERROR IN LOADING DATA"
         diff_set = set(full_schema_export_list) - set(export_schema_names_list)
         diff_list = list(diff_set)
         print diff_list
+
+        # Outputs Failed Loaded Schemas as .dif files
+        for schema in diff_list:
+            log_name = Loader_Validation_Path + os.sep + str(schema) + '.dif'
+            f = open(log_name, 'w')
+            f.close()
+
+        loaded_set = set(full_schema_export_list) - diff_set
+        loaded_list = list(loaded_set)
+
+        # Outputs Successfully Loaded Schemas as .suc files
+        for schema in loaded_list:
+            log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
+            f = open(log_name, 'w')
+            f.close()
+
+
+
+
+
+
+
+

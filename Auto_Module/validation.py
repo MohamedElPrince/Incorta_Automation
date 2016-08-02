@@ -41,7 +41,7 @@ def tenant_editor(path):
 				os.system(Parent_arg)
 
 
-def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, dictionary_type):
+def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaData_Validation_Path, dictionary_type):
 
 	"""
 	Compares import and export files. If any differences are found
@@ -51,9 +51,16 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 	contained within the Output folder
 	"""
 
-	output_path = wd_path+os.sep+'Output' + os.sep + test_suite_name + '_Summary' + os.sep
-	file_tools.create_directory(output_path, dictionary_type)
-	output_path = output_path + dictionary_type + os.sep
+	meta_data_directory = file_tools.create_directory(XML_MetaData_Validation_Path, dictionary_type)
+
+	if meta_data_directory == None:
+		meta_data_path = file_tools.get_path(XML_MetaData_Validation_Path, dictionary_type)
+
+	else:
+		meta_data_path = str(meta_data_directory)
+
+	output_path = meta_data_path + os.sep
+
 
 	for key in import_dictionary:
 
@@ -123,9 +130,6 @@ def validation(import_dictionary, export_dictionary, wd_path, test_suite_name, d
 					f.write(diff_exp_string)
 					f.write('\n\n')
 				f.close()
-
-				# diff_command = 'diff ' + import_dictionary[key] + ' ' + export_dictionary[key] + ' > ' + log_name
-				# subprocess.call(diff_command, shell = True)
 
 			else:
 				# FILES ARE THE SAME
