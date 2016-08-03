@@ -118,22 +118,23 @@ def set_new_defaults(config_file):
     f.close()
     for line in lines:
         for key, value in config_defaults.items():
-            if line[0] == '#':
-                pass
-            elif key in line:
-                var = key + '='
-                what_is_after_var = line[len(var):]
-                what_is_after_key = line[len(key):]
-                # if there is nothing after an = of a key in config file, the default value of the key will be assigned
-                # Ex: admin=________ -> admin=Super
-                if len(what_is_after_var) == 1:
-                    config_defaults[key] = value.rstrip()
-                # if there is nothing after the name of a key in config file, the default value of the key will be assigned
-                # Ex: admin____ -> admin=Super
-                elif len(what_is_after_key) == 1:
-                    config_defaults[key] = value.rstrip()
-                else:
-                    config_defaults[key] = what_is_after_var.rstrip()
+            if line[0] != '#' or " ":
+                str = line
+                str_tup = str.split("=", 1)
+                if key in str_tup[0]:
+                    var = key + '='
+                    what_is_after_var = line[len(var):]
+                    what_is_after_key = line[len(key):]
+                    # if there is nothing after an = of a key in config file, the default value of the key will be assigned
+                    # Ex: admin=________ -> admin=Super
+                    if len(what_is_after_var) == 1:
+                        config_defaults[key] = value.rstrip()
+                    # if there is nothing after the name of a key in config file, the default value of the key will be assigned
+                    # Ex: admin____ -> admin=Super
+                    elif len(what_is_after_key) == 1:
+                        config_defaults[key] = value.rstrip()
+                    else:
+                        config_defaults[key] = what_is_after_var.rstrip()
 
     # If a key from config_defaults is missing in the config file, the code below will create the key
     # in config_defaults and will assign that key its default value
