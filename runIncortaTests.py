@@ -11,16 +11,6 @@ import errno
 # from Auto_Module import test_suite_import
 # from Auto_Module import export
 
-import Auto_Module.export
-import Auto_Module.test_suite_export_wd
-import Auto_Module.file_tools
-import Auto_Module.test_suite_import
-from Auto_Module import *
-import Auto_Module.validation
-import Auto_Module.data_upload
-import Auto_Module.json_validation
-import Auto_Module.output
-
 """
 ------------------------------------------Initialization----------------------------------------
 """
@@ -42,7 +32,15 @@ if os.path.isfile(preCheckScriptPAth):
     except Exception, e:
         raise Exception ("Pre-Check Script Did Not Run")
 
-
+import Auto_Module.export
+import Auto_Module.test_suite_export_wd
+import Auto_Module.file_tools
+import Auto_Module.test_suite_import
+from Auto_Module import *
+import Auto_Module.validation
+import Auto_Module.data_upload
+import Auto_Module.json_validation
+import Auto_Module.output
 
 
 
