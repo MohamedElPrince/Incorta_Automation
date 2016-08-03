@@ -20,7 +20,7 @@ import Auto_Module.validation
 import Auto_Module.data_upload
 import Auto_Module.json_validation
 import Auto_Module.output
-
+import Auto_Module.ldap_utilities
 """
 ------------------------------------------Initialization----------------------------------------
 """
@@ -50,14 +50,13 @@ config_file = sys.argv[1]
 commands = sys.argv[2:]
 
 config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenants',
-                   'admin': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
+                   'username': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
                    'skip_validation': 'False', 'import_object': 'False', 'data_load': 'False',
                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
                    'url': 'http://localhost:8080/incorta'}
 
 # config_defaults will hold all of the keys from the above dictionary
 # The values of the keys in config_defaults will be parsed from the config file
-
 
 """
 ------------------------------------------Initialization----------------------------------------
@@ -141,6 +140,10 @@ def set_new_defaults(config_file):
         if key not in new_key_list:
             config_defaults[key] = config_defaults[key]
 
+
+
+
+
     # If a custom working directory path is specified, /IncortaTesting/tmp/work will
     # be added to the end of the custom working directory path
     if config_defaults['wd_path'] == '/IncortaTesting':
@@ -148,8 +151,10 @@ def set_new_defaults(config_file):
     else:
         timestamp = ''
         config_defaults['wd_path'] += '/IncortaTesting'
-        add_time_stamp_to_wd(timestamp)
 
+        orig_wd_path = config_defaults['wd_path']
+        add_time_stamp_to_wd(timestamp)
+        return orig_wd_path
 
 def add_time_stamp_to_wd(timestamp):
     """
@@ -181,7 +186,7 @@ def incorta_api_import(incorta_home):
     global incorta
 
 
-def login(url, tenant, admin, password):
+def login(url, tenant, username, password):
     """
     Function takes in login information and attempts to login through Incorta API
     	args:
@@ -195,7 +200,7 @@ def login(url, tenant, admin, password):
             Handles exception case of login fails
     """
     try:
-        return incorta.login(url, tenant, admin, password, True)
+        return incorta.login(url, tenant, username, password, True)
     except Exception, e:
         print "Login Failed"
         exit(1)
@@ -238,7 +243,7 @@ def get_test_suite_path(test_suite):
 """
 
 set_block_defaults(commands)
-set_new_defaults(config_file)
+orig_wd_path = set_new_defaults(config_file)
 
 
 if Debug == False:
@@ -249,8 +254,7 @@ if Debug == False:
 locals().update(config_defaults)
 
 incorta_api_import(incorta_home)  # Import Incorta API
-
-session = login(url, tenant, admin, password)  # Login to Incorta
+session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
 test_suite_directory_path = os.getcwd() + '/' + "TestSuites"
@@ -260,6 +264,21 @@ test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_di
 
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
+
+
+# LOAD USERS FROM LDAP
+print "Checking if instance needs to load users"
+
+sync = orig_wd_path + os.sep + 'sync.txt'
+
+if os.path.isfile(sync):
+    print "Users already Loaded"
+else:
+    print "Populating Users from LDAP"
+    Auto_Module.ldap_utilities.dirExport(incorta_home)
+    Auto_Module.ldap_utilities.sync_directory_setup(incorta_home, tenant, username, password, url)
+    Auto_Module.ldap_utilities.sync_directory(incorta_home, orig_wd_path)
+
 
 
 for sub_dir in test_suite_directories:

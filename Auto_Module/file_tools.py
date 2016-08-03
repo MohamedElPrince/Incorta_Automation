@@ -1,4 +1,4 @@
-import os, errno
+import os, errno, subprocess
 
 """
 Tools and utilities for file and folder manipulation
@@ -10,6 +10,14 @@ TODO
 
 Debug = True  # Debug flag for print statements
 
+
+def unzip(file_path):
+    unzip_cmd = 'unzip -a ' + file_path
+    subprocess.call(unzip_cmd, shell=True)
+
+def remove_file(file_path):
+    remove_cmd = 'rm ' + file_path
+    subprocess.call(remove_cmd, shell=True)
 
 def create_directory(path, folder_name):
     """
