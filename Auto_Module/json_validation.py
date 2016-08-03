@@ -34,41 +34,41 @@ def printDiffs(x, y):
     if not diff:
         print "both files are identical"
 
-def dict_compare(d1, d2):
-    """
-    """
-    d1_keys = set(d1.keys())
-    d2_keys = set(d2.keys())
-    intersect_keys = d1_keys.intersection(d2_keys)
-    added = d1_keys - d2_keys
-    removed = d2_keys - d1_keys
-    modified = {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
-    same = set(o for o in intersect_keys if d1[o] == d2[o])
-    return added, removed, modified, same
-
-def ordered(obj):
-    """
-    """
-    if isinstance(obj, dict):
-        return sorted((k, ordered(v)) for k, v in obj.items())
-    if isinstance(obj, list):
-        return sorted(ordered(x) for x in obj)
-    else:
-        return obj
-
-
-def comp(list1, list2):
-    """
-    """
-    new_list = []
-    new_list2 = []
-    for element in list1:
-        if element not in list2:
-            new_list.append(element)
-    for element in list2:
-        if element not in list1:
-            new_list2.append(element)
-    return new_list, new_list2
+# def dict_compare(d1, d2):
+#     """
+#     """
+#     d1_keys = set(d1.keys())
+#     d2_keys = set(d2.keys())
+#     intersect_keys = d1_keys.intersection(d2_keys)
+#     added = d1_keys - d2_keys
+#     removed = d2_keys - d1_keys
+#     modified = {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
+#     same = set(o for o in intersect_keys if d1[o] == d2[o])
+#     return added, removed, modified, same
+# 
+# def ordered(obj):
+#     """
+#     """
+#     if isinstance(obj, dict):
+#         return sorted((k, ordered(v)) for k, v in obj.items())
+#     if isinstance(obj, list):
+#         return sorted(ordered(x) for x in obj)
+#     else:
+#         return obj
+#
+#
+# def comp(list1, list2):
+#     """
+#     """
+#     new_list = []
+#     new_list2 = []
+#     for element in list1:
+#         if element not in list2:
+#             new_list.append(element)
+#     for element in list2:
+#         if element not in list1:
+#             new_list2.append(element)
+#     return new_list, new_list2
 
 
 def get_paths(test_case_path, test_case_path_wd):
