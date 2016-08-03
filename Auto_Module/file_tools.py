@@ -82,3 +82,28 @@ def convert_dict_values_to_list(dictionary):
 
     list = dictionary.values()
     return list
+
+def create_log_file(wd_path):
+    """
+    Function is used to create a log file
+        args:
+            wd_path: any path can be given
+        returns:
+            Nothing
+        prints:
+            Error message if needed
+    """
+    appended_path = wd_path + "log.txt"
+    try:
+        logfile = open(appended_path, "w")
+        return logfile
+    except Exception, e:
+        print "Unable to create log file"
+    return
+
+def append_log_file(logfile, message):
+    logfile.write(message + "\n")
+
+def close_log_file(logfile):
+    logfile.close()
+

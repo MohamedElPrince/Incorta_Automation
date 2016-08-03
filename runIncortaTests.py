@@ -260,12 +260,12 @@ test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_di
 
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
-
+log = Auto_Module.file_tools.create_log_file(output_wd_path)
 
 for sub_dir in test_suite_directories:
 
     print "Current Test Suite: ", sub_dir
-
+    Auto_Module.file_tools.append_log_file(log, "Current Test Suite: " + sub_dir)
     test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, sub_dir)  # Working Directory test suite path
     test_suite_path = get_test_suite_path(sub_dir)  # Path of test suite
     test_cases_dir = Auto_Module.file_tools.get_subdirectories(test_suite_path)
@@ -284,10 +284,13 @@ for sub_dir in test_suite_directories:
 
             print "-----------------------------------------------------------------------------"
             print "ENTERING DATA FILES"
+            Auto_Module.file_tools.append_log_file(log, "-----------------------------------------------------------------------------")
+            Auto_Module.file_tools.append_log_file(log, "ENTERING DATA FILES")
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
                 print test_suite_subdirectories
+                Auto_Module.file_tools.append_log_file(log, test_suite_subdirectories)
 
             current_test_suite = sub_dir
 
@@ -295,22 +298,22 @@ for sub_dir in test_suite_directories:
             # ENTERING TEST CASES
             for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
                 print "Current Test Case: ", dir
-
+                Auto_Module.file_tools.append_log_file(log, "Current Test Case: " + dir)
                 # Get path of test_case in test_suite
                 test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
                 if Debug == False:
                     print test_case_path
-
+                    Auto_Module.file_tools.append_log_file(log, test_case_path)
                 # Get subdirectories of test case
                 test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
                 if Debug == False:
                     print test_case_subdirectories
-
+                    Auto_Module.file_tools.append_log_file(log, test_case_subdirectories)
                 # Creates test_suite folder in WD
                 test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
                 if Debug == False:
                     print test_case_path_wd
-
+                    Auto_Module.file_tools.append_log_file(log, test_case_path_wd)
                 # Creates Import and Export Folders in WD test case folder
                 Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
 
@@ -449,11 +452,14 @@ for sub_dir in test_suite_directories:
         if 'datasources' == names:
 
             print "-----------------------------------------------------------------------------"
+            Auto_Module.file_tools.append_log_file(log, "-----------------------------------------------------------------------------")
             print "ENTERING DATA SOURCES"
+            Auto_Module.file_tools.append_log_file(log, "ENTERING DATA SOURCES")
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == False:
                 print test_suite_subdirectories
+                Auto_Module.file_tools.append_log_file(log, test_suite_subdirectories)
 
             current_test_suite = sub_dir
 
@@ -461,22 +467,22 @@ for sub_dir in test_suite_directories:
             # ENTERING TEST CASES
             for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
                 print "Current Test Case: ", dir
-
+                Auto_Module.file_tools.append_log_file(log, "Current Test Case: " + dir)
                 # Get path of test_case in test_suite
                 test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
                 if Debug == False:
                     print test_case_path
-
+                    Auto_Module.file_tools.append_log_file(log, test_case_path)
                 # Get subdirectories of test case
                 test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
                 if Debug == False:
                     print test_case_subdirectories
-
+                    Auto_Module.file_tools.append_log_file(log, test_case_subdirectories)
                 # Creates test_suite folder in WD
                 test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
                 if Debug == False:
                     print test_case_path_wd
-
+                    Auto_Module.file_tools.append_log_file(log, test_case_path_wd)
                 # Creates Import and Export Folders in WD test case folder
                 Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
 
@@ -589,8 +595,11 @@ for sub_dir in test_suite_directories:
                 test_case_dashboard_export_list = export_dash_ids.keys()
                 if Debug == False:
                     print "session: ", session, " \n\n"
+                    Auto_Module.file_tools.append_log_file(log, "session: " + session + " \n\n")
                     print "session id: ", session_id
+                    Auto_Module.file_tools.append_log_file(log, "session id: " + session_id)
                     print "dashboard id: ", test_case_dashboard_export_list
+                    Auto_Module.file_tools.append_log_file(log, "dashboard id: " + test_case_dashboard_export_list)
                     print "CSRF TOKEN", csrf_token
                     print "Test Case Path", test_case_path_wd
                     print "Entering JSON DASH EXPORT"
@@ -622,3 +631,4 @@ for sub_dir in test_suite_directories:
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
+Auto_Module.file_tools.close_log_file(log)
