@@ -108,7 +108,7 @@ def get_guid(test_case_path):
     return guid_Names
 
 
-def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_wd, test_case_path):
+def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_wd, test_case_path, url):
     """
     """
     guid_Names = get_guid(test_case_path)
@@ -119,7 +119,7 @@ def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_
         user_path = test_case_path_wd + os.sep + 'admin' + os.sep
         json_name = dash_id + '.json'
         json_path = user_path + json_name
-        cmd = """curl 'http://localhost:8080/incorta/service/viewer?layout=""" + dash_id \
+        cmd = """curl \'""" + url + """/service/viewer?layout=""" + dash_id \
         + """&prompts=&outputFormat=json&odbc=false&Save=View' -H 'Cookie: JSESSIONID=""" + session_id \
         + """; XSRF-TOKEN=""" + csrf_token + """' --compressed > """ + json_path
         subprocess.call(cmd, shell=True)

@@ -431,7 +431,7 @@ for sub_dir in test_suite_directories:
                     print "Entering JSON DASH EXPORT"
 
                 Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                          test_case_path_wd, test_case_path)
+                                                          test_case_path_wd, test_case_path, url)
 
                 if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
@@ -605,7 +605,7 @@ for sub_dir in test_suite_directories:
                     print "Entering JSON DASH EXPORT"
 
                 Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                          test_case_path_wd, test_case_path)
+                                                          test_case_path_wd, test_case_path, url)
 
                 if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
