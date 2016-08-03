@@ -45,7 +45,7 @@ def printDiffs(x, y):
 #     modified = {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
 #     same = set(o for o in intersect_keys if d1[o] == d2[o])
 #     return added, removed, modified, same
-# 
+#
 # def ordered(obj):
 #     """
 #     """

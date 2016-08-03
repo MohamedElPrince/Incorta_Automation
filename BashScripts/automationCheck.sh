@@ -35,7 +35,7 @@ case $( uname -s ) in
 		echo "python        $(check $(programInstalled python))"
 		echo "pip           $(check $(programInstalled pip))"
 		problem=$(rpm -qa | grep python-lxml)
-		echo Checking for libxul: $problem
+		echo Checking for libxml: $problem
 		if [ "" == "$problem" ]; then
      		echo "No libxml. Setting up libxml"
   			sudo yum install python-lxml
