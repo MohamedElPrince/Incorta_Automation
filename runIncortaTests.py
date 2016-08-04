@@ -53,7 +53,9 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
                    'username': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
                    'skip_validation': 'False', 'import_object': 'False', 'data_load': 'False',
                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
-                   'url': 'http://localhost:8080/incorta'}
+                   'url': 'http://localhost:8080/incorta', 'ldap.base.provider.url': 'ldap://dev01.incorta.com:389',
+                   'ldap.base.dn': 'dc=dev01,dc=incorta,dc=com', 'ldap.user.mapping.login': 'uid',
+                   'ldap.group.mapping.member': 'member', 'ldap.group.search.filter': '(objectClass=groupOfNames)'}
 
 # config_defaults will hold all of the keys from the above dictionary
 # The values of the keys in config_defaults will be parsed from the config file
@@ -65,6 +67,21 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
 """
 #################################################### Functions ####################################################
 """
+
+print "Printing LDAP CONFIGURATIONS"
+
+ldap_url = config_defaults['ldap.base.provider.url']
+ldap_base =  config_defaults['ldap.base.dn']
+ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
+ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
+ldap_group_search_filter = config_defaults['ldap.group.search.filter']
+
+
+# ldap.base.provider.url=ldap://dev01.incorta.com:389
+# ldap.base.dn=dc=dev01,dc=incorta,dc=com
+# ldap.user.mapping.login=uid
+# ldap.group.mapping.member=member
+# ldap.group.search.filter=(objectClass=groupOfNames)
 
 
 def set_block_defaults(commands):
@@ -275,9 +292,14 @@ if os.path.isfile(sync):
     print "Users already Loaded"
 else:
     print "Populating Users from LDAP"
+    Auto_Module.ldap_utilities.ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member, ldap_group_search_filter)
     Auto_Module.ldap_utilities.dirExport(incorta_home)
     Auto_Module.ldap_utilities.sync_directory_setup(incorta_home, tenant, username, password, url)
     Auto_Module.ldap_utilities.sync_directory(incorta_home, orig_wd_path)
+
+    Auto_Module.ldap_utilities.tenant_updater(incorta_home, tenant)
+    Auto_Module.ldap_utilities.restart_incorta(incorta_home)
+    Auto_Module.ldap_utilities.assign_roles_to_groups(incorta, session)
 
 
 

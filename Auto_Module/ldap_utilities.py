@@ -1,9 +1,8 @@
 import os, os.path
 import subprocess
-import file_tools
+import time
 
-
-incorta_home = '/Users/Nadim_Incorta/Incorta_Framework'
+incorta_home = '/Users/Nadim_Incorta/incorta_testing'
 
 def dirExport(incorta_home):
     """
@@ -17,6 +16,158 @@ def dirExport(incorta_home):
 
     move_cmd = 'mv directory.zip ' + dirExport_path
     subprocess.call(move_cmd, shell=True)
+
+def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member, ldap_group_search_filter):
+    print "Setting up LDAP"
+    dirExport_path = incorta_home + os.sep + 'dirExport'
+    incorta_bin_path = incorta_home + os.sep + 'bin'
+
+    dirExport_ldap_path = dirExport_path + os.sep + 'ldap-config.properties'
+    incorta_bin_ldap_path = incorta_bin_path + os.sep + 'ldap-config.properties'
+
+
+    print dirExport_ldap_path
+    print incorta_bin_ldap_path
+
+
+    #SETTING LDAP URL
+    modifier = 'ldap.base.provider.url=' + ldap_url
+    lines = open(dirExport_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.base.provider.url=' in line:
+            line_to_replace = line.rstrip()
+    f = open(dirExport_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(dirExport_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    modifier = 'ldap.base.provider.url=' + ldap_url
+    lines = open(incorta_bin_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.base.provider.url=' in line:
+            line_to_replace = line.rstrip()
+    f = open(incorta_bin_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(incorta_bin_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    #SETTING UP LDAP BASE
+    modifier = 'ldap.base.dn=' + ldap_base
+    lines = open(dirExport_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.base.dn=' in line:
+            line_to_replace = line.rstrip()
+    f = open(dirExport_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(dirExport_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    modifier = 'ldap.base.dn=' + ldap_base
+    lines = open(incorta_bin_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.base.dn=' in line:
+            line_to_replace = line.rstrip()
+    f = open(incorta_bin_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(incorta_bin_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    #SETTING UP ldap_user_mapping_login
+    modifier = 'ldap.user.mapping.login=' + ldap_user_mapping_login
+    lines = open(dirExport_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.user.mapping.login=' in line:
+            line_to_replace = line.rstrip()
+    f = open(dirExport_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(dirExport_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    modifier = 'ldap.user.mapping.login=' + ldap_user_mapping_login
+    lines = open(incorta_bin_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.user.mapping.login=' in line:
+            line_to_replace = line.rstrip()
+    f = open(incorta_bin_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(incorta_bin_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    #SETTING UP ldap_group_mapping_member
+
+    modifier = 'ldap.group.mapping.member=' + ldap_group_mapping_member
+    lines = open(dirExport_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.group.mapping.member=' in line:
+            line_to_replace = line.rstrip()
+    f = open(dirExport_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(dirExport_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    modifier = 'ldap.group.mapping.member=' + ldap_group_mapping_member
+    lines = open(incorta_bin_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.group.mapping.member=' in line:
+            line_to_replace = line.rstrip()
+    f = open(incorta_bin_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(incorta_bin_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    #SETTING UP ldap_group_search_filter
+
+    modifier = 'ldap.group.search.filter=' + ldap_group_search_filter
+    lines = open(dirExport_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.group.search.filter=' in line:
+            line_to_replace = line.rstrip()
+    f = open(dirExport_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(dirExport_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+    modifier = 'ldap.group.search.filter=' + ldap_group_search_filter
+    lines = open(incorta_bin_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.group.search.filter=' in line:
+            line_to_replace = line.rstrip()
+    f = open(incorta_bin_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(incorta_bin_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+
 
 
 def sync_directory_setup(incorta_home, tenant_name, admin_username, admin_password, url):
@@ -50,11 +201,25 @@ def sync_directory_setup(incorta_home, tenant_name, admin_username, admin_passwo
         f.write(session_login)
         f.close()
         #Enable full sync by adding true
-        r = open(sync_script_path).read()
-        enable_full_sync = r.replace('$incorta_cmd sync_directory_with_ldap $session', modified_sync_enable)
-        f = open(sync_script_path, 'w')
-        f.write(enable_full_sync)
-        f.close()
+
+
+        string_query = '$incorta_cmd sync_directory_with_ldap $session'
+        a = open(sync_script_path, 'r')
+        lines = a.readlines()
+        for line in lines:
+            if string_query in line:
+                line_to_replace = line.rstrip()
+        a.close()
+
+        b = open(sync_script_path, 'r')
+        filedata = b.read()
+        update = filedata.replace(line_to_replace, modified_sync_enable)
+        b.close()
+
+        c = open(sync_script_path, 'w')
+        c.write(update)
+        c.close()
+
 
 
 
@@ -69,6 +234,7 @@ def sync_directory(incorta_home, orig_wd_path):
         owd = os.getcwd()
         os.chdir(dirExport_path)
         run_sync_cmd = sync_script_path
+        print run_sync_cmd
         subprocess.call(run_sync_cmd, shell=True)
         os.chdir(owd)
 
@@ -81,8 +247,46 @@ def sync_directory(incorta_home, orig_wd_path):
     f = open(sync_tag, 'w')
     f.close()
 
+def tenant_updater(incorta_home, tenant):
 
-# TESTING PURPOSES
-# dirExport(incorta_home)
-# sync_directory_setup(incorta_home, 'Demo', 'admin', 'incorta', 'http://localhost:8080/incorta')
-# sync_directory(incorta_home, '/Users/Nadim_Incorta/IncortaTesting')
+    try:
+        print "Updating Tenant"
+        path_tmt = incorta_home + os.sep + 'tmt'
+        tenant_update_ldap = './tmt.sh -u ' + tenant + ' file ldap.properties -f'
+        owd = os.getcwd()
+        os.chdir(path_tmt)
+        subprocess.call(tenant_update_ldap, shell=True)
+        os.chdir(owd)
+    except Exception, e:
+        print "Failed to update Tenant: ", tenant
+        return
+
+def restart_incorta(incorta_home):
+
+    try:
+        print "Restarting Incorta"
+        owd = os.getcwd()
+        os.chdir(incorta_home)
+        subprocess.call(incorta_home + '/./stop.sh', shell=True)
+        time.sleep(7)
+        subprocess.call("ps -ax |grep %s | awk '{print $1}' | xargs kill -9" % incorta_home, shell=True)
+        time.sleep(2)
+        subprocess.call(incorta_home + '/./start.sh', shell=True)
+        time.sleep(7)
+        os.chdir(owd)
+    except Exception, e:
+        print "Unable to restart Incorta instance"
+        return
+
+def assign_roles_to_groups(incorta, session):
+    # Assign roles
+    # session =incorta.login(url,tenant,admin,password)
+    try:
+        print "Assigning Roles"
+        incorta.assign_role_to_group(session, 'executive', 'SuperRole')
+        incorta.assign_role_to_group(session, 'engineering', 'Analyze User')
+        print "Assigned Roles Successfully"
+    except Exception, e:
+        print "Unable to assign Roles, Roles already assigned"
+        return
+
