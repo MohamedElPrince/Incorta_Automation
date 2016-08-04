@@ -277,6 +277,7 @@ output_wd_path = Auto_Module.output.create_output_folder(wd_path)
 logger = logging.getLogger()
 ab_path = output_wd_path + "sample.log"
 logging.basicConfig(filename= ab_path,level=logging.DEBUG)
+logging.getLogger("requests").setLevel(logging.WARNING)
 
 
 for sub_dir in test_suite_directories:
