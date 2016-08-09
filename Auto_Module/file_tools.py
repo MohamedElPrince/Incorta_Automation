@@ -1,4 +1,4 @@
-import os, errno
+import os, errno, subprocess
 
 """
 Tools and utilities for file and folder manipulation
@@ -82,5 +82,19 @@ def convert_dict_values_to_list(dictionary):
 
     list = dictionary.values()
     return list
+
+
+def unzip(file_path,):
+    unzip_cmd = 'unzip -a ' + file_path
+    subprocess.call(unzip_cmd, shell=True)
+
+def remove_file(file_path):
+    remove_cmd = 'rm ' + file_path
+    subprocess.call(remove_cmd, shell=True)
+
+def move_file(file_path, new_path):
+
+    move_cmd = 'mv ' + file_path + ' ' + new_path
+    subprocess.call(move_cmd,shell=True)
 
 

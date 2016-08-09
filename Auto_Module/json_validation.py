@@ -71,7 +71,7 @@ def printDiffs(x, y):
 #     return new_list, new_list2
 
 
-def get_paths(test_case_path, test_case_path_wd):
+def get_paths(test_case_path, test_case_path_wd, user):
     """
     Function gets paths for JSON files from benchmark JSONs and export JSONs
         args:
@@ -85,29 +85,85 @@ def get_paths(test_case_path, test_case_path_wd):
     test_case_json_dict = {}
     test_case_wd_json_dict = {}
 
+    # OBTAINING BENCHMARK JSON PATHS
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
     for dirs in test_case_subdirectories:
-        if 'admin' in dirs:
-            admin_path = file_tools.get_path(test_case_path, dirs)
-            for files in os.listdir(admin_path):
+        if user in dirs:
+            user_path = file_tools.get_path(test_case_path, dirs)
+            for files in os.listdir(user_path):
                 if files.startswith('.'):
                     pass
                 else:
-                    file_path = file_tools.get_path(admin_path, files)
+                    file_path = file_tools.get_path(user_path, files)
                     test_case_json_dict[(os.path.splitext(files)[0])] = file_path
-
+    # OBTAINING WORKING DIRECTORY JSON PATHS
     test_case_wd_subdirectories = file_tools.get_subdirectories(test_case_path_wd)
     for dirs_wd in test_case_wd_subdirectories:
-        if 'admin' in dirs_wd:
-            admin_wd_path = file_tools.get_path(test_case_path_wd, dirs_wd)
-            for files_wd in os.listdir(admin_wd_path):
-                if files_wd.startswith('.'):
-                    pass
-                else:
-                    file_wd_path = file_tools.get_path(admin_wd_path, files_wd)
-                    test_case_wd_json_dict[(os.path.splitext(files_wd)[0])] = file_wd_path
+        dirs_wd_path = file_tools.get_path(test_case_path_wd, dirs_wd)
+        if 'Import_Files' in dirs_wd:
+            import_sub_directories = file_tools.get_subdirectories(dirs_wd_path)
+            for sub in import_sub_directories:
+                if user in sub:
+                    import_wd_path = file_tools.get_path(test_case_path_wd, dirs_wd)
+                    user_wd_path = file_tools.get_path(import_wd_path, sub)
+                    for files_wd in os.listdir(user_wd_path):
+                        if files_wd.startswith('.'):
+                            pass
+                        else:
+                            file_wd_path = file_tools.get_path(user_wd_path, files_wd)
+                            test_case_wd_json_dict[(os.path.splitext(files_wd)[0])] = file_wd_path
+
+    # print "BENCHMARK TEST CASE PATH: ", test_case_json_dict
+    # print "WORKING DIRECTORY TEST CASE PATH: ", test_case_wd_json_dict
+    # print "\n\n"
     return test_case_json_dict, test_case_wd_json_dict
 
+    # test_case_user_list = []
+    #
+    # COUNT = 0
+    #test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
+    # print test_case_subdirectories
+    # print "Starting Loop"
+    # for dirs in test_case_subdirectories:
+    #     if dirs != 'dashboards' and dirs != 'datafiles' and dirs != 'schemas':
+    #         test_case_user_list.append(dirs)
+    #
+    # print "Printing user list: ", user_list
+    # print "Printing test case users: ", test_case_user_list
+    #
+    # for dirs in test_case_subdirectories:
+    #     print "Subdirectories of benchmark: ", dirs
+    #     if dirs in test_case_user_list:
+    #         if dirs in user_list:
+    #             user_path = file_tools.get_path(test_case_path, dirs)
+    #             print "Checking User: ", dirs, "    ", user_path
+    #             for files in os.listdir(user_path):
+    #                 if files.startswith('.'):
+    #                     pass
+    #                 else:
+    #                     file_path = file_tools.get_path(user_path, files)
+    #                     print file_path
+    #                     test_case_json_dict[(os.path.splitext(files)[0])] = file_path
+    #
+    # print "FINISHED BENCHMARK \n"
+
+    #test_case_wd_subdirectories = file_tools.get_subdirectories(test_case_path_wd)
+    # print test_case_wd_subdirectories
+    # print "Starting Loop\n"
+    # for dirs_wd in test_case_wd_subdirectories:
+    #     print "subdirectories", dirs_wd
+    #     if dirs_wd in test_case_user_list:
+    #         if dirs_wd in user_list:
+    #             print "List of users in wd", dirs_wd
+    #             user_path = file_tools.get_path(test_case_path, dirs_wd)
+    #             for files_wd in os.listdir(user_path):
+    #                 if files_wd.startswith('.'):
+    #                     pass
+    #                 else:
+    #                     file_wd_path = file_tools.get_path(user_path, files_wd)
+    #                     test_case_wd_json_dict[(os.path.splitext(files_wd)[0])] = file_wd_path
+    #             COUNT += 1
+    # print "FINISHED WORKING DIRECTORY \n\n"
 
 def validator(import_file_path, export_file_path):
     """
@@ -140,7 +196,7 @@ def validator(import_file_path, export_file_path):
     return import_diff, export_diff, import_diff_bool, export_diff_bool
 
 
-def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, user_wd_path):
+def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, user_wd_path, user):
     """
     Function creates suc, diff, and NF.diff files after comparing the benchmark JSON and
     exported JSON.
@@ -155,8 +211,8 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
         prints:
             Can print debug statements if needed
     """
-    test_case_json_dict, test_case_wd_json_dict = get_paths(test_case_path, test_case_wd_path)
 
+    test_case_json_dict, test_case_wd_json_dict = get_paths(test_case_path, test_case_wd_path, user)
     for key in test_case_json_dict:
         export_file_path = test_case_wd_json_dict.get(key, None)
         if export_file_path != None:
@@ -200,9 +256,17 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
                 diffFile.write(temp_string2)
                 diffFile.close()
         else:
-            file_path = file_path + '_' + 'NF' + '.diff'
+            user_folder = str(user_wd_path)
+            temp_path_list = test_case_json_dict[key].split('/')
+            temp_path_list_size = len(temp_path_list)
+            temp_name = (temp_path_list[temp_path_list_size - 1].split('.'))[0]
+
+            file_name = temp_path_list[temp_path_list_size - 4] + '_' + temp_path_list[
+                temp_path_list_size - 3] + '_' + temp_name
+            file_path = user_folder + os.sep + file_name + '_' + 'NF' + '.diff'
             try:
                 ndiffFile = open(file_path, 'w')
                 ndiffFile.close()
             except Exception, e:
                 print "Error Unable to Create NF-DIFF File"
+

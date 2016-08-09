@@ -5,11 +5,7 @@ from shutil import copyfile
 
 import errno
 
-# import Auto_Module
-# from Auto_Module import dataLoad
-# from Auto_Module import loadUsers
-# from Auto_Module import test_suite_import
-# from Auto_Module import export
+
 
 """
 ------------------------------------------Initialization----------------------------------------
@@ -42,6 +38,11 @@ import Auto_Module.data_upload
 import Auto_Module.json_validation
 import Auto_Module.output
 
+import Auto_Module.ldap_utilities
+"""
+------------------------------------------Initialization----------------------------------------
+"""
+
 
 
 # All the arguments which are passed in command line
@@ -62,11 +63,12 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
                    'username': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
                    'skip_validation': 'False', 'import_object': 'False', 'data_load': 'False',
                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
-                   'url': 'http://localhost:8080/incorta'}
+                   'url': 'http://localhost:8080/incorta', 'ldap.base.provider.url': 'ldap://dev01.incorta.com:389',
+                   'ldap.base.dn': 'dc=dev01,dc=incorta,dc=com', 'ldap.user.mapping.login': 'uid',
+                   'ldap.group.mapping.member': 'member', 'ldap.group.search.filter': '(objectClass=groupOfNames)'}
 
 # config_defaults will hold all of the keys from the above dictionary
 # The values of the keys in config_defaults will be parsed from the config file
-
 
 """
 ------------------------------------------Initialization----------------------------------------
@@ -75,6 +77,20 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
 """
 #################################################### Functions ####################################################
 """
+
+
+ldap_url = config_defaults['ldap.base.provider.url']
+ldap_base =  config_defaults['ldap.base.dn']
+ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
+ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
+ldap_group_search_filter = config_defaults['ldap.group.search.filter']
+
+
+# ldap.base.provider.url=ldap://dev01.incorta.com:389
+# ldap.base.dn=dc=dev01,dc=incorta,dc=com
+# ldap.user.mapping.login=uid
+# ldap.group.mapping.member=member
+# ldap.group.search.filter=(objectClass=groupOfNames)
 
 
 def set_block_defaults(commands):
@@ -151,6 +167,10 @@ def set_new_defaults(config_file):
         if key not in new_key_list:
             config_defaults[key] = config_defaults[key]
 
+
+
+
+
     # If a custom working directory path is specified, /IncortaTesting/tmp/work will
     # be added to the end of the custom working directory path
     if config_defaults['wd_path'] == '/IncortaTesting':
@@ -158,8 +178,10 @@ def set_new_defaults(config_file):
     else:
         timestamp = ''
         config_defaults['wd_path'] += '/IncortaTesting'
-        add_time_stamp_to_wd(timestamp)
 
+        orig_wd_path = config_defaults['wd_path']
+        add_time_stamp_to_wd(timestamp)
+        return orig_wd_path
 
 def add_time_stamp_to_wd(timestamp):
     """
@@ -191,7 +213,7 @@ def incorta_api_import(incorta_home):
     global incorta
 
 
-def login(url, tenant, admin, password):
+def login(url, tenant, username, password):
     """
     Function takes in login information and attempts to login through Incorta API
     	args:
@@ -205,7 +227,7 @@ def login(url, tenant, admin, password):
             Handles exception case of login fails
     """
     try:
-        return incorta.login(url, tenant, admin, password, True)
+        return incorta.login(url, tenant, username, password, True)
     except Exception, e:
         print "Login Failed"
         logging.critical("Login Failed")
@@ -244,13 +266,20 @@ def get_test_suite_path(test_suite):
     test_suite_path = test_suite_path + '/' + test_suite
     return test_suite_path
 
+def grant_user_access(session, user_name, entity_type, entity_name, permission):
+    try:
+        incorta.grant_user_access(session, user_name, entity_type, entity_name, permission)
+        print "Access to ", entity_type, " ", entity_name, " given to ", user_name
+    except Exception, e:
+        print "Failed to grant user access to", user_name
+        return
 
 """
 #################################################### Functions ####################################################
 """
 
 set_block_defaults(commands)
-set_new_defaults(config_file)
+orig_wd_path = set_new_defaults(config_file)
 
 
 if Debug == True:
@@ -261,7 +290,6 @@ if Debug == True:
 locals().update(config_defaults)
 
 incorta_api_import(incorta_home)  # Import Incorta API
-
 session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
@@ -278,6 +306,39 @@ logger = logging.getLogger()
 ab_path = output_wd_path + "sample.log"
 logging.basicConfig(filename= ab_path,level=logging.DEBUG)
 logging.getLogger("requests").setLevel(logging.WARNING)
+
+
+# LOAD USERS FROM LDAP
+print "Checking if instance needs to load users"
+owd = os.getcwd()
+sync = orig_wd_path + os.sep + 'sync.txt'
+
+if os.path.isfile(sync):
+    print "Users already Loaded"
+else:
+    print "Preparing to populate users from LDAP"
+    Auto_Module.ldap_utilities.ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member, ldap_group_search_filter)
+    Auto_Module.ldap_utilities.dirExport(incorta_home)
+    Auto_Module.ldap_utilities.sync_directory_setup(incorta_home, tenant, username, password, url)
+    Auto_Module.ldap_utilities.sync_directory(incorta_home, orig_wd_path)
+
+    Auto_Module.ldap_utilities.tenant_updater(incorta_home, tenant)
+    Auto_Module.ldap_utilities.restart_incorta(incorta_home)
+    Auto_Module.ldap_utilities.assign_roles_to_groups(incorta, session)
+
+    dirExport_path = incorta_home + os.sep + 'dirExport'
+    directory_zip_path = dirExport_path + os.sep + 'directory.zip'
+    Auto_Module.file_tools.unzip(directory_zip_path)
+    Auto_Module.file_tools.move_file(owd+os.sep+'users.csv', dirExport_path)
+    Auto_Module.file_tools.move_file(owd + os.sep + 'user-groups.csv', dirExport_path)
+    Auto_Module.file_tools.move_file(owd + os.sep + 'groups.csv', dirExport_path)
+
+user_dict = {}
+user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
+print "USER DICT: ", user_dict
+user_list = user_dict.keys()
+print "\n USER LIST: ", user_list
+
 
 
 for sub_dir in test_suite_directories:
@@ -431,10 +492,34 @@ for sub_dir in test_suite_directories:
                 staging = False
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
 
+                # LOADER VALIDATION
+                # Appends to list of loaded schemas as for loop goes through every test case
+                full_schema_export_list.extend(export_schema_names_list)
+                schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
+                                                                     full_schema_export_list)
+
+                test_case_dashboard_export_list = export_dash_ids.keys()
+                # GRANT PERMISSIONS
+                print "DASHBOARD LIST: ", export_dashboard_names_list
+                for user in user_list:
+                    for dashboard_name in export_dashboard_names_list:
+                        grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
+
+
+
+
+                # LOG OUT SUPER USER
+                time.sleep(3)
+                try:
+                    logout(session)
+                    print "Logged out Super User successfully"
+                except Exception, e:
+                    print "unable to logout"
+                time.sleep(3)
 
                 # JSON DASHBOARD EXPORT
-                test_case_dashboard_export_list = export_dash_ids.keys()
-                if Debug == True:
+
+                if Debug == False:
                     print "session: ", session, " \n\n"
                     logging.debug("session: " + session + " \n\n")
                     print "session id: ", session_id
@@ -448,27 +533,45 @@ for sub_dir in test_suite_directories:
                     print "Entering JSON DASH EXPORT"
                     logging.debug("Entering JSON DASH EXPORT")
 
-                Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                          test_case_path_wd, test_case_path, url)
+                user_pass = 'superpass'
+                print "TESTING USER LOGIN"
+                for user in user_list:
+                    session = login(url, tenant, user, user_pass)
+                    time.sleep(2)
+                    print "Logged in user.. ", user
+                    session_id = session[21:53]
+                    csrf_token = session[63:95]
+                    Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
+                                                             test_case_path_wd, test_case_path, user)
+                    logout(session)
+                    time.sleep(2)
+                    print "Logged out user.. ", user
 
-                if Debug == True:
+                #LOGGING IN SUPER USER
+
+                try:
+                    time.sleep(3)
+                    session = login(url, tenant, username, password)
+                    time.sleep(3)
+                    print "Logged in Super User"
+                except Exception, e:
+                    print "Unable to log in Super User"
+                if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
                     logging.debug("\nFinished JSON DASH EXPORT")
 
                 # DATA VALIDATION
 
                 if config_defaults['skip_validation'] == 'False':
+                    for user in user_list:
+                        print "Validating data for user - ", user, " test case - ", dir
+                        output_test_case_path = Data_Validation_Path + os.sep + dir
+                        output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
+                        Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, output_user_path, user)
+                        # Removes user folders not being tested within the current test case
+                        if os.listdir(output_user_path) == []:
+                            os.rmdir(output_user_path)
 
-                    output_test_case_path = Auto_Module.output.create_test_case_output_path(Data_Validation_Path, dir)
-                    output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, 'admin')
-                    Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, output_user_path)
-
-
-                # LOADER VALIDATION
-                # Appends to list of loaded schemas as for loop goes through every test case
-                full_schema_export_list.extend(export_schema_names_list)
-                schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
-                                                                     full_schema_export_list)
             # Compares Loaded Schema List to Exported Schema List
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
 
@@ -614,6 +717,28 @@ for sub_dir in test_suite_directories:
                 staging = False
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
 
+
+                # LOAD VALIDATION
+                # Appends to list of loaded schemas as for loop goes through every test case
+                full_schema_export_list.extend(export_schema_names_list)
+                schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
+                                                                     full_schema_export_list)
+
+                # GRANT PERMISSIONS
+                print "DASHBOARD LIST: ", export_dashboard_names_list
+                for user in user_list:
+                    for dashboard_name in export_dashboard_names_list:
+                        grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
+
+                # LOG OUT SUPER USER
+                time.sleep(3)
+                try:
+                    logout(session)
+                    print "Logged out Super User successfully"
+                except Exception, e:
+                    print "unable to logout"
+                time.sleep(3)
+
                 # JSON DASHBOARD EXPORT
                 test_case_dashboard_export_list = export_dash_ids.keys()
                 if Debug == True:
@@ -630,32 +755,51 @@ for sub_dir in test_suite_directories:
                     print "Entering JSON DASH EXPORT"
                     logging.debug("Entering JSON DASH EXPORT")
 
-                Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                          test_case_path_wd, test_case_path, url)
+
+                user_pass = 'superpass'
+                print "TESTING USER LOGIN"
+                for user in user_list:
+                    session = login(url, tenant, user, user_pass)
+                    time.sleep(2)
+                    print "Logged in user.. ", user
+                    session_id = session[21:53]
+                    csrf_token = session[63:95]
+                    Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
+                                                              test_case_path_wd, test_case_path, user)
+                    logout(session)
+                    time.sleep(2)
+                    print "Logged out user.. ", user
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
                     logging.debug("\nFinished JSON DASH EXPORT")
 
-                if config_defaults['skip_validation'] == 'False':
-                    output_test_case_path = Auto_Module.output.create_test_case_output_path(Data_Validation_Path, dir)
-                    output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, 'admin')
-                    Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
-                                                           current_test_suite, output_user_path)
+
+                # LOGGING IN SUPER USER
+
+                try:
+                    time.sleep(3)
+                    session = login(url, tenant, username, password)
+                    time.sleep(3)
+                    print "Logged in Super User"
+                except Exception, e:
+                    print "Unable to log in Super User"
+                if Debug == False:
+                    print "\nFinished JSON DASH EXPORT"
+                    logging.debug("\nFinished JSON DASH EXPORT")
 
                 # DATA VALIDATION
-
-                if Debug == True:
-                    print "\nFinished JSON DASH EXPORT"
-                    logging.debug("\nFinished JSON DASH EXPORT")
                 if config_defaults['skip_validation'] == 'False':
-                    Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
-                                                           current_test_suite, output_user_path)
+                    for user in user_list:
+                        print "Validating data for user - ", user
+                        output_test_case_path = Data_Validation_Path + os.sep + dir
+                        output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
+                        Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
+                                                           current_test_suite, output_user_path, user)
+                        # Removes user folders not being tested within the current test case
+                        if os.listdir(output_user_path) == []:
+                            os.rmdir(output_user_path)
 
-                # LOAD VALIDATION
-                # Appends to list of loaded schemas as for loop goes through every test case
-                full_schema_export_list.extend(export_schema_names_list)
-                schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
-                                                                     full_schema_export_list)
+
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
 
