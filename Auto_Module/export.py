@@ -95,34 +95,34 @@ def create_temp_directory(test_case_path_wd):
     return temp_path
 
 
-def get_guid(test_case_path):
+def get_guid(test_case_path, user):
     """
     """
     guid_Names = []
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
     for dirs in test_case_subdirectories:
-        if 'admin' in dirs:
-            admin_path = file_tools.get_path(test_case_path, dirs)
-            for files in os.listdir(admin_path):
+        if user in dirs:
+            user_path = file_tools.get_path(test_case_path, dirs)
+            for files in os.listdir(user_path):
                  guid_Names.append(os.path.splitext(files)[0])
     return guid_Names
 
 
-def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_wd, test_case_path):
+def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_wd, test_case_path, user):
     """
     """
-    guid_Names = get_guid(test_case_path)
+    guid_Names = get_guid(test_case_path, user)
     for guid in guid_Names:
         dash_id = str(guid)
-        #print "exporting dashboard: ", guid
-        file_tools.create_directory(test_case_path_wd, 'admin')
-        user_path = test_case_path_wd + os.sep + 'admin' + os.sep
+        user_path = test_case_path_wd + os.sep + 'Import_Files' + os.sep + user + os.sep
         json_name = dash_id + '.json'
         json_path = user_path + json_name
+        #print "PRINTING PATH OF JSON EXPORT", json_path
         cmd = """curl 'http://localhost:8080/incorta/service/viewer?layout=""" + dash_id \
         + """&prompts=&outputFormat=json&odbc=false&Save=View' -H 'Cookie: JSESSIONID=""" + session_id \
         + """; XSRF-TOKEN=""" + csrf_token + """' --compressed > """ + json_path
         subprocess.call(cmd, shell=True)
+
  
 
 

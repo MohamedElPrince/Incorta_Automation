@@ -1,6 +1,7 @@
 import os, os.path
 import subprocess
 import time
+import  file_tools
 
 incorta_home = '/Users/Nadim_Incorta/incorta_testing'
 
@@ -289,4 +290,29 @@ def assign_roles_to_groups(incorta, session):
     except Exception, e:
         print "Unable to assign Roles, Roles already assigned"
         return
+
+def read_users_from_csv(incorta_home):
+    dirExport_path = incorta_home + os.sep + 'dirExport'
+    user_groups_csv_path = dirExport_path + os.sep + 'user-groups.csv'
+
+    print "Incorta Home: ", incorta_home
+    owd = os.getcwd()
+    print "Orig: ", owd
+    os.chdir(dirExport_path)
+    print "Current Directory: ", os.getcwd()
+
+    user_list = {}
+    COUNT = 0
+    print "Extracting users from csv"
+
+    with open(user_groups_csv_path, "rb") as file:
+        for col in file:
+            if COUNT > 0:
+                user = col.split(",")
+                user[1] = user[1].strip('\n')
+                user_list[user[1]] = user[0]
+            COUNT += 1
+
+    os.chdir(owd)
+    return user_list
 
