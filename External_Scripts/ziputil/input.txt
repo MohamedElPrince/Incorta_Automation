@@ -1,0 +1,18 @@
+# Name of schemas wanted (unique)
+schema_name=Sales
+schema_name=Sales2
+schema_name=Sales3
+schema_name=Sales4
+schema_name=Sales5
+
+
+#Name of dashboard wanted (not unique)
+dash_name=sampledash
+dash_name=sampledash2
+dash_name=sampledash3
+dash_name=sampledash4
+dash_name=sampledash5
+
+#Name of datasource wanted
+datasource=sampledata
+datasource=sampledata2
