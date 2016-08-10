@@ -26,3 +26,7 @@ def create_test_case_output_path(Data_Validation_Path, test_case_name):
 def create_output_user_path(output_test_case_path, user_name):
     output_user_path = file_tools.create_directory(output_test_case_path, user_name)
     return output_user_path
+
+def create_log_folder(path):
+    log_folder_path = file_tools.create_directory(path, 'Logs')
+    return log_folder_path

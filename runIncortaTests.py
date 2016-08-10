@@ -86,12 +86,6 @@ ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
 ldap_group_search_filter = config_defaults['ldap.group.search.filter']
 
 
-# ldap.base.provider.url=ldap://dev01.incorta.com:389
-# ldap.base.dn=dc=dev01,dc=incorta,dc=com
-# ldap.user.mapping.login=uid
-# ldap.group.mapping.member=member
-# ldap.group.search.filter=(objectClass=groupOfNames)
-
 
 def set_block_defaults(commands):
     """
@@ -300,13 +294,21 @@ test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_di
 
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
-
+# Create Log Directory
+log_wd_path = Auto_Module.output.create_log_folder(output_wd_path)
+# Create MAIN Log
+main_log = logging.getLogger()
+main_log_path = wd_path + os.sep + 'Summary_Log'
+logging.basicConfig(filename=main_log_path,level=logging.INFO)
+logging.getLogger("requests").setLevel(logging.WARNING)
 # Create logger
 logger = logging.getLogger()
 ab_path = output_wd_path + "sample.log"
 logging.basicConfig(filename= ab_path,level=logging.DEBUG)
 logging.getLogger("requests").setLevel(logging.WARNING)
 
+
+logging.info('Running Tests...')
 
 # LOAD USERS FROM LDAP
 print "Checking if instance needs to load users"
@@ -335,14 +337,10 @@ else:
 
 user_dict = {}
 user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
-print "USER DICT: ", user_dict
 user_list = user_dict.keys()
 print "\n USER LIST: ", user_list
 
-
-
 for sub_dir in test_suite_directories:
-
     print "Current Test Suite: ", sub_dir
     logging.info("Current Test Suite: " + sub_dir)
     test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, sub_dir)  # Working Directory test suite path
@@ -350,17 +348,13 @@ for sub_dir in test_suite_directories:
     test_cases_dir = Auto_Module.file_tools.get_subdirectories(test_suite_path)
     temp_path = Auto_Module.file_tools.get_path(test_suite_path, test_cases_dir[0])
     temp_dir = Auto_Module.file_tools.get_subdirectories(temp_path)
-
-
     # Creating Output Structure
     test_suite_output_path = Auto_Module.output.create_test_suite_output_folder(output_wd_path, sub_dir)
     # Validation Sub Directories
     Data_Validation_Path, Loader_Validation_Path, XML_MetaData_Validation_Path = Auto_Module.output.create_test_suite_validation_folders(test_suite_output_path)
 
     for names in temp_dir:
-
         if 'datafiles' == names:
-
             print "-----------------------------------------------------------------------------"
             print "ENTERING DATA FILES"
             logging.info("-----------------------------------------------------------------------------")
@@ -395,19 +389,15 @@ for sub_dir in test_suite_directories:
                     logging.debug(test_case_path_wd)
                 # Creates Import and Export Folders in WD test case folder
                 Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
-
                 # Extracts test suite to WD
                 Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
-
                 # Import Datafiles to Incorta
                 Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
-
                 # Import Schema to Incorta
                 Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
-
                 # Import Dashboards to Incorta
                 Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
-
+                #Defining Import / Export Paths
                 import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
 
                 # Define Import DATA STRUCTURES
@@ -415,12 +405,11 @@ for sub_dir in test_suite_directories:
                 import_dash_ids = {}
                 import_dash_tenants = {}
                 import_dashboard_names_list = []
-
                 import_schema_names = {}
                 import_schema_loaders = {}
                 import_schema_tenants = {}
                 import_schema_names_list = []
-
+                # Grab Imported Information
                 import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
                     import_path)
                 import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(
@@ -458,7 +447,7 @@ for sub_dir in test_suite_directories:
                 export_schema_loaders = {}
                 export_schema_tenants = {}
                 export_schema_names_list = []
-
+                #Obtain Exported Information
                 export_dash_ids, export_dash_tenants, export_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
                     export_path)
                 export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(
@@ -467,23 +456,15 @@ for sub_dir in test_suite_directories:
                 # TENANT EDITOR
                 Auto_Module.validation.tenant_editor(export_path)
 
-
-
                 # META DATA VALIDATION IMPLEMENTATION
-
                 if config_defaults['skip_validation'] == 'False':
-
-
                     # Comparing Dashboard Items
                     Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids, XML_MetaData_Validation_Path, 'dashboards')
                     Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants, XML_MetaData_Validation_Path, 'dashboard_tenants')
-
                     # Comparing Schema Items
-
                     Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names, XML_MetaData_Validation_Path, 'schemas')
                     Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders, XML_MetaData_Validation_Path, 'schema_loaders')
                     Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants, XML_MetaData_Validation_Path, 'schema_tenants')
-
 
                 # Load Data
                 table = None
@@ -497,7 +478,7 @@ for sub_dir in test_suite_directories:
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
-
+                # Exported Dashboard ID's per test case
                 test_case_dashboard_export_list = export_dash_ids.keys()
                 # GRANT PERMISSIONS
                 print "DASHBOARD LIST: ", export_dashboard_names_list
@@ -505,20 +486,16 @@ for sub_dir in test_suite_directories:
                     for dashboard_name in export_dashboard_names_list:
                         grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
 
-
-
-
                 # LOG OUT SUPER USER
-                time.sleep(3)
+                time.sleep(2)
                 try:
                     logout(session)
                     print "Logged out Super User successfully"
                 except Exception, e:
                     print "unable to logout"
-                time.sleep(3)
+                time.sleep(2)
 
                 # JSON DASHBOARD EXPORT
-
                 if Debug == False:
                     print "session: ", session, " \n\n"
                     logging.debug("session: " + session + " \n\n")
@@ -548,11 +525,10 @@ for sub_dir in test_suite_directories:
                     print "Logged out user.. ", user
 
                 #LOGGING IN SUPER USER
-
                 try:
-                    time.sleep(3)
+                    time.sleep(2)
                     session = login(url, tenant, username, password)
-                    time.sleep(3)
+                    time.sleep(2)
                     print "Logged in Super User"
                 except Exception, e:
                     print "Unable to log in Super User"
@@ -561,7 +537,6 @@ for sub_dir in test_suite_directories:
                     logging.debug("\nFinished JSON DASH EXPORT")
 
                 # DATA VALIDATION
-
                 if config_defaults['skip_validation'] == 'False':
                     for user in user_list:
                         print "Validating data for user - ", user, " test case - ", dir
@@ -611,27 +586,21 @@ for sub_dir in test_suite_directories:
                     logging.debug(test_case_path_wd)
                 # Creates Import and Export Folders in WD test case folder
                 Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
-
                 # Extracts test suite to WD
                 Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
-
                 # Import DataSources to Incorta
                 Auto_Module.test_suite_import.import_datasources(incorta, session, test_case_path)
-
                 # Import Schema to Incorta
                 Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
-
                 # Import Dashboards to Incorta
                 Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
-
+                # Defining Import / Export Paths
                 import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
 
                 # Define IMPORT DATA STRUCTURES
-
                 import_dash_ids = {}
                 import_dash_tenants = {}
                 import_dashboard_names_list = []
-
                 import_schema_names = {}
                 import_schema_loaders = {}
                 import_schema_tenants = {}
@@ -671,7 +640,6 @@ for sub_dir in test_suite_directories:
                 export_dash_ids = {}
                 export_dash_tenants = {}
                 export_dashboard_names_list = []
-
                 export_schema_names = {}
                 export_schema_loaders = {}
                 export_schema_tenants = {}
@@ -690,25 +658,14 @@ for sub_dir in test_suite_directories:
                 #Comparing Dashboard Items
                     Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids,
                                                       XML_MetaData_Validation_Path, 'dashboards')
-
-
                     Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants,
                                                       XML_MetaData_Validation_Path, 'dashboard_tenants')
-
-
                     Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names,
                                                       XML_MetaData_Validation_Path, 'schemas')
-
-
-
-
                     Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders,
                                                       XML_MetaData_Validation_Path, 'schema_loaders')
-
-
                     Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants,
                                                       XML_MetaData_Validation_Path, 'schema_tenants')
-
 
                 # Load Data
                 table = None
@@ -716,7 +673,6 @@ for sub_dir in test_suite_directories:
                 snapshot = False
                 staging = False
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
-
 
                 # LOAD VALIDATION
                 # Appends to list of loaded schemas as for loop goes through every test case
@@ -731,13 +687,13 @@ for sub_dir in test_suite_directories:
                         grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
 
                 # LOG OUT SUPER USER
-                time.sleep(3)
+                time.sleep(2)
                 try:
                     logout(session)
                     print "Logged out Super User successfully"
                 except Exception, e:
                     print "unable to logout"
-                time.sleep(3)
+                time.sleep(2)
 
                 # JSON DASHBOARD EXPORT
                 test_case_dashboard_export_list = export_dash_ids.keys()
@@ -754,7 +710,6 @@ for sub_dir in test_suite_directories:
                     logging.debug("Test Case Path" + test_case_path_wd)
                     print "Entering JSON DASH EXPORT"
                     logging.debug("Entering JSON DASH EXPORT")
-
 
                 user_pass = 'superpass'
                 print "TESTING USER LOGIN"
@@ -774,13 +729,11 @@ for sub_dir in test_suite_directories:
                     print "\nFinished JSON DASH EXPORT"
                     logging.debug("\nFinished JSON DASH EXPORT")
 
-
                 # LOGGING IN SUPER USER
-
                 try:
-                    time.sleep(3)
+                    time.sleep(2)
                     session = login(url, tenant, username, password)
-                    time.sleep(3)
+                    time.sleep(2)
                     print "Logged in Super User"
                 except Exception, e:
                     print "Unable to log in Super User"
@@ -791,7 +744,7 @@ for sub_dir in test_suite_directories:
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':
                     for user in user_list:
-                        print "Validating data for user - ", user
+                        print "Validating data for user - ", user, " test case - ", dir
                         output_test_case_path = Data_Validation_Path + os.sep + dir
                         output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
                         Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
@@ -799,7 +752,6 @@ for sub_dir in test_suite_directories:
                         # Removes user folders not being tested within the current test case
                         if os.listdir(output_user_path) == []:
                             os.rmdir(output_user_path)
-
-
+            # Verify the List of Loaded Schemas
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
 
