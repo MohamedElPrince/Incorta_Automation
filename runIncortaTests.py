@@ -112,7 +112,6 @@ def set_block_defaults(commands):
             if command == '-x':
                 config_defaults['extract_csv'] = True
 
-
 def set_new_defaults(config_file):
     """
     Function parses config file for keys and values and stores them in new_config_defualts
@@ -161,10 +160,6 @@ def set_new_defaults(config_file):
         if key not in new_key_list:
             config_defaults[key] = config_defaults[key]
 
-
-
-
-
     # If a custom working directory path is specified, /IncortaTesting/tmp/work will
     # be added to the end of the custom working directory path
     if config_defaults['wd_path'] == '/IncortaTesting':
@@ -190,7 +185,6 @@ def add_time_stamp_to_wd(timestamp):
     date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
     config_defaults['wd_path'] += '/%s' % date_and_time
 
-
 def incorta_api_import(incorta_home):
     """
     Function takes the incorta installation path to import Incorta API
@@ -205,7 +199,6 @@ def incorta_api_import(incorta_home):
     sys.path.append(incorta_module)
     import incorta
     global incorta
-
 
 def login(url, tenant, username, password):
     """
@@ -227,7 +220,6 @@ def login(url, tenant, username, password):
         logging.critical("Login Failed")
         exit(1)
 
-
 def logout(session):
     """
     Function logs out of the instance of Incorta
@@ -244,7 +236,6 @@ def logout(session):
         print 'Failed to logout'
         logging.critical('Failed to logout')
         exit(1)
-
 
 def get_test_suite_path(test_suite):
     """
@@ -275,7 +266,6 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
 set_block_defaults(commands)
 orig_wd_path = set_new_defaults(config_file)
 
-
 if Debug == True:
     for key, value in config_defaults.items():
         print(key, value)
@@ -288,9 +278,7 @@ session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
 test_suite_directory_path = os.getcwd() + '/' + "TestSuites"
-
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
-
 
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
@@ -306,7 +294,6 @@ logger = logging.getLogger()
 ab_path = output_wd_path + "sample.log"
 logging.basicConfig(filename= ab_path,level=logging.DEBUG)
 logging.getLogger("requests").setLevel(logging.WARNING)
-
 
 logging.info('Running Tests...')
 
@@ -478,12 +465,14 @@ for sub_dir in test_suite_directories:
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
+                Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
                 # Exported Dashboard ID's per test case
                 test_case_dashboard_export_list = export_dash_ids.keys()
                 # GRANT PERMISSIONS
-                print "DASHBOARD LIST: ", export_dashboard_names_list
+                print "Preparing to Export: ", export_dashboard_names_list
                 for user in user_list:
                     for dashboard_name in export_dashboard_names_list:
+                        print "Granting permission to access dashboard ", dashboard_name
                         grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
 
                 # LOG OUT SUPER USER
@@ -496,7 +485,7 @@ for sub_dir in test_suite_directories:
                 time.sleep(2)
 
                 # JSON DASHBOARD EXPORT
-                if Debug == False:
+                if Debug == True:
                     print "session: ", session, " \n\n"
                     logging.debug("session: " + session + " \n\n")
                     print "session id: ", session_id
@@ -539,7 +528,6 @@ for sub_dir in test_suite_directories:
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':
                     for user in user_list:
-                        print "Validating data for user - ", user, " test case - ", dir
                         output_test_case_path = Data_Validation_Path + os.sep + dir
                         output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
                         Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path, current_test_suite, output_user_path, user)
@@ -676,14 +664,18 @@ for sub_dir in test_suite_directories:
 
                 # LOAD VALIDATION
                 # Appends to list of loaded schemas as for loop goes through every test case
+
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
+                Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
 
+                print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
                 # GRANT PERMISSIONS
                 print "DASHBOARD LIST: ", export_dashboard_names_list
                 for user in user_list:
                     for dashboard_name in export_dashboard_names_list:
+                        print "Granting permission to access dashboard ", dashboard_name
                         grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
 
                 # LOG OUT SUPER USER
@@ -744,7 +736,6 @@ for sub_dir in test_suite_directories:
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':
                     for user in user_list:
-                        print "Validating data for user - ", user, " test case - ", dir
                         output_test_case_path = Data_Validation_Path + os.sep + dir
                         output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
                         Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,

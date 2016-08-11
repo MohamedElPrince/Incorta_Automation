@@ -3,12 +3,7 @@ import json, file_tools, os
 """
 JSON validation code to comapare two JSON files and return the differences
 Then to create a .suc file is no changes, .diff file if changes found, NF.diff if one file is not found
-
-TODO
-    Add log file dump for failure and success
-    Need more try/catch handling
 """
-
 
 def getContentFromFile(filepath):
     """
@@ -52,6 +47,7 @@ def get_paths(test_case_path, test_case_path_wd, user):
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
     for dirs in test_case_subdirectories:
         if user in dirs:
+            print "Validating data for user - ", user, " test case - ", dir
             user_path = file_tools.get_path(test_case_path, dirs)
             for files in os.listdir(user_path):
                 if files.startswith('.'):
