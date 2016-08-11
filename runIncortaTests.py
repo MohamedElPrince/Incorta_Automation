@@ -137,7 +137,7 @@ def set_new_defaults(config_file):
             if line[0] != '#' or " ":
                 str = line
                 str_tup = str.split("=", 1)
-                if key in str_tup[0]:
+                if key == str_tup[0]:
                     var = key + '='
                     what_is_after_var = line[len(var):]
                     what_is_after_key = line[len(key):]

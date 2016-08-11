@@ -1,18 +1,21 @@
 # Name of schemas wanted (unique)
+schema_name=A_01_CASE
 schema_name=Sales
-schema_name=Sales2
-schema_name=Sales3
-schema_name=Sales4
-schema_name=Sales5
 
 
 #Name of dashboard wanted (not unique)
-dash_name=sampledash
-dash_name=sampledash2
-dash_name=sampledash3
-dash_name=sampledash4
-dash_name=sampledash5
+dash_name=A_04_CASE_BIN Dashboard-1
+dash_name=A_01_CASE Dashboard
+dash_name=Sales Dashboard
 
 #Name of datasource wanted
-datasource=sampledata
-datasource=sampledata2
+datasource=Sales
+
+#location of zip file.
+zipfile_home=/Users/Bashir_Khan/Desktop/tmt_export_original.zip
+
+#name and path of new directory
+testfile_home=/Users/Bashir_Khan/Desktop/testfile
+
+#path of directory where the txt file is desired
+txt_home=/Users/Bashir_Khan/Desktop
