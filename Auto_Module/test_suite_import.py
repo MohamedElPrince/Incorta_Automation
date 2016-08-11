@@ -7,7 +7,6 @@ TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-
 Debug = False  # Debug flag for print statements
 
 def import_datasources(incorta, session, test_case_path):
@@ -27,7 +26,6 @@ def import_datasources(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
-
 
 def import_datafiles(incorta, session, test_case_path):
     """
@@ -56,7 +54,6 @@ def import_datafiles(incorta, session, test_case_path):
         for checks in upload_check:
             print checks,
 
-
 def import_schema(incorta, session, test_case_path):
     """
     Function imports all schemas to Incorta from the designated test suite
@@ -82,8 +79,7 @@ def import_schema(incorta, session, test_case_path):
                         upload_check.append(incorta.import_tenant(session, file_full_path, True))
     if Debug == True:
         for checks in upload_check:
-            print checks,
-
+            print checks
 
 def import_dashboard(incorta, session, test_case_path):
     """

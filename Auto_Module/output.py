@@ -1,5 +1,4 @@
 import file_tools
-import os
 
 
 #Initializes Output Directories

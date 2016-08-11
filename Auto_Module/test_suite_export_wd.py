@@ -8,9 +8,7 @@ TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-
 Debug = True  # Debug flag for print statements
-
 
 def extract_test_case(test_case_path, test_case_path_wd):
     """
