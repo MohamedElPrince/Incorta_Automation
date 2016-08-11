@@ -63,9 +63,7 @@ def tenant_editor(path):
 					Parent_arg = """ sed -i 's/\(parent=\)"[^"]*"/\\1" "/g' """ + "\"" + os.path.join(root, file) + "\""
 					os.system(Parent_arg)
 
-
 def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaData_Validation_Path, dictionary_type):
-
 	"""
 	Compares import and export files. If any differences are found
 	they are outputted to the log file as a .dif file. If there
@@ -73,30 +71,21 @@ def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaDa
 	outputted to a log file as a .suc file. All log files will be
 	contained within the Output folder
 	"""
-
 	meta_data_directory = file_tools.create_directory(XML_MetaData_Validation_Path, dictionary_type)
-
 	if meta_data_directory == None:
 		meta_data_path = file_tools.get_path(XML_MetaData_Validation_Path, dictionary_type)
-
 	else:
 		meta_data_path = str(meta_data_directory)
-
 	output_path = meta_data_path + os.sep
 
-
 	for key in import_dictionary:
-
-
 		export_file_path = export_dictionary.get(key, None)
 		if export_file_path != None:
 
 			import_tree = etree.parse(import_dictionary[key])
 			export_tree = etree.parse(export_dictionary[key])
-
 			import_tree_string = etree.tostring(import_tree, encoding="unicode", method="xml")
 			export_tree_string = etree.tostring(export_tree, encoding="unicode", method="xml")
-
 			import_tree_string = import_tree_string.replace("u'", "")
 			export_tree_string = export_tree_string.replace("u'", "")
 
@@ -105,20 +94,16 @@ def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaDa
 			set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
 
 			path_list = export_dictionary[key].split('/')
-
 			COUNT = 0
 			for path in path_list:
 				if test_suite_name in path:
 					temp_start_index = COUNT
 				COUNT += 1
-
 			temp_string = path_list[temp_start_index] + '_' + path_list[temp_start_index+1] + '_' + path_list[temp_start_index+4]
-
 			if set1 != set2:
 				# FILES ARE DIFFERENT
 				temp_string = temp_string + '.dif'
 				log_name = output_path + temp_string
-
 				import_list = import_tree_string.split()
 				export_list = export_tree_string.split()
 				import_contents = []
@@ -153,14 +138,12 @@ def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaDa
 					f.write(diff_exp_string)
 					f.write('\n\n')
 				f.close()
-
 			else:
 				# FILES ARE THE SAME
 				temp_string = temp_string + '.suc'
 				log_name = output_path + temp_string
 				f = open(log_name, 'w')
 				f.close()
-
 		else:
 			path_list = import_dictionary[key].split('/')
 			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9] + '_' + 'NF' + '.dif'
@@ -175,7 +158,6 @@ def grab_import_export_path(wd_test_case_path):
 	"""
 	Returns both Export and Import paths per test case
 	"""
-
 	sub_path  = file_tools.get_subdirectories(wd_test_case_path)
 	for x in sub_path:
 		if x == 'Import_Files':
@@ -186,14 +168,12 @@ def grab_import_export_path(wd_test_case_path):
 			export_path = wd_test_case_path+'/'+export_path
 	return import_path, export_path
 
-
 def get_dashboards_info(path):
 	"""
 	Returns dashboard Ids and Dashboard Tenants in a dictionary depending on if export or import path is given
 	Id serves as the key and the file name becomes the value
 	A list of dashboard names is also returned to allow the main script to run the export dashboards command
 	"""
-
 	data = file_tools.get_subdirectories(path)
 	dash_ids = {}
 	dashboard_name_list = []
@@ -206,11 +186,9 @@ def get_dashboards_info(path):
 			dashboards_path = path+os.sep+folder
 			dashboards = file_tools.get_subdirectories(dashboards_path)
 
-
 			for dashboard in dashboards:
 				dashboard_cases_path = dashboards_path + os.sep + dashboard
 				dashboard_cases = file_tools.get_subdirectories(dashboard_cases_path)
-
 
 				for dash_data in dashboard_cases:
 					if dash_data == 'dashboards':
@@ -225,14 +203,11 @@ def get_dashboards_info(path):
 							except Exception, e:
 								print "Unable to open dashboard", names
 							try:
-
 								for node in dash_tree.iter('table'):
 									dash_ids[node.attrib.get('id')] = temp_full_path
 									tenant_id = node.attrib.get('id')
-
 							except Exception, e:
 								print "Unable to read dashboard", names
-
 							try:
 								for node in dash_tree.iter('report'):
 									dashboard_name_list.append(node.attrib.get('name'))
@@ -245,12 +220,8 @@ def get_dashboards_info(path):
 								tenant_tree = ElementTree.parse(f)
 						except Exception, e:
 							print "Unable to open Dashboard tenant", dash_data
-
-
 				dash_tenants[tenant_id] = tenant_full_path
-
 	return dash_ids, dash_tenants, dashboard_name_list
-
 
 def get_schemas_info(path):
 	"""
@@ -258,7 +229,6 @@ def get_schemas_info(path):
 	Schema Name serves as the key and the file name becomes the value
 	A list of schema names is also returned to allow the main script to run the export schemas command
 	"""
-
 	data_types = file_tools.get_subdirectories(path)
 	schema_names = {}
 	schema_loaders = {}
@@ -300,7 +270,6 @@ def get_schemas_info(path):
 								except Exception, e:
 									print "Unable to open schema", file
 								try:
-
 									for node in schema_tree.iter('loader'):
 										schema_loaders[node.attrib.get('name')] = temp_full_path
 										schema_name_list.append(node.attrib.get('name'))
@@ -318,5 +287,4 @@ def get_schemas_info(path):
 								schema_tenants[node.attrib.get('name')] = tenant_full_path
 						except Exception, e:
 							print "Unable to read schema"
-
 	return schema_names, schema_loaders, schema_tenants, schema_name_list

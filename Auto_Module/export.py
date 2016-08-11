@@ -25,7 +25,6 @@ def export_dashboards(incorta, session, export_zips_path, dashboards):
         prints:
             Can print debug statements if needed
     """
-
     for names in dashboards:
         temp_name = names
         temp_path = export_zips_path + os.sep + temp_name + '.zip'
@@ -38,7 +37,6 @@ def export_dashboards(incorta, session, export_zips_path, dashboards):
         if Debug == False:
             print export_check
     return dashboards
-
 
 def export_schemas(incorta, session, export_zips_path, schemas):
     """
@@ -67,7 +65,6 @@ def export_schemas(incorta, session, export_zips_path, schemas):
             print export_check
     return schemas
 
-
 def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
     """
     Function extracts zips files from working directory to export path
@@ -89,11 +86,9 @@ def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
         zip_ref.extractall(file_path_wd)
         zip_ref.close()
 
-
 def create_temp_directory(test_case_path_wd):
     temp_path = file_tools.create_directory(test_case_path_wd, 'zip_export')
     return temp_path
-
 
 def get_guid(test_case_path, user):
     """
@@ -107,8 +102,6 @@ def get_guid(test_case_path, user):
                  guid_Names.append(os.path.splitext(files)[0])
     return guid_Names
 
-
-
 def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_wd, test_case_path, user):
     """
     """
@@ -118,14 +111,9 @@ def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_
         user_path = test_case_path_wd + os.sep + 'Import_Files' + os.sep + user + os.sep
         json_name = dash_id + '.json'
         json_path = user_path + json_name
-
-        #print "PRINTING PATH OF JSON EXPORT", json_path
         cmd = """curl 'http://localhost:8080/incorta/service/viewer?layout=""" + dash_id \
         + """&prompts=&outputFormat=json&odbc=false&Save=View' -H 'Cookie: JSESSIONID=""" + session_id \
         + """; XSRF-TOKEN=""" + csrf_token + """' --compressed > """ + json_path
         subprocess.call(cmd, shell=True)
-
- 
-
 
 

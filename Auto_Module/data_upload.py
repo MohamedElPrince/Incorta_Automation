@@ -13,7 +13,6 @@ TODO
 
 Debug = False  # Debug flag for print statements
 
-
 def Load_data(incorta, session, names_list):
     """
     Function loads all schemas to Incorta from the list of schemas
@@ -35,7 +34,6 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
     COUNT = 0
     LOAD_COUNTER = 0
     loaded = False
-
     while loaded == False and COUNT < 60:
         time.sleep(5)
         schema_list = []
@@ -51,7 +49,6 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
         if full_schema_export_list[-1] not in output[int_size-1]:
             print "Still waiting for schema to load..", full_schema_export_list[-1]
             LOAD_COUNTER += 1
-
             if len(schema_list) == int_size:
                 loaded = True
         # If schema is loaded, the schema name will be appended to schema_list
@@ -74,27 +71,22 @@ def schema_load_validatior(export_schema_names_list, full_schema_export_list, Lo
     if set(export_schema_names_list) == set(full_schema_export_list):
         print "LOADED DATA VALIDATED\n"
         print "Successfully Loaded Schemas: ", export_schema_names_list
-
         for schema in export_schema_names_list:
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
             f = open(log_name, 'w')
             f.close()
-
     else:
         print "ERROR IN LOADING DATA"
         diff_set = set(full_schema_export_list) - set(export_schema_names_list)
         diff_list = list(diff_set)
         print diff_list
-
         # Outputs Failed Loaded Schemas as .dif files
         for schema in diff_list:
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.dif'
             f = open(log_name, 'w')
             f.close()
-
         loaded_set = set(full_schema_export_list) - diff_set
         loaded_list = list(loaded_set)
-
         # Outputs Successfully Loaded Schemas as .suc files
         for schema in loaded_list:
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
