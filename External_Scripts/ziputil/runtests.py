@@ -410,7 +410,7 @@ def main():
     parse(config_defaults['unzipped_home'])
     create_tenant_xml(tmpPath)
     move_files(config_defaults['unzipped_home'], tmpPath)
-    zip_up(wdPath)
+    zip_up(tmpPath)
     create_txt_file(wdPath)
     print 'Cleaning Up...'
     shutil.rmtree(tmpPath)
