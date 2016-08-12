@@ -294,21 +294,21 @@ test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_di
 
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
-# Create Log Directory
-log_wd_path = Auto_Module.output.create_log_folder(output_wd_path)
-# Create MAIN Log
-main_log = logging.getLogger()
-main_log_path = wd_path + os.sep + 'Summary_Log'
-logging.basicConfig(filename=main_log_path,level=logging.INFO)
-logging.getLogger("requests").setLevel(logging.WARNING)
-# Create logger
-logger = logging.getLogger()
-ab_path = output_wd_path + "sample.log"
-logging.basicConfig(filename= ab_path,level=logging.DEBUG)
-logging.getLogger("requests").setLevel(logging.WARNING)
-
-
-logging.info('Running Tests...')
+# # Create Log Directory
+# log_wd_path = Auto_Module.output.create_log_folder(output_wd_path)
+# # Create MAIN Log
+# main_log = logging.getLogger()
+# main_log_path = wd_path + os.sep + 'Summary_Log'
+# logging.basicConfig(filename=main_log_path,level=logging.INFO)
+# logging.getLogger("requests").setLevel(logging.WARNING)
+# # Create logger
+# logger = logging.getLogger()
+# ab_path = output_wd_path + "sample.log"
+# logging.basicConfig(filename= ab_path,level=logging.DEBUG)
+# logging.getLogger("requests").setLevel(logging.WARNING)
+#
+#
+# logging.info('Running Tests...')
 
 # LOAD USERS FROM LDAP
 print "Checking if instance needs to load users"
@@ -371,22 +371,22 @@ for sub_dir in test_suite_directories:
             # ENTERING TEST CASES
             for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
                 print "Current Test Case: ", dir
-                logging.info("Current Test Case: " + dir)
+                #logging.info("Current Test Case: " + dir)
                 # Get path of test_case in test_suite
                 test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
                 if Debug == True:
                     print test_case_path
-                    logging.debug(test_case_path)
+                    #logging.debug(test_case_path)
                 # Get subdirectories of test case
                 test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
                 if Debug == True:
                     print test_case_subdirectories
-                    logging.debug(test_case_subdirectories)
+                    #logging.debug(test_case_subdirectories)
                 # Creates test_suite folder in WD
                 test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
                 if Debug == True:
                     print test_case_path_wd
-                    logging.debug(test_case_path_wd)
+                    #logging.debug(test_case_path_wd)
                 # Creates Import and Export Folders in WD test case folder
                 Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
                 # Extracts test suite to WD
@@ -496,7 +496,7 @@ for sub_dir in test_suite_directories:
                 time.sleep(2)
 
                 # JSON DASHBOARD EXPORT
-                if Debug == False:
+                if Debug == True:
                     print "session: ", session, " \n\n"
                     logging.debug("session: " + session + " \n\n")
                     print "session id: ", session_id
@@ -534,7 +534,7 @@ for sub_dir in test_suite_directories:
                     print "Unable to log in Super User"
                 if Debug == False:
                     print "\nFinished JSON DASH EXPORT"
-                    logging.debug("\nFinished JSON DASH EXPORT")
+                    #logging.debug("\nFinished JSON DASH EXPORT")
 
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':
@@ -554,36 +554,36 @@ for sub_dir in test_suite_directories:
 
         if 'datasources' == names:
             print "-----------------------------------------------------------------------------"
-            logging.info("-----------------------------------------------------------------------------")
+            #logging.info("-----------------------------------------------------------------------------")
             print "ENTERING DATA SOURCES"
-            logging.info("ENTERING DATA SOURCES")
+            #logging.info("ENTERING DATA SOURCES")
             test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
 
             if Debug == True:
                 print test_suite_subdirectories
-                logging.debug(test_suite_subdirectories)
+                #logging.debug(test_suite_subdirectories)
             current_test_suite = sub_dir
 
             full_schema_export_list = []
             # ENTERING TEST CASES
             for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
                 print "Current Test Case: ", dir
-                logging.info("Current Test Case: " + dir)
+                #logging.info("Current Test Case: " + dir)
                 # Get path of test_case in test_suite
                 test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
                 if Debug == True:
                     print test_case_path
-                    logging.debug(test_case_path)
+                    #logging.debug(test_case_path)
                 # Get subdirectories of test case
                 test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
                 if Debug == True:
                     print test_case_subdirectories
-                    logging.debug(test_case_subdirectories)
+                    #logging.debug(test_case_subdirectories)
                 # Creates test_suite folder in WD
                 test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
                 if Debug == True:
                     print test_case_path_wd
-                    logging.debug(test_case_path_wd)
+                    #logging.debug(test_case_path_wd)
                 # Creates Import and Export Folders in WD test case folder
                 Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
                 # Extracts test suite to WD
@@ -727,7 +727,7 @@ for sub_dir in test_suite_directories:
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
-                    logging.debug("\nFinished JSON DASH EXPORT")
+                    #logging.debug("\nFinished JSON DASH EXPORT")
 
                 # LOGGING IN SUPER USER
                 try:
