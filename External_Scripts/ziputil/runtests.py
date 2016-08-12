@@ -1,4 +1,4 @@
-import sys, os, subprocess, time, zipfile, logging
+import sys, os, subprocess, time, zipfile
 import os.path
 from sys import argv
 from shutil import copyfile
@@ -28,8 +28,8 @@ def set_new_values(config_file):
         f = open(config_file, "r")
         lines = f.readlines()
         f.close()
-    except:
-        print "Incorrect path to config file given, process is exiting."
+    except Exception, e:
+        print "Incorrect path to config file given"
         exit(1)
     for line in lines:
         for key, value in config_defaults.items():
@@ -60,7 +60,7 @@ def parse(full_tenant_path):
     try:
         tree = ET.parse(full_tenant_path)
         root = tree.getroot()
-    except:
+    except Exception, e:
         print 'Incorrect path to folder'
         exit(1)
     for child in root.iter('schema-definition'):
@@ -182,7 +182,7 @@ def create_tenant_xml(path):
         output_file.write('<?xml version="1.0" encoding="UTF-8"?>')
         output_file.write(tostring(root))
         output_file.close()
-    except:
+    except Exception, e:
         print 'Wrong path to new folder'
         exit(1)
 
@@ -200,13 +200,13 @@ def extraction(zip_file, unzip):
     if os.path.isfile(zip_file):
         try:
             fn = zipfile.ZipFile(zip_file, 'r')
-        except:
+        except Exception, e:
             print "Incorrect path given to zip file"
             exit(1)
     try:
         fn.extractall(unzip)
         fn.close()
-    except:
+    except Exception, e:
         print 'Incorrect path to output folder'
         exit(1)
 
@@ -229,7 +229,7 @@ def zip_up(zip_path):
                 fp = os.path.join(root, file)
                 fn.write(fp, fp[rootlen:])
         fn.close()
-    except:
+    except Exception, e:
         print "Unable to zip file"
         exit(1)
 
@@ -272,7 +272,7 @@ def move_files(src, dest):
             sn = schema_href[schema]['href']
             try:
                 os.rename(src + os.sep + sn, dest + os.sep + sn)
-            except:
+            except Exception, e:
                 print 'Unable to move schema files'
                 exit(1)
     for dashboard in dash_name:
@@ -280,7 +280,7 @@ def move_files(src, dest):
             dn = dashboard_href[dashboard]['href']
             try:
                 os.rename(src + os.sep + dn, dest + os.sep + dn)
-            except:
+            except Exception, e:
                 print 'Unable to move dashboard files'
                 exit(1)
     for datasource in datasource_name:
@@ -288,7 +288,7 @@ def move_files(src, dest):
             dsn = datasource_href[datasource]['href']
             try:
                 os.rename(src + os.sep + dsn, dest + os.sep + dsn)
-            except:
+            except Exception, e:
                 print 'Unable to move datasource files'
                 exit(1)
     for schema in schema_name:
@@ -296,7 +296,7 @@ def move_files(src, dest):
             rn = loader_href[schema]['href']
             try:
                 os.rename(src + os.sep + rn, dest + os.sep + rn)
-            except:
+            except Exception, e:
                 print 'Unable to move schema loader files'
                 exit(1)
 
@@ -313,7 +313,7 @@ def create_txt_file(path):
     path += os.sep + 'content.log'
     try:
         txt_file = open(path, 'w')
-    except:
+    except Exception, e:
         print 'Incorrect path'
         exit(1)
     txt_file.write('This file contains the names of the requested files.\n\n')

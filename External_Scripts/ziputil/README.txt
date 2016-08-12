@@ -4,7 +4,7 @@ Configuration File for Zip Utility
 Please Read This Before Execution
 Known Supported Systems: Mac OS
 ----------------------------------
-Purpose: The purpose of this utility is to be able to restore certain schemas and dashboards onto Incorta
+Purpose: The purpose of this utility is to be able to restore certain schemas and dashboards onto Incorta from a backup
          without having to restore all the schemas and dashboards.
 ----------------------------------
 Output: Creates a temp directory and puts a zipfile and content.log inside it
