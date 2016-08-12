@@ -1,12 +1,12 @@
-# Name of schemas wanted (unique)
+# Name of schemas wanted
 schema_name=A_01_CASE
 schema_name=Sales
 
 
-#Name of dashboard wanted (not unique)
+#Name of dashboard wanted
 dash_name=A_04_CASE_BIN Dashboard-1
 dash_name=A_01_CASE Dashboard
 dash_name=Sales Dashboard
 
-#Name of datasource wanted
+#Name of datasources wanted
 datasource=Sales

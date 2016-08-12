@@ -45,15 +45,6 @@ def set_new_values(config_file):
                                 dash_name.append(str_tup[1].strip())
                             elif key == 'datasource':
                                 datasource_name.append(str_tup[1].strip())
-                            elif key == 'zipfile_home':
-                                config_defaults['zipfile_home'] = str_tup[1].strip()
-                                temp_str = str_tup[1].strip()
-                                temp_str = temp_str[:-4]
-                                config_defaults['unzipped_home'] = temp_str
-                            elif key == 'testfile_home':
-                                config_defaults['testfile_home'] = str_tup[1].strip()
-                            elif key == 'txt_home':
-                                config_defaults['txt_home'] = str_tup[1].strip()
 
 def parse(full_tenant_path):
     """
@@ -242,27 +233,6 @@ def zip_up(zip_path):
         print "Unable to zip file"
         exit(1)
 
-def create_dir(path):
-    """
-    Function is used to create the necessary directories
-        args:
-            path: the path to where you want the directory
-        returns:
-            nothing
-        prints:
-            Debug statements
-    """
-    try:
-        if not os.path.exists(path):
-            tempPath = path + os.sep + 'tmp'
-            os.makedirs(tempPath)
-            os.makedirs(tempPath + os.sep + 'schemas')
-            os.makedirs(tempPath + os.sep + 'dashboards')
-            os.makedirs(tempPath + os.sep + 'datasources')
-        return tempPath
-    except Exception,e:
-        raise 'Unable to create new directory'
-
 def create_directory(path, folderName):
     """
     Function creates directory
@@ -278,9 +248,6 @@ def create_directory(path, folderName):
     try:
         if not os.path.exists(appended_path):
             os.makedirs(appended_path)
-            # os.makedirs(appended_path + os.sep + 'schemas')
-            # os.makedirs(appended_path + os.sep + 'dashboards')
-            # os.makedirs(appended_path + os.sep + 'datasources')
         return appended_path
     except OSError as exc:
         if exc.errno == errno.EEXIST and os.path.isdir(appended_path):
@@ -343,7 +310,7 @@ def create_txt_file(path):
         prints:
             Debug statements
     """
-    path += os.sep + 'content.txt'
+    path += os.sep + 'content.log'
     try:
         txt_file = open(path, 'w')
     except:
@@ -382,14 +349,14 @@ datasource_href = {}
 
 def get_input_arguments():
     """
-    Function checks for three arguments given when script is ran -h,-f,-l
+    Function checks for three arguments given when script is ran -f,-o,-z
     Stores them into variables and returns them
         args:
         returns:
             Arguments stored in variables:
-            incortaHome: Path to Incorta
-            csvFile: Path to CSV File
-            workingDirectory: Path to extraction output
+            inputFile: Path to input.txt file
+            outputPath: Path to output folder
+            zipPath: Path to zip file
         prints:
             Nothing
     """
@@ -418,13 +385,12 @@ def get_input_arguments():
     return inputFile, outputPath, zipPath
 
 def main():
-    print "Entering script"
+    print "Entering script..."
     inputFile, outputPath, zipPath = get_input_arguments()
     set_new_values(inputFile)
     config_defaults['testfile_home'] = outputPath
     config_defaults['txt_home'] = outputPath
     print config_defaults['testfile_home']
-    print config_defaults['txt_home']
 
     wdPath = create_directory((config_defaults['testfile_home']), 'temp')
     tmpPath = create_directory(wdPath, 'tmp')
@@ -437,7 +403,7 @@ def main():
     zipName = os.path.basename(zipPath)
     extractPath = wdPath + os.sep + zipName[:-4]
     config_defaults['unzipped_home'] = extractPath
-    print  config_defaults['unzipped_home']
+    print config_defaults['unzipped_home']
 
     extraction(config_defaults['zipfile_home'], config_defaults['unzipped_home'])
 
