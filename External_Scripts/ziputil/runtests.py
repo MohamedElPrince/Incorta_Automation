@@ -14,30 +14,6 @@ import shutil
 # from Auto_Module import test_suite_import
 # from Auto_Module import export
 
-
-# sys.argv[1] is the config file
-config_file = sys.argv[1]
-
-# Dictionary for parsing the input.txt file
-config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource': 'default',
-                   'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default", 'txt_home': 'default'}
-
-# Lists the contain the wanted names of schemas/dashboards/datasources
-schema_name = []
-dash_name =[]
-datasource_name = []
-
-# These are lists but contain dictionaries in each node where the key is the wanted file name and value is its xml attributes
-schema_attributes = []
-dashboard_attributes = []
-datasource_attributes = []
-
-# Dictionaries of dictionaries that contain the href as the value and key is the wanted file name
-schema_href = {}
-loader_href = {}
-dashboard_href = {}
-datasource_href = {}
-
 def set_new_values(config_file):
     """
     Function is used to parse the input file for appropriate values and puts them into various objects
@@ -278,13 +254,39 @@ def create_dir(path):
     """
     try:
         if not os.path.exists(path):
-            os.makedirs(path)
-            os.makedirs(path + os.sep + 'schemas')
-            os.makedirs(path + os.sep + 'dashboards')
-            os.makedirs(path + os.sep + 'datasources')
-    except:
-        print 'Unable to create new directory'
-        exit(1)
+            tempPath = path + os.sep + 'tmp'
+            os.makedirs(tempPath)
+            os.makedirs(tempPath + os.sep + 'schemas')
+            os.makedirs(tempPath + os.sep + 'dashboards')
+            os.makedirs(tempPath + os.sep + 'datasources')
+        return tempPath
+    except Exception,e:
+        raise 'Unable to create new directory'
+
+def create_directory(path, folderName):
+    """
+    Function creates directory
+        args:
+            path: any path can be given
+            folder_name: name of the directory
+        returns:
+            The path of the new directory
+        prints:
+            Nothing
+    """
+    appended_path = path + os.sep + folderName
+    try:
+        if not os.path.exists(appended_path):
+            os.makedirs(appended_path)
+            # os.makedirs(appended_path + os.sep + 'schemas')
+            # os.makedirs(appended_path + os.sep + 'dashboards')
+            # os.makedirs(appended_path + os.sep + 'datasources')
+        return appended_path
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(appended_path):
+            pass
+        else:
+            raise
 
 def move_files(src, dest):
     """
@@ -358,17 +360,96 @@ def create_txt_file(path):
     txt_file.write('\n'.join(datasource_name))
     txt_file.close()
 
+# Dictionary for parsing the input.txt file
+config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource': 'default',
+                   'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default", 'txt_home': 'default'}
+
+# Lists the contain the wanted names of schemas/dashboards/datasources
+schema_name = []
+dash_name =[]
+datasource_name = []
+
+# These are lists but contain dictionaries in each node where the key is the wanted file name and value is its xml attributes
+schema_attributes = []
+dashboard_attributes = []
+datasource_attributes = []
+
+# Dictionaries of dictionaries that contain the href as the value and key is the wanted file name
+schema_href = {}
+loader_href = {}
+dashboard_href = {}
+datasource_href = {}
+
+def get_input_arguments():
+    """
+    Function checks for three arguments given when script is ran -h,-f,-l
+    Stores them into variables and returns them
+        args:
+        returns:
+            Arguments stored in variables:
+            incortaHome: Path to Incorta
+            csvFile: Path to CSV File
+            workingDirectory: Path to extraction output
+        prints:
+            Nothing
+    """
+    commands = sys.argv
+    if len(commands[1:]) != 6:
+        raise Exception('Incorrect Amount of Args Expected 6. Given %s' % len(commands[1:]))
+
+    for i in range(len(commands)):
+        try:
+            if commands[i] == '-f':
+                inputFile = commands[i + 1]
+        except Exception, e:
+            raise ('-f Flag Not Found')
+
+        try:
+            if commands[i] == '-o':
+                outputPath = commands[i + 1]
+        except Exception, e:
+            raise ('-o Flag Not Found')
+
+        try:
+            if commands[i] == '-z':
+                zipPath = commands[i + 1]
+        except Exception, e:
+            raise ('-z Flag Not Found')
+    return inputFile, outputPath, zipPath
+
 def main():
     print "Entering script"
-    set_new_values('/Users/Bashir_Khan/git/qa/External_Scripts/ziputil/input.txt')
-    create_dir(config_defaults['testfile_home'])
+    inputFile, outputPath, zipPath = get_input_arguments()
+    set_new_values(inputFile)
+    config_defaults['testfile_home'] = outputPath
+    config_defaults['txt_home'] = outputPath
+    print config_defaults['testfile_home']
+    print config_defaults['txt_home']
+
+    wdPath = create_directory((config_defaults['testfile_home']), 'temp')
+    tmpPath = create_directory(wdPath, 'tmp')
+    create_directory(tmpPath, 'schemas')
+    create_directory(tmpPath, 'dashboards')
+    create_directory(tmpPath, 'datasources')
+    config_defaults['zipfile_home'] = zipPath
+    print config_defaults['zipfile_home']
+
+    zipName = os.path.basename(zipPath)
+    extractPath = wdPath + os.sep + zipName[:-4]
+    config_defaults['unzipped_home'] = extractPath
+    print  config_defaults['unzipped_home']
+
     extraction(config_defaults['zipfile_home'], config_defaults['unzipped_home'])
+
     parse(config_defaults['unzipped_home'])
-    create_tenant_xml(config_defaults['testfile_home'])
-    create_txt_file(config_defaults['txt_home'])
-    move_files(config_defaults['unzipped_home'], config_defaults['testfile_home'])
-    zip_up(config_defaults['testfile_home'])
-    print "Exiting script"
+    create_tenant_xml(tmpPath)
+    move_files(config_defaults['unzipped_home'], tmpPath)
+    zip_up(tmpPath)
+    create_txt_file(wdPath)
+    print 'Cleaning Up...'
+    shutil.rmtree(tmpPath)
+    shutil.rmtree(extractPath)
+    print "Exiting script..."
 
 if __name__ =='__main__':
     main()

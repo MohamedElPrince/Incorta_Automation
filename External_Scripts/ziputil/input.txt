@@ -10,12 +10,3 @@ dash_name=Sales Dashboard
 
 #Name of datasource wanted
 datasource=Sales
-
-#location of zip file.
-zipfile_home=/Users/Bashir_Khan/Desktop/tmt_export_original.zip
-
-#name and path of new directory
-testfile_home=/Users/Bashir_Khan/Desktop/testfile
-
-#path of directory where the txt file is desired
-txt_home=/Users/Bashir_Khan/Desktop
