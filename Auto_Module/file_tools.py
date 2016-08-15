@@ -1,4 +1,4 @@
-import os, errno, subprocess
+import os, errno, subprocess, logging
 
 """
 Tools and utilities for file and folder manipulation
@@ -9,7 +9,7 @@ TODO
 """
 
 Debug = True  # Debug flag for print statements
-
+logger = logging.getLogger('main_logger')
 
 def create_directory(path, folder_name):
     """
@@ -88,4 +88,9 @@ def remove_file(file_path):
 def move_file(file_path, new_path):
     move_cmd = 'mv ' + file_path + ' ' + new_path
     subprocess.call(move_cmd,shell=True)
+
+def create_log(file_path):
+    logger = logging.getLogger('main_logger')
+    ab_path = file_path + "sample.log"
+    logging.basicConfig(filename=ab_path, level=logging.DEBUG)
 

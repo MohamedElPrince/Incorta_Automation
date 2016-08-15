@@ -19,6 +19,7 @@ def getContentFromFile(filepath):
         return file_data
     except Exception, e:
         print "ERROR Unable to Open JSON File: ", filepath
+        file_tools.logging.critical('%s %s', "ERROR Unable to Open JSON File: ", filepath)
 
 def printDiffs(x, y):
     """
@@ -28,11 +29,16 @@ def printDiffs(x, y):
         if x_key not in y:
             diff = True
             print "key %s in x, but not in y" % x_key
+            temp_str = "key %s in x, but not in y" % x_key
+            file_tools.logging.info(temp_str)
         elif x[x_key] != y[x_key]:
             diff = True
             print "key in x and in y, but values differ (%s in x and %s in y)" % (x[x_key], y[x_key])
+            temp_string = "key in x and in y, but values differ (%s in x and %s in y)" % (x[x_key], y[x_key])
+            file_tools.logging.info(temp_string)
     if not diff:
         print "both files are identical"
+        file_tools.logging.info("both files are identical")
 
 def get_paths(test_case_path, test_case_path_wd, user):
     """
@@ -143,6 +149,7 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
                     sucFile.close()
                 except Exception, e:
                     print "Error Unable to Create SUC File"
+                    file_tools.logging.critical("Error Unable to Create SUC File")
             else:
                 file_path = file_path + '.diff'
                 diffFile = open(file_path, 'w')
@@ -178,4 +185,5 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
                 ndiffFile.close()
             except Exception, e:
                 print "Error Unable to Create NF-DIFF File"
+                file_tools.logging.critical("Error Unable to Create NF-DIFF File")
 

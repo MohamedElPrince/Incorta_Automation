@@ -26,6 +26,7 @@ def import_datasources(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
+            file_tools.logging.info(checks)
 
 def import_datafiles(incorta, session, test_case_path):
     """
@@ -53,6 +54,7 @@ def import_datafiles(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
+            file_tools.logging.info(checks)
 
 def import_schema(incorta, session, test_case_path):
     """
@@ -80,6 +82,7 @@ def import_schema(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks
+            file_tools.logging.info(checks)
 
 def import_dashboard(incorta, session, test_case_path):
     """
@@ -107,3 +110,4 @@ def import_dashboard(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
+            file_tools.logging.info(checks)
