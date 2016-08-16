@@ -1,4 +1,4 @@
-import file_tools
+import file_tools, os
 
 
 #Initializes Output Directories
@@ -29,3 +29,61 @@ def create_output_user_path(output_test_case_path, user_name):
 def create_log_folder(path):
     log_folder_path = file_tools.create_directory(path, 'Logs')
     return log_folder_path
+
+def generate_suc_dif_file_names(test_suite_output_type_path, test_case_name):
+    file_name_list = []
+    print "XXXXXXXXXXXXXXX"
+    for dirName, subdirList, fileList in os.walk(test_suite_output_type_path):
+        #print('Found directory: %s' % dirName)
+        for fname in fileList:
+            if test_case_name in fname:
+                print('\t%s' % fname)
+                file_name_list.append(fname)
+    print "***************"
+    return file_name_list
+
+def retrieve_test_suite_names(test_suite_name, test_suite_output_type_path, test_case_name_list):
+    COUNT = 1
+    SUC_COUNT = 0
+    DIFF_COUNT = 0
+    SUC_DICT = {}
+    SUC_LIST = []
+    DIFF_DICT = {}
+    DIFF_LIST = []
+    name_list = generate_suc_dif_file_names(test_suite_output_type_path)
+    suc_key = test_suite_name + ' Successes'
+    dif_key = test_suite_name + ' Failures'
+    print "PRINTING FILE NAMES"
+    print name_list
+    for name in name_list:
+        if name.endswith(".suc"):
+            print "Success: ", COUNT
+            SUC_COUNT += 1
+            print name
+            SUC_LIST.append(name)
+        else:
+            print "diff"
+            DIFF_COUNT += 1
+            print name
+            DIFF_LIST.append(name)
+        COUNT += 1
+    SUC_DICT[suc_key] = SUC_LIST
+    DIFF_DICT[dif_key] = DIFF_LIST
+
+    TOTAL_COUNT = SUC_COUNT + DIFF_COUNT
+    SUC_RATE = (TOTAL_COUNT / SUC_COUNT) * 100
+    SUC_PERC = str(SUC_RATE) + '%'
+    print "For Test Suite: ", test_suite_name, " Validation: ", test_suite_output_type_path
+    print "Success Rate: ", SUC_PERC
+    print "         Number of Successes: ", SUC_COUNT
+    print SUC_LIST
+
+
+
+    return SUC_DICT, DIFF_DICT
+
+
+
+
+
+#retrieve_test_suite_names('CSV_DataSources','/Users/Nadim_Incorta/IncortaTesting/08:15:2016-13:37:27/Output/CSV_DataSources_Summary/Data_Validation')
