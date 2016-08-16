@@ -96,6 +96,14 @@ def create_temp_directory(test_case_path_wd):
 
 def get_guid(test_case_path, user):
     """
+    Function gets GUID names from JSON file name
+        args:
+            test_case_path: path to test case in working directory
+            user: string of user currently being tested
+        returns:
+            The GUID of the dashboard
+        prints:
+            Nothing
     """
     guid_Names = []
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
@@ -108,6 +116,19 @@ def get_guid(test_case_path, user):
 
 def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_wd, test_case_path, user):
     """
+    Function uses curl command to export dashboard in JSON format
+        args:
+            session_id: session id returned by login API
+            dashboard_id: dashbaord GUID
+            csrf_token: csrf_token returned by login API
+            test_case_path_wd: path to test case of working directory
+            test_case_path: path to test case of benchmark
+            user: string of user currently being tested
+            url: url for incorta session
+        returns:
+            Nothing
+        prints:
+            Nothing
     """
     guid_Names = get_guid(test_case_path, user)
     for guid in guid_Names:
