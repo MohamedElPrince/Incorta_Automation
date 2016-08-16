@@ -329,6 +329,7 @@ else:
     logging.info("Preparing to populate users from LDAP")
     Auto_Module.ldap_utilities.ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member, ldap_group_search_filter)
     Auto_Module.ldap_utilities.dirExport(incorta_home)
+    Auto_Module.ldap_utilities.tmt_ldap_property_setup(incorta_home, ldap_url, ldap_user_mapping_login, ldap_base)
     Auto_Module.ldap_utilities.sync_directory_setup(incorta_home, tenant, username, password, url)
     Auto_Module.ldap_utilities.sync_directory(incorta_home, orig_wd_path)
 
@@ -782,6 +783,6 @@ for sub_dir in test_suite_directories:
                             os.rmdir(output_user_path)
             # Verify the List of Loaded Schemas
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
-logging.shutdown()
-logger.close()
+#logging.shutdown()
+#logger.close()
 
