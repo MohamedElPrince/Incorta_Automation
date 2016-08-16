@@ -263,6 +263,7 @@ output_wd_path = Auto_Module.output.create_output_folder(wd_path)
 # Create Logger
 Auto_Module.file_tools.create_log(output_wd_path)
 logger = logging.getLogger('main_logger')
+fh = logging.FileHandler(filename=output_wd_path + os.sep + 'Outputsample.log')
 logging.getLogger("requests").setLevel(logging.WARNING)
 logging.info('Running Tests...')
 
@@ -732,5 +733,5 @@ for sub_dir in test_suite_directories:
             # Verify the List of Loaded Schemas
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
 logging.shutdown()
-logger.close()
+del logger
 
