@@ -35,6 +35,7 @@ import Auto_Module.validation
 import Auto_Module.data_upload
 import Auto_Module.json_validation
 import Auto_Module.output
+import Auto_Module.initialization
 
 import Auto_Module.ldap_utilities
 """
@@ -167,18 +168,18 @@ ldap_group_search_filter = config_defaults['ldap.group.search.filter']
 #         add_time_stamp_to_wd(timestamp)
 #         return orig_wd_path
 
-def add_time_stamp_to_wd(timestamp):
-    """
-    Function adds a timestamp to the end of the working directory path
-        args:
-            timestamp: MM/DD/YY-HR/MIN/SEC
-        returns:
-            Nothing
-        prints:
-            Nothing
-    """
-    date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
-    config_defaults['wd_path'] += '/%s' % date_and_time
+# def add_time_stamp_to_wd(timestamp):
+#     """
+#     Function adds a timestamp to the end of the working directory path
+#         args:
+#             timestamp: MM/DD/YY-HR/MIN/SEC
+#         returns:
+#             Nothing
+#         prints:
+#             Nothing
+#     """
+#     date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
+#     config_defaults['wd_path'] += '/%s' % date_and_time
 
 
 def incorta_api_import(incorta_home):
@@ -234,9 +235,9 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
 #################################################### Functions ####################################################
 """
 
-Auto_Module.initialization.set_block_defaults(commands)
-Auto_Module.initialization.set_new_defaults(config_file)
-orig_wd_path = set_new_defaults(config_file)
+Auto_Module.initialization.set_block_defaults(commands, config_defaults)
+Auto_Module.initialization.set_new_defaults(config_file, config_defaults)
+orig_wd_path = Auto_Module.initialization.set_new_defaults(config_file, config_defaults)
 
 
 if Debug == True:

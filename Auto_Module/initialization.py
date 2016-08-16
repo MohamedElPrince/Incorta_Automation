@@ -1,9 +1,7 @@
-import runIncortaTests, sys, os, time
+import sys, os, time
 
-config_file = runIncortaTests.config_file
-config_defaults = runIncortaTests.config_defaults
 
-def set_block_defaults(commands):
+def set_block_defaults(commands, config_defaults):
     """
     Function checks if an import, data load, or extract file argument is passed after the config file
     If so, the key corresponding to the action will be set to True
@@ -31,7 +29,7 @@ def set_block_defaults(commands):
 
 
 
-def set_new_defaults(config_file):
+def set_new_defaults(config_file, config_defaults):
     """
     Function parses config file for keys and values and stores them in new_config_defualts
         args:
@@ -91,5 +89,19 @@ def set_new_defaults(config_file):
         config_defaults['wd_path'] += '/IncortaTesting'
 
         orig_wd_path = config_defaults['wd_path']
-        runIncortaTests.add_time_stamp_to_wd(timestamp)
+        add_time_stamp_to_wd(timestamp, config_defaults)
         return orig_wd_path
+
+
+def add_time_stamp_to_wd(timestamp, config_defaults):
+    """
+    Function adds a timestamp to the end of the working directory path
+        args:
+            timestamp: MM/DD/YY-HR/MIN/SEC
+        returns:
+            Nothing
+        prints:
+            Nothing
+    """
+    date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
+    config_defaults['wd_path'] += '/%s' % date_and_time
