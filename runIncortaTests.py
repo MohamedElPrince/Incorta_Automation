@@ -519,7 +519,7 @@ for sub_dir in test_suite_directories:
                     session_id = session[21:53]
                     csrf_token = session[63:95]
                     Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                             test_case_path_wd, test_case_path, user)
+                                                             test_case_path_wd, test_case_path, user, url)
                     logout(session)
                     time.sleep(2)
                     print "Logged out user.. ", user
@@ -720,7 +720,7 @@ for sub_dir in test_suite_directories:
                     session_id = session[21:53]
                     csrf_token = session[63:95]
                     Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                              test_case_path_wd, test_case_path, user)
+                                                              test_case_path_wd, test_case_path, user, url)
                     logout(session)
                     time.sleep(2)
                     print "Logged out user.. ", user
