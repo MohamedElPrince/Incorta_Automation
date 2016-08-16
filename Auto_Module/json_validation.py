@@ -5,7 +5,6 @@ JSON validation code to comapare two JSON files and return the differences
 Then to create a .suc file is no changes, .diff file if changes found, NF.diff if one file is not found
 
 TODO
-    Add log file dump for failure and success
     Need more try/catch handling
 """
 

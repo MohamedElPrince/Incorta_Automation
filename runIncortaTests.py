@@ -5,8 +5,6 @@ from shutil import copyfile
 
 import errno
 
-
-
 """
 ------------------------------------------Initialization----------------------------------------
 """
@@ -43,15 +41,8 @@ import Auto_Module.ldap_utilities
 ------------------------------------------Initialization----------------------------------------
 """
 
-
-
 # All the arguments which are passed in command line
 # sys.argv[0:] = argv
-#
-# print "argv = %r" % argv
-# print "sysargv = %r" % sys.argv[0:]
-
-
 
 # sys.argv[1] is the config file
 config_file = sys.argv[1]
@@ -87,95 +78,94 @@ ldap_group_search_filter = config_defaults['ldap.group.search.filter']
 
 
 
-def set_block_defaults(commands):
-    """
-    Function checks if an import, data load, or extract file argument is passed after the config file
-    If so, the key corresponding to the action will be set to True
-        args:
-            commands: the arguments after the config file
-        returns:
-            Nothing
-        prints:
-            Nothing
-    """
-    # If no arguments come after the config file, import, data load, and extract file keys will all be set to True
-    if len(sys.argv) == 2:
-        config_defaults['data_load'] = True
-        config_defaults['extract_csv'] = True
-        config_defaults['import_object'] = True
-    else:
-        for command in commands:
-            if command == '-d':
-                config_defaults['import_object'] = True
-            if command == '-l':
-                config_defaults['data_load'] = True
-            if command == '-x':
-                config_defaults['extract_csv'] = True
+# def set_block_defaults(commands):
+#     """
+#     Function checks if an import, data load, or extract file argument is passed after the config file
+#     If so, the key corresponding to the action will be set to True
+#         args:
+#             commands: the arguments after the config file
+#         returns:
+#             Nothing
+#         prints:
+#             Nothing
+#     """
+#     # If no arguments come after the config file, import, data load, and extract file keys will all be set to True
+#     if len(sys.argv) == 2:
+#         config_defaults['data_load'] = True
+#         config_defaults['extract_csv'] = True
+#         config_defaults['import_object'] = True
+#     else:
+#         for command in commands:
+#             if command == '-d':
+#                 config_defaults['import_object'] = True
+#             if command == '-l':
+#                 config_defaults['data_load'] = True
+#             if command == '-x':
+#                 config_defaults['extract_csv'] = True
 
 
-def set_new_defaults(config_file):
-    """
-    Function parses config file for keys and values and stores them in new_config_defualts
-        args:
-            config_file: config file holds keys and values to be used
-        returns:
-            Nothing
-        prints:
-            Nothing
-    """
-    f = open(config_file, "r")
-    lines = f.readlines()
-    f.close()
-    for line in lines:
-        for key, value in config_defaults.items():
-            if line[0] != '#' or " ":
-                str = line
-                str_tup = str.split("=", 1)
-                if key == str_tup[0]:
-                    var = key + '='
-                    what_is_after_var = line[len(var):]
-                    what_is_after_key = line[len(key):]
-                    # if there is nothing after an = of a key in config file, the default value of the key will be assigned
-                    # Ex: admin=________ -> admin=Super
-                    if len(what_is_after_var) == 1:
-                        config_defaults[key] = value.rstrip()
-                    # if there is nothing after the name of a key in config file, the default value of the key will be assigned
-                    # Ex: admin____ -> admin=Super
-                    elif len(what_is_after_key) == 1:
-                        config_defaults[key] = value.rstrip()
-                    else:
-                        config_defaults[key] = what_is_after_var.rstrip()
-
-    # If a key from config_defaults is missing in the config file, the code below will create the key
-    # in config_defaults and will assign that key its default value
-    new_key_list = []
-    old_key_list = []
-
-    for new_key in config_defaults.keys():
-        new_key_list.append(new_key)
-
-    for old_key in config_defaults.keys():
-        old_key_list.append(old_key)
-
-    for key in old_key_list:
-        if key not in new_key_list:
-            config_defaults[key] = config_defaults[key]
-
-
-
-
-
-    # If a custom working directory path is specified, /IncortaTesting/tmp/work will
-    # be added to the end of the custom working directory path
-    if config_defaults['wd_path'] == '/IncortaTesting':
-        pass
-    else:
-        timestamp = ''
-        config_defaults['wd_path'] += '/IncortaTesting'
-
-        orig_wd_path = config_defaults['wd_path']
-        add_time_stamp_to_wd(timestamp)
-        return orig_wd_path
+# def set_new_defaults(config_file):
+#     """
+#     Function parses config file for keys and values and stores them in new_config_defualts
+#         args:
+#             config_file: config file holds keys and values to be used
+#         returns:
+#             Nothing
+#         prints:
+#             Nothing
+#     """
+#     f = open(config_file, "r")
+#     lines = f.readlines()
+#     f.close()
+#     for line in lines:
+#         for key, value in config_defaults.items():
+#             if line[0] != '#' or " ":
+#                 str = line
+#                 str_tup = str.split("=", 1)
+#                 if key == str_tup[0]:
+#                     var = key + '='
+#                     what_is_after_var = line[len(var):]
+#                     what_is_after_key = line[len(key):]
+#                     # if there is nothing after an = of a key in config file, the default value of the key will be assigned
+#                     # Ex: admin=________ -> admin=Super
+#                     if len(what_is_after_var) == 1:
+#                         config_defaults[key] = value.rstrip()
+#                     # if there is nothing after the name of a key in config file, the default value of the key will be assigned
+#                     # Ex: admin____ -> admin=Super
+#                     elif len(what_is_after_key) == 1:
+#                         config_defaults[key] = value.rstrip()
+#                     else:
+#                         config_defaults[key] = what_is_after_var.rstrip()
+#
+#     # If a key from config_defaults is missing in the config file, the code below will create the key
+#     # in config_defaults and will assign that key its default value
+#     new_key_list = []
+#     old_key_list = []
+#
+#     for new_key in config_defaults.keys():
+#         new_key_list.append(new_key)
+#
+#     for old_key in config_defaults.keys():
+#         old_key_list.append(old_key)
+#
+#     for key in old_key_list:
+#         if key not in new_key_list:
+#             config_defaults[key] = config_defaults[key]
+#
+#
+#
+#
+#     # If a custom working directory path is specified, /IncortaTesting/tmp/work will
+#     # be added to the end of the custom working directory path
+#     if config_defaults['wd_path'] == '/IncortaTesting':
+#         pass
+#     else:
+#         timestamp = ''
+#         config_defaults['wd_path'] += '/IncortaTesting'
+#
+#         orig_wd_path = config_defaults['wd_path']
+#         add_time_stamp_to_wd(timestamp)
+#         return orig_wd_path
 
 def add_time_stamp_to_wd(timestamp):
     """
@@ -192,15 +182,6 @@ def add_time_stamp_to_wd(timestamp):
 
 
 def incorta_api_import(incorta_home):
-    """
-    Function takes the incorta installation path to import Incorta API
-        args:
-            incorta_home: Incorta Home Directory Path
-        returns:
-            Nothing
-        prints:
-            Nothing
-    """
     incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
     sys.path.append(incorta_module)
     import incorta
@@ -208,18 +189,6 @@ def incorta_api_import(incorta_home):
 
 
 def login(url, tenant, username, password):
-    """
-    Function takes in login information and attempts to login through Incorta API
-    	args:
-    		url: Url for the Incorta instance
-    		tenant: Tenant name for instance
-    		admin: Username for instance
-    		password: Password for instance
-    	returns:
-            The session for the Incorta instance is returned
-    	prints:
-            Handles exception case of login fails
-    """
     try:
         return incorta.login(url, tenant, username, password, True)
     except Exception, e:
@@ -229,15 +198,6 @@ def login(url, tenant, username, password):
 
 
 def logout(session):
-    """
-    Function logs out of the instance of Incorta
-    	args:
-    		session: session var returned by login function
-    	returns:
-            Nothing
-    	prints:
-            Handles exception case of login fails
-    """
     try:
         incorta.logout(session)
     except Exception, e:
@@ -274,7 +234,8 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
 #################################################### Functions ####################################################
 """
 
-set_block_defaults(commands)
+Auto_Module.initialization.set_block_defaults(commands)
+Auto_Module.initialization.set_new_defaults(config_file)
 orig_wd_path = set_new_defaults(config_file)
 
 
@@ -297,23 +258,12 @@ test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_di
 
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
-# # Create Log Directory
-# log_wd_path = Auto_Module.output.create_log_folder(output_wd_path)
-# # Create MAIN Log
-# main_log = logging.getLogger()
-# main_log_path = wd_path + os.sep + 'Summary_Log'
-# logging.basicConfig(filename=main_log_path,level=logging.INFO)
-# logging.getLogger("requests").setLevel(logging.WARNING)
-# Create logger
-# logger = logging.getLogger()
-# ab_path = output_wd_path + "sample.log"
-# logging.basicConfig(filename= ab_path,level=logging.DEBUG)
+
+# Create Logger
 Auto_Module.file_tools.create_log(output_wd_path)
 logger = logging.getLogger('main_logger')
 logging.getLogger("requests").setLevel(logging.WARNING)
-#
-#
-# logging.info('Running Tests...')
+logging.info('Running Tests...')
 
 # LOAD USERS FROM LDAP
 print "Checking if instance needs to load users"
@@ -567,8 +517,6 @@ for sub_dir in test_suite_directories:
 
             # Compares Loaded Schema List to Exported Schema List
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
-
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
         if 'datasources' == names:
             print "-----------------------------------------------------------------------------"

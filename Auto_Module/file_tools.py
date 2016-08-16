@@ -9,7 +9,6 @@ TODO
 """
 
 Debug = True  # Debug flag for print statements
-logger = logging.getLogger('main_logger')
 
 def create_directory(path, folder_name):
     """
