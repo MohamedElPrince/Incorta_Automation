@@ -23,7 +23,7 @@ load_users=No
 test_suite=MySQL
 
 #default is Yes
-skip_validation=Yes
+skip_validation=False
 
 #default path to place working directory is /IncortaTesting/tmp/work
 
@@ -32,10 +32,13 @@ skip_validation=Yes
 wd_path=/IncortaTesting/tmp/work
 
 #This is import flag and set to false (-d)
+import_object=Yes
 
 #This is data load flag and set to false (-l)
+data_load=yes
 
 #This is extract flag and set to false (-x)
+extract_csv=yes
 
 
 
