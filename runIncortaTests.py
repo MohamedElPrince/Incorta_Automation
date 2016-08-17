@@ -783,5 +783,5 @@ for sub_dir in test_suite_directories:
             # Verify the List of Loaded Schemas
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
 logging.shutdown()
-logger.close()
+
 
