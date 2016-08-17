@@ -89,7 +89,9 @@ def move_file(file_path, new_path):
     subprocess.call(move_cmd,shell=True)
 
 def create_log(file_path):
-    logger = logging.getLogger('main_logger')
     ab_path = file_path + "sample.log"
     logging.basicConfig(filename=ab_path, level=logging.DEBUG)
+
+def appendLog(logMessage):
+    logging.info(logMessage)
 
