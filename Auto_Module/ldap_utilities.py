@@ -18,6 +18,50 @@ def dirExport(incorta_home):
     move_cmd = 'mv directory.zip ' + dirExport_path
     subprocess.call(move_cmd, shell=True)
 
+def tmt_ldap_property_setup(incorta_home, ldap_url, ldap_user_mapping_login, ldap_base):
+    #Ldap URL setup
+    tmt_path = incorta_home + os.sep + 'tmt'
+    tmt_ldap_path = tmt_path + os.sep + 'ldap.properties'
+    modifier = 'ldap.base.provider.url=' + ldap_url
+    lines = open(tmt_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.base.provider.url=' in line:
+            line_to_replace = line.rstrip()
+    f = open(tmt_ldap_path,'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(tmt_ldap_path, 'w')
+    f.write(update)
+    f.close()
+    #LDAP User Mapping Login Setup
+    modifier = 'ldap.user.mapping.login=' + ldap_user_mapping_login
+    lines = open(tmt_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.user.mapping.login=' in line:
+            line_to_replace = line.rstrip()
+    f = open(tmt_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(tmt_ldap_path, 'w')
+    f.write(update)
+    f.close()
+    #LDAP Base dn setup
+    modifier = 'ldap.base.dn=' + ldap_base
+    lines = open(tmt_ldap_path).readlines()
+    for line in lines:
+        if 'ldap.base.dn=' in line:
+            line_to_replace = line.rstrip()
+    f = open(tmt_ldap_path, 'r')
+    filedata = f.read()
+    update = filedata.replace(line_to_replace, modifier)
+    f.close()
+    f = open(tmt_ldap_path, 'w')
+    f.write(update)
+    f.close()
+
+
 def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member, ldap_group_search_filter):
     print "Setting up LDAP"
     logging.info('Setting up LDAP')
@@ -299,3 +343,5 @@ def read_users_from_csv(incorta_home):
 
     os.chdir(owd)
     return user_list
+
+#tmt_ldap_property_setup('/Users/Nadim_Incorta/2_61', 'ldap://dev01.incorta.com:389', 'uid')
