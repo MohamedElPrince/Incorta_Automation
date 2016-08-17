@@ -1,5 +1,7 @@
 import sys, os, time
 
+from Auto_Module.customLogger import setup_logger
+
 
 def set_block_defaults(commands, config_defaults):
     """
@@ -90,6 +92,8 @@ def set_new_defaults(config_file, config_defaults):
 
         orig_wd_path = config_defaults['wd_path']
         add_time_stamp_to_wd(timestamp, config_defaults)
+        global wd_global_path
+        wd_global_path = config_defaults['wd_path']
         return orig_wd_path
 
 
@@ -105,3 +109,8 @@ def add_time_stamp_to_wd(timestamp, config_defaults):
     """
     date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
     config_defaults['wd_path'] += '/%s' % date_and_time
+
+def create_logger_object():
+    logOuptut = setup_logger('output', wd_global_path + os.sep + r'output.log')
+    
+    return logOuptut

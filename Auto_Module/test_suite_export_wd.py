@@ -1,4 +1,5 @@
 import os, zipfile, file_tools, customLogger
+from initialization import create_logger_object
 
 """
 Exports test cases from a test suite to working directory
