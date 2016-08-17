@@ -1,10 +1,11 @@
-import sys, os, environ, time
+import sys, os, time
 from Auto_Module.file_tools import create_directory
 
 """
 ------------------------------------------Initialization----------------------------------------
 """
-ROOT_DIR = environ.Path(__file__) - 2
+#ROOT_DIR = sys.Path(__file__) - 2
+ROOT_DIR = os.path.dirname(os.path.dirname(__file__)) # This is your Project Root
 
 # All the arguments which are passed in command line
 # sys.argv[0:] = argv
@@ -128,7 +129,7 @@ def add_time_stamp_to_wd(timestamp, config_defaults):
     config_defaults['wd_path'] += '/%s' % date_and_time
 
 
-full_config_path = ROOT_DIR.root + os.sep + config_file
+full_config_path = ROOT_DIR + os.sep + config_file
 
 set_block_defaults(commands, config_defaults)
 set_new_defaults(full_config_path, config_defaults)
