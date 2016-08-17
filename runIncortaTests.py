@@ -45,6 +45,7 @@ from Auto_Module import customLogger
 
 
 
+
 """
 ------------------------------------------Initialization----------------------------------------
 """
@@ -258,9 +259,7 @@ CRITICAL = 'critical'
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
 
-# Create Log file Object with proper handlers
-logObject = customLogger.setup_logger('output', wd_path + os.sep + r'output.log')
-
+customLogger.setup_logger('output', wd_path + os.sep + r'output.log')
 if Debug == False:
     for key, value in config_defaults.items():
         print(key, value)

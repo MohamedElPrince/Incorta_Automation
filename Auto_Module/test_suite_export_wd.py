@@ -1,4 +1,4 @@
-import os, zipfile, file_tools
+import os, zipfile, file_tools, customLogger
 
 """
 Exports test cases from a test suite to working directory
@@ -23,6 +23,7 @@ def extract_test_case(test_case_path, test_case_path_wd):
     """
     if Debug == False:
         print test_case_path, test_case_path_wd
+        customLogger.l
         file_tools.logging.info('%s %s', test_case_path, test_case_path_wd)
 
     # Need to fix this hard code
