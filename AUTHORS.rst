@@ -2,7 +2,7 @@
 Credits
 =======
 
-Development Lead
+Development Team
 ----------------
 
 * Anahit Sarao <anahit.sarao@incorta.com>
