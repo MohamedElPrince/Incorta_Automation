@@ -1,0 +1,29 @@
+# Config file for automatic testing at travis-ci.org
+
+language: python
+python:
+  #Current Python Version for Frameowork
+  - "2.7"
+
+install:
+  # Build/test dependencies
+  - pip install -r requirements.txt
+
+# command to run tests, e.g. python setup.py test
+script:
+  - python /tests/test_qa.py
+  - python setup.py test
+  - tox
+  - tox -e ${TOXENV}
+
+branches:
+  only:
+    - master
+
+env:
+#  - TOXENV=py35
+#  - TOXENV=py34
+#  - TOXENV=py33
+  - TOXENV=py27
+  - TOXENV=coverage
+#  - TOXENV=py26
