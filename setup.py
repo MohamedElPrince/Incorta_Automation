@@ -13,9 +13,8 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     # TODO: put package requirements here
     'lxml>=3.6.1',
+    'wheel==0.29',
     'pip==8.1.2',
-    'wheel==0.29'
-
 ]
 
 test_requirements = [

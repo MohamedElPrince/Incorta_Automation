@@ -5,6 +5,9 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
+include qa/sample_config.txt
+include qa/Bash_Scripts
+
 
 recursive-include tests *
 recursive-exclude * __pycache__
