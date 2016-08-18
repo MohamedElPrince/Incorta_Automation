@@ -2,7 +2,6 @@ import sys, os, subprocess, time, zipfile
 import os.path
 from sys import argv
 from shutil import copyfile
-
 import errno
 
 """
@@ -58,34 +57,6 @@ import Auto_Module.json_validation
 import Auto_Module.ldap_utilities
 import Auto_Module.output
 
-# """
-# ------------------------------------------Initialization----------------------------------------
-# """
-#
-# # All the arguments which are passed in command line
-# # sys.argv[0:] = argv
-#
-# # sys.argv[1] is the config file
-# config_file = sys.argv[1]
-#
-# # Includes rest of arguments passed by user
-# commands = sys.argv[2:]
-#
-# config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenants',
-#                    'username': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
-#                    'skip_validation': 'False', 'import_object': 'False', 'data_load': 'False',
-#                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
-#                    'url': 'http://localhost:8080/incorta', 'ldap.base.provider.url': 'ldap://dev01.incorta.com:389',
-#                    'ldap.base.dn': 'dc=dev01,dc=incorta,dc=com', 'ldap.user.mapping.login': 'uid',
-#                    'ldap.group.mapping.member': 'member', 'ldap.group.search.filter': '(objectClass=groupOfNames)'}
-#
-# # config_defaults will hold all of the keys from the above dictionary
-# # The values of the keys in config_defaults will be parsed from the config file
-#
-# """
-# ------------------------------------------Initialization----------------------------------------
-# """
-
 """
 #################################################### Functions ####################################################
 """
@@ -96,108 +67,6 @@ ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
 ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
 ldap_group_search_filter = config_defaults['ldap.group.search.filter']
 
-
-# def set_block_defaults(commands):
-#     """
-#     Function checks if an import, data load, or extract file argument is passed after the config file
-#     If so, the key corresponding to the action will be set to True
-#         args:
-#             commands: the arguments after the config file
-#         returns:
-#             Nothing
-#         prints:
-#             Nothing
-#     """
-#     # If no arguments come after the config file, import, data load, and extract file keys will all be set to True
-#     if len(sys.argv) == 2:
-#         config_defaults['data_load'] = True
-#         config_defaults['extract_csv'] = True
-#         config_defaults['import_object'] = True
-#     else:
-#         for command in commands:
-#             if command == '-d':
-#                 config_defaults['import_object'] = True
-#             if command == '-l':
-#                 config_defaults['data_load'] = True
-#             if command == '-x':
-#                 config_defaults['extract_csv'] = True
-
-
-# def set_new_defaults(config_file):
-#     """
-#     Function parses config file for keys and values and stores them in new_config_defualts
-#         args:
-#             config_file: config file holds keys and values to be used
-#         returns:
-#             Nothing
-#         prints:
-#             Nothing
-#     """
-#     f = open(config_file, "r")
-#     lines = f.readlines()
-#     f.close()
-#     for line in lines:
-#         for key, value in config_defaults.items():
-#             if line[0] != '#' or " ":
-#                 str = line
-#                 str_tup = str.split("=", 1)
-#                 if key == str_tup[0]:
-#                     var = key + '='
-#                     what_is_after_var = line[len(var):]
-#                     what_is_after_key = line[len(key):]
-#                     # if there is nothing after an = of a key in config file, the default value of the key will be assigned
-#                     # Ex: admin=________ -> admin=Super
-#                     if len(what_is_after_var) == 1:
-#                         config_defaults[key] = value.rstrip()
-#                     # if there is nothing after the name of a key in config file, the default value of the key will be assigned
-#                     # Ex: admin____ -> admin=Super
-#                     elif len(what_is_after_key) == 1:
-#                         config_defaults[key] = value.rstrip()
-#                     else:
-#                         config_defaults[key] = what_is_after_var.rstrip()
-#
-#     # If a key from config_defaults is missing in the config file, the code below will create the key
-#     # in config_defaults and will assign that key its default value
-#     new_key_list = []
-#     old_key_list = []
-#
-#     for new_key in config_defaults.keys():
-#         new_key_list.append(new_key)
-#
-#     for old_key in config_defaults.keys():
-#         old_key_list.append(old_key)
-#
-#     for key in old_key_list:
-#         if key not in new_key_list:
-#             config_defaults[key] = config_defaults[key]
-#
-#
-#
-#
-#     # If a custom working directory path is specified, /IncortaTesting/tmp/work will
-#     # be added to the end of the custom working directory path
-#     if config_defaults['wd_path'] == '/IncortaTesting':
-#         pass
-#     else:
-#         timestamp = ''
-#         config_defaults['wd_path'] += '/IncortaTesting'
-#
-#         orig_wd_path = config_defaults['wd_path']
-#         add_time_stamp_to_wd(timestamp)
-#         return orig_wd_path
-
-# def add_time_stamp_to_wd(timestamp):
-#     """
-#     Function adds a timestamp to the end of the working directory path
-#         args:
-#             timestamp: MM/DD/YY-HR/MIN/SEC
-#         returns:
-#             Nothing
-#         prints:
-#             Nothing
-#     """
-#     date_and_time = str(time.strftime("%m:%d:%Y-%H:%M:%S"))
-#     config_defaults['wd_path'] += '/%s' % date_and_time
 
 def incorta_api_import(incorta_home):
     incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
@@ -510,7 +379,7 @@ for sub_dir in test_suite_directories:
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
-                    writeLogMessage("\nFinished JSON DASH EXPORT", mainLogger, str(DEBUG))
+                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
 
                 # LOGGING IN SUPER USER
                 try:
@@ -525,7 +394,7 @@ for sub_dir in test_suite_directories:
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
-                    writeLogMessage("\nFinished JSON DASH EXPORT", mainLogger, str(DEBUG))
+                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
 
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':
@@ -726,7 +595,7 @@ for sub_dir in test_suite_directories:
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
-                    writeLogMessage("\nFinished JSON DASH EXPORT", mainLogger, str(DEBUG))
+                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
 
                 # LOGGING IN SUPER USER
                 try:
@@ -741,7 +610,7 @@ for sub_dir in test_suite_directories:
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
-                    writeLogMessage("\nFinished JSON DASH EXPORT", mainLogger, str(DEBUG))
+                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
 
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':

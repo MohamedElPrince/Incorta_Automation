@@ -238,7 +238,7 @@ def tenant_updater(incorta_home, tenant):
         os.chdir(owd)
     except Exception, e:
         print "Failed to update Tenant: ", tenant
-        writeLogMessage('%s %s' % ("Failed to update Tenant: ", tenant), mainLogger, 'critical')
+        writeLogMessage("Failed to update Tenant: "% tenant, mainLogger, 'critical')
         return
 
 def restart_incorta(incorta_home):

@@ -8,7 +8,7 @@ TODO
     Need more try/catch handling
 """
 
-Debug = True  # Debug flag for print statements
+Debug = False  # Debug flag for print statements
 
 def create_directory(path, folder_name):
     """

@@ -30,7 +30,7 @@ def Load_data(incorta, session, names_list):
         upload_check = incorta.load_schema(session, names)
     if Debug == True:
         print upload_check, "For:", names
-        writeLogMessage('%s %s %s' % (upload_check, "For:", names), mainLogger, 'info')
+        writeLogMessage('Upload Check %s, For: %s ' % (upload_check, names), mainLogger, 'info')
 
 
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
