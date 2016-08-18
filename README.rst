@@ -5,7 +5,7 @@ qa
 Incorta_.
     .. _Incorta: http://www.incorta.com/
 
-.. figure:: staticfiles/incorta.png
+.. figure:: staticfiles/download.png
 
 Automation Framework for Incorta
 
