@@ -1,4 +1,5 @@
-import os, file_tools, zipfile, subprocess, logging
+import os, file_tools, zipfile, subprocess
+from customLogger import mainLogger, writeLogMessage
 
 """
 Exports schema/dashboards from Incorta to temporary folder to hold zip files
@@ -32,12 +33,12 @@ def export_dashboards(incorta, session, export_zips_path, dashboards):
             export_check = incorta.export_dashboards(session, temp_path, temp_name)
         except Exception, e:
             print ('ERROR: Dashboard:', names, " Not Found")
-            logging.critical('%s %s %s','ERROR: Dashboard:', names, " Not Found")
+            writeLogMessage('%s %s %s' % ('ERROR: Dashboard:', names, " Not Found"), mainLogger, 'info')
             dashboards.remove(names)
             export_dashboards(incorta, session, export_zips_path, dashboards)
         if Debug == False:
             print export_check
-            logging.info(export_check)
+            writeLogMessage(export_check, mainLogger, 'debug')
     return dashboards
 
 def export_schemas(incorta, session, export_zips_path, schemas):
@@ -61,12 +62,12 @@ def export_schemas(incorta, session, export_zips_path, schemas):
             export_check = incorta.export_schemas(session, temp_path, temp_name)
         except Exception, e:
             print ('ERROR: Dashboard:', names, " Not Found")
-            logging.critical('%s %s %s','ERROR: Dashboard:', names, " Not Found")
+            writeLogMessage('%s %s %s' % ('ERROR: Dashboard:', names, " Not Found"), mainLogger, 'critical')
             schemas.remove(names)
             export_schemas(incorta, session, export_zips_path, schemas)
         if Debug == False:
             print export_check
-            logging.info(export_check)
+            writeLogMessage(export_check, mainLogger, 'debug')
     return schemas
 
 def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):

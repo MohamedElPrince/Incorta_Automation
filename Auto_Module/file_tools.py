@@ -8,8 +8,7 @@ TODO
     Need more try/catch handling
 """
 
-Debug = True  # Debug flag for print statements
-logger = logging.getLogger('main_logger')
+Debug = False  # Debug flag for print statements
 
 def create_directory(path, folder_name):
     """
@@ -78,19 +77,22 @@ def convert_dict_values_to_list(dictionary):
     return list
 
 def unzip(file_path,):
+    """
+    """
     unzip_cmd = 'unzip -a ' + file_path
     subprocess.call(unzip_cmd, shell=True)
 
 def remove_file(file_path):
+    """"""
+
     remove_cmd = 'rm ' + file_path
     subprocess.call(remove_cmd, shell=True)
 
 def move_file(file_path, new_path):
+    """
+    """
     move_cmd = 'mv ' + file_path + ' ' + new_path
     subprocess.call(move_cmd,shell=True)
 
-def create_log(file_path):
-    logger = logging.getLogger('main_logger')
-    ab_path = file_path + "sample.log"
-    logging.basicConfig(filename=ab_path, level=logging.DEBUG)
+
 

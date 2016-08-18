@@ -1,5 +1,5 @@
 import os, zipfile, file_tools
-
+from customLogger import mainLogger, writeLogMessage
 """
 Exports test cases from a test suite to working directory
 Retains same file structure of the test case and suite to working directory
@@ -8,7 +8,7 @@ TODO
     Add log file dump for failure and success of each import and extract
     Need more try/catch handling
 """
-Debug = True  # Debug flag for print statements
+Debug = False  # Debug flag for print statements
 
 def extract_test_case(test_case_path, test_case_path_wd):
     """
@@ -21,9 +21,9 @@ def extract_test_case(test_case_path, test_case_path_wd):
         prints:
             Can print debug statements if needed
     """
-    if Debug == False:
+    if Debug == True:
         print test_case_path, test_case_path_wd
-        file_tools.logging.info('%s %s', test_case_path, test_case_path_wd)
+        writeLogMessage('%s %s' % (test_case_path, test_case_path_wd), mainLogger, 'debug')
 
     # Need to fix this hard code
     test_case_path_wd = test_case_path_wd + os.sep + 'Import_Files'
@@ -59,4 +59,5 @@ def create_standard_directory(test_case_path_wd):
         file_tools.create_directory(test_case_path_wd, 'Export_Files')
         file_tools.create_directory(test_case_path_wd, 'Import_Files')
     except OSError as e:
+        writeLogMessage('Cant not Create Export/Import Folders', mainLogger, 'critical')
         raise Exception('Can not Create Export/Import Folders')
