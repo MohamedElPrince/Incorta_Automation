@@ -85,6 +85,12 @@ def set_new_defaults(config_file, config_defaults):
                     elif len(what_is_after_key) == 1:
                         config_defaults[key] = value.rstrip()
                     else:
+                        if key == 'incorta_home':
+                            if what_is_after_var[0] != '/':
+                                what_is_after_var = '/' + what_is_after_var
+                        if key == 'wd_path':
+                            if what_is_after_var[0] != '/':
+                                what_is_after_var = '/' + what_is_after_var
                         config_defaults[key] = what_is_after_var.rstrip()
 
     # If a key from config_defaults is missing in the config file, the code below will create the key
