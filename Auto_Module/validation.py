@@ -81,71 +81,89 @@ def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaDa
 
 	for key in import_dictionary:
 		export_file_path = export_dictionary.get(key, None)
-		if export_file_path != None:
 
-			import_tree = etree.parse(import_dictionary[key])
-			export_tree = etree.parse(export_dictionary[key])
-			import_tree_string = etree.tostring(import_tree, encoding="unicode", method="xml")
-			export_tree_string = etree.tostring(export_tree, encoding="unicode", method="xml")
-			import_tree_string = import_tree_string.replace("u'", "")
-			export_tree_string = export_tree_string.replace("u'", "")
+		try:
+			if export_file_path != None:
+				try:
+					import_tree = etree.parse(import_dictionary[key])
+					import_tree_string = etree.tostring(import_tree, encoding="unicode", method="xml")
+					import_tree_string = import_tree_string.replace("u'", "")
+					set1 = set(etree.tostring(i, method='c14n') for i in import_tree.getroot())
+				except Exception:
+					print import_dictionary[key], "MISSING"
 
-			#VALIDATION
-			set1 = set(etree.tostring(i, method='c14n') for i in import_tree.getroot())
-			set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
+				try:
+					export_tree = etree.parse(export_dictionary[key])
+					export_tree_string = etree.tostring(export_tree, encoding="unicode", method="xml")
+					export_tree_string = export_tree_string.replace("u'", "")
+					set2 = set(etree.tostring(i, method='c14n') for i in export_tree.getroot())
+				except Exception:
+					print export_dictionary[key], "MISSING"
 
-			path_list = export_dictionary[key].split('/')
-			COUNT = 0
-			for path in path_list:
-				if test_suite_name in path:
-					temp_start_index = COUNT
-				COUNT += 1
-			temp_string = path_list[temp_start_index] + '_' + path_list[temp_start_index+1] + '_' + path_list[temp_start_index+4]
-			if set1 != set2:
-				# FILES ARE DIFFERENT
-				temp_string = temp_string + '.dif'
-				log_name = output_path + temp_string
-				import_list = import_tree_string.split()
-				export_list = export_tree_string.split()
-				import_contents = []
-				export_contents = []
+				#VALIDATION
 
-				f = open(log_name, 'w')
-				header_string = 'Imported File: \n' + import_dictionary[key] + '\nExported File: \n' + export_dictionary[key]
-				f.write(header_string)
-				f.write('\n\n')
-				header2_string = "\n\n Outputting Differences.... \n\n"
-				f.write(header2_string)
-				header3_string = ">>> IMPORT CONTENT"
-				header_newline = '\n'
-				header4_string = "<<< EXPORT CONTENT"
-				f.write(header3_string)
-				f.write(header_newline)
-				f.write(header4_string)
-				f.write('\n\n')
+				path_list = export_dictionary[key].split('/')
+				COUNT = 0
+				for path in path_list:
+					if test_suite_name == path:
+						temp_start_index = COUNT
+					COUNT += 1
+				temp_string = path_list[temp_start_index] + '_' + path_list[temp_start_index+1] + '_' + path_list[temp_start_index+4]
+				if set1 != set2:
+					# FILES ARE DIFFERENT
+					temp_string = temp_string + '.dif'
+					log_name = output_path + temp_string
+					import_list = import_tree_string.split()
+					export_list = export_tree_string.split()
+					import_contents = []
+					export_contents = []
 
-				for i in range(len(import_list)):
-					if import_list[i] != export_list[i]:
-						import_contents.append(import_list[i])
-						export_contents.append(export_list[i])
-				for i in range(len(import_contents)):
-					import_temp = import_contents[i].replace("u'", "")
-					export_temp = export_contents[i].replace("u'", "")
-					diff_imp_string = '>>> ' + import_temp
-					f.write(header_newline)
-					diff_exp_string = '<<< ' + export_temp
-					f.write(diff_imp_string)
-					f.write(header_newline)
-					f.write(diff_exp_string)
+					f = open(log_name, 'w')
+					header_string = 'Imported File: \n' + import_dictionary[key] + '\nExported File: \n' + export_dictionary[key]
+					f.write(header_string)
 					f.write('\n\n')
-				f.close()
+					header2_string = "\n\n Outputting Differences.... \n\n"
+					f.write(header2_string)
+					header3_string = ">>> IMPORT CONTENT"
+					header_newline = '\n'
+					header4_string = "<<< EXPORT CONTENT"
+					f.write(header3_string)
+					f.write(header_newline)
+					f.write(header4_string)
+					f.write('\n\n')
+
+					for i in range(len(import_list)):
+						if import_list[i] != export_list[i]:
+							import_contents.append(import_list[i])
+							export_contents.append(export_list[i])
+					for i in range(len(import_contents)):
+						import_temp = import_contents[i].replace("u'", "")
+						export_temp = export_contents[i].replace("u'", "")
+						diff_imp_string = '>>> ' + import_temp
+						f.write(header_newline)
+						diff_exp_string = '<<< ' + export_temp
+						f.write(diff_imp_string)
+						f.write(header_newline)
+						f.write(diff_exp_string)
+						f.write('\n\n')
+					f.close()
+				else:
+					# FILES ARE THE SAME
+					temp_string = temp_string + '.suc'
+					log_name = output_path + temp_string
+					f = open(log_name, 'w')
+					f.close()
 			else:
-				# FILES ARE THE SAME
-				temp_string = temp_string + '.suc'
+				path_list = import_dictionary[key].split('/')
+				temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9] + '_' + 'NF' + '.dif'
 				log_name = output_path + temp_string
-				f = open(log_name, 'w')
-				f.close()
-		else:
+				try:
+					f = open(log_name, 'w')
+					f.close()
+				except Exception, e:
+					print "CANT CREATE FILE", log_name
+		except Exception:
+			print "MISSING FILE"
 			path_list = import_dictionary[key].split('/')
 			temp_string = path_list[5] + '_' + path_list[6] + '_' + path_list[9] + '_' + 'NF' + '.dif'
 			log_name = output_path + temp_string

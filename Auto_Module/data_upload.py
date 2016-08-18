@@ -72,16 +72,15 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
     return schema_list
 
 def schema_load_validatior(export_schema_names_list, full_schema_export_list, Loader_Validation_Path):
-
+    """
+    Determines The full list of successfully loaded schemas, dif and suc files are generated in the loaded_validator function
+    """
     if set(export_schema_names_list) == set(full_schema_export_list):
         print "LOADED DATA VALIDATED\n"
         writeLogMessage("LOADED DATA VALIDATED\n", mainLogger, 'info')
         print "Successfully Loaded Schemas: ", export_schema_names_list
         writeLogMessage('%s %s' % ("Successfully Loaded Schemas: ", export_schema_names_list), mainLogger, 'info')
-        for schema in export_schema_names_list:
-            log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
-            f = open(log_name, 'w')
-            f.close()
+
     else:
         print "ERROR IN LOADING DATA"
         writeLogMessage('ERROR IN LOADING DATA', mainLogger, 'warning')
@@ -89,19 +88,20 @@ def schema_load_validatior(export_schema_names_list, full_schema_export_list, Lo
         diff_list = list(diff_set)
         print diff_list
         writeLogMessage(diff_list, mainLogger, 'warning')
-        # Outputs Failed Loaded Schemas as .dif files
-        for schema in diff_list:
-            log_name = Loader_Validation_Path + os.sep + str(schema) + '.dif'
-            f = open(log_name, 'w')
-            f.close()
-        loaded_set = set(full_schema_export_list) - diff_set
-        loaded_list = list(loaded_set)
-        # Outputs Successfully Loaded Schemas as .suc files
-        for schema in loaded_list:
+
+
+def loaded_validator(loaded_schema_names, loaded_schema, Loader_Validation_Path):
+    for schema in loaded_schema:
+        if schema in loaded_schema_names:
+            print "LOAD SUCCESSFUL: ", loaded_schema, "\n"
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
             f = open(log_name, 'w')
             f.close()
-
+        else:
+            print "SCHEMA ", schema, " FAILED TO LOAD \n"
+            log_name = Loader_Validation_Path + os.sep + str(schema) + '.dif'
+            f = open(log_name, 'w')
+            f.close()
 
 
 

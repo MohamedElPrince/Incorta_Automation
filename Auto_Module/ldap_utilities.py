@@ -61,7 +61,6 @@ def tmt_ldap_property_setup(incorta_home, ldap_url, ldap_user_mapping_login, lda
     f.write(update)
     f.close()
 
-
 def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member, ldap_group_search_filter):
     print "Setting up LDAP"
     writeLogMessage('Setting up LDAP', mainLogger, 'info')
@@ -342,5 +341,3 @@ def read_users_from_csv(incorta_home):
 
     os.chdir(owd)
     return user_list
-
-#tmt_ldap_property_setup('/Users/Nadim_Incorta/2_61', 'ldap://dev01.incorta.com:389', 'uid')
