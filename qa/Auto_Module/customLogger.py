@@ -42,3 +42,4 @@ def shutdown_logger(logObject):
 
 #Create LoggerObject
 mainLogger = setup_logger('output', wd_path + os.sep + r'output.log')
+summaryLogger = setup_logger('TEST_RESULTS', wd_path + os.sep + r'TEST_RESULTS.log')

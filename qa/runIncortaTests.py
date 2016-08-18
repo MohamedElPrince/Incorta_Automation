@@ -668,9 +668,18 @@ print "     Time Taken To Run Framework: ", (time.time()-start_time), " seconds"
 minute_timer = (time.time()-start_time) / 60
 print "         In minutes... ", minute_timer
 
+Total_Suite_Count = 0
+Passed_Suite_Count = 0
+Passed_Suite_List = []
+Failed_Suite_Count = 0
+Failed_Suite_List = []
 for suite in test_suite_name_list:
+    Total_Suite_Count += 1
+    print "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
     print "\n"
-    print suite, " ", "RESULTS"
+    print "-------------------------------------------------"
+
+    print suite, " ", "***RESULTS***"
     print "-------------------------------------------------"
     print "\n"
     print "             DATA VALIDATION"
@@ -678,6 +687,7 @@ for suite in test_suite_name_list:
     json_dif_count = 0
     json_total_count = 0
     test_suite_check = True
+    #DATA_VALID_SUCC = True
     print "\n"
     if suite in test_suite_name_dict.keys():
         if test_suite_check == False:
@@ -704,13 +714,20 @@ for suite in test_suite_name_list:
                 print "     FAILED FILES: ", failed_files
             json_total_count += 1
         if case_check == False:
+            #DATA_VALID_SUCC = False
             test_suite_check = False
+
+        DATA_VALID_SUCC = test_suite_check
+
+
     json_pass_rate = (json_suc_count / json_total_count) * 100
-    print "\nJSON DATA VALIDATION TEST SUITE ", suite, ": ", "Failure Count: ",json_dif_count, " Success Count: ", json_suc_count, "DATA PASS RATE: ", json_pass_rate
-    #print "-------------------------------------------------"
+    print "\nJSON DATA VALIDATION TEST SUITE ", suite, ": ", "Failure Count: ",json_dif_count, " Success Count: ", json_suc_count, "   DATA PASS RATE: ", json_pass_rate, "%\n"
+
+    print "**************************************************"
     print '\n'
     print "             METADATA VALIDATION\n"
     test_suite_check = True
+
     if suite in metadata_suite_dict.keys():
         if test_suite_check == False:
             suite_result = 'FAILED'
@@ -735,14 +752,19 @@ for suite in test_suite_name_list:
         if case_check == False:
             test_suite_check = False
 
-    #print "-------------------------------------------------"
+        METADATA_VALID_SUCC = test_suite_check
+
+    print "\n**************************************************"
     print "\n"
     print "             LOADER VALIDATION\n"
     loader_test_suite_check = True
+    failed_schemas = []
+    loader_result = ''
     if suite in loader_valid_dict.keys():
         for schema in loader_valid_dict[suite]:
             if '.dif' in schema:
                 loader_test_suite_check = False
+                failed_schemas.append(failed_schemas)
         if loader_test_suite_check == False:
             loader_result = 'FAILED'
         else:
@@ -750,8 +772,49 @@ for suite in test_suite_name_list:
     else:
         loader_result = 'MISSING'
     print "TEST SUITE: ", suite, " ", loader_result
-    try:
-        print loader_valid_dict[suite]
-    except Exception:
-        print suite, "Does not contain loaded schemas"
+    if loader_result == 'FAILED':
+        print "Schemas Failed to Load... ", failed_schemas
+    LOAD_VALID_SUCC = loader_test_suite_check
+
+    print "\n**************************************************"
+    SUITE_STATUS = ''
+    if DATA_VALID_SUCC and METADATA_VALID_SUCC and LOAD_VALID_SUCC == True:
+        SUITE_STATUS = 'PASSED'
+    else:
+        SUITE_STATUS = 'FAILED'
+
+
+    print "\n             ", suite, " Summary\n"
+    print "Overall test suite ", suite, " ", SUITE_STATUS, "\n"
+    failed_phases = []
+    if SUITE_STATUS == 'FAILED':
+        if not DATA_VALID_SUCC:
+            failed_phases.append('Data Validation Phase')
+        if not METADATA_VALID_SUCC:
+            failed_phases.append('MetaData Validation Phase')
+        if not LOAD_VALID_SUCC:
+            failed_phases.append('Schema Loader Validation Phase')
+        print suite, " failed in these validation phases; ", failed_phases
+        Failed_Suite_Count += 1
+        Failed_Suite_List.append(suite)
+    else:
+        Passed_Suite_Count += 1
+        Passed_Suite_List.append(suite)
+
+
+
+print "************************************** TEST RESULTS *************************************"
+
+print "Out of ", Total_Suite_Count, " tested suites,   ", Passed_Suite_Count, "passed testing      ", Failed_Suite_Count, "failed testing ", "\n"
+
+if Passed_Suite_Count > 0:
+    print "List of successful test suites: ", Passed_Suite_List
+
+if Failed_Suite_Count > 0:
+    print "List of failed test suites: ", Failed_Suite_List
+
+Suite_pass_rate = (Passed_Suite_Count / Total_Suite_Count) * 100
+
+print "Incorta Build has a ", Suite_pass_rate, "% success rate"
+
 shutdown_logger(mainLogger)

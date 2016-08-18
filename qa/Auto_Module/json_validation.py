@@ -60,7 +60,6 @@ def get_paths(test_case_path, test_case_path_wd, user):
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
     for dirs in test_case_subdirectories:
         if user in dirs:
-            print "Validating data for user - ", user, " test case - ", dirs
             user_path = file_tools.get_path(test_case_path, dirs)
             for files in os.listdir(user_path):
                 if files.startswith('.'):

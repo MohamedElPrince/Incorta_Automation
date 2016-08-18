@@ -25,7 +25,7 @@ Framework Architect:
     - Imran Shamim
 Intern Team of Incorta based in California:
     .. [#] Anahit Sarao
-    .. [#] Placeholder
+    .. [#] Nadim Sarras
     .. [#] Placeholder
     .. [#] Placeholder
 
