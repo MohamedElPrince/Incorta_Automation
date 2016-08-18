@@ -2,7 +2,7 @@ import os, os.path
 import subprocess
 import time
 import file_tools
-
+from customLogger import mainLogger, writeLogMessage
 
 incorta_home = '/Users/Bashir_Khan/IncortaNew'
 
@@ -20,7 +20,7 @@ def dirExport(incorta_home):
 
 def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member, ldap_group_search_filter):
     print "Setting up LDAP"
-    file_tools.logging.info('Setting up LDAP')
+    writeLogMessage('Setting up LDAP', mainLogger, 'info')
     dirExport_path = incorta_home + os.sep + 'dirExport'
     incorta_bin_path = incorta_home + os.sep + 'bin'
     dirExport_ldap_path = dirExport_path + os.sep + 'ldap-config.properties'
@@ -166,10 +166,10 @@ def sync_directory_setup(incorta_home, tenant_name, admin_username, admin_passwo
 
     if os.path.isfile(sync_script_backup_path):
         print "Backup Already Created"
-        file_tools.logging.info("Backup Already Created")
+        writeLogMessage("Backup Already Created", mainLogger, 'info')
     else:
         print "Creating Backup"
-        file_tools.logging.info('Creating Backup')
+        writeLogMessage("Creating Backup", mainLogger, 'info')
         # Make backup
         backup_cmd = 'cp ' + sync_script_path + ' ' + sync_script_backup_path
         subprocess.call(backup_cmd, shell=True)
@@ -208,18 +208,17 @@ def sync_directory(incorta_home, orig_wd_path):
 
     try:
         print "Populating Incorta Instance from LDAP"
-        file_tools.logging.info("Populating Incorta Instance from LDAP")
+        writeLogMessage("Populating Incorta Instance from LDAP", mainLogger, 'info')
         owd = os.getcwd()
         os.chdir(dirExport_path)
         run_sync_cmd = sync_script_path
         print run_sync_cmd
-        file_tools.logging.info(run_sync_cmd)
-        file_tools.logging.info(run_sync_cmd)
+        writeLogMessage(run_sync_cmd, mainLogger, 'info')
         subprocess.call(run_sync_cmd, shell=True)
         os.chdir(owd)
     except Exception, e:
         print "Failed to run sync with LDAP and local Incorta instance"
-        file_tools.logging.critical("Failed to run sync with LDAP and local Incorta instance")
+        writeLogMessage("Failed to run sync with LDAP and local Incorta instance", mainLogger, 'critical')
         return
 
     # Creates Sync tag if LDAP populate was successful
@@ -230,7 +229,7 @@ def sync_directory(incorta_home, orig_wd_path):
 def tenant_updater(incorta_home, tenant):
     try:
         print "Updating Tenant"
-        file_tools.logging.info("Updating Tenant")
+        writeLogMessage('Updating Tenant', mainLogger, 'info')
         path_tmt = incorta_home + os.sep + 'tmt'
         tenant_update_ldap = './tmt.sh -u ' + tenant + ' file ldap.properties -f'
         owd = os.getcwd()
@@ -239,13 +238,13 @@ def tenant_updater(incorta_home, tenant):
         os.chdir(owd)
     except Exception, e:
         print "Failed to update Tenant: ", tenant
-        file_tools.logging.critical('%s %s', "Failed to update Tenant: ", tenant)
+        writeLogMessage('%s %s' % ("Failed to update Tenant: ", tenant), mainLogger, 'critical')
         return
 
 def restart_incorta(incorta_home):
     try:
         print "Restarting Incorta"
-        file_tools.logging.info("Restarting Incorta")
+        writeLogMessage('Restarting Incorta', mainLogger, 'info')
         owd = os.getcwd()
         os.chdir(incorta_home)
         subprocess.call(incorta_home + '/./stop.sh', shell=True)
@@ -257,7 +256,7 @@ def restart_incorta(incorta_home):
         os.chdir(owd)
     except Exception, e:
         print "Unable to restart Incorta instance"
-        file_tools.logging.critical("Unable to restart Incorta instance")
+        writeLogMessage('Unable to restart Incorta instance', mainLogger, 'critical')
         return
 
 def assign_roles_to_groups(incorta, session):
@@ -265,14 +264,14 @@ def assign_roles_to_groups(incorta, session):
     # session =incorta.login(url,tenant,admin,password)
     try:
         print "Assigning Roles"
-        file_tools.logging.info('Assigning Roles')
+        writeLogMessage('Assigning Roles', mainLogger, 'info')
         incorta.assign_role_to_group(session, 'executive', 'SuperRole')
         incorta.assign_role_to_group(session, 'engineering', 'Analyze User')
         print "Assigned Roles Successfully"
-        file_tools.logging.info("Assigned Roles Successfully")
+        writeLogMessage('Assigned Roles Successfully', mainLogger, 'info')
     except Exception, e:
         print "Unable to assign Roles, Roles already assigned"
-        file_tools.logging.warning("Unable to assign Roles, Roles already assigned")
+        writeLogMessage('Unable to assign Roles, Roles already assigned', mainLogger, 'warning')
         return
 
 def read_users_from_csv(incorta_home):
@@ -280,15 +279,15 @@ def read_users_from_csv(incorta_home):
     user_groups_csv_path = dirExport_path + os.sep + 'user-groups.csv'
 
     print "Incorta Home: ", incorta_home
-    file_tools.logging.info('%s %s',"Incorta Home: ", incorta_home)
+    writeLogMessage('%s %s' % ("Incorta Home: ", incorta_home), mainLogger, 'info')
     owd = os.getcwd()
     os.chdir(dirExport_path)
     print "Reading CSV files from: ", os.getcwd()
-    file_tools.logging.info('%s: %s', "Reading CSV files from: ", os.getcwd())
+    writeLogMessage('%s: %s' % ("Reading CSV files from: ", os.getcwd()), mainLogger, 'info')
     user_list = {}
     COUNT = 0
     print "Extracting users from csv"
-    file_tools.logging.info("Extracting users from csv")
+    writeLogMessage('Extracting users from csv', mainLogger, 'info')
     with open(user_groups_csv_path, "rb") as file:
         for col in file:
             if COUNT > 0:

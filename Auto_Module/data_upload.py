@@ -2,7 +2,7 @@ import time
 import os
 import subprocess
 import file_tools
-
+from customLogger import mainLogger, writeLogMessage
 
 """
 Loads all data on the Incorta Software
@@ -30,7 +30,8 @@ def Load_data(incorta, session, names_list):
         upload_check = incorta.load_schema(session, names)
     if Debug == True:
         print upload_check, "For:", names
-        file_tools.logging.info('%s %s %s', upload_check, "For:", names)
+        writeLogMessage('%s %s %s' % (upload_check, "For:", names), mainLogger, 'info')
+
 
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
     COUNT = 0
@@ -50,7 +51,7 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
         # Waits for Schema to Load
         if full_schema_export_list[-1] not in output[int_size-1]:
             print "Still waiting for schema to load..", full_schema_export_list[-1]
-            file_tools.logging.info('%s %s',"Still waiting for schema to load..", full_schema_export_list[-1])
+            writeLogMessage('%s %s' % ("Still waiting for schema to load..", full_schema_export_list[-1]), mainLogger, 'info')
             LOAD_COUNTER += 1
             if len(schema_list) == int_size:
                 loaded = True
@@ -66,7 +67,7 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
                 loaded = True
         COUNT += 1
         print COUNT*5, "seconds.."
-        file_tools.logging.info('%s %s', COUNT*5, "seconds..")
+        writeLogMessage('%s %s' % (COUNT*5, "seconds.."), mainLogger, 'info')
     # Loaded schemas are stored in the variable schema_list
     return schema_list
 
@@ -74,20 +75,20 @@ def schema_load_validatior(export_schema_names_list, full_schema_export_list, Lo
 
     if set(export_schema_names_list) == set(full_schema_export_list):
         print "LOADED DATA VALIDATED\n"
-        file_tools.logging.info("LOADED DATA VALIDATED\n")
+        writeLogMessage("LOADED DATA VALIDATED\n", mainLogger, 'info')
         print "Successfully Loaded Schemas: ", export_schema_names_list
-        file_tools.logging.info('%s %s', "Successfully Loaded Schemas: ", export_schema_names_list)
+        writeLogMessage('%s %s' % ("Successfully Loaded Schemas: ", export_schema_names_list), mainLogger, 'info')
         for schema in export_schema_names_list:
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.suc'
             f = open(log_name, 'w')
             f.close()
     else:
         print "ERROR IN LOADING DATA"
-        file_tools.logging.info("ERROR IN LOADING DATA")
+        writeLogMessage('ERROR IN LOADING DATA', mainLogger, 'warning')
         diff_set = set(full_schema_export_list) - set(export_schema_names_list)
         diff_list = list(diff_set)
         print diff_list
-        file_tools.logging.info(diff_list)
+        writeLogMessage(diff_list, mainLogger, 'warning')
         # Outputs Failed Loaded Schemas as .dif files
         for schema in diff_list:
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.dif'

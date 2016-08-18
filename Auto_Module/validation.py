@@ -3,6 +3,7 @@ from xml.etree import ElementTree
 from lxml import etree
 import os, platform
 import file_tools
+from customLogger import mainLogger, writeLogMessage
 
 """
 This file contains an array of functions to pull schema, dashboard, and tenant data.
@@ -153,7 +154,7 @@ def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaDa
 				f.close()
 			except Exception, e:
 				print "CANT CREATE FILE", log_name
-				file_tools.logging.critical('%s %s',"CANT CREATE FILE", log_name)
+				writeLogMessage('%s %s' % ("CANT CREATE FILE", log_name), mainLogger, 'critical')
 
 def grab_import_export_path(wd_test_case_path):
 	"""
@@ -203,20 +204,20 @@ def get_dashboards_info(path):
 									dash_tree = ElementTree.parse(f)
 							except Exception, e:
 								print "Unable to open dashboard", names
-								file_tools.logging.critical('%s %s',"Unable to open dashboard", names)
+								writeLogMessage('%s %s' % ("Unable to open dashboard", names), mainLogger, 'critical')
 							try:
 								for node in dash_tree.iter('table'):
 									dash_ids[node.attrib.get('id')] = temp_full_path
 									tenant_id = node.attrib.get('id')
 							except Exception, e:
 								print "Unable to read dashboard", names
-								file_tools.logging.critical('%s %s', "Unable to read dashboard", names)
+								writeLogMessage('%s %s' % ("Unable to read dashboard", names), mainLogger, 'critical')
 							try:
 								for node in dash_tree.iter('report'):
 									dashboard_name_list.append(node.attrib.get('name'))
 							except Exception, e:
 								print "Unable to read name from dashboard", names
-								file_tools.logging.critical('%s %s', "Unable to read nane dashboard", names)
+								writeLogMessage('%s %s' % ("Unable to read name from dashboard", names), mainLogger, 'critical')
 					elif dash_data == 'tenant.xml':
 						tenant_full_path = dashboard_cases_path + os.sep + dash_data
 						try:
@@ -224,7 +225,7 @@ def get_dashboards_info(path):
 								tenant_tree = ElementTree.parse(f)
 						except Exception, e:
 							print "Unable to open Dashboard tenant", dash_data
-							file_tools.logging.critical('%s %s', "Unable to open Dashboard tenant", dash_data)
+							writeLogMessage('%s %s' % ("Unable to open Dashboard tenant", dash_data), mainLogger, 'critical')
 				dash_tenants[tenant_id] = tenant_full_path
 	return dash_ids, dash_tenants, dashboard_name_list
 
@@ -262,13 +263,13 @@ def get_schemas_info(path):
 										schema_tree = ElementTree.parse(f)
 								except Exception, e:
 									print "Unable to open schema", file
-									file_tools.logging.critical('%s %s',"Unable to open schema", file)
+									writeLogMessage('%s %s' % ("Unable to open schema", file), mainLogger,'critical')
 								try:
 									for node in schema_tree.iter('schema'):
 										schema_names[node.attrib.get('name')] = temp_full_path
 								except Exception, e:
 									print "Unable to read schema"
-									file_tools.logging.critical("Unable to read schema")
+									writeLogMessage('Unable to Read Schema', mainLogger, 'critical')
 							elif 'loader' in file:
 								temp_full_path = schema_full_path + os.sep + file
 								try:
@@ -276,14 +277,14 @@ def get_schemas_info(path):
 										schema_tree = ElementTree.parse(f)
 								except Exception, e:
 									print "Unable to open schema", file
-									file_tools.logging.critical('%s %s', "Unable to open schema", file)
+									writeLogMessage('%s %s' % ("Unable to open schema", file), mainLogger, 'critical')
 								try:
 									for node in schema_tree.iter('loader'):
 										schema_loaders[node.attrib.get('name')] = temp_full_path
 										schema_name_list.append(node.attrib.get('name'))
 								except Exception, e:
 									print "Unable to read schema"
-									file_tools.logging.critical("Unable to open schema")
+									writeLogMessage('Unable to Read Schema', mainLogger, 'critical')
 					elif schema_data == 'tenant.xml':
 						tenant_full_path = schema_cases_path+os.sep+schema_data
 						try:
@@ -291,11 +292,11 @@ def get_schemas_info(path):
 								tenant_tree = ElementTree.parse(f)
 						except Exception, e:
 							print "Unable to open schema", schema_data
-							file_tools.logging.critical('%s %s', "Unable to open schema", schema_data)
+							writeLogMessage('%s %s' % ("Unable to open schema", schema_data), mainLogger, 'critical')
 						try:
 							for node in tenant_tree.iter('schema-definition'):
 								schema_tenants[node.attrib.get('name')] = tenant_full_path
 						except Exception, e:
 							print "Unable to read schema"
-							file_tools.logging.critical("Unable to read schema")
+							writeLogMessage('Unable to Read Schema', mainLogger, 'critical')
 	return schema_names, schema_loaders, schema_tenants, schema_name_list

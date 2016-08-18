@@ -1,5 +1,5 @@
 import os, file_tools
-
+from customLogger import mainLogger, writeLogMessage
 """
 Imports datafiles / schemas / dashboards to Incorta
 
@@ -26,7 +26,7 @@ def import_datasources(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
-            file_tools.logging.info(checks)
+            writeLogMessage(checks,mainLogger,'debug')
 
 def import_datafiles(incorta, session, test_case_path):
     """
@@ -54,7 +54,7 @@ def import_datafiles(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
-            file_tools.logging.info(checks)
+            writeLogMessage(checks, mainLogger, 'debug')
 
 def import_schema(incorta, session, test_case_path):
     """
@@ -82,7 +82,7 @@ def import_schema(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks
-            file_tools.logging.info(checks)
+            writeLogMessage(checks, mainLogger, 'debug')
 
 def import_dashboard(incorta, session, test_case_path):
     """
@@ -110,4 +110,4 @@ def import_dashboard(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
-            file_tools.logging.info(checks)
+            writeLogMessage(checks, mainLogger, 'debug')

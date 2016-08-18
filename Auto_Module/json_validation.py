@@ -1,5 +1,5 @@
 import json, file_tools, os
-
+from customLogger import mainLogger, writeLogMessage
 """
 JSON validation code to comapare two JSON files and return the differences
 Then to create a .suc file is no changes, .diff file if changes found, NF.diff if one file is not found
@@ -18,7 +18,8 @@ def getContentFromFile(filepath):
         return file_data
     except Exception, e:
         print "ERROR Unable to Open JSON File: ", filepath
-        file_tools.logging.critical('%s %s', "ERROR Unable to Open JSON File: ", filepath)
+        writeLogMessage('%s %s' % ("ERROR Unable to Open JSON File: ", filepath), mainLogger, 'critical')
+
 
 def printDiffs(x, y):
     """
@@ -29,15 +30,15 @@ def printDiffs(x, y):
             diff = True
             print "key %s in x, but not in y" % x_key
             temp_str = "key %s in x, but not in y" % x_key
-            file_tools.logging.info(temp_str)
+            writeLogMessage(temp_str, mainLogger, 'info')
         elif x[x_key] != y[x_key]:
             diff = True
             print "key in x and in y, but values differ (%s in x and %s in y)" % (x[x_key], y[x_key])
             temp_string = "key in x and in y, but values differ (%s in x and %s in y)" % (x[x_key], y[x_key])
-            file_tools.logging.info(temp_string)
+            writeLogMessage(temp_string, mainLogger, 'info')
     if not diff:
         print "both files are identical"
-        file_tools.logging.info("both files are identical")
+        writeLogMessage('Both Files are Identical', mainLogger, 'info')
 
 def get_paths(test_case_path, test_case_path_wd, user):
     """
@@ -148,7 +149,7 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
                     sucFile.close()
                 except Exception, e:
                     print "Error Unable to Create SUC File"
-                    file_tools.logging.critical("Error Unable to Create SUC File")
+                    writeLogMessage("Error Unable to Create SUC File", mainLogger, 'critical')
             else:
                 file_path = file_path + '.diff'
                 diffFile = open(file_path, 'w')
@@ -184,5 +185,5 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
                 ndiffFile.close()
             except Exception, e:
                 print "Error Unable to Create NF-DIFF File"
-                file_tools.logging.critical("Error Unable to Create NF-DIFF File")
+                writeLogMessage("Error Unable to Create NF-DIFF File", mainLogger, 'critical')
 
