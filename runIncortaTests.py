@@ -1,4 +1,6 @@
-import sys, os, subprocess, time, zipfile
+import time
+start_time = time.time()
+import sys, os, subprocess, zipfile
 import os.path
 from sys import argv
 from shutil import copyfile
@@ -57,6 +59,8 @@ import Auto_Module.json_validation
 import Auto_Module.ldap_utilities
 import Auto_Module.output
 
+
+
 """
 #################################################### Functions ####################################################
 """
@@ -67,13 +71,11 @@ ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
 ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
 ldap_group_search_filter = config_defaults['ldap.group.search.filter']
 
-
 def incorta_api_import(incorta_home):
     incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
     sys.path.append(incorta_module)
     import incorta
     global incorta
-
 
 def login(url, tenant, username, password):
     try:
@@ -83,7 +85,6 @@ def login(url, tenant, username, password):
         writeLogMessage("Login Failed", mainLogger, str(CRITICAL))
         exit(1)
 
-
 def logout(session):
     try:
         incorta.logout(session)
@@ -92,17 +93,7 @@ def logout(session):
         writeLogMessage('Failed to logout', mainLogger, str(CRITICAL))
         exit(1)
 
-
 def get_test_suite_path(test_suite):
-    """
-    Function gets path of test suite within the AF
-    	args:
-    		test_suite: pass test suite name as string
-    	returns:
-            Path of test suite located within the AF
-    	prints:
-            Nothing
-    """
     test_suite_path = os.getcwd() + '/' + "TestSuites"
     test_suite_path = test_suite_path + '/' + test_suite
     return test_suite_path
@@ -122,7 +113,6 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
 """
 #################################################### Functions ####################################################
 """
-
 # set_block_defaults(commands, config_defaults)
 # set_new_defaults(config_file, config_defaults)
 # set_new_defaults(config_file, config_defaults)
@@ -130,9 +120,17 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
 # Auto_Module.initialization.set_new_defaults(config_file, config_defaults)
 # orig_wd_path = Auto_Module.initialization.set_new_defaults(config_file, config_defaults)
 # converts keys in a dictionary to variables
+
 locals().update(config_defaults)
+
 # Creates Output Directory
 output_wd_path = Auto_Module.output.create_output_folder(wd_path)
+test_suite_name_list = []
+test_case_name_list = []
+output_dict = {}
+test_suite_name_dict = {}
+loader_valid_dict = {}
+metadata_suite_dict = {}
 
 if Debug == True:
     for key, value in config_defaults.items():
@@ -183,6 +181,11 @@ print "\n USER LIST: ", user_list
 writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
 
 for sub_dir in test_suite_directories:
+
+    loaded_schemas = []
+    test_case_name_dict = {}
+    meta_data_case_dict = {}
+
     print "Current Test Suite: ", sub_dir
     writeLogMessage("Current Test Suite: %s" % sub_dir, mainLogger, str(INFO))
     test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, sub_dir)  # Working Directory test suite path
@@ -220,6 +223,7 @@ for sub_dir in test_suite_directories:
                 if Debug == True:
                     print test_case_path
                     writeLogMessage(test_case_path, mainLogger, str(DEBUG))
+
                 # Get subdirectories of test case
                 test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
                 if Debug == True:
@@ -326,11 +330,13 @@ for sub_dir in test_suite_directories:
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
+                Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
+                loaded_schemas = full_schema_export_list
                 # Exported Dashboard ID's per test case
                 test_case_dashboard_export_list = export_dash_ids.keys()
                 # GRANT PERMISSIONS
-                print "DASHBOARD LIST: ", export_dashboard_names_list
-                writeLogMessage("DASHBOARD LIST: %s" % export_dashboard_names_list, mainLogger, str(INFO))
+                print "Preparing to Export: ", export_dashboard_names_list
+                writeLogMessage("Preparing to Export: %s" % export_dashboard_names_list, mainLogger, str(INFO))
                 for user in user_list:
                     for dashboard_name in export_dashboard_names_list:
                         grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
@@ -364,6 +370,7 @@ for sub_dir in test_suite_directories:
                 user_pass = 'superpass'
                 print "TESTING USER LOGIN"
                 writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
+
                 for user in user_list:
                     session = login(url, tenant, user, user_pass)
                     time.sleep(2)
@@ -396,7 +403,6 @@ for sub_dir in test_suite_directories:
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
                     writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
-
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':
                     for user in user_list:
@@ -410,9 +416,19 @@ for sub_dir in test_suite_directories:
                         # Removes user folders not being tested within the current test case
                         if os.listdir(output_user_path) == []:
                             os.rmdir(output_user_path)
+                print "SEARCHING FOR SUCS AND DIFFS"
+                test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path, dir)
+                meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboard_tenants')
+                meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboards')
+                meta_data_case_dict['schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_loaders')
+                meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_tenants')
+                meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schemas')
 
             # Compares Loaded Schema List to Exported Schema List
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
+            loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(Loader_Validation_Path)
+            test_suite_name_dict[sub_dir] = test_case_name_dict
+            metadata_suite_dict[sub_dir] = meta_data_case_dict
 
         if 'datasources' == names:
             print "-----------------------------------------------------------------------------"
@@ -539,15 +555,18 @@ for sub_dir in test_suite_directories:
 
                 # LOAD VALIDATION
                 # Appends to list of loaded schemas as for loop goes through every test case
+
                 full_schema_export_list.extend(export_schema_names_list)
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
                                                                      full_schema_export_list)
+                Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
 
                 # GRANT PERMISSIONS
-                print "DASHBOARD LIST: ", export_dashboard_names_list
-                writeLogMessage("DASHBOARD LIST: %s" % export_dashboard_names_list, mainLogger, str(INFO))
+                print "Preparing to Export: ", export_dashboard_names_list
+                writeLogMessage("Preparing to Export: %s" % export_dashboard_names_list, mainLogger, str(INFO))
                 for user in user_list:
                     for dashboard_name in export_dashboard_names_list:
+                        #print "Granting permission to access dashboard ", dashboard_name
                         grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
 
                 # LOG OUT SUPER USER
@@ -597,7 +616,6 @@ for sub_dir in test_suite_directories:
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
                     writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
-
                 # LOGGING IN SUPER USER
                 try:
                     time.sleep(2)
@@ -626,6 +644,114 @@ for sub_dir in test_suite_directories:
                         # Removes user folders not being tested within the current test case
                         if os.listdir(output_user_path) == []:
                             os.rmdir(output_user_path)
+
+                print "SEARCHING FOR SUCS AND DIFFS"
+                test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path, dir)
             # Verify the List of Loaded Schemas
+                meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboard_tenants')
+                meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboards')
+                meta_data_case_dict['schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_loaders')
+                meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_tenants')
+                meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schemas')
+
             Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
+            loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(Loader_Validation_Path)
+            test_suite_name_dict[sub_dir] = test_case_name_dict
+            metadata_suite_dict[sub_dir] = meta_data_case_dict
+    test_suite_name_list.append(sub_dir)
+
+print test_suite_name_list
+print "------------------------------------------Summary------------------------------------------------------"
+
+print "PERFORMANCE: "
+print "     Time Taken To Run Framework: ", (time.time()-start_time), " seconds"
+minute_timer = (time.time()-start_time) / 60
+print "         In minutes... ", minute_timer
+
+for suite in test_suite_name_list:
+    print "\n"
+    print suite, " ", "RESULTS"
+    print "-------------------------------------------------"
+    print "\n"
+    print "             DATA VALIDATION"
+    json_suc_count = 0
+    json_dif_count = 0
+    json_total_count = 0
+    test_suite_check = True
+    print "\n"
+    if suite in test_suite_name_dict.keys():
+        if test_suite_check == False:
+            suite_result = 'FAILED'
+        else:
+            suite_result = 'SUCCESSFUL'
+        temp_dict = test_suite_name_dict[suite]
+        case_check = True
+        print "TEST SUITE: ", suite, ' > ', suite_result
+        for item, value in temp_dict.items():
+            failed_files = []
+            for file in value:
+                if '.dif' in file:
+                    case_check = False
+                    failed_files.append(file)
+            if case_check == False:
+                result = 'failed'
+                json_dif_count += 1
+            else:
+                result = 'successful'
+                json_suc_count += 1
+            print "Test Case: ", item, " > ", result
+            if result == 'failed':
+                print "     FAILED FILES: ", failed_files
+            json_total_count += 1
+        if case_check == False:
+            test_suite_check = False
+    json_pass_rate = (json_suc_count / json_total_count) * 100
+    print "\nJSON DATA VALIDATION TEST SUITE ", suite, ": ", "Failure Count: ",json_dif_count, " Success Count: ", json_suc_count, "DATA PASS RATE: ", json_pass_rate
+    #print "-------------------------------------------------"
+    print '\n'
+    print "             METADATA VALIDATION\n"
+    test_suite_check = True
+    if suite in metadata_suite_dict.keys():
+        if test_suite_check == False:
+            suite_result = 'FAILED'
+        else:
+            suite_result = 'SUCCESSFUL'
+        temp_dict = metadata_suite_dict[suite]
+        case_check = True
+        print "TEST SUITE: ", suite, ' > ', suite_result
+        for item, value in temp_dict.items():
+            failed_files = []
+            for file in value:
+                if '.dif' in file:
+                    case_check = False
+                    failed_files.append(file)
+            if case_check == False:
+                result = 'failed'
+            else:
+                result = 'successful'
+            print "MetaData Type: ", item, " > ", result
+            if result == 'failed':
+                print "     FAILED FILES: ", failed_files
+        if case_check == False:
+            test_suite_check = False
+
+    #print "-------------------------------------------------"
+    print "\n"
+    print "             LOADER VALIDATION\n"
+    loader_test_suite_check = True
+    if suite in loader_valid_dict.keys():
+        for schema in loader_valid_dict[suite]:
+            if '.dif' in schema:
+                loader_test_suite_check = False
+        if loader_test_suite_check == False:
+            loader_result = 'FAILED'
+        else:
+            loader_result = 'SUCCESSFUL'
+    else:
+        loader_result = 'MISSING'
+    print "TEST SUITE: ", suite, " ", loader_result
+    try:
+        print loader_valid_dict[suite]
+    except Exception:
+        print suite, "Does not contain loaded schemas"
 shutdown_logger(mainLogger)
