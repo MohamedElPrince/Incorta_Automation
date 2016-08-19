@@ -70,7 +70,7 @@ def export_dashboards(incorta, session, casePath, dashboards):
         prints:
             Can print debug statements if needed
     """
-    dashboardPath = create_directory(casePath, 'dashboard')
+    dashboardPath = create_directory(casePath, 'dashboards')
     temp_path = dashboardPath + os.sep + dashboards + '.zip'
     try:
         export_check = incorta.export_dashboards(session, temp_path, dashboards)

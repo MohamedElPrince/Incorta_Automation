@@ -1,17 +1,112 @@
 #!/bin/bash
-# Bash Script to scan through changes of Directories then  files.
+# ************************************************************************
+# By : Anahit Sarao
+# Last Update: Teusday August 2, 2016
+#
+# (c) Copyright Incorta 2016. All rights reserved.
+# ************************************************************************
+# Bash Script to scan through changes of Directories then  files
+# ************************************************************************
 
 #SOURCE1 must point to one export folder
-SOURCE1=/Users/Nadim_Incorta/Desktop/demo_06132016
 
 #SOURCE2 must point to second export folder
-SOURCE2=/Users/Nadim_Incorta/Desktop/demo_06132016-new
+
+usage() { echo "Usage: $0 [-o <old_tenant>] [-f <new_tenant>] [-w <working_directory>]" 1>&2; exit 1; }
+
+while getopts :n:o:w: FLAG; do
+    case "${FLAG}" in
+        n)
+            s=${OPTARG}
+            ;;
+        o)
+            p=${OPTARG}
+            ;;
+        w)
+			w=${OPTARG}
+			;;
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+SOURCE1=${s}
+SOURCE2=${p}
 
 #EXPORT_DIR is desired output directory of this script
-EXPORT_DIR=/Users/Nadim_Incorta/Desktop
+EXPORT_DIR=${w}
+
+
 
 echo "Path for SOURCE1" $SOURCE1
 echo "Path for SOURCE2" $SOURCE2
+
+hash python &> /dev/null
+if [ $? -eq 1 ]; then
+    echo >&2 "python not found."
+fi
+
+#Checks for installed programs on machine
+function programInstalled {
+  local returning=1
+  type $1 >/dev/null 2>&1 || { local returning=0; }
+  echo "$returning"
+}
+
+#Fucntion Displays Green Check for installed programs
+#Else Displays Red Cross for Missing Programs
+function check {
+	if [ $1 == 1 ]; then
+    	printf "\e[32m✔"
+  		echo $(tput sgr0)
+	else
+    	printf "\e[31m✘"
+  		echo $(tput sgr0)
+  	fi
+}
+
+case $( uname -s ) in
+	Linux)	#Linux Case
+		echo Operating System: Linux
+		echo "libxml2-utils $(check $(programInstalled libxml2-utils))"
+		echo "vim           $(check $(programInstalled vim))"
+		problem=$(rpm -qa | grep libxml2-utils)
+		echo Checking for libxml2-utils: $problem
+		if [ "" == "$problem" ]; then
+     		echo "No libxml2-utils. Setting up libxml2-utils"
+  			sudo yum install libxml2-utils
+  			echo "Success..."
+		fi
+		Vproblem=$(rpm -qa | grep vim)
+		echo Checking for libxml2-utils: $Vproblem
+		if [ "" == "$Vproblem" ]; then
+     		echo "No vim. Setting up vim..."
+  			sudo yum install vim
+  			echo "Success..."
+		fi
+		;;
+	Darwin)	#Mac Case
+		echo Operating System: Mac OSX Darvin
+		echo "xmllint $(check $(programInstalled xmllint))"
+		echo "vim     $(check $(programInstalled vim))"
+		xcheck=$(pkgutil --pkgs=.\+xquartz.\+)
+		if [[ $xcheck == "org.macosforge.xquartz.pkg" ]]; then
+			echo xquartz Already Installed on Machine
+		
+		elif [[ $xcheck == "" ]]; then
+			echo "xmllint Not Installed; Please Install xmllint..."
+			sudo pip install lxml
+			echo "Success..."
+		fi
+		;;
+	*)	#Default if Operatin System other than Mac or Linux
+		echo Other
+		exit 1
+		;;
+esac
+
 
 #Checks if specified source directories contain required schemas/dashboards
 if [[ -d "${SOURCE1}/schemas" && -d "${SOURCE1}/dashboards" && -f "${SOURCE1}/tenant.xml" ]]; then
@@ -49,7 +144,7 @@ while [  "$CHOICE" -ne "3" ]; do
 
 		#Dashboard Comparison
 		if [[ "$CHOICE" -eq "1" ]]; then
-			echo -n "Enter Dashboard GUI_ID? > "
+			echo -n "Enter Dashboard Name? > "
 			read dash_name
 			FILE_SRC1=$(grep -rl "$dash_name" ${SOURCE1}/dashboards)
 			FILE_SRC2=$(grep -rl "$dash_name" ${SOURCE2}/dashboards)
@@ -104,8 +199,6 @@ while [  "$CHOICE" -ne "3" ]; do
 			rm ${TEMP_DIR}/FILE_SRC2_formatted.xml
 		fi
 	fi
-
-
 
 done #End of WHILE loop
 rm -rf ${TEMP_DIR}

@@ -10,17 +10,14 @@ To view xml differences in max capacity run execution as full screen.
 ---------------------------------------------------------------------------
 SINGLE FILE EXECUTION: To run the diff tool for single XML files run the 
 XML_FILE_COMPARATOR.sh script. 
-
-Make sure to specify the source directories for each file at the top of the script.
 ---------------------------------------------------------------------------
-
 Dependency:
 
 Windows
-*To run the script on Windows Cygwin must be installed, as well as a few other dependencies including; X11, xmllint, vim*
+To run the script on Windows Cygwin must be installed, as well as a few other dependencies including; X11, xmllint, vim*
 
 All dependencies can be installed from the Cygwin Setup Tool.
-The Cygwin Setup Tool Can be found https://cygwin.com/install.html 
+The Cygwin Setup Tool Can be found: https://cygwin.com/install.html 
 
 In the Cygwin Setup Tool Install:
 
@@ -34,10 +31,8 @@ In the Cygwin Setup Tool Install:
 	-libxml C++ bindings for libxml2 
 ~Search Vim in Cygwin Installer Search Bar
  vim
-	Install all from Base, Debug, Editors
-~Entire X11 Package
-
-*X11 installation can be skipped if the script is ran from the cygwin terminal in full screen mode
+	-Install all from Base, Debug, Editors
+~Entire X11 Package  -->[SEE NOTE]
 
 Linux 
 
@@ -45,26 +40,41 @@ libxml2-utils - For xml lint and formating
 vim - For viewing the compared files in terminal screen
 
 Mac
+xmllib2 (Almost all OSX evirnements come pre-packaged)
+XQuartz (X11) -->[SEE NOTE]
 
-XQuartz (X11) - Required to resize and shift terminal window
-Commands using XQuartz (X11)
-resize -s 0 0
-printf '\e[3;0;0t'
+*[SEE NOTE]
+- X11 is not INSTALLED - 
+	-The code has been written to that it supports AUTO rezise
+	Commands using XQuartz (X11)
+		resize -s 0 0
+		printf '\e[3;0;0t'
+	-These commands maximize screen so that VIM can split it evenly
 
-* To Run the Script Without XQuartz * - If you would prefer to manually run commands through vimdiff such as winc = and to manually expand the window then the commands resize and printf are not needed, thus XQuartz is not needed as a dependency.
+- Steps Must be taken to evenly split the view pane:
+	1. Manually adjust the screen size(FULL SCREEN IS RECOMMENDED)
+	2. Within the dual pane screen user ':'' to enter insert mode and user 'winc =' to evenly distrubute
+
+- X11 is INSTALLED -
+Life is Easier!
+*[SEE NOTE] 
 
 ---------------------------------------------------------------------------
+Arguments Taken by Content_Comparison.sh
+Usage: ./Content_Comparison.sh [-o <old_tenant>] [-f <new_tenant>] [-w <working_directory>]
+ 
+ [-o <old_tenant>]			-> Path to old tenant tmt extract folder
+ [-f <new_tenant>]			-> Path to new tenant tmt extract folder
+ [-w <working_directory>]	-> Path to working Directory
 
+---------------------------------------------------------------------------
 Instructions To Run Script: 
 
-Note - The script does not require any dependencies other than having vim/vimdiff installed on your machine.
-
 1. Export Tenants to be compared to a local directory
-2. Specify the paths of the tenant folders within the bash script
-3. Run Script from CLI
-4. Enter 1,2, or 3 correlating to what action you would like to implement
-5A. For Dashboards enter the specific GUI ID to locate the file in both tenants
-5B. For Schemas specify the unique schema name to locate the file in both tenants
+2. Run Script from CLI giving proper arguments
+3. Enter 1,2, or 3 correlating to what action you would like to implement
+4. For Dashboards enter the specific Dashboard Name to locate the file in both tenants
+5. For Schemas specify the unique schema name to locate the file in both tenants
 6. Amount of Lines/Characters will display, press enter to continue
 7. VIM window appears, enter :winc =  This will equate the size of the split screen.
 8. Run vim visual commands to navigate and observe the differences, some useful commands are listed below.
@@ -73,7 +83,7 @@ Note - If the command :q is run the user will only back out to see the xml files
 10. Specify your next search or press 3 to exit the script
 
 ======================================================================
-useful vim visual commands
+Useful vim visual commands
 
 In Normal Mode:
 
@@ -84,7 +94,7 @@ Ctrl + w   | (Press twice) Shifts between windows
 e          | jump to end of words (punctuation considered words)
 b	       | jump backward by words (punctuation considered words)
 ======================================================================
-useful vim window commands
+Useful vim window commands
 
 In Insert Mode:
 
@@ -93,6 +103,11 @@ qa!        | Exit vim, exits directly back to terminal
 
 ======================================================================
 Sample ID's
+
+<This feature has been depracated as dashboard.xml does not contain GUID anymore.>
 GUID sample comparison: cebefa45-9e59-ee37-f372-6fea6298c3e6
-SCHEMA sample comparison: EBS_FSG // name="EBS_FSG"
+
+<The Dashboard Name is now required to comapre two dashbaords>
+DashboardName : Sales Dashboard
+SCHEMA sample comparison: EBS_FSG
 ======================================================================
