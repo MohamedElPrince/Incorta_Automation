@@ -417,6 +417,7 @@ for sub_dir in test_suite_directories:
                         if os.listdir(output_user_path) == []:
                             os.rmdir(output_user_path)
                 print "SEARCHING FOR SUCS AND DIFFS"
+                writeLogMessage('SEARCHING FOR SUCS AND DIFFS', mainLogger, 'info')
                 test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path, dir)
                 meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboard_tenants')
                 meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboards')
@@ -646,6 +647,7 @@ for sub_dir in test_suite_directories:
                             os.rmdir(output_user_path)
 
                 print "SEARCHING FOR SUCS AND DIFFS"
+                writeLogMessage('SEARCHING FOR SUCS AND DIFFS', mainLogger, 'info')
                 test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path, dir)
             # Verify the List of Loaded Schemas
                 meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboard_tenants')
@@ -661,12 +663,17 @@ for sub_dir in test_suite_directories:
     test_suite_name_list.append(sub_dir)
 
 print test_suite_name_list
+writeLogMessage(test_suite_name_list, summaryLogger, 'info')
 print "------------------------------------------Summary------------------------------------------------------"
+writeLogMessage("------------------------------------------Summary------------------------------------------------------", summaryLogger, 'info')
 
 print "PERFORMANCE: "
+writeLogMessage("PERFORMANCE: ", summaryLogger, 'info')
 print "     Time Taken To Run Framework: ", (time.time()-start_time), " seconds"
+writeLogMessage("     Time Taken To Run Framework: %s seconds" % (time.time()-start_time), summaryLogger, 'info')
 minute_timer = (time.time()-start_time) / 60
 print "         In minutes... ", minute_timer
+writeLogMessage("         In minutes... %s" % minute_timer, summaryLogger, 'info')
 
 Total_Suite_Count = 0
 Passed_Suite_Count = 0
@@ -676,19 +683,28 @@ Failed_Suite_List = []
 for suite in test_suite_name_list:
     Total_Suite_Count += 1
     print "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+    writeLogMessage("\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", summaryLogger, 'info')
     print "\n"
+    writeLogMessage('\n', summaryLogger, 'info')
     print "-------------------------------------------------"
+    writeLogMessage("-------------------------------------------------", summaryLogger, 'info')
 
     print suite, " ", "***RESULTS***"
+    temp_str = suite +  " " + "***RESULTS***"
+    writeLogMessage(temp_str, summaryLogger, 'info')
     print "-------------------------------------------------"
+    writeLogMessage("-------------------------------------------------", summaryLogger, 'info')
     print "\n"
+    writeLogMessage('\n', summaryLogger, 'info')
     print "             DATA VALIDATION"
+    writeLogMessage("             DATA VALIDATION", summaryLogger, 'info')
     json_suc_count = 0
     json_dif_count = 0
     json_total_count = 0
     test_suite_check = True
     #DATA_VALID_SUCC = True
     print "\n"
+    writeLogMessage('\n', summaryLogger, 'info')
     if suite in test_suite_name_dict.keys():
         if test_suite_check == False:
             suite_result = 'FAILED'
@@ -697,6 +713,7 @@ for suite in test_suite_name_list:
         temp_dict = test_suite_name_dict[suite]
         case_check = True
         print "TEST SUITE: ", suite, ' > ', suite_result
+        writeLogMessage("TEST SUITE: %s > %s" % (suite, suite_result), summaryLogger, 'info')
         for item, value in temp_dict.items():
             failed_files = []
             for file in value:
@@ -710,8 +727,10 @@ for suite in test_suite_name_list:
                 result = 'successful'
                 json_suc_count += 1
             print "Test Case: ", item, " > ", result
+            writeLogMessage("Test Case: %s > %s" % (item, result), summaryLogger, 'info')
             if result == 'failed':
                 print "     FAILED FILES: ", failed_files
+                writeLogMessage("     FAILED FILES: %s" % failed_files, summaryLogger, 'warning')
             json_total_count += 1
         if case_check == False:
             #DATA_VALID_SUCC = False
@@ -722,10 +741,14 @@ for suite in test_suite_name_list:
 
     json_pass_rate = (json_suc_count / json_total_count) * 100
     print "\nJSON DATA VALIDATION TEST SUITE ", suite, ": ", "Failure Count: ",json_dif_count, " Success Count: ", json_suc_count, "   DATA PASS RATE: ", json_pass_rate, "%\n"
-
+    temp_str = "\nJSON DATA VALIDATION TEST SUITE " + str(suite) + ": " + "Failure Count: " + str(json_dif_count) + " Success Count: " + str(json_suc_count) + "   DATA PASS RATE: " + str(json_pass_rate) + "%\n"
+    writeLogMessage(temp_str, summaryLogger, 'info')
     print "**************************************************"
+    writeLogMessage("**************************************************", summaryLogger, 'info')
     print '\n'
+    writeLogMessage('\n', summaryLogger, 'info')
     print "             METADATA VALIDATION\n"
+    writeLogMessage("             METADATA VALIDATION\n", summaryLogger, 'info')
     test_suite_check = True
 
     if suite in metadata_suite_dict.keys():
@@ -736,6 +759,7 @@ for suite in test_suite_name_list:
         temp_dict = metadata_suite_dict[suite]
         case_check = True
         print "TEST SUITE: ", suite, ' > ', suite_result
+        writeLogMessage("TEST SUITE: %s > %s" % (suite,suite_result), summaryLogger, 'info')
         for item, value in temp_dict.items():
             failed_files = []
             for file in value:
@@ -747,16 +771,21 @@ for suite in test_suite_name_list:
             else:
                 result = 'successful'
             print "MetaData Type: ", item, " > ", result
+            writeLogMessage("MetaData Type: %s > %s" % (item, result), summaryLogger, 'info')
             if result == 'failed':
                 print "     FAILED FILES: ", failed_files
+                writeLogMessage("     FAILED FILES: %s" % failed_files, summaryLogger, 'warning')
         if case_check == False:
             test_suite_check = False
 
         METADATA_VALID_SUCC = test_suite_check
 
     print "\n**************************************************"
+    writeLogMessage("\n**************************************************", summaryLogger, 'info')
     print "\n"
+    writeLogMessage('\n', summaryLogger, 'info')
     print "             LOADER VALIDATION\n"
+    writeLogMessage("             LOADER VALIDATION\n", summaryLogger, 'info')
     loader_test_suite_check = True
     failed_schemas = []
     loader_result = ''
@@ -772,11 +801,14 @@ for suite in test_suite_name_list:
     else:
         loader_result = 'MISSING'
     print "TEST SUITE: ", suite, " ", loader_result
+    writeLogMessage("TEST SUITE: %s %s" % (suite,loader_result), summaryLogger, 'info')
     if loader_result == 'FAILED':
         print "Schemas Failed to Load... ", failed_schemas
+        writeLogMessage("Schemas Failed to Load... %s" % failed_schemas, summaryLogger, 'warning')
     LOAD_VALID_SUCC = loader_test_suite_check
 
     print "\n**************************************************"
+    writeLogMessage("\n**************************************************", summaryLogger, 'info')
     SUITE_STATUS = ''
     if DATA_VALID_SUCC and METADATA_VALID_SUCC and LOAD_VALID_SUCC == True:
         SUITE_STATUS = 'PASSED'
@@ -785,7 +817,9 @@ for suite in test_suite_name_list:
 
 
     print "\n             ", suite, " Summary\n"
+    writeLogMessage("\n             %s Summary\n" % suite,  summaryLogger, 'info')
     print "Overall test suite ", suite, " ", SUITE_STATUS, "\n"
+    writeLogMessage("Overall test suite %s %s \n" % (suite,SUITE_STATUS), summaryLogger, 'info')
     failed_phases = []
     if SUITE_STATUS == 'FAILED':
         if not DATA_VALID_SUCC:
@@ -795,6 +829,7 @@ for suite in test_suite_name_list:
         if not LOAD_VALID_SUCC:
             failed_phases.append('Schema Loader Validation Phase')
         print suite, " failed in these validation phases; ", failed_phases
+        writeLogMessage(" failed in these validation phases; %s" % failed_phases, summaryLogger, 'info')
         Failed_Suite_Count += 1
         Failed_Suite_List.append(suite)
     else:
@@ -804,17 +839,26 @@ for suite in test_suite_name_list:
 
 
 print "************************************** TEST RESULTS *************************************"
+writeLogMessage("************************************** TEST RESULTS *************************************", summaryLogger, 'info')
 
 print "Out of ", Total_Suite_Count, " tested suites,   ", Passed_Suite_Count, "passed testing      ", Failed_Suite_Count, "failed testing ", "\n"
-
+temp_str = "Out of " + str(Total_Suite_Count) + " tested suites,   " + str(Passed_Suite_Count) + " passed testing      " + str(Failed_Suite_Count) + " failed testing " + "\n"
+writeLogMessage(temp_str, summaryLogger, 'info')
 if Passed_Suite_Count > 0:
     print "List of successful test suites: ", Passed_Suite_List
+    writeLogMessage("List of successful test suites: %s" % Passed_Suite_List, summaryLogger, 'info')
 
 if Failed_Suite_Count > 0:
     print "List of failed test suites: ", Failed_Suite_List
+    writeLogMessage("List of failed test suites: %s" % Failed_Suite_List, summaryLogger, 'warning')
 
 Suite_pass_rate = (Passed_Suite_Count / Total_Suite_Count) * 100
 
 print "Incorta Build has a ", Suite_pass_rate, "% success rate"
+temp_str = "Incorta Build has a " + str(Suite_pass_rate) + "% success rate"
+writeLogMessage(temp_str, summaryLogger, 'info')
 
+
+time.sleep(2)
 shutdown_logger(mainLogger)
+shutdown_logger(summaryLogger)
