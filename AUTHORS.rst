@@ -11,4 +11,4 @@ Development Team
 Contributors
 ------------
 
-None yet. Why not be the first?
+* Bashir Khan <bashir.khan@incorta.com>
