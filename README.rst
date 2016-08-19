@@ -30,7 +30,7 @@ Framework Architect:
 Intern Team of Incorta based in California:
     .. [#] Anahit Sarao
     .. [#] Nadim Sarras
-    .. [#] Placeholder
+    .. [#] Bashir Khan
     .. [#] Placeholder
 
 
