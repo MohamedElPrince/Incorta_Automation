@@ -1,0 +1,98 @@
+----------------------------------------------
+Configuration File for Content Comparison Tool
+
+Please Read This Before Execution
+Supported Operating Systems: Mac OS, Linux, Windows
+----------------------------------------------
+Output: Displays changes of files within "context". For example, the entire xml of the file will not be displayed but only the subsections of the file where the changes take place. 
+
+To view xml differences in max capacity run execution as full screen.
+---------------------------------------------------------------------------
+SINGLE FILE EXECUTION: To run the diff tool for single XML files run the 
+XML_FILE_COMPARATOR.sh script. 
+
+Make sure to specify the source directories for each file at the top of the script.
+---------------------------------------------------------------------------
+
+Dependency:
+
+Windows
+*To run the script on Windows Cygwin must be installed, as well as a few other dependencies including; X11, xmllint, vim*
+
+All dependencies can be installed from the Cygwin Setup Tool.
+The Cygwin Setup Tool Can be found https://cygwin.com/install.html 
+
+In the Cygwin Setup Tool Install:
+
+~Debug
+	-libxml2-debuginfo: Debug info for libxml2
+~GNOME
+	-xml2po
+~Libs
+	-libxml2: GNOME XML library (runtime) 
+	-libxml2-devel: GNOME XML library (development)
+	-libxml C++ bindings for libxml2 
+~Search Vim in Cygwin Installer Search Bar
+ vim
+	Install all from Base, Debug, Editors
+~Entire X11 Package
+
+*X11 installation can be skipped if the script is ran from the cygwin terminal in full screen mode
+
+Linux 
+
+libxml2-utils - For xml lint and formating
+vim - For viewing the compared files in terminal screen
+
+Mac
+
+XQuartz (X11) - Required to resize and shift terminal window
+Commands using XQuartz (X11)
+resize -s 0 0
+printf '\e[3;0;0t'
+
+* To Run the Script Without XQuartz * - If you would prefer to manually run commands through vimdiff such as winc = and to manually expand the window then the commands resize and printf are not needed, thus XQuartz is not needed as a dependency.
+
+---------------------------------------------------------------------------
+
+Instructions To Run Script: 
+
+Note - The script does not require any dependencies other than having vim/vimdiff installed on your machine.
+
+1. Export Tenants to be compared to a local directory
+2. Specify the paths of the tenant folders within the bash script
+3. Run Script from CLI
+4. Enter 1,2, or 3 correlating to what action you would like to implement
+5A. For Dashboards enter the specific GUI ID to locate the file in both tenants
+5B. For Schemas specify the unique schema name to locate the file in both tenants
+6. Amount of Lines/Characters will display, press enter to continue
+7. VIM window appears, enter :winc =  This will equate the size of the split screen.
+8. Run vim visual commands to navigate and observe the differences, some useful commands are listed below.
+9. Completely exit vim to the terminal by running the command :qa!
+Note - If the command :q is run the user will only back out to see the xml files
+10. Specify your next search or press 3 to exit the script
+
+======================================================================
+useful vim visual commands
+
+In Normal Mode:
+
+arrow_keys | navigate by character
+$          | Moves Cursor to end of line
+0          | Move to beginning of line
+Ctrl + w   | (Press twice) Shifts between windows
+e          | jump to end of words (punctuation considered words)
+b	       | jump backward by words (punctuation considered words)
+======================================================================
+useful vim window commands
+
+In Insert Mode:
+
+winc =     | Configures split windows to be of equal width/height
+qa!        | Exit vim, exits directly back to terminal
+
+======================================================================
+Sample ID's
+GUID sample comparison: cebefa45-9e59-ee37-f372-6fea6298c3e6
+SCHEMA sample comparison: EBS_FSG // name="EBS_FSG"
+======================================================================
