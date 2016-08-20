@@ -161,14 +161,14 @@ def get_dashboard_guid(casePath, dashboardZippath, tempPath):
         prints:
             Prints exception case
     """
-    tempPath = create_directory(tempPath, randomName)
+    newtempPath = create_directory(tempPath, randomName)
     zip_ref = zipfile.ZipFile(dashboardZippath, 'r')
-    zip_ref.extractall(tempPath)
+    zip_ref.extractall(newtempPath)
     zip_ref.close()
-    tempPathfiles = os.listdir(tempPath)
+    tempPathfiles = os.listdir(newtempPath)
     for files in tempPathfiles:
         if 'tenant.xml' == files:
-            tenantxmlPath = os.path.join(tempPath, files)
+            tenantxmlPath = os.path.join(newtempPath, files)
             try:
                 with open(tenantxmlPath, 'rt') as f:
                     tree = ET.parse(f)
