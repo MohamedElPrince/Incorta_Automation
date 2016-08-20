@@ -1,7 +1,5 @@
 #!/bin/bash
 # ************************************************************************
-# By : Anahit Sarao
-# Last Update: Teusday August 2, 2016
 #
 # (c) Copyright Incorta 2016. All rights reserved.
 # ************************************************************************
@@ -9,7 +7,7 @@
 # ************************************************************************
 usage() { echo "Usage: $0 [-o <old_file>] [-f <new_file>] [-w <working_directory>]" 1>&2; exit 1; }
 
-while getopts :n:o:w: FLAG; do
+while getopts ":n:o:w:" FLAG; do
     case "${FLAG}" in
         n)
             s=${OPTARG}
@@ -27,39 +25,98 @@ while getopts :n:o:w: FLAG; do
 done
 shift $((OPTIND-1))
 
-SOURCE1=${s}
-SOURCE2=${p}
+FILE_SRC2=${s}
+FILE_SRC2=${p}
 
 #EXPORT_DIR is desired output directory of this script
 EXPORT_DIR=${w}
 
-hash python &> /dev/null
-if [ $? -eq 1 ]; then
-    echo >&2 "python not found."
-fi
+echo ""
+echo $"Path for SOURCE1" $FILE_SRC1
+echo "Path for SOURCE2" $FILE_SRC2
+echo "working Directory" $EXPORT_DIR
+echo ""
 
-#Checks for installed programs on machine
+#mac check for installed
 function programInstalled {
   local returning=1
   type $1 >/dev/null 2>&1 || { local returning=0; }
   echo "$returning"
 }
 
+#yum check for isntalled
+function isinstalled {
+	if yum list installed "$@" >/dev/null 2>&1; then
+  		local returns=1
+	else
+		local returns=0
+	fi
+	echo $returns
+}
+
+#yum check for isntalled--no echo print
+function isinstallednoecho {
+	if yum list installed "$@" >/dev/null 2>&1; then
+  		local returns=1
+	else
+		local returns=0
+	fi
+}
+
 #Fucntion Displays Green Check for installed programs
 #Else Displays Red Cross for Missing Programs
 function check {
 	if [ $1 == 1 ]; then
-    	printf "\e[32m✔"
-  		echo $(tput sgr0)
+		printf "\e[32m✔"
+		echo $(tput sgr0)
 	else
-    	printf "\e[31m✘"
-  		echo $(tput sgr0)
-  	fi
+		printf "\e[31m✘"
+		echo $(tput sgr0)
+	fi
 }
 
-echo "Path for SOURCE1" $FILE_SRC1
-echo "Path for SOURCE2" $FILE_SRC2
-
+case $( uname -s ) in
+	Linux)	#Linux Case
+		pkg="libxml2"
+		pfk2="vim"
+		echo Operating System: Linux
+		echo "libxml2 $(check $(isinstalled $pkg))"
+		echo "vim     $(check $(isinstalled $pkg))"
+		if isinstallednoecho $pkg; then
+			echo "Libxml2 is installed"; 
+		else
+			echo "No libxml2. Setting up libxml2"
+			sudo yum install libxml2
+			echo "Success..."
+		fi
+			
+		if isinstallednoecho $pkg2; then
+			echo "Vim is installed"; 
+		else
+			echo "No Vim. Setting up Vim"
+			sudo yum install vim
+			echo "Success..."
+		fi
+		;;
+	Darwin)	#Mac Case
+		echo Operating System: Mac OSX Darvin
+		echo "xmllint 		$(check $(programInstalled xmllint))"
+		echo "vim     		$(check $(programInstalled vim))"
+		xcheck=$(pkgutil --pkgs=.\+xquartz.\+)
+		if [[ $xcheck == "org.macosforge.xquartz.pkg" ]]; then
+			echo xquartz Already Installed on Machine
+		
+		elif [[ $xcheck == "" ]]; then
+			echo "xmllint Not Installed; Please Install xmllint..."
+			sudo pip install lxml
+			echo "Success..."
+		fi
+		;;
+	*)	#Default if Operatin System other than Mac or Linux
+		echo Other
+		exit 1
+		;;
+esac
 
 #Checks for temp directory, if not founds makes directory
 if [ ! -d "${EXPORT_DIR}/tracked_changes" ]; then
@@ -78,7 +135,7 @@ while [  "$CHOICE" -ne "2" ]; do
 	read CHOICE
 
 	if [[ "$CHOICE" -eq "1" ]]; then
-# Retrieves the file names within the specificed source directories
+		# Retrieves the file names within the specificed source directories
 		if [[ "$CHOICE" -eq "1" ]]; then
 
 			echo "Enter name of first file you would like to compare"
