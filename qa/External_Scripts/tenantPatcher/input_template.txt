@@ -1,3 +1,4 @@
+# FOLLOW FORMAT PROVIDE IN THIS FILE
 # Name of schemas wanted
 schema_name=Sample_Schema_1
 schema_name=Sample_Schema_2
