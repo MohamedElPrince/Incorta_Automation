@@ -1,7 +1,7 @@
 #!/bin/bash
 # ************************************************************************
 # By : Anahit Sarao
-# Last Update: Teusday August 2, 2016
+# Last Update: Teusday August 19, 2016
 #
 # (c) Copyright Incorta 2016. All rights reserved.
 # ************************************************************************
@@ -12,9 +12,9 @@
 
 #SOURCE2 must point to second export folder
 
-usage() { echo "Usage: $0 [-o <old_tenant>] [-f <new_tenant>] [-w <working_directory>]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-n <old_tenant>] [-o <new_tenant>] [-w <working_directory>]" 1>&2; exit 1; }
 
-while getopts :n:o:w: FLAG; do
+while getopts ":n:o:w:" FLAG; do
     case "${FLAG}" in
         n)
             s=${OPTARG}
@@ -38,59 +38,77 @@ SOURCE2=${p}
 #EXPORT_DIR is desired output directory of this script
 EXPORT_DIR=${w}
 
-
-
-echo "Path for SOURCE1" $SOURCE1
+echo ""
+echo $"Path for SOURCE1" $SOURCE1
 echo "Path for SOURCE2" $SOURCE2
+echo "working Directory" $EXPORT_DIR
+echo ""
 
-hash python &> /dev/null
-if [ $? -eq 1 ]; then
-    echo >&2 "python not found."
-fi
-
-#Checks for installed programs on machine
+#mac check for installed
 function programInstalled {
   local returning=1
   type $1 >/dev/null 2>&1 || { local returning=0; }
   echo "$returning"
 }
 
+#yum check for isntalled
+function isinstalled {
+	if yum list installed "$@" >/dev/null 2>&1; then
+  		local returns=1
+	else
+		local returns=0
+	fi
+	echo $returns
+}
+
+#yum check for isntalled--no echo print
+function isinstallednoecho {
+	if yum list installed "$@" >/dev/null 2>&1; then
+  		local returns=1
+	else
+		local returns=0
+	fi
+}
+
 #Fucntion Displays Green Check for installed programs
 #Else Displays Red Cross for Missing Programs
 function check {
 	if [ $1 == 1 ]; then
-    	printf "\e[32m✔"
-  		echo $(tput sgr0)
+		printf "\e[32m✔"
+		echo $(tput sgr0)
 	else
-    	printf "\e[31m✘"
-  		echo $(tput sgr0)
-  	fi
+		printf "\e[31m✘"
+		echo $(tput sgr0)
+	fi
 }
 
 case $( uname -s ) in
 	Linux)	#Linux Case
+		pkg="libxml2"
+		pfk2="vim"
 		echo Operating System: Linux
-		echo "libxml2-utils $(check $(programInstalled libxml2-utils))"
-		echo "vim           $(check $(programInstalled vim))"
-		problem=$(rpm -qa | grep libxml2-utils)
-		echo Checking for libxml2-utils: $problem
-		if [ "" == "$problem" ]; then
-     		echo "No libxml2-utils. Setting up libxml2-utils"
-  			sudo yum install libxml2-utils
-  			echo "Success..."
+		echo "libxml2 $(check $(isinstalled $pkg))"
+		echo "vim     $(check $(isinstalled $pkg))"
+		if isinstallednoecho $pkg; then
+			echo "Libxml2 is installed"; 
+		else
+			echo "No libxml2. Setting up libxml2"
+			sudo yum install libxml2
+			echo "Success..."
 		fi
-		Vproblem=$(rpm -qa | grep vim)
-		echo Checking for libxml2-utils: $Vproblem
-		if [ "" == "$Vproblem" ]; then
-     		echo "No vim. Setting up vim..."
-  			sudo yum install vim
-  			echo "Success..."
+			
+		if isinstallednoecho $pkg2; then
+			echo "Vim is installed"; 
+		else
+			echo "No Vim. Setting up Vim"
+			sudo yum install vim
+			echo "Success..."
 		fi
 		;;
 	Darwin)	#Mac Case
 		echo Operating System: Mac OSX Darvin
-		echo "xmllint $(check $(programInstalled xmllint))"
-		echo "vim     $(check $(programInstalled vim))"
+		echo "xmllint 		$(check $(programInstalled xmllint))"
+		echo "vim     		$(check $(programInstalled vim))"
 		xcheck=$(pkgutil --pkgs=.\+xquartz.\+)
 		if [[ $xcheck == "org.macosforge.xquartz.pkg" ]]; then
 			echo xquartz Already Installed on Machine
@@ -139,7 +157,6 @@ while [  "$CHOICE" -ne "3" ]; do
 	echo -n "2-Schema "
 	echo -n "3-Exit "
 	read CHOICE
-
 	if [[ "$CHOICE" -eq "1" || "$CHOICE" -eq "2" ]]; then
 
 		#Dashboard Comparison
@@ -149,23 +166,26 @@ while [  "$CHOICE" -ne "3" ]; do
 			FILE_SRC1=$(grep -rl "$dash_name" ${SOURCE1}/dashboards)
 			FILE_SRC2=$(grep -rl "$dash_name" ${SOURCE2}/dashboards)
 			echo "Finding Location of Files"
-			echo $FILE_SRC1
-			echo $FILE_SRC2
+			if [[ ! -f "${FILE_SRC1}" || ! -f "${FILE_SRC2}" ]]; then
+					echo "Files do not exist"
+			else 
+				echo $FILE_SRC1
+				echo $FILE_SRC2
+				xmllint --c14n ${FILE_SRC1} > ${TEMP_DIR}/FILE_SRC1_conc.xml
+				xmllint --format ${TEMP_DIR}/FILE_SRC1_conc.xml > ${TEMP_DIR}/FILE_SRC1_formatted.xml
+				xmllint --c14n ${FILE_SRC2} > ${TEMP_DIR}/FILE_SRC2_conc.xml
+				xmllint --format ${TEMP_DIR}/FILE_SRC2_conc.xml > ${TEMP_DIR}/FILE_SRC2_formatted.xml
 
-			xmllint --c14n ${FILE_SRC1} > ${TEMP_DIR}/FILE_SRC1_conc.xml
-			xmllint --format ${TEMP_DIR}/FILE_SRC1_conc.xml > ${TEMP_DIR}/FILE_SRC1_formatted.xml
-			xmllint --c14n ${FILE_SRC2} > ${TEMP_DIR}/FILE_SRC2_conc.xml
-			xmllint --format ${TEMP_DIR}/FILE_SRC2_conc.xml > ${TEMP_DIR}/FILE_SRC2_formatted.xml
-
-			echo "Tracking Changes"
-			resize -s 0 0
-			printf '\e[3;0;0t'
-			vimdiff -c ":i" -c ":colorscheme elflord" -c ":winc =" ${TEMP_DIR}/FILE_SRC2_formatted.xml ${TEMP_DIR}/FILE_SRC1_formatted.xml
-			rm ${TEMP_DIR}/FILE_SRC1_conc.xml
-			rm ${TEMP_DIR}/FILE_SRC1_formatted.xml
-			rm ${TEMP_DIR}/FILE_SRC2_conc.xml
-			rm ${TEMP_DIR}/FILE_SRC2_formatted.xml
-			echo "Done"
+				echo "Tracking Changes"
+				resize -s 0 0
+				printf '\e[3;0;0t'
+				vimdiff -c ":i" -c ":colorscheme elflord" -c ":winc =" ${TEMP_DIR}/FILE_SRC2_formatted.xml ${TEMP_DIR}/FILE_SRC1_formatted.xml
+				rm ${TEMP_DIR}/FILE_SRC1_conc.xml
+				rm ${TEMP_DIR}/FILE_SRC1_formatted.xml
+				rm ${TEMP_DIR}/FILE_SRC2_conc.xml
+				rm ${TEMP_DIR}/FILE_SRC2_formatted.xml
+				echo "Done"
+			fi
 		fi
 
 		#Schema Comparison
@@ -173,30 +193,43 @@ while [  "$CHOICE" -ne "3" ]; do
 			echo -n "Enter Schema Name? > "
 			read schema_raw
 			schema_name=(name="\"""${schema_raw}""\"")
-			FILE_SRC1_RAW=$(grep -rl "$schema_name" ${SOURCE1}/schemas)
-			FILE_SRC2_RAW=$(grep -rl "$schema_name" ${SOURCE2}/schemas)
-			FILE_SRC1_ARR=( $FILE_SRC1_RAW )
-			FILE_SRC2_ARR=( $FILE_SRC2_RAW )
-			FILE_SRC1_LOADER="${FILE_SRC1_ARR[0]}"
-			FILE_SRC1_SCHEMA="${FILE_SRC1_ARR[1]}"
-			FILE_SRC2_LOADER="${FILE_SRC2_ARR[0]}"
-			FILE_SRC2_SCHEMA="${FILE_SRC2_ARR[1]}"
-			echo "Finding Location of Files"
-			echo $FILE_SRC2_SCHEMA
-			echo $FILE_SRC1_SCHEMA
-			xmllint --c14n ${FILE_SRC1_SCHEMA} > ${TEMP_DIR}/FILE_SRC1_conc.xml
-			xmllint --format ${TEMP_DIR}/FILE_SRC1_conc.xml > ${TEMP_DIR}/FILE_SRC1_formatted.xml
-			xmllint --c14n ${FILE_SRC2_SCHEMA} > ${TEMP_DIR}/FILE_SRC2_conc.xml
-			xmllint --format ${TEMP_DIR}/FILE_SRC2_conc.xml > ${TEMP_DIR}/FILE_SRC2_formatted.xml
 
-			echo "Tracking Changes"
-			resize -s 0 0
-			printf '\e[3;0;0t'
-			vimdiff -c ":i" -c ":colorscheme elflord" -c ":winc =" ${TEMP_DIR}/FILE_SRC1_formatted.xml ${TEMP_DIR}/FILE_SRC2_formatted.xml
-			rm ${TEMP_DIR}/FILE_SRC1_conc.xml
-			rm ${TEMP_DIR}/FILE_SRC1_formatted.xml
-			rm ${TEMP_DIR}/FILE_SRC2_conc.xml
-			rm ${TEMP_DIR}/FILE_SRC2_formatted.xml
+			FILE_SRC1_RAW=$(grep -rl "$schema_name" ${SOURCE1}/schemas)
+			FILE_SRC1_ARR=( $FILE_SRC1_RAW )
+			FILE_SRC2_RAW=$(grep -rl "$schema_name" ${SOURCE2}/schemas)
+			FILE_SRC2_ARR=( $FILE_SRC2_RAW )
+
+			if [[ ! -f "${FILE_SRC1_RAW}" || ! -f "${FILE_SRC2_RAW}" ]]; then
+					echo "Files do not exist"
+			else 
+				if [[ "${FILE_SRC1_ARR[0]}" == *schema.xml ]]; then
+					FILE_SRC1_SCHEMA="${FILE_SRC1_ARR[0]}"
+				else
+					FILE_SRC1_SCHEMA="${FILE_SRC1_ARR[1]}"
+				fi
+				
+				if [[ "${FILE_SRC2_ARR[0]}" == *schema.xml ]]; then
+					FILE_SRC2_SCHEMA="${FILE_SRC2_ARR[0]}"
+				else
+					FILE_SRC2_SCHEMA="${FILE_SRC2_ARR[1]}"
+				fi
+				echo "Finding Location of Files"
+				echo $FILE_SRC2_SCHEMA
+				echo $FILE_SRC1_SCHEMA
+				xmllint --c14n ${FILE_SRC1_SCHEMA} > ${TEMP_DIR}/FILE_SRC1_conc.xml
+				xmllint --format ${TEMP_DIR}/FILE_SRC1_conc.xml > ${TEMP_DIR}/FILE_SRC1_formatted.xml
+				xmllint --c14n ${FILE_SRC2_SCHEMA} > ${TEMP_DIR}/FILE_SRC2_conc.xml
+				xmllint --format ${TEMP_DIR}/FILE_SRC2_conc.xml > ${TEMP_DIR}/FILE_SRC2_formatted.xml
+
+				echo "Tracking Changes"
+				resize -s 0 0
+				printf '\e[3;0;0t'
+				vimdiff -c ":i" -c ":colorscheme elflord" -c ":winc =" ${TEMP_DIR}/FILE_SRC1_formatted.xml ${TEMP_DIR}/FILE_SRC2_formatted.xml
+				rm ${TEMP_DIR}/FILE_SRC1_conc.xml
+				rm ${TEMP_DIR}/FILE_SRC1_formatted.xml
+				rm ${TEMP_DIR}/FILE_SRC2_conc.xml
+				rm ${TEMP_DIR}/FILE_SRC2_formatted.xml
+			fi
 		fi
 	fi
 

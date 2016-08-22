@@ -683,9 +683,9 @@ Failed_Suite_List = []
 for suite in test_suite_name_list:
     Total_Suite_Count += 1
     print "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
-    writeLogMessage("\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", summaryLogger, 'info')
-    print "\n"
     writeLogMessage('\n', summaryLogger, 'info')
+    writeLogMessage("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n", summaryLogger, 'info')
+    print "\n"
     print "-------------------------------------------------"
     writeLogMessage("-------------------------------------------------", summaryLogger, 'info')
 
@@ -739,7 +739,7 @@ for suite in test_suite_name_list:
 
     json_pass_rate = (json_suc_count / json_total_count) * 100
     print "\nJSON DATA VALIDATION TEST SUITE ", suite, ": ", "Failure Count: ",json_dif_count, " Success Count: ", json_suc_count, "   DATA PASS RATE: ", json_pass_rate, "%\n"
-    temp_str = "\nJSON DATA VALIDATION TEST SUITE " + str(suite) + ": " + "Failure Count: " + str(json_dif_count) + " Success Count: " + str(json_suc_count) + "   DATA PASS RATE: " + str(json_pass_rate) + "%\n"
+    temp_str = "\n\nJSON DATA VALIDATION TEST SUITE " + str(suite) + ": " + "Failure Count: " + str(json_dif_count) + " Success Count: " + str(json_suc_count) + "   DATA PASS RATE: " + str(json_pass_rate) + "%\n"
     writeLogMessage(temp_str, summaryLogger, 'info')
     print "**************************************************"
     writeLogMessage("**************************************************", summaryLogger, 'info')
@@ -779,7 +779,8 @@ for suite in test_suite_name_list:
         METADATA_VALID_SUCC = test_suite_check
 
     print "\n**************************************************"
-    writeLogMessage("\n**************************************************", summaryLogger, 'info')
+    writeLogMessage('\n\n', summaryLogger, 'info')
+    writeLogMessage("**************************************************", summaryLogger, 'info')
     print "\n"
     writeLogMessage('\n', summaryLogger, 'info')
     print "             LOADER VALIDATION\n"
@@ -806,7 +807,8 @@ for suite in test_suite_name_list:
     LOAD_VALID_SUCC = loader_test_suite_check
 
     print "\n**************************************************"
-    writeLogMessage("\n**************************************************", summaryLogger, 'info')
+    writeLogMessage('\n', summaryLogger, 'info')
+    writeLogMessage("**************************************************\n", summaryLogger, 'info')
     SUITE_STATUS = ''
     if DATA_VALID_SUCC and METADATA_VALID_SUCC and LOAD_VALID_SUCC == True:
         SUITE_STATUS = 'PASSED'
@@ -815,7 +817,7 @@ for suite in test_suite_name_list:
 
 
     print "\n             ", suite, " Summary\n"
-    writeLogMessage("\n             %s Summary\n" % suite,  summaryLogger, 'info')
+    writeLogMessage("             %s Summary\n" % suite,  summaryLogger, 'info')
     print "Overall test suite ", suite, " ", SUITE_STATUS, "\n"
     writeLogMessage("Overall test suite %s %s \n" % (suite,SUITE_STATUS), summaryLogger, 'info')
     failed_phases = []

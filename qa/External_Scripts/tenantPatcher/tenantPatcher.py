@@ -1,3 +1,11 @@
+#! /usr/bin/env python
+# ************************************************************************
+#  Licensed Material - Property of Incorta.
+#
+#  (c) Copyright Incorta 2014, 2015. All rights reserved.
+# ************************************************************************
+# Incorta Tenant Patch Tool
+# ************************************************************************
 import sys, os, subprocess, time, zipfile
 import os.path
 from sys import argv
@@ -7,12 +15,8 @@ import errno
 import xml.etree.ElementTree as ET
 import shutil
 
+import datetime
 
-# import Auto_Module
-# from Auto_Module import dataLoad
-# from Auto_Module import loadUsers
-# from Auto_Module import test_suite_import
-# from Auto_Module import export
 
 def set_new_values(config_file):
     """
@@ -45,6 +49,7 @@ def set_new_values(config_file):
                                 dash_name.append(str_tup[1].strip())
                             elif key == 'datasource':
                                 datasource_name.append(str_tup[1].strip())
+
 
 def parse(full_tenant_path):
     """
@@ -95,6 +100,7 @@ def parse(full_tenant_path):
                             if bool(dn.attrib):
                                 datasource_href[datasource] = dn.attrib
 
+
 def create_tenant_xml(path):
     """
     Function is used to create a new tenant.xml file for the various files retrieved
@@ -107,10 +113,10 @@ def create_tenant_xml(path):
     """
     tenant_attributes = {"enabld": "true", "exportTime": "", "load-mode": "start",
                          "name": "", "partial": "true", "path": "/", "version": "1.0"}
-    #tenant_attributes can be hardcoded since there are no parameters that need to be changed
+    # tenant_attributes can be hardcoded since there are no parameters that need to be changed
 
     data_attribute = {'xmlns:xi': "http://www.w3.org/2001/XInclude"}
-    #data_attribute will always be these url
+    # data_attribute will always be these url
 
     href_schema = {"href": "", "parse": "xml"}
     href_loader = {"href": "", "parse": "xml"}
@@ -186,6 +192,7 @@ def create_tenant_xml(path):
         print 'Wrong path to new folder'
         exit(1)
 
+
 def extraction(zip_file, unzip):
     """
     Function is used to extract the zip file contents to a new file
@@ -210,7 +217,8 @@ def extraction(zip_file, unzip):
         print 'Incorrect path to output folder'
         exit(1)
 
-def zip_up(zip_path):
+
+def zip_up(zip_path, tempstamp):
     """
     Function is used to zip the new folder
         args:
@@ -220,7 +228,7 @@ def zip_up(zip_path):
         prints:
             Debug statements
     """
-    new_zipfile_name = zip_path + '.zip'
+    new_zipfile_name = zip_path[:-3] + tempstamp + '.zip'
     fn = zipfile.ZipFile(new_zipfile_name, 'w', zipfile.ZIP_DEFLATED)
     rootlen = len(zip_path) + 1
     try:
@@ -232,6 +240,7 @@ def zip_up(zip_path):
     except Exception, e:
         print "Unable to zip file"
         exit(1)
+
 
 def create_directory(path, folderName):
     """
@@ -254,6 +263,7 @@ def create_directory(path, folderName):
             pass
         else:
             raise
+
 
 def move_files(src, dest):
     """
@@ -300,6 +310,7 @@ def move_files(src, dest):
                 print 'Unable to move schema loader files'
                 exit(1)
 
+
 def create_txt_file(path):
     """
     Function is used to create a txt file describing what's in the newly zipped file
@@ -327,13 +338,24 @@ def create_txt_file(path):
     txt_file.write('\n'.join(datasource_name))
     txt_file.close()
 
+def filecreation(list, filename):
+    mydir = os.path.join(os.getcwd(), datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
+    try:
+        os.makedirs(mydir)
+        return mydir
+    except OSError, e:
+        if e.errno != 17:
+            raise # This was not a "directory exist" error..
+
+
 # Dictionary for parsing the input.txt file
 config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource': 'default',
-                   'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default", 'txt_home': 'default'}
+                   'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default",
+                   'txt_home': 'default'}
 
 # Lists the contain the wanted names of schemas/dashboards/datasources
 schema_name = []
-dash_name =[]
+dash_name = []
 datasource_name = []
 
 # These are lists but contain dictionaries in each node where the key is the wanted file name and value is its xml attributes
@@ -346,6 +368,7 @@ schema_href = {}
 loader_href = {}
 dashboard_href = {}
 datasource_href = {}
+
 
 def get_input_arguments():
     """
@@ -384,6 +407,7 @@ def get_input_arguments():
             raise ('-z Flag Not Found')
     return inputFile, outputPath, zipPath
 
+
 def main():
     print "Entering script..."
     inputFile, outputPath, zipPath = get_input_arguments()
@@ -391,8 +415,9 @@ def main():
     config_defaults['testfile_home'] = outputPath
     config_defaults['txt_home'] = outputPath
     print config_defaults['testfile_home']
-
-    wdPath = create_directory((config_defaults['testfile_home']), 'temp')
+    tempStamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    wdPath = create_directory((config_defaults['testfile_home']), tempStamp)
+    print wdPath
     tmpPath = create_directory(wdPath, 'tmp')
     create_directory(tmpPath, 'schemas')
     create_directory(tmpPath, 'dashboards')
@@ -410,14 +435,13 @@ def main():
     parse(config_defaults['unzipped_home'])
     create_tenant_xml(tmpPath)
     move_files(config_defaults['unzipped_home'], tmpPath)
-    zip_up(tmpPath)
+    zip_up(tmpPath, tempStamp)
     create_txt_file(wdPath)
     print 'Cleaning Up...'
     shutil.rmtree(tmpPath)
     shutil.rmtree(extractPath)
     print "Exiting script..."
 
-if __name__ =='__main__':
+
+if __name__ == '__main__':
     main()
-
-
