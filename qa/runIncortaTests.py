@@ -702,7 +702,6 @@ for suite in test_suite_name_list:
     json_dif_count = 0
     json_total_count = 0
     test_suite_check = True
-    #DATA_VALID_SUCC = True
     print "\n"
     writeLogMessage('\n', summaryLogger, 'info')
     if suite in test_suite_name_dict.keys():
@@ -733,7 +732,6 @@ for suite in test_suite_name_list:
                 writeLogMessage("     FAILED FILES: %s" % failed_files, summaryLogger, 'warning')
             json_total_count += 1
         if case_check == False:
-            #DATA_VALID_SUCC = False
             test_suite_check = False
 
         DATA_VALID_SUCC = test_suite_check
