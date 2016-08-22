@@ -1,4 +1,4 @@
-# FOLLOW FORMAT PROVIDE IN THIS FILE
+# FOLLOW FORMAT PROVIDED IN THIS FILE
 # Name of schemas wanted
 schema_name=Sample_Schema_1
 schema_name=Sample_Schema_2
@@ -10,3 +10,9 @@ dash_name=Sample_Dashboard_3
 
 #Name of datasources wanted
 datasource=Sample_datasource
+
+#Name of schemas wanted using Wildchar seach
+schema_char=Sample_Schema*
+
+#Name of dashboards wanted using Wildchar search
+dash_char=Sample_Dashboard*
