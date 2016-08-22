@@ -17,6 +17,32 @@ import shutil
 
 import datetime
 
+def parse_wild_char(full_tenant_path):
+    full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
+    try:
+        tree = ET.parse(full_tenant_path)
+        root = tree.getroot()
+    except Exception, e:
+        print 'Incorrect path to Tenant'
+        exit(1)
+    test_dash = []
+    test_schema = []
+    for child in root.iter('dashboard'):
+        for char in dash_char_name:
+            char = char[:-1]
+            if str(child.attrib['name']).startswith(char):
+                test_dash.append(child.attrib['name'])
+    for test in test_dash:
+        if test not in dash_name:
+            dash_name.append(test)
+    for child in root.iter('schema-definition'):
+        for char in schema_char_name:
+            char = char[:-1]
+            if str(child.attrib['name']).startswith(char):
+                test_schema.append(child.attrib['name'])
+    for schema in test_schema:
+        if schema not in schema_name:
+            schema_name.append(schema)
 
 def set_new_values(config_file):
     """
@@ -49,7 +75,10 @@ def set_new_values(config_file):
                                 dash_name.append(str_tup[1].strip())
                             elif key == 'datasource':
                                 datasource_name.append(str_tup[1].strip())
-
+                            elif key == 'dash_char':
+                                dash_char_name.append(str_tup[1].strip())
+                            elif key == 'schema_char':
+                                schema_char_name.append(str_tup[1].strip())
 
 def parse(full_tenant_path):
     """
@@ -351,12 +380,15 @@ def filecreation(list, filename):
 # Dictionary for parsing the input.txt file
 config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource': 'default',
                    'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default",
-                   'txt_home': 'default'}
+                   'txt_home': 'default', 'dash_char': 'default', 'schema_char': 'default'}
 
 # Lists the contain the wanted names of schemas/dashboards/datasources
 schema_name = []
 dash_name = []
 datasource_name = []
+dash_char_name = []
+schema_char_name = []
+
 
 # These are lists but contain dictionaries in each node where the key is the wanted file name and value is its xml attributes
 schema_attributes = []
@@ -432,6 +464,7 @@ def main():
 
     extraction(config_defaults['zipfile_home'], config_defaults['unzipped_home'])
 
+    parse_wild_char(config_defaults['unzipped_home'])
     parse(config_defaults['unzipped_home'])
     create_tenant_xml(tmpPath)
     move_files(config_defaults['unzipped_home'], tmpPath)

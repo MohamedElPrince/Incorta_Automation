@@ -10,3 +10,9 @@ dash_name=Sales Dashboard
 
 #Name of datasources wanted
 datasource=Sales
+
+#Name of dashboards wanted using wildchar search
+dash_char=A_*
+
+#Name of schemas wanted using wildchar seach
+schema_char=*
