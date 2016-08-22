@@ -13,17 +13,6 @@ install:
 script:
   - python /tests/test_qa.py
   - python setup.py test
-  - tox
-  - tox -e ${TOXENV}
-
 branches:
   only:
     - master
-
-env:
-#  - TOXENV=py35
-#  - TOXENV=py34
-#  - TOXENV=py33
-  - TOXENV=py27
-  - TOXENV=coverage
-#  - TOXENV=py26
