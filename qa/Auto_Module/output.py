@@ -60,40 +60,4 @@ def meta_data_validation_generate_suc_dif_file_names(test_suite_output_type_path
     return file_name_list
 
 
-# def retrieve_test_suite_names(test_suite_name, test_suite_output_type_path, test_case_name_list):
-#     COUNT = 1
-#     SUC_COUNT = 0
-#     DIFF_COUNT = 0
-#     SUC_DICT = {}
-#     SUC_LIST = []
-#     DIFF_DICT = {}
-#     DIFF_LIST = []
-#     name_list = generate_suc_dif_file_names(test_suite_output_type_path)
-#     suc_key = test_suite_name + ' Successes'
-#     dif_key = test_suite_name + ' Failures'
-#     print "PRINTING FILE NAMES"
-#     print name_list
-#     for name in name_list:
-#         if name.endswith(".suc"):
-#             print "Success: ", COUNT
-#             SUC_COUNT += 1
-#             print name
-#             SUC_LIST.append(name)
-#         else:
-#             print "diff"
-#             DIFF_COUNT += 1
-#             print name
-#             DIFF_LIST.append(name)
-#         COUNT += 1
-#     SUC_DICT[suc_key] = SUC_LIST
-#     DIFF_DICT[dif_key] = DIFF_LIST
-#
-#     TOTAL_COUNT = SUC_COUNT + DIFF_COUNT
-#     SUC_RATE = (TOTAL_COUNT / SUC_COUNT) * 100
-#     SUC_PERC = str(SUC_RATE) + '%'
-#     print "For Test Suite: ", test_suite_name, " Validation: ", test_suite_output_type_path
-#     print "Success Rate: ", SUC_PERC
-#     print "         Number of Successes: ", SUC_COUNT
-#     print SUC_LIST
-#
-#     return SUC_DICT, DIFF_DICT
+
