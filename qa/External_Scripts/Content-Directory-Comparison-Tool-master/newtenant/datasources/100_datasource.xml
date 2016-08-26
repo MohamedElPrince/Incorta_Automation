@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><datasource name="Sales" type="sql" xml:base="datasources/9_datasource.xml"><property name="connectionPool" value="30"/><property name="database" value="mysql"/><property name="connection" value="jdbc:mysql://184.107.73.174:3306/salesdb"/><property name="user" value="root"/><property name="password" value="Inc0rt@P@$$w0Rd"/></datasource>

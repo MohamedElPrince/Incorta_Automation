@@ -61,11 +61,11 @@ Life is Easier!
 
 ---------------------------------------------------------------------------
 Arguments Taken by Content_Comparison.sh
-Usage: ./Content_Comparison.sh [-o <old_tenant>] [-f <new_tenant>] [-w <working_directory>]
+Usage: ./Content_Comparison.sh -o <old_tenant> -n <new_tenant> -w <working_directory>
  
- [-o <old_tenant>]			-> Path to old tenant tmt extract folder
- [-f <new_tenant>]			-> Path to new tenant tmt extract folder
- [-w <working_directory>]	-> Path to working Directory
+ <old_tenant>			-> Path to old tenant tmt extract folder
+ <new_tenant>			-> Path to new tenant tmt extract folder
+ <working_directory>		-> Path to working Directory
 
 ---------------------------------------------------------------------------
 Instructions To Run Script: 
@@ -109,5 +109,5 @@ GUID sample comparison: cebefa45-9e59-ee37-f372-6fea6298c3e6
 
 <The Dashboard Name is now required to comapre two dashbaords>
 DashboardName : Sales Dashboard
-SCHEMA sample comparison: EBS_FSG
+SCHEMA sample comparison: Sales
 ======================================================================

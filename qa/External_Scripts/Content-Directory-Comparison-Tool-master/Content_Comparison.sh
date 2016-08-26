@@ -5,21 +5,21 @@
 #
 # (c) Copyright Incorta 2016. All rights reserved.
 # ************************************************************************
-# Bash Script to scan through changes of Directories then  files
+# Bash Script to scan through changes of Tenant Backup
 # ************************************************************************
 
 #SOURCE1 must point to one export folder
 
 #SOURCE2 must point to second export folder
 
-usage() { echo "Usage: $0 [-n <old_tenant>] [-o <new_tenant>] [-w <working_directory>]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-o <old_tenant>] [-n <new_tenant>] [-w <working_directory>]" 1>&2; exit 1; }
 
 while getopts ":n:o:w:" FLAG; do
     case "${FLAG}" in
-        n)
+        o)
             s=${OPTARG}
             ;;
-        o)
+        n)
             p=${OPTARG}
             ;;
         w)
@@ -194,13 +194,15 @@ while [  "$CHOICE" -ne "3" ]; do
 			read schema_raw
 			schema_name=(name="\"""${schema_raw}""\"")
 
-			FILE_SRC1_RAW=$(grep -rl "$schema_name" ${SOURCE1}/schemas)
+			FILE_SRC1_RAW=$(grep -rl "$schema_raw" ${SOURCE1}/schemas)
 			FILE_SRC1_ARR=( $FILE_SRC1_RAW )
-			FILE_SRC2_RAW=$(grep -rl "$schema_name" ${SOURCE2}/schemas)
+			FILE_SRC2_RAW=$(grep -rl "$schema_raw" ${SOURCE2}/schemas)
 			FILE_SRC2_ARR=( $FILE_SRC2_RAW )
 
-			if [[ ! -f "${FILE_SRC1_RAW}" || ! -f "${FILE_SRC2_RAW}" ]]; then
-					echo "Files do not exist"
+			if [[ ! -f "${FILE_SRC1_ARR[0]}" || ! -f "${FILE_SRC2_ARR[0]}" ]]; then
+				echo "Loader Schema Files do not exist"
+			elif [[ ! -f "${FILE_SRC1_ARR[1]}" || ! -f "${FILE_SRC2_ARR[1]}" ]]; then
+				echo "Schema Files do not exist"
 			else 
 				if [[ "${FILE_SRC1_ARR[0]}" == *schema.xml ]]; then
 					FILE_SRC1_SCHEMA="${FILE_SRC1_ARR[0]}"
