@@ -2,7 +2,7 @@
 incorta_home=/home/Incorta
 
 #defaults to /home/tenants if none specified
-tenant_home=/home/tenants
+tenant_home=/home/Incorta/tenants
 
 #tenant defaults to Demo
 tenant=Demo
@@ -22,7 +22,7 @@ load_users=No
 #default is MySQL
 test_suite=MySQL
 
-#default is Yes
+#default is False
 skip_validation=False
 
 #default path to place working directory is /IncortaTesting/tmp/work
