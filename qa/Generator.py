@@ -71,12 +71,14 @@ def export_dashboards(incorta, session, casePath, dashboards):
             Can print debug statements if needed
     """
     dashboardPath = create_directory(casePath, 'dashboards')
-    temp_path = dashboardPath + os.sep + dashboards + '.zip'
+    str_tup=dashboards.split('/')
+    dashboard_name=str_tup[-1]
+    dashboardPath+= (os.sep + dashboard_name +'.zip')
     try:
-        export_check = incorta.export_dashboards(session, temp_path, dashboards)
+        export_check = incorta.export_dashboards(session, dashboardPath, dashboards)
         if Debug == True:
             print export_check
-        return temp_path
+        return dashboardPath
     except Exception, e:
         print ('ERROR: Dashboard:', dashboards, " Not Found")
 
