@@ -248,9 +248,13 @@ for sub_dir in test_suite_directories:
             print "Test Case ", dir, " contains datasources"
             writeLogMessage("Test Case %s contains datasources" % dir, mainLogger, str(INFO))
             Auto_Module.test_suite_import.import_datasources(incorta, session, test_case_path)
+        else:
+            print "Test Case ", dir, "does not contain datafiles or datasources"
+            writeLogMessage("Test Case %s does not contain datafiles or datasources" % dir, mainLogger, str(INFO))
 
-        # Import Schema to Incorta
-        Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
+        if config_defaults['include_schemas'] == 'True':
+            # Import Schema to Incorta
+            Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
         # Import Dashboards to Incorta
         Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
         # Defining Import / Export Paths
@@ -268,8 +272,8 @@ for sub_dir in test_suite_directories:
         # Grab Imported Information
         import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
             import_path)
-        import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(
-            import_path)
+        if config_defaults['include_schemas'] == 'True':
+            import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
 
         # TENANT EDITOR
         Auto_Module.validation.tenant_editor(import_path)
@@ -326,23 +330,23 @@ for sub_dir in test_suite_directories:
                                               XML_MetaData_Validation_Path, 'schema_loaders')
             Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants,
                                               XML_MetaData_Validation_Path, 'schema_tenants')
+        if config_defaults['include_schemas'] == 'True':
+            # Load Data
+            table = None
+            incremental = False
+            snapshot = False
+            staging = False
+            Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
+            # LOADER VALIDATION
+            # Appends to list of loaded schemas as for loop goes through every test case
+            full_schema_export_list.extend(export_schema_names_list)
+            schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list, full_schema_export_list)
+            Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
+            loaded_schemas = full_schema_export_list
+            # Exported Dashboard ID's per test case
+            test_case_dashboard_export_list = export_dash_ids.keys()
 
-        # Load Data
-        table = None
-        incremental = False
-        snapshot = False
-        staging = False
-        Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
 
-        # LOADER VALIDATION
-        # Appends to list of loaded schemas as for loop goes through every test case
-        full_schema_export_list.extend(export_schema_names_list)
-        schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list,
-                                                             full_schema_export_list)
-        Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
-        loaded_schemas = full_schema_export_list
-        # Exported Dashboard ID's per test case
-        test_case_dashboard_export_list = export_dash_ids.keys()
         # GRANT PERMISSIONS
         print "Preparing to Export: ", export_dashboard_names_list
         writeLogMessage("Preparing to Export: %s" % export_dashboard_names_list, mainLogger, str(INFO))
@@ -376,23 +380,23 @@ for sub_dir in test_suite_directories:
             print "Entering JSON DASH EXPORT"
             writeLogMessage("Entering JSON DASH EXPORT", mainLogger, str(DEBUG))
 
-        user_pass = 'superpass'
-        print "TESTING USER LOGIN"
-        writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
-
-        for user in user_list:
-            session = login(url, tenant, user, user_pass)
-            time.sleep(2)
-            print "Logged in user.. ", user
-            writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
-            session_id = session[21:53]
-            csrf_token = session[63:95]
-            Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                      test_case_path_wd, test_case_path, user, url)
-            logout(session)
-            time.sleep(2)
-            print "Logged out user.. ", user
-            writeLogMessage("Logged out user.. %s" % user, mainLogger, str(INFO))
+        #USER TESTING
+        if config_defaults['include_user_testing'] == 'True':
+            user_pass = 'superpass'
+            print "TESTING USER LOGIN"
+            writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
+            for user in user_list:
+                session = login(url, tenant, user, user_pass)
+                time.sleep(2)
+                print "Logged in user.. ", user
+                writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
+                session_id = session[21:53]
+                csrf_token = session[63:95]
+                Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token, test_case_path_wd, test_case_path, user, url)
+                logout(session)
+                time.sleep(2)
+                print "Logged out user.. ", user
+                writeLogMessage("Logged out user.. %s" % user, mainLogger, str(INFO))
 
         if Debug == True:
             print "\nFinished JSON DASH EXPORT"
