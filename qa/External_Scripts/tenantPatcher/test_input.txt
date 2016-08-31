@@ -1,18 +1,18 @@
 # Name of schemas wanted
-schema_name=A_01_CASE
-schema_name=Sales
+#schema_name=A_01_CASE
+#chema_name=Sales
 
 
 #Name of dashboard wanted
-dash_name=A_04_CASE_BIN Dashboard-1
-dash_name=A_01_CASE Dashboard
-dash_name=Sales Dashboard
+#dash_name=A_04_CASE_BIN Dashboard
+#dash_name=A_01_CASE Dashboard
+#dash_name=Sales Dashboard
 
 #Name of datasources wanted
-datasource=Sales
+#datasource=Sales
 
 #Name of dashboards wanted using wildchar search
-dash_char=A_*
+dash_char=(*
 
 #Name of schemas wanted using wildchar seach
-schema_char=*
+#schema_char=*

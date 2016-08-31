@@ -17,6 +17,17 @@ import shutil
 
 import datetime
 
+def parse_folder(full_tenant_path):
+    full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
+    try:
+        tree = ET.parse(full_tenant_path)
+        root = tree.getroot()
+    except Exception, e:
+        print 'Incorrect path to Tenant'
+        exit(1)
+    for child in root.iter('folder'):
+        folder_structure.setdefault(child.attrib['owner-id'], []).append(child.attrib)
+
 def parse_wild_char(full_tenant_path):
     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
     try:
@@ -204,7 +215,11 @@ def create_tenant_xml(path):
         for attrib in dashboard_attributes:
             if attrib['name'] == dash:
                 dash_attributes = attrib
-        dashboard = SubElement(catalog, 'dashboard', dash_attributes)
+                folder = SubElement(catalog, 'folder')
+                for f in folder_structure[attrib['owner-id']]:
+                    print f
+                    folder = SubElement(folder, 'folder', f)
+        dashboard = SubElement(folder, 'dashboard', dash_attributes)
         dash_data = SubElement(dashboard, 'data', data_attribute)
         for name in dashboard_href:
             if name == dash:
@@ -401,6 +416,8 @@ loader_href = {}
 dashboard_href = {}
 datasource_href = {}
 
+folder_structure = {}
+
 
 def get_input_arguments():
     """
@@ -463,7 +480,7 @@ def main():
     print config_defaults['unzipped_home']
 
     extraction(config_defaults['zipfile_home'], config_defaults['unzipped_home'])
-
+    parse_folder(config_defaults['unzipped_home'])
     parse_wild_char(config_defaults['unzipped_home'])
     parse(config_defaults['unzipped_home'])
     create_tenant_xml(tmpPath)
