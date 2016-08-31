@@ -330,21 +330,23 @@ for sub_dir in test_suite_directories:
                                               XML_MetaData_Validation_Path, 'schema_loaders')
             Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants,
                                               XML_MetaData_Validation_Path, 'schema_tenants')
-        if config_defaults['include_schemas'] == 'True':
-            # Load Data
-            table = None
-            incremental = False
-            snapshot = False
-            staging = False
-            Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
-            # LOADER VALIDATION
-            # Appends to list of loaded schemas as for loop goes through every test case
-            full_schema_export_list.extend(export_schema_names_list)
-            schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list, full_schema_export_list)
-            Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
-            loaded_schemas = full_schema_export_list
-            # Exported Dashboard ID's per test case
-            test_case_dashboard_export_list = export_dash_ids.keys()
+
+        if config_defaults['skip_data_load'] == 'False':
+            if config_defaults['include_schemas'] == 'True':
+                # Load Data
+                table = None
+                incremental = False
+                snapshot = False
+                staging = False
+                Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list)
+                # LOADER VALIDATION
+                # Appends to list of loaded schemas as for loop goes through every test case
+                full_schema_export_list.extend(export_schema_names_list)
+                schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list, full_schema_export_list)
+                Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
+                loaded_schemas = full_schema_export_list
+                # Exported Dashboard ID's per test case
+                test_case_dashboard_export_list = export_dash_ids.keys()
 
 
         # GRANT PERMISSIONS
@@ -438,8 +440,10 @@ for sub_dir in test_suite_directories:
         meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_tenants')
         meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schemas')
 
-    # Compares Loaded Schema List to Exported Schema List
-    Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
+    if config_defaults['include_schemas'] == 'True':
+        if config_defaults['skip_data_load'] == 'False':
+            # Compares Loaded Schema List to Exported Schema List
+            Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
     loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(Loader_Validation_Path)
     test_suite_name_dict[sub_dir] = test_case_name_dict
     metadata_suite_dict[sub_dir] = meta_data_case_dict
