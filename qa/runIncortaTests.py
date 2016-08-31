@@ -438,8 +438,9 @@ for sub_dir in test_suite_directories:
         meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_tenants')
         meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schemas')
 
-    # Compares Loaded Schema List to Exported Schema List
-    Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
+    if config_defaults['include_schemas'] == 'True':
+        # Compares Loaded Schema List to Exported Schema List
+        Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
     loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(Loader_Validation_Path)
     test_suite_name_dict[sub_dir] = test_case_name_dict
     metadata_suite_dict[sub_dir] = meta_data_case_dict
