@@ -17,6 +17,23 @@ import shutil
 
 import datetime
 
+def get_name_from_folder(full_tenant_path):
+    full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
+    try:
+        tree = ET.parse(full_tenant_path)
+        root = tree.getroot()
+    except Exception, e:
+        print 'Incorrect path to Tenant'
+        exit(1)
+    for child in root.iter('folder'):
+        for f in folder_name:
+            if f == child.attrib['name']:
+                for sub in child.iter():
+                    if sub.tag == 'dashboard':
+                        print sub.attrib
+
+
+
 def parse_folder(full_tenant_path):
     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
     try:
@@ -90,6 +107,8 @@ def set_new_values(config_file):
                                 dash_char_name.append(str_tup[1].strip())
                             elif key == 'schema_char':
                                 schema_char_name.append(str_tup[1].strip())
+                            elif key == 'dash_folder':
+                                folder_name.append(str_tup[1].strip())
 
 def parse(full_tenant_path):
     """
@@ -215,9 +234,10 @@ def create_tenant_xml(path):
         for attrib in dashboard_attributes:
             if attrib['name'] == dash:
                 dash_attributes = attrib
-                folder = SubElement(catalog, 'folder', folder_structure[attrib['owner-id']][0])
-                for f in folder_structure[attrib['owner-id']][1:]:
-                    folder = SubElement(folder, 'folder', f)
+                if folder_structure[attrib['owner-id']] != '':
+                    folder = SubElement(catalog, 'folder', folder_structure[attrib['owner-id']][0])
+                    for f in folder_structure[attrib['owner-id']][1:]:
+                        folder = SubElement(folder, 'folder', f)
         dashboard = SubElement(folder, 'dashboard', dash_attributes)
         dash_data = SubElement(dashboard, 'data', data_attribute)
         for name in dashboard_href:
@@ -394,7 +414,7 @@ def filecreation(list, filename):
 # Dictionary for parsing the input.txt file
 config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource': 'default',
                    'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default",
-                   'txt_home': 'default', 'dash_char': 'default', 'schema_char': 'default'}
+                   'txt_home': 'default', 'dash_char': 'default', 'schema_char': 'default', 'dash_folder': 'default'}
 
 # Lists the contain the wanted names of schemas/dashboards/datasources
 schema_name = []
@@ -416,6 +436,7 @@ dashboard_href = {}
 datasource_href = {}
 
 folder_structure = {}
+folder_name = []
 
 
 def get_input_arguments():
@@ -480,6 +501,7 @@ def main():
 
     extraction(config_defaults['zipfile_home'], config_defaults['unzipped_home'])
     parse_folder(config_defaults['unzipped_home'])
+    get_name_from_folder(config_defaults['unzipped_home'])
     parse_wild_char(config_defaults['unzipped_home'])
     parse(config_defaults['unzipped_home'])
     create_tenant_xml(tmpPath)

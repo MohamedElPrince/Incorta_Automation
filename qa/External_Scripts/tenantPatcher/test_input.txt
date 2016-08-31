@@ -16,3 +16,6 @@ dash_char=(*
 
 #Name of schemas wanted using wildchar seach
 #schema_char=*
+
+#Name of folder wanted
+dash_folder=Aggregated
