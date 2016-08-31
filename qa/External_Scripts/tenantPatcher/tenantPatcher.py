@@ -215,9 +215,8 @@ def create_tenant_xml(path):
         for attrib in dashboard_attributes:
             if attrib['name'] == dash:
                 dash_attributes = attrib
-                folder = SubElement(catalog, 'folder')
-                for f in folder_structure[attrib['owner-id']]:
-                    print f
+                folder = SubElement(catalog, 'folder', folder_structure[attrib['owner-id']][0])
+                for f in folder_structure[attrib['owner-id']][1:]:
                     folder = SubElement(folder, 'folder', f)
         dashboard = SubElement(folder, 'dashboard', dash_attributes)
         dash_data = SubElement(dashboard, 'data', data_attribute)
