@@ -31,15 +31,16 @@ skip_validation=False
 #be added to the end of the custom working directory path
 wd_path=/IncortaTesting/tmp/work
 
-#This is import flag and set to false (-d)
-import_object=Yes
+#LDAP SETUP PROPERTIES
 
-#This is data load flag and set to false (-l)
-data_load=yes
+#Schemas Included? Default set to True
+include_schemas=True
 
-#This is extract flag and set to false (-x)
-extract_csv=yes
+#User Testing? Includes json files per user. Default set to True
+include_user_testing=True
 
+#Default is set to False
+skip_data_load=True
 
 
 
