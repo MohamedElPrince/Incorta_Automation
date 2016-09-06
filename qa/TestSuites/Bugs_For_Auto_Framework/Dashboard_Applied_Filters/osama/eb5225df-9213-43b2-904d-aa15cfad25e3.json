@@ -1,0 +1,18 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"4e4080ba-1adb-df32-3dcf-9ed45fafd088",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["County","Time Id","Cost"],
+"rowTypes":[],
+"measureTypes":["string","date","double"],
+"totalRows":0,
+"complete":true,
+"rowTree":{
+"r":[]}}]
+}
