@@ -1,0 +1,27 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"3a470042-2130-1679-a71d-db8cb8568424",
+"type":"pivot",
+"isSampled":false,
+"rowCount":1,
+"colCount":1,
+"measureCount":1,
+"row":["SALES_MySQL4.sales.TIME_ID"],
+"col":["SALES_MySQL4.customers.CUST_STATE_PROVINCE"],
+"rowHeaders":["Time Id"],
+"measureHeaders":["Cost"],
+"colTree":[{
+"v":"CA"}],
+"rowTree":{
+"rs":2,
+"g":[{
+"v":"2014-09-24",
+"g":[[{
+"v":"41,838.96"}]]},
+{
+"v":"2014-09-28",
+"g":[[{
+"v":"35,149.65"}]]}]}}]
+}

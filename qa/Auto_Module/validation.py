@@ -218,6 +218,20 @@ def get_dashboards_info(path):
 						for names in dash_file_names:
 							temp_full_path = full_dash_path + os.sep + names
 							try:
+								tree = ElementTree.parse(dashboard_cases_path + os.sep + 'tenant.xml')
+								root = tree.getroot()
+							except Exception, e:
+								print 'Incorrect path to Tenant'
+								exit(1)
+							file_path = ''
+							for child in root.iter('folder'):
+								file_path = file_path + os.sep + child.attrib['name']
+							for child in root.iter('dashboard'):
+								file_path += os.sep + child.attrib['name']
+								# print file_path
+								dashboard_name_list.append(file_path[1:])
+
+							try:
 								with open(temp_full_path, 'rt') as f:
 									dash_tree = ElementTree.parse(f)
 							except Exception, e:
@@ -230,12 +244,12 @@ def get_dashboards_info(path):
 							except Exception, e:
 								print "Unable to read dashboard", names
 								writeLogMessage('%s %s' % ("Unable to read dashboard", names), mainLogger, 'critical')
-							try:
-								for node in dash_tree.iter('report'):
-									dashboard_name_list.append(node.attrib.get('name'))
-							except Exception, e:
-								print "Unable to read name from dashboard", names
-								writeLogMessage('%s %s' % ("Unable to read name from dashboard", names), mainLogger, 'critical')
+							# try:
+							# 	for node in dash_tree.iter('report'):
+							# 		dashboard_name_list.append(node.attrib.get('name'))
+							# except Exception, e:
+							# 	print "Unable to read name from dashboard", names
+							# 	writeLogMessage('%s %s' % ("Unable to read name from dashboard", names), mainLogger, 'critical')
 					elif dash_data == 'tenant.xml':
 						tenant_full_path = dashboard_cases_path + os.sep + dash_data
 						try:
@@ -318,3 +332,4 @@ def get_schemas_info(path):
 							print "Unable to read schema"
 							writeLogMessage('Unable to Read Schema', mainLogger, 'critical')
 	return schema_names, schema_loaders, schema_tenants, schema_name_list
+
