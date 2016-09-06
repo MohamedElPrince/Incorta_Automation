@@ -163,8 +163,12 @@ while [  "$CHOICE" -ne "3" ]; do
 		if [[ "$CHOICE" -eq "1" ]]; then
 			echo -n "Enter Dashboard Name? > "
 			read dash_name
-			FILE_SRC1=$(grep -rl "$dash_name" ${SOURCE1}/dashboards)
-			FILE_SRC2=$(grep -rl "$dash_name" ${SOURCE2}/dashboards)
+			search="name=\"$dash_name\""
+			echo $search
+			FILE_SRC1=$(grep -rl "$search" ${SOURCE1}/dashboards)
+			FILE_SRC1_ARR=( $FILE_SRC1_RAW )
+			FILE_SRC2=$(grep -rl "$search" ${SOURCE2}/dashboards)
+			FILE_SRC2_ARR=( $FILE_SRC2_RAW )
 			echo "Finding Location of Files"
 			if [[ ! -f "${FILE_SRC1}" || ! -f "${FILE_SRC2}" ]]; then
 					echo "Files do not exist"
