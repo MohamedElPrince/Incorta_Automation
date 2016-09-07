@@ -1,6 +1,6 @@
 # Name of schemas wanted
-#schema_name=A_01_CASE
-#schema_name=Sales
+schema_name=A_01_CASE
+schema_name=Sales
 
 
 #Name of dashboard wanted
@@ -9,13 +9,13 @@
 #dash_name=(Aggregated)Date !=
 
 #Name of datasources wanted
-datasource=Sales
+#datasource=Sales
 
 #Name of dashboards wanted using wildchar search
 #dash_char=*
 
 #Name of schemas wanted using wildchar seach
-#schema_char=*
+schema_char=*
 
 #Name of folder wanted
 #dash_folder=Interns
