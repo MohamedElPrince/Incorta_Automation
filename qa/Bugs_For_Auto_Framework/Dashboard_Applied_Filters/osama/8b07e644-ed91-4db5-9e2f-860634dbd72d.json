@@ -1,0 +1,19 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"31e8b33c-81fe-d3d3-bc49-c525f846157d",
+"type":"pivot",
+"isSampled":false,
+"rowCount":1,
+"colCount":1,
+"measureCount":1,
+"row":["SALES_MySQL4.customers.CUST_STATE_PROVINCE"],
+"col":["SALES_MySQL4.sales.CALENDAR_QUARTER_NUMBER"],
+"rowHeaders":["State/Province"],
+"measureHeaders":["Units"],
+"colTree":[],
+"rowTree":{
+"rs":0,
+"g":[]}}]
+}

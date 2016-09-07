@@ -1,0 +1,4021 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"4e4080ba-1adb-df32-3dcf-9ed45fafd088",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Year","County","Cost"],
+"rowTypes":["integer"],
+"measureTypes":["string","double"],
+"totalRows":72216,
+"complete":false,
+"rowTree":{
+"g":[{
+"v":"2010",
+"rowNo":0,
+"rs":1000,
+"r":[[{
+"v":"Kalamazoo County"},
+{
+"v":"$2,227.72"}],
+[{
+"v":"Izard County"},
+{
+"v":"$596.13"}],
+[{
+"v":"Izard County"},
+{
+"v":"$596.13"}],
+[{
+"v":"Izard County"},
+{
+"v":"$596.13"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$1,788.39"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$98.80"}],
+[{
+"v":"Izard County"},
+{
+"v":"$5.47"}],
+[{
+"v":"Izard County"},
+{
+"v":"$5.47"}],
+[{
+"v":"Izard County"},
+{
+"v":"$5.47"}],
+[{
+"v":"Izard County"},
+{
+"v":"$5.47"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Izard County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Izard County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$666.16"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$666.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$24.46"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$24.46"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$24.46"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$5.47"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$5.47"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$5.47"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.88"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.88"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$35.77"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$35.77"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$35.77"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$21.88"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Switzerland County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Switzerland County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Switzerland County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$17.55"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$17.55"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$23.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$23.40"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Izard County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$66.24"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$66.24"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$66.24"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$68.40"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$68.40"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$68.40"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$21.72"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$21.72"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$21.72"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$21.72"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$64.22"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$64.22"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.92"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$74.97"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$87.18"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$71.25"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$71.25"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$99.96"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$24.08"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$24.08"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$24.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$24.08"}],
+[{
+"v":"Gonzales County"},
+{
+"v":"$53.34"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$93.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$93.92"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$53.34"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$95.00"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$95.00"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$95.00"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$95.00"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$23.75"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$23.75"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$23.75"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$23.75"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$23.75"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$53.34"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$53.34"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$26.67"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$26.67"}],
+[{
+"v":"Switzerland County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Switzerland County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Switzerland County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Switzerland County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$24.99"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$24.99"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$24.99"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$24.99"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$24.99"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$24.99"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$71.25"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.16"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.16"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.16"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.16"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$14.32"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$9.26"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$9.26"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$9.26"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$9.26"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$18.52"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$12.96"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$12.96"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$12.96"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$9.26"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$9.26"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$9.26"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$30.72"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$30.72"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$4.68"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$4.68"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$4.68"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$4.68"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$13.89"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$13.89"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$11.41"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$11.41"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$11.41"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$7.56"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$7.56"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$14.04"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$14.04"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$7.62"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$15.12"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.56"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$15.24"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Auglaize County"},
+{
+"v":"$17.36"}],
+[{
+"v":"Auglaize County"},
+{
+"v":"$17.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Auglaize County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Auglaize County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$14.43"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$14.43"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$14.43"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$14.43"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$14.43"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$14.43"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.64"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.64"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.64"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.64"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$23.28"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$23.28"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$230.60"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$102.82"}],
+[{
+"v":"La Paz County"},
+{
+"v":"$102.82"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$23.28"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$23.28"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$23.28"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.86"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.86"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.86"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$28.86"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$102.82"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$613.71"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Gonzales County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Gonzales County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$26.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$26.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$26.36"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$26.36"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$26.36"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$26.36"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,594.35"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$16.41"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$93.92"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$93.92"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$1,750.95"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$83.94"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$25.92"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$25.92"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$7.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$7.62"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$7.62"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$7.62"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$7.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$70.44"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$29.06"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$29.06"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$29.06"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$28.64"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$106.68"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$106.68"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$106.68"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$74.97"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$74.97"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,192.26"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,192.26"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3,391.80"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$596.13"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,695.90"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$1,192.26"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$1,192.26"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$1,750.95"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$1,750.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$556.93"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$556.93"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$556.93"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$613.71"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$613.71"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,788.39"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,192.26"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$1,227.42"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$1,227.42"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$1,227.42"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,788.39"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,788.39"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,788.39"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,788.39"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$583.65"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$583.65"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$583.65"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$25.40"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$41.04"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$41.04"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$41.04"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$41.04"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$41.04"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$41.04"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$41.04"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Izard County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Izard County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$12.70"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$12.70"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$12.70"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$10.94"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$10.94"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$10.94"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$10.94"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Cowlitz County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$10.94"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$73.38"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$999.24"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$21.88"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$5.85"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$22.38"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$22.38"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$17.55"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$17.55"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$23.40"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$23.40"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$23.40"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.70"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$91.20"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$91.20"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$68.40"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$31.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$24.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$65.16"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$65.16"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$21.48"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$28.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$18.52"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$18.52"}],
+[{
+"v":"Nez Perce County"},
+{
+"v":"$18.52"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$22.82"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$22.82"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$22.82"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Ozaukee County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.43"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$11.43"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$18.52"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$18.52"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$11.43"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$19.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$19.44"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$19.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$12.96"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$12.96"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$45.28"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$45.28"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$45.28"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$45.28"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Izard County"},
+{
+"v":"$17.18"}],
+[{
+"v":"Izard County"},
+{
+"v":"$17.18"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$11.34"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.56"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.56"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$7.56"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Ziebach County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Ziebach County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Ziebach County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$69.44"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$69.44"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$69.44"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$25.77"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$21.94"}],
+[{
+"v":"Montezuma County"},
+{
+"v":"$21.94"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$21.94"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$21.94"}],
+[{
+"v":"McKenzie County"},
+{
+"v":"$52.08"}],
+[{
+"v":"McKenzie County"},
+{
+"v":"$52.08"}],
+[{
+"v":"McKenzie County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$17.36"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$17.36"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$34.72"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$15.66"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$308.46"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$17.18"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$17.18"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$8.59"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$15.66"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$15.66"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$31.32"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Zapata County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Ozark County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Wetzel County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$102.82"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$102.82"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$102.82"}],
+[{
+"v":"Izard County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$23.28"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$23.28"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$21.21"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Brazoria County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Izard County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Izard County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Benzie County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Tazewell County"},
+{
+"v":"$737.74"}],
+[{
+"v":"McKenzie County"},
+{
+"v":"$17.55"}],
+[{
+"v":"McKenzie County"},
+{
+"v":"$17.55"}],
+[{
+"v":"McKenzie County"},
+{
+"v":"$17.55"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Kalamazoo County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$52.72"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$52.72"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Gonzales County"},
+{
+"v":"$69.44"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Brazos County"},
+{
+"v":"$2,334.60"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$1,841.13"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$1,841.13"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$1,841.13"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$1,841.13"}],
+[{
+"v":"Santa Cruz County"},
+{
+"v":"$1,841.13"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$1,788.39"}],
+[{
+"v":"Yazoo County"},
+{
+"v":"$1,788.39"}]]}]}}]
+}

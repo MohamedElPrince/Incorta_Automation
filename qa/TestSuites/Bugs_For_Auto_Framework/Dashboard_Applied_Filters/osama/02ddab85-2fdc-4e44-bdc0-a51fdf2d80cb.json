@@ -1,0 +1,4021 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"4e4080ba-1adb-df32-3dcf-9ed45fafd088",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Year","County","Cost"],
+"rowTypes":["integer"],
+"measureTypes":["string","double"],
+"totalRows":141600,
+"complete":false,
+"rowTree":{
+"g":[{
+"v":"2010",
+"rowNo":0,
+"rs":1000,
+"r":[[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cochise County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cochise County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cochise County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Owsley County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cumberland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cumberland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cumberland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Culberson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Culberson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Bartow County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Crawford County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Crawford County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Crawford County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Fulton County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Fulton County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Fulton County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Portage County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Portage County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shiawassee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shiawassee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shiawassee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shiawassee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Penobscot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Penobscot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Penobscot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cass County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cass County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Butler County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Butler County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Butler County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Linn County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Linn County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Bladen County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Bladen County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Schuylkill County"},
+{
+"v":"$4.63"}],
+[{
+"v":"San Jacinto County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Knox County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Knox County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Miller County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Miller County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grant County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grant County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Henry County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Henry County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sacramento County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sacramento County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Liberty County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutherford County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutherford County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutherford County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lyman County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lyman County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Guaynabo"},
+{
+"v":"$4.63"}],
+[{
+"v":"Guaynabo"},
+{
+"v":"$4.63"}],
+[{
+"v":"Calhoun County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Calhoun County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Berkshire County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Berkshire County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Waller County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Texas County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Texas County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Texas County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Allegheny County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Phillips County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Phillips County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Phillips County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Phillips County"},
+{
+"v":"$4.63"}],
+[{
+"v":""},
+{
+"v":"$4.63"}],
+[{
+"v":"Monmouth County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Coffee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Coffee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Coffee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Forsyth County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Forsyth County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Forsyth County"},
+{
+"v":"$4.63"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$4.63"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$4.63"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutherford County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Erie County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Erie County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Erie County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Erie County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Garrett County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Garrett County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Smith County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Smith County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Smith County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Smith County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Minnehaha County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Minnehaha County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cedar County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cedar County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cedar County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Pierce County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Pierce County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Suffolk County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Suffolk County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Suffolk County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Hamilton County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Hamilton County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shawano County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sarpy County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sarpy County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marion County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marion County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marion County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Imperial County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Knox County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Pacific County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Pacific County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Pacific County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Aitkin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Aitkin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Baltimore County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Baltimore County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Tangipahoa Parish"},
+{
+"v":"$4.63"}],
+[{
+"v":"Tangipahoa Parish"},
+{
+"v":"$4.63"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Choctaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Choctaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Brown County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Brown County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Brown County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Brown County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Brown County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Dunklin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Dunklin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Dunklin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lorain County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lorain County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lorain County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"St Clair County"},
+{
+"v":"$4.63"}],
+[{
+"v":"St Clair County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Chautauqua County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Swift County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Swift County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Swift County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cobb County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cobb County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Anderson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Anderson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Anderson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Barber County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Barber County"},
+{
+"v":"$4.63"}],
+[{
+"v":"El Dorado County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Jack County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Jack County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Gallatin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Gallatin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Gallatin County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Knox County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Knox County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Habersham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Hillsborough County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Hillsborough County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Hillsborough County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Chatham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Chatham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$4.63"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$4.63"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$4.63"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cook County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shawnee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Prince George's County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Oktibbeha County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Uvalde County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Uvalde County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Orange County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Jefferson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Camden County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Camden County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Creek County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Creek County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Meriwether County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Meriwether County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Meriwether County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Fergus County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Fergus County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shawnee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Shawnee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cass County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cass County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Elliott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Elliott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Elliott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Elliott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Elliott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Scott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Scott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Scott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Scott County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Denver County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Denver County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Denver County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Redwood County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Redwood County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Redwood County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Jefferson Davis Parish"},
+{
+"v":"$4.63"}],
+[{
+"v":"Jefferson Davis Parish"},
+{
+"v":"$4.63"}],
+[{
+"v":"Santa Barbara County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Columbia County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Broward County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Broward County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lawrence County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Portage County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Portage County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Weld County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Weld County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Saginaw County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Swift County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Swift County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marion County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marion County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Marion County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Adair County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Los Angeles County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gregg County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Calcasieu Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Calcasieu Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"San Joaquin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"San Joaquin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.81"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.81"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cass County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cass County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cass County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cass County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cass County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sharp County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nassau County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Box Elder County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Box Elder County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Clearwater County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Clearwater County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Elliott County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Baca County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Baca County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Baca County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jefferson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Okeechobee County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Okeechobee County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Plymouth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Plymouth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Riverside County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Tulsa County"},
+{
+"v":"$3.78"}],
+[{
+"v":"El Dorado County"},
+{
+"v":"$3.78"}],
+[{
+"v":"El Dorado County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Taylor County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Williams County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Williams County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Black Hawk County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Black Hawk County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Platte County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Platte County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Platte County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Platte County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Barren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Barren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilkes County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wilkes County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wilkes County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Macomb County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Macomb County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Macomb County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Jefferson Davis Parish"},
+{
+"v":"$3.78"}],
+[{
+"v":"Jefferson Davis Parish"},
+{
+"v":"$3.78"}],
+[{
+"v":"Jefferson Davis Parish"},
+{
+"v":"$3.78"}],
+[{
+"v":"Sullivan County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Sullivan County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Parker County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Parker County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Parker County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Harrison County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Harrison County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Harrison County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lehigh County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lehigh County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lehigh County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lehigh County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lehigh County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wasco County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wasco County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Overton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Overton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Knox County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Knox County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Bedford County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hunterdon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hunterdon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hunterdon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hunterdon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hunterdon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sioux County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Sioux County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Sioux County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Rush County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Rush County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Rush County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Rush County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Santa Barbara County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Santa Barbara County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Santa Barbara County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Essex County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Josephine County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Josephine County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Josephine County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Josephine County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lenawee County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lenawee County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Big Horn County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Orange County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Orange County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cumberland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cumberland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cumberland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marshall County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Pike County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Pike County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Johnston County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Johnston County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Johnston County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Johnston County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ellsworth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ellsworth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ellsworth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sanilac County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harlan County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dallas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dallas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"McHenry County"},
+{
+"v":"$3.78"}],
+[{
+"v":"McHenry County"},
+{
+"v":"$3.78"}],
+[{
+"v":"McHenry County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Shelby County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Shelby County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Floyd County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tulsa County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tulsa County"},
+{
+"v":"$3.81"}],
+[{
+"v":"McCormick County"},
+{
+"v":"$3.78"}],
+[{
+"v":"McCormick County"},
+{
+"v":"$3.78"}],
+[{
+"v":"McCormick County"},
+{
+"v":"$3.78"}],
+[{
+"v":"McCormick County"},
+{
+"v":"$3.78"}],
+[{
+"v":"McCormick County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Bernardino County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Indian River County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Indian River County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Indian River County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Flathead County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Flathead County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Ocean County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Ocean County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Ocean County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Ocean County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Ramsey County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hillsborough County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hillsborough County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"King County"},
+{
+"v":"$3.81"}],
+[{
+"v":"King County"},
+{
+"v":"$3.81"}],
+[{
+"v":"King County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Columbia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Columbia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Pitkin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Luna County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Luna County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miller County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Cuming County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Cuming County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Cuming County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Erie County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Kay County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lackawanna County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Martin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Passaic County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Passaic County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Franklin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fairfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fairfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fairfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fairfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Garrett County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Garrett County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fremont County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fremont County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fremont County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fremont County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fremont County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fremont County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fremont County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Campbell County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Campbell County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Campbell County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Fayette County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Fayette County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Fayette County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Chester County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Chester County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Chester County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Morton County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Morton County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nassau County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nassau County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nassau County"},
+{
+"v":"$3.78"}],
+[{
+"v":"New York County"},
+{
+"v":"$3.78"}],
+[{
+"v":"New York County"},
+{
+"v":"$3.78"}],
+[{
+"v":"New York County"},
+{
+"v":"$3.78"}],
+[{
+"v":"New York County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Cameron County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cameron County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cameron County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dupage County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dupage County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dupage County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Creek County"},
+{
+"v":"$3.81"}],
+[{
+"v":"King County"},
+{
+"v":"$3.81"}],
+[{
+"v":"King County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hennepin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hennepin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hennepin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Orange County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Baca County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Kanawha County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Kanawha County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Henrico County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Henrico County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Henrico County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Henrico County"},
+{
+"v":"$3.78"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.78"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.78"}],
+[{
+"v":"Gaston County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Gaston County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Gaston County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dallas County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dallas County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Grayson County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Carteret County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Dauphin County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Claiborne Parish"},
+{
+"v":"$3.78"}],
+[{
+"v":"Claiborne Parish"},
+{
+"v":"$3.78"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Creek County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Creek County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Bonner County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Shelby County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Shelby County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Essex County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Johnson County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Maricopa County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Maricopa County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Maricopa County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Maricopa County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Maricopa County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Kay County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Kay County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Kay County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Morrow County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Morrow County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Morrow County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lewis and Clark County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lewis and Clark County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Lewis and Clark County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Hillsborough County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Hillsborough County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Barnstable County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Caldwell County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Caldwell County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Caldwell County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Grimes County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tulsa County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tulsa County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St Tammany Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"St Tammany Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dallas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dallas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Dallas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Story County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.78"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.78"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.78"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nobles County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nobles County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Prince William County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Prince William County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Prince William County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Rutherford County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Montgomery County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Campbell County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Santa Clara County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Santa Clara County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gloucester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Florence County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Guthrie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Chautauqua County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Chautauqua County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Chautauqua County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Daviess County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Daviess County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harlan County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Anderson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Anderson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Anderson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St. Louis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Logan County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Bergen County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Bergen County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Ellsworth County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Ellsworth County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nottoway County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fulton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Linn County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sevier County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Rockland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Door County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Door County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Door County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Door County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Door County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Mifflin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Mifflin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Saline County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Saline County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hampden County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hampden County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Morrow County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Morrow County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Erie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Erie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Erie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Henry County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Henry County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Loudoun County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Franklin Parish"},
+{
+"v":"$3.78"}],
+[{
+"v":"Franklin Parish"},
+{
+"v":"$3.78"}],
+[{
+"v":"Belknap County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Lenoir County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Lenoir County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Lenoir County"},
+{
+"v":"$3.81"}],
+[{
+"v":"El Paso County"},
+{
+"v":"$3.81"}],
+[{
+"v":"El Paso County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harlan County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harlan County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harlan County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sacramento County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sacramento County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Sacramento County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Duval County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Duval County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ada County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ada County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ada County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ada County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Phelps County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Phelps County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Phelps County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Phelps County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Barton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Barton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Barton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Barton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Houghton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Houghton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Houghton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Lake County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Lake County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Lake County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Roanoke City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Black Hawk County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Black Hawk County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Black Hawk County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Black Hawk County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Travis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Travis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Travis County"},
+{
+"v":"$3.81"}],
+[{
+"v":"San Augustine County"},
+{
+"v":"$3.81"}],
+[{
+"v":"San Augustine County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Bayfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cherokee County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Cherokee County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nuckolls County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Nuckolls County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Kings County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Kings County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hamlin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hamlin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hamlin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hamlin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Merrimack County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Merrimack County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Merrimack County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Allegheny County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Allegheny County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Allegheny County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Allegheny County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Douglas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Douglas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Douglas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harris County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harris County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harris County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Harris County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Floyd County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Floyd County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Floyd County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Floyd County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Berkshire County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Berkshire County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Middlesex County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Jackson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Shawnee County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fayette County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fayette County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fayette County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cass County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Seward County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Seward County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Seward County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Erie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Erie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Erie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Gregg County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Hamilton County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Hamilton County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Hamilton County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Rush County"},
+{
+"v":"$3.78"}],
+[{
+"v":"New York County"},
+{
+"v":"$3.78"}],
+[{
+"v":"New York County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Wheeler County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$3.78"}],
+[{
+"v":"San Diego County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Essex County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Essex County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Morris County"},
+{
+"v":"$3.78"}],
+[{
+"v":"St Clair County"},
+{
+"v":"$3.78"}],
+[{
+"v":"St Clair County"},
+{
+"v":"$3.78"}],
+[{
+"v":"St Clair County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Rio Arriba County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rio Arriba County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rio Arriba County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rio Arriba County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rio Arriba County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rio Arriba County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Monroe County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Monroe County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lyon County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lyon County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lyon County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lyon County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Putnam County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Putnam County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Putnam County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cleburne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cleburne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Cleburne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Sullivan County"},
+{
+"v":"$4.63"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$4.63"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$4.63"}],
+[{
+"v":"Aroostook County"},
+{
+"v":"$4.63"}],
+[{
+"v":"San Bernardino County"},
+{
+"v":"$4.63"}],
+[{
+"v":"San Bernardino County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Luna County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Lee County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Berkshire County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Berkshire County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Clark County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Clark County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Clark County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Clark County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Worth County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Worth County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Worth County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Fergus County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Carbon County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Carbon County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Placer County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Ottawa County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Ottawa County"},
+{
+"v":"$4.63"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$4.63"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$4.63"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$4.63"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Portage County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Portage County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Portage County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Caldwell County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Caldwell County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Caldwell County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Caldwell County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Maricopa County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Maricopa County"},
+{
+"v":"$4.63"}],
+[{
+"v":"King County"},
+{
+"v":"$4.63"}],
+[{
+"v":"King County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Salt Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Salt Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Salt Lake County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Rutland County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Madison County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Madison County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Collier County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Collier County"},
+{
+"v":"$4.63"}],
+[{
+"v":"Big Horn County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Big Horn County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Oceana County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Oceana County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Oceana County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Oceana County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Meeker County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Meeker County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Miami-Dade County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Berks County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Berks County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Berks County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Berks County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Menard County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Menard County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Menard County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Menard County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Philadelphia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"El Paso County"},
+{
+"v":"$3.81"}],
+[{
+"v":"El Paso County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Platte County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Platte County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Platte County"},
+{
+"v":"$3.81"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.81"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.81"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.81"}],
+[{
+"v":"District of Columbia"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Marion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cobb County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Cobb County"},
+{
+"v":"$3.81"}],
+[{
+"v":"St Bernard Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"St Bernard Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"St Bernard Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"St Bernard Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Goliad County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Goliad County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fergus County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Fergus County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Moultrie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Moultrie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Moultrie County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Orangeburg County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Redwood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Redwood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Redwood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Taylor County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Davidson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Moniteau County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Moniteau County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Broome County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Broome County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Broome County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Broome County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Northampton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Beaver County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Beaver County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Beaver County"},
+{
+"v":"$3.81"}],
+[{
+"v":"El Paso County"},
+{
+"v":"$3.81"}],
+[{
+"v":"El Paso County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Luzerne County"},
+{
+"v":"$3.81"}],
+[{
+"v":""},
+{
+"v":"$3.81"}],
+[{
+"v":""},
+{
+"v":"$3.81"}],
+[{
+"v":""},
+{
+"v":"$3.81"}],
+[{
+"v":"Hall County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Hall County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Hall County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Garrett County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Garrett County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Orange County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Orange County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Orange County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Orange County"},
+{
+"v":"$3.78"}],
+[{
+"v":"Coos County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Coos County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Coos County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Coos County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Lucas County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Lucas County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Lucas County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Tuscaloosa County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Tuscaloosa County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Tuscaloosa County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Tuscaloosa County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Concordia Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"Concordia Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"Fayette County"},
+{
+"v":"$4.51"}]]}]}}]
+}

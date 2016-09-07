@@ -26,11 +26,14 @@ def export_dashboards(incorta, session, export_zips_path, dashboards):
         prints:
             Can print debug statements if needed
     """
-    for names in dashboards:
-        temp_name = names
-        temp_path = export_zips_path + os.sep + temp_name + '.zip'
+    for dash_full_path in dashboards:
+
+        str_tup=dash_full_path.split('/')
+        dash_name=str_tup[-1]
+        temp_path = export_zips_path + os.sep + dash_name + '.zip'
+
         try:
-            export_check = incorta.export_dashboards(session, temp_path, temp_name)
+            export_check = incorta.export_dashboards(session, temp_path, dash_full_path)
         except Exception, e:
             print ('ERROR: Dashboard:', names, " Not Found")
             writeLogMessage('%s %s %s' % ('ERROR: Dashboard:', names, " Not Found"), mainLogger, 'info')
@@ -54,6 +57,7 @@ def export_schemas(incorta, session, export_zips_path, schemas):
         prints:
             Can print debug statements if needed
     """
+
     #cleaned_export_schema = [x.replace(' ', '_') for x in schemas]
     for names in schemas:
         temp_name = names
@@ -83,10 +87,12 @@ def export_zip(export_zips_path, test_case_export_path_wd, export_file_name):
             Nothing
     """
     #cleaned_export_file_name = [x.replace(' ', '_') for x in export_file_name]
-    extension = '.zip'
     for files in export_file_name:
-        file_path_wd = file_tools.create_directory(test_case_export_path_wd, files)
-        file_raw_path = os.path.join(export_zips_path, files + extension)
+        str_tup = files.split('/')
+        zip_name = str_tup[-1]
+        extension = '.zip'
+        file_path_wd = file_tools.create_directory(test_case_export_path_wd, zip_name)
+        file_raw_path = os.path.join(export_zips_path, zip_name + extension)
         zip_ref = zipfile.ZipFile(file_raw_path)
         zip_ref.extractall(file_path_wd)
         zip_ref.close()
