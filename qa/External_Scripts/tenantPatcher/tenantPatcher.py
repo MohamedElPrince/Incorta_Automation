@@ -17,6 +17,24 @@ import shutil
 
 import datetime
 
+
+# def get_file_path(full_tenant_path):
+#     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
+#     try:
+#         tree = ET.parse(full_tenant_path)
+#         root = tree.getroot()
+#     except Exception, e:
+#         print 'Incorrect path to Tenant'
+#         exit(1)
+#     file_path = ''
+#     for child in root.iter('folder'):
+#         print child.attrib['name']
+#         file_path = file_path + os.sep + child.attrib['name']
+#     for child in root.iter('dashboard'):
+#         file_path += os.sep + child.attrib['name']
+#         print file_path
+
+
 def get_name_from_folder(full_tenant_path):
     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
     try:
@@ -25,14 +43,16 @@ def get_name_from_folder(full_tenant_path):
     except Exception, e:
         print 'Incorrect path to Tenant'
         exit(1)
+    dash_folder = []
     for child in root.iter('folder'):
         for f in folder_name:
             if f == child.attrib['name']:
                 for sub in child.iter():
                     if sub.tag == 'dashboard':
-                        print sub.attrib
-
-
+                        dash_folder.append(sub.attrib['name'])
+    for dash in dash_folder:
+        if dash not in dash_name:
+            dash_name.append(dash)
 
 def parse_folder(full_tenant_path):
     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
@@ -131,6 +151,7 @@ def parse(full_tenant_path):
         for schema in schema_name:
             if child.attrib['name'] == schema:
                 schema_attributes.append(child.attrib)
+                schema_confirmed.append(schema)
                 for sub in child.iter():
                     if 'schema-data' == sub.tag:
                         for sd in sub.iter():
@@ -144,6 +165,7 @@ def parse(full_tenant_path):
         for dash in dash_name:
             if child.attrib['name'] == dash:
                 dashboard_attributes.append(child.attrib)
+                dash_confirmed.append(dash)
                 for sub in child.iter():
                     if 'data' == sub.tag:
                         for dbn in sub.iter():
@@ -153,12 +175,12 @@ def parse(full_tenant_path):
         for datasource in datasource_name:
             if child.attrib['name'] == datasource:
                 datasource_attributes.append(child.attrib)
+                datasource_confirmed.append(datasource)
                 for sub in child.iter():
                     if 'data' == sub.tag:
                         for dn in sub.iter():
                             if bool(dn.attrib):
                                 datasource_href[datasource] = dn.attrib
-
 
 def create_tenant_xml(path):
     """
@@ -194,7 +216,7 @@ def create_tenant_xml(path):
     datasources = SubElement(datapackage, 'data-sources')
 
     data_source_attributes = {}
-    for dash in datasource_name:
+    for dash in datasource_confirmed:
         for attrib in datasource_attributes:
             if attrib['name'] == dash:
                 data_source_attributes = attrib
@@ -206,7 +228,7 @@ def create_tenant_xml(path):
         data_xi = SubElement(data, 'xi:include', href_data)
     schemas = SubElement(datapackage, 'schemas')
     schema_attribute = {}
-    for schema in schema_name:
+    for schema in schema_confirmed:
         def_element = 'schema' + '_def'
         for attrib in schema_attributes:
             if attrib['name'] == schema:
@@ -230,15 +252,20 @@ def create_tenant_xml(path):
     sessionvar = SubElement(datapackage, 'session-variables')
     catalog = SubElement(root, 'catalog')
     dash_attributes = {}
-    for dash in dash_name:
+    for dash in dash_confirmed:
+        var_fo = 0
         for attrib in dashboard_attributes:
             if attrib['name'] == dash:
                 dash_attributes = attrib
                 if folder_structure[attrib['owner-id']] != '':
+                    var_fo = 1
                     folder = SubElement(catalog, 'folder', folder_structure[attrib['owner-id']][0])
                     for f in folder_structure[attrib['owner-id']][1:]:
                         folder = SubElement(folder, 'folder', f)
-        dashboard = SubElement(folder, 'dashboard', dash_attributes)
+        if var_fo == 1:
+            dashboard = SubElement(folder, 'dashboard', dash_attributes)
+        if var_fo == 0:
+            dashboard = SubElement(catalog, 'dashboard', dash_attributes)
         dash_data = SubElement(dashboard, 'data', data_attribute)
         for name in dashboard_href:
             if name == dash:
@@ -254,7 +281,6 @@ def create_tenant_xml(path):
     except Exception, e:
         print 'Wrong path to new folder'
         exit(1)
-
 
 def extraction(zip_file, unzip):
     """
@@ -280,7 +306,6 @@ def extraction(zip_file, unzip):
         print 'Incorrect path to output folder'
         exit(1)
 
-
 def zip_up(zip_path, tempstamp):
     """
     Function is used to zip the new folder
@@ -304,7 +329,6 @@ def zip_up(zip_path, tempstamp):
         print "Unable to zip file"
         exit(1)
 
-
 def create_directory(path, folderName):
     """
     Function creates directory
@@ -327,7 +351,6 @@ def create_directory(path, folderName):
         else:
             raise
 
-
 def move_files(src, dest):
     """
     Function is used to move the files wanted from the extracted zip files to the new folder that will be zipped
@@ -340,39 +363,42 @@ def move_files(src, dest):
             Debug statements
     """
 
-    for schema in schema_name:
+    for schema in schema_confirmed:
         if bool(schema_href):
-            sn = schema_href[schema]['href']
-            try:
-                os.rename(src + os.sep + sn, dest + os.sep + sn)
-            except Exception, e:
-                print 'Unable to move schema files'
-                exit(1)
-    for dashboard in dash_name:
+            if bool(schema_href[schema]):
+                sn = schema_href[schema]['href']
+                try:
+                    os.rename(src + os.sep + sn, dest + os.sep + sn)
+                except Exception, e:
+                    print 'Unable to move schema files'
+                    exit(1)
+    for dashboard in dash_confirmed:
         if bool(dashboard_href):
-            dn = dashboard_href[dashboard]['href']
-            try:
-                os.rename(src + os.sep + dn, dest + os.sep + dn)
-            except Exception, e:
-                print 'Unable to move dashboard files'
-                exit(1)
-    for datasource in datasource_name:
+            # if bool(dash_name[dashboard]):
+                dn = dashboard_href[dashboard]['href']
+                try:
+                    os.rename(src + os.sep + dn, dest + os.sep + dn)
+                except Exception, e:
+                    print 'Unable to move dashboard files'
+                    exit(1)
+    for datasource in datasource_confirmed:
         if bool(datasource_href):
-            dsn = datasource_href[datasource]['href']
-            try:
-                os.rename(src + os.sep + dsn, dest + os.sep + dsn)
-            except Exception, e:
-                print 'Unable to move datasource files'
-                exit(1)
+            if bool(datasource_href[datasource]):
+                dsn = datasource_href[datasource]['href']
+                try:
+                    os.rename(src + os.sep + dsn, dest + os.sep + dsn)
+                except Exception, e:
+                    print 'Unable to move datasource files'
+                    exit(1)
     for schema in schema_name:
         if bool(loader_href):
-            rn = loader_href[schema]['href']
-            try:
-                os.rename(src + os.sep + rn, dest + os.sep + rn)
-            except Exception, e:
-                print 'Unable to move schema loader files'
-                exit(1)
-
+            if bool(loader_href[schema]):
+                rn = loader_href[schema]['href']
+                try:
+                    os.rename(src + os.sep + rn, dest + os.sep + rn)
+                except Exception, e:
+                    print 'Unable to move schema loader files'
+                    exit(1)
 
 def create_txt_file(path):
     """
@@ -390,15 +416,18 @@ def create_txt_file(path):
     except Exception, e:
         print 'Incorrect path'
         exit(1)
-    txt_file.write('This file contains the names of the requested files.\n\n')
-    txt_file.write('The following schemas are included\n')
-    txt_file.write('\n'.join(schema_name))
-    txt_file.write('\n\n')
-    txt_file.write('The following dashboards are included\n')
-    txt_file.write('\n'.join(dash_name))
-    txt_file.write('\n\n')
-    txt_file.write('The following datasources are included\n')
-    txt_file.write('\n'.join(datasource_name))
+    txt_file.write('This file contains the names of the requested files.')
+    if bool(schema_confirmed):
+        txt_file.write('\n\nThe following schemas are included\n')
+        txt_file.write('\n'.join(schema_confirmed))
+    if bool(dash_confirmed):
+        txt_file.write('\n\n')
+        txt_file.write('The following dashboards are included\n')
+        txt_file.write('\n'.join(dash_confirmed))
+    if bool(datasource_confirmed):
+        txt_file.write('\n\n')
+        txt_file.write('The following datasources are included\n')
+        txt_file.write('\n'.join(datasource_confirmed))
     txt_file.close()
 
 def filecreation(list, filename):
@@ -420,6 +449,9 @@ config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource
 schema_name = []
 dash_name = []
 datasource_name = []
+schema_confirmed = []
+dash_confirmed = []
+datasource_confirmed = []
 dash_char_name = []
 schema_char_name = []
 

@@ -1,21 +1,22 @@
 # Name of schemas wanted
 #schema_name=A_01_CASE
-#chema_name=Sales
+#schema_name=Sales
 
 
 #Name of dashboard wanted
 #dash_name=A_04_CASE_BIN Dashboard
 #dash_name=A_01_CASE Dashboard
-#dash_name=Sales Dashboard
+#dash_name=(Aggregated)Date !=
 
 #Name of datasources wanted
-#datasource=Sales
+datasource=Sales
 
 #Name of dashboards wanted using wildchar search
-dash_char=(*
+#dash_char=*
 
 #Name of schemas wanted using wildchar seach
 #schema_char=*
 
 #Name of folder wanted
-dash_folder=Aggregated
+#dash_folder=Interns
+dash_folder=Dashboard applied Filters
