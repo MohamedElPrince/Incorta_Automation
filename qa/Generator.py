@@ -56,6 +56,25 @@ def login(url, tenant, admin, password):
         print "Login Failed"
         exit(1)
 
+def logout(session):
+    """
+    Function takes in logout information and attempts to logout through Incorta API
+        args:
+            url: Url for the Incorta instance
+            tenant: Tenant name for instance
+            admin: Username for instance
+            password: Password for instance
+        returns:
+            The session for the Incorta instance is returned
+        prints:
+            Prints exception case
+    """
+    try:
+        return incorta.logout(session)
+    except Exception, e:
+        print "Logout Failed"
+        exit(1)
+
 
 def export_dashboards(incorta, session, casePath, dashboards):
     """
@@ -70,12 +89,14 @@ def export_dashboards(incorta, session, casePath, dashboards):
         prints:
             Can print debug statements if needed
     """
+    print casePath
+    print dashboards
     dashboardPath = create_directory(casePath, 'dashboards')
     str_tup=dashboards.split('/')
     dashboard_name=str_tup[-1]
     dashboardPath+= (os.sep + dashboard_name +'.zip')
     try:
-        export_check = incorta.export_dashboards(session, dashboardPath, dashboards)
+        export_check = incorta.export_dashboards_no_bookmarks(session, dashboardPath, dashboards)
         if Debug == True:
             print export_check
         return dashboardPath
@@ -279,6 +300,7 @@ def csv_file_handler(records, workingDirectory):
             print 'No Schema found'
         else:
             export_schemas(incorta, session, casePath, rows['Schema_Name'])
+        logout(session)
     return tempPath
 
 
