@@ -14,7 +14,7 @@ from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 import errno
 import xml.etree.ElementTree as ET
 import shutil
-
+import lxml
 import datetime
 
 
@@ -33,6 +33,31 @@ import datetime
 #     for child in root.iter('dashboard'):
 #         file_path += os.sep + child.attrib['name']
 #         print file_path
+def get_all_dash(map):
+    dash_list = []
+    for dash in dash_confirmed:
+        for child, parent in map.iteritems():
+            if bool(child.attrib):
+                if child.attrib.has_key('name'):
+                    if child.attrib['name'] == dash:
+                        dash_list.append(child.attrib)
+    print dash_list
+    return dash_list
+
+def get_parent(map, key):
+    struct = []
+    for child, parent in map.iteritems():
+        if child.attrib == key:
+            # print child.attrib
+            c = child
+            p = parent
+    if p.attrib['parent'] != p.attrib['owner-id']:
+        while p.attrib['parent'] != p.attrib['owner-id']:
+            struct.append(p.attrib)
+            c = p
+            p = map[p]
+        struct.append(p.attrib)
+    return struct
 
 def confirm_input(full_tenant_path):
     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
@@ -67,6 +92,7 @@ def confirm_input(full_tenant_path):
         if ds not in datasource_confirmed:
             datasource_confirmed.append(ds)
 
+
 def get_name_from_folder(full_tenant_path):
     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
     try:
@@ -94,14 +120,10 @@ def parse_folder(full_tenant_path):
     except Exception, e:
         print 'Incorrect path to Tenant'
         exit(1)
-    y = 0
-    for child in root.iter('folder'):
-        x = folder_name[0]
-        if child.attrib['name'] == x:
-            for xx in child.findall('.//'):
-                print xx.attrib
-            folder_structure.setdefault(child.attrib['owner-id'], []).append(child.attrib)
-    print folder_structure
+    parent = dict((ch, pa) for pa in tree.getiterator() for ch in pa)
+    # for c, p in parent.iteritems():
+    #     print c.attrib, p.attrib
+    return parent
 
 def parse_wild_char(full_tenant_path):
     full_tenant_path = full_tenant_path + os.sep + 'tenant.xml'
@@ -217,7 +239,7 @@ def parse(full_tenant_path):
                             if bool(dn.attrib):
                                 datasource_href[datasource] = dn.attrib
 
-def create_tenant_xml(path):
+def create_tenant_xml(path, map):
     """
     Function is used to create a new tenant.xml file for the various files retrieved
         args:
@@ -286,26 +308,30 @@ def create_tenant_xml(path):
 
     sessionvar = SubElement(datapackage, 'session-variables')
     catalog = SubElement(root, 'catalog')
+
+    #######################################################################
     dash_attributes = {}
     for dash in dash_confirmed:
-        # var_fo = 0
         for attrib in dashboard_attributes:
             if attrib['name'] == dash:
                 dash_attributes = attrib
-                # if folder_structure[attrib['owner-id']] != '':
-                #     var_fo = 1
-                # folder = SubElement(catalog, 'folder', folder_structure[attrib['owner-id']][0])
-                # for f in folder_structure[attrib['owner-id']][1:]:
-                #     folder = SubElement(folder, 'folder', f)
-        # if var_fo == 1:
-        #     dashboard = SubElement(folder, 'dashboard', dash_attributes)
-        # if var_fo == 0:
-        dashboard = SubElement(catalog, 'dashboard', dash_attributes)
-        dash_data = SubElement(dashboard, 'data', data_attribute)
-        for name in dashboard_href:
-            if name == dash:
-                href_dash['href'] = dashboard_href[dash]['href']
-        xi = SubElement(dash_data, 'xi:include', href_dash)
+        if dash_attributes['parent'] == dash_attributes['owner-id']:
+            dashboard = SubElement(catalog, 'dashboard', dash_attributes)
+            dash_data = SubElement(dashboard, 'data', data_attribute)
+            for name in dashboard_href:
+                if name == dash:
+                    href_dash['href'] = dashboard_href[dash]['href']
+            xi = SubElement(dash_data, 'xi:include', href_dash)
+        if dash_attributes['parent'] != dash_attributes['owner-id']:
+            struct1 = get_parent(map, dash_attributes)
+            for f in reversed(struct1):
+                folder = SubElement(catalog, 'folder',f)
+            dashboard = SubElement(folder, 'dashboard', dash_attributes)
+            dash_data = SubElement(dashboard, 'data', data_attribute)
+            for name in dashboard_href:
+                if name == dash:
+                    href_dash['href'] = dashboard_href[dash]['href']
+            xi = SubElement(dash_data, 'xi:include', href_dash)
     path = path + os.sep + 'tenant.xml'
 
     try:
@@ -397,7 +423,6 @@ def move_files(src, dest):
         prints:
             Debug statements
     """
-    # print dash_confirmed
     for schema in schema_confirmed:
         if bool(schema_href):
             if bool(schema_href[schema]):
@@ -478,6 +503,7 @@ def filecreation(list, filename):
 config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource': 'default',
                    'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default",
                    'txt_home': 'default', 'dash_char': 'default', 'schema_char': 'default', 'dash_folder': 'default'}
+parent_map = {}
 
 # Lists the contain the wanted names of schemas/dashboards/datasources
 schema_name = []
@@ -566,12 +592,13 @@ def main():
     print config_defaults['unzipped_home']
 
     extraction(config_defaults['zipfile_home'], config_defaults['unzipped_home'])
-    parse_folder(config_defaults['unzipped_home'])
+    parent_map = parse_folder(config_defaults['unzipped_home'])
     get_name_from_folder(config_defaults['unzipped_home'])
     parse_wild_char(config_defaults['unzipped_home'])
     confirm_input(config_defaults['unzipped_home'])
+    get_all_dash(parent_map)
     parse(config_defaults['unzipped_home'])
-    create_tenant_xml(tmpPath)
+    create_tenant_xml(tmpPath, parent_map)
     move_files(config_defaults['unzipped_home'], tmpPath)
     zip_up(tmpPath, tempStamp)
     create_txt_file(wdPath)
