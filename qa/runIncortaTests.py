@@ -345,8 +345,9 @@ for sub_dir in test_suite_directories:
                 schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list, full_schema_export_list)
                 Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
                 loaded_schemas = full_schema_export_list
-                # Exported Dashboard ID's per test case
-                test_case_dashboard_export_list = export_dash_ids.keys()
+
+        # Exported Dashboard ID's per test case
+        test_case_dashboard_export_list = export_dash_ids.keys()
 
 
         # GRANT PERMISSIONS
