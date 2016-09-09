@@ -17,7 +17,7 @@ Dependency:
 Instructions To Run Script:
     1. Write desired schemas, dashboards, and datasources in the input.txt in the given format
         The Wildchar search gives you all the files that start with a given name. If you give it just a star, it will grab all
-        the files of that type.
+        the files of that type. You can also give a folder name and all the dashboards under that folder will be grabbed.
     2. Run the ziputil script
         a. On the command line you need to enter 3 arguments;
         the path to the input.txt, the path to the tenant backup zip, and the path to the output directory

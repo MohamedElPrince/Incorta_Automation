@@ -174,7 +174,6 @@ def get_names_from_wild_char(full_tenant_path):
             char = char[:-1]
             if str(child.attrib['name']).startswith(char):
                 test_dash.append(child.attrib)
-                print child.attrib['name']
     for test in test_dash:
         if test not in dashboard_attributes:
             dash_confirmed.append(test['name'])
@@ -214,15 +213,17 @@ def set_new_values(config_file):
                     if str_tup[1].strip() != '':
                         if key == str_tup[0]:
                             if key == 'schema_name':
-                                schema_name.append(str_tup[1].strip())
+                                if str_tup[1].strip()[-1] == '*':
+                                    schema_char_name.append(str_tup[1].strip())
+                                else:
+                                    schema_name.append(str_tup[1].strip())
                             elif key == 'dash_name':
-                                dash_name.append(str_tup[1].strip())
+                                if str_tup[1].strip()[-1] == '*':
+                                    dash_char_name.append(str_tup[1].strip())
+                                else:
+                                    dash_name.append(str_tup[1].strip())
                             elif key == 'datasource':
                                 datasource_name.append(str_tup[1].strip())
-                            elif key == 'dash_char':
-                                dash_char_name.append(str_tup[1].strip())
-                            elif key == 'schema_char':
-                                schema_char_name.append(str_tup[1].strip())
                             elif key == 'dash_folder':
                                 folder_name.append(str_tup[1].strip())
 
@@ -535,7 +536,7 @@ def filecreation(list, filename):
 # Dictionary for parsing the input.txt file
 config_defaults = {'schema_name': 'default', 'dash_name': 'default', 'datasource': 'default',
                    'zipfile_home': 'default', 'testfile_home': 'default', 'unzipped_home': "default",
-                   'txt_home': 'default', 'dash_char': 'default', 'schema_char': 'default', 'dash_folder': 'default'}
+                   'txt_home': 'default', 'dash_folder': 'default'}
 
 
 # Lists the contain the wanted names of schemas/dashboards/datasources
