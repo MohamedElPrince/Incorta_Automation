@@ -4,7 +4,7 @@ import time
 import file_tools
 from customLogger import mainLogger, writeLogMessage
 
-incorta_home = '/Users/Bashir_Khan/IncortaNew'
+#incorta_home = '/Users/Bashir_Khan/IncortaNew'
 
 
 def dirExport(incorta_home):
@@ -265,7 +265,8 @@ def sync_directory(incorta_home, orig_wd_path):
         return
 
     # Creates Sync tag if LDAP populate was successful
-    sync_tag = orig_wd_path + os.sep + 'sync.txt'
+    #sync_tag = orig_wd_path + os.sep + 'sync.txt'
+    sync_tag = incorta_home + os.sep + 'sync.txt'
     f = open(sync_tag, 'w')
     f.close()
 

@@ -1,48 +1,55 @@
-#location for incorta home. Defaults to /home/Incorta if none specified
-incorta_home=/Users/Nadim_Incorta/2_61
+#location for incorta home.
+#Default: /home/Incorta
+incorta_home=/Users/Nadim_Incorta/2_70
 
-#defaults to /home/tenants if none specified
-tenant_home=/Users/Nadim_Incorta/2_61/tenants
+#path to tenant home
+#Default: /home/tenants
+tenant_home=/Users/Nadim_Incorta/2_70/tenants
 
-#tenant defaults to Demo
+#name of the tenant
+#Default: Demo
 tenant=demo
 
-#url defaults to http://localhost:8080/incorta
+#Connection Url to incorta instance (in most cases localhost)
+#Default: http://localhost:8080/incorta
 url=http://localhost:8080/incorta
 
-# admin defaults to Super
-username=super
+# Admin user username
+#Default: Super
+admin_user=super
 
-#defaults to none
-password=incorta
+#password for admin user login
+#Default: incorta
+admin_pass=incorta
 
-#default is No
-load_users=No
-
-#default is MySQL
-test_suite=CSV_DataSources
-
-#default is False
+#Flag to skip data / json validation. (options: False / True)
+#Default: False
 skip_validation=False
 
-#default is False
+#Flag to skip xml meta data validation. (options: False / True)
+#Default: False
 skip_xml_validation=False
 
+#Working Directory Path, Where all tests become timestamped and stored
+#Default: ~/IncortaTesting/tmp/work
 wd_path=/Users/Nadim_Incorta
 
-#This is import flag and set to false (-d)
+#LDAP SETUP PROPERTIES (After first = symbol place connection info per ldap property)
+#Default: environment dev 01 with port 389
+ldap.base.provider.url=ldap://dev01.incorta.com:389
+ldap.base.dn=dc=dev01,dc=incorta,dc=com
+ldap.user.mapping.login=uid
+ldap.group.mapping.member=member
+ldap.group.search.filter=(objectClass=groupOfNames)
 
-#This is data load flag and set to false (-l)
-
-#This is extract flag and set to false (-x)
-
-#LDAP SETUP PROPERTIES
-
-#Schemas Included? Default set to True
+#Flag to include loading and validation of schemas? (useful if user only wants to test dashboards)
+#Default: True
 include_schemas=True
 
-#User Testing? Includes json files per user. Default set to True
-include_user_testing=False
+#Flag to run data validation stage with different users, tests permissions and security. (will generate NF diffs if set to False)
+#Default: True
+include_user_testing=True
 
-#Default is set to False
-skip_data_load=True
+#Flag to skip schema loading phase (options: False / True)
+#Default: False
+skip_data_load=False

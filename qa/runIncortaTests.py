@@ -136,6 +136,10 @@ if Debug == True:
         print(key, value)
         writeLogMessage('%s %s' % (key, value), mainLogger, str(DEBUG))
 
+#Set admin username and admin password to local variables
+username = admin_user
+password = admin_pass
+
 incorta_api_import(incorta_home)  # Import Incorta API
 session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
@@ -146,8 +150,10 @@ test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_di
 print "Checking if instance needs to load users"
 writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
 owd = os.getcwd()
-sync = orig_wd_path + os.sep + 'sync.txt'
-
+#sync = orig_wd_path + os.sep + 'sync.txt'
+print incorta_home
+sync = incorta_home + os.sep + 'sync.txt'
+print "Location of sync file ", sync
 if os.path.isfile(sync):
     print "Users already Loaded"
     writeLogMessage("Users already Loaded", mainLogger, str(INFO))
@@ -389,17 +395,22 @@ for sub_dir in test_suite_directories:
             print "TESTING USER LOGIN"
             writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
             for user in user_list:
-                session = login(url, tenant, user, user_pass)
-                time.sleep(2)
-                print "Logged in user.. ", user
-                writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
-                session_id = session[21:53]
-                csrf_token = session[63:95]
-                Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token, test_case_path_wd, test_case_path, user, url)
-                logout(session)
-                time.sleep(2)
-                print "Logged out user.. ", user
-                writeLogMessage("Logged out user.. %s" % user, mainLogger, str(INFO))
+                #Check if test case utilizes user from LDAP
+                test_case_directories = os.listdir(test_case_path)
+                #print "Files for current test case", test_case_directories, " checking with user ", user
+                if user in test_case_directories:
+
+                    session = login(url, tenant, user, user_pass)
+                    time.sleep(2)
+                    print "Logged in user.. ", user
+                    writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
+                    session_id = session[21:53]
+                    csrf_token = session[63:95]
+                    Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token, test_case_path_wd, test_case_path, user, url)
+                    logout(session)
+                    time.sleep(2)
+                    print "Logged out user.. ", user
+                    writeLogMessage("Logged out user.. %s" % user, mainLogger, str(INFO))
 
         if Debug == True:
             print "\nFinished JSON DASH EXPORT"
