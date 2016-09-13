@@ -1,18 +1,23 @@
-# Name of schemas wanted
+# Name of schemas wanted using exact name or wildchar search
 schema_name=A_01_CASE
 schema_name=Sales
 
 
-#Name of dashboard wanted
-dash_name=A_04_CASE_BIN Dashboard-1
-dash_name=A_01_CASE Dashboard
-dash_name=Sales Dashboard
+#Name of dashboard wanted using exact name or wildchar search
+#dash_name=A_04_CASE_BIN Dashboard-1
+#dash_name=A_01_CASE Dashboard
+dash_name=(Aggregated)Date !=*
+dash_name=Testing dash 1
+dash_name=(Aggregated)Date Not Null
+#dash_name=(Aggregated)Date Not In
+#dash_name=(Aggregated)Date Null
+#dash_name=(Simple)Int Null
+dash_name=*
 
 #Name of datasources wanted
-datasource=Sales
+#datasource=Sales
 
-#Name of dashboards wanted using wildchar search
-dash_char=A_*
-
-#Name of schemas wanted using wildchar seach
-schema_char=*
+#Name of folder wanted
+#dash_folder=Interns
+#dash_folder=Dashboard applied Filters
+#dash_folder=Insight Filters
