@@ -317,7 +317,7 @@ for sub_dir in test_suite_directories:
         Auto_Module.validation.tenant_editor(export_path)
 
         # META DATA VALIDATION IMPLEMENTATION
-        if config_defaults['skip_validation'] == 'False':
+        if config_defaults['skip_xml_validation'] == 'False':
             # Comparing Dashboard Items
             Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids,
                                               XML_MetaData_Validation_Path, 'dashboards')

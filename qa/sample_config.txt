@@ -1,35 +1,40 @@
 #location for incorta home. Defaults to /home/Incorta if none specified
-incorta_home=/home/Incorta
+incorta_home=/Users/Nadim_Incorta/2_61
 
 #defaults to /home/tenants if none specified
-tenant_home=/home/Incorta/tenants
+tenant_home=/Users/Nadim_Incorta/2_61/tenants
 
 #tenant defaults to Demo
-tenant=Demo
+tenant=demo
 
 #url defaults to http://localhost:8080/incorta
 url=http://localhost:8080/incorta
 
-#username defaults to Super
+# admin defaults to Super
 username=super
 
 #defaults to none
-password=super
+password=incorta
 
 #default is No
-load_users=No 
+load_users=No
 
 #default is MySQL
-test_suite=MySQL
+test_suite=CSV_DataSources
 
 #default is False
 skip_validation=False
 
-#default path to place working directory is /IncortaTesting/tmp/work
+#default is False
+skip_xml_validation=False
 
-#when a custom working directory path is specified, /IncortaTesting/tmp/work will
-#be added to the end of the custom working directory path
-wd_path=/IncortaTesting/tmp/work
+wd_path=/Users/Nadim_Incorta
+
+#This is import flag and set to false (-d)
+
+#This is data load flag and set to false (-l)
+
+#This is extract flag and set to false (-x)
 
 #LDAP SETUP PROPERTIES
 
@@ -37,10 +42,7 @@ wd_path=/IncortaTesting/tmp/work
 include_schemas=True
 
 #User Testing? Includes json files per user. Default set to True
-include_user_testing=True
+include_user_testing=False
 
 #Default is set to False
 skip_data_load=True
-
-
-

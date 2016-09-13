@@ -18,7 +18,7 @@ commands = sys.argv[2:]
 
 config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenants',
                    'username': 'Super', 'password': 'none', 'load_users': 'No', 'test_suite': 'CSV_DataSource',
-                   'skip_validation': 'False', 'import_object': 'False', 'data_load': 'False',
+                   'skip_validation': 'False', 'skip_xml_validation': 'False', 'import_object': 'False', 'data_load': 'False',
                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
                    'url': 'http://localhost:8080/incorta', 'ldap.base.provider.url': 'ldap://dev01.incorta.com:389',
                    'ldap.base.dn': 'dc=dev01,dc=incorta,dc=com', 'ldap.user.mapping.login': 'uid',
