@@ -150,10 +150,7 @@ test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_di
 print "Checking if instance needs to load users"
 writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
 owd = os.getcwd()
-#sync = orig_wd_path + os.sep + 'sync.txt'
-print incorta_home
 sync = incorta_home + os.sep + 'sync.txt'
-print "Location of sync file ", sync
 if os.path.isfile(sync):
     print "Users already Loaded"
     writeLogMessage("Users already Loaded", mainLogger, str(INFO))
@@ -321,6 +318,15 @@ for sub_dir in test_suite_directories:
 
         # TENANT EDITOR
         Auto_Module.validation.tenant_editor(export_path)
+
+
+        print "DEBUGGING XML META DATA VALIDATION"
+        print "For Test Suite: ", sub_dir
+        print "For current test case: ", dir
+        print "import dash ids:  ", import_dash_ids
+        print "export dash ids:  ", export_dash_ids
+
+
 
         # META DATA VALIDATION IMPLEMENTATION
         if config_defaults['skip_xml_validation'] == 'False':

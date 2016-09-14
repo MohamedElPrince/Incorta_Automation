@@ -201,6 +201,11 @@ def get_dashboards_info(path):
 	tenant_id = ""
 	tenant_full_path = ""
 
+
+	print "&*%&*%*&%*&*%*&*%*&*%*&%&*%*&*%**&*%&*%*&%"
+	print "Testing GET DASHBOARD INFO"
+
+
 	for folder in data:
 		if folder == 'dashboards':
 			dashboards_path = path+os.sep+folder
@@ -220,6 +225,7 @@ def get_dashboards_info(path):
 							try:
 								tree = ElementTree.parse(dashboard_cases_path + os.sep + 'tenant.xml')
 								root = tree.getroot()
+								tenant_xml_path = dashboard_cases_path + os.sep + 'tenant.xml'
 							except Exception, e:
 								print 'Incorrect path to Tenant'
 								exit(1)
@@ -228,28 +234,24 @@ def get_dashboards_info(path):
 								file_path = file_path + os.sep + child.attrib['name']
 							for child in root.iter('dashboard'):
 								file_path += os.sep + child.attrib['name']
-								# print file_path
 								dashboard_name_list.append(file_path[1:])
-
-							try:
-								with open(temp_full_path, 'rt') as f:
-									dash_tree = ElementTree.parse(f)
-							except Exception, e:
-								print "Unable to open dashboard", names
-								writeLogMessage('%s %s' % ("Unable to open dashboard", names), mainLogger, 'critical')
-							try:
-								for node in dash_tree.iter('table'):
-									dash_ids[node.attrib.get('id')] = temp_full_path
-									tenant_id = node.attrib.get('id')
-							except Exception, e:
-								print "Unable to read dashboard", names
-								writeLogMessage('%s %s' % ("Unable to read dashboard", names), mainLogger, 'critical')
+							for child in root.iter('dashboard'):
+								dash_ids[child.attrib['guid']] = tenant_xml_path
+								tenant_id = child.attrib['guid']
 							# try:
-							# 	for node in dash_tree.iter('report'):
-							# 		dashboard_name_list.append(node.attrib.get('name'))
+							# 	temp_full_path = dashboard_cases_path + os.sep + 'tenant.xml'
+							# 	with open(temp_full_path, 'rt') as f:
+							# 		dash_tree = ElementTree.parse(f)
 							# except Exception, e:
-							# 	print "Unable to read name from dashboard", names
-							# 	writeLogMessage('%s %s' % ("Unable to read name from dashboard", names), mainLogger, 'critical')
+							# 	print "Unable to open dashboard", names
+							# 	writeLogMessage('%s %s' % ("Unable to open dashboard", names), mainLogger, 'critical')
+							# try:
+							# 	for node in dash_tree.iter('table'):
+							# 		dash_ids[node.attrib.get('id')] = temp_full_path
+							# 		tenant_id = node.attrib.get('id')
+							# except Exception, e:
+							# 	print "Unable to read dashboard", names
+							# 	writeLogMessage('%s %s' % ("Unable to read dashboard", names), mainLogger, 'critical')
 					elif dash_data == 'tenant.xml':
 						tenant_full_path = dashboard_cases_path + os.sep + dash_data
 						try:
@@ -259,6 +261,7 @@ def get_dashboards_info(path):
 							print "Unable to open Dashboard tenant", dash_data
 							writeLogMessage('%s %s' % ("Unable to open Dashboard tenant", dash_data), mainLogger, 'critical')
 				dash_tenants[tenant_id] = tenant_full_path
+	print "&*%&*%*&%*&*%*&*%*&*%*&%&*%*&*%**&*%&*%*&%"
 	return dash_ids, dash_tenants, dashboard_name_list
 
 def get_schemas_info(path):
