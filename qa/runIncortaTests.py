@@ -284,7 +284,7 @@ for sub_dir in test_suite_directories:
         # EXPORTS
         test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
         for test_case_wd_dirs in test_case_wd_subdirectories:
-            if 'Export_Files' in test_case_wd_dirs:
+            if 'Output_Files' in test_case_wd_dirs:
                 test_case_export_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, test_case_wd_dirs)
                 export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
                 test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,

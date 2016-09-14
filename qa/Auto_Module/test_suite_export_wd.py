@@ -26,7 +26,7 @@ def extract_test_case(test_case_path, test_case_path_wd):
         writeLogMessage('%s %s' % (test_case_path, test_case_path_wd), mainLogger, 'debug')
 
     # Need to fix this hard code
-    test_case_path_wd = test_case_path_wd + os.sep + 'Import_Files'
+    test_case_path_wd = test_case_path_wd + os.sep + 'Baseline_Files'
     extension = '.zip'
     test_case_subdirectories = file_tools.get_subdirectories(test_case_path)
     for dir in test_case_subdirectories:
@@ -56,8 +56,8 @@ def create_standard_directory(test_case_path_wd):
         Nothing
     """
     try:
-        file_tools.create_directory(test_case_path_wd, 'Export_Files')
-        file_tools.create_directory(test_case_path_wd, 'Import_Files')
+        file_tools.create_directory(test_case_path_wd, 'Output_Files')
+        file_tools.create_directory(test_case_path_wd, 'Baseline_Files')
     except OSError as e:
-        writeLogMessage('Cant not Create Export/Import Folders', mainLogger, 'critical')
-        raise Exception('Can not Create Export/Import Folders')
+        writeLogMessage('Cant not Create Output/Baseline Folders', mainLogger, 'critical')
+        raise Exception('Can not Create Output/Baseline Folders')

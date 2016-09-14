@@ -71,7 +71,7 @@ def get_paths(test_case_path, test_case_path_wd, user):
     test_case_wd_subdirectories = file_tools.get_subdirectories(test_case_path_wd)
     for dirs_wd in test_case_wd_subdirectories:
         dirs_wd_path = file_tools.get_path(test_case_path_wd, dirs_wd)
-        if 'Import_Files' in dirs_wd:
+        if 'Baseline_Files' in dirs_wd:
             import_sub_directories = file_tools.get_subdirectories(dirs_wd_path)
             for sub in import_sub_directories:
                 if user in sub:
@@ -161,9 +161,9 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
                 diffFile.write('\n\n')
                 header2_string = "\n\n Outputting Differences.... \n\n"
                 diffFile.write(header2_string)
-                header3_string = ">>> IMPORT CONTENT"
+                header3_string = ">>> BASELINE CONTENT"
                 header_newline = '\n'
-                header4_string = "<<< EXPORT CONTENT"
+                header4_string = "<<< OUTPUT CONTENT"
                 diffFile.write(header3_string)
                 diffFile.write(header_newline)
                 diffFile.write(header4_string)

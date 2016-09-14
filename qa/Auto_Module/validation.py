@@ -124,9 +124,9 @@ def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaDa
 					f.write('\n\n')
 					header2_string = "\n\n Outputting Differences.... \n\n"
 					f.write(header2_string)
-					header3_string = ">>> IMPORT CONTENT"
+					header3_string = ">>> BASELINE CONTENT"
 					header_newline = '\n'
-					header4_string = "<<< EXPORT CONTENT"
+					header4_string = "<<< OUTPUT CONTENT"
 					f.write(header3_string)
 					f.write(header_newline)
 					f.write(header4_string)
@@ -180,10 +180,10 @@ def grab_import_export_path(wd_test_case_path):
 	"""
 	sub_path  = file_tools.get_subdirectories(wd_test_case_path)
 	for x in sub_path:
-		if x == 'Import_Files':
+		if x == 'Baseline_Files':
 			import_path = x
 			import_path = wd_test_case_path+'/'+import_path
-		if x == 'Export_Files':
+		if x == 'Output_Files':
 			export_path = x
 			export_path = wd_test_case_path+'/'+export_path
 	return import_path, export_path

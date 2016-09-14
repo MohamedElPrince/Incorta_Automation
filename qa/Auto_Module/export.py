@@ -140,7 +140,7 @@ def export_dashboards_json(session_id, dashboard_id, csrf_token, test_case_path_
     guid_Names = get_guid(test_case_path, user)
     for guid in guid_Names:
         dash_id = str(guid)
-        user_path = test_case_path_wd + os.sep + 'Import_Files' + os.sep + user + os.sep
+        user_path = test_case_path_wd + os.sep + 'Baseline_Files' + os.sep + user + os.sep
         json_name = dash_id + '.json'
         json_path = user_path + json_name
         cmd = """curl \'""" + url + """/service/viewer?layout=""" + dash_id \
