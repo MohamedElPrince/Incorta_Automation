@@ -1,0 +1,22 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"111649f4-e82d-1123-be4f-f484556b2cfc",
+"type":"chart",
+"graph_type":"column",
+"isSampled":false,
+"row":"SALES_MySQL4.products.PROD_CATEGORY",
+"xAxisCount":1,
+"yAxisCount":1,
+"axisLabels":["Category","Revenue"],
+"dataTypeXAxis":"string",
+"labels":["Category","Revenue"],
+"average":[null],
+"cells":[["Camp & Hike",4.7305494E8],
+["Climb",5.08656047E8],
+["Cycling",9.51211894E8],
+["Fitness",2.45702291E8],
+["Snow",1.707517126E9]],
+"result":0}]
+}

@@ -583,8 +583,8 @@ for suite in test_suite_name_list:
             if result == 'failed':
                 print "     FAILED FILES: ", failed_files
                 writeLogMessage("     FAILED FILES: %s" % failed_files, summaryLogger, 'warning')
-        if case_check == False:
-            test_suite_check = False
+            if case_check == False:
+                test_suite_check = False
 
         METADATA_VALID_SUCC = test_suite_check
 

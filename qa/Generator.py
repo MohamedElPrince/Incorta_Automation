@@ -277,7 +277,7 @@ def csv_file_handler(records, workingDirectory):
         prints:
             Prints 'Not Found' statements when certain objects are not found
     """
-    tempPath = create_directory(workingDirectory, 'suites')
+    tempPath = create_directory(workingDirectory, 'TestSuites')
     for rows in records:
         session = login(rows['Url'], rows['Tenant'], rows['User'], rows['Password'])
         session_id = session[21:53]
