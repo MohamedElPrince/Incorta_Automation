@@ -119,7 +119,7 @@ def validation(test_suite_name, import_dictionary, export_dictionary, XML_MetaDa
 					export_contents = []
 
 					f = open(log_name, 'w')
-					header_string = 'Imported File: \n' + import_dictionary[key] + '\nExported File: \n' + export_dictionary[key]
+					header_string = 'Baseline File: \n' + import_dictionary[key] + '\nOutput File: \n' + export_dictionary[key]
 					f.write(header_string)
 					f.write('\n\n')
 					header2_string = "\n\n Outputting Differences.... \n\n"

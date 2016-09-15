@@ -155,7 +155,7 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
             else:
                 file_path = file_path + '.diff'
                 diffFile = open(file_path, 'w')
-                header_string = 'Imported File: \n' + test_case_json_dict[key] + '\nExported File: \n' + \
+                header_string = 'Baseline File: \n' + test_case_json_dict[key] + '\nOutput File: \n' + \
                                 test_case_wd_json_dict[key]
                 diffFile.write(header_string)
                 diffFile.write('\n\n')
