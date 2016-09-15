@@ -201,11 +201,6 @@ def get_dashboards_info(path):
 	tenant_id = ""
 	tenant_full_path = ""
 
-
-	print "&*%&*%*&%*&*%*&*%*&*%*&%&*%*&*%**&*%&*%*&%"
-	print "Testing GET DASHBOARD INFO"
-
-
 	for folder in data:
 		if folder == 'dashboards':
 			dashboards_path = path+os.sep+folder
@@ -261,7 +256,6 @@ def get_dashboards_info(path):
 							print "Unable to open Dashboard tenant", dash_data
 							writeLogMessage('%s %s' % ("Unable to open Dashboard tenant", dash_data), mainLogger, 'critical')
 				dash_tenants[tenant_id] = tenant_full_path
-	print "&*%&*%*&%*&*%*&*%*&*%*&%&*%*&*%**&*%&*%*&%"
 	return dash_ids, dash_tenants, dashboard_name_list
 
 def get_schemas_info(path):

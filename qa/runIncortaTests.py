@@ -320,14 +320,6 @@ for sub_dir in test_suite_directories:
         Auto_Module.validation.tenant_editor(export_path)
 
 
-        print "DEBUGGING XML META DATA VALIDATION"
-        print "For Test Suite: ", sub_dir
-        print "For current test case: ", dir
-        print "import dash ids:  ", import_dash_ids
-        print "export dash ids:  ", export_dash_ids
-
-
-
         # META DATA VALIDATION IMPLEMENTATION
         if config_defaults['skip_xml_validation'] == 'False':
             # Comparing Dashboard Items
