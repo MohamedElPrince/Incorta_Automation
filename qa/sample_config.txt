@@ -1,10 +1,10 @@
 #location for incorta home.
 #Default: /home/Incorta
-incorta_home=/Users/Nadim_Incorta/2_70
+incorta_home=/home/users/Incorta/
 
 #path to tenant home
 #Default: /home/tenants
-tenant_home=/Users/Nadim_Incorta/2_70/tenants
+tenant_home=/home/users/Incorta/tenants
 
 #name of the tenant
 #Default: Demo
@@ -32,7 +32,7 @@ skip_xml_validation=False
 
 #Working Directory Path, Where all tests become timestamped and stored
 #Default: ~/IncortaTesting/tmp/work
-wd_path=/Users/Nadim_Incorta
+wd_path=/home/user/testing
 
 #LDAP SETUP PROPERTIES (After first = symbol place connection info per ldap property)
 #Default: environment dev 01 with port 389
