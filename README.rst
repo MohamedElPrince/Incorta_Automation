@@ -9,15 +9,6 @@ Incorta_.
 
 Automation Framework for Incorta
 
-
-
-.. image:: https://pyup.io/repos/github/asarao/qa/shield.svg
-
-
-
-
-
-
 Features
 --------
 
