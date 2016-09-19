@@ -207,10 +207,12 @@ for sub_dir in test_suite_directories:
     current_test_suite = sub_dir
 
     full_schema_export_list = []
+
     # ENTERING TEST CASES
     for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
         print "Current Test Case: ", dir
         writeLogMessage("Current Test Case: %s" % dir, mainLogger, str(INFO))
+
         # Get path of test_case in test_suite
         test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
         if Debug == True:
@@ -222,16 +224,18 @@ for sub_dir in test_suite_directories:
         if Debug == True:
             print test_case_subdirectories
             writeLogMessage(test_case_subdirectories, mainLogger, str(DEBUG))
+
         # Creates test_suite folder in WD
         test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
         if Debug == True:
             print test_case_path_wd
             writeLogMessage(test_case_path_wd, mainLogger, str(DEBUG))
+
         # Creates Import and Export Folders in WD test case folder
         Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
+
         # Extracts test suite to WD
         Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
-
         source_folders = os.listdir(test_case_path)
         if 'datafiles' in source_folders and 'datasources' in source_folders:
             print "Test Case ", dir, " contains both datafiles and datasources"
