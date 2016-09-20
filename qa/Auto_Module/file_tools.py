@@ -45,6 +45,8 @@ def get_subdirectories(path):
     for x in subdirectories:
         if x == '.DS_Store':
             subdirectories.remove(x)
+        if x == 'schema.txt':
+            subdirectories.remove(x)
     return subdirectories
 
 def get_path(path, directory):
