@@ -1,11 +1,10 @@
 import time
 import os
 import subprocess
-import file_tools
 from customLogger import mainLogger, writeLogMessage
 
 """
-Loads all data on the Incorta Software
+Loads all data on to Incorta Software
 
 TODO
     Add log file dump for failure and success of each import and extract
