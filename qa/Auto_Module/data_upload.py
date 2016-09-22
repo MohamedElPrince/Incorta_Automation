@@ -1,3 +1,4 @@
+import json, requests
 import time
 import os
 import subprocess
@@ -13,23 +14,56 @@ TODO
 
 Debug = False  # Debug flag for print statements
 
-def Load_data(incorta, session, names_list):
+#TODO: Remove not needed parameter export_schema_name_list
+#Temp Static Flag -- Remove after new functionality works
+load_code_switch = False
+
+def Load_data(incorta, session, names_list, test_case_path):
     """
     Function loads all schemas to Incorta from the list of schemas
         args:
             incorta: Incorta API module
             session: session var returned by login function
+            test_case_path: Path for test case within test suite
             names_list: list of names to upload
         returns:
             Nothing
         prints:
             Can print debug statements if needed
     """
-    for names in names_list:
-        upload_check = incorta.load_schema(session, names)
-    if Debug == True:
-        print upload_check, "For:", names
-        writeLogMessage('Upload Check %s, For: %s ' % (upload_check, names), mainLogger, 'info')
+    if load_code_switch == False:
+        for names in names_list:
+            upload_check = incorta.load_schema(session, names)
+        if Debug == True:
+            print upload_check, "For:", names
+            writeLogMessage('Upload Check %s, For: %s ' % (upload_check, names), mainLogger, 'info')
+    else:
+        fileFound = False
+        for files in os.listdir(test_case_path):
+            if files == 'schema.txt':
+                try:
+                    with open(os.path.join(test_case_path, files)) as text_file:
+                        schema_list = [line.rstrip('\n') for line in text_file]
+                    fileFound=True
+                except Exception, e:
+                    print ("schema.txt Not Found Inside Test Case")
+                    writeLogMessage('schema.txt Not Found Inside Test Case %s ' % (test_case_path), mainLogger, 'critical')
+        if fileFound == True:
+            for schemas in schema_list:
+                upload_check = incorta.load_schema(session, schemas)
+                result = incorta.get(session, "/service/schema/getSchemas")
+                json_parsed = json.loads(result.content)['schemas']
+                for schema in json_parsed:
+                    print schema['name']
+            if Debug == True:
+                print upload_check, "For:", schemas
+                writeLogMessage('Upload Check %s, For: %s ' % (upload_check, schemas), mainLogger, 'info')
+
+
+
+        #print json_parsed['schemas']
+        #print json_parsed['id']
+        #print '\n'.join((schema[' '] for schema in json.loads(r.content)['schemas']))
 
 
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
