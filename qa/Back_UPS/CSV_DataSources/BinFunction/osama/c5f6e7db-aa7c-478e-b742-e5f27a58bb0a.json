@@ -1,0 +1,18 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"285dbdee-fe53-b11d-ee83-5bd2b466e17e",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Case Number","Open Date","Close Date"],
+"rowTypes":[],
+"measureTypes":["integer","date","date"],
+"totalRows":0,
+"complete":true,
+"rowTree":{
+"r":[]}}]
+}

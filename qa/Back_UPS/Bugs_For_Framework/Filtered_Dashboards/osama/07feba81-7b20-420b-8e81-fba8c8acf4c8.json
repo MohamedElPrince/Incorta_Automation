@@ -1,0 +1,4021 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"4e4080ba-1adb-df32-3dcf-9ed45fafd088",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Year","County","Cost"],
+"rowTypes":["integer"],
+"measureTypes":["string","double"],
+"totalRows":59928,
+"complete":false,
+"rowTree":{
+"g":[{
+"v":"2010",
+"rowNo":0,
+"rs":1000,
+"r":[[{
+"v":"Yuma County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yuma County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yuma County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yuma County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yuma County"},
+{
+"v":"$4.51"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$3.81"}],
+[{
+"v":"York County"},
+{
+"v":"$4.51"}],
+[{
+"v":"York County"},
+{
+"v":"$4.51"}],
+[{
+"v":"York County"},
+{
+"v":"$4.51"}],
+[{
+"v":"York County"},
+{
+"v":"$4.51"}],
+[{
+"v":"York County"},
+{
+"v":"$4.51"}],
+[{
+"v":"York County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yolo County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yellowstone County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yavapai County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yankton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yankton County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yankton County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yamhill County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yamhill County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yamhill County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yamhill County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yakima County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yakima County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yakima County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yakima County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Yadkin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Yadkin County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wythe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wythe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wyoming County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wyandot County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wright County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wright County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wright County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wright County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worth County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Worcester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Woodward County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Woodward County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Woodson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Woodford County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Woodford County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Woodford County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Woodbury County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Woodbury County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wood County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wise County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wise County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wise County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wise County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wise County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wise County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wise County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wise County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wise County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wise County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Winston County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winston County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winston County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winona County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Winneshiek County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winneshiek County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winneshiek County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winneshiek County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winnebago County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winn Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winn Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Winn Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Windham County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wilson County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Williamson County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Williamsburg County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williamsburg City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Williams County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Will County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Will County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Will County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Will County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Will County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Will County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Will County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wilkinson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilkinson County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilkes County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilkes County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilcox County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilcox County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilcox County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilcox County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wilcox County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wicomico County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wicomico County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wicomico County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wicomico County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wicomico County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wicomico County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wichita County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Whitman County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitman County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitman County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitman County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whitfield County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White Pine County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White Pine County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"White County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wheeler County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wheeler County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wheeler County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wheeler County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whatcom County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Whatcom County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Whatcom County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Whatcom County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Whatcom County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wharton County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westmoreland County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Westchester County"},
+{
+"v":"$4.51"}],
+[{
+"v":"West Baton Rouge Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"West Baton Rouge Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"West Baton Rouge Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wells County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wells County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wells County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weld County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webster Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webster Parish"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Weber County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weber County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weber County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weber County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Weber County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webb County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Webb County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webb County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Webb County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wayne County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Waushara County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Waupaca County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waukesha County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waukesha County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waukesha County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waukesha County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waukesha County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waukesha County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waukesha County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Watauga County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Watauga County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Watauga County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washtenaw County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washtenaw County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washtenaw County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washoe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washoe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washoe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washoe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washoe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washoe County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Washington County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wasco County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wasco County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wasatch County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wasatch County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warrick County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Warren County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ward County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ward County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ward County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ward County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ward County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wapello County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Walton County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Waller County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Waller County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Waller County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Walker County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Walker County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Walker County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Walker County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wake County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wake County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wake County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wahkiakum County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wagoner County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wagoner County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wagoner County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wagoner County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wabaunsee County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabaunsee County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Wabash County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Volusia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$3.81"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$4.51"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$4.51"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$4.51"}],
+[{
+"v":"Virginia Beach City"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vilas County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vigo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vigo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vigo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vigo County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vernon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vernon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vernon County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vernon County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vernon County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vernon County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vernon County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vermilion Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vermilion County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ventura County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ventura County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ventura County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ventura County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ventura County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ventura County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ventura County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Venango County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Venango County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Venango County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Venango County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Vanderburgh County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Van Zandt County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Van Buren County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Valley County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Valley County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Valley County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Valley County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Valley County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Valley County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Valley County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Valley County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Valley County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Valley County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Valley County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Valley County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Valencia County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uvalde County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Uvalde County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Uvalde County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Utah County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Utah County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Utah County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Upshur County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Upshur County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Upshur County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union Parish"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Union County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Ulster County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uintah County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uintah County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uintah County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uintah County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Uinta County"},
+{
+"v":"$4.51"}],
+[{
+"v":"Twiggs County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Twiggs County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Twiggs County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Twiggs County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tuscola County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tuscola County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tuscola County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tuscola County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tuscola County"},
+{
+"v":"$3.81"}],
+[{
+"v":"Tuscola County"},
+{
+"v":"$3.81"}]]}]}}]
+}
