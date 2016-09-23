@@ -6,9 +6,7 @@ Fucntion MainWindow shows MainWindow through file_comparitor.py File.
 By: Ilyas Reyhanoglu
 """
 
-
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QDialog, QWidget, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 import file_comparitor
 
 class MainWindow(QMainWindow, file_comparitor.Ui_MainWindow):
