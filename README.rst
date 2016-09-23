@@ -16,19 +16,12 @@ Features
 
 Credits
 ---------
-Framework Architect:
+Framework Architect
+___________________
+
     - Imran Shamim
-Intern Team of Incorta based in California:
-    .. [#] Anahit Sarao
-    .. [#] Nadim Sarras
-    .. [#] Bashir Khan
-    .. [#] Placeholder
 
-===============================
-qa
-===============================
+Development Team
+----------------
 
-.. include:: AUTHORS.rst
-
-
-
+    .. include:: AUTHORS.rst
