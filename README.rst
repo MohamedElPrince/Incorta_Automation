@@ -28,6 +28,7 @@ Intern Team of Incorta based in California:
 qa
 ===============================
 
+.. include::AUTHORS.rst
 
 
 
