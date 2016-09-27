@@ -1,7 +1,8 @@
-import json, requests
+import json
 import time
 import os
 import subprocess
+import sys
 from customLogger import mainLogger, writeLogMessage
 
 """
@@ -14,9 +15,10 @@ TODO
 
 Debug = False  # Debug flag for print statements
 
-#TODO: Remove not needed parameter export_schema_name_list
-#Temp Static Flag -- Remove after new functionality works
-load_code_switch = False
+# TODO: Remove not needed parameter export_schema_name_list
+# Temp Static Flag -- Remove after new functionality works
+load_code_switch = True
+
 
 def Load_data(incorta, session, names_list, test_case_path):
     """
@@ -43,27 +45,81 @@ def Load_data(incorta, session, names_list, test_case_path):
             if files == 'schema.txt':
                 try:
                     with open(os.path.join(test_case_path, files)) as text_file:
-                        schema_list = [line.rstrip('\n') for line in text_file]
-                    fileFound=True
+                        schema_file_list = [line.rstrip('\n') for line in text_file]
+                    fileFound = True
                 except Exception, e:
                     print ("schema.txt Not Found Inside Test Case")
-                    writeLogMessage('schema.txt Not Found Inside Test Case %s ' % (test_case_path), mainLogger, 'critical')
+                    writeLogMessage('schema.txt Not Found Inside Test Case %s ' % (test_case_path), mainLogger,
+                                    'critical')
+
         if fileFound == True:
-            for schemas in schema_list:
-                upload_check = incorta.load_schema(session, schemas)
-                result = incorta.get(session, "/service/schema/getSchemas")
-                json_parsed = json.loads(result.content)['schemas']
-                for schema in json_parsed:
-                    print schema['name']
-            if Debug == True:
-                print upload_check, "For:", schemas
-                writeLogMessage('Upload Check %s, For: %s ' % (upload_check, schemas), mainLogger, 'info')
+            schema_names = get_load_status(incorta, session, schema_file_list, command='pre_check')
+            print schema_names
+            for key, value in schema_names.iteritems():
+                count = 0
+                if value < 0:
+                    print ("Schema %s status errno: %s" % key, str(value))
+                    writeLogMessage("Schema %s status errno: %s" % key, str(value), 'error')
+                else:
+                    while value != 1:
+                        print "Value Position1: ", value
+                        if value == 0:
+                            print "Value Position2: ", value
+                            upload_check = incorta.load_schema(session, str(key))
+                            print upload_check
+                            if Debug == True:
+                                print upload_check, "For:", key
+                                writeLogMessage('Upload Check %s, For: %s ' % (upload_check, key), mainLogger, 'info')
+                            value = get_load_status(incorta, session, schema_file_list, key, command='status')
+                            print "Value Position3: ", value
+                            if value != 3:
+                                while (value != 3 and count < 60):
+                                    time.sleep(5)
+                                    value = get_load_status(incorta, session, schema_file_list, key, command='status')
+                                    count += 1
+                                    print "Loading schema ", key, count * 5, "seconds.."
+                                    writeLogMessage('%s %s' % (count * 5, "seconds.."), mainLogger, 'info')
+                            elif value == 1:
+                                print "Loaded schema ", key, count * 5, "seconds.."
+                                writeLogMessage('%s %s' % (count * 5, "seconds.."), mainLogger, 'info')
+                    print 'Schema is already loaded:' , key, value
+            sys.exit(0)
+            # json_parser = [schema['name'] for schema in json.loads(result.content)['schemas']]
+            # print json_parser
+            # schema_file_list, json_parser = set(schema_file_list), json_parser
+            # schema_names = [item for item in schema_file_list if item in json_parser]
+
+            # for schema_file in schema_file_list:
+            #     upload_check = incorta.load_schema(session, schema_file)
+            # if Debug == True:
+            #     print upload_check, "For:", schema_file
+            #     writeLogMessage('Upload Check %s, For: %s ' % (upload_check, schema_file), mainLogger, 'info')
 
 
 
-        #print json_parsed['schemas']
-        #print json_parsed['id']
-        #print '\n'.join((schema[' '] for schema in json.loads(r.content)['schemas']))
+            # print json_parsed['schemas']
+            # print json_parsed['id']
+            # print '\n'.join((schema[' '] for schema in json.loads(r.content)['schemas']))
+
+
+def get_load_status(incorta, session, schema_file_list, schema_name=None, command='status'):
+    """
+    COMMANDS
+    status=get schema names status and return it
+    pre_check=get dictionary of schemas from GET request compare to schema_file_list return common schema names
+
+    """
+    pre_check = incorta.get(session, "/service/schema/getSchemas")
+    json_dict = {}
+    for json_schema in json.loads(pre_check.content)['schemas']:
+        json_dict[json_schema['name']] = json_schema['status']
+    schema_names = {key: json_dict[key] for key in schema_file_list if key in json_dict}
+    if command == 'pre_check':
+        return schema_names
+    elif command == 'status':
+        for key, value in schema_names.iteritems():
+            if key == schema_name:
+                return value
 
 
 def load_validator(incorta_home, export_schema_names_list, full_schema_export_list):
@@ -82,9 +138,10 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
         output = p.split('\n')
 
         # Waits for Schema to Load
-        if full_schema_export_list[-1] not in output[int_size-1]:
+        if full_schema_export_list[-1] not in output[int_size - 1]:
             print "Still waiting for schema to load..", full_schema_export_list[-1]
-            writeLogMessage('%s %s' % ("Still waiting for schema to load..", full_schema_export_list[-1]), mainLogger, 'info')
+            writeLogMessage('%s %s' % ("Still waiting for schema to load..", full_schema_export_list[-1]), mainLogger,
+                            'info')
             LOAD_COUNTER += 1
             if len(schema_list) == int_size:
                 loaded = True
@@ -94,15 +151,16 @@ def load_validator(incorta_home, export_schema_names_list, full_schema_export_li
                 string = item.split()
                 for index in range(len(string)):
                     if string[index] == 'completed!':
-                        schema_list.append(string[index-1])
+                        schema_list.append(string[index - 1])
 
             if len(schema_list) == int_size:
                 loaded = True
         COUNT += 1
-        print "Loading schema ", full_schema_export_list[-1], COUNT*5, "seconds.."
-        writeLogMessage('%s %s' % (COUNT*5, "seconds.."), mainLogger, 'info')
+        print "Loading schema ", full_schema_export_list[-1], COUNT * 5, "seconds.."
+        writeLogMessage('%s %s' % (COUNT * 5, "seconds.."), mainLogger, 'info')
     # Loaded schemas are stored in the variable schema_list
     return schema_list
+
 
 def schema_load_validatior(export_schema_names_list, full_schema_export_list, Loader_Validation_Path):
     """
@@ -135,10 +193,3 @@ def loaded_validator(loaded_schema_names, loaded_schema, Loader_Validation_Path)
             log_name = Loader_Validation_Path + os.sep + str(schema) + '.dif'
             f = open(log_name, 'w')
             f.close()
-
-
-
-
-
-
-

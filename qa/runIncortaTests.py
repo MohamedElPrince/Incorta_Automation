@@ -352,7 +352,7 @@ for sub_dir in test_suite_directories:
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list, test_case_path)
 
                 #TODO: Adding flag to disable old loader Validation Code
-                load_code_switch = False
+                load_code_switch = True
                 if load_code_switch == False:
                     # LOADER VALIDATION
                     # Appends to list of loaded schemas as for loop goes through every test case
@@ -465,7 +465,7 @@ for sub_dir in test_suite_directories:
         if config_defaults['skip_data_load'] == 'False':
 
             #TODO: Adding flag to disable old loader Validation Code
-            load_code_switch = False
+            load_code_switch = True
             if load_code_switch == False:
                 # Compares Loaded Schema List to Exported Schema List
                 Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
