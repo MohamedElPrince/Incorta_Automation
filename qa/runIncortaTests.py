@@ -145,7 +145,9 @@ session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
 test_suite_directory_path = os.getcwd() + os.sep + "TestSuites"
+SourcesMetadata_path = os.getcwd() +os.sep + "SourcesMetadata"
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
+SourcesMetadata_directories = Auto_Module.file_tools.get_subdirectories(SourcesMetadata_path)
 # LOAD USERS FROM LDAP
 print "Checking if instance needs to load users"
 writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
@@ -181,6 +183,57 @@ user_list = user_dict.keys()
 print "\n USER LIST: ", user_list
 writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
 
+
+#Import Files from SourcesMetadata folder
+
+for sources in SourcesMetadata_directories:
+    print "Importing Current Source: %s" % sources
+    curr_source_path = SourcesMetadata_path + os.sep + sources
+    sources_subdirectories = Auto_Module.file_tools.get_subdirectories(curr_source_path)
+
+    print "Current Source Path: ", curr_source_path
+    print "Source Sub directories ", sources_subdirectories
+
+    for import_type in sources_subdirectories:
+        if import_type == 'datasources':
+            datasource_path = curr_source_path + os.sep + import_type
+            datasources = Auto_Module.file_tools.get_subdirectories(datasource_path)
+            print "Importing DataSources ", datasources
+
+            for datasource in datasources:
+                if 'datafiles' in datasource:
+                    source_path = datasource_path + os.sep + datasource
+                    print "Datafile to be imported", datasource
+                    try:
+                        incorta.upload_data_file(session, source_path)
+                    except Exception:
+                        print "Data File already imported ", datasource
+                else:
+                    source_path = datasource_path + os.sep + datasource
+                    print "Datasource to be imported", datasource
+                    try:
+                        incorta.import_datasources(session, source_path)
+                    except Exception:
+                        print "Data Source Already Imported", datasource
+        if import_type == 'schemas':
+            schema_path = curr_source_path + os.sep + import_type
+            schemas = Auto_Module.file_tools.get_subdirectories(schema_path)
+            print "Importing Schemas ", schemas
+
+            for schema in schemas:
+                print "Importing ", schema
+                source_path = schema_path + os.sep + schema
+                try:
+                    incorta.import_schemas(session, source_path)
+                except Exception:
+                    print "Schema Already Imported"
+        if import_type == 'session_variables':
+            print "In Progress"
+            # This Module needs to be completed ****
+    print "\n"
+
+
+# Run Through Test Suites
 for sub_dir in test_suite_directories:
     loaded_schemas = []
     test_case_name_dict = {}
@@ -236,32 +289,7 @@ for sub_dir in test_suite_directories:
 
         # Extracts test suite to WD
         Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
-        source_folders = os.listdir(test_case_path)
-        if 'datafiles' in source_folders and 'datasources' in source_folders:
-            print "Test Case ", dir, " contains both datafiles and datasources"
-            writeLogMessage("Test Case %s contains both datafiles and datasources" % dir, mainLogger, str(INFO))
 
-            Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
-            Auto_Module.test_suite_import.import_datasources(incorta, session, test_case_path)
-
-        elif 'datafiles' in source_folders:
-        # Import Datafiles to Incorta
-            print "Test Case ", dir, " contains datafiles"
-            writeLogMessage("Test Case %s contains datafiles" % dir, mainLogger, str(INFO))
-            Auto_Module.test_suite_import.import_datafiles(incorta, session, test_case_path)
-
-        elif 'datasources' in source_folders:
-        # Import Datasources to Incorta
-            print "Test Case ", dir, " contains datasources"
-            writeLogMessage("Test Case %s contains datasources" % dir, mainLogger, str(INFO))
-            Auto_Module.test_suite_import.import_datasources(incorta, session, test_case_path)
-        else:
-            print "Test Case ", dir, "does not contain datafiles or datasources"
-            writeLogMessage("Test Case %s does not contain datafiles or datasources" % dir, mainLogger, str(INFO))
-
-        if config_defaults['include_schemas'] == 'True':
-            # Import Schema to Incorta
-            Auto_Module.test_suite_import.import_schema(incorta, session, test_case_path)
         # Import Dashboards to Incorta
         Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
         # Defining Import / Export Paths
@@ -347,11 +375,11 @@ for sub_dir in test_suite_directories:
                 snapshot = False
                 staging = False
 
-                #TODO: Remove not needed parameter export_schema_name_list
+                #/todo.txt: Remove not needed parameter export_schema_name_list
 
                 Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list, test_case_path)
 
-                #TODO: Adding flag to disable old loader Validation Code
+                #/todo.txt: Adding flag to disable old loader Validation Code
                 load_code_switch = True
                 if load_code_switch == False:
                     # LOADER VALIDATION
@@ -464,7 +492,7 @@ for sub_dir in test_suite_directories:
     if config_defaults['include_schemas'] == 'True':
         if config_defaults['skip_data_load'] == 'False':
 
-            #TODO: Adding flag to disable old loader Validation Code
+            #/todo.txt: Adding flag to disable old loader Validation Code
             load_code_switch = True
             if load_code_switch == False:
                 # Compares Loaded Schema List to Exported Schema List

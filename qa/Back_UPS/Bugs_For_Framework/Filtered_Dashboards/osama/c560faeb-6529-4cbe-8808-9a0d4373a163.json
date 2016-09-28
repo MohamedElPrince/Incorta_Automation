@@ -1,0 +1,4021 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"4e4080ba-1adb-df32-3dcf-9ed45fafd088",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Year","County","Cost"],
+"rowTypes":["integer"],
+"measureTypes":["string","double"],
+"totalRows":200340,
+"complete":false,
+"rowTree":{
+"g":[{
+"v":"2010",
+"rowNo":0,
+"rs":1000,
+"r":[[{
+"v":"Aiken County"},
+{
+"v":"$2,384.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$2,384.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$2,384.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$2,384.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$2,384.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$2,384.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$2,384.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,670.79"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,670.79"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,475.48"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,227.42"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,227.42"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,227.42"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,167.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$1,106.61"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$779.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$779.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$779.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$737.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$613.71"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$613.71"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$613.71"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$613.71"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$583.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$583.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$470.32"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$411.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$395.20"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$368.87"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$368.87"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$368.87"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$368.87"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$352.74"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$296.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$249.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$235.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$230.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$205.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$197.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$194.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$194.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$194.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$194.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$194.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$194.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$194.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$187.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$172.95"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$143.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$143.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$143.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$143.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$143.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$143.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$132.48"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$131.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$131.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$130.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$130.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$130.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$130.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$130.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$130.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$130.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$128.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$124.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$117.58"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$116.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$115.30"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$114.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$111.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$111.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$107.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$99.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.84"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$97.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$96.33"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$93.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$93.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$92.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$92.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$92.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$92.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$92.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$92.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$89.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$89.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$89.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$89.52"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.66"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.18"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.18"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$87.18"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$86.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$85.83"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$80.01"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$74.97"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$74.97"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$73.38"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$73.38"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$73.38"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.25"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$71.25"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$70.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$70.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$70.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$70.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$70.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$69.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$68.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$68.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$68.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$68.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$67.14"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$67.14"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$67.14"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$67.14"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$67.14"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$67.14"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$66.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.82"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$65.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.48"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.48"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$64.04"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.64"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.34"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$62.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$61.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$58.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.65"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$57.22"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$55.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$54.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$54.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$54.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$54.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$54.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$54.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$54.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.72"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$52.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$50.80"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$49.53"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.16"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.03"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.03"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.03"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.03"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$48.03"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$47.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$47.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$47.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$47.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$47.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$47.50"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.98"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.62"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.56"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$46.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.68"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.60"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$45.28"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$44.76"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.88"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.44"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.29"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$43.08"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$39.54"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$38.10"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.40"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$36.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.91"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.77"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$35.77"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.92"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.36"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$34.23"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.96"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.57"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.57"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.57"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.57"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.57"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.12"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$33.02"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.31"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.24"}],
+[{
+"v":"Aiken County"},
+{
+"v":"$32.24"}]]}]}}]
+}
