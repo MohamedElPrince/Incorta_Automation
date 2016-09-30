@@ -199,7 +199,6 @@ for sources in SourcesMetadata_directories:
             datasource_path = curr_source_path + os.sep + import_type
             datasources = Auto_Module.file_tools.get_subdirectories(datasource_path)
             print "Importing DataSources ", datasources
-
             for datasource in datasources:
                 if 'datafiles' in datasource:
                     source_path = datasource_path + os.sep + datasource
@@ -215,11 +214,11 @@ for sources in SourcesMetadata_directories:
                         incorta.import_datasources(session, source_path)
                     except Exception:
                         print "Data Source Already Imported", datasource
+
         if import_type == 'schemas':
             schema_path = curr_source_path + os.sep + import_type
             schemas = Auto_Module.file_tools.get_subdirectories(schema_path)
             print "Importing Schemas ", schemas
-
             for schema in schemas:
                 print "Importing ", schema
                 source_path = schema_path + os.sep + schema
@@ -227,9 +226,18 @@ for sources in SourcesMetadata_directories:
                     incorta.import_schemas(session, source_path)
                 except Exception:
                     print "Schema Already Imported"
+
         if import_type == 'session_variables':
-            print "In Progress"
-            # This Module needs to be completed ****
+            session_var_path = curr_source_path + os.sep + import_type
+            session_variables = Auto_Module.file_tools.get_subdirectories(session_var_path)
+            print "Importing Session Variables ", session_variables
+            for var in session_variables:
+                print "Importing ", var
+                source_path = session_var_path + os.sep + var
+                try:
+                    incorta.import_session_variables(session, source_path)
+                except Exception:
+                    print "Session Variable ", var, " already imported"
     print "\n"
 
 
