@@ -1,5 +1,5 @@
 import logging
-from config.initialization_global import *
+from qa.config.settings.initialization_global import *
 
 
 #Different levels of logging to pass to writeLogMessage

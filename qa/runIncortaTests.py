@@ -30,7 +30,7 @@ if os.path.isfile(preCheckScriptPAth):
 """
 NEW IMPORTS--Please Retain this order
 """
-from config.initialization_global import *
+from qa.config.settings.initialization_global import *
 
 # Create working directory
 try:

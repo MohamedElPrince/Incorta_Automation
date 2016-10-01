@@ -1,11 +1,11 @@
 import sys, os, time
-from Auto_Module.file_tools import create_directory
+from qa.Auto_Module.file_tools import create_directory
 
 """
 ------------------------------------------Initialization----------------------------------------
 """
 #ROOT_DIR = sys.Path(__file__) - 2
-ROOT_DIR = os.path.dirname(os.path.dirname(__file__)) # This is your Project Root
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__))) # This is your Project Root
 
 # All the arguments which are passed in command line
 # sys.argv[0:] = argv
