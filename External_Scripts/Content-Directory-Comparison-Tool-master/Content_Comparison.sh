@@ -163,13 +163,34 @@ while [  "$CHOICE" -ne "3" ]; do
 		if [[ "$CHOICE" -eq "1" ]]; then
 			echo -n "Enter Dashboard Name? > "
 			read dash_name
+			#Handling of & Case
+			if grep -q "&" <<<$dash_name; then
+				echo "Contains Special Character &"
+				dash_name=${dash_name/&/&amp;}
+				echo "Dashboard Name with &char"
+				echo $dash_name
+			fi
+			#Handling of " Case
+			quote="\""
+			echo "checking"
+			echo $quote
+			if [[ "$dash_name" == *"\""* ]]; then
+			    echo "'$dash_name' contains '\"'";
+			    dash_name=${dash_name/$quote/&quot;}
+			fi
+
+
+
 			search="name=\"$dash_name\""
 			echo $search
+
 			FILE_SRC1=$(grep -rl "$search" ${SOURCE1}/dashboards)
 			FILE_SRC1_ARR=( $FILE_SRC1_RAW )
 			FILE_SRC2=$(grep -rl "$search" ${SOURCE2}/dashboards)
 			FILE_SRC2_ARR=( $FILE_SRC2_RAW )
 			echo "Finding Location of Files"
+
+
 			if [[ ! -f "${FILE_SRC1}" || ! -f "${FILE_SRC2}" ]]; then
 					echo "Files do not exist"
 			else 
@@ -196,7 +217,33 @@ while [  "$CHOICE" -ne "3" ]; do
 		if [[ "$CHOICE" -eq "2" ]]; then			
 			echo -n "Enter Schema Name? > "
 			read schema_raw
+			
+
+
+			#Handling of & Case
+			if grep -q "&" <<<$schema_raw; then
+				echo "Contains Special Character &"
+				schema_raw=${schema_raw/&/&amp;}
+				echo "Dashboard Name with &char"
+				echo $schema_raw
+			fi
+			#Handling of " Case
+			quote="\""
+			echo "checking"
+			echo $quote
+			if [[ "$schema_raw" == *"\""* ]]; then
+			    echo "'$schema_raw' contains '\"'";
+			    schema_raw=${schema_raw/$quote/&quot;}
+			fi
+
+
+
 			schema_name=(name="\"""${schema_raw}""\"")
+
+
+
+
+
 
 			FILE_SRC1_RAW=$(grep -rl "$schema_raw" ${SOURCE1}/schemas)
 			FILE_SRC1_ARR=( $FILE_SRC1_RAW )
