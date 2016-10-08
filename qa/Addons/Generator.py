@@ -5,7 +5,6 @@ import sys, os, csv
 import errno
 import zipfile
 import xml.etree.ElementTree as ET
-
 import shutil
 
 """
@@ -18,7 +17,14 @@ Where ARGS NEEDED ARE:
 -h --> Path to Inocorta Installation
 """
 Debug = False
-randomName = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15))
+
+random_name_list = []
+
+
+def random_name():
+    randomName = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15))
+    random_name_list.append(randomName)
+    return randomName
 
 
 def incorta_api_import(incortaHome):
@@ -56,6 +62,7 @@ def login(url, tenant, admin, password):
         print "Login Failed"
         exit(1)
 
+
 def logout(session):
     """
     Function takes in logout information and attempts to logout through Incorta API
@@ -92,9 +99,9 @@ def export_dashboards(incorta, session, casePath, dashboards):
     print casePath
     print dashboards
     dashboardPath = create_directory(casePath, 'dashboards')
-    str_tup=dashboards.split('/')
-    dashboard_name=str_tup[-1]
-    dashboardPath+= (os.sep + dashboard_name +'.zip')
+    str_tup = dashboards.split('/')
+    dashboard_name = str_tup[-1]
+    dashboardPath += (os.sep + dashboard_name + '.zip')
     try:
         export_check = incorta.export_dashboards_no_bookmarks(session, dashboardPath, dashboards)
         if Debug == True:
@@ -117,10 +124,10 @@ def export_schemas(incorta, session, casePath, schemas):
         prints:
             Can print debug statements if needed
     """
-    schemaPath = create_directory(casePath, 'schemas')
-    temp_path = schemaPath + os.sep + schemas + '.zip'
+    schemaDirPath = create_directory(casePath, 'schemas')
+    schema_path = schemaDirPath + os.sep + schemas + '.zip'
     try:
-        export_check = incorta.export_schemas(session, temp_path, schemas)
+        export_check = incorta.export_schemas(session, schema_path, schemas)
         if Debug == True:
             print export_check
     except Exception, e:
@@ -140,12 +147,12 @@ def export_datasources(incorta, session, casePath, datasources):
         prints:
             Can print debug statements if needed
     """
-    datasourcesPath = create_directory(casePath, 'datasources')
-    temp_path = datasourcesPath + os.sep + datasources + '.zip'
+    datasourcesPath = casePath + os.sep + datasources + '.zip'
     try:
-        export_check = incorta.export_datasources(session, temp_path, datasources)
+        export_check = incorta.export_datasources(session, datasourcesPath, datasources)
         if Debug == True:
             print export_check
+        return datasourcesPath
     except Exception, e:
         print ('ERROR: DataSources:', datasources, " Not Found")
 
@@ -173,7 +180,43 @@ def create_directory(path, folderName):
             raise
 
 
-def get_dashboard_guid(casePath, dashboardZippath, tempPath):
+def remove_duplication(outfilename, infilename):
+    lines_seen = set()  # holds lines already seen
+    outfile = open(outfilename, "w")
+    for line in open(infilename, "r"):
+        if line not in lines_seen:  # not a duplicate
+            outfile.write(line)
+            lines_seen.add(line)
+    outfile.close()
+
+
+def create_data_source_folder(data_source_path, temp_path):
+    newtempPath = create_directory(temp_path, random_name())
+    zip_ref = zipfile.ZipFile(data_source_path, 'r')
+    zip_ref.extractall(newtempPath)
+    zip_ref.close()
+    for root_path, dir, files in os.walk(newtempPath):
+        for file in files:
+            if file.endswith('.xml'):
+                xmlPath = os.path.join(root_path, file)
+                try:
+                    with open(xmlPath, 'rt') as f:
+                        tree = ET.parse(f)
+                except Exception, e:
+                    print "Unable to open datasource.xml"
+                root = tree.getroot()
+                for tags in root.iter('datasource'):
+                    name = tags.attrib['name']
+                    for taglets in tags.iter('property'):
+                        name2 = taglets.attrib['name']
+                        if 'connection' == name2:
+                            jbdc_string = taglets.attrib['value']
+                        if 'user' == name2:
+                            username = taglets.attrib['value']
+    return name, jbdc_string, username
+
+
+def get_dashboard_guid(dashboardZippath, tempPath):
     """
     Function parses tenant.xml from dashboard.zip
         args:
@@ -184,7 +227,7 @@ def get_dashboard_guid(casePath, dashboardZippath, tempPath):
         prints:
             Prints exception case
     """
-    newtempPath = create_directory(tempPath, randomName)
+    newtempPath = create_directory(tempPath, random_name())
     zip_ref = zipfile.ZipFile(dashboardZippath, 'r')
     zip_ref.extractall(newtempPath)
     zip_ref.close()
@@ -219,6 +262,7 @@ def export_dashboards_json(session_id, guid, csrf_token, user, casePath, url):
             Nothing
     """
     user_path = create_directory(casePath, user)
+    user_path = "\"" + user_path + "\""
     jsonName = guid + '.json'
     jsonPath = user_path + os.sep + jsonName
     cmd = """curl \'""" + url + """/service/viewer?layout=""" + guid \
@@ -277,31 +321,70 @@ def csv_file_handler(records, workingDirectory):
         prints:
             Prints 'Not Found' statements when certain objects are not found
     """
-    tempPath = create_directory(workingDirectory, 'TestSuites')
+    tempPath1 = create_directory(workingDirectory, 'Generator_Output')
+    metadata_path = create_directory(tempPath1, 'SourcesMetadata')
+    testsuite_path = create_directory(tempPath1, 'TestSuites')
     for rows in records:
         session = login(rows['Url'], rows['Tenant'], rows['User'], rows['Password'])
         session_id = session[21:53]
         csrf_token = session[63:95]
         suiteName = rows['Test_Suite_Name']
         caseName = rows['Test_Case_Name']
-        suitePath = create_directory(tempPath, suiteName)
-        casePath = create_directory(suitePath, caseName)
+        root_suitePath = create_directory(testsuite_path, suiteName)
+        root_casePath = create_directory(root_suitePath, caseName)
+
         if rows['Dashboard_Name'] == '':
             print 'No Dashboard found'
         else:
-            dashboardZippath = export_dashboards(incorta, session, casePath, rows['Dashboard_Name'])
-            guid = get_dashboard_guid(casePath, dashboardZippath, tempPath)
-            export_dashboards_json(session_id, guid, csrf_token, rows['User'], casePath, rows['Url'])
+            dashboardZippath = export_dashboards(incorta, session, root_casePath, rows['Dashboard_Name'])
+            guid = get_dashboard_guid(dashboardZippath, tempPath1)
+            export_dashboards_json(session_id, guid, csrf_token, rows['User'], root_casePath, rows['Url'])
+
         if rows['Datasource_Name'] == '':
             print 'No Datasource found for TestSuite: %s, TestCase: %s' % (suiteName, caseName)
         else:
-            export_datasources(incorta, session, casePath, rows['Datasource_Name'])
-        if rows['Schema_Name'] == '':
-            print 'No Schema found'
+            datasourceZippath = export_datasources(incorta, session, metadata_path, rows['Datasource_Name'])
+            name, jbdc_string, username = create_data_source_folder(datasourceZippath, tempPath1)
+            jbdc_string = jbdc_string[5:]
+
+            for c in ['\\', '`', '*', '@', ':', '{', '}', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!', '$', '\'',
+                      '/', '//', '___', '__']:
+                if c in jbdc_string:
+                    jbdc_string = jbdc_string.replace(c, '_')
+
+            data_source_folder_path = name + '_' + jbdc_string + '_' + username
+            metadata_dir_path = create_directory(metadata_path, data_source_folder_path)
+            metadata_datasource_folder_path = create_directory(metadata_dir_path, 'dashboards')
+            shutil.copy(datasourceZippath, metadata_datasource_folder_path)
+            os.remove(datasourceZippath)
+
+            # schema export only occurs on datasource export success
+            if rows['Schema_Name'] == '':
+                print 'No Schema found'
+            else:
+                export_schemas(incorta, session, metadata_dir_path, rows['Schema_Name'])
+
+        dashboard_temp_path = root_casePath + os.sep + 'dashboards'
+        if os.path.isdir(dashboard_temp_path):
+            text_file_path = root_casePath + os.sep + 'schema.txt'
+            tmp_file_path = root_casePath + os.sep + 'temp.txt'
+            try:
+                with open(tmp_file_path, "a") as text_file:
+                    appended_text = rows['Schema_Name'] + '\n'
+                    text_file.write(appended_text)
+                remove_duplication(text_file_path, tmp_file_path)
+            except Exception:
+                print "Can not create Schema Text File"
         else:
-            export_schemas(incorta, session, casePath, rows['Schema_Name'])
+            print "Dashboard Folder can not be found"
         logout(session)
-    return tempPath
+
+    for root, dirs, files in os.walk(testsuite_path):
+        for file in files:
+            if 'temp.txt' in file:
+                file_path = os.path.join(root, file)
+                os.remove(file_path)
+    return tempPath1
 
 
 def main():
@@ -324,7 +407,8 @@ def main():
         tempPath = csv_file_handler(records, workingDirectory)
     print '\nExtraction Complete...'
     print 'Cleaning up...'
-    shutil.rmtree(os.path.join(tempPath, randomName))
+    for random_names in random_name_list:
+        shutil.rmtree(os.path.join(tempPath, random_names))
 
 
 if __name__ == '__main__':
