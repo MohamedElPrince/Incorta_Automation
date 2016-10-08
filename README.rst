@@ -24,4 +24,5 @@ ___________________
 Development Team
 ----------------
 
-    .. include:: AUTHORS.rst
+* Anahit Sarao <anahit.sarao@incorta.com>
+* Nadim Sarras <nadim.sarras@incorta.com>
