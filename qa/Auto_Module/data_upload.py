@@ -57,8 +57,11 @@ def Load_data(incorta, session, names_list, test_case_path):
             for key, value in schema_names.iteritems():
                 count = 0
                 if value < 0:
-                    print ("Schema %s status errno: %s" % key, str(value))
-                    writeLogMessage("Schema %s status errno: %s" % key, str(value), 'error')
+                    try:
+                        print ("Schema %s status errno: %s" % key, str(value))
+                        writeLogMessage("Schema %s status errno: %s" % key, str(value), 'error')
+                    except Exception:
+                        print ("Schema Status Not available")
                 else:
                     if value != 1:
                         while value != 1:
