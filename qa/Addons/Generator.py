@@ -354,7 +354,7 @@ def csv_file_handler(records, workingDirectory):
 
             data_source_folder_path = name + '_' + jbdc_string + '_' + username
             metadata_dir_path = create_directory(metadata_path, data_source_folder_path)
-            metadata_datasource_folder_path = create_directory(metadata_dir_path, 'dashboards')
+            metadata_datasource_folder_path = create_directory(metadata_dir_path, 'datasources')
             shutil.copy(datasourceZippath, metadata_datasource_folder_path)
             os.remove(datasourceZippath)
 
