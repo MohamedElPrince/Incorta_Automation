@@ -1,4 +1,5 @@
 import time
+
 start_time = time.time()
 import sys, os, subprocess, zipfile
 import os.path
@@ -59,8 +60,6 @@ import Auto_Module.json_validation
 import Auto_Module.ldap_utilities
 import Auto_Module.output
 
-
-
 """
 #################################################### Functions ####################################################
 """
@@ -71,11 +70,13 @@ ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
 ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
 ldap_group_search_filter = config_defaults['ldap.group.search.filter']
 
+
 def incorta_api_import(incorta_home):
     incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
     sys.path.append(incorta_module)
     import incorta
     global incorta
+
 
 def login(url, tenant, username, password):
     try:
@@ -85,6 +86,7 @@ def login(url, tenant, username, password):
         writeLogMessage("Login Failed", mainLogger, str(CRITICAL))
         exit(1)
 
+
 def logout(session):
     try:
         incorta.logout(session)
@@ -93,10 +95,12 @@ def logout(session):
         writeLogMessage('Failed to logout', mainLogger, str(CRITICAL))
         exit(1)
 
+
 def get_test_suite_path(test_suite):
     test_suite_path = os.getcwd() + os.sep + "TestSuites"
     test_suite_path = test_suite_path + os.sep + test_suite
     return test_suite_path
+
 
 def grant_user_access(session, user_name, entity_type, entity_name, permission):
     try:
@@ -112,13 +116,6 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
 """
 #################################################### Functions ####################################################
 """
-# set_block_defaults(commands, config_defaults)
-# set_new_defaults(config_file, config_defaults)
-# set_new_defaults(config_file, config_defaults)
-# Auto_Module..set_block_defaults(commands, config_defaults)
-# Auto_Module.initialization.set_new_defaults(config_file, config_defaults)
-# orig_wd_path = Auto_Module.initialization.set_new_defaults(config_file, config_defaults)
-# converts keys in a dictionary to variables
 
 locals().update(config_defaults)
 
@@ -136,7 +133,7 @@ if Debug == True:
         print(key, value)
         writeLogMessage('%s %s' % (key, value), mainLogger, str(DEBUG))
 
-#Set admin username and admin password to local variables
+# Set admin username and admin password to local variables
 username = admin_user
 password = admin_pass
 
@@ -145,7 +142,7 @@ session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
 test_suite_directory_path = os.getcwd() + os.sep + "TestSuites"
-SourcesMetadata_path = os.getcwd() +os.sep + "SourcesMetadata"
+SourcesMetadata_path = os.getcwd() + os.sep + "SourcesMetadata"
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
 SourcesMetadata_directories = Auto_Module.file_tools.get_subdirectories(SourcesMetadata_path)
 # LOAD USERS FROM LDAP
@@ -183,8 +180,7 @@ user_list = user_dict.keys()
 print "\n USER LIST: ", user_list
 writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
 
-
-#Import Files from SourcesMetadata folder
+# Import Files from SourcesMetadata folder
 
 for sources in SourcesMetadata_directories:
     print "Importing Current Source: %s" % sources
@@ -239,7 +235,6 @@ for sources in SourcesMetadata_directories:
                 except Exception:
                     print "Session Variable ", var, " already imported"
     print "\n"
-
 
 # Run Through Test Suites
 for sub_dir in test_suite_directories:
@@ -316,7 +311,8 @@ for sub_dir in test_suite_directories:
         import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
             import_path)
         if config_defaults['include_schemas'] == 'True':
-            import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(import_path)
+            import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(
+                import_path)
 
         # TENANT EDITOR
         Auto_Module.validation.tenant_editor(import_path)
@@ -359,7 +355,6 @@ for sub_dir in test_suite_directories:
         # TENANT EDITOR
         Auto_Module.validation.tenant_editor(export_path)
 
-
         # META DATA VALIDATION IMPLEMENTATION
         if config_defaults['skip_xml_validation'] == 'False':
             # Comparing Dashboard Items
@@ -383,23 +378,10 @@ for sub_dir in test_suite_directories:
                 snapshot = False
                 staging = False
 
-                #/todo.txt: Remove not needed parameter export_schema_name_list
-
-                Auto_Module.data_upload.Load_data(incorta, session, export_schema_names_list, test_case_path)
-
-                #/todo.txt: Adding flag to disable old loader Validation Code
-                load_code_switch = True
-                if load_code_switch == False:
-                    # LOADER VALIDATION
-                    # Appends to list of loaded schemas as for loop goes through every test case
-                    full_schema_export_list.extend(export_schema_names_list)
-                    schema_list = Auto_Module.data_upload.load_validator(incorta_home, export_schema_names_list, full_schema_export_list)
-                    Auto_Module.data_upload.loaded_validator(schema_list, export_schema_names_list, Loader_Validation_Path)
-                    loaded_schemas = full_schema_export_list
+                Auto_Module.data_upload.Load_data(incorta, session, test_case_path)
 
         # Exported Dashboard ID's per test case
         test_case_dashboard_export_list = export_dash_ids.keys()
-
 
         # GRANT PERMISSIONS
         print "Preparing to Export: ", export_dashboard_names_list
@@ -434,24 +416,24 @@ for sub_dir in test_suite_directories:
             print "Entering JSON DASH EXPORT"
             writeLogMessage("Entering JSON DASH EXPORT", mainLogger, str(DEBUG))
 
-        #USER TESTING
+        # USER TESTING
         if config_defaults['include_user_testing'] == 'True':
             user_pass = 'superpass'
             print "TESTING USER LOGIN"
             writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
             for user in user_list:
-                #Check if test case utilizes user from LDAP
+                # Check if test case utilizes user from LDAP
                 test_case_directories = os.listdir(test_case_path)
-                #print "Files for current test case", test_case_directories, " checking with user ", user
+                # print "Files for current test case", test_case_directories, " checking with user ", user
                 if user in test_case_directories:
-
                     session = login(url, tenant, user, user_pass)
                     time.sleep(2)
                     print "Logged in user.. ", user
                     writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
                     session_id = session[21:53]
                     csrf_token = session[63:95]
-                    Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token, test_case_path_wd, test_case_path, user, url)
+                    Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
+                                                              test_case_path_wd, test_case_path, user, url)
                     logout(session)
                     time.sleep(2)
                     print "Logged out user.. ", user
@@ -490,23 +472,21 @@ for sub_dir in test_suite_directories:
                     os.rmdir(output_user_path)
         print "SEARCHING FOR SUCS AND DIFFS"
         writeLogMessage('SEARCHING FOR SUCS AND DIFFS', mainLogger, 'info')
-        test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path, dir)
-        meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboard_tenants')
-        meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'dashboards')
-        meta_data_case_dict['schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_loaders')
-        meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schema_tenants')
-        meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(XML_MetaData_Validation_Path, 'schemas')
+        test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path,
+                                                                                                  dir)
+        meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'dashboard_tenants')
+        meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'dashboards')
+        meta_data_case_dict['schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'schema_loaders')
+        meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'schema_tenants')
+        meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'schemas')
 
-    if config_defaults['include_schemas'] == 'True':
-        if config_defaults['skip_data_load'] == 'False':
-
-            #/todo.txt: Adding flag to disable old loader Validation Code
-            load_code_switch = True
-            if load_code_switch == False:
-                # Compares Loaded Schema List to Exported Schema List
-                Auto_Module.data_upload.schema_load_validatior(schema_list, full_schema_export_list, Loader_Validation_Path)
-
-    loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(Loader_Validation_Path)
+    loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(
+        Loader_Validation_Path)
     test_suite_name_dict[sub_dir] = test_case_name_dict
     metadata_suite_dict[sub_dir] = meta_data_case_dict
     test_suite_name_list.append(sub_dir)
@@ -514,13 +494,15 @@ for sub_dir in test_suite_directories:
 print test_suite_name_list
 writeLogMessage(test_suite_name_list, summaryLogger, 'info')
 print "------------------------------------------Summary------------------------------------------------------"
-writeLogMessage("------------------------------------------Summary------------------------------------------------------", summaryLogger, 'info')
+writeLogMessage(
+    "------------------------------------------Summary------------------------------------------------------",
+    summaryLogger, 'info')
 
 print "PERFORMANCE: "
 writeLogMessage("PERFORMANCE: ", summaryLogger, 'info')
-print "     Time Taken To Run Framework: ", (time.time()-start_time), " seconds"
-writeLogMessage("     Time Taken To Run Framework: %s seconds" % (time.time()-start_time), summaryLogger, 'info')
-minute_timer = (time.time()-start_time) / 60
+print "     Time Taken To Run Framework: ", (time.time() - start_time), " seconds"
+writeLogMessage("     Time Taken To Run Framework: %s seconds" % (time.time() - start_time), summaryLogger, 'info')
+minute_timer = (time.time() - start_time) / 60
 print "         In minutes... ", minute_timer
 writeLogMessage("         In minutes... %s" % minute_timer, summaryLogger, 'info')
 
@@ -533,13 +515,15 @@ for suite in test_suite_name_list:
     Total_Suite_Count += 1
     print "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
     writeLogMessage('\n', summaryLogger, 'info')
-    writeLogMessage("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n", summaryLogger, 'info')
+    writeLogMessage(
+        "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n",
+        summaryLogger, 'info')
     print "\n"
     print "-------------------------------------------------"
     writeLogMessage("-------------------------------------------------", summaryLogger, 'info')
 
     print suite, " ", "***RESULTS***"
-    temp_str = suite +  " " + "***RESULTS***"
+    temp_str = suite + " " + "***RESULTS***"
     writeLogMessage(temp_str, summaryLogger, 'info')
     print "-------------------------------------------------"
     writeLogMessage("-------------------------------------------------", summaryLogger, 'info')
@@ -588,10 +572,10 @@ for suite in test_suite_name_list:
 
         DATA_VALID_SUCC = test_suite_check
 
-
     json_pass_rate = (float(json_suc_count) / float(json_total_count)) * 100
-    print "\nJSON DATA VALIDATION TEST SUITE ", suite, ": ", "Failure Count: ",json_dif_count, " Success Count: ", json_suc_count, "   DATA PASS RATE: ", json_pass_rate, "%\n"
-    temp_str = "\n\nJSON DATA VALIDATION TEST SUITE " + str(suite) + ": " + "Failure Count: " + str(json_dif_count) + " Success Count: " + str(json_suc_count) + "   DATA PASS RATE: " + str(json_pass_rate) + "%\n"
+    print "\nJSON DATA VALIDATION TEST SUITE ", suite, ": ", "Failure Count: ", json_dif_count, " Success Count: ", json_suc_count, "   DATA PASS RATE: ", json_pass_rate, "%\n"
+    temp_str = "\n\nJSON DATA VALIDATION TEST SUITE " + str(suite) + ": " + "Failure Count: " + str(
+        json_dif_count) + " Success Count: " + str(json_suc_count) + "   DATA PASS RATE: " + str(json_pass_rate) + "%\n"
     writeLogMessage(temp_str, summaryLogger, 'info')
     print "**************************************************"
     writeLogMessage("**************************************************", summaryLogger, 'info')
@@ -609,7 +593,7 @@ for suite in test_suite_name_list:
         temp_dict = metadata_suite_dict[suite]
         case_check = True
         print "TEST SUITE: ", suite, ' > ', suite_result
-        writeLogMessage("TEST SUITE: %s > %s" % (suite,suite_result), summaryLogger, 'info')
+        writeLogMessage("TEST SUITE: %s > %s" % (suite, suite_result), summaryLogger, 'info')
         for item, value in temp_dict.items():
             failed_files = []
             case_check = True
@@ -654,7 +638,7 @@ for suite in test_suite_name_list:
     else:
         loader_result = 'MISSING'
     print "TEST SUITE: ", suite, " ", loader_result
-    writeLogMessage("TEST SUITE: %s %s" % (suite,loader_result), summaryLogger, 'info')
+    writeLogMessage("TEST SUITE: %s %s" % (suite, loader_result), summaryLogger, 'info')
     if loader_result == 'FAILED':
         print "Schemas Failed to Load... ", failed_schemas
         writeLogMessage("Schemas Failed to Load... %s" % failed_schemas, summaryLogger, 'warning')
@@ -669,11 +653,10 @@ for suite in test_suite_name_list:
     else:
         SUITE_STATUS = 'FAILED'
 
-
     print "\n             ", suite, " Summary\n"
-    writeLogMessage("             %s Summary\n" % suite,  summaryLogger, 'info')
+    writeLogMessage("             %s Summary\n" % suite, summaryLogger, 'info')
     print "Overall test suite ", suite, " ", SUITE_STATUS, "\n"
-    writeLogMessage("Overall test suite %s %s \n" % (suite,SUITE_STATUS), summaryLogger, 'info')
+    writeLogMessage("Overall test suite %s %s \n" % (suite, SUITE_STATUS), summaryLogger, 'info')
     failed_phases = []
     if SUITE_STATUS == 'FAILED':
         if not DATA_VALID_SUCC:
@@ -690,13 +673,13 @@ for suite in test_suite_name_list:
         Passed_Suite_Count += 1
         Passed_Suite_List.append(suite)
 
-
-
 print "************************************** TEST RESULTS *************************************"
-writeLogMessage("************************************** TEST RESULTS *************************************", summaryLogger, 'info')
+writeLogMessage("************************************** TEST RESULTS *************************************",
+                summaryLogger, 'info')
 
 print "Out of ", Total_Suite_Count, " tested suites,   ", Passed_Suite_Count, "passed testing      ", Failed_Suite_Count, "failed testing ", "\n"
-temp_str = "Out of " + str(Total_Suite_Count) + " tested suites,   " + str(Passed_Suite_Count) + " passed testing      " + str(Failed_Suite_Count) + " failed testing " + "\n"
+temp_str = "Out of " + str(Total_Suite_Count) + " tested suites,   " + str(
+    Passed_Suite_Count) + " passed testing      " + str(Failed_Suite_Count) + " failed testing " + "\n"
 writeLogMessage(temp_str, summaryLogger, 'info')
 if Passed_Suite_Count > 0:
     print "List of successful test suites: ", Passed_Suite_List
@@ -711,7 +694,6 @@ Suite_pass_rate = int(Suite_pass_rate)
 print "Incorta Build has a ", Suite_pass_rate, "% success rate"
 temp_str = "Incorta Build has a " + str(Suite_pass_rate) + "% success rate"
 writeLogMessage(temp_str, summaryLogger, 'info')
-
 
 time.sleep(2)
 shutdown_logger(mainLogger)
