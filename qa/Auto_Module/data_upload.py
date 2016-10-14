@@ -52,25 +52,22 @@ def Load_data(incorta, session, test_case_path):
             else:
                 if value != 1:
                     while value != 1:
-                        # print "Value Position1: ", value
                         if value == 0:
-                            # print "Value Position2: ", value
                             upload_check = incorta.load_schema(session, key)
                             if Debug == True:
                                 print upload_check, "For:", key
                                 writeLogMessage('Upload Check %s, For: %s ' % (upload_check, key), mainLogger, 'info')
                             value = get_load_status(incorta, session, schema_file_list, key, command='status')
-                            # print "Value Position3: ", value
                             if value != 1:
                                 while (value == 2 and count < 60):
                                     time.sleep(5)
                                     value = get_load_status(incorta, session, schema_file_list, key, command='status')
                                     count += 1
-                                    print "Loading schema ", key, count * 5, "seconds.."
-                                    writeLogMessage('%s %s' % (count * 5, "seconds.."), mainLogger, 'info')
+                                    print "Loading schema: ", key, count * 5, "seconds.."
+                                    writeLogMessage('Loading Schema: %s %s %s' % (key, count * 5, "seconds.."), mainLogger, 'info')
                             elif value == 1:
-                                print "Loaded schema ", key, count * 5, "seconds.."
-                                writeLogMessage('%s %s' % (count * 5, "seconds.."), mainLogger, 'info')
+                                print "Loaded schema: ", key, count * 5, "seconds.."
+                                writeLogMessage('Loaded schema: %s %s %s' % (key, count * 5, "seconds.."), mainLogger, 'info')
                     print 'New Schema loaded: ', key
                 else:
                     print 'Schema Was Loaded Already: ', key
