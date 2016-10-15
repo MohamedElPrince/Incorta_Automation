@@ -15,6 +15,7 @@ Where ARGS NEEDED ARE:
 -f --> CSV FILE PATH
 -w --> Disired output path(creates a suites folder)
 -h --> Path to Inocorta Installation
+-t --> Path to tenant folder for Local Inocrta
 """
 Debug = False
 
@@ -157,6 +158,23 @@ def export_datasources(incorta, session, casePath, datasources):
         print ('ERROR: DataSources:', datasources, " Not Found")
 
 
+def export_datafile(file_name, tenant, tenant_path, export_path):
+    """
+    """
+    temp = export_path + os.sep + 'temp'
+    tenant_deep_path = tenant_path + os.sep + tenant + os.sep + 'data'
+    if os.path.isdir(tenant_deep_path):
+        for files in os.listdir(tenant_deep_path):
+            if os.path.isdir(temp):
+                temp_export_path = export_path + os.sep + 'temp'
+            else:
+                temp_export_path = create_directory(export_path, 'temp')
+            if files == file_name:
+                datafile_path = os.path.join(tenant_deep_path, files)
+                shutil.copy(datafile_path, temp_export_path)
+                return temp_export_path
+
+
 def create_directory(path, folderName):
     """
     Function creates directory
@@ -190,7 +208,7 @@ def remove_duplication(outfilename, infilename):
     outfile.close()
 
 
-def create_data_source_folder(data_source_path, temp_path):
+def info_data_source_folder(data_source_path, temp_path):
     newtempPath = create_directory(temp_path, random_name())
     zip_ref = zipfile.ZipFile(data_source_path, 'r')
     zip_ref.extractall(newtempPath)
@@ -285,8 +303,8 @@ def get_input_arguments():
             Nothing
     """
     commands = sys.argv
-    if len(commands[1:]) != 6:
-        raise Exception('Too Many Commands Given Expected 3. Given %s' % len(commands[1:]))
+    if len(commands[1:]) != 8:
+        raise Exception('Argument Error Expected 4. Given %s' % len(commands[1:]))
 
     for i in range(len(commands)):
         try:
@@ -306,10 +324,16 @@ def get_input_arguments():
                 workingDirectory = commands[i + 1]
         except Exception, e:
             raise ('-w Flag Not Found')
-    return incorta_home, csvFile, workingDirectory
+
+        try:
+            if commands[i] == '-t':
+                tenantDirectory = commands[i + 1]
+        except Exception, e:
+            raise ('-t Flag Not Found')
+    return incorta_home, csvFile, workingDirectory, tenantDirectory
 
 
-def csv_file_handler(records, workingDirectory):
+def csv_file_handler(records, workingDirectory, tenant_path):
     """
     Function handles the records from the main function, calls upon external
         definitions to extract to the working directory
@@ -321,6 +345,7 @@ def csv_file_handler(records, workingDirectory):
         prints:
             Prints 'Not Found' statements when certain objects are not found
     """
+    data_file_path_list = []
     tempPath1 = create_directory(workingDirectory, 'Generator_Output')
     metadata_path = create_directory(tempPath1, 'SourcesMetadata')
     testsuite_path = create_directory(tempPath1, 'TestSuites')
@@ -344,7 +369,7 @@ def csv_file_handler(records, workingDirectory):
             print 'No Datasource found for TestSuite: %s, TestCase: %s' % (suiteName, caseName)
         else:
             datasourceZippath = export_datasources(incorta, session, metadata_path, rows['Datasource_Name'])
-            name, jbdc_string, username = create_data_source_folder(datasourceZippath, tempPath1)
+            name, jbdc_string, username = info_data_source_folder(datasourceZippath, tempPath1)
             jbdc_string = jbdc_string[5:]
 
             for c in ['\\', '`', '*', '@', ':', '{', '}', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!', '$', '\'',
@@ -352,8 +377,8 @@ def csv_file_handler(records, workingDirectory):
                 if c in jbdc_string:
                     jbdc_string = jbdc_string.replace(c, '_')
 
-            data_source_folder_path = name + '_' + jbdc_string + '_' + username
-            metadata_dir_path = create_directory(metadata_path, data_source_folder_path)
+            data_source_folder_name = name + '_' + jbdc_string + '_' + username
+            metadata_dir_path = create_directory(metadata_path, data_source_folder_name)
             metadata_datasource_folder_path = create_directory(metadata_dir_path, 'datasources')
             shutil.copy(datasourceZippath, metadata_datasource_folder_path)
             os.remove(datasourceZippath)
@@ -363,6 +388,12 @@ def csv_file_handler(records, workingDirectory):
                 print 'No Schema found'
             else:
                 export_schemas(incorta, session, metadata_dir_path, rows['Schema_Name'])
+                # Datasource export
+            if rows['Datafile'] == '':
+                print 'No Datafile not found'
+            else:
+                data_file_path_list.append(
+                    export_datafile(rows['Datafile'], rows['Tenant'], tenant_path, metadata_datasource_folder_path))
 
         dashboard_temp_path = root_casePath + os.sep + 'dashboards'
         if os.path.isdir(dashboard_temp_path):
@@ -384,6 +415,13 @@ def csv_file_handler(records, workingDirectory):
             if 'temp.txt' in file:
                 file_path = os.path.join(root, file)
                 os.remove(file_path)
+
+    data_file_path_list_dupes = list(set(data_file_path_list))
+    data_file_path_list_stripped = list([element for element in data_file_path_list_dupes if element is not None])
+    for path in data_file_path_list_stripped:
+        upper_path = os.path.dirname(path) + os.sep + 'datafiles'
+        shutil.make_archive(upper_path, 'zip', path)
+        shutil.rmtree(path)
     return tempPath1
 
 
@@ -397,14 +435,14 @@ def main():
         prints:
             Prints the three args to console
     """
-    incortaHome, csvFile, workingDirectory = get_input_arguments()
+    incortaHome, csvFile, workingDirectory, tenantDirectory = get_input_arguments()
     incorta_api_import(incortaHome)
     print 'Incorta Home: ', incortaHome
     print 'CSV File Path: ', csvFile
     print 'Working Directory Path: ', workingDirectory + '\n'
     with open(csvFile) as file:
         records = csv.DictReader(file)
-        tempPath = csv_file_handler(records, workingDirectory)
+        tempPath = csv_file_handler(records, workingDirectory, tenantDirectory)
     print '\nExtraction Complete...'
     print 'Cleaning up...'
     for random_names in random_name_list:
