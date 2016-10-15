@@ -17,6 +17,29 @@ Where ARGS NEEDED ARE:
 -h --> Path to Inocorta Installation
 -t --> Path to tenant folder for Local Inocrta
 """
+#todo:#1 -Active -Datafile folder name if no data source used
+#todo:#2 -Active -Schemas are only triggered if data source is used
+#todo:
+#todo:
+"""
+todo#1- Active
+Problem: If datafile is the only type of source for the test case or suite
+    there will be no folder inside SourcesMetadata to put it under.
+Reason: The current design is only configured to create a custom folder
+    depending on a data source database. There is no convention for data files.
+Solution: Create naming convention for datafiles.
+
+todo#2- Active
+Problem: Schemas are only triggered if data source is present. If there is
+    only a datafile used this will trigger todo#1.
+Reason: todo#1
+Solution: todo#1
+
+todo#- Active
+Problem:
+Reason:
+Solution:
+"""
 Debug = False
 
 random_name_list = []
