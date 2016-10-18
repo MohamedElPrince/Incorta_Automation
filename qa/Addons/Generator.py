@@ -127,7 +127,7 @@ def export_dashboards(incorta, session, casePath, dashboards):
     dashboard_name = str_tup[-1]
     dashboardPath += (os.sep + dashboard_name + '.zip')
     try:
-        export_check = incorta.export_dashboards_no_bookmarks(session, dashboardPath, dashboards)
+        export_check = incorta.export_dashboards(session, dashboardPath, dashboards)
         if Debug == True:
             print export_check
         return dashboardPath

@@ -1,0 +1,4 @@
+Url,Tenant,User,Password,Test_Suite_Name,Test_Case_Name,Datasource_Name,Schema_Name,Dashboard_Name,Datafile
+http://dev01.incorta.com:8080/incorta,demo,super@incorta.com,SuperPass123,GitHub Issue,Bug3798,Stanford,STANFORD,Date Filters
+http://dev01.incorta.com:8080/incorta,demo,super@incorta.com,SuperPass123,GitHub Issue,Bug3798,Stanford,SALES_MySQL4,Date Filters
+http://dev01.incorta.com:8080/incorta,demo,super@incorta.com,SuperPass123,GitHub Issue,Bug3798,Stanford,SALES_MySQL4,Date Filters
