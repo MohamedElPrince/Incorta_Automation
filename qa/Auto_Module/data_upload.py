@@ -16,7 +16,7 @@ TODO
 Debug = False  # Debug flag for print statements
 
 
-def Load_data(incorta, session, test_case_path):
+def load_data(incorta, session, test_case_path):
     """
     Function loads all schemas to Incorta from the list of schemas
         args:

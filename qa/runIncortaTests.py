@@ -378,7 +378,7 @@ for sub_dir in test_suite_directories:
                 snapshot = False
                 staging = False
 
-                Auto_Module.data_upload.Load_data(incorta, session, test_case_path)
+                Auto_Module.data_upload.load_data(incorta, session, test_case_path)
 
         # Exported Dashboard ID's per test case
         test_case_dashboard_export_list = export_dash_ids.keys()
