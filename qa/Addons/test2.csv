@@ -1,2 +1,0 @@
-Url,Tenant,User,Password,Test_Suite_Name,Test_Case_Name,Datasource_Name,Schema_Name,Dashboard_Name,Datafile
- http://iwebdev02.incorta.com:8080/incorta,Demo,nadim,incorta,GitHub Filter Issue,DescendantOf filter,Mysql57,IsDescendantTesting,Bubble chart,IsDescendantSalesExample.xlsx

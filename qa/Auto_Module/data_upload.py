@@ -16,7 +16,7 @@ TODO
 Debug = False  # Debug flag for print statements
 
 
-def load_data(incorta, session, test_case_path):
+def load_data(incorta, session, test_case_path, loader_Validation_Path):
     """
     Function loads all schemas to Incorta from the list of schemas
         args:
@@ -48,30 +48,52 @@ def load_data(incorta, session, test_case_path):
             count = 0
             if value < 0:
                 print ("Schema %s status errno: %s" % (key, str(value)))
-                writeLogMessage("Schema %s status errno: %s" % key, str(value), 'error')
-            else:
+                writeLogMessage("Schema %s status errno: %s" % (key, str(value)), mainLogger, 'error')
+                print "SCHEMA ", key, " Load Failed...Reinitializing Load \n"
+            while value != 1:
                 if value != 1:
-                    while value != 1:
-                        if value == 0:
-                            upload_check = incorta.load_schema(session, key)
-                            if Debug == True:
-                                print upload_check, "For:", key
-                                writeLogMessage('Upload Check %s, For: %s ' % (upload_check, key), mainLogger, 'info')
+                    upload_check = incorta.load_schema(session, key)
+                    if Debug == True:
+                        print upload_check, "For:", key
+                        writeLogMessage('Upload Check %s, For: %s ' % (upload_check, key), mainLogger, 'info')
+
+                    value = get_load_status(incorta, session, schema_file_list, key, command='status')
+                    if value != 1:
+                        while (value == 2 and count < 70):
+                            time.sleep(5)
                             value = get_load_status(incorta, session, schema_file_list, key, command='status')
-                            if value != 1:
-                                while (value == 2 and count < 60):
-                                    time.sleep(5)
-                                    value = get_load_status(incorta, session, schema_file_list, key, command='status')
-                                    count += 1
-                                    print "Loading schema: ", key, count * 5, "seconds.."
-                                    writeLogMessage('Loading Schema: %s %s %s' % (key, count * 5, "seconds.."), mainLogger, 'info')
-                            elif value == 1:
-                                print "Loaded schema: ", key, count * 5, "seconds.."
-                                writeLogMessage('Loaded schema: %s %s %s' % (key, count * 5, "seconds.."), mainLogger, 'info')
-                    print 'New Schema loaded: ', key
-                else:
-                    print 'Schema Was Loaded Already: ', key
-                    writeLogMessage('Schema loaded: %s ' % key, mainLogger, 'info')
+                            count += 1
+                            print "Loading schema: ", key, count * 5, "seconds.."
+                            writeLogMessage('Loading Schema: %s %s %s' % (key, count * 5, "seconds.."), mainLogger, 'info')
+                    if value == 1:
+                        print 'New Schema loaded: ', key, count * 5, "seconds..."
+                        writeLogMessage('Loaded schema: %s %s %s' % (key, count * 5, "seconds.."), mainLogger, 'info')
+                        log_name = loader_Validation_Path + os.sep + str(key) + '.suc'
+                        f = open(log_name, 'w')
+                        f.close()
+                        break
+                    elif value < 0 or count >= 70:
+                        print ("Schema %s status errno: %s" % (key, str(value)))
+                        writeLogMessage("Schema %s status errno: %s" % (key, str(value)), mainLogger, 'error')
+                        print "SCHEMA ", key, " FAILED TO LOAD...Will not Reload Till Next Run \n"
+                        writeLogMessage("SCHEMA %s FAILED TO LOAD...Will not Reload Till Next Run \n" % key,
+                                        mainLogger, 'error')
+                        log_name = loader_Validation_Path + os.sep + str(key) + '.dif'
+                        f = open(log_name, 'w')
+                        f.close()
+                        break
+                elif value < 0:
+                    print ("Schema %s status errno: %s" % (key, str(value)))
+                    writeLogMessage("Schema %s status errno: %s" % (key, str(value)), mainLogger, 'error')
+                    print "SCHEMA ", key, " FAILED TO LOAD...Will not Reload Till Next Run \n"
+                    writeLogMessage("SCHEMA %s FAILED TO LOAD...Will Not Reload Till Next Run \n" % key, mainLogger, 'error')
+                    break
+            if value == 1:
+                print 'Schema Was Loaded Already: ', key
+                writeLogMessage('Schema loaded: %s ' % key, mainLogger, 'info')
+                log_name = loader_Validation_Path + os.sep + str(key) + '.suc'
+                f = open(log_name, 'w')
+                f.close()
 
 
 def get_load_status(incorta, session, schema_file_list, schema_name=None, command='status'):
