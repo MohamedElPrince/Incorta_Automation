@@ -238,7 +238,7 @@ for sources in SourcesMetadata_directories:
 
 # Run Through Test Suites
 for sub_dir in test_suite_directories:
-    if sub_dir == 'Github_Issue':
+    if sub_dir == 'GitHub_Issue':
         loaded_schemas = []
         test_case_name_dict = {}
         meta_data_case_dict = {}
