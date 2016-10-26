@@ -63,13 +63,15 @@ import Auto_Module.output
 """
 #################################################### Functions ####################################################
 """
+#todo - Do Not need Anymore repetition of code present in config/setting/initialization.y
+#todo - Remove on next master branch merge - 10/25/16
 # LDAP Connection Information
-ldap_url = config_defaults['ldap.base.provider.url']
-ldap_base = config_defaults['ldap.base.dn']
-ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
-ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
-ldap_group_search_filter = config_defaults['ldap.group.search.filter']
-
+# ldap_url = config_defaults['ldap.base.provider.url']
+# ldap_base = config_defaults['ldap.base.dn']
+# ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
+# ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
+# ldap_group_search_filter = config_defaults['ldap.group.search.filter']
+#todo - Remove on next master branch merge - 10/25/16
 
 def incorta_api_import(incorta_home):
     incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
@@ -136,7 +138,6 @@ if Debug == True:
 # Set admin username and admin password to local variables
 username = admin_user
 password = admin_pass
-
 incorta_api_import(incorta_home)  # Import Incorta API
 session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
@@ -145,17 +146,20 @@ test_suite_directory_path = os.getcwd() + os.sep + "TestSuites"
 SourcesMetadata_path = os.getcwd() + os.sep + "SourcesMetadata"
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
 SourcesMetadata_directories = Auto_Module.file_tools.get_subdirectories(SourcesMetadata_path)
+
 # LOAD USERS FROM LDAP
 print "Checking if instance needs to load users"
 writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
 owd = os.getcwd()
 sync = incorta_home + os.sep + 'sync.txt'
+
 if os.path.isfile(sync):
     print "Users already Loaded"
     writeLogMessage("Users already Loaded", mainLogger, str(INFO))
 else:
     print "Preparing to populate users from LDAP"
     writeLogMessage("Preparing to populate users from LDAP", mainLogger, str(INFO))
+
     Auto_Module.ldap_utilities.ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login,
                                                    ldap_group_mapping_member, ldap_group_search_filter)
     Auto_Module.ldap_utilities.dirExport(incorta_home)
