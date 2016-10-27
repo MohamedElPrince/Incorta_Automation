@@ -242,259 +242,258 @@ for sources in SourcesMetadata_directories:
 
 # Run Through Test Suites
 for sub_dir in test_suite_directories:
-    if sub_dir == 'GitHub_Issue':
-        loaded_schemas = []
-        test_case_name_dict = {}
-        meta_data_case_dict = {}
+    loaded_schemas = []
+    test_case_name_dict = {}
+    meta_data_case_dict = {}
 
-        print "Current Test Suite: ", sub_dir
-        writeLogMessage("Current Test Suite: %s" % sub_dir, mainLogger, str(INFO))
-        test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, sub_dir)  # Working Directory test suite path
-        test_suite_path = get_test_suite_path(sub_dir)  # Path of test suite
-        test_cases_dir = Auto_Module.file_tools.get_subdirectories(test_suite_path)
-        temp_path = Auto_Module.file_tools.get_path(test_suite_path, test_cases_dir[0])
-        temp_dir = Auto_Module.file_tools.get_subdirectories(temp_path)
-        # Creating Output Structure
-        test_suite_output_path = Auto_Module.output.create_test_suite_output_folder(output_wd_path, sub_dir)
-        # Validation Sub Directories
-        Data_Validation_Path, Loader_Validation_Path, XML_MetaData_Validation_Path = Auto_Module.output.create_test_suite_validation_folders(
-            test_suite_output_path)
+    print "Current Test Suite: ", sub_dir
+    writeLogMessage("Current Test Suite: %s" % sub_dir, mainLogger, str(INFO))
+    test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path, sub_dir)  # Working Directory test suite path
+    test_suite_path = get_test_suite_path(sub_dir)  # Path of test suite
+    test_cases_dir = Auto_Module.file_tools.get_subdirectories(test_suite_path)
+    temp_path = Auto_Module.file_tools.get_path(test_suite_path, test_cases_dir[0])
+    temp_dir = Auto_Module.file_tools.get_subdirectories(temp_path)
+    # Creating Output Structure
+    test_suite_output_path = Auto_Module.output.create_test_suite_output_folder(output_wd_path, sub_dir)
+    # Validation Sub Directories
+    Data_Validation_Path, Loader_Validation_Path, XML_MetaData_Validation_Path = Auto_Module.output.create_test_suite_validation_folders(
+        test_suite_output_path)
 
-        test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
+    test_suite_subdirectories = Auto_Module.file_tools.get_subdirectories(test_suite_path)
+
+    if Debug == True:
+        print test_suite_subdirectories
+        writeLogMessage(test_suite_subdirectories, mainLogger, str(DEBUG))
+    current_test_suite = sub_dir
+
+    full_schema_export_list = []
+
+    # ENTERING TEST CASES
+    for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
+        print "Current Test Case: ", dir
+        writeLogMessage("Current Test Case: %s" % dir, mainLogger, str(INFO))
+
+        # Get path of test_case in test_suite
+        test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
+        if Debug == True:
+            print test_case_path
+            writeLogMessage(test_case_path, mainLogger, str(DEBUG))
+
+        # Get subdirectories of test case
+        test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
+        if Debug == True:
+            print test_case_subdirectories
+            writeLogMessage(test_case_subdirectories, mainLogger, str(DEBUG))
+
+        # Creates test_suite folder in WD
+        test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
+        if Debug == True:
+            print test_case_path_wd
+            writeLogMessage(test_case_path_wd, mainLogger, str(DEBUG))
+
+        # Creates Import and Export Folders in WD test case folder
+        Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
+
+        # Extracts test suite to WD
+        Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
+
+        # Import Dashboards to Incorta
+        Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
+        # Defining Import / Export Paths
+        import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
+
+        # Define Import DATA STRUCTURES
+
+        import_dash_ids = {}
+        import_dash_tenants = {}
+        import_dashboard_names_list = []
+        import_schema_names = {}
+        import_schema_loaders = {}
+        import_schema_tenants = {}
+        import_schema_names_list = []
+        # Grab Imported Information
+        import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
+            import_path)
+        if config_defaults['include_schemas'] == 'True':
+            import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(
+                import_path)
+
+        # TENANT EDITOR
+        Auto_Module.validation.tenant_editor(import_path)
+
+        # EXPORTS
+        test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
+        for test_case_wd_dirs in test_case_wd_subdirectories:
+            if 'Output_Files' in test_case_wd_dirs:
+                test_case_export_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, test_case_wd_dirs)
+                export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
+                test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
+                                                                                      'dashboards')
+                test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
+                                                                                   'schemas')
+                custom_export_dashboard_names_list = Auto_Module.export.export_dashboards(incorta, session,
+                                                                                          export_zips_path,
+                                                                                          import_dashboard_names_list)
+                Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path,
+                                              custom_export_dashboard_names_list)
+                custom_export_schema_names_list = Auto_Module.export.export_schemas(incorta, session,
+                                                                                    export_zips_path,
+                                                                                    import_schema_names_list)
+                Auto_Module.export.export_zip(export_zips_path, test_case_wd_schema_path,
+                                              custom_export_schema_names_list)
+
+        # EXPORT DATA STRUCTURES
+        export_dash_ids = {}
+        export_dash_tenants = {}
+        export_dashboard_names_list = []
+        export_schema_names = {}
+        export_schema_loaders = {}
+        export_schema_tenants = {}
+        export_schema_names_list = []
+        # Obtain Exported Information
+        export_dash_ids, export_dash_tenants, export_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
+            export_path)
+        export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(
+            export_path)
+
+        # TENANT EDITOR
+        Auto_Module.validation.tenant_editor(export_path)
+
+        # META DATA VALIDATION IMPLEMENTATION
+        if config_defaults['skip_xml_validation'] == 'False':
+            # Comparing Dashboard Items
+            Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids,
+                                              XML_MetaData_Validation_Path, 'dashboards')
+            Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants,
+                                              XML_MetaData_Validation_Path, 'dashboard_tenants')
+            # Comparing Schema Items
+            Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names,
+                                              XML_MetaData_Validation_Path, 'schemas')
+            Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders,
+                                              XML_MetaData_Validation_Path, 'schema_loaders')
+            Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants,
+                                              XML_MetaData_Validation_Path, 'schema_tenants')
+
+        if config_defaults['skip_data_load'] == 'False':
+            if config_defaults['include_schemas'] == 'True':
+                # Load Data
+                table = None
+                incremental = False
+                snapshot = False
+                staging = False
+
+                Auto_Module.data_upload.load_data(incorta, session, test_case_path, Loader_Validation_Path)
+
+        # Exported Dashboard ID's per test case
+        test_case_dashboard_export_list = export_dash_ids.keys()
+
+        # GRANT PERMISSIONS
+        print "Preparing to Export: ", export_dashboard_names_list
+        writeLogMessage("Preparing to Export: %s" % export_dashboard_names_list, mainLogger, str(INFO))
+        for user in user_list:
+            for dashboard_name in export_dashboard_names_list:
+                grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
+
+        # LOG OUT SUPER USER
+        time.sleep(2)
+        try:
+            logout(session)
+            print "Logged out Super User successfully"
+            writeLogMessage("Logged out Super User successfully", mainLogger, str(INFO))
+        except Exception, e:
+            print "unable to logout"
+            writeLogMessage("Unable to Logout", mainLogger, str(CRITICAL))
+        time.sleep(2)
+
+        # JSON DASHBOARD EXPORT
+        if Debug == True:
+            print "session: ", session, " \n\n"
+            writeLogMessage("Session: %s\n\n" % session, mainLogger, str(DEBUG))
+            print "session id: ", session_id
+            writeLogMessage("Session id: %s" % session_id, mainLogger, str(DEBUG))
+            print "dashboard id: ", test_case_dashboard_export_list
+            writeLogMessage("Dashboard id: %s" % test_case_dashboard_export_list, mainLogger, str(DEBUG))
+            print "CSRF TOKEN", csrf_token
+            writeLogMessage("CSRF TOKEN: %s" % csrf_token, mainLogger, str(DEBUG))
+            print "Test Case Path", test_case_path_wd
+            writeLogMessage("Test Case Path: %s" % test_case_path_wd, mainLogger, str(DEBUG))
+            print "Entering JSON DASH EXPORT"
+            writeLogMessage("Entering JSON DASH EXPORT", mainLogger, str(DEBUG))
+
+        # USER TESTING
+        if config_defaults['include_user_testing'] == 'True':
+            user_pass = 'superpass'
+            print "TESTING USER LOGIN"
+            writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
+            for user in user_list:
+                # Check if test case utilizes user from LDAP
+                test_case_directories = os.listdir(test_case_path)
+                # print "Files for current test case", test_case_directories, " checking with user ", user
+                if user in test_case_directories:
+                    session = login(url, tenant, user, user_pass)
+                    time.sleep(2)
+                    print "Logged in user.. ", user
+                    writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
+                    session_id = session[21:53]
+                    csrf_token = session[63:95]
+                    Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
+                                                              test_case_path_wd, test_case_path, user, url)
+                    logout(session)
+                    time.sleep(2)
+                    print "Logged out user.. ", user
+                    writeLogMessage("Logged out user.. %s" % user, mainLogger, str(INFO))
 
         if Debug == True:
-            print test_suite_subdirectories
-            writeLogMessage(test_suite_subdirectories, mainLogger, str(DEBUG))
-        current_test_suite = sub_dir
+            print "\nFinished JSON DASH EXPORT"
+            writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
 
-        full_schema_export_list = []
+        # LOGGING IN SUPER USER
+        try:
+            time.sleep(2)
+            session = login(url, tenant, username, password)
+            time.sleep(2)
+            print "Logged in Super User"
+            writeLogMessage("Logged in Super User", mainLogger, str(INFO))
+        except Exception, e:
+            print "Unable to log in Super User"
+            writeLogMessage("Unable to log in Super User", mainLogger, str(CRITICAL))
 
-        # ENTERING TEST CASES
-        for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
-            print "Current Test Case: ", dir
-            writeLogMessage("Current Test Case: %s" % dir, mainLogger, str(INFO))
-
-            # Get path of test_case in test_suite
-            test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
-            if Debug == True:
-                print test_case_path
-                writeLogMessage(test_case_path, mainLogger, str(DEBUG))
-
-            # Get subdirectories of test case
-            test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
-            if Debug == True:
-                print test_case_subdirectories
-                writeLogMessage(test_case_subdirectories, mainLogger, str(DEBUG))
-
-            # Creates test_suite folder in WD
-            test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
-            if Debug == True:
-                print test_case_path_wd
-                writeLogMessage(test_case_path_wd, mainLogger, str(DEBUG))
-
-            # Creates Import and Export Folders in WD test case folder
-            Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
-
-            # Extracts test suite to WD
-            Auto_Module.test_suite_export_wd.extract_test_case(test_case_path, test_case_path_wd)
-
-            # Import Dashboards to Incorta
-            Auto_Module.test_suite_import.import_dashboard(incorta, session, test_case_path)
-            # Defining Import / Export Paths
-            import_path, export_path = Auto_Module.validation.grab_import_export_path(test_case_path_wd)
-
-            # Define Import DATA STRUCTURES
-
-            import_dash_ids = {}
-            import_dash_tenants = {}
-            import_dashboard_names_list = []
-            import_schema_names = {}
-            import_schema_loaders = {}
-            import_schema_tenants = {}
-            import_schema_names_list = []
-            # Grab Imported Information
-            import_dash_ids, import_dash_tenants, import_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
-                import_path)
-            if config_defaults['include_schemas'] == 'True':
-                import_schema_names, import_schema_loaders, import_schema_tenants, import_schema_names_list = Auto_Module.validation.get_schemas_info(
-                    import_path)
-
-            # TENANT EDITOR
-            Auto_Module.validation.tenant_editor(import_path)
-
-            # EXPORTS
-            test_case_wd_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path_wd)
-            for test_case_wd_dirs in test_case_wd_subdirectories:
-                if 'Output_Files' in test_case_wd_dirs:
-                    test_case_export_path_wd = Auto_Module.file_tools.get_path(test_case_path_wd, test_case_wd_dirs)
-                    export_zips_path = Auto_Module.export.create_temp_directory(test_case_export_path_wd)
-                    test_case_wd_dashboard_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
-                                                                                          'dashboards')
-                    test_case_wd_schema_path = Auto_Module.file_tools.create_directory(test_case_export_path_wd,
-                                                                                       'schemas')
-                    custom_export_dashboard_names_list = Auto_Module.export.export_dashboards(incorta, session,
-                                                                                              export_zips_path,
-                                                                                              import_dashboard_names_list)
-                    Auto_Module.export.export_zip(export_zips_path, test_case_wd_dashboard_path,
-                                                  custom_export_dashboard_names_list)
-                    custom_export_schema_names_list = Auto_Module.export.export_schemas(incorta, session,
-                                                                                        export_zips_path,
-                                                                                        import_schema_names_list)
-                    Auto_Module.export.export_zip(export_zips_path, test_case_wd_schema_path,
-                                                  custom_export_schema_names_list)
-
-            # EXPORT DATA STRUCTURES
-            export_dash_ids = {}
-            export_dash_tenants = {}
-            export_dashboard_names_list = []
-            export_schema_names = {}
-            export_schema_loaders = {}
-            export_schema_tenants = {}
-            export_schema_names_list = []
-            # Obtain Exported Information
-            export_dash_ids, export_dash_tenants, export_dashboard_names_list = Auto_Module.validation.get_dashboards_info(
-                export_path)
-            export_schema_names, export_schema_loaders, export_schema_tenants, export_schema_names_list = Auto_Module.validation.get_schemas_info(
-                export_path)
-
-            # TENANT EDITOR
-            Auto_Module.validation.tenant_editor(export_path)
-
-            # META DATA VALIDATION IMPLEMENTATION
-            if config_defaults['skip_xml_validation'] == 'False':
-                # Comparing Dashboard Items
-                Auto_Module.validation.validation(sub_dir, import_dash_ids, export_dash_ids,
-                                                  XML_MetaData_Validation_Path, 'dashboards')
-                Auto_Module.validation.validation(sub_dir, import_dash_tenants, export_dash_tenants,
-                                                  XML_MetaData_Validation_Path, 'dashboard_tenants')
-                # Comparing Schema Items
-                Auto_Module.validation.validation(sub_dir, import_schema_names, export_schema_names,
-                                                  XML_MetaData_Validation_Path, 'schemas')
-                Auto_Module.validation.validation(sub_dir, import_schema_loaders, export_schema_loaders,
-                                                  XML_MetaData_Validation_Path, 'schema_loaders')
-                Auto_Module.validation.validation(sub_dir, import_schema_tenants, export_schema_tenants,
-                                                  XML_MetaData_Validation_Path, 'schema_tenants')
-
-            if config_defaults['skip_data_load'] == 'False':
-                if config_defaults['include_schemas'] == 'True':
-                    # Load Data
-                    table = None
-                    incremental = False
-                    snapshot = False
-                    staging = False
-
-                    Auto_Module.data_upload.load_data(incorta, session, test_case_path, Loader_Validation_Path)
-
-            # Exported Dashboard ID's per test case
-            test_case_dashboard_export_list = export_dash_ids.keys()
-
-            # GRANT PERMISSIONS
-            print "Preparing to Export: ", export_dashboard_names_list
-            writeLogMessage("Preparing to Export: %s" % export_dashboard_names_list, mainLogger, str(INFO))
+        if Debug == True:
+            print "\nFinished JSON DASH EXPORT"
+            writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
+        # DATA VALIDATION
+        if config_defaults['skip_validation'] == 'False':
             for user in user_list:
-                for dashboard_name in export_dashboard_names_list:
-                    grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
+                print "Validating data for user - ", user, " test case - ", dir
+                writeLogMessage(("Validating data for user - %s test case - %s" % (user, dir)), mainLogger,
+                                str(INFO))
+                output_test_case_path = Data_Validation_Path + os.sep + dir
+                output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
+                Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
+                                                       current_test_suite, output_user_path, user)
+                # Removes user folders not being tested within the current test case
+                if os.listdir(output_user_path) == []:
+                    os.rmdir(output_user_path)
+        print "SEARCHING FOR SUCS AND DIFFS"
+        writeLogMessage('SEARCHING FOR SUCS AND DIFFS', mainLogger, 'info')
+        test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path,
+                                                                                                  dir)
+        meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'dashboard_tenants')
+        meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'dashboards')
+        meta_data_case_dict['schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'schema_loaders')
+        meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'schema_tenants')
+        meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+            XML_MetaData_Validation_Path, 'schemas')
 
-            # LOG OUT SUPER USER
-            time.sleep(2)
-            try:
-                logout(session)
-                print "Logged out Super User successfully"
-                writeLogMessage("Logged out Super User successfully", mainLogger, str(INFO))
-            except Exception, e:
-                print "unable to logout"
-                writeLogMessage("Unable to Logout", mainLogger, str(CRITICAL))
-            time.sleep(2)
-
-            # JSON DASHBOARD EXPORT
-            if Debug == True:
-                print "session: ", session, " \n\n"
-                writeLogMessage("Session: %s\n\n" % session, mainLogger, str(DEBUG))
-                print "session id: ", session_id
-                writeLogMessage("Session id: %s" % session_id, mainLogger, str(DEBUG))
-                print "dashboard id: ", test_case_dashboard_export_list
-                writeLogMessage("Dashboard id: %s" % test_case_dashboard_export_list, mainLogger, str(DEBUG))
-                print "CSRF TOKEN", csrf_token
-                writeLogMessage("CSRF TOKEN: %s" % csrf_token, mainLogger, str(DEBUG))
-                print "Test Case Path", test_case_path_wd
-                writeLogMessage("Test Case Path: %s" % test_case_path_wd, mainLogger, str(DEBUG))
-                print "Entering JSON DASH EXPORT"
-                writeLogMessage("Entering JSON DASH EXPORT", mainLogger, str(DEBUG))
-
-            # USER TESTING
-            if config_defaults['include_user_testing'] == 'True':
-                user_pass = 'superpass'
-                print "TESTING USER LOGIN"
-                writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
-                for user in user_list:
-                    # Check if test case utilizes user from LDAP
-                    test_case_directories = os.listdir(test_case_path)
-                    # print "Files for current test case", test_case_directories, " checking with user ", user
-                    if user in test_case_directories:
-                        session = login(url, tenant, user, user_pass)
-                        time.sleep(2)
-                        print "Logged in user.. ", user
-                        writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
-                        session_id = session[21:53]
-                        csrf_token = session[63:95]
-                        Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list, csrf_token,
-                                                                  test_case_path_wd, test_case_path, user, url)
-                        logout(session)
-                        time.sleep(2)
-                        print "Logged out user.. ", user
-                        writeLogMessage("Logged out user.. %s" % user, mainLogger, str(INFO))
-
-            if Debug == True:
-                print "\nFinished JSON DASH EXPORT"
-                writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
-
-            # LOGGING IN SUPER USER
-            try:
-                time.sleep(2)
-                session = login(url, tenant, username, password)
-                time.sleep(2)
-                print "Logged in Super User"
-                writeLogMessage("Logged in Super User", mainLogger, str(INFO))
-            except Exception, e:
-                print "Unable to log in Super User"
-                writeLogMessage("Unable to log in Super User", mainLogger, str(CRITICAL))
-
-            if Debug == True:
-                print "\nFinished JSON DASH EXPORT"
-                writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
-            # DATA VALIDATION
-            if config_defaults['skip_validation'] == 'False':
-                for user in user_list:
-                    print "Validating data for user - ", user, " test case - ", dir
-                    writeLogMessage(("Validating data for user - %s test case - %s" % (user, dir)), mainLogger,
-                                    str(INFO))
-                    output_test_case_path = Data_Validation_Path + os.sep + dir
-                    output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
-                    Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
-                                                           current_test_suite, output_user_path, user)
-                    # Removes user folders not being tested within the current test case
-                    if os.listdir(output_user_path) == []:
-                        os.rmdir(output_user_path)
-            print "SEARCHING FOR SUCS AND DIFFS"
-            writeLogMessage('SEARCHING FOR SUCS AND DIFFS', mainLogger, 'info')
-            test_case_name_dict[dir] = Auto_Module.output.data_validation_generate_suc_dif_file_names(Data_Validation_Path,
-                                                                                                      dir)
-            meta_data_case_dict['dashboard_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
-                XML_MetaData_Validation_Path, 'dashboard_tenants')
-            meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
-                XML_MetaData_Validation_Path, 'dashboards')
-            meta_data_case_dict['schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
-                XML_MetaData_Validation_Path, 'schema_loaders')
-            meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
-                XML_MetaData_Validation_Path, 'schema_tenants')
-            meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
-                XML_MetaData_Validation_Path, 'schemas')
-
-        loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(
-            Loader_Validation_Path)
-        test_suite_name_dict[sub_dir] = test_case_name_dict
-        metadata_suite_dict[sub_dir] = meta_data_case_dict
-        test_suite_name_list.append(sub_dir)
+    loader_valid_dict[sub_dir] = Auto_Module.output.loader_validation_generate_suc_dif_file_names(
+        Loader_Validation_Path)
+    test_suite_name_dict[sub_dir] = test_case_name_dict
+    metadata_suite_dict[sub_dir] = meta_data_case_dict
+    test_suite_name_list.append(sub_dir)
 
 print test_suite_name_list
 writeLogMessage(test_suite_name_list, summaryLogger, 'info')
