@@ -20,9 +20,9 @@ config_defaults = {'incorta_home': '/home/Incorta', 'tenant_home': '/home/tenant
                    'admin_user': 'Super', 'admin_pass': 'none',
                    'skip_validation': 'False', 'skip_xml_validation': 'False',
                    'extract_csv': 'False', 'wd_path': '~/IncortaTesting/tmp/work', 'tenant': 'Demo',
-                   'url': 'http://localhost:8080/incorta', 'ldap.base.provider.url': 'ldap://dev01.incorta.com:389',
-                   'ldap.base.dn': 'dc=dev01,dc=incorta,dc=com', 'ldap.user.mapping.login': 'uid',
-                   'ldap.group.mapping.member': 'member', 'ldap.group.search.filter': '(objectClass=groupOfNames)',
+                   'url': 'http://localhost:8080/incorta', 'ldap_url': 'ldap://dev01.incorta.com:389',
+                   'ldap_base': 'dc=dev01,dc=incorta,dc=com', 'ldap_user_mapping_login': 'uid',
+                   'ldap_group_mapping_member': 'member', 'ldap_group_search_filter': '(objectClass=groupOfNames)',
                    'include_schemas': 'True', 'include_user_testing': 'True', 'skip_data_load': 'True'}
 
 
