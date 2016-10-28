@@ -113,6 +113,10 @@ def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_log
             for line in lines:
                 ldap_bin_out.write(line)
 
+        with open(dirExport_ldap_path, 'w') as ldap_bin_out:
+            for line in lines:
+                ldap_bin_out.write(line)
+
     except EnvironmentError:
         print "Unable to Modify LDAP Properties File Under /bin"
         writeLogMessage('Unable to Modify LDAP Properties File Under /bin', mainLogger, 'error')
