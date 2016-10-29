@@ -99,7 +99,7 @@ def logout(session):
 
 
 def get_test_suite_path(test_suite):
-    test_suite_path = os.getcwd() + os.sep + "TestSuitesExternal"
+    test_suite_path = os.getcwd() + os.sep + "TestSuites"
     test_suite_path = test_suite_path + os.sep + test_suite
     return test_suite_path
 
@@ -142,8 +142,8 @@ incorta_api_import(incorta_home)  # Import Incorta API
 session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
-test_suite_directory_path = os.getcwd() + os.sep + "TestSuitesExternal"
-SourcesMetadata_path = os.getcwd() + os.sep + "SourcesMetadataExternal"
+test_suite_directory_path = os.getcwd() + os.sep + "TestSuites"
+SourcesMetadata_path = os.getcwd() + os.sep + "SourcesMetadata"
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
 SourcesMetadata_directories = Auto_Module.file_tools.get_subdirectories(SourcesMetadata_path)
 
