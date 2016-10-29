@@ -32,14 +32,18 @@ def load_data(incorta, session, test_case_path, loader_Validation_Path):
 
     fileFound = False
     schema_file_list = schema_file(test_case_path)
-    for items in schema_file_list:
-        if items != None:
-            fileFound = True
-        else:
-            fileFound = False
-            print ("Invalid Entry inside schema.txt %s" % test_case_path)
-            writeLogMessage('Invalid Entry inside schema.txt %s ' % (test_case_path), mainLogger,
-                            'critical')
+    print schema_file_list
+    if schema_file_list == None:
+        pass
+    else:
+        for items in schema_file_list:
+            if None != items:
+                fileFound = True
+            else:
+                fileFound = False
+                print ("Invalid Entry inside schema.txt %s" % test_case_path)
+                writeLogMessage('Invalid Entry inside schema.txt %s ' % (test_case_path), mainLogger,
+                                'critical')
     if fileFound == True:
         schema_names = get_load_status(incorta, session, schema_file_list, command='pre_check')
         for key, value in schema_names.iteritems():
