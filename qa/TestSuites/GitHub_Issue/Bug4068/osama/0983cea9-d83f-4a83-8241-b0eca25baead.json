@@ -1,0 +1,52 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"4ab99484-4922-e436-3eeb-0580db577211",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Empl Name 0","Empl Name 1","Empl Name 2","Empl Name 3","Salary"],
+"rowTypes":["string","string","string","string"],
+"measureTypes":["double"],
+"totalRows":0,
+"complete":true,
+"rowTree":{
+"g":[],
+"t":[{
+"v":"0.00"}]}},
+{
+"id":"01388574-b0e0-0543-d457-356dc9d93099",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":true,
+"labels":["Empl Name","Salary"],
+"rowTypes":["string"],
+"measureTypes":["double"],
+"totalRows":0,
+"complete":true,
+"rowTree":{
+"g":[],
+"t":[{
+"v":"0.00"}]}},
+{
+"id":"3f631c34-10c0-2ea9-d70b-2c8e020aa949",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":true,
+"labels":["Empl Name","Sales Amount"],
+"rowTypes":["string"],
+"measureTypes":["double"],
+"totalRows":0,
+"complete":true,
+"rowTree":{
+"g":[],
+"t":[{
+"v":"0.00"}]}}]
+}
