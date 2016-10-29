@@ -4,8 +4,8 @@ start_time = time.time()
 import sys, os, subprocess, zipfile
 import os.path
 from sys import argv
-from shutil import copyfile
 import errno
+import shutil
 
 """
 ------------------------------------------Initialization----------------------------------------
@@ -99,7 +99,11 @@ def logout(session):
 
 
 def get_test_suite_path(test_suite):
-    test_suite_path = os.getcwd() + os.sep + "TestSuites"
+
+    # todo: Custom code for Anahit Evn
+    test_suite_path = os.getcwd() + os.sep + "custom_anahit_evn" + os.sep + "TestSuitesExternal"
+    # todo: Custom code for Anahit Evn
+
     test_suite_path = test_suite_path + os.sep + test_suite
     return test_suite_path
 
@@ -142,8 +146,12 @@ incorta_api_import(incorta_home)  # Import Incorta API
 session = login(url, tenant, username, password)  # Login to Incorta
 session_id = session[21:53]
 csrf_token = session[63:95]
-test_suite_directory_path = os.getcwd() + os.sep + "TestSuites"
-SourcesMetadata_path = os.getcwd() + os.sep + "SourcesMetadata"
+
+#todo: Custom code for Anahit Evn
+test_suite_directory_path = os.getcwd() + os.sep + "custom_anahit_evn" + os.sep + "TestSuitesExternal"
+SourcesMetadata_path = os.getcwd() + os.sep + "custom_anahit_evn" + os.sep + "SourcesMetadataExternal"
+#todo: Custom code for Anahit Evn
+
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
 SourcesMetadata_directories = Auto_Module.file_tools.get_subdirectories(SourcesMetadata_path)
 
@@ -152,6 +160,12 @@ print "Checking if instance needs to load users"
 writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
 owd = os.getcwd()
 sync = incorta_home + os.sep + 'sync.txt'
+
+#todo: Custom code for Anahit Evn
+VPN = False
+if os.path.isfile(sync) and VPN == True:
+    os.remove(sync)
+#todo: Custom code for Anahit Evn
 
 if os.path.isfile(sync):
     print "Users already Loaded"

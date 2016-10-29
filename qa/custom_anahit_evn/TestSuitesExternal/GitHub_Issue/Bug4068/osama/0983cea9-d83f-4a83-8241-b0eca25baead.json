@@ -1,0 +1,342 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"4ab99484-4922-e436-3eeb-0580db577211",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Empl Name 0","Empl Name 1","Empl Name 2","Empl Name 3","Salary"],
+"rowTypes":["string","string","string","string"],
+"measureTypes":["double"],
+"totalRows":7,
+"complete":true,
+"rowTree":{
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":1,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"300.00"}]}]}]}]},
+{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":6,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":1,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"320.00"}]}]}]},
+{
+"v":"Michael Johnson",
+"rowNo":1,
+"rs":3,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"4,900.00"}]}]},
+{
+"v":"John Stewart",
+"rowNo":2,
+"rs":2,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"240.00"}]},
+{
+"v":"John Halliday",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"500.00"}]}]}]},
+{
+"v":"Mike Stevens",
+"rowNo":1,
+"rs":2,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"500.00"}]}]},
+{
+"v":"Elisabeth Smith",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"550.00"}]}]}]}]}],
+"t":[{
+"v":"7,310.00"}]}},
+{
+"id":"01388574-b0e0-0543-d457-356dc9d93099",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":true,
+"labels":["Empl Name","Salary"],
+"rowTypes":["string"],
+"measureTypes":["double"],
+"totalRows":15,
+"complete":true,
+"rowTree":{
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"320.00"}]}],
+"t":[{
+"v":"320.00"}]},
+{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":13,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"4,900.00"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"5,400.00"}]},
+{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":6,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Stewart",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"240.00"}]}],
+"t":[{
+"v":"240.00"}]},
+{
+"v":"John Stewart",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Halliday",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"740.00"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Elisabeth Smith",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"6,690.00"}]}],
+"t":[{
+"v":"7,010.00"}]}},
+{
+"id":"3f631c34-10c0-2ea9-d70b-2c8e020aa949",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":true,
+"labels":["Empl Name","Sales Amount"],
+"rowTypes":["string"],
+"measureTypes":["double"],
+"totalRows":15,
+"complete":true,
+"rowTree":{
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"320.00"}]}],
+"t":[{
+"v":"320.00"}]},
+{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":13,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"4,900.00"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"5,400.00"}]},
+{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":6,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Stewart",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"240.00"}]}],
+"t":[{
+"v":"240.00"}]},
+{
+"v":"John Stewart",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Halliday",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"740.00"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Elisabeth Smith",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"6,690.00"}]}],
+"t":[{
+"v":"7,010.00"}]}}]
+}
