@@ -50,10 +50,10 @@ def load_data(incorta, session, test_case_path, loader_Validation_Path):
             print key, value
             for schemaName, schemaTimer in schema_file_dict.iteritems():
                 if key in schemaName:
-                    if schemaTimer < 30:
+                    if schemaTimer < 300:
                         max_count=schemaTimer
                     else:
-                        max_count=30
+                        max_count=300
             if value < 0:
                 print ("Schema %s status errno: %s" % (key, str(value)))
                 writeLogMessage("Schema %s status errno: %s" % (key, str(value)), mainLogger, 'error')
