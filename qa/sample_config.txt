@@ -1,10 +1,10 @@
 #location for incorta home.
 #Default: /home/Incorta
-incorta_home=/home/users/Incorta/
+incorta_home=/Users/Nadim_Incorta/2_72
 
 #path to tenant home
 #Default: /home/tenants
-tenant_home=/home/users/Incorta/tenants
+tenant_home=/Users/Nadim_Incorta/2_72/tenants
 
 #name of the tenant
 #Default: Demo
@@ -32,15 +32,15 @@ skip_xml_validation=False
 
 #Working Directory Path, Where all tests become timestamped and stored
 #Default: ~/IncortaTesting/tmp/work
-wd_path=/home/user/testing
+wd_path=/Users/Nadim_Incorta
 
 #LDAP SETUP PROPERTIES (After first = symbol place connection info per ldap property)
 #Default: environment dev 01 with port 389
-ldap_url=ldap://dev01.incorta.com:389
-ldap_base=dc=dev01,dc=incorta,dc=com
-ldap_user_mapping_login=uid
-ldap_group_mapping_member=member
-ldap_group_search_filter=(objectClass=groupOfNames)
+ldap.base.provider.url=ldap://dev01.incorta.com:389
+ldap.base.dn=dc=dev01,dc=incorta,dc=com
+ldap.user.mapping.login=uid
+ldap.group.mapping.member=member
+ldap.group.search.filter=(objectClass=groupOfNames)
 
 #Flag to include loading and validation of schemas? (useful if user only wants to test dashboards)
 #Default: True
@@ -53,3 +53,7 @@ include_user_testing=True
 #Flag to skip schema loading phase (options: False / True)
 #Default: False
 skip_data_load=False
+
+#Indicator of what Test Suites / Test Cases to run
+#Default is set to ALL, which will run all test suites
+run_tests=GitHub_Issue
