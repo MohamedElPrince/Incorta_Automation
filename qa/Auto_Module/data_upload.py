@@ -34,10 +34,11 @@ def load_data(incorta, session, test_case_path, loader_Validation_Path):
     if schema_file_list == None:
         pass
     else:
-        for items in schema_file_list:
-            if None != items:
-                fileFound = True
-            else:
+        try:
+            for items in schema_file_list:
+                if None != items:
+                    fileFound = True
+        except Exception:
                 fileFound = False
                 print ("Invalid Entry inside schema.txt %s" % test_case_path)
                 writeLogMessage('Invalid Entry inside schema.txt %s ' % (test_case_path), mainLogger,
