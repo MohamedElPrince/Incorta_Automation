@@ -236,8 +236,8 @@ def set_new_values(config_file):
                                 elif key == 'dash_folder':
                                     folder_name.append(str_tup[1].strip())
         f.close()
-    except Exception:
-        raise Exception('Failed to parse Input text file -- report to Dev:set_new_values(config_file)')
+    except ParseError:
+        raise ParseError('Failed to parse Input text file -- report to Dev:set_new_values(config_file)')
 
 
 def parse(full_tenant_path):
@@ -288,8 +288,8 @@ def parse(full_tenant_path):
                                 if bool(dn.attrib):
                                     datasource_href[datasource] = dn.attrib
                                     # print str(dn.attrib)
-    except Exception, e:
-        raise Exception('Failed to parse tenant.xml -- report to Dev:parse(full_tenant_path)==Failed')
+    except ParseError:
+        raise ParseError('Failed to parse tenant.xml -- report to Dev:parse(full_tenant_path)==Failed')
 
 
 def create_tenant_xml(path, mapper):
@@ -605,28 +605,49 @@ def get_input_arguments():
             Nothing
     """
     commands = sys.argv
-    if len(commands[1:]) != 6:
-        raise Exception('Incorrect Amount of Args Expected 6. Given %s' % len(commands[1:]))
 
+    if len(commands[1:]) < 6 and commands[1] != '--h':
+        raise SystemExit('Incorrect Amount of Argument Flags... Minimum 3. Given %s. See --h For Help' % (len(commands[1:])/2))
+    elif commands[1] == '--h':
+        print '\nRequired Flags: -o /path/to/Working_Directory -z /path/to/the/tenant_backup.zip'
+        print 'Conditional Flags. Either: -i SchemaName,DashboardName,DatasourceName Or: -f /path/to/input.txt'
+        exit(1)
+    file_input_bool = False
+    input_arg_bool= False
     for i in range(len(commands)):
         try:
-            if commands[i] == '-f':
-                inputFile = commands[i + 1]
-        except Exception, e:
-            raise ('-f Flag Not Found')
+            if file_input_bool == False or input_arg_bool == False:
+                if commands[i] == '-f':
+                    inputFile = commands[i + 1]
+                    file_input_bool = True
+
+                elif commands[i] == '-i':
+                    inputParam = commands[i + 1]
+                    input_arg_bool = True
+            elif file_input_bool == True and input_arg_bool ==True:
+                raise SystemExit('-i and -f, One or the Other. See --h For Help')
+        except Exception:
+            raise Exception('-i and or -f Flag Not Found. See --h For Help')
 
         try:
             if commands[i] == '-o':
                 outputPath = commands[i + 1]
-        except Exception, e:
-            raise ('-o Flag Not Found')
+        except Exception:
+            raise Exception('-o Flag Not Found. See --h For Help')
 
         try:
             if commands[i] == '-z':
                 zipPath = commands[i + 1]
-        except Exception, e:
-            raise ('-z Flag Not Found')
-    return inputFile, outputPath, zipPath
+        except Exception:
+            raise Exception('-z Flag Not Found. See --h For Help')
+
+
+    if file_input_bool == True:
+        input_type = 'File'
+        return inputFile, outputPath, zipPath, input_type
+    elif input_arg_bool == True:
+        input_type = 'args'
+        return  str(inputParam), outputPath, zipPath, input_type
 
 
 def main():
@@ -636,8 +657,18 @@ def main():
     except Exception:
         raise IOError('Failed to install lxml -- Install pip for python2.7 manually -- Report problem to developer')
     
-    inputFile, outputPath, zipPath = get_input_arguments()
-    set_new_values(inputFile)
+    inputFile, outputPath, zipPath, inputType = get_input_arguments()
+    if inputType == 'file':
+        set_new_values(inputFile)
+    elif inputType == 'args':
+        value = list(inputFile.split(','))
+        try:
+            schema_name.append(value[0])
+            dash_name.append(value[1])
+            datasource_name.append(value[2])
+        except IndexError:
+            IndexError('Input File Override...Supplied Override Arguments Incorrect. See --help For Help')
+
     config_defaults['testfile_home'] = outputPath
     config_defaults['txt_home'] = outputPath
     print 'Home: ' + config_defaults['testfile_home']

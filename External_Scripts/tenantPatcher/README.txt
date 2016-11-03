@@ -21,8 +21,14 @@ Instructions To Run Script:
     2. Run the ziputil script
         a. On the command line you need to enter 3 arguments;
         the path to the input.txt, the path to the tenant backup zip, and the path to the output directory
-        b. The following is the proper format for entering the arguments:
+        b. The following two lines show proper format for entering the arguments:
             -f /path/to/input.txt -o /path/to/Working_Directory -z /path/to/the/tenant_backup.zip
+            -i SchemaName,DashboardName,DatasourceName -o /path/to/Working_Directory -z /path/to/the/tenant_backup.zip
+
+        c. Extra Info
+            Required Flags: -o /path/to/Working_Directory -z /path/to/the/tenant_backup.zip
+            Conditional Flags. Either: -i SchemaName,DashboardName,DatasourceName Or: -f /path/to/input.txt
+
 ------------------------------------
 
 
