@@ -56,4 +56,4 @@ skip_data_load=False
 
 #Indicator of what Test Suites / Test Cases to run
 #Default is set to ALL, which will run all test suites
-run_tests=All
+run_tests=ALL
