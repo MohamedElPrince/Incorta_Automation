@@ -53,3 +53,7 @@ include_user_testing=True
 #Flag to skip schema loading phase (options: False / True)
 #Default: False
 skip_data_load=False
+
+#Indicator of what Test Suites / Test Cases to run
+#Default is set to ALL, which will run all test suites
+run_tests=All
