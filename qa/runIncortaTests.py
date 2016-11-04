@@ -282,7 +282,7 @@ for sub_dir in test_suite_directories:
 
         # ENTERING TEST CASES
         for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
-            if dir in config_defaults['run_tests']:
+            if dir in config_defaults['run_tests'] or config_defaults['run_tests'] == 'ALL':
                 print "Current Test Case: ", dir
                 writeLogMessage("Current Test Case: %s" % dir, mainLogger, str(INFO))
 
