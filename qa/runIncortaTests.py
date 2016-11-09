@@ -20,6 +20,7 @@ Arguments
 """
 
 Debug = False  # Debug flag for print statements
+Developer_Mode = True #Developer flag for stack trace
 
 preCheckScriptPAth = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'automationCheck.sh'
 if os.path.isfile(preCheckScriptPAth):
@@ -42,6 +43,9 @@ except OSError as exc:
     else:
         raise
 # Create working directory
+if Developer_Mode == True:
+    from qa.config.settings.exceptionhandler import exceptionHandler    #Import Custom Exception Handler Stack Trace
+    sys.excepthook = exceptionHandler                                   #Enable Custom Exception Handler Stack Trace
 
 from Auto_Module.customLogger import *
 
@@ -49,16 +53,19 @@ from Auto_Module.customLogger import *
 NEW IMPORTS--Please Retain this order
 """
 
+from Auto_Module import summary
+from Auto_Module import *
 import Auto_Module.export
 import Auto_Module.test_suite_export_wd
 import Auto_Module.file_tools
 import Auto_Module.test_suite_import
-from Auto_Module import *
+
 import Auto_Module.validation
 import Auto_Module.data_upload
 import Auto_Module.json_validation
 import Auto_Module.ldap_utilities
 import Auto_Module.output
+
 
 """
 #################################################### Functions ####################################################
@@ -511,12 +518,18 @@ for sub_dir in test_suite_directories:
         metadata_suite_dict[sub_dir] = meta_data_case_dict
         test_suite_name_list.append(sub_dir)
 
-print test_suite_name_list
-writeLogMessage(test_suite_name_list, summaryLogger, 'info')
-print "------------------------------------------Summary------------------------------------------------------"
-writeLogMessage(
-    "------------------------------------------Summary------------------------------------------------------",
-    summaryLogger, 'info')
+print test_suite_name_list,
+exit(1)
+#table = [(str(x), str(f(x))) for x in mylist]
+#print_table(table)
+
+
+# print test_suite_name_list
+# writeLogMessage(test_suite_name_list, summaryLogger, 'info')
+# print "------------------------------------------Summary------------------------------------------------------"
+# writeLogMessage(
+#     "------------------------------------------Summary------------------------------------------------------",
+#     summaryLogger, 'info')
 
 print "PERFORMANCE: "
 writeLogMessage("PERFORMANCE: ", summaryLogger, 'info')

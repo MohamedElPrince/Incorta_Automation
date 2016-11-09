@@ -1,2 +1,0 @@
-IsDescendantTesting:009
-SALES_MySQL4:050

@@ -1,5 +1,6 @@
 import json
 import time
+import sys
 import os
 from customLogger import mainLogger, writeLogMessage
 
@@ -30,7 +31,7 @@ def load_data(incorta, session, test_case_path, loader_Validation_Path):
 
     fileFound = False
     schema_file_list, schema_file_dict = schema_file(test_case_path)
-    print schema_file_list
+    print schema_file_list, 'list'
     if schema_file_list == None:
         pass
     else:
@@ -38,11 +39,14 @@ def load_data(incorta, session, test_case_path, loader_Validation_Path):
             for items in schema_file_list:
                 if None != items:
                     fileFound = True
-        except Exception:
-                fileFound = False
-                print ("Invalid Entry inside schema.txt %s" % test_case_path)
-                writeLogMessage('Invalid Entry inside schema.txt %s ' % (test_case_path), mainLogger,
+        except IndexError:
+            writeLogMessage('Invalid Entry inside schema.txt %s ' % (test_case_path), mainLogger,
                                 'critical')
+            print ("Invalid Entry inside schema.txt %s" % test_case_path)
+        except:
+            print "Unexpected error:", sys.exc_info()
+            raise
+
     if fileFound == True:
         schema_names = get_load_status(incorta, session, schema_file_list, command='pre_check')
         max_count = 0
@@ -123,13 +127,21 @@ def schema_file(test_case_path):
                     for line in text_file:
                         #schema_file_list = [line.rstrip('\n') for line in text_file]
                         schemaName, timerValue = line.split(':')
+                        print schemaName, timerValue
                         schema_file_list.append(schemaName)
                         schema_dict[schemaName] = timerValue
                     return schema_file_list, schema_dict
-            except Exception, e:
-                print ("schema.txt Not Found Inside Test Case")
-                writeLogMessage('schema.txt Not Found Inside Test Case %s ' % (test_case_path), mainLogger,
-                                'critical')
+            except IOError as e:
+                print "\nI/O error({0}): {1}".format(e.errno, e.strerror)
+                writeLogMessage('\nschema.txt Not Found Inside Test Case %s' % (test_case_path),
+                                mainLogger, 'critical')
+                print 'schema.txt Not Found Inside Test Case %s' % test_case_path
+            except ValueError as ve:
+                writeLogMessage(('\nError within schema.txt file; %s' % ve), mainLogger, 'critical')
+                print ValueError("\nError within schema.txt file; %s" % ve)
+            except:
+                print "Unexpected error:", sys.exc_info()
+                raise
 
 def get_load_status(incorta, session, schema_file_list, schema_name=None, command='status'):
     """
