@@ -259,6 +259,8 @@ for sub_dir in test_suite_directories:
         for item in temp_list:
             if '/' in item:
                 run_test_case.append(item.split('/')[1])
+            else:
+                run_test_case.append('ALL_test_cases')
         print "Test Cases to be run: ", run_test_case
 
         loaded_schemas = []
@@ -290,8 +292,9 @@ for sub_dir in test_suite_directories:
 
         # ENTERING TEST CASES
         for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
-            if dir in config_defaults['run_tests']:
-                print "Current Test Case: ", dir
+            print "Current Test Case: ", dir
+            if dir in run_test_case or 'ALL_test_cases' in run_test_case :
+
                 writeLogMessage("Current Test Case: %s" % dir, mainLogger, str(INFO))
 
                 # Get path of test_case in test_suite
