@@ -55,5 +55,9 @@ include_user_testing=True
 skip_data_load=False
 
 #Indicator of what Test Suites / Test Cases to run
+#To run a specific Test Suite: TestSuiteName
+#To run a specific Test Case: TestSuiteName/TestCaseName
+#Seperate every input by comma
+#Example: SuiteA, SuiteB/testcase2
 #Default is set to ALL, which will run all test suites
 run_tests=ALL
