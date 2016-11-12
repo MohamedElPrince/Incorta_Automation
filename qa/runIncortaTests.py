@@ -26,7 +26,7 @@ preCheckScriptPAth = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'automation
 if os.path.isfile(preCheckScriptPAth):
     try:
         os.system(preCheckScriptPAth)
-    except Exception, e:
+    except Exception:
         raise Exception("Pre-Check Script Did Not Run")
 
 """
@@ -92,19 +92,19 @@ def incorta_api_import(incorta_home):
 def login(url, tenant, username, password):
     try:
         return incorta.login(url, tenant, username, password, True)
-    except Exception, e:
+    except Exception:
         print "Login Failed"
         writeLogMessage("Login Failed", mainLogger, str(CRITICAL))
-        exit(1)
+        raise
 
 
 def logout(session):
     try:
         incorta.logout(session)
-    except Exception, e:
+    except Exception:
         print 'Failed to logout'
         writeLogMessage('Failed to logout', mainLogger, str(CRITICAL))
-        exit(1)
+        raise Exception
 
 
 def get_test_suite_path(test_suite):
@@ -118,7 +118,7 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
         incorta.grant_user_access(session, user_name, entity_type, entity_name, permission)
         print "Access to ", entity_type, " ", entity_name, " given to ", user_name
         writeLogMessage("Access to %s %s given to %s" % (entity_type, entity_name, user_name), mainLogger, str(INFO))
-    except Exception, e:
+    except Exception:
         print "Failed to grant user access to", user_name
         writeLogMessage("Failed to grant user access to %s" % user_name, mainLogger, str(CRITICAL))
         return
