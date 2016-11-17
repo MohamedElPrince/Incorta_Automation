@@ -53,7 +53,7 @@ from Auto_Module.customLogger import *
 NEW IMPORTS--Please Retain this order
 """
 
-from Auto_Module import summary
+
 from Auto_Module import *
 import Auto_Module.export
 import Auto_Module.test_suite_export_wd
@@ -65,6 +65,7 @@ import Auto_Module.data_upload
 import Auto_Module.json_validation
 import Auto_Module.ldap_utilities
 import Auto_Module.output
+from Auto_Module import summary
 
 
 """
@@ -521,8 +522,15 @@ for sub_dir in test_suite_directories:
         test_suite_name_dict[sub_dir] = test_case_name_dict
         metadata_suite_dict[sub_dir] = meta_data_case_dict
         test_suite_name_list.append(sub_dir)
-# table = [(str(x), str(f(x))) for x in mylist]
-# print_table(table)
+
+minute_timer_custom = (time.time() - start_time) / 60
+seconds_timer_custom = time.time() - start_time
+time_list = [seconds_timer_custom, minute_timer_custom]
+summary.print_table(*time_list, **test_suite_name_dict)
+time.sleep(2)
+shutdown_logger(mainLogger)
+shutdown_logger(summaryLogger)
+exit(1) #todo Remove temp exit 1 11/17/16 - senu
 
 
 print test_suite_name_list
