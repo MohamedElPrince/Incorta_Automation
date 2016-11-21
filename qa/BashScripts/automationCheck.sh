@@ -39,24 +39,34 @@ case $( uname -s ) in
 		if [ "" == "$problem" ]; then
      		echo "No libxml. Setting up libxml"
   			sudo yum install python-lxml
+  			sudo pip install ptable
   			echo "Success..."
 		fi
+		exit 1
 		;;
 	Darwin)	#Mac Case
-		echo Operating System: Mac OSX Darvin
+		echo "Operating System: Mac OSX Darvin"
 		echo "python        $(check $(programInstalled python))"
 		echo "pip           $(check $(programInstalled pip))"
 		lxml_check=$(python -c 'import pkgutil; print(1 if pkgutil.find_loader("lxml") else 0)')
 		if [[ $lxml_check -eq "1" ]]; then
-			echo Lxml Already Installed on Machine
-			exit 1
+			echo "Lxml Already Installed on Machine"
 		
 		elif [[ $lxml_check -eq "0" ]]; then
 			echo "Lxml Not Installed; Installing..."
 			sudo pip install lxml
 			echo "Success..."
-			exit 1
 		fi
+		ptable_check=$(python -c 'import pkgutil; print(1 if pkgutil.find_loader("ptable") else 0)')
+		if [[ $ptable_check -eq "1" ]]; then
+			echo "Ptable Already Installed on Machine"
+
+		elif [[ $ptable_check -eq "0" ]]; then
+			echo "Ptable Not Installed; Installing..."
+			sudo pip install ptable
+			echo "Success..."
+		fi
+		exit 1
 		;;
 	*)	#Default if Operatin System other than Mac or Linux
 		echo Other
