@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="Budget" refreshPeriod="-1" schema="Budget" version="1.0"><datasets><csv charset="UTF-8" dateformat="MM/dd/yyyy" filename="budget_revenue.csv" filenameUpdate="budget_revenue.csv" incremental="false" sep="," table="Budget.Budget" type="csv"/></datasets></loader>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="STANFORD_EAM" refreshPeriod="-1" schema="STANFORD_EAM" version="1.0" xml:base="schemas/289_loader.xml"><datasets><sql source="Vision" table="STANFORD_EAM.WIP_OPERATIONS"><query>select max(OPERATION_COMPLETED) as OPERATION_COMPLETED, organization_id, wip_entity_id from WIP_OPERATIONS group by organization_id, wip_entity_id</query></sql><sql source="Vision" table="STANFORD_EAM.FullOuterJoin_ReqOperations"><query>select inventory_item_id, wip_entity_id, organization_id,required_quantity, supply_subinventory from wip_requirement_operations 
+union all
+(select null,jobs.wip_entity_id, jobs.organization_id,null,null from wip_discrete_jobs jobs,
+wip_requirement_operations req
+where jobs.wip_entity_id = req.wip_entity_id (+) and
+jobs.organization_id = req.organization_id (+) and
+(req.wip_entity_id is null or req.organization_id is null) )</query></sql><sql source="Vision" table="STANFORD_EAM.FullOuterJoin_WorkRequests"><query>select wreq.*, jobs.wip_entity_id as jobs_wip_entity_id from wip_discrete_jobs jobs full outer join
+wip_eam_work_requests wreq on
+jobs.wip_entity_id = wreq.wip_entity_id</query></sql><sql source="Vision" table="STANFORD_EAM.WIP_DISCRETE_JOBS"><query>SELECT * FROM WIP_DISCRETE_JOBS</query></sql><sql source="Vision" table="STANFORD_EAM.FullOuterJoin_OPERATIONS"><query>select jobs.wip_entity_id as jobs_wip_entity_id, opr.* from wip_discrete_jobs jobs,
+wip_operations opr
+where jobs.wip_entity_id = opr.wip_entity_id (+)</query></sql><sql source="Vision" table="STANFORD_EAM.FullOuterJoin_OPERATION_RESOURCES"><query>select jobs.wip_entity_id as jobs_wip_entity_id, opp.wip_entity_id as opp_wip_entity_id, opp.operation_seq_num as opp_operation_seq_num, opr.* from wip_operations opp,
+wip_operation_resources opr, wip_discrete_jobs jobs
+where opp.wip_entity_id = opr.wip_entity_id (+) and
+opp.operation_seq_num = opr.operation_seq_num (+) and
+jobs.wip_entity_id = opp.wip_entity_id (+)</query></sql><sql source="Vision" table="STANFORD_EAM.WIP_ENTITIES"><query>select ent.*, jobs.wip_entity_id as JOBS_ENTITY_ID from wip_entities ent, wip_discrete_jobs jobs where ent.wip_entity_id = jobs.wip_entity_id (+)</query></sql><sql source="Stanford" table="STANFORD_EAM.ASSETS"><query>select o.id, o.description, 
+(select a.ASSET_GROUP from  table(o.asset_details) a
+) AS ASSET_GROUP,
+(select a.ASSET_NUMBER from  table(o.asset_details) a
+) AS ASSET_NUMBER,
+(select a.PARENT_ASSET from  table(o.asset_details) a
+) AS PARENT_ASSET,
+(select a.ORGANIZATION_CODE from  table(o.asset_details) a
+) AS ORGANIZATION_CODE,
+(select a.WIP_CLASS from  table(o.asset_details) a
+) AS WIP_CLASS,
+(select t.ATTRIBUTE1 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Provisioning Information'
+) AS PROVISINING_TYPE,
+(select t.ATTRIBUTE1 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Customer Information'
+) AS CUSTOMER_NAME,
+(select t.ATTRIBUTE2 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Customer Information'
+) AS CUSTOMER_LOGIN,
+(select t.ATTRIBUTE1 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Service Locations'
+) AS SERVICE_LOC1,
+(select t.ATTRIBUTE2 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Service Locations'
+) AS SERVICE_LOC2,
+(select t.ATTRIBUTE1 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Account Information'
+) AS ACCOUNT_INFO1,
+(select t.ATTRIBUTE1 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Account Information'
+) AS ACCOUNT_INFO2,
+(select t.ATTRIBUTE1 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Contact Information'
+) AS CONTACT_INFO1,
+(select t.ATTRIBUTE2 from  table(o.asset_attr_details) t
+where t.ATTRIBUTE_GROUP='Contact Information'
+) AS CONTACT_INFO2
+FROM xxdl_eam_ext_order o</query></sql><sql source="Vision" table="STANFORD_EAM.PO_HEADERS_ALL"><query>select poh.rowid, poh.* from po_headers_all poh</query></sql><sql source="Vision" table="STANFORD_EAM.po_headers_all_dfv"><query>select * from po_headers_all_dfv</query></sql><sql source="Vision" table="STANFORD_EAM.mtl_eam_asset_attr_values"><query>select mea.rowid, mea.* from mtl_eam_asset_attr_values mea</query></sql><sql source="Vision" table="STANFORD_EAM.mtl_eam_asset_attr_values_dfv"><query>select * from mtl_eam_asset_attr_values_dfv</query></sql><sql source="Vision" table="STANFORD_EAM.MTL_EAM_ASSET_ATTR_VALUES_CONTEXT_FORK"><query>select
+meaav.ASSOCIATION_ID, meaav.INVENTORY_ITEM_ID, meaav.SERIAL_NUMBER, meaav.ORGANIZATION_ID
+, meaavd.load, meaavd.Mast , meaavd.model , meaavd.make
+from MTL_EAM_ASSET_ATTR_VALUES meaav
+, MTL_EAM_ASSET_ATTR_VALUES_DFV  meaavd
+where meaav.rowid = meaavd.rowid
+and context_value = 'Fork Lift Classifications'</query></sql><sql source="Vision" table="STANFORD_EAM.MTL_EAM_ASSET_DFF_WARRANTY"><query>select
+meaav.ASSOCIATION_ID, meaav.INVENTORY_ITEM_ID, meaav.SERIAL_NUMBER, meaav.ORGANIZATION_ID
+ , meaavd.coverage , meaavd.warranty_type, meaav.ATTRIBUTE_CATEGORY
+from MTL_EAM_ASSET_ATTR_VALUES meaav
+, MTL_EAM_ASSET_ATTR_VALUES_DFV  meaavd
+where meaav.rowid = meaavd.rowid
+and context_value = 'Warranty Data'</query></sql><sql source="Vision" table="STANFORD_EAM.mtl_parameters"><query>select * from mtl_parameters</query></sql><sql source="Vision" table="STANFORD_EAM.po_requisition_headers_all"><query>select * from po_requisition_headers_all</query></sql><sql source="Vision" table="STANFORD_EAM.po_requisition_lines_all"><query>select * from po_requisition_lines_all</query></sql><sql source="Vision" table="STANFORD_EAM.po_req_distributions_all"><query>select * from po_req_distributions_all</query></sql><sql source="Vision" table="STANFORD_EAM.po_lines_all"><query>select * from po_lines_all</query></sql><sql source="Vision" table="STANFORD_EAM.po_distributions_all"><query>select * from po_distributions_all</query></sql></datasets></loader>

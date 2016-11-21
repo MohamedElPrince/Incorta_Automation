@@ -1,0 +1,1 @@
+<?xml version="1.0" ?><datasource name="incorta_metadata" type="sql"><property name="database" value="mysql"/><property name="connection" value="jdbc:mysql://127.0.0.1:3306/incorta_metadata"/><property name="user" value="root"/><property name="connectionPool" value="30"/><property name="password" value="incorta_mysql_root"/></datasource>

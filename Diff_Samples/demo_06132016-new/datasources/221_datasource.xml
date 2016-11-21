@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><datasource name="EBS_DB" type="sql" xml:base="datasources/100_datasource.xml"><property name="user" value="zd"/><property name="password" value="zd"/><property name="connection" value="jdbc:oracle:thin:@dev01.incorta.com:1521:viz"/><property name="database" value="oracle"/></datasource>

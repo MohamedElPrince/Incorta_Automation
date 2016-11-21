@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><report name="New Dashboard" version="" schema=""><defaultTables> <defaultTable schema="EAMWorkOrders" table="Asset"/> <defaultTable schema="EAMWorkOrders" table="Cost"/> <defaultTable schema="EAMWorkOrders" table="Date"/></defaultTables><layout></layout></report>

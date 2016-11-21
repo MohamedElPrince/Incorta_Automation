@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="Date" refreshPeriod="-1" schema="Date" version="1.0" xml:base="schemas/144_loader.xml"><datasets><csv charset="UTF-8" dateformat="MM/dd/yy" filename="Date.csv" filenameUpdate="Date_US.csv" sep="," table="Date.Date"/><csv charset="UTF-8" dateformat="MM/dd/yy" filename="Date4.csv" filenameUpdate="Date4.csv" sep="," table="Date.Date4"/><csv charset="UTF-8" dateformat="MM/dd/yyyy" filename="Date_US.csv" filenameUpdate="Date_US.csv" sep="," table="Date.Date_US"/><csv charset="UTF-8" dateformat="yyyy-MM-dd" filename="audit.csv" sep="," table="Date.Audit" type="csv"/><sql source="Vision" table="Date.DATE_GEN"><query>SELECT JN_DATE
+,      GN_DATE
+,      TO_CHAR(GN_DATE,'Day') DAY_NAME
+,      TO_NUMBER(TO_CHAR(GN_DATE,'DD')) DAY_NUMBER
+,      TO_NUMBER(TO_CHAR(GN_DATE,'MM')) MONTH_NUMBER
+,      TO_NUMBER(TO_CHAR(GN_DATE,'YYYY')) YEAR
+,      TO_CHAR(GN_DATE,'MON') MONTH_NAME3
+,      TO_CHAR(GN_DATE,'Month') MONTH_NAME
+,      NEXT_DAY(GN_DATE,'SUNDAY')-7 WEEK_START_DATE
+,      TRUNC((JN_DATE-TO_NUMBER(TO_CHAR(NEXT_DAY(TO_DATE('01-JAN-'||TO_CHAR(GN_DATE,'YYYY')),'MONDAY')-7 ,'J'))) /7)+1  WEEK_OF_YEAR
+,      TRUNC((JN_DATE-TO_NUMBER(TO_CHAR(NEXT_DAY(TO_DATE('01-'||TO_CHAR(GN_DATE,'MON')||'-'||TO_CHAR(GN_DATE,'YYYY')),'MONDAY')-7 ,'J'))) /7)+1  WEEK_OF_MONTH
+,      (CASE  TO_CHAR(GN_DATE,'MM') 
+        WHEN  '01' THEN 'Q1'
+        WHEN  '02' THEN 'Q1'
+        WHEN  '03' THEN 'Q1'
+        WHEN  '04' THEN 'Q2'
+        WHEN  '05' THEN 'Q2'
+        WHEN  '06' THEN 'Q2'
+        WHEN  '07' THEN 'Q3'
+        WHEN  '08' THEN 'Q3'
+        WHEN  '09' THEN 'Q3'
+        WHEN  '10' THEN 'Q4'
+        WHEN  '11' THEN 'Q4'
+        WHEN  '12' THEN 'Q4'
+        ELSE  '00'
+       END)  QUARTER_NUMBER   
+,      (GN_DATE -1)  DAY_AGO_DATE
+,      ADD_MONTHS(GN_DATE, -1) MONTH_AGO_DATE
+,      (GN_DATE -7)  WEEK_AGO_DATE       
+,      ADD_MONTHS(GN_DATE,-3) QTY_AGO_DATE
+,      ADD_MONTHS(GN_DATE,  -12)     YEAR_AGO_DATE 
+, TO_NUMBER(TO_CHAR(GN_DATE,'YYYY'))-1980 YEAR_SEQ
+, (TO_NUMBER(TO_CHAR(GN_DATE,'YYYY'))-1980)*12+TO_NUMBER(TO_CHAR(GN_DATE,'MM')) MONTH_SEQ
+,      TRUNC((JN_DATE-TO_NUMBER(TO_CHAR(NEXT_DAY(TO_DATE('01-JAN-1980'),'SUNDAY')-7 ,'J'))) /7)  WEEK_SEQ
+FROM TABLE(get_day_rows(1980,2030))</query></sql></datasets></loader>
