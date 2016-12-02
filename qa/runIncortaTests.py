@@ -158,42 +158,52 @@ SourcesMetadata_path = os.getcwd() + os.sep + "SourcesMetadata"
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
 SourcesMetadata_directories = Auto_Module.file_tools.get_subdirectories(SourcesMetadata_path)
 
-# LOAD USERS FROM LDAP
-print "Checking if instance needs to load users"
-writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
-owd = os.getcwd()
-sync = incorta_home + os.sep + 'sync.txt'
+if config_defaults['skip_ldap'] == 'True':
 
-if os.path.isfile(sync):
-    print "Users already Loaded"
-    writeLogMessage("Users already Loaded", mainLogger, str(INFO))
+    # LOAD USERS FROM LDAP
+    print "Checking if instance needs to load users"
+    writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
+    owd = os.getcwd()
+    sync = incorta_home + os.sep + 'sync.txt'
+
+    if os.path.isfile(sync):
+        print "Users already Loaded"
+        writeLogMessage("Users already Loaded", mainLogger, str(INFO))
+    else:
+        print "Preparing to populate users from LDAP"
+        writeLogMessage("Preparing to populate users from LDAP", mainLogger, str(INFO))
+
+        Auto_Module.ldap_utilities.ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login,
+                                                       ldap_group_mapping_member, ldap_group_search_filter)
+        Auto_Module.ldap_utilities.dirExport(incorta_home)
+        Auto_Module.ldap_utilities.tmt_ldap_property_setup(incorta_home, ldap_url, ldap_user_mapping_login, ldap_base)
+        Auto_Module.ldap_utilities.sync_directory_setup(incorta_home, tenant, username, password, url)
+        Auto_Module.ldap_utilities.sync_directory(incorta_home, orig_wd_path)
+
+        Auto_Module.ldap_utilities.tenant_updater(incorta_home, tenant)
+        Auto_Module.ldap_utilities.restart_incorta(incorta_home)
+        Auto_Module.ldap_utilities.assign_roles_to_groups(incorta, session)
+
+        dirExport_path = incorta_home + os.sep + 'dirExport'
+        directory_zip_path = dirExport_path + os.sep + 'directory.zip'
+        Auto_Module.file_tools.unzip(directory_zip_path)
+        Auto_Module.file_tools.move_file(owd + os.sep + 'users.csv', dirExport_path)
+        Auto_Module.file_tools.move_file(owd + os.sep + 'user-groups.csv', dirExport_path)
+        Auto_Module.file_tools.move_file(owd + os.sep + 'groups.csv', dirExport_path)
+        user_dict = {}
+        user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
+        user_list = user_dict.keys()
+        print "\n USER LIST: ", user_list
+        writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
+        # END of LDAP Implementation
 else:
-    print "Preparing to populate users from LDAP"
-    writeLogMessage("Preparing to populate users from LDAP", mainLogger, str(INFO))
+    user_dict = {}
+    user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
+    user_list = user_dict.keys()
+    print "\n USER LIST: ", user_list
+    writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
 
-    Auto_Module.ldap_utilities.ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login,
-                                                   ldap_group_mapping_member, ldap_group_search_filter)
-    Auto_Module.ldap_utilities.dirExport(incorta_home)
-    Auto_Module.ldap_utilities.tmt_ldap_property_setup(incorta_home, ldap_url, ldap_user_mapping_login, ldap_base)
-    Auto_Module.ldap_utilities.sync_directory_setup(incorta_home, tenant, username, password, url)
-    Auto_Module.ldap_utilities.sync_directory(incorta_home, orig_wd_path)
 
-    Auto_Module.ldap_utilities.tenant_updater(incorta_home, tenant)
-    Auto_Module.ldap_utilities.restart_incorta(incorta_home)
-    Auto_Module.ldap_utilities.assign_roles_to_groups(incorta, session)
-
-    dirExport_path = incorta_home + os.sep + 'dirExport'
-    directory_zip_path = dirExport_path + os.sep + 'directory.zip'
-    Auto_Module.file_tools.unzip(directory_zip_path)
-    Auto_Module.file_tools.move_file(owd + os.sep + 'users.csv', dirExport_path)
-    Auto_Module.file_tools.move_file(owd + os.sep + 'user-groups.csv', dirExport_path)
-    Auto_Module.file_tools.move_file(owd + os.sep + 'groups.csv', dirExport_path)
-
-user_dict = {}
-user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
-user_list = user_dict.keys()
-print "\n USER LIST: ", user_list
-writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
 
 # Import Files from SourcesMetadata folder
 
