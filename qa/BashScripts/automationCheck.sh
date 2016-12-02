@@ -63,7 +63,7 @@ case $( uname -s ) in
 
 		elif [[ $ptable_check -eq "0" ]]; then
 			echo "Ptable Not Installed; Installing..."
-			sudo pip install ptable
+			pip install ptable
 			echo "Success..."
 		fi
 		exit 1

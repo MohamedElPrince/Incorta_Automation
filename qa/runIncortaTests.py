@@ -64,6 +64,7 @@ import Auto_Module.validation
 import Auto_Module.data_upload
 import Auto_Module.json_validation
 import Auto_Module.ldap_utilities
+import Auto_Module.json_extraction
 import Auto_Module.output
 from Auto_Module import summary
 
@@ -461,9 +462,8 @@ for sub_dir in test_suite_directories:
                             writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
                             session_id = session[21:53]
                             csrf_token = session[63:95]
-                            Auto_Module.export.export_dashboards_json(session_id, test_case_dashboard_export_list,
-                                                                      csrf_token,
-                                                                      test_case_path_wd, test_case_path, user, url)
+                            thread_count = 10
+                            Auto_Module.json_extraction.export_dashboards_json(test_case_path_wd, test_case_path, user, session, thread_count)
                             logout(session)
                             time.sleep(2)
                             print "Logged out user.. ", user
