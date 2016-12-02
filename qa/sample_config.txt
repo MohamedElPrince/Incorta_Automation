@@ -50,6 +50,10 @@ include_schemas=True
 #Default: True
 include_user_testing=True
 
+#Flag to skip LDAP Usage
+#Default: False
+skip_ldap=True
+
 #Flag to skip schema loading phase (options: False / True)
 #Default: False
 skip_data_load=False

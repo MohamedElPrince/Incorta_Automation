@@ -1,7 +1,6 @@
 import threading
 from multiprocessing.pool import ThreadPool
 import urllib
-import pycurl
 from customLogger import mainLogger, writeLogMessage
 from time import time as timer
 from cStringIO import StringIO
