@@ -26,7 +26,7 @@ class Downloader(threading.Thread):
 
     # Downloader class - reads queue and downloads each file in succession
     def __init__(self, payload, output_paths):
-        threading.Thread.__init__(self, name=os.urandom(16).encode('hex'))
+        threading.Thread.__init__(self, name=os.urandom(1).encode('hex'))
         self.queue = payload
         self.output_paths = output_paths
 
@@ -60,7 +60,7 @@ class Downloader(threading.Thread):
 
 class DownloadManager():
     # todo- need documentation
-    def __init__(self, download_dict_input, thread_count=10):  # thread count set to 10 by default
+    def __init__(self, download_dict_input, thread_count=8):  # thread count set to 8 by default
         self.thread_count = thread_count
         self.download_dict = download_dict_input
         self.output_paths = download_dict_input
@@ -115,25 +115,24 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session, thr
     """
     Function uses curl command to export dashboard in JSON format
         args:
-            session_id: session id returned by login API
-            dashboard_id: dashbaord GUID
-            csrf_token: csrf_token returned by login API
             test_case_path_wd: path to test case of working directory
             test_case_path: path to test case of benchmark
             user: string of user currently being tested
             url: url for incorta session
+            session: give session string returned by login API
+            thread_count: number of threads to be used
         returns:
             Nothing
         prints:
             Nothing
     """
     guid_Names = get_guid(test_case_path, user)
-    print '----------Download------------------'
-    print '------------------------------------'
-    print '# of GUID:             ', len(guid_Names)
-    print 'Output Directory:      ', test_case_path_wd
-    print 'File list:             ', len(guid_Names)
-    print '------------------------------------'
+    print '------------------Download------------------'
+    print '--------------------------------------------'
+    print '# of GUID:             ',len(guid_Names)
+    print 'Output Directory:      ',test_case_path_wd
+    print 'File list:             ',len(guid_Names)
+    print '--------------------------------------------'
 
     payload_dict = {}
     session_altered_string = session.replace("'", "\"")
@@ -156,7 +155,9 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session, thr
     # If there are no URLs to download then exit now, nothing to do!
     if len(payload_dict) is 0:
         print 'No URLs to download'
-        sys.exit(2)
+        Exception('No URLS to download')
+    else:
+        pass
 
-    download_manager = DownloadManager(payload_dict, thread_count)  # Create queue.pool with thread safe level 5
+    download_manager = DownloadManager(payload_dict, thread_count)  # Create queue.pool with thread_count
     download_manager.begin_downloads()  # Start Threaded Download
