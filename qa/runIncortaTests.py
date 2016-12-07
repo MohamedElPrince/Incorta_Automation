@@ -472,8 +472,7 @@ for sub_dir in test_suite_directories:
                             writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
                             session_id = session[21:53]
                             csrf_token = session[63:95]
-                            thread_count = 10
-                            Auto_Module.json_extraction.export_dashboards_json(test_case_path_wd, test_case_path, user, session, thread_count)
+                            Auto_Module.json_extraction.export_dashboards_json(test_case_path_wd, test_case_path, user, session)
                             logout(session)
                             time.sleep(2)
                             print "Logged out user.. ", user

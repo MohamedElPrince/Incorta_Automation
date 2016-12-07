@@ -177,7 +177,7 @@ def get_load_status(incorta, session, schema_file_list, schema_name=None, comman
                 if key == schema_name:
                     return value
         except Exception:
-            print "The GET request can not find: %s, check Schema.txt file" % schema_name
+            Exception("The GET request can not find: %s, check Schema.txt file" % schema_name)
             writeLogMessage("The GET request can not find: %s, check Schema.txt file" % schema_name, mainLogger,
                             'error')
 

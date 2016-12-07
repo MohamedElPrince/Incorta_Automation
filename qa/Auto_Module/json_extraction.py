@@ -1,7 +1,8 @@
+import multiprocessing
+
 import os
 import Queue
 import threading
-import sys
 import requests
 import json
 import time
@@ -60,34 +61,35 @@ class Downloader(threading.Thread):
 
 class DownloadManager():
     # todo- need documentation
-    def __init__(self, download_dict_input, thread_count=8):  # thread count set to 8 by default
+    def __init__(self, download_dict_input, thread_count=20):  # thread count set to 20 by default
         self.thread_count = thread_count
         self.download_dict = download_dict_input
         self.output_paths = download_dict_input
 
     def begin_downloads(self):
         # todo- need documentation
-        x = 1
-        if x == 1:
-            queue = Queue.Queue()
+        queue = Queue.Queue()
 
-            # Create Thread Pooled Queue
-            for i in range(self.thread_count):
-                t = Downloader(queue, self.output_paths)
-                t.setDaemon(True)
-                t.start()
+        # Create Thread Pooled Queue
+        for i in range(self.thread_count):
+            t = Downloader(queue, self.output_paths)
+            t.setDaemon(True)
+            t.start()
 
-            for node in self.download_dict:
-                print 'Queuing: ', node + '\n'
-                # Insert List of Custom REST_API into Queue
-                queue.put([self.download_dict[node][0], self.download_dict[node][1], self.download_dict[node][2],
-                           self.download_dict[node][3], self.download_dict[node][4]])
+        for node in self.download_dict:
+            print 'Queuing: ', node + '\n'
+            writeLogMessage('Queuing: %s' % node + '\n', mainLogger, 'info')
+            # Insert List of Custom REST_API into Queue
+            queue.put([self.download_dict[node][0], self.download_dict[node][1], self.download_dict[node][2],
+                       self.download_dict[node][3], self.download_dict[node][4]])
 
-            # Create Blocking Queue Thread Pool
-            print '*** Main Thread Initialization ***'
-            queue.join()
-            print '*** Main Thread Shutdown ***'
-            return
+        # Create Blocking Queue Thread Pool
+        print '*** Main Thread Initialization ***'
+        writeLogMessage('*** Main Thread Initialization ***', mainLogger, 'info')
+        queue.join()
+        print '*** Main Thread Shutdown ***' + '\n'
+        writeLogMessage('*** Main Thread Shutdown ***\n', mainLogger, 'info')
+        return
 
 
 def get_guid(test_case_path, user):
@@ -111,7 +113,7 @@ def get_guid(test_case_path, user):
     return guid_Names
 
 
-def export_dashboards_json(test_case_path_wd, test_case_path, user, session, thread_count):
+def export_dashboards_json(test_case_path_wd, test_case_path, user, session):
     """
     Function uses curl command to export dashboard in JSON format
         args:
@@ -120,19 +122,26 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session, thr
             user: string of user currently being tested
             url: url for incorta session
             session: give session string returned by login API
-            thread_count: number of threads to be used
         returns:
             Nothing
         prints:
-            Nothing
+            Messages for debugging and code completion
     """
     guid_Names = get_guid(test_case_path, user)
+    thread_count = (multiprocessing.cpu_count()/2)
     print '------------------Download------------------'
     print '--------------------------------------------'
-    print '# of GUID:             ',len(guid_Names)
-    print 'Output Directory:      ',test_case_path_wd
-    print 'File list:             ',len(guid_Names)
+    print '# of GUID:             ', len(guid_Names)
+    print 'Output Directory:      ', test_case_path_wd
+    print 'File list:             ', len(guid_Names)
+    print "Current configuration indicated %s CPU/Cores...Optimizing" % thread_count
     print '--------------------------------------------'
+    writeLogMessage('------------------Download------------------', mainLogger, 'INFO')
+    writeLogMessage('--------------------------------------------', mainLogger, 'INFO')
+    writeLogMessage('# of GUID:             ' + str(len(guid_Names)), mainLogger, 'INFO')
+    writeLogMessage('Output Directory:      ' + test_case_path_wd, mainLogger, 'INFO')
+    writeLogMessage('File list:             ' + str(len(guid_Names)), mainLogger, 'INFO')
+    writeLogMessage('--------------------------------------------', mainLogger, 'INFO')
 
     payload_dict = {}
     session_altered_string = session.replace("'", "\"")
@@ -158,6 +167,5 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session, thr
         Exception('No URLS to download')
     else:
         pass
-
     download_manager = DownloadManager(payload_dict, thread_count)  # Create queue.pool with thread_count
     download_manager.begin_downloads()  # Start Threaded Download

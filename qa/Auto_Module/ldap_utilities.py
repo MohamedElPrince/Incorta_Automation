@@ -150,7 +150,7 @@ def sync_directory_setup(incorta_home, tenant_name, admin_username, admin_passwo
         # Editing Connection Info for input login arguments
         lines = []
         login_info = ' ' + tenant_name + ' ' + admin_username + ' ' + admin_password
-        old_session_string = 'session=`$incorta_cmd login <INCORTA_URL>'
+        old_session_string = 'session=`$incorta_cmd login'
         new_session_string = 'session=`$incorta_cmd login ' + url + login_info + '`'
         old_sync_string = '$incorta_cmd sync_directory_with_ldap $session'
         new_sync_string = '$incorta_cmd sync_directory_with_ldap $session true'
@@ -196,8 +196,8 @@ def sync_directory(incorta_home, orig_wd_path):
         writeLogMessage(run_sync_cmd, mainLogger, 'info')
         subprocess.call(run_sync_cmd, shell=True)
         os.chdir(owd)
-    except Exception, e:
-        print "Failed to run sync with LDAP and local Incorta instance"
+    except Exception:
+        Exception("Failed to run sync with LDAP and local Incorta instance")
         writeLogMessage("Failed to run sync with LDAP and local Incorta instance", mainLogger, 'critical')
         return
 
