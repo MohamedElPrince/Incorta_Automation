@@ -1,5 +1,6 @@
 from prettytable import PrettyTable
 import sys
+from customLogger import summaryLogger, writeLogMessage, DebugLevel
 
 
 def print_table(*time_list, **test_suite_name_dict):
@@ -60,8 +61,10 @@ def print_table(*time_list, **test_suite_name_dict):
     print '\n'
     print summary_header_table
     print summary_table
-
-
+    writeLogMessage(detail_header_table,summaryLogger,DebugLevel.INFO)
+    writeLogMessage(detail_table, summaryLogger, DebugLevel.INFO)
+    writeLogMessage(summary_header_table, summaryLogger, DebugLevel.INFO)
+    writeLogMessage(summary_table, summaryLogger, DebugLevel.INFO)
 
 
 # print test_suite_name_list

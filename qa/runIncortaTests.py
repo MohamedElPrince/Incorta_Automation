@@ -96,7 +96,7 @@ def login(url, tenant, username, password):
         return incorta.login(url, tenant, username, password, True)
     except Exception:
         print "Login Failed"
-        writeLogMessage("Login Failed", mainLogger, str(CRITICAL))
+        writeLogMessage("Login Failed", mainLogger, DebugLevel.CRITICAL)
         raise
 
 
@@ -105,7 +105,7 @@ def logout(session):
         incorta.logout(session)
     except Exception:
         print 'Failed to logout'
-        writeLogMessage('Failed to logout', mainLogger, str(CRITICAL))
+        writeLogMessage('Failed to logout', mainLogger, DebugLevel.CRITICAL)
         raise Exception
 
 
@@ -119,10 +119,10 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
     try:
         incorta.grant_user_access(session, user_name, entity_type, entity_name, permission)
         print "Access to ", entity_type, " ", entity_name, " given to ", user_name
-        writeLogMessage("Access to %s %s given to %s" % (entity_type, entity_name, user_name), mainLogger, str(INFO))
+        writeLogMessage("Access to %s %s given to %s" % (entity_type, entity_name, user_name), mainLogger, DebugLevel.INFO)
     except Exception:
         print "Failed to grant user access to", user_name
-        writeLogMessage("Failed to grant user access to %s" % user_name, mainLogger, str(CRITICAL))
+        writeLogMessage("Failed to grant user access to %s" % user_name, mainLogger, DebugLevel.CRITICAL)
         return
 
 
@@ -144,7 +144,7 @@ metadata_suite_dict = {}
 if Debug == True:
     for key, value in config_defaults.items():
         print(key, value)
-        writeLogMessage('%s %s' % (key, value), mainLogger, str(DEBUG))
+        writeLogMessage('%s %s' % (key, value), mainLogger, DebugLevel.DEBUG)
 
 # Set admin username and admin password to local variables
 username = admin_user
@@ -161,20 +161,20 @@ user_dict = {}
 if config_defaults['skip_ldap'] == 'False':
     # LOAD USERS FROM LDAP
     print "Checking if instance needs to load users"
-    writeLogMessage("Checking if instance needs to load users...", mainLogger, str(INFO))
+    writeLogMessage("Checking if instance needs to load users...", mainLogger, DebugLevel.INFO)
     owd = os.getcwd()
     sync = incorta_home + os.sep + 'sync.txt'
 
     if os.path.isfile(sync):
         print "Users already Loaded"
-        writeLogMessage("Users already Loaded", mainLogger, str(INFO))
+        writeLogMessage("Users already Loaded", mainLogger, DebugLevel.INFO)
         user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
         user_list = user_dict.keys()
         print "USER LIST: ", user_list
-        writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
+        writeLogMessage("USER LIST: %s" % user_list, mainLogger, DebugLevel.INFO)
     else:
         print "Preparing to populate users from LDAP"
-        writeLogMessage("Preparing to populate users from LDAP", mainLogger, str(INFO))
+        writeLogMessage("Preparing to populate users from LDAP", mainLogger, DebugLevel.INFO)
 
         Auto_Module.ldap_utilities.ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login,
                                                        ldap_group_mapping_member, ldap_group_search_filter)
@@ -196,20 +196,21 @@ if config_defaults['skip_ldap'] == 'False':
         user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
         user_list = user_dict.keys()
         print "USER LIST: ", user_list
-        writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
+        writeLogMessage("USER LIST: %s" % user_list, mainLogger, DebugLevel.INFO)
         # END of LDAP Implementation
 else:
     user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
     user_list = user_dict.keys()
     print "USER LIST: ", user_list
-    writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
+    writeLogMessage("USER LIST: %s" % user_list, mainLogger, DebugLevel.INFO)
 
 
 
 # Import Files from SourcesMetadata folder
 
 for sources in SourcesMetadata_directories:
-    print "Importing Current Source: %s" % sources
+    print "\nImporting Current Source: %s" % sources
+    writeLogMessage("\nImporting Current Source: %s" % sources,mainLogger,DebugLevel.INFO)
     curr_source_path = SourcesMetadata_path + os.sep + sources
     sources_subdirectories = Auto_Module.file_tools.get_subdirectories(curr_source_path)
 
@@ -247,7 +248,7 @@ for sources in SourcesMetadata_directories:
                 try:
                     incorta.import_schemas(session, source_path)
                 except Exception:
-                    print "Schema Already Imported"
+                    print Exception("Schema Already Imported")
 
         if import_type == 'session_variables':
             session_var_path = curr_source_path + os.sep + import_type
@@ -259,8 +260,7 @@ for sources in SourcesMetadata_directories:
                 try:
                     incorta.import_session_variables(session, source_path)
                 except Exception:
-                    print "Session Variable ", var, " already imported"
-    print "\n"
+                    print Exception("Session Variable ", var, " already imported")
 
 # Run Through Test Suites
 for sub_dir in test_suite_directories:
@@ -281,7 +281,7 @@ for sub_dir in test_suite_directories:
         meta_data_case_dict = {}
 
         print "Current Test Suite: ", sub_dir
-        writeLogMessage("Current Test Suite: %s" % sub_dir, mainLogger, str(INFO))
+        writeLogMessage("Current Test Suite: %s" % sub_dir, mainLogger, DebugLevel.INFO)
         test_suite_wd_path = Auto_Module.file_tools.create_directory(wd_path,
                                                                      sub_dir)  # Working Directory test suite path
         test_suite_path = get_test_suite_path(sub_dir)  # Path of test suite
@@ -298,7 +298,7 @@ for sub_dir in test_suite_directories:
 
         if Debug == True:
             print test_suite_subdirectories
-            writeLogMessage(test_suite_subdirectories, mainLogger, str(DEBUG))
+            writeLogMessage(test_suite_subdirectories, mainLogger, DebugLevel.DEBUG)
         current_test_suite = sub_dir
 
         full_schema_export_list = []
@@ -308,25 +308,25 @@ for sub_dir in test_suite_directories:
             print "Current Test Case: ", dir
             if dir in run_test_case or 'ALL_test_cases' in run_test_case :
 
-                writeLogMessage("Current Test Case: %s" % dir, mainLogger, str(INFO))
+                writeLogMessage("Current Test Case: %s" % dir, mainLogger, DebugLevel.INFO)
 
                 # Get path of test_case in test_suite
                 test_case_path = Auto_Module.file_tools.get_path(test_suite_path, dir)
                 if Debug == True:
                     print test_case_path
-                    writeLogMessage(test_case_path, mainLogger, str(DEBUG))
+                    writeLogMessage(test_case_path, mainLogger, DebugLevel.DEBUG)
 
                 # Get subdirectories of test case
                 test_case_subdirectories = Auto_Module.file_tools.get_subdirectories(test_case_path)
                 if Debug == True:
                     print test_case_subdirectories
-                    writeLogMessage(test_case_subdirectories, mainLogger, str(DEBUG))
+                    writeLogMessage(test_case_subdirectories, mainLogger, DebugLevel.DEBUG)
 
                 # Creates test_suite folder in WD
                 test_case_path_wd = Auto_Module.file_tools.create_directory(test_suite_wd_path, dir)
                 if Debug == True:
                     print test_case_path_wd
-                    writeLogMessage(test_case_path_wd, mainLogger, str(DEBUG))
+                    writeLogMessage(test_case_path_wd, mainLogger, DebugLevel.DEBUG)
 
                 # Creates Import and Export Folders in WD test case folder
                 Auto_Module.test_suite_export_wd.create_standard_directory(test_case_path_wd)
@@ -427,7 +427,7 @@ for sub_dir in test_suite_directories:
                 # GRANT PERMISSIONS
                 for dashboards in export_dashboard_names_list:
                     print "Preparing to Export: ", dashboards
-                    writeLogMessage("Preparing to Export: %s" % dashboards, mainLogger, str(INFO))
+                    writeLogMessage("Preparing to Export: %s" % dashboards, mainLogger, DebugLevel.INFO)
 
                 for user in user_list:
                     for dashboard_name in export_dashboard_names_list:
@@ -438,32 +438,32 @@ for sub_dir in test_suite_directories:
                 try:
                     logout(session)
                     print "Logged out Super User successfully"
-                    writeLogMessage("Logged out Super User successfully", mainLogger, str(INFO))
+                    writeLogMessage("Logged out Super User successfully", mainLogger, DebugLevel.INFO)
                 except Exception:
                     print Exception("unable to logout")
-                    writeLogMessage("Unable to Logout", mainLogger, str(CRITICAL))
+                    writeLogMessage("Unable to Logout", mainLogger, DebugLevel.CRITICAL)
                 time.sleep(2)
 
                 # JSON DASHBOARD EXPORT
                 if Debug == True:
                     print "session: ", session, " \n\n"
-                    writeLogMessage("Session: %s\n\n" % session, mainLogger, str(DEBUG))
+                    writeLogMessage("Session: %s\n\n" % session, mainLogger, DebugLevel.DEBUG)
                     print "session id: ", session_id
-                    writeLogMessage("Session id: %s" % session_id, mainLogger, str(DEBUG))
+                    writeLogMessage("Session id: %s" % session_id, mainLogger, DebugLevel.DEBUG)
                     print "dashboard id: ", test_case_dashboard_export_list
-                    writeLogMessage("Dashboard id: %s" % test_case_dashboard_export_list, mainLogger, str(DEBUG))
+                    writeLogMessage("Dashboard id: %s" % test_case_dashboard_export_list, mainLogger, DebugLevel.DEBUG)
                     print "CSRF TOKEN", csrf_token
-                    writeLogMessage("CSRF TOKEN: %s" % csrf_token, mainLogger, str(DEBUG))
+                    writeLogMessage("CSRF TOKEN: %s" % csrf_token, mainLogger, DebugLevel.DEBUG)
                     print "Test Case Path", test_case_path_wd
-                    writeLogMessage("Test Case Path: %s" % test_case_path_wd, mainLogger, str(DEBUG))
+                    writeLogMessage("Test Case Path: %s" % test_case_path_wd, mainLogger, DebugLevel.DEBUG)
                     print "Entering JSON DASH EXPORT"
-                    writeLogMessage("Entering JSON DASH EXPORT", mainLogger, str(DEBUG))
+                    writeLogMessage("Entering JSON DASH EXPORT", mainLogger, DebugLevel.DEBUG)
 
                 # USER TESTING
                 if config_defaults['include_user_testing'] == 'True':
                     user_pass = 'superpass'
                     print "TESTING USER LOGIN"
-                    writeLogMessage("TESTING USER LOGIN", mainLogger, str(INFO))
+                    writeLogMessage("TESTING USER LOGIN", mainLogger, DebugLevel.INFO)
                     for user in user_list:
                         # Check if test case utilizes user from LDAP
                         test_case_directories = os.listdir(test_case_path)
@@ -472,18 +472,18 @@ for sub_dir in test_suite_directories:
                             session = login(url, tenant, user, user_pass)
                             time.sleep(2)
                             print "Logged in user.. ", user
-                            writeLogMessage("Logged in user.. %s" % user, mainLogger, str(INFO))
+                            writeLogMessage("Logged in user.. %s" % user, mainLogger, DebugLevel.INFO)
                             session_id = session[21:53]
                             csrf_token = session[63:95]
                             Auto_Module.json_extraction.export_dashboards_json(test_case_path_wd, test_case_path, user, session)
                             logout(session)
                             time.sleep(2)
                             print "Logged out user.. ", user
-                            writeLogMessage("Logged out user.. %s" % user, mainLogger, str(INFO))
+                            writeLogMessage("Logged out user.. %s" % user, mainLogger, DebugLevel.INFO)
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
-                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
+                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, DebugLevel.DEBUG)
 
                 # LOGGING IN SUPER USER
                 try:
@@ -491,20 +491,20 @@ for sub_dir in test_suite_directories:
                     session = login(url, tenant, username, password)
                     time.sleep(2)
                     print "Logged in Super User"
-                    writeLogMessage("Logged in Super User", mainLogger, str(INFO))
+                    writeLogMessage("Logged in Super User", mainLogger, DebugLevel.INFO)
                 except Exception:
                     print "Unable to log in Super User"
-                    writeLogMessage("Unable to log in Super User", mainLogger, str(CRITICAL))
+                    writeLogMessage("Unable to log in Super User", mainLogger, DebugLevel.CRITICAL)
 
                 if Debug == True:
                     print "\nFinished JSON DASH EXPORT"
-                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, str(DEBUG))
+                    writeLogMessage("Finished JSON DASH EXPORT", mainLogger, DebugLevel.DEBUG)
                 # DATA VALIDATION
                 if config_defaults['skip_validation'] == 'False':
                     for user in user_list:
                         print "Validating data for user - ", user, " test case - ", dir
                         writeLogMessage(("Validating data for user - %s test case - %s" % (user, dir)), mainLogger,
-                                        str(INFO))
+                                        DebugLevel.INFO)
                         output_test_case_path = Data_Validation_Path + os.sep + dir
                         output_user_path = Auto_Module.output.create_output_user_path(output_test_case_path, user)
                         Auto_Module.json_validation.validation(test_case_path, test_case_path_wd, output_wd_path,
