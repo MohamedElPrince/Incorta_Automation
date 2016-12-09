@@ -157,18 +157,21 @@ test_suite_directory_path = os.getcwd() + os.sep + "TestSuites"
 SourcesMetadata_path = os.getcwd() + os.sep + "SourcesMetadata"
 test_suite_directories = Auto_Module.file_tools.get_subdirectories(test_suite_directory_path)
 SourcesMetadata_directories = Auto_Module.file_tools.get_subdirectories(SourcesMetadata_path)
-
+user_dict = {}
 if config_defaults['skip_ldap'] == 'False':
-
     # LOAD USERS FROM LDAP
     print "Checking if instance needs to load users"
-    writeLogMessage("Checking if instance needs to load users", mainLogger, str(INFO))
+    writeLogMessage("Checking if instance needs to load users...", mainLogger, str(INFO))
     owd = os.getcwd()
     sync = incorta_home + os.sep + 'sync.txt'
 
     if os.path.isfile(sync):
         print "Users already Loaded"
         writeLogMessage("Users already Loaded", mainLogger, str(INFO))
+        user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
+        user_list = user_dict.keys()
+        print "USER LIST: ", user_list
+        writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
     else:
         print "Preparing to populate users from LDAP"
         writeLogMessage("Preparing to populate users from LDAP", mainLogger, str(INFO))
@@ -190,17 +193,15 @@ if config_defaults['skip_ldap'] == 'False':
         Auto_Module.file_tools.move_file(owd + os.sep + 'users.csv', dirExport_path)
         Auto_Module.file_tools.move_file(owd + os.sep + 'user-groups.csv', dirExport_path)
         Auto_Module.file_tools.move_file(owd + os.sep + 'groups.csv', dirExport_path)
-        user_dict = {}
         user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
         user_list = user_dict.keys()
-        print "\n USER LIST: ", user_list
+        print "USER LIST: ", user_list
         writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
         # END of LDAP Implementation
 else:
-    user_dict = {}
     user_dict = Auto_Module.ldap_utilities.read_users_from_csv(incorta_home)
     user_list = user_dict.keys()
-    print "\n USER LIST: ", user_list
+    print "USER LIST: ", user_list
     writeLogMessage("USER LIST: %s" % user_list, mainLogger, str(INFO))
 
 
@@ -424,8 +425,10 @@ for sub_dir in test_suite_directories:
                 test_case_dashboard_export_list = export_dash_ids.keys()
 
                 # GRANT PERMISSIONS
-                print "Preparing to Export: ", export_dashboard_names_list
-                writeLogMessage("Preparing to Export: %s" % export_dashboard_names_list, mainLogger, str(INFO))
+                for dashboards in export_dashboard_names_list:
+                    print "Preparing to Export: ", dashboards
+                    writeLogMessage("Preparing to Export: %s" % dashboards, mainLogger, str(INFO))
+
                 for user in user_list:
                     for dashboard_name in export_dashboard_names_list:
                         grant_user_access(session, user, 'dashboard', os.sep + dashboard_name, 'edit')
@@ -436,8 +439,8 @@ for sub_dir in test_suite_directories:
                     logout(session)
                     print "Logged out Super User successfully"
                     writeLogMessage("Logged out Super User successfully", mainLogger, str(INFO))
-                except Exception, e:
-                    print "unable to logout"
+                except Exception:
+                    print Exception("unable to logout")
                     writeLogMessage("Unable to Logout", mainLogger, str(CRITICAL))
                 time.sleep(2)
 
@@ -489,7 +492,7 @@ for sub_dir in test_suite_directories:
                     time.sleep(2)
                     print "Logged in Super User"
                     writeLogMessage("Logged in Super User", mainLogger, str(INFO))
-                except Exception, e:
+                except Exception:
                     print "Unable to log in Super User"
                     writeLogMessage("Unable to log in Super User", mainLogger, str(CRITICAL))
 

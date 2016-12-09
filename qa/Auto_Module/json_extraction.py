@@ -1,5 +1,4 @@
 import multiprocessing
-
 import os
 import Queue
 import threading
@@ -27,7 +26,7 @@ class Downloader(threading.Thread):
 
     # Downloader class - reads queue and downloads each file in succession
     def __init__(self, payload, output_paths):
-        threading.Thread.__init__(self, name=os.urandom(1).encode('hex'))
+        threading.Thread.__init__(self, name=os.urandom(16).encode('hex'))
         self.queue = payload
         self.output_paths = output_paths
 
@@ -35,11 +34,13 @@ class Downloader(threading.Thread):
         # todo- need documentation
         while True:
             # Allocate Resources + Begin
-            print '%s: Looking for the next enclosure' % self.name
+            print '%s: Looking for next target' % self.name
+            writeLogMessage('%s: Looking for next target' % self.name, mainLogger, 'info')
             url = self.queue.get()
 
             # request.get JSON file
             print "* Thread " + self.name + " - processing Payload"
+            writeLogMessage('* Thread %s - processing Payload' % self.name, mainLogger, 'info')
             self.download_file(url)
 
             # Clean Up Resources + Shutdown
@@ -52,6 +53,8 @@ class Downloader(threading.Thread):
         if (r.status_code == requests.codes.ok):
             t_elapsed = time.clock() - t_start
             print "* Thread: " + self.name + " Downloaded " + str(url[0]) + " in " + str(t_elapsed) + " seconds"
+            writeLogMessage("* Thread:  %s  Download: %s in %s seconds" % (self.name, str(url[0]), str(t_elapsed)),
+                            mainLogger, 'info')
             with open(url[4], "w") as f:
                 f.write(r.content)
         else:
@@ -128,7 +131,7 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session):
             Messages for debugging and code completion
     """
     guid_Names = get_guid(test_case_path, user)
-    thread_count = (multiprocessing.cpu_count()/2)
+    thread_count = (multiprocessing.cpu_count() / 2) #Use Half of max threads possible
     print '------------------Download------------------'
     print '--------------------------------------------'
     print '# of GUID:             ', len(guid_Names)
@@ -164,8 +167,9 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session):
     # If there are no URLs to download then exit now, nothing to do!
     if len(payload_dict) is 0:
         print 'No URLs to download'
-        Exception('No URLS to download')
+        writeLogMessage('No URLs to download', mainLogger, 'error')
+        raise Exception('No URLS to download')
     else:
         pass
-    download_manager = DownloadManager(payload_dict, thread_count)  # Create queue.pool with thread_count
-    download_manager.begin_downloads()  # Start Threaded Download
+        download_manager = DownloadManager(payload_dict, thread_count)  # Create queue.pool with thread_count
+        download_manager.begin_downloads()  # Start Threaded Download

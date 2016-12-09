@@ -1,4 +1,4 @@
-import os, os.path
+import os, os.path, sys
 import subprocess, shutil
 import time
 from customLogger import mainLogger, writeLogMessage
@@ -54,8 +54,11 @@ def tmt_ldap_property_setup(incorta_home, ldap_url, ldap_user_mapping_login, lda
                 ldap_prop_out.write(line)
 
     except EnvironmentError:
-        print "Unable to Modify LDAP Properties File Under /tmt"
+        print EnvironmentError("Unable to Modify LDAP Properties File Under /tmt")
         writeLogMessage('Unable to Modify LDAP Properties File Under /tmt', mainLogger, 'error')
+    except:
+        print "Unexpected error:", sys.exc_info()
+        raise
 
 
 def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_login, ldap_group_mapping_member,
@@ -72,7 +75,6 @@ def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_log
     url_modifier = 'ldap.base.provider.url=' + ldap_url
     login_modifier = 'ldap.user.mapping.login=' + ldap_user_mapping_login
     base_modifier = 'ldap.base.dn=' + ldap_base
-    lines = []
     group_map_modifier = 'ldap.group.mapping.member=' + ldap_group_mapping_member
     group_search_modifier = 'ldap.group.search.filter=' + ldap_group_search_filter
     lines = []
@@ -105,7 +107,6 @@ def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_log
                 elif 'ldap.group.search.filter=' in line:
                     group_search_replace = line.rstrip()
                     lines.append(line.replace(group_search_replace, group_search_modifier))
-
                 else:
                     lines.append(line)
 
@@ -118,8 +119,11 @@ def ldap_property_setup(incorta_home, ldap_url, ldap_base, ldap_user_mapping_log
                 ldap_bin_out.write(line)
 
     except EnvironmentError:
-        print "Unable to Modify LDAP Properties File Under /bin"
+        print EnvironmentError("Unable to Modify LDAP Properties File Under /bin")
         writeLogMessage('Unable to Modify LDAP Properties File Under /bin', mainLogger, 'error')
+    except:
+        print "Unexpected error:", sys.exc_info()
+        raise
 
 
 def sync_directory_setup(incorta_home, tenant_name, admin_username, admin_password, url):
@@ -174,8 +178,11 @@ def sync_directory_setup(incorta_home, tenant_name, admin_username, admin_passwo
                     sync_script_out.write(line)
 
         except EnvironmentError:
-            print "Unable to Modify LDAP Sync Bash File Under /bin"
+            print EnvironmentError("Unable to Modify LDAP Sync Bash File Under /bin")
             writeLogMessage('Unable to Modify LDAP Sync Bash File Under /bin', mainLogger, 'error')
+        except:
+            print "Unexpected error:", sys.exc_info()
+            raise
 
 
 def sync_directory(incorta_home, orig_wd_path):
@@ -197,9 +204,11 @@ def sync_directory(incorta_home, orig_wd_path):
         subprocess.call(run_sync_cmd, shell=True)
         os.chdir(owd)
     except Exception:
-        Exception("Failed to run sync with LDAP and local Incorta instance")
+        print Exception("Failed to run sync with LDAP and local Incorta instance")
         writeLogMessage("Failed to run sync with LDAP and local Incorta instance", mainLogger, 'critical')
-        return
+    except:
+        print "Unexpected error:", sys.exc_info()
+        raise
 
     # Creates Sync tag if LDAP populate was successful
     # sync_tag = orig_wd_path + os.sep + 'sync.txt'
@@ -220,10 +229,12 @@ def tenant_updater(incorta_home, tenant):
         os.chdir(path_tmt)
         subprocess.call(tenant_update_ldap, shell=True)
         os.chdir(owd)
-    except Exception, e:
-        print "Failed to update Tenant: ", tenant
+    except Exception:
+        print Exception("Failed to update Tenant: ", tenant)
         writeLogMessage("Failed to update Tenant: " % tenant, mainLogger, 'critical')
-        return
+    except:
+        print "Unexpected error:", sys.exc_info()
+        raise
 
 
 def restart_incorta(incorta_home):
@@ -242,9 +253,11 @@ def restart_incorta(incorta_home):
         time.sleep(7)
         os.chdir(owd)
     except Exception, e:
-        print "Unable to restart Incorta instance"
+        print Exception("Unable to restart Incorta instance")
         writeLogMessage('Unable to restart Incorta instance', mainLogger, 'critical')
-        return
+    except:
+        print "Unexpected error:", sys.exc_info()
+        raise
 
 
 def assign_roles_to_groups(incorta, session):
@@ -259,10 +272,12 @@ def assign_roles_to_groups(incorta, session):
         incorta.assign_role_to_group(session, 'engineering', 'Analyze User')
         print "Assigned Roles Successfully"
         writeLogMessage('Assigned Roles Successfully', mainLogger, 'info')
-    except Exception, e:
-        print "Unable to assign Roles, Roles already assigned"
+    except Exception:
+        print Exception("Unable to assign Roles, Roles already assigned")
         writeLogMessage('Unable to assign Roles, Roles already assigned', mainLogger, 'warning')
-        return
+    except:
+        print "Unexpected error:", sys.exc_info()
+        raise
 
 
 def read_users_from_csv(incorta_home):
@@ -277,7 +292,7 @@ def read_users_from_csv(incorta_home):
     os.chdir(dirExport_path)
     print "Reading CSV files from: ", os.getcwd()
     writeLogMessage('%s: %s' % ("Reading CSV files from: ", os.getcwd()), mainLogger, 'info')
-    user_list = {}
+    user_role_dict = {}
     COUNT = 0
     print "Extracting users from csv"
     writeLogMessage('Extracting users from csv', mainLogger, 'info')
@@ -286,8 +301,7 @@ def read_users_from_csv(incorta_home):
             if COUNT > 0:
                 user = col.split(",")
                 user[1] = user[1].strip('\n')
-                user_list[user[1]] = user[0]
+                user_role_dict[user[1]] = user[0]
             COUNT += 1
-
     os.chdir(owd)
-    return user_list
+    return user_role_dict
