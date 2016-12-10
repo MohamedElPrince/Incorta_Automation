@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="EBS_CSI" refreshPeriod="300" schema="EBS_CSI" version="1.0" xml:base="schemas/522_loader.xml"><datasets><sql source="Vision" table="EBS_CSI.csi_item_instances"><query>SELECT * FROM csi_item_instances</query></sql></datasets></loader>

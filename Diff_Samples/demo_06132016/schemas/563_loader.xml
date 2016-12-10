@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="BudgetV2" refreshPeriod="-1" schema="BudgetV2" version="1.0" xml:base="schemas/309_loader.xml"><datasets><xslx filename="BudgetV2.xlsx" filenameUpdate="BudgetV2.xlsx" table="BudgetV2.BudgetV2" worksheet="Sheet1"/></datasets></loader>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="XXAT_Views" refreshPeriod="-1" schema="XXAT_Views" version="1.0" xml:base="schemas/226_loader.xml"><datasets><sql source="Vision" table="XXAT_Views.xxav_mu_hierarchy"><query>select * from apps.xxav_mu_hierarchy</query></sql><sql source="Vision" table="XXAT_Views.xxbi_category_prod_hierarchy_v"><query>select * from xxbi_category_prod_hierarchy_v</query></sql><sql source="Vision" table="XXAT_Views.XXBI_OE_ORDER_LINES_ALL_V"><query>select * from XXBI_OE_ORDER_LINES_ALL_V</query></sql><sql source="Vision" table="XXAT_Views.xxbi_ra_cust_trx_lines_all_v"><query>select * from apps.xxbi_ra_cust_trx_lines_all_v</query></sql><sql source="Vision" table="XXAT_Views.xxbi_ou_master_org_lookup_v"><query>select * from xxbi_ou_master_org_lookup_v</query></sql><sql source="Vision" table="XXAT_Views.xxbi_revenue_details_v"><query>select * from xxbi_revenue_details_v</query></sql><sql source="Vision" table="XXAT_Views.Acct_Hierarchy_V"><query>select * from acct_hierarchy_v2</query></sql><sql source="Vision" table="XXAT_Views.Descriptive_Flex_Fields"><query>SELECT
+       fdf.title                             "DFF Title",
+       fdf.application_table_name            "Application Table",
+       fdf.context_column_name               "Context Column Name",
+       --
+       fdfcu.descriptive_flex_context_code   "DFF Context Code",
+       fdfcu.column_seq_num                  "Sequence",
+       fdfcu.end_user_column_name            "Segment Name",
+       fdfcu.application_column_name         "Column Name",
+       ffv.flex_value_set_name               "Value Set Name"
+  FROM
+       fnd_descr_flex_col_usage_vl   fdfcu,
+       fnd_descriptive_flexs_vl      fdf,
+       fnd_flex_value_sets           ffv
+ WHERE
+       1 = 1
+   --
+   -- AND fdf.title = 'Further Job Information'        -- &lt;change it&gt;
+   -- AND fdfcu.descriptive_flex_context_code = 'US'   -- &lt;change it&gt;
+   AND fdfcu.enabled_flag = 'Y'
+   AND fdf.title not like '$SRS$%'
+   AND fdfcu.flex_value_set_id = ffv.flex_value_set_id
+   AND fdfcu.descriptive_flexfield_name = fdf.descriptive_flexfield_name
+   AND fdfcu.application_id = fdf.application_id
+   --
+ ORDER BY
+       fdf.title,
+       fdfcu.descriptive_flexfield_name,
+       fdfcu.descriptive_flex_context_code,
+       fdfcu.column_seq_num</query></sql></datasets></loader>

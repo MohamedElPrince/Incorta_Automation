@@ -2,7 +2,7 @@ Path of Generator Script within QA Repository
 git_directory/qa/qa/Addons/generator.py
 
 How to Run Generator Tool:
-python generator.py -f /home/example.csv -w /home/ -h /home/Incorta Analytics
+python generator.py -f /home/example.csv -w /home/ -h /home/Incorta Analytics -t /home/Incorta Analytics/tenants
 
 After Run:
 Generator Output Folder will be created with two subset folders; Sources Metadata, and TestSuite. Move the appropiate subset folders within the framework. 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="ZEN" refreshPeriod="-1" schema="ZEN" version="1.0" xml:base="schemas/336_loader.xml"><datasets><sql source="Vision" table="ZEN.xla_ae_headers"><query>select * from xla_ae_headers</query></sql><sql source="Vision" table="ZEN.xla_ae_lines"><query>select
+(SELECT   instance_name FROM v$instance) INSTANCE,
+ NVL (xll.accounting_class_code, 'Unknown') accounting_line_code,
+            NVL (xll.accounted_dr, 0) - NVL (xll.accounted_cr, 0) amount,
+            NVL (xll.accounted_dr, 0) accounted_dr,
+            NVL (xll.accounted_cr, 0) accounted_cr,
+            xll.accounting_date accounting_date,
+            xll.description description,
+            xll.creation_date origin_date,
+            xll.application_id,
+            xll.code_combination_id,
+            xll.gl_sl_link_table,
+            xll.gl_sl_link_id,
+            xll.source_table,
+            xll.source_id,
+            xll.ae_header_id,
+            xll.ae_line_num,
+            xll.party_id,
+            xll.created_by,
+            xll.creation_date
+ from xla_ae_lines xll</query></sql><sql source="Vision" table="ZEN.xla_events"><query>select * from xla_events</query></sql><sql source="Vision" table="ZEN.ap_invoice_distributions_all"><query>select * from ap_invoice_distributions_all</query></sql><sql source="Vision" table="ZEN.ap_invoice_lines_all"><query>select * from ap_invoice_lines_all</query></sql><sql source="Vision" table="ZEN.ap_invoices_all"><query>select * from ap_invoices_all</query></sql><sql source="Vision" table="ZEN.ap_batches_all"><query>select * from ap_batches_all</query></sql><sql source="Vision" table="ZEN.ap_suppliers"><query>select * from ap_suppliers</query></sql><sql source="Vision" table="ZEN.ap_supplier_sites_all"><query>select * from ap_supplier_sites_all</query></sql><sql source="Vision" table="ZEN.hr_locations"><query>select * from hr_locations</query></sql><sql source="Vision" table="ZEN.gl_je_lines"><query>select * from gl_je_lines</query></sql><sql source="Vision" table="ZEN.gl_je_headers"><query>select * from gl_je_headers</query></sql><sql source="Vision" table="ZEN.gl_code_combinations"><query>select * from gl_code_combinations</query></sql><sql source="Vision" table="ZEN.gl_je_batches"><query>select * from gl_je_batches</query></sql><sql source="Vision" table="ZEN.gl_period_statuses"><query>select * from gl_period_statuses</query></sql><sql source="Vision" table="ZEN.gl_import_references"><query>select * from gl_import_references</query></sql><sql source="Vision" table="ZEN.fnd_user"><query>select * from fnd_user</query></sql><sql source="Vision" table="ZEN.ZEN_XLA_QUERY"><query>select * from ZEN_XLA_QUERY</query></sql><sql source="Vision" table="ZEN.po_vendors"><query>select * from po_vendors</query></sql><sql source="Vision" table="ZEN.po_vendor_sites_all"><query>select * from po_vendor_sites_all</query></sql><sql source="Vision" table="ZEN.instance"><query>SELECT   instance_name FROM v$instance</query></sql><sql source="Vision" table="ZEN.ap_checks_all"><query>select * from ap_checks_all</query></sql><sql source="Vision" table="ZEN.ap_invoice_payments_all"><query>select * from ap_invoice_payments_all</query></sql><sql source="Vision" table="ZEN.xla_distribution_links"><query>select * from xla_distribution_links</query></sql><sql source="Vision" table="ZEN.ap_payment_hist_dists"><query>select * from ap_payment_hist_dists</query></sql><sql source="Vision" table="ZEN.ap_payment_history_all"><query>select * from ap_payment_history_all</query></sql><sql source="Vision" table="ZEN.zen_xla_subledger_detail"><query>select * from zen_xla_subledger_detail</query></sql><sql source="Vision" table="ZEN.gl_periods"><query>select * from gl_periods</query></sql><xslx filename="APGL Detail output.xlsx" filenameUpdate="APGL Detail output.xlsx" table="ZEN.REPORT" worksheet="Results"/></datasets></loader>

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><datasource name="HDP" type="sql" xml:base="datasources/109_datasource.xml"><property name="database" value="hive"/><property name="connection" value="jdbc:hive2://76.77.180.158:10000/default"/><property name="user" value="hue"/><property name="password" value="hue"/></datasource>

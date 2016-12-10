@@ -1,0 +1,1 @@
+<?xml version="1.0" ?><datasource name="SalesForce" type="salesforce"><property name="user" value="anush.padmanaban@estuate.com"/><property name="password" value="Unicorn191"/><property name="database" value="salesforce"/><property name="loginUrl" value="https://login.salesforce.com/services/Soap/u/29.0"/><property name="token" value="h7el0vyDj93tDZl0NqieWold"/></datasource>

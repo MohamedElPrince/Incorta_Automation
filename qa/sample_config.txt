@@ -36,11 +36,11 @@ wd_path=/home/user/testing
 
 #LDAP SETUP PROPERTIES (After first = symbol place connection info per ldap property)
 #Default: environment dev 01 with port 389
-ldap.base.provider.url=ldap://dev01.incorta.com:389
-ldap.base.dn=dc=dev01,dc=incorta,dc=com
-ldap.user.mapping.login=uid
-ldap.group.mapping.member=member
-ldap.group.search.filter=(objectClass=groupOfNames)
+ldap_url=ldap://dev01.incorta.com:389
+ldap_base=dc=dev01,dc=incorta,dc=com
+ldap_user_mapping_login=uid
+ldap_group_mapping_member=member
+ldap_group_search_filter=(objectClass=groupOfNames)
 
 #Flag to include loading and validation of schemas? (useful if user only wants to test dashboards)
 #Default: True
@@ -50,6 +50,18 @@ include_schemas=True
 #Default: True
 include_user_testing=True
 
+#Flag to skip LDAP Usage
+#Default: False
+skip_ldap=True
+
 #Flag to skip schema loading phase (options: False / True)
 #Default: False
 skip_data_load=False
+
+#Indicator of what Test Suites / Test Cases to run
+#To run a specific Test Suite: TestSuiteName
+#To run a specific Test Case: TestSuiteName/TestCaseName
+#Seperate every input by comma
+#Example: SuiteA, SuiteB/testcase2
+#Default is set to ALL, which will run all test suites
+run_tests=ALL

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="TestMap" refreshPeriod="-1" schema="TestMap" version="1.0"><datasets><csv charset="UTF-8" dateformat="yyyy-MM-dd" filename="zip_codes_states.csv" incremental="false" sep="," table="TestMap.Cities" timestampFormat="yyyy-MM-dd HH:mm:ss" type="csv"/></datasets></loader>

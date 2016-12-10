@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><schema loader="Person" name="Person" version="0.1"><businessViews><businessView name="New_View"><column label="Prs Id" name="My_Ds_Prs_Id" source="Apple2.PersonAlias.Ds_Prs_Id"/><column label="My  Person" name="MyPerson" source="Apple2.Person.Ds_Prs_Id"/></businessView></businessViews></schema>
