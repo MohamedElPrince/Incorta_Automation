@@ -30,7 +30,6 @@ def load_data(incorta, session, test_case_path, loader_Validation_Path):
     """
     fileFound = False
     schema_file_list, schema_file_dict = schema_file(test_case_path)
-    print schema_file_list, 'list'
     if schema_file_list == None:
         pass
     else:
@@ -51,7 +50,6 @@ def load_data(incorta, session, test_case_path, loader_Validation_Path):
         max_count = 0
         count = 0
         for key, value in schema_names.iteritems():
-            print key, value
             for schemaName, schemaTimer in schema_file_dict.iteritems():
                 if key in schemaName:
                     if schemaTimer < 300:

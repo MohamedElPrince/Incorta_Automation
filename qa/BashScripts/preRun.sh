@@ -9,4 +9,4 @@
 # Automation Test Framework Pre Run Bash Script
 # ************************************************************************
 
-pip install -r ../config/production.txt
+pip install -r "config/production.txt"

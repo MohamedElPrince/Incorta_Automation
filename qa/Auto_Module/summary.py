@@ -24,6 +24,7 @@ def print_table(*time_list, **test_suite_name_dict):
         overall_exception_files = 0
         overall_suc_count = 0
         overall_diff_count = 0
+        case_pass_rate = []
         for case_name, files in values.iteritems():
             total = 0
             exception_files = 0
@@ -43,8 +44,11 @@ def print_table(*time_list, **test_suite_name_dict):
             overall_suc_count += suc_count
             overall_diff_count += diff_count
             detail_table.add_row([suite_name, case_name, suc_count, diff_count, total])
+            case_pass_rate.append((float(suc_count) / (total)) * 100)
         try:
-            pass_rate = ((overall_suc_count) / float(overall_total)) * 100
+            case_sum = sum(case_pass_rate)
+            pass_rate = (float(case_sum) / len(case_pass_rate))
+            pass_rate = round(pass_rate, 2)
             if pass_rate < 100:
                 status = 'Failed'
             else:
@@ -60,7 +64,7 @@ def print_table(*time_list, **test_suite_name_dict):
             writeLogMessage('\nDetailed Summary Shutting Down', mainLogger, DebugLevel.ERROR)
         except:
             print 'Unexpected error:', sys.exc_info()
-            writeLogMessage('Unexpected error: %s' % sys.exc_info(), mainLogger, DebugLevel.ERROR)
+            writeLogMessage('Unexpected error: %s' % str(sys.exc_info()), mainLogger, DebugLevel.ERROR)
             raise
 
     print '\n'
