@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><datasource name="RTA" type="sql" xml:base="datasources/104_datasource.xml"><property name="connection" value="jdbc:oracle:thin:@172.18.125.112:1521:traffic"/><property name="user" value="read_only"/><property name="password" value="read_only123"/><property name="database" value="oracle"/></datasource>

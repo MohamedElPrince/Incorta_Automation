@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="AH_EBS_GL" refreshPeriod="-1" schema="AH_EBS_GL" version="1.0"><datasets><sql fetchsize="500" incremental="true" source="Vision" table="AH_EBS_GL.GL_Code_Combinations" type="sql"><query>select * 
+from GL_CODE_COMBINATIONS</query><queryUpdate>select *  
+from GL_CODE_COMBINATIONS where last_update_date &gt; ?</queryUpdate></sql><sql fetchsize="500" incremental="true" source="Vision" table="AH_EBS_GL.GL_Balances" type="sql"><query>Select  *
+from GL_BALANCES</query><queryUpdate>Select  *
+from GL_BALANCES where last_update_date &gt; ?</queryUpdate></sql><sql fetchsize="300" incremental="true" source="Vision" table="AH_EBS_GL.Ledger" type="sql"><query>select
+*
+from GL_SETS_OF_BOOKS</query><queryUpdate>select
+*
+from GL_SETS_OF_BOOKS  where last_update_date &gt; ?</queryUpdate></sql><sql fetchsize="300" incremental="false" source="Vision" table="AH_EBS_GL.GL_PERIODS" type="sql"><query>SELECT 
+ADJUSTMENT_PERIOD_FLAG,
+ATTRIBUTE1, ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, ATTRIBUTE6, ATTRIBUTE7, ATTRIBUTE8,
+CONTEXT,
+CREATED_BY, CREATION_DATE,
+DESCRIPTION,
+END_DATE,
+ENTERED_PERIOD_NAME,
+LAST_UPDATED_BY, LAST_UPDATE_DATE, LAST_UPDATE_LOGIN,
+PERIOD_NAME,
+PERIOD_NUM,
+PERIOD_SET_NAME,
+PERIOD_TYPE,
+PERIOD_YEAR,
+QUARTER_NUM,
+QUARTER_START_DATE,
+START_DATE,
+YEAR_START_DATE
+FROM GL.GL_PERIODS</query><queryUpdate>SELECT 
+ADJUSTMENT_PERIOD_FLAG,
+ATTRIBUTE1, ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, ATTRIBUTE6, ATTRIBUTE7, ATTRIBUTE8,
+CONTEXT,
+CREATED_BY, CREATION_DATE,
+DESCRIPTION,
+END_DATE,
+ENTERED_PERIOD_NAME,
+LAST_UPDATED_BY, LAST_UPDATE_DATE, LAST_UPDATE_LOGIN,
+PERIOD_NAME,
+PERIOD_NUM,
+PERIOD_SET_NAME,
+PERIOD_TYPE,
+PERIOD_YEAR,
+QUARTER_NUM,
+QUARTER_START_DATE,
+START_DATE,
+YEAR_START_DATE
+FROM GL.GL_PERIODS  where last_udpate_date &gt; ?</queryUpdate></sql></datasets></loader>

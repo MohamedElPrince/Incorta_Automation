@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="EBS_CUST" refreshPeriod="900" schema="EBS_CUST" version="1.0" xml:base="schemas/503_loader.xml"><datasets><csv charset="UTF-8" dateformat="MM/dd/yyyy" filename="Date_US.csv" filenameUpdate="Date_US.csv" sep="," table="EBS_CUST.GL_DATE"/><csv charset="UTF-8" dateformat="MM/dd/yyyy" filename="Date_US.csv" filenameUpdate="Date_US.csv" sep="," table="EBS_CUST.INVOICE_DATE"/><sql source="Vision" table="EBS_CUST.IPM"><query>SELECT DISTINCT
+                  t1.file_name, TO_CHAR (d.pk1_value) pk1_value, t1.url
+             FROM apps.fnd_documents t1, apps.fnd_attached_documents d
+            WHERE     d.document_id = t1.document_id
+                  AND t1.file_name LIKE 'http%'
+                  AND d.entity_name = 'AP_INVOICES'</query></sql></datasets></loader>

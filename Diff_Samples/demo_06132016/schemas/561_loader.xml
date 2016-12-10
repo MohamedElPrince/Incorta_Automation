@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="BENCHMARK" refreshPeriod="-1" schema="BENCHMARK" version="1.0" xml:base="schemas/145_loader.xml"><datasets><xslx filename="Financial_Report_WMT.xlsx" filenameUpdate="Financial_Report_WMT.xlsx" table="BENCHMARK.BALANCE_SHEET" worksheet="Condensed_Consolidated_Balance"/></datasets></loader>

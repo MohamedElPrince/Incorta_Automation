@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="ActivityMonitor" refreshPeriod="3600" schema="ActivityMonitor" version="1.0" xml:base="schemas/143_loader.xml"><datasets><sql source="incorta_metadata" table="ActivityMonitor.Action"><query>SELECT A.ACTIONDATE, A.TENANTID, A.USERID, A.ENTITYID, A.RELATEDENTITYID, A.ENTITYTYPE, A.ACTION, A.NOTES ,
+
+CASE A.ENTITYTYPE
+    WHEN 0 THEN (SELECT NAME FROM USER WHERE ID=A.ENTITYID)
+    WHEN 1 THEN (SELECT NAME FROM `GROUP` WHERE ID=A.ENTITYID)
+    WHEN 2 THEN (SELECT NAME FROM ROLE WHERE ID=A.ENTITYID)
+    WHEN 3 THEN (SELECT NAME FROM FOLDER WHERE ID=A.ENTITYID)
+    WHEN 4 THEN (SELECT NAME FROM DASHBOARD WHERE ID=A.ENTITYID)
+    WHEN 5 THEN (SELECT NAME FROM `SCHEMA` WHERE ID=A.ENTITYID)
+    WHEN 6 THEN (SELECT NAME FROM DATASOURCE WHERE ID=A.ENTITYID)
+    WHEN 7 THEN (SELECT NAME FROM DATAFILE WHERE ID=A.ENTITYID)
+    WHEN 8 THEN (SELECT NAME FROM COMPONENT WHERE ID=A.ENTITYID)
+    WHEN 9 THEN (SELECT NAME FROM SESSION_VARIABLE WHERE ID=A.ENTITYID)
+    ELSE  NULL
+END as 'ENTITY_NAME',
+
+CASE A.ENTITYTYPE
+    WHEN 0 THEN 'User'
+    WHEN 1 THEN 'Group'
+    WHEN 2 THEN 'Role'
+    WHEN 3 THEN 'Folder'
+    WHEN 4 THEN 'Dashboard'
+    WHEN 5 THEN 'Schema'
+    WHEN 6 THEN 'DataSource'
+    WHEN 7 THEN 'DataFile'
+    WHEN 8 THEN 'Component'
+    WHEN 9 THEN 'SessionVariable'
+    ELSE 'Other'
+END as 'ENTITYTYPE_STR',
+
+CASE A.ACTION
+    WHEN 1 THEN 'View'
+    WHEN 2 THEN 'Share'
+    WHEN 4 THEN 'Edit'
+    WHEN 8 THEN 'Create'
+    ELSE 'Other'
+END as 'ACTION_STR',
+
+(SELECT NAME FROM USER WHERE ID=A.USERID) as 'User',
+
+(SELECT NAME FROM TENANT WHERE ID=A.TENANTID) as 'Tenant'
+
+FROM ACTION as A</query></sql><csv charset="UTF-8" dateformat="MM/dd/yy" filename="Date.csv" filenameUpdate="Date.csv" sep="," table="ActivityMonitor.Date"/></datasets></loader>
