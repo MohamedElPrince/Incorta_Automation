@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
 import sys
-from customLogger import summaryLogger, writeLogMessage, DebugLevel
+from customLogger import summaryLogger,mainLogger, writeLogMessage, DebugLevel
 
 
 def print_table(*time_list, **test_suite_name_dict):
@@ -41,7 +41,7 @@ def print_table(*time_list, **test_suite_name_dict):
             overall_diff_count += diff_count
             detail_table.add_row([suite_name, case_name, suc_count, diff_count, total])
         try:
-            pass_rate = (float((overall_suc_count + overall_diff_count + overall_exception_files) / overall_total)) * 100
+            pass_rate = ((overall_suc_count) / float(overall_total)) * 100
             if pass_rate < 100:
                 status = 'Failed'
             else:
@@ -51,8 +51,12 @@ def print_table(*time_list, **test_suite_name_dict):
             print "\nI/O error({0})".format(zerrno.args)
             print '\nZero Division Exception, No Ouput Files found or No tests ran'
             print '\nDetailed Summary Shutting Down'
+            writeLogMessage("\nI/O error({0})".format(zerrno.args), mainLogger, DebugLevel.ERROR)
+            writeLogMessage('\nZero Division Exception, No Ouput Files found or No tests ran', mainLogger, DebugLevel.ERROR)
+            writeLogMessage('\nDetailed Summary Shutting Down', mainLogger, DebugLevel.ERROR)
         except:
-            print "Unexpected error:", sys.exc_info()
+            print 'Unexpected error:', sys.exc_info()
+            writeLogMessage('Unexpected error: %s' % sys.exc_info(), mainLogger, DebugLevel.ERROR)
             raise
 
     print '\n'
