@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><loader name="Effective_Date_POC" refreshPeriod="-1" schema="Effective_Date_POC" version="1.0"><datasets><sql source="Vision" table="Effective_Date_POC.PERSON"><query>select per.person_id
+, per.marital_status
+,per.known_As
+,per.internal_location
+,per.office_number
+,per.mailstop
+,      per.effective_start_date per_start
+,      per.effective_end_date per_end
+From per_all_people_f per
+where   per.person_id in (130, 27299)</query></sql><sql source="Vision" table="Effective_Date_POC.ASSGN"><query>select assgn.assignment_id
+,      assgn.effective_start_date asgn_start
+,      assgn.effective_end_date asgn_end
+,assgn.supervisor_id
+,assgn.organization_id
+,assgn.job_id
+, assgn.person_id
+, assgn.manager_flag
+, assgn.assignment_number
+From per_all_assignments_f assgn
+where assgn.primary_flag = 'Y'
+and assgn.person_id in (130, 27299)</query></sql></datasets></loader>

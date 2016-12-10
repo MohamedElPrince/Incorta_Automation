@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><datasource name="Sample_DB2" type="sql" xml:base="datasources/108_datasource.xml"><property name="database" value="db2"/><property name="connection" value="jdbc:db2://dev01.incorta.com:50000/sample"/><property name="user" value="db2inst1"/><property name="password" value="db2psw0d"/></datasource>

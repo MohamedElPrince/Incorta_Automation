@@ -1,0 +1,20 @@
+# FOLLOW FORMAT PROVIDED IN THIS FILE
+# Name of schemas wanted using exact names or Wildchar search
+schema_name=Clorox
+schema_name=HR
+schema_name=actors
+schema_name=SALES
+schema_name=SONAR
+
+#Name of dashboards wanted using exact names or Wildchar search
+dash_name=temp
+dash_name=TestExport
+
+#Name of datasources wanted
+datasource=Mysql57
+
+#Name of folder wanted
+dash_folder=AH EBS
+dash_folder=Anahit
+
+
