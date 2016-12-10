@@ -1,4 +1,4 @@
-import os, errno, subprocess
+import os, errno, subprocess, logging
 
 """
 Tools and utilities for file and folder manipulation
@@ -85,8 +85,7 @@ def unzip(file_path,):
     subprocess.call(unzip_cmd, shell=True)
 
 def remove_file(file_path):
-    """
-    """
+    """"""
 
     remove_cmd = 'rm ' + file_path
     subprocess.call(remove_cmd, shell=True)

@@ -1,12 +1,14 @@
 # FOLLOW FORMAT PROVIDED IN THIS FILE
-# Name of schemas wanted using exact names
+# Name of schemas wanted using exact names or Wildchar search
 schema_name=Sample_Schema_1
 schema_name=Sample_Schema_2
+schema_name=Sample*
 
-#Name of dashboards wanted using exact names
+#Name of dashboards wanted using exact names or Wildchar search
 dash_name=Sample_Dashboard_1
 dash_name=Sample_Dashboard_2
 dash_name=Sample_Dashboard_3
+dash_name=Sample*
 
 #Name of datasources wanted
 datasource=Sample_datasource

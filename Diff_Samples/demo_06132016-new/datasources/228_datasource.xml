@@ -1,1 +1,0 @@
-<?xml version="1.0" ?><datasource name="afdevTEST" type="sql"><property name="user" value="inc"/><property name="password" value="inc"/><property name="database" value="oracle"/><property name="connection" value="jdbc:oracle:thin:@10.1.10.145:1521:orcl"/></datasource>

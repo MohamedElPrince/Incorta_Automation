@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader description="" name="EBS_XLA" refreshPeriod="300" schema="EBS_XLA" version="1" xml:base="schemas/498_loader.xml"><datasets><sql fetchsize="300" incremental="" source="Vision" table="EBS_XLA.XLA_AE_HEADERS"><query>SELECT * FROM XLA_AE_HEADERS</query></sql><sql fetchsize="300" incremental="" source="Vision" table="EBS_XLA.XLA_AE_LINES"><query>SELECT * FROM XLA_AE_LINES</query></sql><sql fetchsize="300" incremental="" source="Vision" table="EBS_XLA.XLA_DISTRIBUTION_LINKS"><query>SELECT * FROM XLA_DISTRIBUTION_LINKS</query></sql><sql source="Vision" table="EBS_XLA.XLA_TRANSACTION_ENTITIES"><query>SELECT *  FROM XLA_TRANSACTION_ENTITIES</query></sql><sql source="Vision" table="EBS_XLA.XLA_EVENTS"><query>SELECT * FROM XLA_EVENTS</query></sql><sql source="Vision" table="EBS_XLA.XLA_CONTROL_BALANCES"><query>SELECT * FROM XLA_CONTROL_BALANCES</query></sql><sql source="Vision" table="EBS_XLA.IPM"><query>SELECT DISTINCT
-                  t1.file_name, TO_CHAR (d.pk1_value) pk1_value, t1.url
-             FROM apps.fnd_documents t1, apps.fnd_attached_documents d
-            WHERE     d.document_id = t1.document_id
-                  AND t1.file_name LIKE 'http%'
-                  AND d.entity_name = 'AP_INVOICES'</query></sql></datasets></loader>

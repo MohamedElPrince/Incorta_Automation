@@ -1,1 +1,0 @@
-<?xml version="1.0" ?><datasource name="Z_test" type="sql"><property name="user" value="zd"/><property name="password" value="zd"/><property name="database" value="oracle"/><property name="connection" value="jdbc:oracle:thin:@76.77.184.20:1521:CUSTOM01"/></datasource>

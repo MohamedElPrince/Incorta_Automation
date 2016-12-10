@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="TestingHierarchy2" refreshPeriod="-1" schema="TestingHierarchy2" version="1.0"><datasets><xslx filename="Employee_Manager_DSID_List.xlsx" incremental="false" table="TestingHierarchy2.EmployeeHierarchy" type="xlsx" worksheet="Sheet1"/></datasets></loader>
