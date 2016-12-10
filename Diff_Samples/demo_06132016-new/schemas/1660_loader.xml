@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="Schema1" refreshPeriod="-1" schema="Schema1" version="1.0"><datasets><csv charset="UTF-8" dateformat="MM/dd/yy" filename="SALES1.csv" incremental="false" sep="," table="Schema1.sales" timestampFormat="yyyy-MM-dd HH:mm:ss" type="csv"/></datasets></loader>

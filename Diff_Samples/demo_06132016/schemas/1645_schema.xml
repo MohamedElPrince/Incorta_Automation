@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><schema loader="TestCLI" name="TestCLI" version="1.0"><tables><table alias="false" name="RCTA_EMPTY" source="Vision" type="default"><column function="dimension" hide="false" label="Customer Trx Id" name="CUSTOMER_TRX_ID" type="long"/></table></tables></schema>

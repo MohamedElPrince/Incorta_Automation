@@ -1,4 +1,4 @@
-Url,Tenant,User,Password,Test_Suite_Name,Test_Case_Name,Datasource_Name,Schema_Name,Dashboard_Name,Datafile
-http://localhost:8080/incorta,super,super,super,Local_Test2,Test_case_1,Mysql57,SALES_MySQL4,A_06_HIERARCHY Dashboard,audit.csv
-http://localhost:8080/incorta,super,super,super,Local_Test2,Test_case_1,Mysql57,SALES_MySQL4,Interns/Dashboard Applied Filters/Aggregated/Date/DAF(Aggregated)Date !=,audit.csv
-http://dev01.incorta.com:8080/incorta,demo,super@incorta.com,SuperPass123,Local_Test2,Test_case_1,Bill,ZEN,Date Filters,audit.csv
+Url,Tenant,User,Password,Test_Suite_Name,Test_Case_Name,Datasource_Name,Schema_Name,Dashboard_Name
+http://localhost:8080/incorta,demo,super,incorta,Local_Test2,Test_case_1,Mysql57,SALES_MySQL4,A_06_HIERARCHY Dashboard
+http://localhost:8080/incorta,demo,super,incorta,Local_Test2,Test_case_1,Mysql57,SALES_MySQL4,Interns/Dashboard Applied Filters/Aggregated/Date/DAF(Aggregated)Date !=
+http://dev01.incorta.com:8080/incorta,demo,super@incorta.com,SuperPass123,Local_Test2,Test_case_1,sakila,actors,Date Filters

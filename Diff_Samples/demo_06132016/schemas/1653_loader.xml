@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="Date_v3" refreshPeriod="-1" schema="Date_v3" version="1.0"><datasets><csv charset="UTF-8" dateformat="MM/dd/yy" filename="Date_US_v3.csv" incremental="false" sep="," table="Date_v3.Date" timestampFormat="yyyy-MM-dd HH:mm:ss" type="csv"/></datasets></loader>

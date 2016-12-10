@@ -2,20 +2,12 @@ import logging
 from qa.config.settings.initialization_global import *
 
 
-class DebugLevel:
-    # Different levels of logging to pass to writeLogMessage
-    DEBUG = 'debug'
-    INFO = 'info'
-    WARNING = 'warning'
-    ERROR = 'error'
-    CRITICAL = 'critical'
-
-    def __init__(self):
-        self.DEBUG = 'debug'
-        self.INFO = 'info'
-        self.WARNING = 'warning'
-        self.ERROR = 'error'
-        self.CRITICAL = 'critical'
+#Different levels of logging to pass to writeLogMessage
+DEBUG = 'debug'
+INFO = 'info'
+WARNING = 'warning'
+ERROR = 'error'
+CRITICAL = 'critical'
 
 def setup_logger(logger_name, log_file, level=logging.DEBUG):
     l = logging.getLogger(logger_name)
