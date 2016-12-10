@@ -1,14 +1,14 @@
 {
-"type":"lol",
+"type":"layout",
 "comp": [
 {
 "id":"01388574-b0e0-0543-d457-356dc9d93099",
 "type":"table",
-"lol":false,
+"isSampled":false,
 "isAggregated":true,
 "endRow":1000,
 "mergeColumns":true,
-"hahahahahah":["Empl Name","Sales Amount"],
+"labels":["Empl Name","Sales Amount"],
 "rowTypes":["string"],
 "measureTypes":["double"],
 "totalRows":15,
@@ -24,7 +24,7 @@
 "rowNo":0,
 "rs":1,
 "t":[{
-"v":"3339939.00"}]}],
+"v":"320.00"}]}],
 "t":[{
 "v":"320.00"}]},
 {
