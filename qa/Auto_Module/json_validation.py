@@ -1,15 +1,14 @@
 import json, file_tools, os
 from customLogger import mainLogger, writeLogMessage
+
 """
 JSON validation code to comapare two JSON files and return the differences
 Then to create a .suc file is no changes, .diff file if changes found, NF.diff if one file is not found
-<<<<<<< HEAD
 
 TODO
     Need more try/catch handling
-=======
->>>>>>> nadim_dev
 """
+
 
 def getContentFromFile(filepath):
     """
@@ -41,6 +40,7 @@ def printDiffs(x, y):
     if not diff:
         print "both files are identical"
         writeLogMessage('Both Files are Identical', mainLogger, 'info')
+
 
 def get_paths(test_case_path, test_case_path_wd, user):
     """
@@ -85,6 +85,7 @@ def get_paths(test_case_path, test_case_path_wd, user):
                             test_case_wd_json_dict[(os.path.splitext(files_wd)[0])] = file_wd_path
     return test_case_json_dict, test_case_wd_json_dict
 
+
 def validator(import_file_path, export_file_path):
     """
     Function compares two JSON line by line to find differences
@@ -114,6 +115,7 @@ def validator(import_file_path, export_file_path):
     export_diff = set(json_export_list) - set(json_import_list)
     export_diff_bool = set(json_export_list) == set(json_import_list)
     return import_diff, export_diff, import_diff_bool, export_diff_bool
+
 
 def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, user_wd_path, user):
     """
@@ -185,7 +187,6 @@ def validation(test_case_path, test_case_wd_path, output_wd_path, test_suite, us
             try:
                 ndiffFile = open(file_path, 'w')
                 ndiffFile.close()
-            except Exception, e:
-                print "Error Unable to Create NF-DIFF File"
+            except Exception:
                 writeLogMessage("Error Unable to Create NF-DIFF File", mainLogger, 'critical')
-
+                print Exception("Error Unable to Create NF-DIFF File")

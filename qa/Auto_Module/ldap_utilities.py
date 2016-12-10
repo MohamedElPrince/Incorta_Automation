@@ -6,7 +6,6 @@ from customLogger import mainLogger, writeLogMessage
 """
 """
 
-
 def dirExport(incorta_home):
     """
     Exports User / Group Lists from Remote Incorta Environment
@@ -143,14 +142,6 @@ def sync_directory_setup(incorta_home, tenant_name, admin_username, admin_passwo
         print "Creating Backup"
         writeLogMessage("Creating Backup", mainLogger, 'info')
         shutil.copyfile(sync_script_path, sync_script_backup_path)
-
-        # todo removed subprocess thread call for superior pythonic method shutil 10/25/16
-        # backup_cmd = 'cp ' + sync_script_path + ' ' + sync_script_backup_path
-        # subprocess.call(backup_cmd, shell=True)
-        # modified_session_login = 'session=`$incorta_cmd login ' + url + ' ' + login_info + '`'
-        # modified_sync_enable = '$incorta_cmd sync_directory_with_ldap $session true'
-        # todo removed subprocess thread call for superior pythonic method shutil 10/25/16
-
         # Editing Connection Info for input login arguments
         lines = []
         login_info = ' ' + tenant_name + ' ' + admin_username + ' ' + admin_password
@@ -252,7 +243,7 @@ def restart_incorta(incorta_home):
         subprocess.call(incorta_home + '/./start.sh', shell=True)
         time.sleep(7)
         os.chdir(owd)
-    except Exception, e:
+    except Exception:
         print Exception("Unable to restart Incorta instance")
         writeLogMessage('Unable to restart Incorta instance', mainLogger, 'critical')
     except:

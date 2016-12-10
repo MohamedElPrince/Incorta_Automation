@@ -131,7 +131,7 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session):
             Messages for debugging and code completion
     """
     guid_Names = get_guid(test_case_path, user)
-    thread_count = (multiprocessing.cpu_count() / 2) #Use Half of max threads possible
+    thread_count = (multiprocessing.cpu_count() / 2)  # Use Half of max threads possible
     print '------------------Download------------------'
     print '--------------------------------------------'
     print '# of GUID:             ', len(guid_Names)

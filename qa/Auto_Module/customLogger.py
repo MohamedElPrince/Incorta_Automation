@@ -17,17 +17,16 @@ class DebugLevel:
         self.ERROR = 'error'
         self.CRITICAL = 'critical'
 
+
 def setup_logger(logger_name, log_file, level=logging.DEBUG):
     l = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
     fileHandler = logging.FileHandler(log_file, mode='w')
     fileHandler.setFormatter(formatter)
-    #streamHandler = logging.StreamHandler()
-    #streamHandler.setFormatter(formatter)
     l.setLevel(level)
     l.addHandler(fileHandler)
-    #l.addHandler(streamHandler)
     return l
+
 
 def writeLogMessage(logMessage, logObject, level):
     if level == 'debug':
@@ -48,6 +47,7 @@ def shutdown_logger(logObject):
         handler.close()
         logObject.removeHandler(handler)
 
-#Create LoggerObject
+
+# Create LoggerObject
 mainLogger = setup_logger('output', wd_path + os.sep + r'output.log')
 summaryLogger = setup_logger('TEST_RESULTS', wd_path + os.sep + r'TEST_RESULTS.log')

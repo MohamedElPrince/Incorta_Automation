@@ -58,6 +58,6 @@ def create_standard_directory(test_case_path_wd):
     try:
         file_tools.create_directory(test_case_path_wd, 'Output_Files')
         file_tools.create_directory(test_case_path_wd, 'Baseline_Files')
-    except OSError as e:
+    except OSError:
         writeLogMessage('Cant not Create Output/Baseline Folders', mainLogger, 'critical')
-        raise Exception('Can not Create Output/Baseline Folders')
+        raise OSError('Can not Create Output/Baseline Folders')

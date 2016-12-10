@@ -20,14 +20,16 @@ Arguments
 """
 
 Debug = False  # Debug flag for print statements
-Developer_Mode = True #Developer flag for stack trace
+Developer_Mode = True  # Developer flag for stack trace
 
-preCheckScriptPAth = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'automationCheck.sh'
-if os.path.isfile(preCheckScriptPAth):
+preCheckScriptPath = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'automationCheck.sh'
+preRunScriptPath = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'preRun.sh'
+if os.path.isfile(preCheckScriptPath):
     try:
-        os.system(preCheckScriptPAth)
+        os.system(preRunScriptPath)
+        os.system(preCheckScriptPath)
     except Exception:
-        raise Exception("Pre-Check Script Did Not Run")
+        raise Exception("Pre-Check/Run Script Did Not Run")
 
 """
 NEW IMPORTS--Please Retain this order
@@ -44,15 +46,15 @@ except OSError as exc:
         raise
 # Create working directory
 if Developer_Mode == False:
-    from qa.config.settings.exceptionhandler import exceptionHandler    #Import Custom Exception Handler Stack Trace
-    sys.excepthook = exceptionHandler                                   #Enable Custom Exception Handler Stack Trace
+    from qa.config.settings.exceptionhandler import exceptionHandler  # Import Custom Exception Handler Stack Trace
+
+    sys.excepthook = exceptionHandler  # Enable Custom Exception Handler Stack Trace
 
 from Auto_Module.customLogger import *
 
 """
 NEW IMPORTS--Please Retain this order
 """
-
 
 from Auto_Module import *
 import Auto_Module.export
@@ -68,21 +70,10 @@ import Auto_Module.json_extraction
 import Auto_Module.output
 from Auto_Module import summary
 
-
 """
 #################################################### Functions ####################################################
 """
 
-
-# todo - Do Not need Anymore repetition of code present in config/setting/initialization.y
-# todo - Remove on next master branch merge - 10/25/16
-# LDAP Connection Information
-# ldap_url = config_defaults['ldap.base.provider.url']
-# ldap_base = config_defaults['ldap.base.dn']
-# ldap_user_mapping_login = config_defaults['ldap.user.mapping.login']
-# ldap_group_mapping_member = config_defaults['ldap.group.mapping.member']
-# ldap_group_search_filter = config_defaults['ldap.group.search.filter']
-# todo - Remove on next master branch merge - 10/25/16
 
 def incorta_api_import(incorta_home):
     incorta_module = incorta_home.rstrip() + os.sep + "bin".rstrip()
@@ -119,7 +110,8 @@ def grant_user_access(session, user_name, entity_type, entity_name, permission):
     try:
         incorta.grant_user_access(session, user_name, entity_type, entity_name, permission)
         print "Access to ", entity_type, " ", entity_name, " given to ", user_name
-        writeLogMessage("Access to %s %s given to %s" % (entity_type, entity_name, user_name), mainLogger, DebugLevel.INFO)
+        writeLogMessage("Access to %s %s given to %s" % (entity_type, entity_name, user_name), mainLogger,
+                        DebugLevel.INFO)
     except Exception:
         print "Failed to grant user access to", user_name
         writeLogMessage("Failed to grant user access to %s" % user_name, mainLogger, DebugLevel.CRITICAL)
@@ -204,13 +196,11 @@ else:
     print "USER LIST: ", user_list
     writeLogMessage("USER LIST: %s" % user_list, mainLogger, DebugLevel.INFO)
 
-
-
 # Import Files from SourcesMetadata folder
 
 for sources in SourcesMetadata_directories:
     print "\nImporting Current Source: %s" % sources
-    writeLogMessage("\nImporting Current Source: %s" % sources,mainLogger,DebugLevel.INFO)
+    writeLogMessage("\nImporting Current Source: %s" % sources, mainLogger, DebugLevel.INFO)
     curr_source_path = SourcesMetadata_path + os.sep + sources
     sources_subdirectories = Auto_Module.file_tools.get_subdirectories(curr_source_path)
 
@@ -306,7 +296,7 @@ for sub_dir in test_suite_directories:
         # ENTERING TEST CASES
         for dir in test_suite_subdirectories:  # For loop for each test case inside test suite
             print "Current Test Case: ", dir
-            if dir in run_test_case or 'ALL_test_cases' in run_test_case :
+            if dir in run_test_case or 'ALL_test_cases' in run_test_case:
 
                 writeLogMessage("Current Test Case: %s" % dir, mainLogger, DebugLevel.INFO)
 
@@ -475,7 +465,8 @@ for sub_dir in test_suite_directories:
                             writeLogMessage("Logged in user.. %s" % user, mainLogger, DebugLevel.INFO)
                             session_id = session[21:53]
                             csrf_token = session[63:95]
-                            Auto_Module.json_extraction.export_dashboards_json(test_case_path_wd, test_case_path, user, session)
+                            Auto_Module.json_extraction.export_dashboards_json(test_case_path_wd, test_case_path, user,
+                                                                               session)
                             logout(session)
                             time.sleep(2)
                             print "Logged out user.. ", user
@@ -522,9 +513,11 @@ for sub_dir in test_suite_directories:
                     XML_MetaData_Validation_Path, 'dashboard_tenants')
                 meta_data_case_dict['dashboards'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
                     XML_MetaData_Validation_Path, 'dashboards')
-                meta_data_case_dict['schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+                meta_data_case_dict[
+                    'schema_loaders'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
                     XML_MetaData_Validation_Path, 'schema_loaders')
-                meta_data_case_dict['schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
+                meta_data_case_dict[
+                    'schema_tenants'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
                     XML_MetaData_Validation_Path, 'schema_tenants')
                 meta_data_case_dict['schemas'] = Auto_Module.output.meta_data_validation_generate_suc_dif_file_names(
                     XML_MetaData_Validation_Path, 'schemas')

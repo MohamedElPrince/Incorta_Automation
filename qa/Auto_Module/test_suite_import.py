@@ -1,5 +1,6 @@
 import os, file_tools
 from customLogger import mainLogger, writeLogMessage
+
 """
 Imports datafiles / schemas / dashboards to Incorta
 
@@ -8,6 +9,7 @@ TODO
     Need more try/catch handling
 """
 Debug = False  # Debug flag for print statements
+
 
 def import_datasources(incorta, session, test_case_path):
     """
@@ -26,7 +28,8 @@ def import_datasources(incorta, session, test_case_path):
     if Debug == True:
         for checks in upload_check:
             print checks,
-            writeLogMessage(checks,mainLogger,'debug')
+            writeLogMessage(checks, mainLogger, 'debug')
+
 
 def import_datafiles(incorta, session, test_case_path):
     """
@@ -56,6 +59,7 @@ def import_datafiles(incorta, session, test_case_path):
             print checks,
             writeLogMessage(checks, mainLogger, 'debug')
 
+
 def import_schema(incorta, session, test_case_path):
     """
     Function imports all schemas to Incorta from the designated test suite
@@ -83,6 +87,7 @@ def import_schema(incorta, session, test_case_path):
         for checks in upload_check:
             print checks
             writeLogMessage(checks, mainLogger, 'debug')
+
 
 def import_dashboard(incorta, session, test_case_path):
     """

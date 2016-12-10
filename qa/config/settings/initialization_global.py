@@ -1,5 +1,4 @@
 import sys, os, time
-from qa.Auto_Module.file_tools import create_directory
 
 """
 ------------------------------------------Initialization----------------------------------------

@@ -10,6 +10,7 @@ TODO
 
 Debug = False  # Debug flag for print statements
 
+
 def create_directory(path, folder_name):
     """
     Function creates directory
@@ -31,6 +32,7 @@ def create_directory(path, folder_name):
         else:
             raise
 
+
 def get_subdirectories(path):
     """
     Function gets all directories in a path
@@ -49,6 +51,7 @@ def get_subdirectories(path):
             subdirectories.remove(x)
     return subdirectories
 
+
 def get_path(path, directory):
     # Pass in path, name of subdirectory
     """
@@ -64,12 +67,14 @@ def get_path(path, directory):
     appended_path = path + os.sep + directory
     return appended_path
 
+
 def convert_dict_keys_to_list(dictionary):
     """
 	Converts Keys of Dictionary to List
 	"""
     list = dictionary.keys()
     return list
+
 
 def convert_dict_values_to_list(dictionary):
     """
@@ -78,24 +83,23 @@ def convert_dict_values_to_list(dictionary):
     list = dictionary.values()
     return list
 
-def unzip(file_path,):
+
+def unzip(file_path, ):
     """
     """
     unzip_cmd = 'unzip -a ' + file_path
     subprocess.call(unzip_cmd, shell=True)
 
+
 def remove_file(file_path):
     """
     """
-
     remove_cmd = 'rm ' + file_path
     subprocess.call(remove_cmd, shell=True)
+
 
 def move_file(file_path, new_path):
     """
     """
     move_cmd = 'mv ' + file_path + ' ' + new_path
-    subprocess.call(move_cmd,shell=True)
-
-
-
+    subprocess.call(move_cmd, shell=True)
