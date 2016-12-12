@@ -2,7 +2,7 @@ import time
 
 start_time = time.time()
 import sys, os, subprocess, zipfile
-import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from sys import argv
 from shutil import copyfile
 import errno
