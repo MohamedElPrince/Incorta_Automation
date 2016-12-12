@@ -20,7 +20,7 @@ Arguments
 """
 
 Debug = False  # Debug flag for print statements
-Developer_Mode = True  # Developer flag for stack trace
+Developer_Mode = False  # Developer flag for stack trace
 
 preCheckScriptPath = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'automationCheck.sh'
 preRunScriptPath = os.getcwd() + os.sep + 'BashScripts' + os.sep + 'preRun.sh'
