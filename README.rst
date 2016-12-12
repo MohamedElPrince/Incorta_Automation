@@ -27,4 +27,4 @@ Development Team
 * Anahit Sarao anahit.sarao@incorta.com
 * Nadim Sarras nadim.sarras@incorta.com
 
-* version='0.1.0'
+* version='1.0.0'
