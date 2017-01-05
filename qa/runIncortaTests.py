@@ -3,7 +3,7 @@ import time
 start_time = time.time()
 import sys, os, subprocess, zipfile
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from sys import argv
+from sys import argv, platform
 from shutil import copyfile
 import errno
 
@@ -532,6 +532,24 @@ minute_timer_custom = (time.time() - start_time) / 60
 seconds_timer_custom = time.time() - start_time
 time_list = [seconds_timer_custom, minute_timer_custom]
 summary.print_table(*time_list, **test_suite_name_dict)
+
+print '\n'
+if platform == "linux" or platform == "linux2":
+    # linux
+    find_cmd_path2 = 'find ./ -name *.diff'
+    find_cmd_path = 'find ' + wd_path + ' -name \'*.diff\''
+    print find_cmd_path
+    os.system(find_cmd_path)
+elif platform == "darwin":
+    # OS X
+    find_cmd_path2 = 'find ./ -name *.diff'
+    find_cmd_path = 'find ' + wd_path + ' -name \'*.diff\''
+    print find_cmd_path
+    os.system(find_cmd_path)
+elif platform == "win32":
+    # Windows...
+    pass
+
 time.sleep(2)
 shutdown_logger(mainLogger)
 shutdown_logger(summaryLogger)
