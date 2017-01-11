@@ -159,6 +159,7 @@ def export_dashboards_json(test_case_path_wd, test_case_path, user, session):
     for guid in guid_Names:
         payload = {'layout': guid, 'prompts': '', 'outputFormat': 'json', 'odbc': 'false', 'Save': 'View'}
         custom_url = session_dict['server'] + '/service/viewer'
+        #JSON Files are exported to Baseline Path
         json_path = test_case_path_wd + os.sep + 'Baseline_Files' + os.sep + user + os.sep + guid + '.json'
 
         payload_dict[guid] = [custom_url, payload, header_strike, cookies,

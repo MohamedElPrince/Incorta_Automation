@@ -1,0 +1,29 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"0fbed834-27d5-9942-35d1-684972ade33c",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Empl Id","Emp Manager","Organization Id"],
+"rowTypes":[],
+"measureTypes":["integer","integer","integer"],
+"totalRows":2,
+"complete":true,
+"rowTree":{
+"r":[[{
+"v":"130"},
+{
+"v":"100"},
+{
+"v":"10"}],
+[{
+"v":"160"},
+{
+"v":"130"},
+{
+"v":"20"}]]}}]
+}
