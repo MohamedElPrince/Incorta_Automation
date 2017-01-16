@@ -1,0 +1,470 @@
+{
+"type":"layout",
+"comp": [
+{
+"id":"01388574-b0e0-0543-d457-356dc9d93099",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":true,
+"labels":["Empl Name","Sales Amount"],
+"rowTypes":["string"],
+"measureTypes":["double"],
+"totalRows":15,
+"complete":true,
+"rowTree":{
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"320.00"}]}],
+"t":[{
+"v":"320.00"}]},
+{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":13,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"4,900.00"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"5,400.00"}]},
+{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":6,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Stewart",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"240.00"}]}],
+"t":[{
+"v":"240.00"}]},
+{
+"v":"John Stewart",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Halliday",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"500.00"}]}],
+"t":[{
+"v":"740.00"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Direct Reports",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Elisabeth Smith",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"550.00"}]}],
+"t":[{
+"v":"6,690.00"}]}]}},
+{
+"id":"cfdb409f-2726-655b-29a6-217db4777bf9",
+"type":"table",
+"isSampled":false,
+"isAggregated":false,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Empl Name","Empl Id","Emp Manager"],
+"rowTypes":[],
+"measureTypes":["string","integer","integer"],
+"totalRows":8,
+"complete":true,
+"rowTree":{
+"r":[[{
+"v":"John Stewart"},
+{
+"v":"100"},
+{
+"v":"200"}],
+[{
+"v":"Mike Stevens"},
+{
+"v":"110"},
+{
+"v":"300"}],
+[{
+"v":"John Halliday"},
+{
+"v":"130"},
+{
+"v":"100"}],
+[{
+"v":"Elisabeth Smith"},
+{
+"v":"140"},
+{
+"v":"110"}],
+[{
+"v":"Michael Johnson"},
+{
+"v":"200"},
+{
+"v":"300"}],
+[{
+"v":"Hillary Stevens"},
+{
+"v":"300"},
+{
+"v":""}],
+[{
+"v":"Steven Colbert"},
+{
+"v":"150"},
+{
+"v":"140"}],
+[{
+"v":"Adam Ferrari"},
+{
+"v":"160"},
+{
+"v":"130"}]]}},
+{
+"id":"f98b1dd9-8c66-61c2-846e-75821dbe0473",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Empl Id","Empl Id","Empl Id","Emp Manager"],
+"rowTypes":["integer","integer","integer"],
+"measureTypes":["double"],
+"totalRows":5,
+"complete":true,
+"rowTree":{
+"g":[{
+"v":"300",
+"rowNo":0,
+"rs":5,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":1,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"t":[{
+"v":"1"}]}]},
+{
+"v":"110",
+"rowNo":1,
+"rs":2,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"t":[{
+"v":"1"}]},
+{
+"v":"140",
+"rowNo":2,
+"rs":1,
+"t":[{
+"v":"2"}]}]},
+{
+"v":"200",
+"rowNo":1,
+"rs":2,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"t":[{
+"v":"1"}]},
+{
+"v":"100",
+"rowNo":2,
+"rs":1,
+"t":[{
+"v":"3"}]}]}]}]}},
+{
+"id":"4ab99484-4922-e436-3eeb-0580db577211",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":false,
+"labels":["Empl Name 0","Empl Name 1","Empl Name 2","Empl Name 3","Sales Amount"],
+"rowTypes":["string","string","string","string"],
+"measureTypes":["double"],
+"totalRows":6,
+"complete":true,
+"rowTree":{
+"g":[{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":6,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":1,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"320.00"}]}]}]},
+{
+"v":"Michael Johnson",
+"rowNo":1,
+"rs":3,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"4,900.00"}]}]},
+{
+"v":"John Stewart",
+"rowNo":2,
+"rs":2,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"240.00"}]},
+{
+"v":"John Halliday",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"500.00"}]}]}]},
+{
+"v":"Mike Stevens",
+"rowNo":1,
+"rs":2,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"500.00"}]}]},
+{
+"v":"Elisabeth Smith",
+"rowNo":2,
+"rs":1,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":3,
+"rs":1,
+"t":[{
+"v":"550.00"}]}]}]}]}]}},
+{
+"id":"9249a9d6-0c20-0a5a-8250-feb05267dd43",
+"type":"table",
+"isSampled":false,
+"isAggregated":true,
+"endRow":1000,
+"mergeColumns":true,
+"labels":["Empl Name","Empl Id"],
+"rowTypes":["string"],
+"measureTypes":["double"],
+"totalRows":20,
+"complete":true,
+"rowTree":{
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"1"}]},
+{
+"v":"Hillary Stevens",
+"rowNo":0,
+"rs":18,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"2"}]},
+{
+"v":"Michael Johnson",
+"rowNo":0,
+"rs":8,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Stewart",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"1"}]},
+{
+"v":"John Stewart",
+"rowNo":0,
+"rs":5,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"John Halliday",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"1"}]},
+{
+"v":"John Halliday",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"2"}]}],
+"t":[{
+"v":"3"}]},
+{
+"v":"Mike Stevens",
+"rowNo":0,
+"rs":6,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Elisabeth Smith",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"1"}]},
+{
+"v":"Elisabeth Smith",
+"rowNo":0,
+"rs":3,
+"g":[{
+"v":"",
+"rv":"",
+"rowNo":0,
+"rs":2,
+"g":[{
+"v":"Steven Colbert",
+"rowNo":0,
+"rs":1,
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"1"}]}],
+"t":[{
+"v":"2"}]}],
+"t":[{
+"v":"7"}]}]}}]
+}
