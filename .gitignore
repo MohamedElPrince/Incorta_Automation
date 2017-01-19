@@ -58,4 +58,3 @@ target/
 .idea
 config.txt
 *.logs
-/testing_evn/
