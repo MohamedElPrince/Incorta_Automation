@@ -1,0 +1,1 @@
+Currently Implementing REST API Call through Zenpy to automate extraction of ZenDesk tickets
