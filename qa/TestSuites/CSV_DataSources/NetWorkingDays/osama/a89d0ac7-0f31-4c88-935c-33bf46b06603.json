@@ -10,7 +10,7 @@
 "mergeColumns":false,
 "labels":["Case Number","Open Date","Close Date","Days to Close","Working Days to Close"],
 "rowTypes":[],
-"measureTypes":["integer","date","date","double","double"],
+"measureTypes":["integer","date","date","integer","double"],
 "totalRows":5,
 "complete":true,
 "rowTree":{
