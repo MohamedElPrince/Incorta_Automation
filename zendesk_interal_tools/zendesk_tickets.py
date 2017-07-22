@@ -59,9 +59,6 @@ class ZendeskUser(object):
             data = response.json()
             self.user_total = data['count']
             self.parser(data)
-            file_name = 'export' + str(count) + '.json'
-            with open(file_name,'w') as exp:
-                json.dump(data,exp)
             self.new_url = data['next_page']
             print self.new_url
             if response.status_code != 200 or response.status_code != 304:
@@ -88,7 +85,7 @@ class ZendeskUser(object):
                 time.sleep(int(response.headers['retry-after']))
                 continue
             if response.status_code != 404:
-                file_name = str(counter)+'.json'
+                file_name = str(self.user_id[counter] +'.json')
                 file_path = os.path.join(path,file_name)
                 with open(file_path,'w') as output_file:
                     json.dump(response.json(), output_file)
