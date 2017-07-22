@@ -1,0 +1,32 @@
+{ "avroSchema": [
+    { "type": "record", "name": "ticket.satisfaction_rating", "fields": [
+        { "name": "score", "type": "string"}
+    ]},
+    { "type": "record", "name": "ticket", "fields": [
+        { "name": "updated_at", "type": "string"},
+        { "name": "submitter_id", "type": "long"},
+        { "name": "assignee_id", "type": "string"},
+        { "name": "brand_id", "type": "long"},
+        { "name": "id", "type": "long"},
+        { "name": "subject", "type": "string"},
+        { "name": "collaborator_ids", "type": { "type": "array", "items": "long"}},
+        { "name": "priority", "type": "string"},
+        { "name": "satisfaction_rating", "type": "ticket.satisfaction_rating"},
+        { "name": "type", "type": "string"},
+        { "name": "status", "type": "string"},
+        { "name": "description", "type": "string"},
+        { "name": "tags", "type": { "type": "array", "items": "string"}},
+        { "name": "forum_topic_id", "type": "string"},
+        { "name": "organization_id", "type": "long"},
+        { "name": "due_at", "type": "string"},
+        { "name": "is_public", "type": "boolean"},
+        { "name": "requester_id", "type": "long"},
+        { "name": "recipient", "type": "string"},
+        { "name": "problem_id", "type": "string"},
+        { "name": "url", "type": "string"},
+        { "name": "created_at", "type": "string"},
+        { "name": "raw_subject", "type": "string"},
+        { "name": "group_id", "type": "long"},
+        { "name": "external_id", "type": "string"}
+    ]}
+], "annotations": []}
