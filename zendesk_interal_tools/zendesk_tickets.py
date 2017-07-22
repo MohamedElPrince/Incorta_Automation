@@ -85,7 +85,7 @@ class ZendeskUser(object):
                 time.sleep(int(response.headers['retry-after']))
                 continue
             if response.status_code != 404:
-                file_name = str(self.user_id[counter] +'.json')
+                file_name = str(str(self.user_id[counter]) + '.json')
                 file_path = os.path.join(path,file_name)
                 with open(file_path,'w') as output_file:
                     json.dump(response.json(), output_file)
