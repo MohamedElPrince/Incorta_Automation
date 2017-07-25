@@ -1,0 +1,20 @@
+{ "avroSchema": [ 
+    { "type": "record", "name": "organization.organization_fields", "fields": [ 
+    ]},
+    { "type": "record", "name": "organization", "fields": [ 
+        { "name": "url", "type": "string"},
+        { "name": "id", "type": "long"},
+        { "name": "name", "type": "string"},
+        { "name": "shared_tickets", "type": "boolean"},
+        { "name": "shared_comments", "type": "boolean"},
+        { "name": "external_id", "type": "string"},
+        { "name": "created_at", "type": "string"},
+        { "name": "updated_at", "type": "string"},
+        { "name": "domain_names", "type": { "type": "array", "items": "string"}},
+        { "name": "details", "type": "string"},
+        { "name": "notes", "type": "string"},
+        { "name": "group_id", "type": "string"},
+        { "name": "tags", "type": { "type": "array", "items": "string"}},
+        { "name": "organization_fields", "type": "organization.organization_fields"}
+    ]}
+], "annotations": []}
