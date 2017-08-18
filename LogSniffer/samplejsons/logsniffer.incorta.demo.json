@@ -1,0 +1,28 @@
+{
+    "@type": "RollingLogsSourceDynamicLiveName",
+    "id": 0,
+    "name": "incorta demo logs",
+    "pastLogsType": "NAME",
+    "pattern": "../server/logs/incorta/demo/*.log",
+    "reader": {
+        "fieldTypes": {},
+        "filters": [],
+        "supportedSeverities": [],
+        "targetReader": {
+            "@type": "GrokTextReader",
+            "charset": "UTF-8",
+            "fieldTypes": {
+                "lf_raw": "STRING"
+            },
+            "grokBean": {
+                "caseInsensitive": true,
+                "dotAll": true,
+                "multiLine": true,
+                "pattern": "(?<Line>.+)",
+                "subStringSearch": false
+            },
+            "overflowAttribute": null
+        }
+    },
+    "uiSettings": {}
+}
