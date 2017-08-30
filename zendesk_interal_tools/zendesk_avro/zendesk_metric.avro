@@ -1,0 +1,50 @@
+{ "avroSchema": [ 
+    { "type": "record", "name": "ticket_metric.full_resolution_time_in_minutes", "fields": [ 
+        { "name": "calendar", "type": "string"},
+        { "name": "business", "type": "string"}
+    ]},
+    { "type": "record", "name": "ticket_metric.on_hold_time_in_minutes", "fields": [ 
+        { "name": "calendar", "type": "long"},
+        { "name": "business", "type": "long"}
+    ]},
+    { "type": "record", "name": "ticket_metric.first_resolution_time_in_minutes", "fields": [ 
+        { "name": "calendar", "type": "string"},
+        { "name": "business", "type": "string"}
+    ]},
+    { "type": "record", "name": "ticket_metric.reply_time_in_minutes", "fields": [ 
+        { "name": "calendar", "type": "long"},
+        { "name": "business", "type": "long"}
+    ]},
+    { "type": "record", "name": "ticket_metric.requester_wait_time_in_minutes", "fields": [ 
+        { "name": "calendar", "type": "long"},
+        { "name": "business", "type": "long"}
+    ]},
+    { "type": "record", "name": "ticket_metric.agent_wait_time_in_minutes", "fields": [ 
+        { "name": "calendar", "type": "long"},
+        { "name": "business", "type": "long"}
+    ]},
+    { "type": "record", "name": "ticket_metric", "fields": [ 
+        { "name": "updated_at", "type": "string"},
+        { "name": "solved_at", "type": "string"},
+        { "name": "replies", "type": "long"},
+        { "name": "id", "type": "long"},
+        { "name": "full_resolution_time_in_minutes", "type": "ticket_metric.full_resolution_time_in_minutes"},
+        { "name": "on_hold_time_in_minutes", "type": "ticket_metric.on_hold_time_in_minutes"},
+        { "name": "status_updated_at", "type": "string"},
+        { "name": "assignee_stations", "type": "long"},
+        { "name": "group_stations", "type": "long"},
+        { "name": "requester_updated_at", "type": "string"},
+        { "name": "initially_assigned_at", "type": "string"},
+        { "name": "ticket_id", "type": "long"},
+        { "name": "first_resolution_time_in_minutes", "type": "ticket_metric.first_resolution_time_in_minutes"},
+        { "name": "assigned_at", "type": "string"},
+        { "name": "latest_comment_added_at", "type": "string"},
+        { "name": "reply_time_in_minutes", "type": "ticket_metric.reply_time_in_minutes"},
+        { "name": "url", "type": "string"},
+        { "name": "created_at", "type": "string"},
+        { "name": "assignee_updated_at", "type": "string"},
+        { "name": "reopens", "type": "long"},
+        { "name": "requester_wait_time_in_minutes", "type": "ticket_metric.requester_wait_time_in_minutes"},
+        { "name": "agent_wait_time_in_minutes", "type": "ticket_metric.agent_wait_time_in_minutes"}
+    ]}
+], "annotations": []}
