@@ -19,7 +19,7 @@ def parse_logfile(file, schema_name):
     """
     with open(file) as fp2:
         content = fp2.read()
-    print("There are {}, Schemas Loaded in {}").format(content.count("Finished"), file)  # Extra detail -- Fun
+    # print("There are {}, Schemas Loaded in {}").format(content.count("Finished"), file)  # Extra detail -- Fun
 
     data = []
     parsed_data = []
@@ -61,7 +61,7 @@ def main():
                         required=True)
     parser.add_argument('-s', '--schema', help='Schema name. \nSample Input: jira-incremental', required=True)
     args = parser.parse_args()
-    print('Current Arguments: {}').format(args)
+    # print('Current Arguments: {0:2}').format(args)
     check_logfile(args.file)
     parse_logfile(args.file, args.schema)
 
