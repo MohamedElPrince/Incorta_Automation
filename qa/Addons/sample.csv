@@ -1,3 +1,0 @@
-Url,Tenant,User,Password,Test_Suite_Name,Test_Case_Name,Datasource_Name,Schema_Name,Dashboard_Name,Datafile
-http://localhost:8080/incorta,demo,super,super,Local_Test,Test_case_1,Mysql57,Schema_1,Dashboard_Name_1,audit.csv
-http://dev01.incorta.com:8080/incorta,demo,super@incorta.com,SuperPass123,Dev01_Test,Test_case_2,Mysql57,Schema_2,Path/to/Dashboard_Name_2,date.csv

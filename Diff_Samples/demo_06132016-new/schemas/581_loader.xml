@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="EBS_MFG" refreshPeriod="300" schema="EBS_MFG" version="1.0" xml:base="schemas/523_loader.xml"><datasets><sql source="Vision" table="EBS_MFG.ML_WR_STATUS"><query>select * from MFG_LOOKUPS
-where lookup_type = 'WIP_EAM_WORK_REQ_STATUS'</query></sql><sql source="Vision" table="EBS_MFG.ML_WR_PRIORITY"><query>select * from MFG_LOOKUPS
-where lookup_type = 'WIP_EAM_ACTIVITY_PRIORITY'</query></sql><sql source="Vision" table="EBS_MFG.ML_WR_TYPE"><query>select * from MFG_LOOKUPS
-where lookup_type = 'WIP_EAM_WORK_REQ_TYPE'</query></sql></datasets></loader>

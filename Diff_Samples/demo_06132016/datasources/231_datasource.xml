@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><datasource name="localdb" type="sql" xml:base="datasources/164_datasource.xml"><property name="database" value="oracle"/><property name="connection" value="jdbc:oracle:thin:@incortaeg.ddns.net:1521:xe"/><property name="user" value="incorta"/><property name="password" value="incorta"/></datasource>

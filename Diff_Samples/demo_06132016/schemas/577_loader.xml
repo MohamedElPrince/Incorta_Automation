@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="EBS_HR_Extension" refreshPeriod="300" schema="EBS_HR_Extension" version="1.0" xml:base="schemas/506_loader.xml"><datasets><csv charset="UTF-8" filename="OPERATING_UNIT_ATTRIBUTE.csv" filenameUpdate="OPERATING_UNIT_ATTRIBUTE.csv" sep="," table="EBS_HR_Extension.OPERATING_UNIT_EX"/></datasets></loader>

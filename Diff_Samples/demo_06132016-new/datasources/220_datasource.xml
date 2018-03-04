@@ -1,1 +1,0 @@
-<?xml version="1.0" ?><datasource name="Bill" type="sql"><property name="database" value="oracle"/><property name="connection" value="jdbc:oracle:thin:@10.1.10.132:1521:CUSTOM01"/><property name="user" value="zd"/><property name="password" value="zd"/></datasource>

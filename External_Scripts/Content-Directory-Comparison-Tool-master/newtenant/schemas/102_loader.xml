@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="A_06_HIERARCHY" refreshPeriod="-1" schema="A_06_HIERARCHY" version="1.0" xml:base="schemas/118_loader.xml"><datasets><csv charset="UTF-8" dateformat="MM/dd/yyyy" filename="06_employee_hierarchy.csv" incremental="false" sep="," table="A_06_HIERARCHY.employee" timestampFormat="yyyy-MM-dd HH:mm:ss" type="csv"/></datasets></loader>

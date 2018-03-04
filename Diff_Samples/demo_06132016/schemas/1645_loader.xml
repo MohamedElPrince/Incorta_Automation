@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="TestCLI" refreshPeriod="-1" schema="TestCLI" version="1.0"><datasets><sql incremental="false" source="Vision" table="TestCLI.RCTA_EMPTY" type="sql"><query>select customer_trx_id from rcta_empty</query></sql></datasets></loader>
