@@ -1,4 +1,4 @@
-package pageObjectModels.modules.content;
+package java.pageObjectModels.modules.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

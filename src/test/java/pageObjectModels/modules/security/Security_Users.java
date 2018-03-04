@@ -1,4 +1,4 @@
-package pageObjectModels.modules.security;
+package java.pageObjectModels.modules.security;
 
 import java.io.File;
 

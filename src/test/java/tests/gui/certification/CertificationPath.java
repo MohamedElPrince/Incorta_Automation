@@ -1,4 +1,4 @@
-package tests.gui.certification;
+package java.tests.gui.certification;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -13,17 +13,17 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.modules.content.Content_AllContent;
-import pageObjectModels.modules.data.Data_DataFiles;
-import pageObjectModels.modules.data.Data_DataSources;
-import pageObjectModels.modules.login.Login_Login;
-import pageObjectModels.modules.login.Login_Logout;
-import pageObjectModels.modules.main.Main_Skeleton;
-import pageObjectModels.modules.schemas.Schemas_SchemaList;
-import pageObjectModels.modules.schemas.Schemas_SchemaList_SchemaView;
-import pageObjectModels.modules.security.Security_Groups;
-import pageObjectModels.modules.security.Security_Groups_Group;
-import pageObjectModels.modules.security.Security_Users;
+import java.pageObjectModels.modules.content.Content_AllContent;
+import java.pageObjectModels.modules.data.Data_DataFiles;
+import java.pageObjectModels.modules.data.Data_DataSources;
+import java.pageObjectModels.modules.login.Login_Login;
+import java.pageObjectModels.modules.login.Login_Logout;
+import java.pageObjectModels.modules.main.Main_Skeleton;
+import java.pageObjectModels.modules.schemas.Schemas_SchemaList;
+import java.pageObjectModels.modules.schemas.Schemas_SchemaList_SchemaView;
+import java.pageObjectModels.modules.security.Security_Groups;
+import java.pageObjectModels.modules.security.Security_Groups_Group;
+import java.pageObjectModels.modules.security.Security_Users;
 
 @Epic("incorta Certification Path.")
 public class CertificationPath {
