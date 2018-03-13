@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><loader name="opsmaster" refreshPeriod="-1" schema="opsmaster" version="1.0" xml:base="schemas/349_loader.xml"><datasets><xslx filename="Ops_Master_Lu.xlsx" filenameUpdate="Ops_Master_Lu.xlsx" table="opsmaster.ops" worksheet="master"/></datasets></loader>

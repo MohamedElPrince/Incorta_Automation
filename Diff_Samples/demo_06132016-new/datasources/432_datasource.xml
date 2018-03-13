@@ -1,1 +1,0 @@
-<?xml version="1.0" ?><datasource name="vision2" type="sql"><property name="database" value="oracle"/><property name="connection" value="jdbc:oracle:thin:@ebs02.incorta.com:1521:VISION"/><property name="user" value="apps"/><property name="connectionPool" value="30"/><property name="password" value="apps"/></datasource>
