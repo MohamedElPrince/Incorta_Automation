@@ -113,7 +113,7 @@
     <testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
     <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
     <allure.version>2.6.0</allure.version>
-    <selenium.version>3.9.1</selenium.version>
+    <selenium.version>3.11.0</selenium.version>
     <testng.version>6.14.2</testng.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <executionAddress>local</executionAddress>

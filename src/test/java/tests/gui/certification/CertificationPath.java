@@ -193,10 +193,9 @@ public class CertificationPath {
 		dataFilesPage.Assert_nameIsDisplayed(uploadedDataFileName);
 	}
 
-	@Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods = {
-			"loginUsingNewlyCreatedUserAccount" })
 	// @Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods
-	// = {"loginUsingAdmin" })
+	// = { "loginUsingNewlyCreatedUserAccount" })
+	@Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods = { "loginUsingAdmin" })
 	@Description("When I navigate to the \"Schemas\" page, And click add, And create a new schema, And navigate back to the schemas page, Then the newly created schema name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createSchema() {

@@ -24,7 +24,7 @@ public class Main_Skeleton {
 	// header_actions_button
 	// header_actionsMenuItem_link
 	By header_add_button = By
-			.xpath("//div[contains(@class,'explorerAdd')]//img[contains(@src,'plus_icon')]//..//..//a");
+			.xpath("//div[contains(@class,'explorerAdd')]//img[contains(@src,'plus_icon')]");
 	By header_addMenuItem_link;
 	By header_user_button = By.className("dropdown-toggle");
 	By header_userMenuItem_link;
