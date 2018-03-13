@@ -10,7 +10,7 @@
 		<incortaRoot>http://qa.incorta.com:6080/incorta/#/</incortaRoot>
 		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
-		<!-- Acceptable Values: Windows-64 | Linux-64 -->
+		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge -->
