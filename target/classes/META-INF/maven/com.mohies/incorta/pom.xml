@@ -47,6 +47,13 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.mohies</groupId>
+			<artifactId>SHAFT_ENGINE</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/${shaft_engine.version}.jar</systemPath>
+		</dependency>
+		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
@@ -131,7 +138,6 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-
 			</plugins>
 		</pluginManagement>
 	</build>
