@@ -3,31 +3,17 @@
   [
     {
       "browserName": "firefox",
-	  "platform": "WINDOWS",
+	  "platform": "LINUX",
       "maxInstances": 4,
       "seleniumProtocol": "WebDriver",
-	  "webdriver.gecko.driver": "geckodriver.exe"
+	  "webdriver.gecko.driver": "/linux-64/geckodriver"
     },
     {
       "browserName": "chrome",
-	  "platform": "WINDOWS",
+	  "platform": "LINUX",
       "maxInstances": 4,
       "seleniumProtocol": "WebDriver",
-	  "webdriver.chrome.driver": "chromedriver.exe"
-    },
-    {
-      "browserName": "internet explorer",
-	  "platform": "WINDOWS",
-      "maxInstances": 1,
-      "seleniumProtocol": "WebDriver",
-	  "webdriver.ie.driver": "IEDriverServer.exe"
-    },
-    {
-      "browserName": "MicrosoftEdge",
-	  "platform": "WINDOWS",
-      "maxInstances": 1,
-      "seleniumProtocol": "WebDriver",
-	  "webdriver.edge.driver": "MicrosoftWebDriver.exe"
+	  "webdriver.chrome.driver": "/linux-64/chromedriver"
     }
   ],
   "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
