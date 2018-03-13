@@ -1,4 +1,4 @@
-package java.pageObjectModels.modules.data;
+package pageObjectModels.modules.data;
 
 import java.io.File;
 

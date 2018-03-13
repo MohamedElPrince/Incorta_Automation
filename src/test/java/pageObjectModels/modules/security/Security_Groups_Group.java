@@ -1,4 +1,4 @@
-package java.pageObjectModels.modules.security;
+package pageObjectModels.modules.security;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

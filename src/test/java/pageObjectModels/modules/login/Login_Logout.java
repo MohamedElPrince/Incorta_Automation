@@ -1,4 +1,4 @@
-package java.pageObjectModels.modules.login;
+package pageObjectModels.modules.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
