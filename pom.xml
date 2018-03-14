@@ -115,13 +115,6 @@
 						<encoding>UTF-8</encoding>
 						<inputEncoding>UTF-8</inputEncoding>
 						<outputEncoding>UTF-8</outputEncoding>
-						<properties>
-							<property>
-								<!-- To set reporting to the Most Detailed level -->
-								<name>surefire.testng.verbose</name>
-								<value>10</value>
-							</property>
-						</properties>
 						<argLine>
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>

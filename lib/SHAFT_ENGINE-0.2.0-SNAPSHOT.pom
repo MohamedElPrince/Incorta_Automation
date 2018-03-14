@@ -44,12 +44,6 @@
             <encoding>UTF-8</encoding>
             <inputEncoding>UTF-8</inputEncoding>
             <outputEncoding>UTF-8</outputEncoding>
-            <properties>
-              <property>
-                <name>surefire.testng.verbose</name>
-                <value>10</value>
-              </property>
-            </properties>
             <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
           </configuration>
         </plugin>
@@ -117,7 +111,7 @@
     <testng.version>6.14.2</testng.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <executionAddress>local</executionAddress>
-    <testSuite.name>testSuite03</testSuite.name>
+    <testSuite.name>testSuite01</testSuite.name>
     <org.slf4j.version>1.7.25</org.slf4j.version>
     <maven-shade-plugin.version>3.1.0</maven-shade-plugin.version>
     <rest-assured.version>3.0.7</rest-assured.version>
