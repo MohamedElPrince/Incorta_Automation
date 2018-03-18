@@ -73,7 +73,7 @@ public class Data_DataFiles {
 
 		FileManager.copyFile(dataFilePath, tempFilePath);
 
-		ElementActions.type(driver, popup_uploadNewDataFile_selectFromYourPC_textBox, tempFilePath);
+		ElementActions.typeFileLocationForUpload(driver, popup_uploadNewDataFile_selectFromYourPC_textBox, tempFilePath);
 
 		FileManager.deleteFile(tempFilePath);
 

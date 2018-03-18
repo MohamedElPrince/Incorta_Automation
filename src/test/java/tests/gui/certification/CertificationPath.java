@@ -21,6 +21,7 @@ import pageObjectModels.modules.login.Login_Logout;
 import pageObjectModels.modules.main.Main_Skeleton;
 import pageObjectModels.modules.schemas.Schemas_SchemaList;
 import pageObjectModels.modules.schemas.Schemas_SchemaList_SchemaView;
+import pageObjectModels.modules.schemas.Schemas_SchemaList_Table;
 import pageObjectModels.modules.security.Security_Groups;
 import pageObjectModels.modules.security.Security_Groups_Group;
 import pageObjectModels.modules.security.Security_Users;
@@ -43,13 +44,15 @@ public class CertificationPath {
 	Data_DataFiles dataFilesPage;
 	Schemas_SchemaList schemasPage;
 	Schemas_SchemaList_SchemaView schemasViewPage;
+	Schemas_SchemaList_Table schemaTablePage;
 
 	// Declaring public variables that will be shared between tests
 	String[] newUserData; // username, password, displayname
 	String newGroupName;
 	String newDataSourceName;
-	String uploadedDataFileName;
+	String uploadedDataFileName, uploadedDataFileExtension;
 	String newSchemaName;
+	String newDataSourceTableName, newDataFileTableName;
 
 	@Test(priority = 1, description = "TC001 - Login using Admin Account.")
 	@Description("When I navigate to the login page, And I login using valid credentials Then all content tab is selected.")
@@ -155,8 +158,6 @@ public class CertificationPath {
 
 	@Test(priority = 8, description = "TC008 - Create DataSource.", dependsOnMethods = {
 			"loginUsingNewlyCreatedUserAccount" })
-	// @Test(priority = 8, description = "TC008 - Create DataSource.",
-	// dependsOnMethods = { "loginUsingAdmin" })
 	@Description("When I navigate to the DataSources page, And click add, And create a new dataSource, Then dataSource creation popup will be displayed, And dataSource name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createDatasource() {
@@ -174,8 +175,6 @@ public class CertificationPath {
 
 	@Test(priority = 9, description = "TC009 - Upload DataFile.", dependsOnMethods = {
 			"loginUsingNewlyCreatedUserAccount" })
-	// @Test(priority = 9, description = "TC009 - Upload DataFile.",
-	// dependsOnMethods = { "loginUsingAdmin" })
 	@Description("When I navigate to the \"DataFiles\" page, And click add, And upload a new dataFile, Then dataFile upload success message will be displayed, And dataFile name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void uploadDataFile() {
@@ -186,6 +185,7 @@ public class CertificationPath {
 		mainPage = new Main_Skeleton(driver);
 		mainPage.Click_add();
 
+		uploadedDataFileExtension = testDataReader.getCellData("DataFileExtension");
 		uploadedDataFileName = dataFilesPage.AddDataFile(testDataReader.getCellData("DataFileName"),
 				testDataReader.getCellData("DataFileExtension"));
 
@@ -193,25 +193,98 @@ public class CertificationPath {
 		dataFilesPage.Assert_nameIsDisplayed(uploadedDataFileName);
 	}
 
-	// @Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods
-	// = { "loginUsingNewlyCreatedUserAccount" })
-	@Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods = { "loginUsingAdmin" })
+	@Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount" })
 	@Description("When I navigate to the \"Schemas\" page, And click add, And create a new schema, And navigate back to the schemas page, Then the newly created schema name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createSchema() {
-
 		schemasPage = new Schemas_SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaListTabIsSelected();
 
 		mainPage = new Main_Skeleton(driver);
 		mainPage.Click_add();
-		mainPage.Select_fromAddMenu("Create Schema");
+		mainPage.Select_fromDropdownMenu("Create Schema");
 
 		newSchemaName = schemasPage.createNewSchema();
 
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+	}
+
+	@Test(priority = 11, description = "TC011 - Add DataSource to Schema using Wizard.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount", "createDatasource", "createSchema" })
+	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And use the schema wizard to add a new data source, Then the newly added data source table name will be displayed in the list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void addDatasourceToSchemaUsingWizard() {
+		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Click_schemaName(newSchemaName);
+
+		schemasViewPage = new Schemas_SchemaList_SchemaView(driver);
+		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.Click_add();
+		mainPage.Select_fromDropdownMenu("Schema Wizard");
+
+		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
+				testDataReader.getCellData("DatabaseTableName"));
+		newDataSourceTableName = schemasViewPage.GetNewestTableName();
+		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
+	}
+
+	@Test(priority = 12, description = "TC012 - Add DataFile to Schema (with load filter).", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount", "uploadDataFile", "createSchema" })
+	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And add a new data file, Then the newly added data file table name will be displayed in the list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void addDatafileToSchemaWithLoadFilter() {
+		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Click_schemaName(newSchemaName);
+
+		schemasViewPage = new Schemas_SchemaList_SchemaView(driver);
+		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.Click_add();
+		mainPage.Hover_overDropdownMenu("Table");
+		mainPage.Select_fromDropdownMenu("File System");
+
+		schemaTablePage = new Schemas_SchemaList_Table(driver);
+		schemaTablePage.Assert_AddDatasourcePopupIsDisplayed();
+		schemaTablePage.Assert_correctDatasourceIsSelected("File System");
+		schemaTablePage.AddDataFile("LocalFiles", "Text (csv, tsv, tab, txt)", false, uploadedDataFileName,
+				uploadedDataFileExtension, "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "UTF-8", "Comma");
+
+		newDataFileTableName = schemaTablePage.SetTableName();
+		schemaTablePage.SetLoadFilter();
+		mainPage.Click_done();
+		schemasViewPage.Assert_tableNameIsDisplayed(newDataFileTableName);
+	}
+
+	@Test(priority = 13, description = "TC013 - Full load Schema.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount", "createSchema" })
+	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And trigger a full data load, Then the data will be loaded, And the last load status will be updated.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void fullLoadSchema() {
+		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Click_schemaName(newSchemaName);
+
+		schemasViewPage = new Schemas_SchemaList_SchemaView(driver);
+		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+
+		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.Click_load();
+		mainPage.Hover_overDropdownMenu("Load now");
+		mainPage.Select_fromDropdownMenu("Full");
+		schemasViewPage.confirmLoadingData();
+
+		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
+		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
 	}
 
 	@BeforeClass

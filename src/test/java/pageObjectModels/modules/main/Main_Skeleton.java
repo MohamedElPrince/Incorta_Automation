@@ -21,13 +21,15 @@ public class Main_Skeleton {
 
 	// header_searchBar_textBox
 
+	By header_load_button = By.id("load_types_btn");
+	By header_loadMenuItem_link;
 	// header_actions_button
 	// header_actionsMenuItem_link
-	By header_add_button = By
-			.xpath("//div[contains(@class,'explorerAdd')]//img[contains(@src,'plus_icon')]");
+	By header_add_button = By.xpath("//div[contains(@class,'HeaderBtnWrap')]//img[contains(@src,'plus_icon')]");
 	By header_addMenuItem_link;
 	By header_user_button = By.className("dropdown-toggle");
 	By header_userMenuItem_link;
+	By header_done_link = By.id("saveButton_Charts");
 
 	//// Functions
 	public Main_Skeleton(WebDriver driver) {
@@ -41,14 +43,30 @@ public class Main_Skeleton {
 	// Navigate_toSearchResult
 
 	// Select_fromActionsMenu
+	public void Click_load() {
+		ElementActions.click(driver, header_load_button);
+	}
+
 	public void Click_add() {
 		ElementActions.click(driver, header_add_button);
 	}
 
-	public void Select_fromAddMenu(String functionName) {
-		header_addMenuItem_link = By.xpath(
-				"//ul[contains(@class,'dropdown-menu') and @role='menu']//a[contains(normalize-space(.),'" + functionName + "')]");
+	public void Click_done() {
+		ElementActions.click(driver, header_done_link);
+	}
+
+	public void Select_fromDropdownMenu(String functionName) {
+		header_addMenuItem_link = By
+				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//a[contains(normalize-space(.),'"
+						+ functionName + "')]");
 		ElementActions.click(driver, header_addMenuItem_link);
+	}
+
+	public void Hover_overDropdownMenu(String functionName) {
+		header_addMenuItem_link = By
+				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//a[contains(normalize-space(.),'"
+						+ functionName + "')]");
+		ElementActions.hover(driver, header_addMenuItem_link);
 	}
 
 	public void Select_fromUserMenu(String functionName) {

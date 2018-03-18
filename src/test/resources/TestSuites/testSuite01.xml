@@ -4,10 +4,12 @@
 	<test name="Test01">
 		<classes>
 			<class name="tests.gui.certification.CertificationPath">
-				<methods>
-					<include name="loginUsingAdmin" />
-					<include name="createSchema" />
-				</methods>
+				<!-- <methods> -->
+				<!-- <include name="loginUsingAdmin" /> -->
+				<!-- <include name="createDatasource" /> -->
+				<!-- <include name="createSchema" /> -->
+				<!-- <include name="addDatasourceToSchemaUsingWizard" /> -->
+				<!-- </methods> -->
 			</class>
 		</classes>
 	</test>

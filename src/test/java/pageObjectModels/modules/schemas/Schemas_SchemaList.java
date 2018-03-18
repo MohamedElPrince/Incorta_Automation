@@ -57,7 +57,12 @@ public class Schemas_SchemaList {
 	// Assert_lastLoadStatusIsDisplayed
 	// Assert_memoryUsedIsDisplayed
 
-	// Click_schemaName
+	public void Click_schemaName(String schemaName) {
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p");
+		ElementActions.click(driver, body_schemaName_link);
+	}
 
 	public void hoverOnSchemaAndClickDetails(String schemaName) {
 		body_schemaName_link = By
