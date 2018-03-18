@@ -10,7 +10,7 @@
 		<incortaRoot>http://qa.incorta.com:6080/incorta/#/</incortaRoot>
 		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
-		<!-- Acceptable Values: Windows-64 | Linux-64 -->
+		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge -->
@@ -46,6 +46,13 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.mohies</groupId>
+			<artifactId>SHAFT_ENGINE</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/${shaft_engine.version}.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -108,13 +115,6 @@
 						<encoding>UTF-8</encoding>
 						<inputEncoding>UTF-8</inputEncoding>
 						<outputEncoding>UTF-8</outputEncoding>
-						<properties>
-							<property>
-								<!-- To set reporting to the Most Detailed level -->
-								<name>surefire.testng.verbose</name>
-								<value>10</value>
-							</property>
-						</properties>
 						<argLine>
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
@@ -131,7 +131,6 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-
 			</plugins>
 		</pluginManagement>
 	</build>
