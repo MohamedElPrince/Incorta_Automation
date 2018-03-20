@@ -56,7 +56,7 @@ public class Security_Groups {
 	}
 
 	public String AddNewGroup() {
-		return AddNewGroup("Automation_" + "Group_" + String.valueOf(System.currentTimeMillis()), "");
+		return AddNewGroup("Automation" + "_Group_" + String.valueOf(System.currentTimeMillis()), "");
 	}
 
 	public String AddNewGroup(String name, String description) {

@@ -14,11 +14,15 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.modules.content.Content_AllContent;
+import pageObjectModels.modules.content.Content_AllContent_Dashboard;
+import pageObjectModels.modules.content.Content_AllContent_Dashboard_Insight;
 import pageObjectModels.modules.data.Data_DataFiles;
 import pageObjectModels.modules.data.Data_DataSources;
 import pageObjectModels.modules.login.Login_Login;
 import pageObjectModels.modules.login.Login_Logout;
 import pageObjectModels.modules.main.Main_Skeleton;
+import pageObjectModels.modules.scheduler.Scheduler_Dashboards;
+import pageObjectModels.modules.scheduler.Scheduler_SchemaLoads;
 import pageObjectModels.modules.schemas.Schemas_SchemaList;
 import pageObjectModels.modules.schemas.Schemas_SchemaList_SchemaView;
 import pageObjectModels.modules.schemas.Schemas_SchemaList_Table;
@@ -45,14 +49,20 @@ public class CertificationPath {
 	Schemas_SchemaList schemasPage;
 	Schemas_SchemaList_SchemaView schemasViewPage;
 	Schemas_SchemaList_Table schemaTablePage;
+	Content_AllContent_Dashboard_Insight insightPage;
+	Content_AllContent_Dashboard dashboardPage;
+	Scheduler_Dashboards schedulerDashboardsPage;
+	Scheduler_SchemaLoads schedulerSchemaLoadsPage;
 
 	// Declaring public variables that will be shared between tests
 	String[] newUserData; // username, password, displayname
 	String newGroupName;
 	String newDataSourceName;
-	String uploadedDataFileName, uploadedDataFileExtension;
+	String newDataFileName, newDataFileExtension;
 	String newSchemaName;
+	String newScheduledSchemaLoadJobName;
 	String newDataSourceTableName, newDataFileTableName;
+	String newDashboardName, newInsightName;
 
 	@Test(priority = 1, description = "TC001 - Login using Admin Account.")
 	@Description("When I navigate to the login page, And I login using valid credentials Then all content tab is selected.")
@@ -131,7 +141,7 @@ public class CertificationPath {
 	@Test(priority = 6, description = "TC006 - Logout from Admin Account.", dependsOnMethods = { "loginUsingAdmin" })
 	@Description("Given I am logged in, When I logout, Then logout success message is displayed.")
 	@Severity(SeverityLevel.CRITICAL)
-	public void logoutFromAdminAccount() {
+	public void logout() {
 		mainPage = new Main_Skeleton(driver);
 		mainPage.Select_fromUserMenu("Logout");
 
@@ -185,12 +195,12 @@ public class CertificationPath {
 		mainPage = new Main_Skeleton(driver);
 		mainPage.Click_add();
 
-		uploadedDataFileExtension = testDataReader.getCellData("DataFileExtension");
-		uploadedDataFileName = dataFilesPage.AddDataFile(testDataReader.getCellData("DataFileName"),
+		newDataFileExtension = testDataReader.getCellData("DataFileExtension");
+		newDataFileName = dataFilesPage.AddDataFile(testDataReader.getCellData("DataFileName"),
 				testDataReader.getCellData("DataFileExtension"));
 
-		dataFilesPage.Assert_dataFileUploadingWasSuccessful(uploadedDataFileName);
-		dataFilesPage.Assert_nameIsDisplayed(uploadedDataFileName);
+		dataFilesPage.Assert_dataFileUploadingWasSuccessful(newDataFileName);
+		dataFilesPage.Assert_nameIsDisplayed(newDataFileName);
 	}
 
 	@Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods = {
@@ -254,8 +264,8 @@ public class CertificationPath {
 		schemaTablePage = new Schemas_SchemaList_Table(driver);
 		schemaTablePage.Assert_AddDatasourcePopupIsDisplayed();
 		schemaTablePage.Assert_correctDatasourceIsSelected("File System");
-		schemaTablePage.AddDataFile("LocalFiles", "Text (csv, tsv, tab, txt)", false, uploadedDataFileName,
-				uploadedDataFileExtension, "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "UTF-8", "Comma");
+		schemaTablePage.AddDataFile("LocalFiles", "Text (csv, tsv, tab, txt)", false, newDataFileName,
+				newDataFileExtension, "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "UTF-8", "Comma");
 
 		newDataFileTableName = schemaTablePage.SetTableName();
 		schemaTablePage.SetLoadFilter();
@@ -285,6 +295,141 @@ public class CertificationPath {
 
 		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
 		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
+	}
+
+	@Test(priority = 15, description = "TC015 - Schedule Schema Incremental load.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount", "createSchema" })
+	@Description("When I navigate to the \"Schedule.SchemaLoad\" page, And create a new Incremental load job, Then the job will be displayed in the list, And the job's status will be active.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void scheduleSchemaIncremnetalLoad() {
+		schedulerSchemaLoadsPage = new Scheduler_SchemaLoads(driver);
+		schedulerSchemaLoadsPage.Navigate_toURL();
+		schedulerSchemaLoadsPage.Assert_schemasTabIsSelected();
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.Click_add();
+
+		newScheduledSchemaLoadJobName = schedulerSchemaLoadsPage.scheduleSchemaLoad(
+				testDataReader.getCellData("SchemaLoadJobDescription"), newSchemaName,
+				testDataReader.getCellData("SchemaLoadJobType"), testDataReader.getCellData("SchemaLoadJobDate"),
+				testDataReader.getCellData("SchemaLoadJobTime"), testDataReader.getCellData("SchemaLoadJobTimeZone"),
+				testDataReader.getCellData("SchemaLoadJobRecurrence"));
+
+		schedulerSchemaLoadsPage.Assert_nameIsDisplayed(newScheduledSchemaLoadJobName);
+		schedulerSchemaLoadsPage.Assert_jobStatusIsCorrect(newScheduledSchemaLoadJobName, "Active");
+	}
+
+	@Test(priority = 16, description = "TC016 - Create Dashboard and Insight.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount", "fullLoadSchema" })
+	@Description("When I navigate to the \"Content.AllContent\" page, And click on add, And create a dashboard, And add all the tables of the schema that was created previously to a new insight, Then the dashboard will be displayed in the list, And the insight will be displayed inside it.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void createDashboardAndInsight() {
+		allContentPage = new Content_AllContent(driver);
+		allContentPage.Navigate_toURL();
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.Click_add();
+		mainPage.Select_fromDropdownMenu("Create Dashboard");
+
+		newDashboardName = allContentPage.setNewDashboardName();
+
+		insightPage = new Content_AllContent_Dashboard_Insight(driver);
+		insightPage.addTableorSchemaToInsight(newSchemaName);
+		insightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
+		insightPage.addColumnToInsight(newDataSourceTableName, "Units");
+
+		newInsightName = insightPage.setInsightName();
+		mainPage.Click_done();
+
+		allContentPage.Navigate_toURL();
+		mainPage.SearchForContentAndOpenResult(newDashboardName);
+
+		dashboardPage = new Content_AllContent_Dashboard(driver);
+		dashboardPage.Assert_dashboardName(newDashboardName);
+		dashboardPage.Assert_insightName(newInsightName);
+	}
+
+	@Test(priority = 17, description = "TC017 - Send Dashboard via email.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount", "createDashboardAndInsight" })
+	@Description("When I navigate to the \"Content.AllContent\" page, And open a dashboard, And send it to an email address, Then a completed scheduled task will be displayed in the scheduled tasks list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void sendDashboardViaEmail() {
+		allContentPage = new Content_AllContent(driver);
+		allContentPage.Navigate_toURL();
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(newDashboardName);
+		mainPage.Click_export();
+		mainPage.Select_fromDropdownMenu("Send");
+
+		dashboardPage = new Content_AllContent_Dashboard(driver);
+		dashboardPage.selectEmailFormat(testDataReader.getCellData("EmailFormat"));
+		dashboardPage.addUserEmailToRecieversList(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleEmailSending();
+
+		schedulerDashboardsPage = new Scheduler_Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ChangeJobStatus("All");
+
+		schedulerDashboardsPage.Assert_nameIsDisplayed(newDashboardName);
+		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newDashboardName, "Completed");
+	}
+
+	@Test(priority = 18, description = "TC018 - Switch to admin Account.")
+	@Description("When I logout, And login as an administrator, Then I will be redirected to the All Content tab.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void switchToAdminAccount() {
+		logout();
+		loginUsingAdmin();
+	}
+
+	@Test(priority = 19, description = "TC019 - Delete User and Transfer Ownership to self.", dependsOnMethods = {
+			"switchToAdminAccount" })
+	@Description("Given I am logged in as an administrator, When I delete a user account that has content, And I transfer ownership to myself, Then the user will no longer be displayed in the users list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void deleteUserAndTransferOwnershipToSelf() {
+		usersPage = new Security_Users(driver);
+		usersPage.Navigate_toURL();
+		usersPage.Select_nameCheckbox(newUserData[2]);
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Delete selection");
+
+		usersPage.ConfirmUserDeletionAndTransferOwnershipToSelf();
+		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
+	}
+
+	@Test(priority = 20, description = "TC020 - Search for Transfered Ownership Elements.", dependsOnMethods = {
+			"deleteUserAndTransferOwnershipToSelf" })
+	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void searchForTransferedOwnershipElements() {
+		/*
+		 * 1 SCHEMA(s) 1 DASHBOARD(s) 1 DATASOURCE(s) 1 DATAFILE(s) 1 SCHEDULER(s)
+		 */
+		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+
+		allContentPage = new Content_AllContent(driver);
+		allContentPage.Navigate_toURL();
+		// allContentPage.Assert_dashboardIsDisplayed(newDashboardName);
+		mainPage = new Main_Skeleton(driver);
+		mainPage.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
+
+		dataSourcesPage = new Data_DataSources(driver);
+		dataSourcesPage.Navigate_toURL();
+		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
+
+		dataFilesPage = new Data_DataFiles(driver);
+		dataFilesPage.Navigate_toURL();
+		dataFilesPage.Assert_nameIsDisplayed(newDataFileName);
+
+		schedulerDashboardsPage = new Scheduler_Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ChangeJobStatus("All");
+		schedulerDashboardsPage.Assert_nameIsDisplayed(newDashboardName);
 	}
 
 	@BeforeClass

@@ -23,7 +23,7 @@ public class Security_Users {
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Users']");
 	// header_users_label
 
-	// body_name_checkbox
+	By body_name_checkbox;
 	By body_name_link;
 	// body_lastSignedIn_label
 
@@ -40,6 +40,20 @@ public class Security_Users {
 			.xpath("//div[contains(@class,'userDetailsModal')]//input[@type='file']");
 	By popup_addNewUser_addUser_button = By.xpath("//button[@ng-click='addNewUser(user)']");
 	By popup_addNewUser_cancel_button = By.xpath("//button[@ng-click='modal.closeMe()']");
+
+	By popup_confirmDelete_transferOwnership_button = By
+			.xpath("//div[contains(@class,'confirmDeleteModal')]//button[normalize-space()='Transfer ownership']");
+	By popup_confirmDelete_deleteAnyway_button = By
+			.xpath("//div[contains(@class,'confirmDeleteModal')]//button[normalize-space()='Delete anyway']");
+
+	By popup_confirmDelete_delete_button = By
+			.xpath("//div[contains(@class,'confirmDeleteModal')]//button[normalize-space()='Delete']");
+
+	By popup_transferOwnership_targetuser_radioButton; // p[contains(normalize-space(),'Transfer ownership to the
+														// current user')]/preceding-sibling::input[@type='radio']
+	By popup_transferOwnership_transferSharingPermissions_checkBox = By
+			.xpath("//input[@type='checkbox'][@ng-model='transferSharingPermissions']");
+	By popup_transferOwnership_transferOwnership_button = By.xpath("//button[@ng-click='transferOwnership()']");
 
 	//// Functions
 	public Security_Users(WebDriver driver) {
@@ -59,9 +73,22 @@ public class Security_Users {
 						+ "')]/p");
 		CustomAssertions.cAssertElementExists(driver, body_name_link, true);
 	}
+	
+	public void Assert_nameIsNotDisplayed(String name) {
+		body_name_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
+						+ "')]/p");
+		CustomAssertions.cAssertElementExists(driver, body_name_link, false);
+	}
 
 	// Assert_lastSignedInForUserNameIsCorrect
-	// Select_nameCheckbox
+	public void Select_nameCheckbox(String name) {
+		body_name_checkbox = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
+						+ "')]/preceding-sibling::div[contains(@class,'userSelection')]/input");
+		ElementActions.click(driver, body_name_checkbox);
+	}
+
 	public void Click_name(String name) {
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
@@ -73,10 +100,10 @@ public class Security_Users {
 		// can be used to read data from data sheet after adding a parameter to map with
 		// the column name
 		String[] userData = new String[10];
-		userData[0] = "Automation"; // Login Name
+		userData[0] = "Automation_User"; // Login Name
 		userData[1] = "a"; // Password
 		userData[2] = "a"; // Confirm Password
-		userData[3] = "automation"; // Display Name
+		userData[3] = "automation_user"; // Display Name
 		userData[4] = "a@a.a"; // Email
 		userData[5] = "Arabic"; // Language
 		userData[6] = "Egypt"; // Region Format
@@ -108,6 +135,20 @@ public class Security_Users {
 
 		ElementActions.click(driver, popup_addNewUser_addUser_button);
 		return new String[] { loginName, userData[1], displayName }; // return username,password,displayname
+	}
+
+	public void ConfirmUserDeletionAndTransferOwnershipToSelf() {
+		ElementActions.click(driver, popup_confirmDelete_transferOwnership_button);
+		popup_transferOwnership_targetuser_radioButton = By.xpath(
+				"//p[contains(normalize-space(),'Transfer ownership to the current user')]/preceding-sibling::input[@type='radio']");
+		ElementActions.click(driver, popup_transferOwnership_targetuser_radioButton);
+		ElementActions.click(driver, popup_transferOwnership_transferSharingPermissions_checkBox);
+		ElementActions.click(driver, popup_transferOwnership_transferOwnership_button);
+		ElementActions.click(driver, popup_confirmDelete_delete_button);
+	}
+
+	public void ConfirmUserDeletionAnyway() {
+		ElementActions.click(driver, popup_confirmDelete_deleteAnyway_button);
 	}
 
 }

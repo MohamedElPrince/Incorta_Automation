@@ -81,7 +81,7 @@ public class Data_DataSources {
 
 		String columnName = testDataReader.getColumnNameUsingRowNameAndCellData("DataSourceType", dataSourceType);
 
-		dataSourceName = dataSourceType.replaceAll(" ", "_").toLowerCase() + "_"
+		dataSourceName = "Automation" + "_" + dataSourceType.replaceAll(" ", "_").toLowerCase() + "_"
 				+ String.valueOf(System.currentTimeMillis());
 		username = testDataReader.getCellData("DataSourceUsername", columnName);
 		password = testDataReader.getCellData("DataSourcePassword", columnName);

@@ -97,7 +97,7 @@ public class Schemas_SchemaList_SchemaView {
 	public void Assert_tableAttributeIsCorrect(String tableName, String tableAttribute, String expectedValue) {
 		body_tableAttribute_label = By.xpath("//div[@id='" + tableName + "']//h5[normalize-space(.)='" + tableAttribute
 				+ "']//following-sibling::p[@class='ng-binding']");
-		CustomAssertions.cAssertEquals(expectedValue, ElementActions.getText(driver, body_tableAttribute_label), true);
+		CustomAssertions.cAssertElementAttribute(driver, body_tableAttribute_label, "Text", expectedValue, true);
 	}
 
 	public void Wizard_AddDataSourceTable(String dataSourceName, boolean createImplicitJoins, String dataSourceType,
@@ -153,8 +153,7 @@ public class Schemas_SchemaList_SchemaView {
 	}
 
 	public void Assert_lastLoadStatusIsUpdated(String initialLoadStatus) {
-		CustomAssertions.cAssertEquals(initialLoadStatus, ElementActions.getText(driver, header_lastLoadStatus_link),
-				false);
+		CustomAssertions.cAssertElementAttribute(driver, header_lastLoadStatus_link, "Text", initialLoadStatus, false);
 	}
 
 }

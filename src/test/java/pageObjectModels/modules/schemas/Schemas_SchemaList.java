@@ -77,7 +77,7 @@ public class Schemas_SchemaList {
 	}
 
 	public String createNewSchema() {
-		return createNewSchema("Automation_" + "Schema_" + String.valueOf(System.currentTimeMillis()), "");
+		return createNewSchema("Automation" + "_Schema_" + String.valueOf(System.currentTimeMillis()), "");
 	}
 
 	public String createNewSchema(String schemaName, String schemaDesription) {

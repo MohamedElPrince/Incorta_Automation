@@ -115,7 +115,7 @@ public class Schemas_SchemaList_Table {
 	}
 
 	public String SetTableName() {
-		String newTableName = "Automation" + "_" + String.valueOf(System.currentTimeMillis());
+		String newTableName = "Automation" + "_DataFileTable_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, header_tableName_textBox, newTableName);
 		return newTableName;
 	}

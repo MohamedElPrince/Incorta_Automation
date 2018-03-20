@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.customValidations.CustomAssertions;
+import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.io.ExcelReader;
 
 public class Content_AllContent {
@@ -21,6 +22,9 @@ public class Content_AllContent {
 	By body_dashboard_link;
 	By body_dashboardProperties_link;
 
+	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
+	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
+
 	//// Functions
 	public Content_AllContent(WebDriver driver) {
 		this.driver = driver;
@@ -35,10 +39,20 @@ public class Content_AllContent {
 	}
 
 	// Assert_folderIsDisplayed
-	// Assert_dashboardIsDisplayed
+	public void Assert_dashboardIsDisplayed(String name) {
+		body_dashboard_link = By.xpath(" //section[@id=\"content\"]//a[@title='" + name + "']");
+		CustomAssertions.cAssertElementExists(driver, body_dashboard_link, true);
+	}
 
 	// Click_folder
 	// Click_folderProperties
 	// Click_dashboard
 	// Click_dashboardProperties
+
+	public String setNewDashboardName() {
+		String newDashboardName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_newDashboard_dashboardName_textBox, newDashboardName);
+		ElementActions.click(driver, popup_newDashboard_create_button);
+		return newDashboardName;
+	}
 }
