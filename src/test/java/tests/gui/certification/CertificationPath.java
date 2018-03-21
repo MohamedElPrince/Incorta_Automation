@@ -434,7 +434,6 @@ public class CertificationPath {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("java.awt.headless", "false");
 		System.setProperty("testDataFilePath",
 				System.getProperty("testDataFolderPath") + "certification/TestData.xlsx");
 		testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
