@@ -15,7 +15,7 @@
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
-		<screenshooterFlag>Always</screenshooterFlag>
+		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
 		<executionAddress>local</executionAddress>
 		<!-- <executionAddress>localhost:4444</executionAddress> -->
@@ -23,7 +23,7 @@
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-0.2.0-SNAPSHOT</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-0.3.0-BETA</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
@@ -53,16 +53,11 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/${shaft_engine.version}.jar</systemPath>
 		</dependency>
+		<!-- Selenium and Allure Dependencies -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>${testng.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
@@ -71,10 +66,62 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-cucumber-jvm</artifactId>
+			<version>${allure.version}</version>
+		</dependency>
+
+		<!-- REST Assured (includes JsonPath and XmlPath) Dependencies -->
+		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<version>${rest-assured.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- TestNG Dependencies -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Cucumber Dependencies -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-jvm</artifactId>
+			<version>${cucumber.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Other Dependencies -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apachepoi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apachepoi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${org.slf4j.version}</version>
 		</dependency>
 	</dependencies>
 

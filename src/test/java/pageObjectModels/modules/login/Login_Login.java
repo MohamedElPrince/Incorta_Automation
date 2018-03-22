@@ -23,8 +23,8 @@ public class Login_Login {
 	By body_forgotPassword_link = By.xpath("//input[@ng-click='forgetPassSwitch()']");
 	By body_signIn_button = By.className("signInBtn");
 	By footer_incortaCopyrights_label = By.className("loginFooter");
-	
-	//First Time Login
+
+	// First Time Login
 	By body_changePasswordMessageHeader_label;
 	By body_changePasswordMessageBody_label;
 	By body_oldPassword_textBox = By.xpath("//input[@ng-model='password.oldPassword']");
@@ -57,8 +57,8 @@ public class Login_Login {
 	}
 
 	public void Assert_correctVersionNumberIsDisplayed() {
-		CustomAssertions.cAssertEquals("([\\s\\S]*" + incortaVersion + "\\s[\\s\\S]*)",
-				ElementActions.getText(driver, footer_incortaCopyrights_label), true);
+		CustomAssertions.cAssertElementAttribute(driver, footer_incortaCopyrights_label, "Text",
+				"([\\s\\S]*" + incortaVersion + "\\s[\\s\\S]*)", true);
 
 		// ([\s\S]*Rel3.2\s[\s\S]*) This regular expression matches all characters and
 		// white spaces before the version number, then a whitespace right after the
