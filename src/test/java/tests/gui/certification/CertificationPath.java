@@ -400,32 +400,57 @@ public class CertificationPath {
 		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
 	}
 
-	@Test(priority = 20, description = "TC020 - Search for Transfered Ownership Elements.", dependsOnMethods = {
-			"deleteUserAndTransferOwnershipToSelf" })
+	@Test(priority = 20, description = "TC020 - Search for Transfered Ownership Elements: Schema", dependsOnMethods = {
+			"deleteUserAndTransferOwnershipToSelf", "createSchema" })
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
-	public void searchForTransferedOwnershipElements() {
+	public void searchForTransferedOwnershipElementsSchema() {
 		/*
-		 * 1 SCHEMA(s) 1 DASHBOARD(s) 1 DATASOURCE(s) 1 DATAFILE(s) 1 SCHEDULER(s)
+		 * 1 SCHEMA(s) 1 DASHBOARD(s) 1 DATASOURCE(s) 1 DATAFILE(s) 1of2 SCHEDULER(s)
 		 */
+
 		schemasPage = new Schemas_SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+	}
 
+	@Test(priority = 21, description = "TC021 - Search for Transfered Ownership Elements: Dashboard", dependsOnMethods = {
+			"deleteUserAndTransferOwnershipToSelf", "createDashboardAndInsight" })
+	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void searchForTransferedOwnershipElementsDashboard() {
 		allContentPage = new Content_AllContent(driver);
 		allContentPage.Navigate_toURL();
 		// allContentPage.Assert_dashboardIsDisplayed(newDashboardName);
 		mainPage = new Main_Skeleton(driver);
 		mainPage.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
+	}
 
+	@Test(priority = 22, description = "TC022 - Search for Transfered Ownership Elements: Datasource", dependsOnMethods = {
+			"deleteUserAndTransferOwnershipToSelf", "createDatasource" })
+	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void searchForTransferedOwnershipElementsDatasource() {
 		dataSourcesPage = new Data_DataSources(driver);
 		dataSourcesPage.Navigate_toURL();
 		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
+	}
 
+	@Test(priority = 23, description = "TC023 - Search for Transfered Ownership Elements: DataFile", dependsOnMethods = {
+			"deleteUserAndTransferOwnershipToSelf", "uploadDataFile" })
+	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void searchForTransferedOwnershipElementsDataFile() {
 		dataFilesPage = new Data_DataFiles(driver);
 		dataFilesPage.Navigate_toURL();
 		dataFilesPage.Assert_nameIsDisplayed(newDataFileName);
+	}
 
+	@Test(priority = 24, description = "TC024 - Search for Transfered Ownership Elements: Scheduler", dependsOnMethods = {
+			"deleteUserAndTransferOwnershipToSelf" })
+	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void searchForTransferedOwnershipElementsScheduler() {
 		schedulerDashboardsPage = new Scheduler_Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ChangeJobStatus("All");
