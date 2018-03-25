@@ -27,6 +27,7 @@
 
 		<!-- Version Numbers Properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.8</jdk.version>
 
 		<selenium.version>3.11.0</selenium.version>
@@ -42,6 +43,8 @@
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
 		<maven-shade-plugin.version>3.1.0</maven-shade-plugin.version>
+		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+		<maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
 
 		<cucumber.version>1.2.5</cucumber.version> <!-- reintegrate cucumber with the proper latest version -->
 	</properties>
@@ -171,7 +174,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
+					<version>${maven-jar-plugin.version}</version>
 					<configuration>
 						<archive>
 							<manifest>
@@ -214,6 +217,19 @@
 							<phase>package</phase>
 							<goals>
 								<goal>shade</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<goals>
+								<goal>jar</goal>
 							</goals>
 						</execution>
 					</executions>

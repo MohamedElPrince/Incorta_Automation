@@ -48,8 +48,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mohies</groupId>
-			<artifactId>SHAFT_ENGINE</artifactId>
-			<version>0.2.0-SNAPSHOT</version>
+			<artifactId>SHAFT_ENGINE-core</artifactId>
+			<version>${shaft_engine.version}</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/${shaft_engine.version}.jar</systemPath>
 		</dependency>
@@ -168,6 +168,7 @@
 						<additionalClasspathElements>
 							<additionalClasspathElement>lib/${shaft_engine.version}.jar</additionalClasspathElement>
 							<additionalClasspathElement>lib/${shaft_engine.version}.pom</additionalClasspathElement>
+							<additionalClasspathElement>lib/${shaft_engine.version}-javadoc.jar</additionalClasspathElement>
 						</additionalClasspathElements>
 					</configuration>
 					<dependencies>
