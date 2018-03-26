@@ -13,7 +13,7 @@ public class Login_Login {
 	WebDriver driver;
 	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_login_login");
-	String incortaVersion = testDataReader.getCellData("IncortaVersion");
+	String incortaVersion = System.getProperty("incortaVersion");
 
 	//// Elements
 	By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");

@@ -7,7 +7,8 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://qa.incorta.com:6080/incorta/#/</incortaRoot>
+		<incortaRoot>http://qa.incorta.com:7080/incorta/#/</incortaRoot>
+		<incortaVersion>Rel3.1.9_trial_3.1.Keysight</incortaVersion>
 		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
@@ -15,7 +16,7 @@
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
-		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
+		<screenshooterFlag>Always</screenshooterFlag>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
 		<executionAddress>local</executionAddress>
 		<!-- <executionAddress>localhost:4444</executionAddress> -->
@@ -149,6 +150,7 @@
 							<executionAddress>${executionAddress}</executionAddress>
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
 							<incortaRoot>${incortaRoot}</incortaRoot>
+							<incortaVersion>${incortaVersion}</incortaVersion>
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
 						</systemPropertyVariables>
