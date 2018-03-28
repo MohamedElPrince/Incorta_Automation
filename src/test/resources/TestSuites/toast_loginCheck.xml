@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite01" verbose="10">
+	<test name="Test01">
+		<classes>
+			<class name="tests.gui.certification.ToastCertification">
+				<methods>
+					<include name="loginUsingAdmin" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
