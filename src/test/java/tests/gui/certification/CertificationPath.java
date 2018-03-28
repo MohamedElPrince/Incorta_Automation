@@ -376,7 +376,8 @@ public class CertificationPath {
 		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newDashboardName, "Completed");
 	}
 
-	@Test(priority = 18, description = "TC018 - Switch to admin Account.")
+	@Test(priority = 18, description = "TC018 - Switch to admin Account.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount" })
 	@Description("When I logout, And login as an administrator, Then I will be redirected to the All Content tab.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void switchToAdminAccount() {
