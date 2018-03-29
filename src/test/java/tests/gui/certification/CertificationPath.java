@@ -2,7 +2,7 @@ package tests.gui.certification;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -376,7 +376,8 @@ public class CertificationPath {
 		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newDashboardName, "Completed");
 	}
 
-	@Test(priority = 18, description = "TC018 - Switch to admin Account.")
+	@Test(priority = 18, description = "TC018 - Switch to admin Account.", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount" })
 	@Description("When I logout, And login as an administrator, Then I will be redirected to the All Content tab.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void switchToAdminAccount() {
@@ -465,16 +466,16 @@ public class CertificationPath {
 		testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
-	
-	@AfterTest
-	public void afterTest() {
-		ReportManager.logTest();
+
+	@AfterMethod
+	public void afterMethod() {
+		ReportManager.getTestLog();
 	}
 
 	@AfterClass
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
-		ReportManager.getLog();
+		ReportManager.getFullLog();
 	}
 
 }

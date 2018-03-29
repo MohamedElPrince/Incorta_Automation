@@ -83,7 +83,7 @@ public class Schemas_SchemaList_Table {
 
 		popup_addDatasource_datasourceImage_span = By.xpath("//img[contains(@src,'" + imageSrc + "')]/../..");
 		CustomAssertions.cAssertElementAttribute(driver, popup_addDatasource_datasourceImage_span, "style",
-				".*(background: white;).*", true);
+				".*(background:.*white).*", true);
 	}
 
 	private void SelectDataFile(String dataFileName, String dataFileExtension) {

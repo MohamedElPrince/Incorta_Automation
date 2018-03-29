@@ -7,7 +7,8 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://qa.incorta.com:6080/incorta/#/</incortaRoot>
+		<incortaRoot>http://qa.incorta.com:7080/incorta/#/</incortaRoot>
+		<incortaVersion>Rel3.1.9_trial_3.1.Keysight</incortaVersion>
 		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
@@ -27,7 +28,6 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
-
 		<selenium.version>3.11.0</selenium.version>
 		<allure.version>2.6.0</allure.version>
 		<aspectj.version>1.8.13</aspectj.version>
@@ -48,8 +48,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mohies</groupId>
-			<artifactId>SHAFT_ENGINE</artifactId>
-			<version>0.2.0-SNAPSHOT</version>
+			<artifactId>SHAFT_ENGINE-core</artifactId>
+			<version>${shaft_engine.version}</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/${shaft_engine.version}.jar</systemPath>
 		</dependency>
@@ -150,6 +150,7 @@
 							<executionAddress>${executionAddress}</executionAddress>
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
 							<incortaRoot>${incortaRoot}</incortaRoot>
+							<incortaVersion>${incortaVersion}</incortaVersion>
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
 						</systemPropertyVariables>
@@ -168,6 +169,7 @@
 						<additionalClasspathElements>
 							<additionalClasspathElement>lib/${shaft_engine.version}.jar</additionalClasspathElement>
 							<additionalClasspathElement>lib/${shaft_engine.version}.pom</additionalClasspathElement>
+							<additionalClasspathElement>lib/${shaft_engine.version}-javadoc.jar</additionalClasspathElement>
 						</additionalClasspathElements>
 					</configuration>
 					<dependencies>
