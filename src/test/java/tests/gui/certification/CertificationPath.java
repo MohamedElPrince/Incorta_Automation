@@ -381,6 +381,9 @@ public class CertificationPath {
 	@Description("When I logout, And login as an administrator, Then I will be redirected to the All Content tab.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void switchToAdminAccount() {
+		allContentPage = new Content_AllContent(driver);
+		allContentPage.Navigate_toURL();
+		
 		logout();
 		loginUsingAdmin();
 	}
