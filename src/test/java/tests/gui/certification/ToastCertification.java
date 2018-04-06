@@ -17,7 +17,7 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.modules.content.Content_AllContent;
 import pageObjectModels.modules.login.Login_Login;
 
-@Epic("incorta Certification Path.")
+@Epic("incorta [toast] Certification Path.")
 public class ToastCertification {
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
@@ -27,7 +27,7 @@ public class ToastCertification {
 	Login_Login loginPage;
 	Content_AllContent allContentPage;
 
-	@Test(priority = 1, description = "TC001 - Login using Admin Account.")
+	@Test(priority = 1, description = "Login using Admin Account.")
 	@Description("When I navigate to the login page, And I login using valid credentials Then all content tab is selected.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void loginUsingAdmin() {

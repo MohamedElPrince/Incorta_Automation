@@ -25,6 +25,7 @@
 		<!-- <executionAddress>localhost:4444</executionAddress> -->
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
+		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 
 		<!-- Version Numbers Properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -150,6 +151,7 @@
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
+							<defaultElementIdentificationTimeout>${defaultElementIdentificationTimeout}</defaultElementIdentificationTimeout>
 						</systemPropertyVariables>
 						<!-- To continue execution after validation errors are thrown in the 
 							before method -->

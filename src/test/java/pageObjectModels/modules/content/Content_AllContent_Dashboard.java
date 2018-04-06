@@ -18,7 +18,7 @@ public class Content_AllContent_Dashboard {
 
 	By popup_sendDashboard_type_radioButton; // label[normalize-space(.)='HTML']/input[@type='radio']
 	By popup_sendDashboard_plusReciever_button = By
-			.xpath("//a[contains(@class,'usersHeadAdd')]/img[contains(@src,'plus')]");
+			.xpath("//*[contains(@ng-click,\"!error && goToState('addUsers', 'to')\")]");
 	By popup_sendDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$parent.entitySearchText']");
 	By popup_sendDashboard_add_button = By.xpath("//button[@type='button'][normalize-space()='Add']");
 	By popup_sendDashboard_reciever_label; // div[contains(@class,'folderUserRow')][contains(normalize-space(.),'mohab.mohie@incorta.com')]//h5[contains(@class,'UserData')]
@@ -49,8 +49,8 @@ public class Content_AllContent_Dashboard {
 		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, email);
 		ElementActions.click(driver, popup_sendDashboard_add_button);
 		popup_sendDashboard_reciever_label = By
-				.xpath("// div[contains(@class,'folderUserRow')][contains(normalize-space(.),'" + email
-						+ "')]//h5[contains(@class,'UserData')]");
+				.xpath("//*[contains(@title,'" + email
+						+ "')]");
 		CustomAssertions.cAssertElementExists(driver, popup_sendDashboard_reciever_label, true);
 	}
 
