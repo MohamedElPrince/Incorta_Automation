@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Scheduler_Dashboards {
 	//// Variables
@@ -33,7 +33,7 @@ public class Scheduler_Dashboards {
 	}
 
 	public void Assert_allDashboardsTabIsSelected() {
-		CustomAssertions.cAssertElementAttribute(driver, header_dashboardsTabHeader_link, "class", "selectedTab", true);
+		Assertions.assertElementAttribute(driver, header_dashboardsTabHeader_link, "class", "selectedTab", true);
 	}
 
 	public void ChangeJobStatus(String status) {
@@ -44,13 +44,13 @@ public class Scheduler_Dashboards {
 		body_dashboard_link = By.xpath(
 				"//div[contains(@class,'usersPanel')]//p[contains(@class,'job-status')][contains(normalize-space(.),'"
 						+ name + "')]");
-		CustomAssertions.cAssertElementExists(driver, body_dashboard_link, true);
+		Assertions.assertElementExists(driver, body_dashboard_link, true);
 	}
 
 	public void Assert_jobStatusIsCorrect(String name, String expectedStatus) {
 		body_Status_label = By.xpath(
 				"//div[contains(@class,'usersPanel')]//div[contains(@class,'dataTypeName')][contains(normalize-space(.),'"
 						+ name + "')]/following-sibling::div[contains(@class,'dataConnectionLink')]");
-		CustomAssertions.cAssertElementAttribute(driver, body_Status_label, "Text", expectedStatus, true);
+		Assertions.assertElementAttribute(driver, body_Status_label, "Text", expectedStatus, true);
 	}
 }

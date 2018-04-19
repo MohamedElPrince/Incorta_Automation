@@ -3,9 +3,9 @@ package pageObjectModels.modules.schemas;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Schemas_SchemaList_Table {
 	//// Variables
@@ -45,7 +45,7 @@ public class Schemas_SchemaList_Table {
 	}
 
 	public void Assert_AddDatasourcePopupIsDisplayed() {
-		CustomAssertions.cAssertElementExists(driver, popup_addDatasource_header_label, true);
+		Assertions.assertElementExists(driver, popup_addDatasource_header_label, true);
 	}
 
 	public void Assert_correctDatasourceIsSelected(String dataSourceType) { // span background is white for the selected
@@ -82,7 +82,7 @@ public class Schemas_SchemaList_Table {
 		}
 
 		popup_addDatasource_datasourceImage_span = By.xpath("//img[contains(@src,'" + imageSrc + "')]/../..");
-		CustomAssertions.cAssertElementAttribute(driver, popup_addDatasource_datasourceImage_span, "style",
+		Assertions.assertElementAttribute(driver, popup_addDatasource_datasourceImage_span, "style",
 				".*(background:.*white).*", true);
 	}
 

@@ -2,9 +2,9 @@ package pageObjectModels.modules.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Login_Logout {
 	//// Variables
@@ -24,8 +24,8 @@ public class Login_Logout {
 	}
 
 	public void Assert_logoutMessageHeaderAndBodyAreCorrect() {
-		CustomAssertions.cAssertElementAttribute(driver, body_loggedOutMessageHeader_label, "text",
-				loggedOutMessageHeader, true);
+		Assertions.assertElementAttribute(driver, body_loggedOutMessageHeader_label, "text", loggedOutMessageHeader,
+				true);
 		// CustomAssertions.cAssertElementAttribute(driver,
 		// body_loggedOutMessageBody_label, "text", loggedOutMessageBody,true);
 	}

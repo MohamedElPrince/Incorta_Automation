@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Scheduler_SchemaLoads {
 	//// Variables
@@ -52,7 +52,7 @@ public class Scheduler_SchemaLoads {
 	}
 
 	public void Assert_schemasTabIsSelected() {
-		CustomAssertions.cAssertElementAttribute(driver, header_schemasTabHeader_link, "class", "selectedTab", true);
+		Assertions.assertElementAttribute(driver, header_schemasTabHeader_link, "class", "selectedTab", true);
 	}
 
 	public void ChangeJobStatus(String status) {
@@ -61,13 +61,13 @@ public class Scheduler_SchemaLoads {
 
 	public void Assert_nameIsDisplayed(String name) {
 		body_name_link = By.xpath("//div[contains(@class,'usersPanel')]//p[@title='" + name + "']");
-		CustomAssertions.cAssertElementExists(driver, body_name_link, true);
+		Assertions.assertElementExists(driver, body_name_link, true);
 	}
 
 	public void Assert_jobStatusIsCorrect(String name, String expectedStatus) {
 		body_status_label = By.xpath("//div[contains(@class,'usersPanel')]//p[@title='" + name
 				+ "']/parent::div[contains(@class,'userName')]/following-sibling::div[contains(@class,'dataConnectionLink')]");
-		CustomAssertions.cAssertElementAttribute(driver, body_status_label, "Text", expectedStatus, true);
+		Assertions.assertElementAttribute(driver, body_status_label, "Text", expectedStatus, true);
 	}
 
 	public String scheduleSchemaLoad(String description, String schemaName, String loadType, String startByDate,

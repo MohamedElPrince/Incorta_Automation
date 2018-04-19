@@ -3,9 +3,9 @@ package pageObjectModels.modules.content;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Content_AllContent_Dashboard {
 	//// Variables
@@ -30,12 +30,12 @@ public class Content_AllContent_Dashboard {
 	}
 
 	public void Assert_dashboardName(String name) {
-		CustomAssertions.cAssertElementAttribute(driver, header_dashboardName_textBox, "Text", "(.*" + name + ".*)",
+		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", "(.*" + name + ".*)",
 				true);
 	}
 
 	public void Assert_insightName(String name) {
-		CustomAssertions.cAssertElementAttribute(driver, body_insightName_label, "Text", "(.*" + name + ".*)", true);
+		Assertions.assertElementAttribute(driver, body_insightName_label, "Text", "(.*" + name + ".*)", true);
 	}
 
 	public void selectEmailFormat(String format) {
@@ -51,7 +51,7 @@ public class Content_AllContent_Dashboard {
 		popup_sendDashboard_reciever_label = By
 				.xpath("//*[contains(@title,'" + email
 						+ "')]");
-		CustomAssertions.cAssertElementExists(driver, popup_sendDashboard_reciever_label, true);
+		Assertions.assertElementExists(driver, popup_sendDashboard_reciever_label, true);
 	}
 
 	public void scheduleEmailSending() {

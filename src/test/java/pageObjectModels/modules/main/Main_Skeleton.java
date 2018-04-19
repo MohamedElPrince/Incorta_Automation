@@ -3,8 +3,8 @@ package pageObjectModels.modules.main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Main_Skeleton {
 	//// Variables
@@ -48,14 +48,14 @@ public class Main_Skeleton {
 				+ "')]/ancestor::a[contains(@id,'searchBoxItem')]");
 		ElementActions.click(driver, header_searchResult_link);
 	}
-	
+
 	public void SearchForContentAndAssertResultIsDisplayed(String query) {
 		ElementActions.type(driver, header_search_textBox, query);
 		header_searchResult_link = By.xpath("//*[@id='search-box-container']//h5[contains(normalize-space(),'" + query
 				+ "')]/ancestor::a[contains(@id,'searchBoxItem')]");
-		CustomAssertions.cAssertElementExists(driver, header_searchResult_link, true);
+		Assertions.assertElementExists(driver, header_searchResult_link, true);
 	}
-	
+
 	// Assert_searchResultIsDisplayed
 	// Navigate_toSearchResult
 

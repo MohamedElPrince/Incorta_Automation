@@ -6,10 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
-import com.shaftEngine.io.FileManager;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.ioActionLibrary.FileManager;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Data_DataFiles {
 	//// Variables
@@ -46,14 +46,14 @@ public class Data_DataFiles {
 	}
 
 	public void Assert_dataFilesTabIsSelected() {
-		CustomAssertions.cAssertElementAttribute(driver, header_dataFilesTabHeader_link, "class", "selectedTab", true);
+		Assertions.assertElementAttribute(driver, header_dataFilesTabHeader_link, "class", "selectedTab", true);
 	}
 
 	public void Assert_nameIsDisplayed(String name) {
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
-		CustomAssertions.cAssertElementExists(driver, body_name_link, true);
+		Assertions.assertElementExists(driver, body_name_link, true);
 	}
 	// Assert_typeIsDisplayed
 	// Assert_permissionIsDisplayed
@@ -73,7 +73,8 @@ public class Data_DataFiles {
 
 		FileManager.copyFile(dataFilePath, tempFilePath);
 
-		ElementActions.typeFileLocationForUpload(driver, popup_uploadNewDataFile_selectFromYourPC_textBox, tempFilePath);
+		ElementActions.typeFileLocationForUpload(driver, popup_uploadNewDataFile_selectFromYourPC_textBox,
+				tempFilePath);
 
 		FileManager.deleteFile(tempFilePath);
 
@@ -82,7 +83,7 @@ public class Data_DataFiles {
 	}
 
 	public void Assert_dataFileUploadingWasSuccessful(String dataFileName) {
-		CustomAssertions.cAssertElementAttribute(driver, popup_uploadNewDataFile_uploadSuccessMessage_label, "text",
+		Assertions.assertElementAttribute(driver, popup_uploadNewDataFile_uploadSuccessMessage_label, "text",
 				testDataReader.getCellData("DataFileUploadSuccessMessage"), true);
 		ElementActions.click(driver, popup_uploadNewDataFile_ok_button);
 

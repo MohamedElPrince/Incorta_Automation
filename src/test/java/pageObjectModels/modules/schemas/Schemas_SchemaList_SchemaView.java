@@ -3,10 +3,9 @@ package pageObjectModels.modules.schemas;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
-import com.shaftEngine.io.ReportManager;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Schemas_SchemaList_SchemaView {
 	//// Variables
@@ -81,7 +80,7 @@ public class Schemas_SchemaList_SchemaView {
 
 	// Assert_AllPageElementsExist
 	public void Assert_schemaNameIsDisplayed(String schemaName) {
-		CustomAssertions.cAssertElementAttribute(driver, header_schemaName_label, "text", schemaName, true);
+		Assertions.assertElementAttribute(driver, header_schemaName_label, "text", schemaName, true);
 	}
 
 	public String GetNewestTableName() {
@@ -91,22 +90,22 @@ public class Schemas_SchemaList_SchemaView {
 	public void Assert_tableNameIsDisplayed(String tableName) {
 		body_tableName_label = By
 				.xpath("//div[@id='" + tableName + "']//div[contains(@class,'SchemaTable')]//p[@class='ng-binding']");
-		CustomAssertions.cAssertElementExists(driver, body_tableName_label, true);
+		Assertions.assertElementExists(driver, body_tableName_label, true);
 	}
 
 	public void Assert_tableAttributeIsCorrect(String tableName, String tableAttribute, String expectedValue) {
 		body_tableAttribute_label = By.xpath("//div[@id='" + tableName + "']//h5[normalize-space(.)='" + tableAttribute
 				+ "']//following-sibling::p[@class='ng-binding']");
-		CustomAssertions.cAssertElementAttribute(driver, body_tableAttribute_label, "Text", expectedValue, true);
+		Assertions.assertElementAttribute(driver, body_tableAttribute_label, "Text", expectedValue, true);
 	}
 
 	public void Wizard_AddDataSourceTable(String dataSourceName, boolean createImplicitJoins, String dataSourceType,
 			String tableName) {
 
 		String columnName = testDataReader.getColumnNameUsingRowNameAndCellData("DataSourceType", dataSourceType);
-		ReportManager.log("columnName: [" + columnName + "]");
+		// ReportManager.log("columnName: [" + columnName + "]");
 		String databaseName = testDataReader.getCellData("DatabaseName", columnName);
-		ReportManager.log("databaseName: [" + databaseName + "]");
+		// ReportManager.log("databaseName: [" + databaseName + "]");
 
 		ElementActions.select(driver, popup_schemaWizard_dataSource_list, dataSourceName);
 		if (createImplicitJoins
@@ -129,7 +128,7 @@ public class Schemas_SchemaList_SchemaView {
 	}
 
 	public void Assert_wizardWelcomeTextIsDisplayed() {
-		CustomAssertions.cAssertElementExists(driver, popup_schemaWizard_welcomeText_label, true);
+		Assertions.assertElementExists(driver, popup_schemaWizard_welcomeText_label, true);
 	}
 
 	// public void Assert_WizardWelcomeTextIsCorrect() {}
@@ -153,7 +152,7 @@ public class Schemas_SchemaList_SchemaView {
 	}
 
 	public void Assert_lastLoadStatusIsUpdated(String initialLoadStatus) {
-		CustomAssertions.cAssertElementAttribute(driver, header_lastLoadStatus_link, "Text", initialLoadStatus, false);
+		Assertions.assertElementAttribute(driver, header_lastLoadStatus_link, "Text", initialLoadStatus, false);
 	}
 
 }

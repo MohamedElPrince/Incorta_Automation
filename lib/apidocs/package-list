@@ -1,5 +1,5 @@
 com.shaftEngine.browserActionLibrary
-com.shaftEngine.customValidations
 com.shaftEngine.elementActionLibrary
-com.shaftEngine.io
+com.shaftEngine.ioActionLibrary
 com.shaftEngine.restAssuredActionLibrary
+com.shaftEngine.validationsLibrary

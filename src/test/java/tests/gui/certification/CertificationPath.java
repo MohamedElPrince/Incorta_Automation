@@ -7,8 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.io.ExcelReader;
-import com.shaftEngine.io.ReportManager;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ReportManager;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -383,7 +383,7 @@ public class CertificationPath {
 	public void switchToAdminAccount() {
 		allContentPage = new Content_AllContent(driver);
 		allContentPage.Navigate_toURL();
-		
+
 		logout();
 		loginUsingAdmin();
 	}

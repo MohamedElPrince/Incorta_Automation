@@ -2,11 +2,10 @@ package pageObjectModels.modules.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Content_AllContent {
 	//// Variables
@@ -35,13 +34,13 @@ public class Content_AllContent {
 	}
 
 	public void Assert_allContentTabIsSelected() {
-		CustomAssertions.cAssertElementAttribute(driver, header_allContentTabHeader_link, "class", "selectedTab", true);
+		Assertions.assertElementAttribute(driver, header_allContentTabHeader_link, "class", "selectedTab", true);
 	}
 
 	// Assert_folderIsDisplayed
 	public void Assert_dashboardIsDisplayed(String name) {
 		body_dashboard_link = By.xpath(" //section[@id=\"content\"]//a[@title='" + name + "']");
-		CustomAssertions.cAssertElementExists(driver, body_dashboard_link, true);
+		Assertions.assertElementExists(driver, body_dashboard_link, true);
 	}
 
 	// Click_folder
