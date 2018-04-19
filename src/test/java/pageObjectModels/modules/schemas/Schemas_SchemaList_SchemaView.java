@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Schemas_SchemaList_SchemaView {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 
 	//// Elements
 	// By header_schemaIcon_image;

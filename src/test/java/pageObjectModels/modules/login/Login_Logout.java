@@ -3,13 +3,13 @@ package pageObjectModels.modules.login;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Login_Logout {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String loggedOutMessageHeader = testDataReader.getCellData("LoggedOutMessageHeader");
 	String loggedOutMessageBody = testDataReader.getCellData("LoggedOutMessageBody");
 

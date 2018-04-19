@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Schemas_SchemaList_Table {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 
 	//// Elements
 	By header_tableName_textBox = By.xpath("//input[@ng-model='table._name']");

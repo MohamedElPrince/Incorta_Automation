@@ -5,13 +5,13 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.ioActionLibrary.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Scheduler_SchemaLoads {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_scheduler_schemas");
 
 	//// Elements
