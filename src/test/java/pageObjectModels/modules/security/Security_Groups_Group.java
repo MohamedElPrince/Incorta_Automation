@@ -3,14 +3,14 @@ package pageObjectModels.modules.security;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Security_Groups_Group {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 
 	//// Elements
 	// header_backToGroupsTab_link
@@ -70,13 +70,14 @@ public class Security_Groups_Group {
 			ElementActions.click(driver, popup_addUsersToGroup_add_button);
 		}
 	}
+
 	public void Assert_usersAreDisplayed(String[] users) {
 		if (users.length > 0) {
 			for (String user : users) {
 				body_users_name_link = By.xpath(
 						"//*[@id='contentScroll']//div[contains(@class,'usersPanel')]//div[contains(@ng-if,'group.users')]//p[text()='"
 								+ user + "']");
-				CustomAssertions.cAssertElementExists(driver, body_users_name_link, true);
+				Assertions.assertElementExists(driver, body_users_name_link, true);
 			}
 		}
 	}
@@ -102,7 +103,7 @@ public class Security_Groups_Group {
 				body_roles_name_link = By.xpath(
 						"//*[@id='contentScroll']//div[contains(@class,'usersPanel')]//div[contains(@ng-if,'group.roles')]//p[text()='"
 								+ role + "']");
-				CustomAssertions.cAssertElementExists(driver, body_roles_name_link, true);
+				Assertions.assertElementExists(driver, body_roles_name_link, true);
 			}
 		}
 	}

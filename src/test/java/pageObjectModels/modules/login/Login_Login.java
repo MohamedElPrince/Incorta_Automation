@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Login_Login {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_login_login");
 	String incortaVersion = System.getProperty("incortaVersion");
 
@@ -42,7 +42,7 @@ public class Login_Login {
 	}
 
 	public void Assert_logoIsDisplayed() {
-		CustomAssertions.cAssertElementExists(driver, header_incortaLogo_image, true);
+		Assertions.assertElementExists(driver, header_incortaLogo_image, true);
 	}
 
 	public void Login(String tenant, String username, String password) {
@@ -57,7 +57,7 @@ public class Login_Login {
 	}
 
 	public void Assert_correctVersionNumberIsDisplayed() {
-		CustomAssertions.cAssertElementAttribute(driver, footer_incortaCopyrights_label, "Text",
+		Assertions.assertElementAttribute(driver, footer_incortaCopyrights_label, "Text",
 				"([\\s\\S]*" + incortaVersion + "\\s[\\s\\S]*)", true);
 
 		// ([\s\S]*Rel3.2\s[\s\S]*) This regular expression matches all characters and

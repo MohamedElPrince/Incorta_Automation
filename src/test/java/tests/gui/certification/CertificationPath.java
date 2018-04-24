@@ -7,8 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.io.ExcelReader;
-import com.shaftEngine.io.ReportManager;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.ioActionLibrary.ReportManager;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -35,7 +35,7 @@ import pageObjectModels.modules.security.Security_Users;
 public class CertificationPath {
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
-	ExcelReader testDataReader;
+	ExcelFileManager testDataReader;
 
 	// Declaring Page Objects that will be used throughout the test
 	Login_Login loginPage;
@@ -383,7 +383,7 @@ public class CertificationPath {
 	public void switchToAdminAccount() {
 		allContentPage = new Content_AllContent(driver);
 		allContentPage.Navigate_toURL();
-		
+
 		logout();
 		loginUsingAdmin();
 	}
@@ -466,7 +466,7 @@ public class CertificationPath {
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
 				System.getProperty("testDataFolderPath") + "certification/TestData.xlsx");
-		testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
 

@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 
 public class Content_AllContent_Dashboard_Insight {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 
 	//// Elements
 	By menuHeader_search_textBox = By
@@ -23,7 +23,7 @@ public class Content_AllContent_Dashboard_Insight {
 	By submenuHeader_search_textBox = By.xpath("//tables-selection-panel//input[@ng-model='$ctrl.searchKey']");
 	By submenuBody_element_checkBox;
 	By submenuBody_done_button = By.className("done-button");
-	
+
 	By body_insightName_textBox = By.xpath("//input[@ng-model='component.title']");
 
 	//// Functions
@@ -74,7 +74,7 @@ public class Content_AllContent_Dashboard_Insight {
 				+ "']/../../../..//i[contains(@class,'fa-plus-circle')]");
 		ElementActions.click(driver, menuBody_addElement_button);
 	}
-	
+
 	public String setInsightName() {
 		String newInsightName = "Automation" + "_Insight_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.click(driver, body_insightName_textBox);

@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Data_DataSources {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_data_dataSources");
 
 	//// Elements
@@ -53,15 +53,14 @@ public class Data_DataSources {
 	}
 
 	public void Assert_dataSourcesTabIsSelected() {
-		CustomAssertions.cAssertElementAttribute(driver, header_dataSourcesTabHeader_link, "class", "selectedTab",
-				true);
+		Assertions.assertElementAttribute(driver, header_dataSourcesTabHeader_link, "class", "selectedTab", true);
 	}
 
 	public void Assert_nameIsDisplayed(String name) {
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
-		CustomAssertions.cAssertElementExists(driver, body_name_link, true);
+		Assertions.assertElementExists(driver, body_name_link, true);
 	}
 	// Assert_databaseIsDisplayed
 	// Assert_permissionIsDisplayed
@@ -101,8 +100,7 @@ public class Data_DataSources {
 	}
 
 	public void Assert_dataSourceCreationWasSuccessful(String dataSourceName) {
-		CustomAssertions.cAssertElementAttribute(driver, popup_newDataSource_headerName_label, "text", dataSourceName,
-				true);
+		Assertions.assertElementAttribute(driver, popup_newDataSource_headerName_label, "text", dataSourceName, true);
 		ElementActions.click(driver, popup_newDataSource_done_button);
 	}
 }

@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Schemas_SchemaList {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_schemas_schemaList");
 
 	//// Elements
@@ -42,14 +42,14 @@ public class Schemas_SchemaList {
 	}
 
 	public void Assert_schemaListTabIsSelected() {
-		CustomAssertions.cAssertElementAttribute(driver, header_schemaListTabHeader_link, "class", "selectedTab", true);
+		Assertions.assertElementAttribute(driver, header_schemaListTabHeader_link, "class", "selectedTab", true);
 	}
 
 	public void Assert_schemaNameIsDisplayed(String schemaName) {
 		body_schemaName_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
 						+ schemaName + "')]/p");
-		CustomAssertions.cAssertElementExists(driver, body_schemaName_link, true);
+		Assertions.assertElementExists(driver, body_schemaName_link, true);
 	}
 	// Assert_statusIsDisplayed
 	// Assert_permissionIsDisplayed

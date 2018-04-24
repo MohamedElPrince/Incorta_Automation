@@ -3,14 +3,14 @@ package pageObjectModels.modules.security;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Security_Groups {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_security_groups");
 
 	//// Elements
@@ -43,7 +43,7 @@ public class Security_Groups {
 		body_group_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
-		CustomAssertions.cAssertElementExists(driver, body_group_link, true);
+		Assertions.assertElementExists(driver, body_group_link, true);
 	}
 
 	// Assert_detailsForGroupAreCorrect

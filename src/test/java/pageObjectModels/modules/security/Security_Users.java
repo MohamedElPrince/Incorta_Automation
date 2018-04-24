@@ -6,14 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.customValidations.CustomAssertions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.io.ExcelReader;
+import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Security_Users {
 	//// Variables
 	WebDriver driver;
-	ExcelReader testDataReader = new ExcelReader(System.getProperty("testDataFilePath"));
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_security_users");
 	String imagesFolderPath = System.getProperty("testDataFolderPath") + "images/";
 
@@ -71,14 +71,14 @@ public class Security_Users {
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
-		CustomAssertions.cAssertElementExists(driver, body_name_link, true);
+		Assertions.assertElementExists(driver, body_name_link, true);
 	}
-	
+
 	public void Assert_nameIsNotDisplayed(String name) {
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
-		CustomAssertions.cAssertElementExists(driver, body_name_link, false);
+		Assertions.assertElementExists(driver, body_name_link, false);
 	}
 
 	// Assert_lastSignedInForUserNameIsCorrect
