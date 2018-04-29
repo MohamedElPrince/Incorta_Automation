@@ -32,6 +32,7 @@ public class Main_Skeleton {
 	By header_genericMenuItem_link;
 	By header_user_button = By
 			.xpath("//img[contains(@ng-src,'getUserPicture')]//ancestor::a[@class='dropdown-toggle']");
+	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
 
@@ -77,6 +78,10 @@ public class Main_Skeleton {
 
 	public void Click_actions() {
 		ElementActions.click(driver, header_actions_button);
+	}
+	
+	public void Click_ChooseVisualization() {
+		ElementActions.click(driver, header_chooseVisualization_button);
 	}
 
 	public void Select_fromDropdownMenu(String functionName) {

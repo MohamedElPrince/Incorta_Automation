@@ -26,6 +26,8 @@ public class Content_AllContent_Dashboard_Insight {
 
 	By body_insightName_textBox = By.xpath("//input[@ng-model='component.title']");
 
+	By popup_chooseAVisualization_visualizationType_text;
+
 	//// Functions
 	public Content_AllContent_Dashboard_Insight(WebDriver driver) {
 		this.driver = driver;
@@ -80,5 +82,11 @@ public class Content_AllContent_Dashboard_Insight {
 		ElementActions.click(driver, body_insightName_textBox);
 		ElementActions.type(driver, body_insightName_textBox, newInsightName);
 		return newInsightName;
+	}
+
+	public void selectVisualization(String visualizationType) {
+		popup_chooseAVisualization_visualizationType_text = By.xpath(
+				"//div[@id='send-dashboard-modal']//div[@class='ng-binding'][text()='" + visualizationType + "']/../a");
+		ElementActions.click(driver, popup_chooseAVisualization_visualizationType_text);
 	}
 }
