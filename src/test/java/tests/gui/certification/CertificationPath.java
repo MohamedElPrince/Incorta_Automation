@@ -320,7 +320,7 @@ public class CertificationPath {
 		schedulerSchemaLoadsPage.Assert_jobStatusIsCorrect(newScheduledSchemaLoadJobName, "Active");
 	}
 
-	@Test(priority = 16, description = "TC016 - Create Dashboard and Insight.", dependsOnMethods = {
+	@Test(priority = 16, description = "TC016 - Create Dashboard and Insight (Aggregated Table).", dependsOnMethods = {
 			"loginUsingNewlyCreatedUserAccount", "fullLoadSchema" })
 	@Description("When I navigate to the \"Content.AllContent\" page, And click on add, And create a dashboard, And add all the tables of the schema that was created previously to a new insight, Then the dashboard will be displayed in the list, And the insight will be displayed inside it.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -338,6 +338,9 @@ public class CertificationPath {
 		insightPage.addTableorSchemaToInsight(newSchemaName);
 		insightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
 		insightPage.addColumnToInsight(newDataSourceTableName, "Units");
+		
+		mainPage.Click_ChooseVisualization();
+		insightPage.selectVisualization("Aggregated");
 
 		newInsightName = insightPage.setInsightName();
 		mainPage.Click_done();
@@ -349,8 +352,32 @@ public class CertificationPath {
 		dashboardPage.Assert_dashboardName(newDashboardName);
 		dashboardPage.Assert_insightName(newInsightName);
 	}
+	
+	@Test(priority = 17, description = "TC017 - Validate Insight Data (Aggregated Table).", dependsOnMethods = {
+			"loginUsingNewlyCreatedUserAccount", "createDashboardAndInsight" })
+	@Description("When I navigate to the newly created insight, Then the insight will be displayed, And the data within it will be correct.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void validateInsightData() {
+		allContentPage = new Content_AllContent(driver);
+		allContentPage.Navigate_toURL();
+		mainPage.SearchForContentAndOpenResult(newDashboardName);
 
-	@Test(priority = 17, description = "TC017 - Send Dashboard via email.", dependsOnMethods = {
+		dashboardPage = new Content_AllContent_Dashboard(driver);
+		dashboardPage.Assert_dashboardName(newDashboardName);
+		dashboardPage.Assert_insightName(newInsightName);
+		
+		dashboardPage.AssertData_AggregatedTableContent("row", 1, testDataReader.getCellData("InsightDataRows", "Data1"));
+		dashboardPage.AssertData_AggregatedTableContent("row", 2, testDataReader.getCellData("InsightDataRows", "Data2"));
+		dashboardPage.AssertData_AggregatedTableContent("row", 3, testDataReader.getCellData("InsightDataRows", "Data3"));
+		dashboardPage.AssertData_AggregatedTableContent("row", 4, testDataReader.getCellData("InsightDataRows", "Data4"));
+		
+		dashboardPage.AssertData_AggregatedTableContent("measure", 1, testDataReader.getCellData("InsightDataMeasures", "Data1"));
+		dashboardPage.AssertData_AggregatedTableContent("measure", 2, testDataReader.getCellData("InsightDataMeasures", "Data2"));
+		dashboardPage.AssertData_AggregatedTableContent("measure", 3, testDataReader.getCellData("InsightDataMeasures", "Data3"));
+		dashboardPage.AssertData_AggregatedTableContent("measure", 4, testDataReader.getCellData("InsightDataMeasures", "Data4"));
+	}
+
+	@Test(priority = 18, description = "TC018 - Send Dashboard via email.", dependsOnMethods = {
 			"loginUsingNewlyCreatedUserAccount", "createDashboardAndInsight" })
 	@Description("When I navigate to the \"Content.AllContent\" page, And open a dashboard, And send it to an email address, Then a completed scheduled task will be displayed in the scheduled tasks list.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -376,7 +403,7 @@ public class CertificationPath {
 		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newDashboardName, "Completed");
 	}
 
-	@Test(priority = 18, description = "TC018 - Switch to admin Account.", dependsOnMethods = {
+	@Test(priority = 19, description = "TC019 - Switch to admin Account.", dependsOnMethods = {
 			"loginUsingNewlyCreatedUserAccount" })
 	@Description("When I logout, And login as an administrator, Then I will be redirected to the All Content tab.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -388,7 +415,7 @@ public class CertificationPath {
 		loginUsingAdmin();
 	}
 
-	@Test(priority = 19, description = "TC019 - Delete User and Transfer Ownership to self.", dependsOnMethods = {
+	@Test(priority = 20, description = "TC020 - Delete User and Transfer Ownership to self.", dependsOnMethods = {
 			"switchToAdminAccount" })
 	@Description("Given I am logged in as an administrator, When I delete a user account that has content, And I transfer ownership to myself, Then the user will no longer be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -405,7 +432,7 @@ public class CertificationPath {
 		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
 	}
 
-	@Test(priority = 20, description = "TC020 - Search for Transfered Ownership Elements: Schema", dependsOnMethods = {
+	@Test(priority = 21, description = "TC021 - Search for Transfered Ownership Elements: Schema", dependsOnMethods = {
 			"deleteUserAndTransferOwnershipToSelf", "createSchema" })
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -419,7 +446,7 @@ public class CertificationPath {
 		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
 	}
 
-	@Test(priority = 21, description = "TC021 - Search for Transfered Ownership Elements: Dashboard", dependsOnMethods = {
+	@Test(priority = 22, description = "TC022 - Search for Transfered Ownership Elements: Dashboard", dependsOnMethods = {
 			"deleteUserAndTransferOwnershipToSelf", "createDashboardAndInsight" })
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -431,7 +458,7 @@ public class CertificationPath {
 		mainPage.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
 	}
 
-	@Test(priority = 22, description = "TC022 - Search for Transfered Ownership Elements: Datasource", dependsOnMethods = {
+	@Test(priority = 23, description = "TC023 - Search for Transfered Ownership Elements: Datasource", dependsOnMethods = {
 			"deleteUserAndTransferOwnershipToSelf", "createDatasource" })
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -441,7 +468,7 @@ public class CertificationPath {
 		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
 	}
 
-	@Test(priority = 23, description = "TC023 - Search for Transfered Ownership Elements: DataFile", dependsOnMethods = {
+	@Test(priority = 24, description = "TC024 - Search for Transfered Ownership Elements: DataFile", dependsOnMethods = {
 			"deleteUserAndTransferOwnershipToSelf", "uploadDataFile" })
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -451,7 +478,7 @@ public class CertificationPath {
 		dataFilesPage.Assert_nameIsDisplayed(newDataFileName);
 	}
 
-	@Test(priority = 24, description = "TC024 - Search for Transfered Ownership Elements: Scheduler", dependsOnMethods = {
+	@Test(priority = 25, description = "TC025 - Search for Transfered Ownership Elements: Scheduler", dependsOnMethods = {
 			"deleteUserAndTransferOwnershipToSelf" })
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)

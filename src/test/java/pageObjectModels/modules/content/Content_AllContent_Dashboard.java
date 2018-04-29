@@ -16,6 +16,8 @@ public class Content_AllContent_Dashboard {
 	By header_dashboardName_textBox = By.xpath("//div[@id='dashboardHeader']//input");
 	By body_insightName_label = By.xpath("//header/span");
 
+	By body_aggregatedTable_dataCell_text;
+
 	By popup_sendDashboard_type_radioButton; // label[normalize-space(.)='HTML']/input[@type='radio']
 	By popup_sendDashboard_plusReciever_button = By
 			.xpath("//*[contains(@ng-click,\"!error && goToState('addUsers', 'to')\")]");
@@ -30,8 +32,7 @@ public class Content_AllContent_Dashboard {
 	}
 
 	public void Assert_dashboardName(String name) {
-		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", "(.*" + name + ".*)",
-				true);
+		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", "(.*" + name + ".*)", true);
 	}
 
 	public void Assert_insightName(String name) {
@@ -48,13 +49,28 @@ public class Content_AllContent_Dashboard {
 		ElementActions.click(driver, popup_sendDashboard_plusReciever_button);
 		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, email);
 		ElementActions.click(driver, popup_sendDashboard_add_button);
-		popup_sendDashboard_reciever_label = By
-				.xpath("//*[contains(@title,'" + email
-						+ "')]");
+		popup_sendDashboard_reciever_label = By.xpath("//*[contains(@title,'" + email + "')]");
 		Assertions.assertElementExists(driver, popup_sendDashboard_reciever_label, true);
 	}
 
 	public void scheduleEmailSending() {
 		ElementActions.click(driver, popup_sendDashboard_send_button);
+	}
+
+	public void AssertData_AggregatedTableContent(String RowOrMeasure, int RowNumber, String ExpectedData) {
+		switch (RowOrMeasure.trim().toLowerCase()) {
+		case "row":
+			body_aggregatedTable_dataCell_text = By
+					.xpath("//tbody/tr[" + RowNumber + "]//a[contains(@onclick,', \"row\"')]");
+			break;
+		case "measure":
+			body_aggregatedTable_dataCell_text = By
+					.xpath("//tbody/tr[" + RowNumber + "]//a[contains(@onclick,', \"measure\"')]");
+			break;
+		default:
+			break;
+		}
+
+		Assertions.assertElementAttribute(driver, body_aggregatedTable_dataCell_text, "text", ExpectedData, true);
 	}
 }
