@@ -105,7 +105,10 @@ public class CertificationPath {
 
 		newGroupName = groupsPage.AddNewGroup();
 		groupsPage.Navigate_toURL();
-		groupsPage.Assert_groupIsDisplayed(newGroupName);
+		// groupsPage.Assert_groupIsDisplayed(newGroupName);
+		// using search instead as the name is not found on the list after reaching 200
+		// entries
+		mainPage.SearchForContentAndAssertResultIsDisplayed(newGroupName);
 	}
 
 	@Test(priority = 4, description = "TC004 - Add Roles to Group.", dependsOnMethods = { "loginUsingAdmin",
@@ -115,7 +118,12 @@ public class CertificationPath {
 	public void addRolesToGroup() {
 		groupsPage = new Security_Groups(driver);
 		groupsPage.Navigate_toURL();
-		groupsPage.Click_group(newGroupName);
+		// groupsPage.Click_group(newGroupName);
+		// using search instead as the name is not found on the list after reaching 200
+		// entries
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(newGroupName);
 
 		groupPage = new Security_Groups_Group(driver);
 		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
@@ -131,7 +139,12 @@ public class CertificationPath {
 	public void addUserToGroup() {
 		groupsPage = new Security_Groups(driver);
 		groupsPage.Navigate_toURL();
-		groupsPage.Click_group(newGroupName);
+		// groupsPage.Click_group(newGroupName);
+		// using search instead as the name is not found on the list after reaching 200
+		// entries
+
+		mainPage = new Main_Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(newGroupName);
 
 		groupPage = new Security_Groups_Group(driver);
 
@@ -338,7 +351,7 @@ public class CertificationPath {
 		insightPage.addTableorSchemaToInsight(newSchemaName);
 		insightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
 		insightPage.addColumnToInsight(newDataSourceTableName, "Units");
-		
+
 		mainPage.Click_ChooseVisualization();
 		insightPage.selectVisualization("Aggregated");
 
@@ -352,7 +365,7 @@ public class CertificationPath {
 		dashboardPage.Assert_dashboardName(newDashboardName);
 		dashboardPage.Assert_insightName(newInsightName);
 	}
-	
+
 	@Test(priority = 17, description = "TC017 - Validate Insight Data (Aggregated Table).", dependsOnMethods = {
 			"loginUsingNewlyCreatedUserAccount", "createDashboardAndInsight" })
 	@Description("When I navigate to the newly created insight, Then the insight will be displayed, And the data within it will be correct.")
@@ -365,16 +378,24 @@ public class CertificationPath {
 		dashboardPage = new Content_AllContent_Dashboard(driver);
 		dashboardPage.Assert_dashboardName(newDashboardName);
 		dashboardPage.Assert_insightName(newInsightName);
-		
-		dashboardPage.AssertData_AggregatedTableContent("row", 1, testDataReader.getCellData("InsightDataRows", "Data1"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 2, testDataReader.getCellData("InsightDataRows", "Data2"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 3, testDataReader.getCellData("InsightDataRows", "Data3"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 4, testDataReader.getCellData("InsightDataRows", "Data4"));
-		
-		dashboardPage.AssertData_AggregatedTableContent("measure", 1, testDataReader.getCellData("InsightDataMeasures", "Data1"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 2, testDataReader.getCellData("InsightDataMeasures", "Data2"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 3, testDataReader.getCellData("InsightDataMeasures", "Data3"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 4, testDataReader.getCellData("InsightDataMeasures", "Data4"));
+
+		dashboardPage.AssertData_AggregatedTableContent("row", 1,
+				testDataReader.getCellData("InsightDataRows", "Data1"));
+		dashboardPage.AssertData_AggregatedTableContent("row", 2,
+				testDataReader.getCellData("InsightDataRows", "Data2"));
+		dashboardPage.AssertData_AggregatedTableContent("row", 3,
+				testDataReader.getCellData("InsightDataRows", "Data3"));
+		dashboardPage.AssertData_AggregatedTableContent("row", 4,
+				testDataReader.getCellData("InsightDataRows", "Data4"));
+
+		dashboardPage.AssertData_AggregatedTableContent("measure", 1,
+				testDataReader.getCellData("InsightDataMeasures", "Data1"));
+		dashboardPage.AssertData_AggregatedTableContent("measure", 2,
+				testDataReader.getCellData("InsightDataMeasures", "Data2"));
+		dashboardPage.AssertData_AggregatedTableContent("measure", 3,
+				testDataReader.getCellData("InsightDataMeasures", "Data3"));
+		dashboardPage.AssertData_AggregatedTableContent("measure", 4,
+				testDataReader.getCellData("InsightDataMeasures", "Data4"));
 	}
 
 	@Test(priority = 18, description = "TC018 - Send Dashboard via email.", dependsOnMethods = {
