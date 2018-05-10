@@ -500,7 +500,7 @@ public class CertificationPath {
 	}
 
 	@Test(priority = 25, description = "TC025 - Search for Transfered Ownership Elements: Scheduler", dependsOnMethods = {
-			"deleteUserAndTransferOwnershipToSelf" })
+			"deleteUserAndTransferOwnershipToSelf", "sendDashboardViaEmail" })
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsScheduler() {

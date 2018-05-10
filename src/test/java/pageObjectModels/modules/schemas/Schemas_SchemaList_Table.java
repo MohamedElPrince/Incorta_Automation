@@ -81,7 +81,7 @@ public class Schemas_SchemaList_Table {
 			break;
 		}
 
-		popup_addDatasource_datasourceImage_span = By.xpath("//img[contains(@src,'" + imageSrc + "')]/../..");
+		popup_addDatasource_datasourceImage_span = By.xpath("//div[contains(@class,'flex-box-wrap')]//img[contains(@src,'" + imageSrc + "')]/../..");
 		Assertions.assertElementAttribute(driver, popup_addDatasource_datasourceImage_span, "style",
 				".*(background:.*white).*", true);
 	}

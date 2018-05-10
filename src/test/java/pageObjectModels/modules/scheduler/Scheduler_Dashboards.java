@@ -49,7 +49,7 @@ public class Scheduler_Dashboards {
 
 	public void Assert_jobStatusIsCorrect(String name, String expectedStatus) {
 		body_Status_label = By.xpath(
-				"//div[contains(@class,'usersPanel')]//div[contains(@class,'dataTypeName')][contains(normalize-space(.),'"
+				"//div[contains(@class,'usersPanel')]//div[contains(@class,'userName')][contains(normalize-space(.),'"
 						+ name + "')]/following-sibling::div[contains(@class,'dataConnectionLink')]");
 		Assertions.assertElementAttribute(driver, body_Status_label, "Text", expectedStatus, true);
 	}

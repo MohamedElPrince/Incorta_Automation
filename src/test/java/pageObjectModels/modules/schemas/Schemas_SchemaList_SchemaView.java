@@ -108,11 +108,6 @@ public class Schemas_SchemaList_SchemaView {
 		// ReportManager.log("databaseName: [" + databaseName + "]");
 
 		ElementActions.select(driver, popup_schemaWizard_dataSource_list, dataSourceName);
-		if (createImplicitJoins
-				& !ElementActions.getAttribute(driver, popup_schemaWizard_createImplicitJoins_checkbox, "class")
-						.contains("ng-not-empty")) {
-			ElementActions.click(driver, popup_schemaWizard_createImplicitJoins_checkbox);
-		}
 		ElementActions.click(driver, popup_schemaWizard_next_button);
 
 		popup_schemaWizard_dataName_label = By
@@ -124,6 +119,11 @@ public class Schemas_SchemaList_SchemaView {
 		ElementActions.click(driver, popup_schemaWizard_next_button);
 
 		Assert_wizardWelcomeTextIsDisplayed();
+		if (createImplicitJoins
+				& !ElementActions.getAttribute(driver, popup_schemaWizard_createImplicitJoins_checkbox, "class")
+						.contains("ng-not-empty")) {
+			ElementActions.click(driver, popup_schemaWizard_createImplicitJoins_checkbox);
+		}
 		ElementActions.click(driver, popup_schemaWizard_finish_button);
 	}
 
