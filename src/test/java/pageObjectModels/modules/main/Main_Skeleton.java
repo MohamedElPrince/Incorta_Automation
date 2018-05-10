@@ -13,7 +13,6 @@ public class Main_Skeleton {
 	//// Elements
 
 	// header_incortaLogo_image
-	// sideMenu_security_link
 	// sideMenu_dataSourcesAndDataFiles_link
 	// sideMenu_schemasAndSessionVariables_link
 	// sideMenu_businessSchemas_link
@@ -35,6 +34,8 @@ public class Main_Skeleton {
 	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
+	
+	By sideMenu_security_link = By.xpath("(//img[@class='schema-menu-icon ng-scope'])[1]");
 
 	//// Functions
 	public Main_Skeleton(WebDriver driver) {
@@ -59,6 +60,10 @@ public class Main_Skeleton {
 
 	// Assert_searchResultIsDisplayed
 	// Navigate_toSearchResult
+	
+	public void Click_securityTab() {
+		ElementActions.click(driver, sideMenu_security_link);
+	}
 
 	public void Click_load() {
 		ElementActions.click(driver, header_load_button);
