@@ -9,7 +9,7 @@
 	<properties>
 		<!-- Execution Properties -->
 		<incortaRoot>http://35.225.96.248:9080/incorta/#/</incortaRoot>
-		<incortaVersion>Rel3.1.10</incortaVersion>
+		<incortaVersion>Rel3.2</incortaVersion>
 		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
