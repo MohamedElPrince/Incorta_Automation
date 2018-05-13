@@ -6,6 +6,9 @@ import com.shaftEngine.browserActionLibrary.BrowserFactory;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import pageObjectModels.modules.login.Login_Login;
 import pageObjectModels.modules.main.Main_Skeleton;
 import pageObjectModels.modules.security.Security_Users;
@@ -20,6 +23,7 @@ public class Users {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader;
+	String[] newUserData;
 
 	//// Page Objects
 	Login_Login loginPage;
@@ -27,17 +31,22 @@ public class Users {
 	Main_Skeleton mainPage;
 	
 	//// Test Cases
-	@Test
+	@Test(priority = 1, description = "C478 - Create User")
+	@Description("Given I am logged in, When I navigate to the security.users page, And I create a new user, And I navigate back to the security.users page, Then the new user will be displayed in the users list.")
+	@Severity(SeverityLevel.CRITICAL)
 	public void createNewUser() {
+		usersPage = new Security_Users(driver);
+		usersPage.Navigate_toURL();
+		
 		mainPage = new Main_Skeleton(driver);
-		mainPage.Click_securityTab();
 		mainPage.Click_add();
 		
-		usersPage = new Security_Users(driver);
+		newUserData = usersPage.AddNewUser();
+		usersPage.Assert_nameIsDisplayed(newUserData[2]);
 	}
 
 	
-	///// Testng Annotations
+	//// Testng Annotations
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",

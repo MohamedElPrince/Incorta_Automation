@@ -18,6 +18,7 @@ public class Main_Skeleton {
 	// sideMenu_businessSchemas_link
 	// sideMenu_scheduler_link
 	// sideMenu_content_link
+	// sideMenu_security_link
 
 	By header_search_textBox = By.id("inc-search-box-input");
 	By header_searchResult_link;
@@ -35,8 +36,6 @@ public class Main_Skeleton {
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
 	
-	By sideMenu_security_link = By.xpath("(//img[@class='schema-menu-icon ng-scope'])[1]");
-
 	//// Functions
 	public Main_Skeleton(WebDriver driver) {
 		this.driver = driver;
@@ -61,9 +60,9 @@ public class Main_Skeleton {
 	// Assert_searchResultIsDisplayed
 	// Navigate_toSearchResult
 	
-	public void Click_securityTab() {
-		ElementActions.click(driver, sideMenu_security_link);
-	}
+	//	public void Click_securityTab() {
+	//		ElementActions.click(driver, sideMenu_security_link);
+	//	}
 
 	public void Click_load() {
 		ElementActions.click(driver, header_load_button);
