@@ -132,7 +132,7 @@ public class Security_Users {
 		String UserImagePath = imagesFolderPath + userData[9];
 		UserImagePath = (new File(UserImagePath)).getAbsolutePath();
 		ElementActions.typeFileLocationForUpload(driver, popup_addNewUser_uploadImage_textBox, UserImagePath);
-		JSWaiter.sleep(5000);
+		JSWaiter.sleep(5000); // till uploading is done successfully and image is displayed
 		ElementActions.click(driver, popup_addNewUser_addUser_button);
 		return new String[] { loginName, userData[1], displayName }; // return username,password,displayname
 	}
