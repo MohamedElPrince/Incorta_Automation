@@ -13,7 +13,7 @@
 		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
-		<targetBrowser.name>GoogleChrome</targetBrowser.name>
+		<targetBrowser.name>MozillaFirefox</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
