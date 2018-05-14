@@ -1,6 +1,5 @@
 package tests.gui.security;
 
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -40,6 +39,7 @@ import pageObjectModels.modules.security.Security_Users;
 		String tenant;
 		String username;
 		String password;
+
 		
 		@Test(priority = 2, description = "TC_C474 - Create New Group.")
 		@Description("Given I've logged in. When I navigate to Security Tab, And go to Groups and click on the "+" and add Group name and description, Click 'Add User' Button. Then, A new group will be added to group list.")
@@ -55,7 +55,7 @@ import pageObjectModels.modules.security.Security_Users;
 			groupsPage.Navigate_toURL();
 			groupsPage.Assert_groupIsDisplayed(name);
 		}
-
+		
 		@BeforeClass
 		public void beforeClass() {
 			System.setProperty("testDataFilePath",
@@ -64,7 +64,7 @@ import pageObjectModels.modules.security.Security_Users;
 			driver = BrowserFactory.getBrowser(testDataReader);
 			loginPage = new Login_Login(driver);
 			loginPage.Navigate_toURL();
-			loginPage.Login(testDataReader.getCellData(tenant), testDataReader.getCellData(username), testDataReader.getCellData(password));
+			loginPage.Login(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"), testDataReader.getCellData("Password"));
 		}
 
 		@AfterMethod
