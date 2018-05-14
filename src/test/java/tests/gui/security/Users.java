@@ -3,7 +3,6 @@ package tests.gui.security;
 import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.elementActionLibrary.JSWaiter;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
 
