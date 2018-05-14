@@ -84,15 +84,13 @@ public class Security_Users {
 	// Assert_lastSignedInForUserNameIsCorrect
 	public void Select_nameCheckbox(String name) {
 		body_name_checkbox = By
-				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
-						+ "')]/preceding-sibling::div[contains(@class,'userSelection')]/input");
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" +name+ "')]/preceding-sibling::div[contains(@class,'userSelection')]/input");
 		ElementActions.click(driver, body_name_checkbox);
 	}
 
 	public void Click_name(String name) {
 		body_name_link = By
-				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
-						+ "')]/p");
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"+name+"')]/p"); 
 		ElementActions.click(driver, body_name_link);
 	}
 
@@ -148,5 +146,8 @@ public class Security_Users {
 	public void ConfirmUserDeletionAnyway() {
 		ElementActions.click(driver, popup_confirmDelete_deleteAnyway_button);
 	}
-
+	
+	public void ConfirmUserDeletion() {
+		ElementActions.click(driver, popup_confirmDelete_delete_button);
+	}
 }

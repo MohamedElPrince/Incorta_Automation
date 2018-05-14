@@ -3,6 +3,7 @@ package tests.gui.security;
 import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
+import com.shaftEngine.elementActionLibrary.JSWaiter;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
 
@@ -27,6 +28,7 @@ public class Users {
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
+	String TempUser = "Test_User";
 
 	//// Page Objects
 	Login_Login loginPage;
@@ -47,7 +49,20 @@ public class Users {
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
 	}
-
+	
+	@Test(priority = 2, description = "C471 - Delete Users")
+	@Description("Given I am logged in, When I navigate to the security.users page, And I select existing user, And I delete this selected user, Then user will not be displayed in the users list.")
+	@Severity(SeverityLevel.CRITICAL)
+	public void deleteUser() {
+		usersPage = new Security_Users(driver);
+		usersPage.Navigate_toURL();
+		usersPage.Select_nameCheckbox(TempUser); // manually created user till be automated as prerequisites 
+		mainPage = new Main_Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Delete selection");
+		usersPage.ConfirmUserDeletion();
+		usersPage.Assert_nameIsNotDisplayed(TempUser);
+	}
 	
 	//// Testng Annotations
 	@BeforeClass
