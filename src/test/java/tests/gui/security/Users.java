@@ -19,7 +19,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
-@Epic("Incorta_Security_Users ")
+@Epic("incorta > Security > Users.")
+
 public class Users {
 
 	//// Variables
