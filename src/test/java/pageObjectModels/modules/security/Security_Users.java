@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
+import com.shaftEngine.elementActionLibrary.JSWaiter;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
@@ -130,9 +131,7 @@ public class Security_Users {
 
 		String UserImagePath = imagesFolderPath + userData[9];
 		UserImagePath = (new File(UserImagePath)).getAbsolutePath();
-
 		ElementActions.typeFileLocationForUpload(driver, popup_addNewUser_uploadImage_textBox, UserImagePath);
-
 		ElementActions.click(driver, popup_addNewUser_addUser_button);
 		return new String[] { loginName, userData[1], displayName }; // return username,password,displayname
 	}
