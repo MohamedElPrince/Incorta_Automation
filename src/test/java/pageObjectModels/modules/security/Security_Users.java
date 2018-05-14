@@ -55,6 +55,12 @@ public class Security_Users {
 			.xpath("//input[@type='checkbox'][@ng-model='transferSharingPermissions']");
 	By popup_transferOwnership_transferOwnership_button = By.xpath("//button[@ng-click='transferOwnership()']");
 
+	//Element locator created by "Abdel Salam" for below function "SelectGroupForUserFromUsersPage" from users page
+	By selectUsersToBeAdded;
+	By popup_addUsersToGroup_UsersPage_add_button = By
+			.xpath("//div[contains(@class,'userDetailsModal')]//button[@type='submit'][normalize-space(.)='Add']");
+
+	
 	//// Functions
 	public Security_Users(WebDriver driver) {
 		this.driver = driver;
@@ -149,4 +155,16 @@ public class Security_Users {
 		ElementActions.click(driver, popup_confirmDelete_deleteAnyway_button);
 	}
 
+	//New Function created by "Abdel Salam" to select a specific group from Users page "Add to gtoup screen" 
+	public void SelectGroupForUserFromUsersPage(String GroupName)
+	{
+		selectUsersToBeAdded = By.name(GroupName);
+		ElementActions.click(driver, selectUsersToBeAdded);
+	}
+	
+	//Add Users to Group. Created by "Abdel Salam"
+	public void ClickAddToSelectGroupForUser ()
+	{
+		ElementActions.click(driver, popup_addUsersToGroup_UsersPage_add_button);
+	}
 }

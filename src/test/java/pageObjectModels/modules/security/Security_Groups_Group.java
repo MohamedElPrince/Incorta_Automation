@@ -44,6 +44,8 @@ public class Security_Groups_Group {
 	By popup_addRolesToGroup_role_label;
 	By popup_addRolesToGroup_add_button = popup_addUsersToGroup_add_button;
 	By popup_addRolesToGroup_cancel_button = popup_addUsersToGroup_cancel_button;
+	//Created by abdelsalam, to check that user exist in the group
+	By userAddedToTheGroup;
 
 	//// Functions
 	public Security_Groups_Group(WebDriver driver) {
@@ -81,6 +83,14 @@ public class Security_Groups_Group {
 			}
 		}
 	}
+	//Add new function to assert for one user only that he's displayed. Created by AbdelSalam
+	public void Assert_userAreDisplayed(String user)
+	{
+		userAddedToTheGroup = By.xpath("//*[@id='contentScroll']//div[contains(@class,'usersPanel')]//div[contains(@ng-if,'group.users')]//p[text()='"+user+"']");
+		Assertions.assertElementExists(driver, userAddedToTheGroup, true);
+		
+	}	
+	
 
 	// Assert_rolesLabelIsDisplayed
 	// Assert_rolesNumberIsCorrect
