@@ -58,7 +58,7 @@ public class Login_Login {
 
 	public void Assert_correctVersionNumberIsDisplayed() {
 		Assertions.assertElementAttribute(driver, footer_incortaCopyrights_label, "Text",
-				"([\\s\\S]*" + incortaVersion + "[\\s\\S]*)", true);
+				"([\\s\\S]*" + incortaVersion + ".*[\\s\\S]*)", true);
 
 		// ([\s\S]*Rel3.2\s[\s\S]*) This regular expression matches all characters and
 		// white spaces before the version number, then a whitespace right after the
