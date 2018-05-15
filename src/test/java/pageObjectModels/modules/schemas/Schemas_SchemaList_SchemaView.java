@@ -144,7 +144,7 @@ public class Schemas_SchemaList_SchemaView {
 	public void waitForDataToBeLoaded(String initialLoadStatus) {
 		String currentLoadStatus;
 		do {
-			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus);
+			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus, 1);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
 		} while (currentLoadStatus.equals("(.*" + initialLoadStatus + ".*)")
 				|| currentLoadStatus.equals("(.*Loading Data.*)")
