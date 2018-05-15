@@ -148,5 +148,11 @@ public class Security_Users {
 	public void ConfirmUserDeletionAnyway() {
 		ElementActions.click(driver, popup_confirmDelete_deleteAnyway_button);
 	}
+	
+	public void UploadProfilePicture (String pictureName) {
+		String UserImagePath = imagesFolderPath + pictureName;
+		UserImagePath = (new File(UserImagePath)).getAbsolutePath();
+		ElementActions.typeFileLocationForUpload(driver, popup_addNewUser_uploadImage_textBox, UserImagePath);
+	}
 
 }

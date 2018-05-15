@@ -27,6 +27,8 @@ public class Users {
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
+	String TempUser = "Test_User";
+	String Picture = "ProfilePicture.jpg";
 
 	//// Page Objects
 	Login_Login loginPage;
@@ -46,6 +48,16 @@ public class Users {
 		
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
+	}
+	
+	@Test(priority = 3, description = "C16118 - User profile picture")
+	@Description("Given I am logged in, When I navigate to the security.users page, And I change profile picture of existing user, And I save changes, Then the new profile picture sill be displayed")
+	@Severity(SeverityLevel.CRITICAL)
+	public void changeProfilePicture() {
+		usersPage = new Security_Users(driver);
+		usersPage.Navigate_toURL();
+		usersPage.Click_name(TempUser);
+		usersPage.UploadProfilePicture(Picture);
 	}
 
 	
