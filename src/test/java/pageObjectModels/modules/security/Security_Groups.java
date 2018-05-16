@@ -27,6 +27,11 @@ public class Security_Groups {
 	By popup_addNewGroup_addGroup_button = By.xpath("//button[normalize-space(.)='Add Group']");
 	By popup_addNewGroup_cancel_button = By.xpath("//button[normalize-space(.)='Cancel']");
 
+	//Button Delete selection from Actions in groups screen. Created by AbdelSalam
+	By DeleteSelectionButton = By.xpath("//button[@class='btn btn-default userSaveBtn']");
+	//By popup_Delete_button ;
+	By group_Checkbox ;
+	//input[@name="Abdelsalam_groupCheckBox"]
 	//// Functions
 	public Security_Groups(WebDriver driver) {
 		this.driver = driver;
@@ -65,5 +70,26 @@ public class Security_Groups {
 		ElementActions.click(driver, popup_addNewGroup_addGroup_button);
 		return name;
 	}
-
+	
+//Created by Abdelsalam to click on the group's Checkbox in groups page
+	public void ClickOnGroupCheckBox (String groupNameToBeSelected)
+	{
+		group_Checkbox =By.xpath("//input[@name='"+groupNameToBeSelected+"']");
+		ElementActions.click(driver, group_Checkbox);
+	}
+	
+	public void Assert_groupIsNotDisplayed(String name) {
+		body_group_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
+						+ "')]/p");
+		Assertions.assertElementExists(driver, body_group_link, false);
+	}
+	
+	public void ClickOnDeleteButton()
+	{
+		ElementActions.click(driver, DeleteSelectionButton);
+	}
+	
+	
+	
 }
