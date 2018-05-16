@@ -10,9 +10,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.modules.login.Login_Login;
-import pageObjectModels.modules.main.Main_Skeleton;
-import pageObjectModels.modules.security.Security_Users;
+import pageObjectModels.login.Login;
+import pageObjectModels.main.Skeleton;
+import pageObjectModels.security.Users;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -21,7 +21,7 @@ import org.testng.annotations.BeforeClass;
 
 @Epic("incorta > Security > Users.")
 
-public class Users {
+public class UsersTest{
 
 	//// Variables
 	WebDriver driver;
@@ -29,19 +29,19 @@ public class Users {
 	String[] newUserData;
 
 	//// Page Objects
-	Login_Login loginPage;
-	Security_Users usersPage;
-	Main_Skeleton mainPage;
+	Login loginPage;
+	Users usersPage;
+	Skeleton mainPage;
 	
 	//// Test Cases
 	@Test(priority = 1, description = "C478 - Create User")
 	@Description("Given I am logged in, When I navigate to the security.users page, And I create a new user, And I navigate back to the security.users page, Then the new user will be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createNewUser() {
-		usersPage = new Security_Users(driver);
+		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 		
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 		
 		newUserData = usersPage.AddNewUser();
@@ -56,9 +56,9 @@ public class Users {
 				System.getProperty("testDataFolderPath") + "certification/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
-		loginPage = new Login_Login(driver);
+		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
-		loginPage.Login(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
 	}
 

@@ -1,4 +1,4 @@
-package pageObjectModels.modules.schemas;
+package pageObjectModels.schemas;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Schemas_SchemaList_Table {
+public class SchemaList_Table {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -40,7 +40,7 @@ public class Schemas_SchemaList_Table {
 	By popup_addFileFromLocalFiles_add_button = By.xpath("//button[@ng-click='addItem()']");
 
 	//// Functions
-	public Schemas_SchemaList_Table(WebDriver driver) {
+	public SchemaList_Table(WebDriver driver) {
 		this.driver = driver;
 	}
 

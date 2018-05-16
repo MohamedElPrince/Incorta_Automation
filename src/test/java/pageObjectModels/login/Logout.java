@@ -1,4 +1,4 @@
-package pageObjectModels.modules.login;
+package pageObjectModels.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Login_Logout {
+public class Logout {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -19,7 +19,7 @@ public class Login_Logout {
 	By body_goToLoginPage_button = By.tagName("button");
 
 	//// Functions
-	public Login_Logout(WebDriver driver) {
+	public Logout(WebDriver driver) {
 		this.driver = driver;
 	}
 

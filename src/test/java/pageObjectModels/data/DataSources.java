@@ -1,4 +1,4 @@
-package pageObjectModels.modules.data;
+package pageObjectModels.data;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Data_DataSources {
+public class DataSources {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -44,7 +44,7 @@ public class Data_DataSources {
 	By popup_newDataSource_headerName_label = By.xpath("//span[@ng-if='!newDataSource']");
 
 	//// Functions
-	public Data_DataSources(WebDriver driver) {
+	public DataSources(WebDriver driver) {
 		this.driver = driver;
 	}
 

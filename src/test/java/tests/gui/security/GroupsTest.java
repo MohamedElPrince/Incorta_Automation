@@ -14,22 +14,22 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.modules.login.Login_Login;
-import pageObjectModels.modules.main.Main_Skeleton;
-import pageObjectModels.modules.security.Security_Groups;
+import pageObjectModels.login.Login;
+import pageObjectModels.main.Skeleton;
+import pageObjectModels.security.Groups;
 
 
 @Epic("Incorta -> Security -> Groups")
-	public class Groups 
+	public class GroupsTest 
 	{
 		// Declaring web-driver and excel reader instances
 		WebDriver driver;
 		ExcelFileManager testDataReader;
 		
 		// Declaring Page Objects that will be used in the tests
-		Security_Groups groupsPage;
-		Login_Login loginPage;
-		Main_Skeleton mainPage;
+		Groups groupsPage;
+		Login loginPage;
+		Skeleton mainPage;
 		
 		
 		//Declaring Variables that will be used in below tests
@@ -40,8 +40,8 @@ import pageObjectModels.modules.security.Security_Groups;
 		@Severity(SeverityLevel.CRITICAL)
 		public void createNewGroup() 
 		{
-			groupsPage = new Security_Groups(driver);
-			mainPage = new Main_Skeleton(driver);
+			groupsPage = new Groups(driver);
+			mainPage = new Skeleton(driver);
 			groupsPage.Navigate_toURL();
 			mainPage.Click_add();
 			name = groupsPage.AddNewGroup();
@@ -55,9 +55,9 @@ import pageObjectModels.modules.security.Security_Groups;
 			System.getProperty("testDataFolderPath") + "certification/TestData.xlsx");
 			testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 			driver = BrowserFactory.getBrowser(testDataReader);
-			loginPage = new Login_Login(driver);
+			loginPage = new Login(driver);
 			loginPage.Navigate_toURL();
-			loginPage.Login(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"), testDataReader.getCellData("Password"));
+			loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"), testDataReader.getCellData("Password"));
 		}
 
 		@AfterMethod

@@ -1,4 +1,4 @@
-package pageObjectModels.modules.main;
+package pageObjectModels.main;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Main_Skeleton {
+public class Skeleton {
 	//// Variables
 	WebDriver driver;
 
@@ -37,7 +37,7 @@ public class Main_Skeleton {
 	By header_done_link = By.id("saveButton_Charts");
 	
 	//// Functions
-	public Main_Skeleton(WebDriver driver) {
+	public Skeleton(WebDriver driver) {
 		this.driver = driver;
 	}
 	// Assert_logoIsDisplayed

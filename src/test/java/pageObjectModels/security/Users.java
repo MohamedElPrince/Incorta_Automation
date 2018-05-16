@@ -1,4 +1,4 @@
-package pageObjectModels.modules.security;
+package pageObjectModels.security;
 
 import java.io.File;
 
@@ -10,7 +10,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Security_Users {
+public class Users {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -56,7 +56,7 @@ public class Security_Users {
 	By popup_transferOwnership_transferOwnership_button = By.xpath("//button[@ng-click='transferOwnership()']");
 
 	//// Functions
-	public Security_Users(WebDriver driver) {
+	public Users(WebDriver driver) {
 		this.driver = driver;
 	}
 

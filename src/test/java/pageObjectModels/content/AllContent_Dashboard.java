@@ -1,4 +1,4 @@
-package pageObjectModels.modules.content;
+package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
+import com.shaftEngine.validationsLibrary.Verifications;
 
-public class Content_AllContent_Dashboard {
+public class AllContent_Dashboard {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -26,8 +27,20 @@ public class Content_AllContent_Dashboard {
 	By popup_sendDashboard_reciever_label; // div[contains(@class,'folderUserRow')][contains(normalize-space(.),'mohab.mohie@incorta.com')]//h5[contains(@class,'UserData')]
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
 
+	// Pagination Elements
+	By body_insight_paginationFirst_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')]/following-sibling::i/parent::a");
+	By body_insight_paginationPrevious_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
+	By body_insight_paginationNumberOfRecords_text = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/span[contains(text(),'of')][contains(text(),'-')]");
+	By body_insight_paginationNext_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
+	By body_insight_paginationLast_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");
+
 	//// Functions
-	public Content_AllContent_Dashboard(WebDriver driver) {
+	public AllContent_Dashboard(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -72,5 +85,13 @@ public class Content_AllContent_Dashboard {
 		}
 
 		Assertions.assertElementAttribute(driver, body_aggregatedTable_dataCell_text, "text", ExpectedData, true);
+	}
+
+	public void Pagination_VerifyThat_UiElementsExist() {
+		Verifications.verifyElementExists(driver, body_insight_paginationFirst_button, true);
+		Verifications.verifyElementExists(driver, body_insight_paginationPrevious_button, true);
+		Verifications.verifyElementExists(driver, body_insight_paginationNumberOfRecords_text, true);
+		Verifications.verifyElementExists(driver, body_insight_paginationNext_button, true);
+		Verifications.verifyElementExists(driver, body_insight_paginationLast_button, true);
 	}
 }
