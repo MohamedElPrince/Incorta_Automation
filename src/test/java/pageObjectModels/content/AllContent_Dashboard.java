@@ -87,11 +87,63 @@ public class AllContent_Dashboard {
 		Assertions.assertElementAttribute(driver, body_aggregatedTable_dataCell_text, "text", ExpectedData, true);
 	}
 
-	public void Pagination_VerifyThat_UiElementsExist() {
+	public void Pagination_Verify_UiElementsExist() {
 		Verifications.verifyElementExists(driver, body_insight_paginationFirst_button, true);
 		Verifications.verifyElementExists(driver, body_insight_paginationPrevious_button, true);
 		Verifications.verifyElementExists(driver, body_insight_paginationNumberOfRecords_text, true);
 		Verifications.verifyElementExists(driver, body_insight_paginationNext_button, true);
 		Verifications.verifyElementExists(driver, body_insight_paginationLast_button, true);
+	}
+
+	/**
+	 * 
+	 * @return the first record [*1* - 100 of 620]
+	 */
+	private int Pagination_GetFirstRecordInCurrentPage() {
+		// sample [*1* - 100 of 620]
+
+		String record = ElementActions.getText(driver, body_insight_paginationNumberOfRecords_text);
+		String[] parts = record.split(" of ");
+		String[] firstHalf = parts[0].split(" - ");
+
+		return Integer.parseInt(firstHalf[0].trim());
+	}
+
+	/**
+	 * 
+	 * @return the last record [1 - *100* of 620]
+	 */
+	private int Pagination_GetLastRecordInCurrentPage() {
+		// sample [1 - *100* of 620]
+
+		String record = ElementActions.getText(driver, body_insight_paginationNumberOfRecords_text);
+		String[] parts = record.split(" of ");
+		String[] firstHalf = parts[0].split(" - ");
+
+		return Integer.parseInt(firstHalf[1].trim());
+	}
+
+	/**
+	 * 
+	 * @return the total number of records [1 - 100 of *620*]
+	 */
+	private int Pagination_GetTotalNumberOfRecords() {
+		// sample [1 - 100 of *620*]
+
+		String record = ElementActions.getText(driver, body_insight_paginationNumberOfRecords_text);
+		String[] parts = record.split(" of ");
+
+		return Integer.parseInt(parts[0].trim());
+	}
+
+	public void Pagination_AssertThatNextButtonWorksAsExpected() {
+		// Get last record in current page
+		int lastRecordBeforeClickingNext = Pagination_GetLastRecordInCurrentPage();
+		// Click the Next Button
+		ElementActions.click(driver, body_insight_paginationNext_button);
+		// Get first record in new current page
+		int firstRecordAfterClickingNext = Pagination_GetFirstRecordInCurrentPage();
+
+		Assertions.assertEquals(lastRecordBeforeClickingNext + 1, firstRecordAfterClickingNext, true);
 	}
 }

@@ -62,7 +62,33 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Assert_dashboardName(paginationDashboardName);
 		dashboardPage.Assert_insightName(paginationInsightName);
 
-		dashboardPage.Pagination_VerifyThat_UiElementsExist();
+		dashboardPage.Pagination_Verify_UiElementsExist();
+	}
+
+	@Test(description = "C77297 - Chrome: Table Insight: Verify that user can navigate to Next Page.", dependsOnMethods = {
+			"verifyPaginationUiExists" })
+	@Description("When I navigate to the target dashboard, and I assert that the next button exists, and I click the next button, Then the first result displayed will be (the last result +1)")
+	@Severity(SeverityLevel.NORMAL)
+	public void assertThatNextButtonWorks() {
+		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
+		paginationInsightName = "7amada"; // to be removed
+
+		allContentPage = new AllContent(driver);
+		allContentPage.Navigate_toURL();
+		allContentPage.Assert_allContentTabIsSelected();
+
+		mainPage = new Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage.Assert_dashboardName(paginationDashboardName);
+		dashboardPage.Assert_insightName(paginationInsightName);
+
+		// first page = ^1 -
+		// last page = number of number$
+		// next page = ^(last record of current page + 1) -
+		// previous page = - (first record of current page -1) of
+		dashboardPage.Pagination_AssertThatNextButtonWorksAsExpected();
 	}
 
 	@BeforeClass
