@@ -91,6 +91,29 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Pagination_AssertThatNextButtonWorksAsExpected();
 	}
 
+	//Created By Abdelsalam 
+	@Test(description = "TCxxx - Chrome: Table Insight: Verify that user can navigate to Last Page.", dependsOnMethods = {
+	"verifyPaginationUiExists" })
+	@Description("When I navigate to the target dashboard, and I assert that the Last Page button exists, and I click the Last Page button, Then the Last Page result displayed will be (the total of records)")
+	@Severity(SeverityLevel.NORMAL)
+	public void assertThatLastPageButtonWorks() {
+	paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
+	paginationInsightName = "7amada"; // to be removed
+	
+	allContentPage = new AllContent(driver);
+	allContentPage.Navigate_toURL();
+	allContentPage.Assert_allContentTabIsSelected();
+	
+	mainPage = new Skeleton(driver);
+	mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+	
+	dashboardPage = new AllContent_Dashboard(driver);
+	dashboardPage.Assert_dashboardName(paginationDashboardName);
+	dashboardPage.Assert_insightName(paginationInsightName);
+	
+	dashboardPage.Pagination_AssertThatLastButtonWorksAsExpected();
+	}
+	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "pagination/TestData.xlsx");

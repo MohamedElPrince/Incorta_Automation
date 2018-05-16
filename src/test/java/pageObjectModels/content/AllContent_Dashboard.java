@@ -146,4 +146,33 @@ public class AllContent_Dashboard {
 
 		Assertions.assertEquals(lastRecordBeforeClickingNext + 1, firstRecordAfterClickingNext, true);
 	}
+	
+	public void Pagination_AssertThatLastButtonWorksAsExpected() {
+		// Get total records from current page
+		int TotalRecordFromCurruntPage = Pagination_GetActualTotalNumberOfRecords();
+		// Click the Last Button
+		ElementActions.click(driver, body_insight_paginationLast_button);
+		// Get first record in new current page
+		int SecondRecordAfterClickingLastPage = Pagination_GetLastRecordInCurrentPage();
+		Assertions.assertEquals(TotalRecordFromCurruntPage, SecondRecordAfterClickingLastPage, true);
+		
+	}
+	
+	//Created By Abdelsalam to get the total number of records as below sample..
+	private int Pagination_GetActualTotalNumberOfRecords() {
+		// sample [1 - 100 of *620*]
+
+		String record = ElementActions.getText(driver, body_insight_paginationNumberOfRecords_text);
+		String[] parts = record.split(" of ");
+
+		return Integer.parseInt(parts[1].trim());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
