@@ -14,12 +14,20 @@ public class Skeleton {
 
 	// header_incortaLogo_image
 	// sideMenu_dataSourcesAndDataFiles_link
+	By sideMenu_dataSrourcesAndDataFiles_link = By.xpath("//a[@id='dataSourcesItem']");
 	// sideMenu_schemasAndSessionVariables_link
+	By sideMenu_schemasAndSessionVariables_link = By.xpath("//a[@id='schemaItem']");
 	// sideMenu_businessSchemas_link
+	By sideMenu_businessSchemas_link = By.xpath("//a[@id='businessSchemaItem']");
 	// sideMenu_scheduler_link
+	By sideMenu_scheduler_link = By.xpath("//a[@id='schedulerItem']");
 	// sideMenu_content_link
+	By sideMenu_content_link = By.xpath("//a[@id='contentItem']");
 	// sideMenu_security_link
+	By sideMenu_security_link = By.xpath("//a[@id='securityItem']");
+	
 
+	
 	By header_search_textBox = By.id("inc-search-box-input");
 	By header_searchResult_link;
 
