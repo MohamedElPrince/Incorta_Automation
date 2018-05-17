@@ -25,6 +25,7 @@ public class Security_Users {
 
 	By body_name_checkbox;
 	By body_name_link;
+	By body_image_icon;
 	// body_lastSignedIn_label
 
 	By popup_addNewUser_loginName_textBox = By.xpath("//input[@ng-model='user.loginName']");
@@ -40,6 +41,7 @@ public class Security_Users {
 			.xpath("//div[contains(@class,'userDetailsModal')]//input[@type='file']");
 	By popup_addNewUser_addUser_button = By.xpath("//button[@ng-click='addNewUser(user)']");
 	By popup_addNewUser_cancel_button = By.xpath("//button[@ng-click='modal.closeMe()']");
+	By popup_existingUser_saveChanges_button = By.xpath("//button[@ng-click='updateUser(user)']");
 
 	By popup_confirmDelete_transferOwnership_button = By
 			.xpath("//div[contains(@class,'confirmDeleteModal')]//button[normalize-space()='Transfer ownership']");
@@ -153,6 +155,12 @@ public class Security_Users {
 		String UserImagePath = imagesFolderPath + pictureName;
 		UserImagePath = (new File(UserImagePath)).getAbsolutePath();
 		ElementActions.typeFileLocationForUpload(driver, popup_addNewUser_uploadImage_textBox, UserImagePath);
+		ElementActions.click(driver, popup_existingUser_saveChanges_button);
 	}
-
+	
+	public void Assert_imageIsDisplayed(String userName) {
+		body_image_icon = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"+ userName +"')]//preceding-sibling::div[contains(@class,'userImage')]/img");
+		Assertions.assertElementAttribute(driver, body_image_icon, "src","./content/images/defaultUser.png", false);
+	}
 }

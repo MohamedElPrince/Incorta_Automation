@@ -27,8 +27,8 @@ public class Users {
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
-	String TempUser = "Test_User";
-	String Picture = "ProfilePicture.jpg";
+	String TempUser = "Test_User"; // to be replaced later with dynamic one created at prepare test data phase
+	String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data phase
 
 	//// Page Objects
 	Login_Login loginPage;
@@ -58,6 +58,7 @@ public class Users {
 		usersPage.Navigate_toURL();
 		usersPage.Click_name(TempUser);
 		usersPage.UploadProfilePicture(Picture);
+		usersPage.Assert_imageIsDisplayed(TempUser);
 	}
 
 	
