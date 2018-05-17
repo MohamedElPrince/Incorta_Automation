@@ -2,10 +2,10 @@ package pageObjectModels.modules.security;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
+
 
 public class Security_Groups_Group {
 	//// Variables
@@ -46,7 +46,7 @@ public class Security_Groups_Group {
 	By popup_addRolesToGroup_cancel_button = popup_addUsersToGroup_cancel_button;
 	//Created by abdelsalam, to check that user exist in the group
 	By userAddedToTheGroup;
-
+	
 	//// Functions
 	public Security_Groups_Group(WebDriver driver) {
 		this.driver = driver;
@@ -106,7 +106,8 @@ public class Security_Groups_Group {
 			ElementActions.click(driver, popup_addRolesToGroup_add_button);
 		}
 	}
-
+	
+	
 	public void Assert_rolesAreDisplayed(String[] roles) {
 		if (roles.length > 0) {
 			for (String role : roles) {

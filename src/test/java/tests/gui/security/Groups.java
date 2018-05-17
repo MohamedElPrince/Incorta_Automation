@@ -35,6 +35,7 @@ import pageObjectModels.modules.security.Security_Users;
 		Security_Users usersPage;
 		Security_Groups_Group groupPage;
 		
+		
 		//Declaring Variables that will be used in below tests
 		String newGroupName;
 		//userName Variable created temporarily until we check the prerequisites needed.
@@ -42,8 +43,8 @@ import pageObjectModels.modules.security.Security_Users;
 		//As a workaround I'll create another userName to make it array just for method Assert_usersAreDisplayed.
 		String addUserToGroupButton = "Add to group";
 		String groupNameForTheUser = "Abdelsalam_group";
-		
-		
+		String clickOnGroupName = "Abdelsalam_group_automation";
+		String rolesName = "Schema Manager";
 		
 		@Test(priority = 1, description = "TC_C474 - Create New Group.")
 		@Description("Given I've logged in. When I navigate to Security Tab, And go to Groups and click on the "+" and add Group name and description, Click 'Add Group' Button. Then, A new group will be added to group list.")
@@ -57,8 +58,7 @@ import pageObjectModels.modules.security.Security_Users;
 			newGroupName = groupsPage.AddNewGroup();
 			groupsPage.Navigate_toURL();
 			groupsPage.Assert_groupIsDisplayed(newGroupName);
-		}
-		
+		}	
 		
 		@Test(priority = 2, description = "TC_C473 - Add user to group.")
 		@Description("Given I've a created user. When I navigate to Security Tab -> Users and select my user, then click on Actions -> Add to group, Then select my group and click on 'Add'. Then my user is added to the group successfully.")
@@ -84,6 +84,24 @@ import pageObjectModels.modules.security.Security_Users;
 		//New Function
 		groupPage.Assert_userAreDisplayed(userNameAddedToTheGroup);
 }
+	
+		@Test(priority = 4, description = "TC_C473 - Add role to group.")
+		@Description("Given I've a specific user and group, When I navigate to groups tab and select my group, Then click on + for Add roles. select my ")
+		@Severity(SeverityLevel.CRITICAL)
+		public void AddRoleToGroup() 
+		{	
+			groupsPage = new Security_Groups(driver);
+			groupsPage.Navigate_toURL();
+			groupsPage.Click_group(clickOnGroupName);
+			testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+			groupPage = new Security_Groups_Group(driver);
+			String AddedRoles[] = new String[] {testDataReader.getCellData("GroupRoles", "Data1")};
+			groupPage.AddRoles(AddedRoles);
+			groupPage.Assert_rolesAreDisplayed(AddedRoles);
+			groupPage.Assert_rolesAreDisplayed(AddedRoles);
+}
+
+
 		@BeforeClass
 		public void beforeClass() {
 			System.setProperty("testDataFilePath",
