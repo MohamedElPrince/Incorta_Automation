@@ -146,4 +146,32 @@ public class AllContent_Dashboard {
 
 		Assertions.assertEquals(lastRecordBeforeClickingNext + 1, firstRecordAfterClickingNext, true);
 	}
+	
+	
+	// Issue in this function logic need to be change 
+	
+	public void Pagination_AssertThatFirstButtontWorksAsExpected() {
+
+		// Get last record in current page
+		int lastRecordBeforeClickingLast = Pagination_GetLastRecordInCurrentPage();
+		// Click last Button
+		ElementActions.click(driver, body_insight_paginationLast_button); // To be removed 
+		// Get Last record in the current new page
+		int lastRecordAfterClickingLast = Pagination_GetLastRecordInCurrentPage();
+		// Check that the after click next button page changed
+		Assertions.assertEquals(lastRecordBeforeClickingLast, lastRecordAfterClickingLast, false);
+		
+		// Click the First back Button
+		ElementActions.click(driver, body_insight_paginationFirst_button);
+		// Get First record in new current page
+		int firstRecordAfterClickingFirstBack = Pagination_GetFirstRecordInCurrentPage();
+
+		Assertions.assertEquals(firstRecordAfterClickingFirstBack, 1, true);
+	}
+
+//	public void Pagination_ClickOnLastButton() {
+//		// Click the Last Next Button
+//		ElementActions.click(driver, body_insight_paginationLast_button);
+//
+//	}
 }
