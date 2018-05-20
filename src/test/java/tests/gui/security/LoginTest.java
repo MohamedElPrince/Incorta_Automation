@@ -1,21 +1,20 @@
 package tests.gui.security;
 
 import org.testng.annotations.Test;
-
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
-
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
+import pageObjectModels.security.Groups;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
 public class LoginTest {
   
@@ -26,21 +25,28 @@ public class LoginTest {
 		// Declaring Page Objects that will be used in the tests
 			Login loginPage;
 			Skeleton mainPage;
-						
+			Groups groupsPage;		
 		//Declaring Variables that will be used in below tests
-	
+			String name;
+			
 		@Test(priority = 1, description = "TC_C60554 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void LoginWithAnalyzer() 
 		{
-
+			groupsPage = new Groups(driver);
+			mainPage = new Skeleton(driver);
+			groupsPage.Navigate_toURL();
+			mainPage.Click_add();
+			name = groupsPage.AddNewGroup();
+			groupsPage.Navigate_toURL();
+			groupsPage.Assert_groupIsDisplayed(name);
 		}
 
 		@BeforeClass
 		public void beforeClass() {
 			System.setProperty("testDataFilePath",
-					System.getProperty("testDataFolderPath") + "Login/TestData.xlsx");
+			System.getProperty("testDataFolderPath") + "certification/TestData.xlsx");
 					testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 					driver = BrowserFactory.getBrowser(testDataReader);
 					loginPage = new Login(driver);
