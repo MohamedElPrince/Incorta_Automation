@@ -13,19 +13,8 @@ public class Skeleton {
 	//// Elements
 
 	// header_incortaLogo_image
-	// sideMenu_dataSourcesAndDataFiles_link
-	By sideMenu_dataSrourcesAndDataFiles_link = By.xpath("//a[@id='dataSourcesItem']");
-	// sideMenu_schemasAndSessionVariables_link
-	By sideMenu_schemasAndSessionVariables_link = By.xpath("//a[@id='schemaItem']");
-	// sideMenu_businessSchemas_link
-	By sideMenu_businessSchemas_link = By.xpath("//a[@id='businessSchemaItem']");
-	// sideMenu_scheduler_link
-	By sideMenu_scheduler_link = By.xpath("//a[@id='schedulerItem']");
-	// sideMenu_content_link
-	By sideMenu_content_link = By.xpath("//a[@id='contentItem']");
-	// sideMenu_security_link
-	By sideMenu_security_link = By.xpath("//a[@id='securityItem']");
 	
+	By SideMenu_GenericSideMenuItem_Link;
 
 	
 	By header_search_textBox = By.id("inc-search-box-input");
@@ -116,56 +105,21 @@ public class Skeleton {
 				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
 		ElementActions.click(driver, header_userMenuItem_link);
 	}
-	public void AssertExist_SideMenu_Security()
-
+	
+	/**
+	 * 
+	 * @param tabName --> Could have one of the following options:
+	 * dataSourcesItem
+	 * schemaItem
+	 * businessSchemaItem
+	 * schedulerItem
+	 * contentItem
+	 * securityItem
+	 */
+	public void AssertElementExist_Sidemenu(String tabName)
 	{
-
-	Assertions.assertElementExists(driver, sideMenu_security_link, true);
-
+		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
+		Assertions.assertElementExists(driver, SideMenu_GenericSideMenuItem_Link, true);
 	}
-
-
-	public void AssertExist_SideMenu_Content()
-
-	{
-
-	Assertions.assertElementExists(driver, sideMenu_content_link, true);
-
-	}
-
-
-	public void AssertExist_SideMenu_Scheduler()
-
-	{
-
-	Assertions.assertElementExists(driver, sideMenu_scheduler_link, true);
-
-	}
-
-
-	public void AssertExist_SideMenu_businessSchemas()
-
-	{
-
-	Assertions.assertElementExists(driver, sideMenu_businessSchemas_link, true);
-
-	}
-
-
-	public void AssertExist_SideMenu_schemasAndSessionVariables()
-
-	{
-
-	Assertions.assertElementExists(driver, sideMenu_schemasAndSessionVariables_link, true);
-
-	}
-
-
-	public void AssertExist_SideMenu_dataSrourcesAndDataFiles()
-
-	{
-
-	Assertions.assertElementExists(driver, sideMenu_dataSrourcesAndDataFiles_link, true);
-
-	}
+	
 }
