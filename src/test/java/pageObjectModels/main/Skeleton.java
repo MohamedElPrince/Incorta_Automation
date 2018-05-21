@@ -116,4 +116,56 @@ public class Skeleton {
 				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
 		ElementActions.click(driver, header_userMenuItem_link);
 	}
+	public void AssertExist_SideMenu_Security()
+
+	{
+
+	Assertions.assertElementExists(driver, sideMenu_security_link, true);
+
+	}
+
+
+	public void AssertExist_SideMenu_Content()
+
+	{
+
+	Assertions.assertElementExists(driver, sideMenu_content_link, true);
+
+	}
+
+
+	public void AssertExist_SideMenu_Scheduler()
+
+	{
+
+	Assertions.assertElementExists(driver, sideMenu_scheduler_link, true);
+
+	}
+
+
+	public void AssertExist_SideMenu_businessSchemas()
+
+	{
+
+	Assertions.assertElementExists(driver, sideMenu_businessSchemas_link, true);
+
+	}
+
+
+	public void AssertExist_SideMenu_schemasAndSessionVariables()
+
+	{
+
+	Assertions.assertElementExists(driver, sideMenu_schemasAndSessionVariables_link, true);
+
+	}
+
+
+	public void AssertExist_SideMenu_dataSrourcesAndDataFiles()
+
+	{
+
+	Assertions.assertElementExists(driver, sideMenu_dataSrourcesAndDataFiles_link, true);
+
+	}
 }
