@@ -7,6 +7,7 @@ import com.shaftEngine.ioActionLibrary.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import pageObjectModels.data.DataSources;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.security.Groups;
@@ -26,9 +27,10 @@ public class LoginTest {
 		// Declaring Page Objects that will be used in the tests
 			Login loginPage;
 			Skeleton mainPage;
-			Groups groupsPage;		
-		//Declaring Variables that will be used in below tests
-		
+			Groups groupsPage;	
+			DataSources dataSourcesPage;
+	
+		//Below Test cases is for Users login			
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -56,7 +58,7 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("contentItem");
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 		}
-
+		
 		@Test(priority = 3, description = "TC C60554_3 - Users permissions - Normal User")
 		@Description("When I log in with a normal User, only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -121,13 +123,38 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 		}
 		
+		//*******************************************Under Construction********************************************
+		//Below Test cases is for Users permissions.
+		@Test(priority = 7, description = "TC C60535_6 - Schema Manager Permissions ")
+		@Description("When I log in with Schema manager user, then i'll be able to create a new data source.")
+		@Severity(SeverityLevel.CRITICAL)
+		public void SchemaManager_Permissions_NewDataSource()
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
+				testDataReader.getCellData("Password", "Data3"));
+			
+			mainPage = new Skeleton(driver);
+			mainPage.Click_Element_Sidemenu("dataSourcesItem");
+			
+			dataSourcesPage= new DataSources(driver);
+			dataSourcesPage.Assert_dataSourcesTabIsSelected();
+			mainPage.Click_add();
+			//dataSourcesPage.AddDataSource("MySQL");
+			//dataSourcesPage.Assert_dataSourceCreationWasSuccessful("MySQL");
+		}
+		
 		@BeforeMethod
 		public void beforeMethod()
 		{
-			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_1 || User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
-			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_2 || User name/Pass: AbdelsalamIndividual/AbdelsalamIndividual1.
-			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_4 || User name/Pass: AbdelsalamSchemaManager/AbdelsalamSchemaManager1.
-			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_3 || User name/Pass: AbdelsalamUser/AbdelsalamUser1.
+			/*Need To add below as a predefined:
+			Analyzer User to be defined before executing TC C60554_1 || User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
+			Analyzer User to be defined before executing TC C60554_2 || User name/Pass: AbdelsalamIndividual/AbdelsalamIndividual1.
+			Analyzer User to be defined before executing TC C60554_4 || User name/Pass: AbdelsalamSchemaManager/AbdelsalamSchemaManager1.
+			Analyzer User to be defined before executing TC C60554_3 || User name/Pass: AbdelsalamUser/AbdelsalamUser1.
+			Analyzer User to be defined before executing TC C60554_5 || User name/Pass: AbdelsalamUserManager/AbdelsalamUserManager1.
+			Analyzer User to be defined before executing TC C60554_6 || User name/Pass: AbdelsalamSuper/AbdelsalamSuper1.
+			*/
 			loginPage = new Login(driver);
 			loginPage.Navigate_toURL();
 		}

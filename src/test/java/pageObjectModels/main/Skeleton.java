@@ -122,4 +122,20 @@ public class Skeleton {
 		Assertions.assertElementExists(driver, SideMenu_GenericSideMenuItem_Link, true);
 	}
 	
+	/**
+	 * 
+	 * @param tabName --> Could have one of the following options:
+	 * dataSourcesItem
+	 * schemaItem
+	 * businessSchemaItem
+	 * schedulerItem
+	 * contentItem
+	 * securityItem
+	 */
+	public void Click_Element_Sidemenu(String tabName)
+	{
+		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
+		ElementActions.click(driver, SideMenu_GenericSideMenuItem_Link);
+	}
+	
 }
