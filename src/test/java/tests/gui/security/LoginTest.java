@@ -57,7 +57,21 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 		}
 
-		@Test(priority = 3, description = "TC C60554_3 - Users permissions - Schema Manager User")
+		@Test(priority = 3, description = "TC C60554_3 - Users permissions - Normal User")
+		@Description("When I log in with a normal User, only scheduler and content tab will be exist.")
+		@Severity(SeverityLevel.CRITICAL)
+		public void LoginWithUser() 
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data4"), testDataReader.getCellData("Username", "Data4"), 
+				testDataReader.getCellData("Password", "Data4"));
+			
+			mainPage = new Skeleton(driver);
+			mainPage.AssertElementExist_Sidemenu("contentItem");
+			mainPage.AssertElementExist_Sidemenu("schedulerItem");
+		}
+		
+		@Test(priority = 4, description = "TC C60554_4 - Users permissions - Schema Manager User")
 		@Description("When I log in with Schema Manager User, only scheduler, content, Data Sources, Business Schema and Schema Item tabs will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void LoginWithSchemaManager() 
@@ -73,13 +87,47 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 		}
-
+		
+		@Test(priority = 5, description = "TC C60554_5 - Users permissions - User Manager User")
+		@Description("When I log in with user Manager User, only scheduler, content and security tabs will be exist.")
+		@Severity(SeverityLevel.CRITICAL)
+		public void LoginWithUserManager() 
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data5"), testDataReader.getCellData("Username", "Data5"), 
+				testDataReader.getCellData("Password", "Data5"));
+			
+			mainPage = new Skeleton(driver);
+			mainPage.AssertElementExist_Sidemenu("contentItem");
+			mainPage.AssertElementExist_Sidemenu("schedulerItem");
+			mainPage.AssertElementExist_Sidemenu("securityItem");
+		}
+		
+		@Test(priority = 6, description = "TC C60554_6 - Users permissions - SUPER user")
+		@Description("When I log in with Super User, all tabs will exist.")
+		@Severity(SeverityLevel.CRITICAL)
+		public void LoginWithSuperUser() 
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data6"), testDataReader.getCellData("Username", "Data6"), 
+				testDataReader.getCellData("Password", "Data6"));
+			
+			mainPage = new Skeleton(driver);
+			mainPage.AssertElementExist_Sidemenu("contentItem");
+			mainPage.AssertElementExist_Sidemenu("schedulerItem");
+			mainPage.AssertElementExist_Sidemenu("securityItem");
+			mainPage.AssertElementExist_Sidemenu("dataSourcesItem");
+			mainPage.AssertElementExist_Sidemenu("schemaItem");
+			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
+		}
+		
 		@BeforeMethod
 		public void beforeMethod()
 		{
 			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_1 || User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
 			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_2 || User name/Pass: AbdelsalamIndividual/AbdelsalamIndividual1.
-			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_3 || User name/Pass: AbdelsalamSchemaManager/AbdelsalamSchemaManager1.
+			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_4 || User name/Pass: AbdelsalamSchemaManager/AbdelsalamSchemaManager1.
+			//Need To add as a predefined --> Analyzer User to be defined before executing TC C60554_3 || User name/Pass: AbdelsalamUser/AbdelsalamUser1.
 			loginPage = new Login(driver);
 			loginPage.Navigate_toURL();
 		}
