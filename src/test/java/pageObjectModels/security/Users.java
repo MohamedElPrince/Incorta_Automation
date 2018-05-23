@@ -10,6 +10,8 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
+import pageObjectModels.main.Skeleton;
+
 public class Users {
 	//// Variables
 	WebDriver driver;
@@ -54,6 +56,10 @@ public class Users {
 	By popup_transferOwnership_transferSharingPermissions_checkBox = By
 			.xpath("//input[@type='checkbox'][@ng-model='transferSharingPermissions']");
 	By popup_transferOwnership_transferOwnership_button = By.xpath("//button[@ng-click='transferOwnership()']");
+
+	By popup_userInformation_userDetails_LoginAsUser_button = By.xpath("//a[@ng-click='impersonate(user)']");
+
+	By popup_impersonationMessage = By.xpath("//span[contains(@class,'impersonate-message')]");
 
 	//// Functions
 	public Users(WebDriver driver) {
@@ -149,4 +155,18 @@ public class Users {
 		ElementActions.click(driver, popup_confirmDelete_deleteAnyway_button);
 	}
 
+	public void Click_impersonation() {
+		ElementActions.click(driver, popup_userInformation_userDetails_LoginAsUser_button);
+	}
+
+	public void Assert_impersonationUIElementsAreDisplayed() {
+		Assertions.assertElementExists(driver, popup_impersonationMessage, true);
+		Assertions.assertElementAttribute(driver, popup_impersonationMessage, "text",
+				testDataReader.getCellData("ImpersonationMessage"), true);
+
+		Skeleton mainPage;
+		mainPage = new Skeleton(driver);
+		mainPage.Assert_impersonation_switchBack_link_IsDisplayed();
+		mainPage.Assert_fromUserMenu("Switch Back");
+	}
 }

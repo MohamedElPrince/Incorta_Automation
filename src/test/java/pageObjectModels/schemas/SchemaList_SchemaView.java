@@ -146,9 +146,9 @@ public class SchemaList_SchemaView {
 		do {
 			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus, 1);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
-		} while (currentLoadStatus.equals("(.*" + initialLoadStatus + ".*)")
-				|| currentLoadStatus.equals("(.*Loading Data.*)")
-				|| currentLoadStatus.equals("(.*Please load data.*)"));
+		} while (currentLoadStatus.matches("(.*" + initialLoadStatus + ".*)")
+				|| currentLoadStatus.matches("(.*Loading Data.*)")
+				|| currentLoadStatus.matches("(.*Please load data.*)"));
 	}
 
 	public void Assert_lastLoadStatusIsUpdated(String initialLoadStatus) {
