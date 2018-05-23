@@ -10,6 +10,8 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.data.DataSources;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
+import pageObjectModels.schemas.SchemaList;
+import pageObjectModels.schemas.SchemaList_SchemaView;
 import pageObjectModels.security.Groups;
 
 import org.openqa.selenium.WebDriver;
@@ -29,6 +31,11 @@ public class LoginTest {
 			Skeleton mainPage;
 			Groups groupsPage;	
 			DataSources dataSourcesPage;
+			SchemaList schemasPage;
+			SchemaList_SchemaView schemasViewPage;
+			
+			String NewSchemaName = "Abdelsalam_Automation_Schema";
+			String NewSchemaDescription = "Created by a script in class LoginTest.java";
 	
 		//Below Test cases is for Users login			
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
@@ -122,10 +129,10 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 		}
-		
-		//*******************************************Under Construction********************************************
+	
+	
 		//Below Test cases is for Users permissions.
-		@Test(priority = 7, description = "TC C60535_6 - Schema Manager Permissions ")
+		@Test(priority = 7, description = "TC C60535_1 - Schema Manager Permissions ")
 		@Description("When I log in with Schema manager user, then i'll be able to create a new data source.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void SchemaManager_Permissions_NewDataSource()
@@ -139,9 +146,41 @@ public class LoginTest {
 			
 			dataSourcesPage= new DataSources(driver);
 			dataSourcesPage.Assert_dataSourcesTabIsSelected();
+			
 			mainPage.Click_add();
-			//dataSourcesPage.AddDataSource("MySQL");
-			//dataSourcesPage.Assert_dataSourceCreationWasSuccessful("MySQL");
+			
+			String MyDataSourceName = dataSourcesPage.AddDataSource("MySQL");
+			dataSourcesPage.Assert_dataSourceCreationWasSuccessful(MyDataSourceName);
+			dataSourcesPage.Assert_nameIsDisplayed(MyDataSourceName);
+		}
+		
+			//*******************************************Under Construction********************************************
+		@Test(priority = 8, description = "TC C60535_2 - Schema Manager Permissions ")
+		@Description("When I log in with Schema manager user, then i'll be able to create a new schema")
+		@Severity(SeverityLevel.CRITICAL)
+		public void SchemaManager_Permissions_CreateSchema()
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
+				testDataReader.getCellData("Password", "Data3"));
+			
+			mainPage = new Skeleton(driver);
+			mainPage.Click_Element_Sidemenu("schemaItem");
+			mainPage.Click_add();
+			mainPage.Select_fromDropdownMenu("Create Schema");
+			
+			schemasPage = new SchemaList(driver);
+			schemasPage.createNewSchema(NewSchemaName, NewSchemaDescription);
+			
+			mainPage.Click_Element_Sidemenu("schemaItem");
+			schemasPage.Assert_schemaNameIsDisplayed(NewSchemaName);
+			
+			schemasPage.Click_schemaName(NewSchemaName);
+			mainPage.Click_add();
+			mainPage.Select_fromDropdownMenu("Schema Wizard");
+			
+			//Will use below to check the wizard to add data source table for my schema
+			//schemasViewPage.Wizard_AddDataSourceTable(NewSchemaName, createImplicitJoins, "MySQL", tableName);
 		}
 		
 		@BeforeMethod
