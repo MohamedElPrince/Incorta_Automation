@@ -133,7 +133,7 @@ public class AllContent_Dashboard {
 		String record = ElementActions.getText(driver, body_insight_paginationNumberOfRecords_text);
 		String[] parts = record.split(" of ");
 
-		return Integer.parseInt(parts[0].trim());
+		return Integer.parseInt(parts[1].trim());
 	}
 
 	public void Pagination_AssertThatNextButtonWorksAsExpected() {
@@ -149,30 +149,35 @@ public class AllContent_Dashboard {
 	
 	public void Pagination_AssertThatLastButtonWorksAsExpected() {
 		// Get total records from current page
-		int TotalRecordFromCurruntPage = Pagination_GetActualTotalNumberOfRecords();
+		int TotalRecordFromCurruntPage = Pagination_GetTotalNumberOfRecords();
 		// Click the Last Button
 		ElementActions.click(driver, body_insight_paginationLast_button);
-		// Get first record in new current page
+		// Get last record of the first record in new current page
 		int SecondRecordAfterClickingLastPage = Pagination_GetLastRecordInCurrentPage();
 		Assertions.assertEquals(TotalRecordFromCurruntPage, SecondRecordAfterClickingLastPage, true);
 		
 	}
 	
-	//Created By Abdelsalam to get the total number of records as below sample..
-	private int Pagination_GetActualTotalNumberOfRecords() {
-		// sample [1 - 100 of *620*]
+	public void Pagination_AssertThatFirstButtontWorksAsExpected() {
 
-		String record = ElementActions.getText(driver, body_insight_paginationNumberOfRecords_text);
-		String[] parts = record.split(" of ");
-
-		return Integer.parseInt(parts[1].trim());
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+		// Get First record in current page
+		int initialRecord = Pagination_GetFirstRecordInCurrentPage();
+		// Check that if you are in the first page or not, if yes move to the last page by clicking on last button then click on first button.
+		if (initialRecord == 1) {
+			// I'm on the first page already
+			// Click last Button
+			ElementActions.click(driver, body_insight_paginationLast_button); // To be removed-->click on last button
+			// Get First record in the current new page
+			int firstRecordAfterClickingLastButton = Pagination_GetFirstRecordInCurrentPage();
+			// Check that after click next button page changed
+			Assertions.assertEquals(firstRecordAfterClickingLastButton, 1, false);
+			// to confirm that I am no longer in the first page
+		}
+		// Click First Button
+		ElementActions.click(driver, body_insight_paginationFirst_button);
+		// Get First record in new current page after click first button
+		int firstRecordAfterClickingFirstButton = Pagination_GetFirstRecordInCurrentPage();
+		// Check that First Button works and navigated to first page
+		Assertions.assertEquals(firstRecordAfterClickingFirstButton, 1, true);
+	}	
 }
