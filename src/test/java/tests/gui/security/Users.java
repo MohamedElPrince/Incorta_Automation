@@ -22,6 +22,11 @@ import org.testng.annotations.BeforeClass;
 @Epic("incorta > Security > Users.")
 
 public class Users {
+	
+	//// Prerequisites
+	/**
+	 * Manually Add user with name "Test_User" till automating test data 
+	 */
 
 	//// Variables
 	WebDriver driver;
