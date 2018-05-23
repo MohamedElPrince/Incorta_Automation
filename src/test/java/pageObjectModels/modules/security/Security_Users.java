@@ -1,4 +1,4 @@
-package pageObjectModels.security;
+package pageObjectModels.modules.security;
 
 import java.io.File;
 
@@ -12,7 +12,7 @@ import com.shaftEngine.validationsLibrary.Assertions;
 
 import pageObjectModels.main.Skeleton;
 
-public class Users {
+public class Security_Users {
 ////Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -64,7 +64,7 @@ public class Users {
 	By popup_impersonationMessage = By.xpath("//span[contains(@class,'impersonate-message')]");
 
 	//// Functions
-	public Users(WebDriver driver) {
+	public Security_Users(WebDriver driver) {
 		this.driver = driver;
 	}
 
