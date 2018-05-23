@@ -65,7 +65,7 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Pagination_Verify_UiElementsExist();
 	}
 
-	@Test(description = "C77297 - Chrome: Table Insight: Verify that user can navigate to Next Page.", dependsOnMethods = {
+	@Test(priority = 2, description = "C77297 - Chrome: Table Insight: Verify that user can navigate to Next Page.", dependsOnMethods = {
 			"verifyPaginationUiExists" })
 	@Description("When I navigate to the target dashboard, and I assert that the next button exists, and I click the next button, Then the first result displayed will be (the last result +1)")
 	@Severity(SeverityLevel.NORMAL)
@@ -91,8 +91,7 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Pagination_AssertThatNextButtonWorksAsExpected();
 	}
 
-	//Created By Abdelsalam 
-	@Test(description = "C77298 - Chrome: Table Insight: Verify that user can navigate to Last Page.", dependsOnMethods = {
+	@Test(priority = 3, description = "C77298 - Chrome: Table Insight: Verify that user can navigate to Last Page.", dependsOnMethods = {
 	"verifyPaginationUiExists" })
 	@Description("When I navigate to the target dashboard, and I assert that the Last Page button exists, and I click the Last Page button, Then the Last Page result displayed will be (the total of records)")
 	@Severity(SeverityLevel.NORMAL)
@@ -114,7 +113,7 @@ public class AllContent_DashboardPagination {
 	dashboardPage.Pagination_AssertThatLastButtonWorksAsExpected();
 	}
 	
-	@Test(priority = 3, description = "C77300 - Chrome: Table Insight: Verify that user can return back to first page.")
+	@Test(priority = 4, description = "C77300 - Chrome: Table Insight: Verify that user can return back to first page.")
 	@Description("When I navigate to the target dashboard, Given that I am not in the first page, And if I found that its the first page, I navigate to last page"
 			+ " and next I click the first button, Then the first record result displayed will be ( 1 ) sample: ( 1 - No. of TotalNumber)")
 	@Severity(SeverityLevel.NORMAL)
