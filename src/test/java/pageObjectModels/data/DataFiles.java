@@ -1,4 +1,4 @@
-package pageObjectModels.modules.data;
+package pageObjectModels.data;
 
 import java.io.File;
 
@@ -11,7 +11,7 @@ import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.FileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Data_DataFiles {
+public class DataFiles {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -37,7 +37,7 @@ public class Data_DataFiles {
 			.xpath("//div[contains(@class,'folderActions')]//button[@ng-click='modal.closeMe()']");
 
 	//// Functions
-	public Data_DataFiles(WebDriver driver) {
+	public DataFiles(WebDriver driver) {
 		this.driver = driver;
 	}
 

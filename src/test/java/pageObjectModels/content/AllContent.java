@@ -1,4 +1,4 @@
-package pageObjectModels.modules.content;
+package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Content_AllContent {
+public class AllContent {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -25,7 +25,7 @@ public class Content_AllContent {
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
 
 	//// Functions
-	public Content_AllContent(WebDriver driver) {
+	public AllContent(WebDriver driver) {
 		this.driver = driver;
 	}
 

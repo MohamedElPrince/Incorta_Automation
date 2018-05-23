@@ -1,6 +1,6 @@
-package pageObjectModels.modules.security;
+package pageObjectModels.security;
 
-public class Security_Roles {
+public class Roles {
 
 	//// Elements
 

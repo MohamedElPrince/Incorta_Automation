@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mohies</groupId>
 	<artifactId>SHAFT_ENGINE</artifactId>
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<name>SHAFT_ENGINE</name>
 	<description>Selenium Hybrid Automation Framework for Testing [SHAFT]</description>
 
@@ -40,6 +40,8 @@
 
 		<testng.version>6.14.2</testng.version>
 
+		<ru.yandex.qatools.ashot.version>1.5.4</ru.yandex.qatools.ashot.version>
+
 		<apachepoi.version>3.17</apachepoi.version>
 		<org.slf4j.version>1.7.25</org.slf4j.version>
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -52,7 +54,6 @@
 	</properties>
 
 	<dependencies>
-
 		<!-- Selenium and Allure Dependencies -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -122,6 +123,16 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${org.slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ru.yandex.qatools.ashot</groupId>
+			<artifactId>ashot</artifactId>
+			<version>${ru.yandex.qatools.ashot.version}</version>
 		</dependency>
 	</dependencies>
 

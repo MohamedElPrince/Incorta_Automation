@@ -1,4 +1,4 @@
-package pageObjectModels.modules.main;
+package pageObjectModels.main;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Main_Skeleton {
+public class Skeleton {
 	//// Variables
 	WebDriver driver;
 
@@ -19,6 +19,8 @@ public class Main_Skeleton {
 	// sideMenu_scheduler_link
 	// sideMenu_content_link
 	// sideMenu_security_link
+
+	By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
 
 	By header_search_textBox = By.id("inc-search-box-input");
 	By header_searchResult_link;
@@ -35,9 +37,9 @@ public class Main_Skeleton {
 	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
-	
+
 	//// Functions
-	public Main_Skeleton(WebDriver driver) {
+	public Skeleton(WebDriver driver) {
 		this.driver = driver;
 	}
 	// Assert_logoIsDisplayed
@@ -59,10 +61,10 @@ public class Main_Skeleton {
 
 	// Assert_searchResultIsDisplayed
 	// Navigate_toSearchResult
-	
-	//	public void Click_securityTab() {
-	//		ElementActions.click(driver, sideMenu_security_link);
-	//	}
+
+	// public void Click_securityTab() {
+	// ElementActions.click(driver, sideMenu_security_link);
+	// }
 
 	public void Click_load() {
 		ElementActions.click(driver, header_load_button);
@@ -83,7 +85,7 @@ public class Main_Skeleton {
 	public void Click_actions() {
 		ElementActions.click(driver, header_actions_button);
 	}
-	
+
 	public void Click_ChooseVisualization() {
 		ElementActions.click(driver, header_chooseVisualization_button);
 	}
@@ -108,4 +110,20 @@ public class Main_Skeleton {
 				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
 		ElementActions.click(driver, header_userMenuItem_link);
 	}
+
+	public void Assert_fromUserMenu(String functionName) {
+		ElementActions.click(driver, header_user_button);
+		header_userMenuItem_link = By.xpath(
+				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
+		Assertions.assertElementExists(driver, header_userMenuItem_link, true);
+	}
+
+	public void Assert_impersonation_switchBack_link_IsDisplayed() {
+		Assertions.assertElementExists(driver, sideMenu_impersonation_switchBack_link, true);
+	}
+
+	public void Click_impersonation_switchBack_link() {
+		ElementActions.click(driver, sideMenu_impersonation_switchBack_link);
+	}
+
 }

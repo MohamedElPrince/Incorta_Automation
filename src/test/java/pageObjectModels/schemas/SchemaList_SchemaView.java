@@ -1,4 +1,4 @@
-package pageObjectModels.modules.schemas;
+package pageObjectModels.schemas;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Schemas_SchemaList_SchemaView {
+public class SchemaList_SchemaView {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -74,7 +74,7 @@ public class Schemas_SchemaList_SchemaView {
 	By popup_dataLoading_load_button = By.xpath("//button[normalize-space(.)='Load']");
 
 	//// Functions
-	public Schemas_SchemaList_SchemaView(WebDriver driver) {
+	public SchemaList_SchemaView(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -144,11 +144,11 @@ public class Schemas_SchemaList_SchemaView {
 	public void waitForDataToBeLoaded(String initialLoadStatus) {
 		String currentLoadStatus;
 		do {
-			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus);
+			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus, 1);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
-		} while (currentLoadStatus.equals("(.*" + initialLoadStatus + ".*)")
-				|| currentLoadStatus.equals("(.*Loading Data.*)")
-				|| currentLoadStatus.equals("(.*Please load data.*)"));
+		} while (currentLoadStatus.matches("(.*" + initialLoadStatus + ".*)")
+				|| currentLoadStatus.matches("(.*Loading Data.*)")
+				|| currentLoadStatus.matches("(.*Please load data.*)"));
 	}
 
 	public void Assert_lastLoadStatusIsUpdated(String initialLoadStatus) {

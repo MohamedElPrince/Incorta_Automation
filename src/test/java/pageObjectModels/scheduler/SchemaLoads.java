@@ -1,4 +1,4 @@
-package pageObjectModels.modules.scheduler;
+package pageObjectModels.scheduler;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Scheduler_SchemaLoads {
+public class SchemaLoads {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -43,7 +43,7 @@ public class Scheduler_SchemaLoads {
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//button[@ng-click='$ctrl.scheduleJob()']");
 
 	//// Functions
-	public Scheduler_SchemaLoads(WebDriver driver) {
+	public SchemaLoads(WebDriver driver) {
 		this.driver = driver;
 	}
 

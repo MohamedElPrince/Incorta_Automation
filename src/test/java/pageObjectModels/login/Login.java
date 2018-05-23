@@ -1,4 +1,4 @@
-package pageObjectModels.modules.login;
+package pageObjectModels.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Login_Login {
+public class Login {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -33,7 +33,7 @@ public class Login_Login {
 	By body_updatePassword_button = By.className("signInBtn");
 
 	//// Functions
-	public Login_Login(WebDriver driver) {
+	public Login(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -45,7 +45,7 @@ public class Login_Login {
 		Assertions.assertElementExists(driver, header_incortaLogo_image, true);
 	}
 
-	public void Login(String tenant, String username, String password) {
+	public void UserLogin(String tenant, String username, String password) {
 		ElementActions.type(driver, body_tenant_textBox, tenant);
 		ElementActions.type(driver, body_username_textBox, username);
 		ElementActions.type(driver, body_password_textBox, password);
@@ -58,7 +58,7 @@ public class Login_Login {
 
 	public void Assert_correctVersionNumberIsDisplayed() {
 		Assertions.assertElementAttribute(driver, footer_incortaCopyrights_label, "Text",
-				"([\\s\\S]*" + incortaVersion + "\\s[\\s\\S]*)", true);
+				"([\\s\\S]*" + incortaVersion + ".*[\\s\\S]*)", true);
 
 		// ([\s\S]*Rel3.2\s[\s\S]*) This regular expression matches all characters and
 		// white spaces before the version number, then a whitespace right after the

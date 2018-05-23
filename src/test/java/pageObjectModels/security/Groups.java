@@ -1,4 +1,4 @@
-package pageObjectModels.modules.security;
+package pageObjectModels.security;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Security_Groups {
+public class Groups {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -28,7 +28,7 @@ public class Security_Groups {
 	By popup_addNewGroup_cancel_button = By.xpath("//button[normalize-space(.)='Cancel']");
 
 	//// Functions
-	public Security_Groups(WebDriver driver) {
+	public Groups(WebDriver driver) {
 		this.driver = driver;
 	}
 
