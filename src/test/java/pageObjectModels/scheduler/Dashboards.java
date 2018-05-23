@@ -1,4 +1,4 @@
-package pageObjectModels.modules.scheduler;
+package pageObjectModels.scheduler;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class Scheduler_Dashboards {
+public class Dashboards {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -24,7 +24,7 @@ public class Scheduler_Dashboards {
 	// By body_nextRun_label;
 
 	//// Functions
-	public Scheduler_Dashboards(WebDriver driver) {
+	public Dashboards(WebDriver driver) {
 		this.driver = driver;
 	}
 

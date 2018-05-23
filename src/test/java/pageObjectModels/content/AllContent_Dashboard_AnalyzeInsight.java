@@ -1,4 +1,4 @@
-package pageObjectModels.modules.content;
+package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 
-public class Content_AllContent_Dashboard_Insight {
+public class AllContent_Dashboard_AnalyzeInsight {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -29,7 +29,7 @@ public class Content_AllContent_Dashboard_Insight {
 	By popup_chooseAVisualization_visualizationType_text;
 
 	//// Functions
-	public Content_AllContent_Dashboard_Insight(WebDriver driver) {
+	public AllContent_Dashboard_AnalyzeInsight(WebDriver driver) {
 		this.driver = driver;
 	}
 

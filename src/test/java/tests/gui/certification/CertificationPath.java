@@ -14,22 +14,22 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.modules.content.Content_AllContent;
-import pageObjectModels.modules.content.Content_AllContent_Dashboard;
-import pageObjectModels.modules.content.Content_AllContent_Dashboard_Insight;
-import pageObjectModels.modules.data.Data_DataFiles;
-import pageObjectModels.modules.data.Data_DataSources;
-import pageObjectModels.modules.login.Login_Login;
-import pageObjectModels.modules.login.Login_Logout;
-import pageObjectModels.modules.main.Main_Skeleton;
-import pageObjectModels.modules.scheduler.Scheduler_Dashboards;
-import pageObjectModels.modules.scheduler.Scheduler_SchemaLoads;
-import pageObjectModels.modules.schemas.Schemas_SchemaList;
-import pageObjectModels.modules.schemas.Schemas_SchemaList_SchemaView;
-import pageObjectModels.modules.schemas.Schemas_SchemaList_Table;
-import pageObjectModels.modules.security.Security_Groups;
-import pageObjectModels.modules.security.Security_Groups_Group;
-import pageObjectModels.modules.security.Security_Users;
+import pageObjectModels.content.AllContent;
+import pageObjectModels.content.AllContent_Dashboard;
+import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.data.DataFiles;
+import pageObjectModels.data.DataSources;
+import pageObjectModels.login.Login;
+import pageObjectModels.login.Logout;
+import pageObjectModels.main.Skeleton;
+import pageObjectModels.scheduler.Dashboards;
+import pageObjectModels.scheduler.SchemaLoads;
+import pageObjectModels.schemas.SchemaList;
+import pageObjectModels.schemas.SchemaList_SchemaView;
+import pageObjectModels.schemas.SchemaList_Table;
+import pageObjectModels.security.Groups;
+import pageObjectModels.security.Groups_Group;
+import pageObjectModels.security.Users;
 
 @Epic("incorta Certification Path.")
 public class CertificationPath {
@@ -38,22 +38,22 @@ public class CertificationPath {
 	ExcelFileManager testDataReader;
 
 	// Declaring Page Objects that will be used throughout the test
-	Login_Login loginPage;
-	Content_AllContent allContentPage;
-	Security_Users usersPage;
-	Main_Skeleton mainPage;
-	Security_Groups groupsPage;
-	Security_Groups_Group groupPage;
-	Login_Logout logoutPage;
-	Data_DataSources dataSourcesPage;
-	Data_DataFiles dataFilesPage;
-	Schemas_SchemaList schemasPage;
-	Schemas_SchemaList_SchemaView schemasViewPage;
-	Schemas_SchemaList_Table schemaTablePage;
-	Content_AllContent_Dashboard_Insight insightPage;
-	Content_AllContent_Dashboard dashboardPage;
-	Scheduler_Dashboards schedulerDashboardsPage;
-	Scheduler_SchemaLoads schedulerSchemaLoadsPage;
+	Login loginPage;
+	AllContent allContentPage;
+	Users usersPage;
+	Skeleton mainPage;
+	Groups groupsPage;
+	Groups_Group groupPage;
+	Logout logoutPage;
+	DataSources dataSourcesPage;
+	DataFiles dataFilesPage;
+	SchemaList schemasPage;
+	SchemaList_SchemaView schemasViewPage;
+	SchemaList_Table schemaTablePage;
+	AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	AllContent_Dashboard dashboardPage;
+	Dashboards schedulerDashboardsPage;
+	SchemaLoads schedulerSchemaLoadsPage;
 
 	// Declaring public variables that will be shared between tests
 	String[] newUserData; // username, password, displayname
@@ -69,12 +69,12 @@ public class CertificationPath {
 	@Description("When I navigate to the login page, And I login using valid credentials Then all content tab is selected.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void loginUsingAdmin() {
-		loginPage = new Login_Login(driver);
+		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
 		loginPage.Assert_correctVersionNumberIsDisplayed();
-		loginPage.Login(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
 	}
 
@@ -82,10 +82,10 @@ public class CertificationPath {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I create a new user, And I navigate back to the security.users page, Then the new user will be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createUser() {
-		usersPage = new Security_Users(driver);
+		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 
 		newUserData = usersPage.AddNewUser();
@@ -97,10 +97,10 @@ public class CertificationPath {
 	@Description("Given I am logged in, When I navigate to the security.groups page, And I create a new group, And I navigate to the security.groups page, Then the new group will be displayed in the groups list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createGroup() {
-		groupsPage = new Security_Groups(driver);
+		groupsPage = new Groups(driver);
 		groupsPage.Navigate_toURL();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 
 		newGroupName = groupsPage.AddNewGroup();
@@ -116,16 +116,16 @@ public class CertificationPath {
 	@Description("Given I am logged in, And I have created a new group, When navigate to the groups page, An I click on the new group, And I click on add role, And I select all the roles I want to add, And I click on add, Then the new roles will be displayed in the roles list inside that group.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addRolesToGroup() {
-		groupsPage = new Security_Groups(driver);
+		groupsPage = new Groups(driver);
 		groupsPage.Navigate_toURL();
 		// groupsPage.Click_group(newGroupName);
 		// using search instead as the name is not found on the list after reaching 200
 		// entries
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(newGroupName);
 
-		groupPage = new Security_Groups_Group(driver);
+		groupPage = new Groups_Group(driver);
 		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
 				testDataReader.getCellData("GroupRoles", "Data2") };
 		groupPage.AddRoles(AddedRoles);
@@ -137,16 +137,16 @@ public class CertificationPath {
 	@Description("Given I am logged in, And I have created a new group, When navigate to the groups page, An I click on the new group, And I click on add user, And I select all the users I want to add, And I click on add, Then the new users will be displayed in the roles list inside that group.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addUserToGroup() {
-		groupsPage = new Security_Groups(driver);
+		groupsPage = new Groups(driver);
 		groupsPage.Navigate_toURL();
 		// groupsPage.Click_group(newGroupName);
 		// using search instead as the name is not found on the list after reaching 200
 		// entries
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(newGroupName);
 
-		groupPage = new Security_Groups_Group(driver);
+		groupPage = new Groups_Group(driver);
 
 		groupPage.AddUsers(new String[] { newUserData[2] });
 		groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
@@ -156,10 +156,10 @@ public class CertificationPath {
 	@Description("Given I am logged in, When I logout, Then logout success message is displayed.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void logout() {
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Select_fromUserMenu("Logout");
 
-		logoutPage = new Login_Logout(driver);
+		logoutPage = new Logout(driver);
 		logoutPage.Assert_logoutMessageHeaderAndBodyAreCorrect();
 	}
 
@@ -168,15 +168,15 @@ public class CertificationPath {
 	@Description("When I navigate to the login page, And I login using valid credentials, And I insert and confirm my new password, Then all content tab is selected.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void loginUsingNewlyCreatedUserAccount() {
-		loginPage = new Login_Login(driver);
+		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
-		loginPage.Login(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
+		loginPage.UserLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
 		// Actions for first time login
 		String newPassword = "Automation";
 		loginPage.FirstTimeLogin(newUserData[1], newPassword, newPassword);
 		// Storing the newly created password
 		newUserData[1] = newPassword;
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
 	}
 
@@ -185,11 +185,11 @@ public class CertificationPath {
 	@Description("When I navigate to the DataSources page, And click add, And create a new dataSource, Then dataSource creation popup will be displayed, And dataSource name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createDatasource() {
-		dataSourcesPage = new Data_DataSources(driver);
+		dataSourcesPage = new DataSources(driver);
 		dataSourcesPage.Navigate_toURL();
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 
 		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
@@ -202,11 +202,11 @@ public class CertificationPath {
 	@Description("When I navigate to the \"DataFiles\" page, And click add, And upload a new dataFile, Then dataFile upload success message will be displayed, And dataFile name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void uploadDataFile() {
-		dataFilesPage = new Data_DataFiles(driver);
+		dataFilesPage = new DataFiles(driver);
 		dataFilesPage.Navigate_toURL();
 		dataFilesPage.Assert_dataFilesTabIsSelected();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 
 		newDataFileExtension = testDataReader.getCellData("DataFileExtension");
@@ -222,11 +222,11 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click add, And create a new schema, And navigate back to the schemas page, Then the newly created schema name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createSchema() {
-		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaListTabIsSelected();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 		mainPage.Select_fromDropdownMenu("Create Schema");
 
@@ -241,14 +241,14 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And use the schema wizard to add a new data source, Then the newly added data source table name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addDatasourceToSchemaUsingWizard() {
-		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Click_schemaName(newSchemaName);
 
-		schemasViewPage = new Schemas_SchemaList_SchemaView(driver);
+		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 		mainPage.Select_fromDropdownMenu("Schema Wizard");
 
@@ -263,19 +263,19 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And add a new data file, Then the newly added data file table name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addDatafileToSchemaWithLoadFilter() {
-		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Click_schemaName(newSchemaName);
 
-		schemasViewPage = new Schemas_SchemaList_SchemaView(driver);
+		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 		mainPage.Hover_overDropdownMenu("Table");
 		mainPage.Select_fromDropdownMenu("File System");
 
-		schemaTablePage = new Schemas_SchemaList_Table(driver);
+		schemaTablePage = new SchemaList_Table(driver);
 		schemaTablePage.Assert_AddDatasourcePopupIsDisplayed();
 		schemaTablePage.Assert_correctDatasourceIsSelected("File System");
 		schemaTablePage.AddDataFile("LocalFiles", "Text (csv, tsv, tab, txt)", false, newDataFileName,
@@ -292,16 +292,16 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And trigger a full data load, Then the data will be loaded, And the last load status will be updated.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void fullLoadSchema() {
-		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Click_schemaName(newSchemaName);
 
-		schemasViewPage = new Schemas_SchemaList_SchemaView(driver);
+		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
 		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_load();
 		mainPage.Hover_overDropdownMenu("Load now");
 		mainPage.Select_fromDropdownMenu("Full");
@@ -316,11 +316,11 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Schedule.SchemaLoad\" page, And create a new Incremental load job, Then the job will be displayed in the list, And the job's status will be active.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void scheduleSchemaIncremnetalLoad() {
-		schedulerSchemaLoadsPage = new Scheduler_SchemaLoads(driver);
+		schedulerSchemaLoadsPage = new SchemaLoads(driver);
 		schedulerSchemaLoadsPage.Navigate_toURL();
 		schedulerSchemaLoadsPage.Assert_schemasTabIsSelected();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 
 		newScheduledSchemaLoadJobName = schedulerSchemaLoadsPage.scheduleSchemaLoad(
@@ -338,30 +338,30 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Content.AllContent\" page, And click on add, And create a dashboard, And add all the tables of the schema that was created previously to a new insight, Then the dashboard will be displayed in the list, And the insight will be displayed inside it.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createDashboardAndInsight() {
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 		mainPage.Select_fromDropdownMenu("Create Dashboard");
 
 		newDashboardName = allContentPage.setNewDashboardName();
 
-		insightPage = new Content_AllContent_Dashboard_Insight(driver);
-		insightPage.addTableorSchemaToInsight(newSchemaName);
-		insightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
-		insightPage.addColumnToInsight(newDataSourceTableName, "Units");
+		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
+		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
+		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
 
 		mainPage.Click_ChooseVisualization();
-		insightPage.selectVisualization("Aggregated");
+		analyzeInsightPage.selectVisualization("Aggregated");
 
-		newInsightName = insightPage.setInsightName();
+		newInsightName = analyzeInsightPage.setInsightName();
 		mainPage.Click_done();
 
 		allContentPage.Navigate_toURL();
 		mainPage.SearchForContentAndOpenResult(newDashboardName);
 
-		dashboardPage = new Content_AllContent_Dashboard(driver);
+		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.Assert_dashboardName(newDashboardName);
 		dashboardPage.Assert_insightName(newInsightName);
 	}
@@ -371,11 +371,11 @@ public class CertificationPath {
 	@Description("When I navigate to the newly created insight, Then the insight will be displayed, And the data within it will be correct.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void validateInsightData() {
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		mainPage.SearchForContentAndOpenResult(newDashboardName);
 
-		dashboardPage = new Content_AllContent_Dashboard(driver);
+		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.Assert_dashboardName(newDashboardName);
 		dashboardPage.Assert_insightName(newInsightName);
 
@@ -403,20 +403,20 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Content.AllContent\" page, And open a dashboard, And send it to an email address, Then a completed scheduled task will be displayed in the scheduled tasks list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void sendDashboardViaEmail() {
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(newDashboardName);
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Send");
 
-		dashboardPage = new Content_AllContent_Dashboard(driver);
+		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.selectEmailFormat(testDataReader.getCellData("EmailFormat"));
 		dashboardPage.addUserEmailToRecieversList(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleEmailSending();
 
-		schedulerDashboardsPage = new Scheduler_Dashboards(driver);
+		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ChangeJobStatus("All");
 
@@ -429,7 +429,7 @@ public class CertificationPath {
 	@Description("When I logout, And login as an administrator, Then I will be redirected to the All Content tab.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void switchToAdminAccount() {
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 
 		logout();
@@ -441,11 +441,11 @@ public class CertificationPath {
 	@Description("Given I am logged in as an administrator, When I delete a user account that has content, And I transfer ownership to myself, Then the user will no longer be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void deleteUserAndTransferOwnershipToSelf() {
-		usersPage = new Security_Users(driver);
+		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 		usersPage.Select_nameCheckbox(newUserData[2]);
 
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.Click_actions();
 		mainPage.Select_fromDropdownMenu("Delete selection");
 
@@ -462,7 +462,7 @@ public class CertificationPath {
 		 * 1 SCHEMA(s) 1 DASHBOARD(s) 1 DATASOURCE(s) 1 DATAFILE(s) 1of2 SCHEDULER(s)
 		 */
 
-		schemasPage = new Schemas_SchemaList(driver);
+		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
 	}
@@ -472,10 +472,10 @@ public class CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsDashboard() {
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		// allContentPage.Assert_dashboardIsDisplayed(newDashboardName);
-		mainPage = new Main_Skeleton(driver);
+		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
 	}
 
@@ -484,7 +484,7 @@ public class CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsDatasource() {
-		dataSourcesPage = new Data_DataSources(driver);
+		dataSourcesPage = new DataSources(driver);
 		dataSourcesPage.Navigate_toURL();
 		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
 	}
@@ -494,7 +494,7 @@ public class CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsDataFile() {
-		dataFilesPage = new Data_DataFiles(driver);
+		dataFilesPage = new DataFiles(driver);
 		dataFilesPage.Navigate_toURL();
 		dataFilesPage.Assert_nameIsDisplayed(newDataFileName);
 	}
@@ -504,7 +504,7 @@ public class CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsScheduler() {
-		schedulerDashboardsPage = new Scheduler_Dashboards(driver);
+		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ChangeJobStatus("All");
 		schedulerDashboardsPage.Assert_nameIsDisplayed(newDashboardName);
