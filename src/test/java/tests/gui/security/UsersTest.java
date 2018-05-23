@@ -16,7 +16,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
-import pageObjectModels.modules.security.Security_Users;
+import pageObjectModels.security.Users;
 
 @Epic("incorta > Security > Users")
 
@@ -37,7 +37,7 @@ public class UsersTest {
 
 	//// Page Objects
 	Login loginPage;
-	Security_Users usersPage;
+	Users usersPage;
 	Skeleton mainPage;
 
 	//// Test Cases
@@ -45,7 +45,7 @@ public class UsersTest {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I create a new user, And I navigate back to the security.users page, Then the new user will be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createNewUser() {
-		usersPage = new Security_Users(driver);
+		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 
 		mainPage = new Skeleton(driver);
@@ -59,7 +59,7 @@ public class UsersTest {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I select existing user, And I delete this selected user, Then user will not be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void deleteUser() {
-		usersPage = new Security_Users(driver);
+		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 		usersPage.Select_nameCheckbox(TempUser); // manually created user till be automated as prerequisites
 		mainPage = new Skeleton(driver);
@@ -73,7 +73,7 @@ public class UsersTest {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I change profile picture of existing user, And I save changes, Then the new profile picture sill be displayed")
 	@Severity(SeverityLevel.CRITICAL)
 	public void changeProfilePicture() {
-		usersPage = new Security_Users(driver);
+		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 		usersPage.Click_name(TempUser);
 		usersPage.UploadProfilePicture(Picture);
@@ -85,7 +85,7 @@ public class UsersTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void impersonationUI() {
 
-		usersPage = new Security_Users(driver);
+		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 		String impersonationUserName = testDataReader.getCellData("ImpersonationUserName");
 
