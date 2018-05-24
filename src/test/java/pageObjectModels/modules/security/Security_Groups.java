@@ -71,10 +71,10 @@ public class Security_Groups {
 		return name;
 	}
 	
-//Created by Abdelsalam to click on the group's Checkbox in groups page
+	//Created by Abdelsalam to click on the group's Checkbox in groups page
 	public void ClickOnGroupCheckBox (String groupNameToBeSelected)
 	{
-		group_Checkbox =By.xpath("//input[@name='"+groupNameToBeSelected+"']");
+		group_Checkbox =By.xpath("//input[@name='"+groupNameToBeSelected+"']");//Xpath need to be refactord to not be counting on "CheckBox" word in Xpath.
 		ElementActions.click(driver, group_Checkbox);
 	}
 	
