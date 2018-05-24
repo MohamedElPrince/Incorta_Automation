@@ -191,7 +191,7 @@ public class LoginTest {
 		@Test(priority = 9, description = "TC C60535_3 - Schema Manager Permissions ")
 		@Description("When I log in with Schema manager user, Given I've a file source and schema, then I'll be able to go to schema wizard to add the data source to the schema.")
 		@Severity(SeverityLevel.CRITICAL)
-		public void SchemaManager_Permissions_()
+		public void SchemaManager_Permissions_ConnectDataSourceWithSchemaUsingWizard()
 		{
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
@@ -199,15 +199,12 @@ public class LoginTest {
 			
 			mainPage = new Skeleton(driver);
 			mainPage.Click_Element_Sidemenu("schemaItem");
-			mainPage.Click_add();
-			mainPage.Select_fromDropdownMenu("Create Schema");
 			
 			schemasPage = new SchemaList(driver);
-			schemasPage.createNewSchema(NewSchemaName, NewSchemaDescription);
+			schemasPage.Click_schemaName(NewSchemaName);//Need to be changed to another schema name as a predefined.
 			
-			mainPage.Click_Element_Sidemenu("schemaItem");
-			schemasPage.Assert_schemaNameIsDisplayed(NewSchemaName);
-			
+			schemasViewPage = new SchemaList_SchemaView(driver);
+
 		/*	schemasPage.Click_schemaName(NewSchemaName);
 			mainPage.Click_add();
 			mainPage.Select_fromDropdownMenu("Schema Wizard");
