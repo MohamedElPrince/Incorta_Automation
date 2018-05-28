@@ -40,11 +40,11 @@ public class Groups_Group {
 			"//*[@id='contentScroll']//div[@class='usersHeader']/h3[contains(text(),'Roles')]//..//img[contains(@src,'plus')]");
 	// body_roles_name_checkbox
 	By body_roles_name_link;
+	By body_individual_UserName_label;
 
 	By popup_addRolesToGroup_role_label;
 	By popup_addRolesToGroup_add_button = popup_addUsersToGroup_add_button;
 	By popup_addRolesToGroup_cancel_button = popup_addUsersToGroup_cancel_button;
-	By userAddedToTheGroup;
 
 	//// Functions
 	public Groups_Group(WebDriver driver) {
@@ -83,13 +83,11 @@ public class Groups_Group {
 		}
 	}
 
-	// Add new function to assert for one user only that he's displayed. Created by
-	// AbdelSalam
-	public void Assert_userAreDisplayed(String user) {
-		userAddedToTheGroup = By.xpath(
+	public void Assert_userIsDisplayed(String user) {
+		body_individual_UserName_label = By.xpath(
 				"//*[@id='contentScroll']//div[contains(@class,'usersPanel')]//div[contains(@ng-if,'group.users')]//p[text()='"
 						+ user + "']");
-		Assertions.assertElementExists(driver, userAddedToTheGroup, true);
+		Assertions.assertElementExists(driver, body_individual_UserName_label, true);
 
 	}
 

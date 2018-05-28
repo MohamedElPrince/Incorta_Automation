@@ -74,7 +74,7 @@ public class Groups {
 	
 		public void ClickOnGroupCheckBox (String groupNameToBeSelected)
 		{
-			group_Checkbox =By.xpath("//input[@name='"+groupNameToBeSelected+"']");//Xpath need to be refactord to not be counting on "CheckBox" word in Xpath.
+			group_Checkbox =By.xpath("//input[contains(@name,'"+groupNameToBeSelected+"')]");
 			ElementActions.click(driver, group_Checkbox);
 		}
 		
