@@ -11,7 +11,7 @@
 		<incortaRoot>http://qa.incorta.com:7080/incorta/#/</incortaRoot>
 		<incortaVersion>Rel3.1.10</incortaVersion>
 		<testSuite.name>testSuite01</testSuite.name>
-		<operatingSystem.version>Linux-64</operatingSystem.version>
+		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 

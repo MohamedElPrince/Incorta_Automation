@@ -13,7 +13,7 @@ import com.shaftEngine.validationsLibrary.Assertions;
 import pageObjectModels.main.Skeleton;
 
 public class Users {
-////Variables
+	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_security_users");
@@ -58,10 +58,16 @@ public class Users {
 	By popup_transferOwnership_transferSharingPermissions_checkBox = By
 			.xpath("//input[@type='checkbox'][@ng-model='transferSharingPermissions']");
 	By popup_transferOwnership_transferOwnership_button = By.xpath("//button[@ng-click='transferOwnership()']");
-	
+
 	By popup_userInformation_userDetails_LoginAsUser_button = By.xpath("//a[@ng-click='impersonate(user)']");
 
 	By popup_impersonationMessage = By.xpath("//span[contains(@class,'impersonate-message')]");
+
+	// Element locator created by "Abdel Salam" for below function
+	// "SelectGroupForUserFromUsersPage" from users page
+	By selectUsersToBeAdded;
+	By popup_addUsersToGroup_UsersPage_add_button = By
+			.xpath("//div[contains(@class,'userDetailsModal')]//button[@type='submit'][normalize-space(.)='Add']");
 
 	//// Functions
 	public Users(WebDriver driver) {
@@ -156,24 +162,25 @@ public class Users {
 	public void ConfirmUserDeletionAnyway() {
 		ElementActions.click(driver, popup_confirmDelete_deleteAnyway_button);
 	}
-	
-	public void UploadProfilePicture (String pictureName) {
+
+	public void UploadProfilePicture(String pictureName) {
 		String UserImagePath = imagesFolderPath + pictureName;
 		UserImagePath = (new File(UserImagePath)).getAbsolutePath();
 		ElementActions.typeFileLocationForUpload(driver, popup_addNewUser_uploadImage_textBox, UserImagePath);
 		ElementActions.click(driver, popup_existingUser_saveChanges_button);
 	}
-	
+
 	public void Assert_imageIsDisplayed(String userName) {
 		body_image_icon = By
-				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"+ userName +"')]//preceding-sibling::div[contains(@class,'userImage')]/img");
-		Assertions.assertElementAttribute(driver, body_image_icon, "src","./content/images/defaultUser.png", false);
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ userName + "')]//preceding-sibling::div[contains(@class,'userImage')]/img");
+		Assertions.assertElementAttribute(driver, body_image_icon, "src", "./content/images/defaultUser.png", false);
 	}
-	
+
 	public void ConfirmUserDeletion() {
 		ElementActions.click(driver, popup_confirmDelete_delete_button);
 	}
-	
+
 	public void Click_impersonation() {
 		ElementActions.click(driver, popup_userInformation_userDetails_LoginAsUser_button);
 	}
@@ -188,4 +195,17 @@ public class Users {
 		mainPage.Assert_impersonation_switchBack_link_IsDisplayed();
 		mainPage.Assert_fromUserMenu("Switch Back");
 	}
+	
+	//New Function created by "Abdel Salam" to select a specific group from Users page "Add to gtoup screen" 
+		public void SelectGroupForUserFromUsersPage(String GroupName)
+		{
+			selectUsersToBeAdded = By.name(GroupName);
+			ElementActions.click(driver, selectUsersToBeAdded);
+		}
+		
+		//Add Users to Group. Created by "Abdel Salam"
+		public void ClickAddToSelectGroupForUser ()
+		{
+			ElementActions.click(driver, popup_addUsersToGroup_UsersPage_add_button);
+		}
 }
