@@ -63,9 +63,7 @@ public class Users {
 
 	By popup_impersonationMessage = By.xpath("//span[contains(@class,'impersonate-message')]");
 
-	// Element locator created by "Abdel Salam" for below function
-	// "SelectGroupForUserFromUsersPage" from users page
-	By selectUsersToBeAdded;
+	By popup_UsersToBeAdded_checkbox;
 	By popup_addUsersToGroup_UsersPage_add_button = By
 			.xpath("//div[contains(@class,'userDetailsModal')]//button[@type='submit'][normalize-space(.)='Add']");
 
@@ -196,14 +194,12 @@ public class Users {
 		mainPage.Assert_fromUserMenu("Switch Back");
 	}
 	
-	//New Function created by "Abdel Salam" to select a specific group from Users page "Add to gtoup screen" 
 		public void SelectGroupForUserFromUsersPage(String GroupName)
 		{
-			selectUsersToBeAdded = By.name(GroupName);
-			ElementActions.click(driver, selectUsersToBeAdded);
+			popup_UsersToBeAdded_checkbox = By.name(GroupName);
+			ElementActions.click(driver, popup_UsersToBeAdded_checkbox);
 		}
 		
-		//Add Users to Group. Created by "Abdel Salam"
 		public void ClickAddToSelectGroupForUser ()
 		{
 			ElementActions.click(driver, popup_addUsersToGroup_UsersPage_add_button);
