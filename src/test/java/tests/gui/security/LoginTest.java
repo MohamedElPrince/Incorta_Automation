@@ -34,11 +34,14 @@ public class LoginTest {
 			SchemaList schemasPage;
 			SchemaList_SchemaView schemasViewPage;
 			
+		// Declaring public variables that will be shared between tests
 			String NewSchemaName = "Abdelsalam_Automation_Schema";
 			String NewSchemaDescription = "Created by a script in class LoginTest.java";
-	
+			String ExistingSchemaNAME = "Abdelsalan_Automation_Schema"; //Existing Schema to be used as predefined for TC 9
+			String NewDataSourceTableName; //Table name to be used in assertion
+			
 		//Below Test cases is for Users login	
-		//Prerequisites -->Analyzer User to be defined before executing TC C60554_1 || User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
+		//Prerequisites --> Analyzer User to be defined before executing TC C60554_1 || User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -52,7 +55,7 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("contentItem");
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 		}
-		//Prerequisites -->Analyzer User to be defined before executing TC C60554_2 || User name/Pass: AbdelsalamIndividual/AbdelsalamIndividual1.
+		//Prerequisites --> Analyzer User to be defined before executing TC C60554_2 || User name/Pass: AbdelsalamIndividual/AbdelsalamIndividual1.
 		@Test(priority = 2, description = "TC C60554_2 - Users permissions - Individual User")
 		@Description("When I log in with Individual User, only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -80,7 +83,7 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("contentItem");
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 		}
-		//Prerequisites -->Analyzer User to be defined before executing TC C60554_3 || User name/Pass: AbdelsalamUser/AbdelsalamUser1.
+		//Prerequisites --> Analyzer User to be defined before executing TC C60554_3 || User name/Pass: AbdelsalamUser/AbdelsalamUser1.
 		@Test(priority = 4, description = "TC C60554_4 - Users permissions - Schema Manager User")
 		@Description("When I log in with Schema Manager User, only scheduler, content, Data Sources, Business Schema and Schema Item tabs will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -97,7 +100,7 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 		}
-		//Prerequisites -->Analyzer User to be defined before executing TC C60554_5 || User name/Pass: AbdelsalamUserManager/AbdelsalamUserManager1.
+		//Prerequisites --> Analyzer User to be defined before executing TC C60554_5 || User name/Pass: AbdelsalamUserManager/AbdelsalamUserManager1.
 		@Test(priority = 5, description = "TC C60554_5 - Users permissions - User Manager User")
 		@Description("When I log in with user Manager User, only scheduler, content and security tabs will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -112,7 +115,7 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 			mainPage.AssertElementExist_Sidemenu("securityItem");
 		}
-		//Prerequisites -->Analyzer User to be defined before executing TC C60554_6 || User name/Pass: AbdelsalamSuper/AbdelsalamSuper1.
+		//Prerequisites --> Analyzer User to be defined before executing TC C60554_6 || User name/Pass: AbdelsalamSuper/AbdelsalamSuper1.
 		@Test(priority = 6, description = "TC C60554_6 - Users permissions - SUPER user")
 		@Description("When I log in with Super User, all tabs will exist.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -130,8 +133,7 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 		}
-	
-	
+		
 		//Below Test cases is for Users permissions.
 		//Prerequisites --> Schema Manager user || Connection credentials to data source
 		@Test(priority = 7, description = "TC C60535_1 - Schema Manager Permissions ")
@@ -176,44 +178,44 @@ public class LoginTest {
 			
 			mainPage.Click_Element_Sidemenu("schemaItem");
 			schemasPage.Assert_schemaNameIsDisplayed(NewSchemaName);
-			
-		/*	schemasPage.Click_schemaName(NewSchemaName);
-			mainPage.Click_add();
-			mainPage.Select_fromDropdownMenu("Schema Wizard");
-			
-			//Will use below to check the wizard to add data source table for my schema
-			schemasViewPage.Wizard_AddDataSourceTable(NewSchemaName, createImplicitJoins, "MySQL", tableName);
-		*/
 		}
 		
-		//Prerequisites -->
-		//**************Under Construction***************//
-		@Test(priority = 9, description = "TC C60535_3 - Schema Manager Permissions ")
-		@Description("When I log in with Schema manager user, Given I've a file source and schema, then I'll be able to go to schema wizard to add the data source to the schema.")
+		//Prerequisites, Schema Manager User + Data Source available + New schema available [ExistingSchema] 
+		@Test(priority = 9, description = "TC C60535_3 - Schema Manager Permissions")
+		@Description("When I log in with Schema manager user, Given I've a data source and schema, then I'll be able to go to schema wizard to add the data source to the schema.")
 		@Severity(SeverityLevel.CRITICAL)
-		public void SchemaManager_Permissions_ConnectDataSourceWithSchemaUsingWizard()
-		{
+		public void SchemaManager_Permissions_AddDataSourceToschema()
+		{	
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
 				testDataReader.getCellData("Password", "Data3"));
-			
+
+			//Create new data source as a prerequisite.
 			mainPage = new Skeleton(driver);
+			mainPage.Click_Element_Sidemenu("dataSourcesItem");			
+			dataSourcesPage= new DataSources(driver);
+			dataSourcesPage.Assert_dataSourcesTabIsSelected();
+			mainPage.Click_add();
+			String ExistingDataSourceName = dataSourcesPage.AddDataSource("MySQL");
+			dataSourcesPage.Assert_dataSourceCreationWasSuccessful(ExistingDataSourceName);
+			dataSourcesPage.Assert_nameIsDisplayed(ExistingDataSourceName);
+			
+			//Add Data Source to schema
 			mainPage.Click_Element_Sidemenu("schemaItem");
 			
 			schemasPage = new SchemaList(driver);
-			schemasPage.Click_schemaName(NewSchemaName);//Need to be changed to another schema name as a predefined.
+			schemasPage.Click_schemaName(ExistingSchemaNAME);
 			
-			schemasViewPage = new SchemaList_SchemaView(driver);
-
-		/*	schemasPage.Click_schemaName(NewSchemaName);
 			mainPage.Click_add();
 			mainPage.Select_fromDropdownMenu("Schema Wizard");
+
+			schemasViewPage = new SchemaList_SchemaView(driver);
+			schemasViewPage.Wizard_AddDataSourceTable(ExistingDataSourceName, true, "MySQL",testDataReader.getCellData("DatabaseTableName"));
 			
-			//Will use below to check the wizard to add data source table for my schema
-			schemasViewPage.Wizard_AddDataSourceTable(NewSchemaName, createImplicitJoins, "MySQL", tableName);
-		*/
+			NewDataSourceTableName = schemasViewPage.GetNewestTableName();
+			schemasViewPage.Assert_tableNameIsDisplayed(NewDataSourceTableName);
 		}
-		
+
 		@BeforeMethod
 		public void beforeMethod()
 		{
@@ -227,12 +229,12 @@ public class LoginTest {
 			testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 			driver = BrowserFactory.getBrowser(testDataReader);
 				}
-
+		
 		@AfterMethod
 		public void afterMethod() {
 			ReportManager.getTestLog();
 		}
-
+		
 		@AfterClass
 		public void afterClass() {
 			BrowserFactory.closeAllDrivers();
