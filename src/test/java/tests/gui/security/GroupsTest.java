@@ -43,7 +43,7 @@ public class GroupsTest {
 	// As a workaround I'll create another userName to make it array just for method
 	// Assert_usersAreDisplayed.
 	String addUserToGroupButton = "Add to group";
-	String groupNameForTheUser = "Abdelsalam_group";
+	String groupNameForTheUser = "Test_group";
 	String clickOnGroupName = "Abdelsalam_group_automation";
 	String rolesName = "Schema Manager";
 
@@ -104,8 +104,8 @@ public class GroupsTest {
 	}
 	
 	
-	@Test(priority = 4, description = "TC_C473 - Add role to group.")
-	@Description("Given I've a specific user and group, When I navigate to groups tab and select my group, Then click on + for Add roles. select my ")
+	@Test(priority = 4, description = "TC_C469 - Add role to group.")
+	@Description("Given I've a specific user and group, When I navigate to groups tab and select my group, Then click on + for Add roles. ")
 	@Severity(SeverityLevel.CRITICAL)
 	public void AddRoleToGroup() {
 		groupsPage = new Groups(driver);
