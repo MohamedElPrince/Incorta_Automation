@@ -32,6 +32,7 @@ public class Skeleton {
 	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
+	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 	
 	//// Functions
 	public Skeleton(WebDriver driver) {
@@ -85,6 +86,11 @@ public class Skeleton {
 		ElementActions.click(driver, header_chooseVisualization_button);
 	}
 
+	public void Click_Settings()
+	{
+		ElementActions.click(driver, header_settings_button);
+	}
+	
 	public void Select_fromDropdownMenu(String functionName) {
 		header_genericMenuItem_link = By
 				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//*[contains(normalize-space(.),'"

@@ -7,6 +7,8 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
+import io.restassured.internal.assertion.Assertion;
+
 public class SchemaList_SchemaView {
 	//// Variables
 	WebDriver driver;
@@ -73,6 +75,15 @@ public class SchemaList_SchemaView {
 
 	By popup_dataLoading_load_button = By.xpath("//button[normalize-space(.)='Load']");
 
+	By popup_SchemaSettings_SharingTab = By.xpath("//ul[@class='modalTabLinks']//a[@ng-click='tabState = 'sharing'']");
+	By popup_SchemaSettings_SharingTab_Add_Button = By.xpath("//a[contains(@class,'usersHeadAdd right')]//img[contains(@src,'plus_icon')]");
+	By popup_SchemaSettings_SharingTab_CanEdit = By.xpath("//h5[contains(string(), 'Can Edit')]");
+	By popup_SchemaSettings_SharingTab_ClickSearchField = By.xpath("//div[@class='shareSearch ng-scope']");
+	By popup_SchemaSettings_SharingTab_SelectFromSearchField;
+	By popup_SchemaSettings_SharingTab_SaveButton = By.xpath("//button[contains(string(), 'Save')]");
+	By popup_SchemaSettings_SharingTab_UsersSharedWith;
+	By popup_SchemaSettings_SharingTab_UsersCanEdit = By.xpath("//div[@class='folderUsers']//a[contains(string(), 'Can Edit')]");
+	
 	//// Functions
 	public SchemaList_SchemaView(WebDriver driver) {
 		this.driver = driver;
@@ -155,4 +166,44 @@ public class SchemaList_SchemaView {
 		Assertions.assertElementAttribute(driver, header_lastLoadStatus_link, "Text", initialLoadStatus, false);
 	}
 
+	public void Click_Sharing_Tab()
+	{
+		ElementActions.click(driver, popup_SchemaSettings_SharingTab);
+	}
+
+	public void Click_AddButton_SharingTab()
+	{
+		ElementActions.click(driver, popup_SchemaSettings_SharingTab_Add_Button);
+	}
+
+	public void Schema_Sharing_ClickOnCanEdit()
+	{
+		ElementActions.click(driver, popup_SchemaSettings_SharingTab_CanEdit);
+	}
+	
+	public void Schema_Sharing_SearchAndSelectUsers(String SearchText)
+	{
+		popup_SchemaSettings_SharingTab_SelectFromSearchField = By.xpath("//h5[contains(string(),'"+SearchText+"')]");
+		ElementActions.type(driver, popup_SchemaSettings_SharingTab_ClickSearchField, SearchText);
+		ElementActions.select(driver, popup_SchemaSettings_SharingTab_SelectFromSearchField, SearchText);
+	}
+	
+	public void Click_Save_Button()
+	{
+		ElementActions.click(driver, popup_SchemaSettings_SharingTab_SaveButton);
+	}
+	
+	public void Assertion_UserSharedWith(String SearchText)
+	{
+		popup_SchemaSettings_SharingTab_UsersSharedWith = By.xpath("//div[@class='folderUserRow ng-scope']"
+				+ "//h5[contains(string(), '"+SearchText+"')]");
+		Assertions.assertElementExists(driver, popup_SchemaSettings_SharingTab_UsersSharedWith, true);
+	}
+	//Need To Be Updated to be able to check that edit is for a specific user.
+	//////////In Progress///////////
+	public void Assertion_UserCanEdit(String User)
+	{
+		Assertions.assertElementExists(driver, popup_SchemaSettings_SharingTab_UsersCanEdit, true);
+	}
+	
 }

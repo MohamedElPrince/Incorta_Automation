@@ -37,8 +37,11 @@ public class LoginTest {
 		// Declaring public variables that will be shared between tests
 			String NewSchemaName = "Abdelsalam_Automation_Schema";
 			String NewSchemaDescription = "Created by a script in class LoginTest.java";
-			String ExistingSchemaNAME = "Abdelsalan_Automation_Schema"; //Existing Schema to be used as predefined for TC 9
+			String ExistingSchemaNAME = "Abdelsalan_Automation_Schema"; //Existing Schema to be used as predefined
 			String NewDataSourceTableName; //Table name to be used in assertion
+			String LoadDataSchema = "LoadDataSchema1";//Predefined Schema with data source to load data into it.
+			String ShareSchema = "ShareSchema";
+			String UserToShareWith = "automation_user_1526311329415";
 			
 		//Below Test cases is for Users login	
 		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
@@ -184,7 +187,7 @@ public class LoginTest {
 		@Test(priority = 9, description = "TC C60535_3 - Schema Manager Permissions")
 		@Description("When I log in with Schema manager user, Given I've a data source and schema, then I'll be able to go to schema wizard to add the data source to the schema.")
 		@Severity(SeverityLevel.CRITICAL)
-		public void SchemaManager_Permissions_AddDataSourceToschema()
+		public void SchemaManager_Permissions_AddDataSourceToSchema()
 		{	
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
@@ -216,33 +219,62 @@ public class LoginTest {
 			schemasViewPage.Assert_tableNameIsDisplayed(NewDataSourceTableName);
 		}
 		
-		//Prerequisites , Schema Manager User + Data Source available + New schema available [ExistingSchema]
+		//Prerequisites , Schema Manager User + Data Source available + Schema available + Data source is added to the schema
 		//**************Under Construction***************
 		@Test(priority = 10, description = "TC C60535_4 - Schema Manager Permissions")
 		@Description("Given I log in with Schema manager user, and I've added a data source with schema, and click load data from the schema. Then Data is loaded normally.")
 		@Severity(SeverityLevel.CRITICAL)
-		public void SchemaManager_Permissions()
+		public void SchemaManager_Permissions_LoadData()
 		{	
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
 				testDataReader.getCellData("Password", "Data3"));
 
 			mainPage = new Skeleton(driver);
-			mainPage.Click_Element_Sidemenu("schemaItem");		
+			mainPage.Click_Element_Sidemenu("schemaItem");	
 			
-			schemasPage.Click_schemaName(ExistingSchemaNAME);//Need to make another String to be used in loading data
+			schemasPage = new SchemaList(driver);
+			schemasPage.Click_schemaName(LoadDataSchema);
 			
+			schemasViewPage = new SchemaList_SchemaView(driver);
 			String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
 			
 			mainPage.Click_load();
 			mainPage.Hover_overDropdownMenu("Load now");
 			mainPage.Select_fromDropdownMenu("Full");
-
+			
 			schemasViewPage.confirmLoadingData();
 			schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
 			schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
 		}
 		
+		@Test(priority = 10, description = "TC C60535_4 - Schema Manager Permissions")
+		@Description("Given I log in with Schema manager user, and I've added a data source with schema, and click load data from the schema. Then Data is loaded normally.")
+		@Severity(SeverityLevel.CRITICAL)
+		public void SchemaManager_Permissions_ShareSchemaToEdit()
+		{	
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
+				testDataReader.getCellData("Password", "Data3"));
+
+			mainPage = new Skeleton(driver);
+			mainPage.Click_Element_Sidemenu("schemaItem");	
+			
+			schemasPage = new SchemaList(driver);
+			schemasPage.Click_schemaName(ShareSchema);
+			
+			mainPage.Click_Settings();
+
+			schemasViewPage = new SchemaList_SchemaView(driver);
+			schemasViewPage.Click_Sharing_Tab();
+			schemasViewPage.Click_AddButton_SharingTab();
+			schemasViewPage.Schema_Sharing_SearchAndSelectUsers(UserToShareWith);//User To Share With as a predefined
+			schemasViewPage.Schema_Sharing_ClickOnCanEdit();
+			schemasViewPage.Click_Save_Button();
+			schemasViewPage.Assertion_UserSharedWith(UserToShareWith);
+			//schemasViewPage.Assertion_UserCanEdit(UserToShareWith);
+			
+		}
 		
 		@BeforeMethod
 		public void beforeMethod()
