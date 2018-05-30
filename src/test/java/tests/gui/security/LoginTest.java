@@ -7,6 +7,7 @@ import com.shaftEngine.ioActionLibrary.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import pageObjectModels.content.AllContent;
 import pageObjectModels.data.DataSources;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
@@ -33,7 +34,8 @@ public class LoginTest {
 			DataSources dataSourcesPage;
 			SchemaList schemasPage;
 			SchemaList_SchemaView schemasViewPage;
-			
+			AllContent allContentPage;
+ 
 		// Declaring public variables that will be shared between tests
 			String NewSchemaName = "Abdelsalam_Automation_Schema";
 			String NewSchemaDescription = "Created by a script in class LoginTest.java";
@@ -42,7 +44,9 @@ public class LoginTest {
 			String LoadDataSchema = "LoadDataSchema1";//Predefined Schema with data source to load data into it.
 			String ShareSchema = "ShareSchema";
 			String UserToShareWith = "automation_user_1526311329415";
-			
+			String NewFolderName = "AutomationFolder";
+				
+	 
 		//Below Test cases is for Users login	
 		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
@@ -136,8 +140,8 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 		}
-		
-		//Below Test cases is for Users permissions.
+
+		//Below Test cases is for Users permissions | Schema Manager user
 		//Prerequisites, Schema Manager user + Connection credentials to data source
 		@Test(priority = 7, description = "TC C60535_1 - Schema Manager Permissions ")
 		@Description("When I log in with Schema manager user, then i'll be able to create a new data source.")
@@ -248,7 +252,7 @@ public class LoginTest {
 			schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
 		}
 		
-		@Test(priority = 10, description = "TC C60535_4 - Schema Manager Permissions")
+		@Test(priority = 10, description = "TC C60535_5 - Schema Manager Permissions")
 		@Description("Given I log in with Schema manager user, and I've added a data source with schema, and click load data from the schema. Then Data is loaded normally.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void SchemaManager_Permissions_ShareSchemaToEdit()
@@ -272,9 +276,32 @@ public class LoginTest {
 			schemasViewPage.Schema_Sharing_ClickOnCanEdit();
 			schemasViewPage.Click_Save_Button();
 			schemasViewPage.Assertion_UserSharedWith(UserToShareWith);
-			//schemasViewPage.Assertion_UserCanEdit(UserToShareWith);
+			schemasViewPage.Assertion_UserCanEdit(UserToShareWith);
 			
 		}
+		
+		//Below test cases is for users permission | Analyzer user
+		//******************************In Progress*****************************
+		@Test(priority = 11, description = "TC C60531_1 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, only scheduler and content tab will be exist.")
+		@Severity(SeverityLevel.CRITICAL)
+		public void Analyzer_Permissions_blabla() 
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+					testDataReader.getCellData("Password", "Data1"));
+			
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
+			
+			mainPage = new Skeleton(driver);
+			mainPage.Click_add();
+			mainPage.Select_fromDropdownMenu("Create Folder");
+			
+			allContentPage.AddText_NewFolder(NewFolderName);
+			allContentPage.Assert_folderIsDisplayed(NewFolderName);
+		}
+		
 		
 		@BeforeMethod
 		public void beforeMethod()
@@ -282,7 +309,7 @@ public class LoginTest {
 			loginPage = new Login(driver);
 			loginPage.Navigate_toURL();
 		}
-		
+			
 		@BeforeClass
 		public void beforeClass() {
 			System.setProperty("testDataFilePath",System.getProperty("testDataFolderPath") + "security/TestData.xlsx");

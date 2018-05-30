@@ -2,12 +2,9 @@ package pageObjectModels.schemas;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
-
-import io.restassured.internal.assertion.Assertion;
 
 public class SchemaList_SchemaView {
 	//// Variables
@@ -205,5 +202,6 @@ public class SchemaList_SchemaView {
 	{
 		Assertions.assertElementExists(driver, popup_SchemaSettings_SharingTab_UsersCanEdit, true);
 	}
-	
+	//need to check below Xpath for above function location
+	//div/a[contains(string(),"Can Edit")]/preceding-sibling::div//h5[contains(string(),"automation_user_1526311329415")]	
 }
