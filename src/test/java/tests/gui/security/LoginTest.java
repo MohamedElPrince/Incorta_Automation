@@ -43,14 +43,12 @@ public class LoginTest {
 			String NewDataSourceTableName; //Table name to be used in assertion
 			String LoadDataSchema = "LoadDataSchema1";//Predefined Schema with data source to load data into it.
 			String ShareSchema = "ShareSchema";
-			String UserToShareWith = "automation_user_1526311329415";
+			String UserToShareWith = "automation_user_1526821504534";
 			String NewFolderName = "AutomationFolder";
-				
-	 
-		//Below Test cases is for Users login	
-		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1.
+					
+		//Prerequisites, Analyzer User [User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1]
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
-		@Description("When I log in with Analyzer User, only scheduler and content tab will be exist.")
+		@Description("When I log in with Analyzer User, Then only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void LoginWithAnalyzer() 
 		{
@@ -62,9 +60,9 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("contentItem");
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 		}
-		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamIndividual/AbdelsalamIndividual1.
+		//Prerequisites, Individual User [User name/Pass: AbdelsalamIndividual/AbdelsalamIndividual1]
 		@Test(priority = 2, description = "TC C60554_2 - Users permissions - Individual User")
-		@Description("When I log in with Individual User, only scheduler and content tab will be exist.")
+		@Description("When I log in with Individual User, Then only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void LoginWithIndividual() 
 		{
@@ -76,11 +74,11 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("contentItem");
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 		}
-		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamSchemaManager/AbdelsalamSchemaManager1.
+		//Prerequisites, Normal User [User name/Pass: AbdelsalamSchemaManager/AbdelsalamSchemaManager1]
 		@Test(priority = 3, description = "TC C60554_3 - Users permissions - Normal User")
-		@Description("When I log in with a normal User, only scheduler and content tab will be exist.")
+		@Description("When I log in with a normal User, Then only scheduler and content tab will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
-		public void LoginWithUser() 
+		public void LoginWithNormalUser() 
 		{
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data4"), testDataReader.getCellData("Username", "Data4"), 
@@ -90,11 +88,11 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("contentItem");
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 		}
-		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamUser/AbdelsalamUser1.
+		//Prerequisites, Schema Manager User to be defined + User name/Pass: AbdelsalamUser/AbdelsalamUser1.
 		@Test(priority = 4, description = "TC C60554_4 - Users permissions - Schema Manager User")
-		@Description("When I log in with Schema Manager User, only scheduler, content, Data Sources, Business Schema and Schema Item tabs will be exist.")
+		@Description("When I log in with Schema Manager User. Then only scheduler, content, Data Sources, Business Schema and Schema Item tabs will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
-		public void LoginWithSchemaManager() 
+		public void LoginWithSchemaManager()
 		{
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
@@ -107,9 +105,9 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 		}
-		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamUserManager/AbdelsalamUserManager1.
+		//Prerequisites, User Manager User [User name/Pass: AbdelsalamUserManager/AbdelsalamUserManager1]
 		@Test(priority = 5, description = "TC C60554_5 - Users permissions - User Manager User")
-		@Description("When I log in with user Manager User, only scheduler, content and security tabs will be exist.")
+		@Description("When I log in with User Manager User. Then only scheduler, content and security tabs will be exist.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void LoginWithUserManager() 
 		{
@@ -122,9 +120,9 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schedulerItem");
 			mainPage.AssertElementExist_Sidemenu("securityItem");
 		}
-		//Prerequisites, Analyzer User to be defined + User name/Pass: AbdelsalamSuper/AbdelsalamSuper1.
+		//Prerequisites, Super User [User name/Pass: AbdelsalamSuper/AbdelsalamSuper1]
 		@Test(priority = 6, description = "TC C60554_6 - Users permissions - SUPER user")
-		@Description("When I log in with Super User, all tabs will exist.")
+		@Description("When I log in with Super User. Then all tabs will exist.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void LoginWithSuperUser() 
 		{
@@ -140,11 +138,10 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 		}
-
-		//Below Test cases is for Users permissions | Schema Manager user
+		
 		//Prerequisites, Schema Manager user + Connection credentials to data source
 		@Test(priority = 7, description = "TC C60535_1 - Schema Manager Permissions ")
-		@Description("When I log in with Schema manager user, then i'll be able to create a new data source.")
+		@Description("When I log in with Schema manager user and click add data source, then a new data source will be created.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void SchemaManager_Permissions_NewDataSource()
 		{
@@ -163,11 +160,10 @@ public class LoginTest {
 			String MyDataSourceName = dataSourcesPage.AddDataSource("MySQL");
 			dataSourcesPage.Assert_dataSourceCreationWasSuccessful(MyDataSourceName);
 			dataSourcesPage.Assert_nameIsDisplayed(MyDataSourceName);
-		}
-		
+		}	
 		//Prerequisites, Schema Manager user + Test data defined for creating new schema 
 		@Test(priority = 8, description = "TC C60535_2 - Schema Manager Permissions ")
-		@Description("When I log in with Schema manager user, then i'll be able to create a new schema")
+		@Description("When I log in with Schema manager user and click add to create a new schema, then a new schema will be created")
 		@Severity(SeverityLevel.CRITICAL)
 		public void SchemaManager_Permissions_CreateSchema()
 		{
@@ -186,23 +182,25 @@ public class LoginTest {
 			mainPage.Click_Element_Sidemenu("schemaItem");
 			schemasPage.Assert_schemaNameIsDisplayed(NewSchemaName);
 		}
-		
 		//Prerequisites, Schema Manager User + Data Source available + New schema available [ExistingSchema] 
 		@Test(priority = 9, description = "TC C60535_3 - Schema Manager Permissions")
-		@Description("When I log in with Schema manager user, Given I've a data source and schema, then I'll be able to go to schema wizard to add the data source to the schema.")
+		@Description("Given I've a data source and schema, When I log in with Schema manager user, and go to schema wizard, Then data source will be added to the schema.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void SchemaManager_Permissions_AddDataSourceToSchema()
 		{	
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"), testDataReader.getCellData("Username", "Data3"), 
 				testDataReader.getCellData("Password", "Data3"));
-
+			
 			//Create new data source as a prerequisite.
 			mainPage = new Skeleton(driver);
 			mainPage.Click_Element_Sidemenu("dataSourcesItem");			
+			
 			dataSourcesPage= new DataSources(driver);
 			dataSourcesPage.Assert_dataSourcesTabIsSelected();
+			
 			mainPage.Click_add();
+			
 			String ExistingDataSourceName = dataSourcesPage.AddDataSource("MySQL");
 			dataSourcesPage.Assert_dataSourceCreationWasSuccessful(ExistingDataSourceName);
 			dataSourcesPage.Assert_nameIsDisplayed(ExistingDataSourceName);
@@ -222,11 +220,9 @@ public class LoginTest {
 			NewDataSourceTableName = schemasViewPage.GetNewestTableName();
 			schemasViewPage.Assert_tableNameIsDisplayed(NewDataSourceTableName);
 		}
-		
-		//Prerequisites , Schema Manager User + Data Source available + Schema available + Data source is added to the schema
-		//**************Under Construction***************
+		//Prerequisites, Schema Manager User + Data Source available + Schema available + Data source is added to the schema
 		@Test(priority = 10, description = "TC C60535_4 - Schema Manager Permissions")
-		@Description("Given I log in with Schema manager user, and I've added a data source with schema, and click load data from the schema. Then Data is loaded normally.")
+		@Description("Given I logged in with Schema manager user, and I've added a data source with schema, When I click load data from the schema. Then Data is loaded successfully.")
 		@Severity(SeverityLevel.CRITICAL)
 		public void SchemaManager_Permissions_LoadData()
 		{	
@@ -251,7 +247,7 @@ public class LoginTest {
 			schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
 			schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
 		}
-		
+		//Prerequisites, Schema Manager User + Data Source Available + Schema Available
 		@Test(priority = 10, description = "TC C60535_5 - Schema Manager Permissions")
 		@Description("Given I log in with Schema manager user, and I've added a data source with schema, and click load data from the schema. Then Data is loaded normally.")
 		@Severity(SeverityLevel.CRITICAL)
@@ -275,17 +271,15 @@ public class LoginTest {
 			schemasViewPage.Schema_Sharing_SearchAndSelectUsers(UserToShareWith);//User To Share With as a predefined
 			schemasViewPage.Schema_Sharing_ClickOnCanEdit();
 			schemasViewPage.Click_Save_Button();
-			schemasViewPage.Assertion_UserSharedWith(UserToShareWith);
-			schemasViewPage.Assertion_UserCanEdit(UserToShareWith);
-			
-		}
-		
-		//Below test cases is for users permission | Analyzer user
-		//******************************In Progress*****************************
+			//schemasViewPage.Assertion_UserSharedWith(UserToShareWith);
+			schemasViewPage.Assertion_UserCanEdit(UserToShareWith, "Can Edit");
+		}	
+	
+		//Prerequisites, Analyzer user
 		@Test(priority = 11, description = "TC C60531_1 - Users permissions - Analyzer User")
-		@Description("When I log in with Analyzer User, only scheduler and content tab will be exist.")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on create new folder. Then new folder will be created successfully.")
 		@Severity(SeverityLevel.CRITICAL)
-		public void Analyzer_Permissions_blabla() 
+		public void Analyzer_Permissions_CreateFolder() 
 		{
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
@@ -299,10 +293,10 @@ public class LoginTest {
 			mainPage.Select_fromDropdownMenu("Create Folder");
 			
 			allContentPage.AddText_NewFolder(NewFolderName);
+			allContentPage.Click_Create_CreateFolder(NewFolderName);
 			allContentPage.Assert_folderIsDisplayed(NewFolderName);
 		}
-		
-		
+			
 		@BeforeMethod
 		public void beforeMethod()
 		{
@@ -327,5 +321,4 @@ public class LoginTest {
 			BrowserFactory.closeAllDrivers();
 			ReportManager.getFullLog();
 		}
-
 }

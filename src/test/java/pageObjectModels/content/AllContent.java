@@ -25,7 +25,7 @@ public class AllContent {
 	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
 
-	By popup_newFolder_folderName = By.className("inputGroup newItemModal");
+	By popup_newFolder_folderName = By.xpath("//div[@class='inputGroup newItemModal']/input");
 	
 	//// Functions
 	public AllContent(WebDriver driver) {
@@ -61,6 +61,11 @@ public class AllContent {
 	public void AddText_NewFolder(String FolderName)
 	{
 		ElementActions.type(driver,popup_newFolder_folderName , FolderName);
+	}
+
+	public void Click_Create_CreateFolder(String FolderName)
+	{
+		ElementActions.click(driver, popup_newDashboard_create_button);
 	}
 	
 	public void Assert_folderIsDisplayed(String FolderName)
