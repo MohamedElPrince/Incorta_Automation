@@ -13,10 +13,9 @@ public class Skeleton {
 	//// Elements
 
 	// header_incortaLogo_image
-	
+
 	By SideMenu_GenericSideMenuItem_Link;
 
-	
 	By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
 
 	By header_search_textBox = By.id("inc-search-box-input");
@@ -58,10 +57,10 @@ public class Skeleton {
 
 	// Assert_searchResultIsDisplayed
 	// Navigate_toSearchResult
-	
-	//	public void Click_securityTab() {
-	//		ElementActions.click(driver, sideMenu_security_link);
-	//	}
+
+	// public void Click_securityTab() {
+	// ElementActions.click(driver, sideMenu_security_link);
+	// }
 
 	public void Click_load() {
 		ElementActions.click(driver, header_load_button);
@@ -82,7 +81,7 @@ public class Skeleton {
 	public void Click_actions() {
 		ElementActions.click(driver, header_actions_button);
 	}
-	
+
 	public void Click_ChooseVisualization() {
 		ElementActions.click(driver, header_chooseVisualization_button);
 	}
@@ -107,52 +106,44 @@ public class Skeleton {
 				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
 		ElementActions.click(driver, header_userMenuItem_link);
 	}
-	
-		public void Assert_impersonation_switchBack_link_IsDisplayed() {
+
+	public void Assert_impersonation_switchBack_link_IsDisplayed() {
 		Assertions.assertElementExists(driver, sideMenu_impersonation_switchBack_link, true);
 	}
 
 	public void Click_impersonation_switchBack_link() {
 		ElementActions.click(driver, sideMenu_impersonation_switchBack_link);
 	}
-	
-		public void Assert_fromUserMenu(String functionName) {
+
+	public void Assert_fromUserMenu(String functionName) {
 		ElementActions.click(driver, header_user_button);
 		header_userMenuItem_link = By.xpath(
 				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
 		Assertions.assertElementExists(driver, header_userMenuItem_link, true);
 	}
-	
+
 	/**
 	 * 
-	 * @param tabName --> Could have one of the following options:
-	 * dataSourcesItem
-	 * schemaItem
-	 * businessSchemaItem
-	 * schedulerItem
-	 * contentItem
-	 * securityItem
+	 * @param tabName
+	 *            --> Could have one of the following options: dataSourcesItem
+	 *            schemaItem businessSchemaItem schedulerItem contentItem
+	 *            securityItem
 	 */
-	public void AssertElementExist_Sidemenu(String tabName)
-	{
+	public void AssertElementExist_Sidemenu(String tabName) {
 		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
 		Assertions.assertElementExists(driver, SideMenu_GenericSideMenuItem_Link, true);
 	}
-	
+
 	/**
 	 * 
-	 * @param tabName --> Could have one of the following options:
-	 * dataSourcesItem
-	 * schemaItem
-	 * businessSchemaItem
-	 * schedulerItem
-	 * contentItem
-	 * securityItem
+	 * @param tabName
+	 *            --> Could have one of the following options: dataSourcesItem
+	 *            schemaItem businessSchemaItem schedulerItem contentItem
+	 *            securityItem
 	 */
-	public void Click_Element_Sidemenu(String tabName)
-	{
+	public void Click_Element_Sidemenu(String tabName) {
 		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
 		ElementActions.click(driver, SideMenu_GenericSideMenuItem_Link);
 	}
-	
+
 }

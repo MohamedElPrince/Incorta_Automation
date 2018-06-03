@@ -90,33 +90,6 @@ public class AllContent_DashboardPagination {
 		// previous page = - (first record of current page -1) of
 		dashboardPage.Pagination_AssertThatNextButtonWorksAsExpected();
 	}
-	
-
-	@Test(description = "C77300 - Chrome: Table Insight: Verify that user can return back to first page.", dependsOnMethods = {
-			"verifyPaginationUiExists" })
-	@Description("When I navigate to the target dashboard, and I click on last button ,"
-			+ " and I click the first back button, Then the first record result displayed will be ( 1 ) sample: ( 1 - No. of TotalNumber)")
-	@Severity(SeverityLevel.NORMAL)
-	public void assertThatFirstBackButtontWorks() {
-		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-		paginationInsightName = "7amada"; // to be removed
-
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
-		allContentPage.Assert_allContentTabIsSelected();
-
-		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
-
-		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
-
-		
-		//dashboardPage.Pagination_ClickOnLastButton(); // to be removed
-		dashboardPage.Pagination_AssertThatFirstButtontWorksAsExpected();
-	}
-
 
 	@Test(priority = 3, description = "C77298 - Chrome: Table Insight: Verify that user can navigate to Last Page.", dependsOnMethods = {
 	"verifyPaginationUiExists" })

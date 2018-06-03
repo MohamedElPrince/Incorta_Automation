@@ -20,13 +20,10 @@ public class AllContent {
 	By body_folderProperties_link;
 	By body_dashboard_link;
 	By body_dashboardProperties_link;
-	By body_folderName_link;
 
 	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
 
-	By popup_newFolder_folderName = By.xpath("//div[@class='inputGroup newItemModal']/input");
-	
 	//// Functions
 	public AllContent(WebDriver driver) {
 		this.driver = driver;
@@ -56,21 +53,5 @@ public class AllContent {
 		ElementActions.type(driver, popup_newDashboard_dashboardName_textBox, newDashboardName);
 		ElementActions.click(driver, popup_newDashboard_create_button);
 		return newDashboardName;
-	}
-
-	public void AddText_NewFolder(String FolderName)
-	{
-		ElementActions.type(driver,popup_newFolder_folderName , FolderName);
-	}
-
-	public void Click_Create_CreateFolder(String FolderName)
-	{
-		ElementActions.click(driver, popup_newDashboard_create_button);
-	}
-	
-	public void Assert_folderIsDisplayed(String FolderName)
-	{
-		body_folderName_link = By.xpath("//a[contains(string(),'"+FolderName+"')]");
-		Assertions.assertElementExists(driver, body_folderName_link, true);
 	}
 }
