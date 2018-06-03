@@ -13,12 +13,8 @@ public class Skeleton {
 	//// Elements
 
 	// header_incortaLogo_image
-	// sideMenu_dataSourcesAndDataFiles_link
-	// sideMenu_schemasAndSessionVariables_link
-	// sideMenu_businessSchemas_link
-	// sideMenu_scheduler_link
-	// sideMenu_content_link
-	// sideMenu_security_link
+
+	By SideMenu_GenericSideMenuItem_Link;
 
 	By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
 
@@ -111,6 +107,14 @@ public class Skeleton {
 		ElementActions.click(driver, header_userMenuItem_link);
 	}
 
+	public void Assert_impersonation_switchBack_link_IsDisplayed() {
+		Assertions.assertElementExists(driver, sideMenu_impersonation_switchBack_link, true);
+	}
+
+	public void Click_impersonation_switchBack_link() {
+		ElementActions.click(driver, sideMenu_impersonation_switchBack_link);
+	}
+
 	public void Assert_fromUserMenu(String functionName) {
 		ElementActions.click(driver, header_user_button);
 		header_userMenuItem_link = By.xpath(
@@ -118,12 +122,28 @@ public class Skeleton {
 		Assertions.assertElementExists(driver, header_userMenuItem_link, true);
 	}
 
-	public void Assert_impersonation_switchBack_link_IsDisplayed() {
-		Assertions.assertElementExists(driver, sideMenu_impersonation_switchBack_link, true);
+	/**
+	 * 
+	 * @param tabName
+	 *            --> Could have one of the following options: dataSourcesItem
+	 *            schemaItem businessSchemaItem schedulerItem contentItem
+	 *            securityItem
+	 */
+	public void AssertElementExist_Sidemenu(String tabName) {
+		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
+		Assertions.assertElementExists(driver, SideMenu_GenericSideMenuItem_Link, true);
 	}
 
-	public void Click_impersonation_switchBack_link() {
-		ElementActions.click(driver, sideMenu_impersonation_switchBack_link);
+	/**
+	 * 
+	 * @param tabName
+	 *            --> Could have one of the following options: dataSourcesItem
+	 *            schemaItem businessSchemaItem schedulerItem contentItem
+	 *            securityItem
+	 */
+	public void Click_Element_Sidemenu(String tabName) {
+		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
+		ElementActions.click(driver, SideMenu_GenericSideMenuItem_Link);
 	}
 
 }
