@@ -94,7 +94,7 @@ public class UsersTest {
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
-				System.getProperty("testDataFolderPath") + "security/TestData.xlsx");
+				System.getProperty("testDataFolderPath") + "certification/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 		loginPage = new Login(driver);
