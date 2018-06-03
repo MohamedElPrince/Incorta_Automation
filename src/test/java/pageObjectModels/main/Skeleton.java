@@ -17,6 +17,8 @@ public class Skeleton {
 	By SideMenu_GenericSideMenuItem_Link;
 
 	
+	By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
+
 	By header_search_textBox = By.id("inc-search-box-input");
 	By header_searchResult_link;
 
@@ -32,8 +34,7 @@ public class Skeleton {
 	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
-	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
-	
+
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
@@ -86,11 +87,6 @@ public class Skeleton {
 		ElementActions.click(driver, header_chooseVisualization_button);
 	}
 
-	public void Click_Settings()
-	{
-		ElementActions.click(driver, header_settings_button);
-	}
-	
 	public void Select_fromDropdownMenu(String functionName) {
 		header_genericMenuItem_link = By
 				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//*[contains(normalize-space(.),'"
@@ -110,6 +106,21 @@ public class Skeleton {
 		header_userMenuItem_link = By.xpath(
 				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
 		ElementActions.click(driver, header_userMenuItem_link);
+	}
+	
+		public void Assert_impersonation_switchBack_link_IsDisplayed() {
+		Assertions.assertElementExists(driver, sideMenu_impersonation_switchBack_link, true);
+	}
+
+	public void Click_impersonation_switchBack_link() {
+		ElementActions.click(driver, sideMenu_impersonation_switchBack_link);
+	}
+	
+		public void Assert_fromUserMenu(String functionName) {
+		ElementActions.click(driver, header_user_button);
+		header_userMenuItem_link = By.xpath(
+				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
+		Assertions.assertElementExists(driver, header_userMenuItem_link, true);
 	}
 	
 	/**

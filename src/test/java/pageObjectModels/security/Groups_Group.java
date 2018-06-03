@@ -40,6 +40,7 @@ public class Groups_Group {
 			"//*[@id='contentScroll']//div[@class='usersHeader']/h3[contains(text(),'Roles')]//..//img[contains(@src,'plus')]");
 	// body_roles_name_checkbox
 	By body_roles_name_link;
+	By body_individual_UserName_label;
 
 	By popup_addRolesToGroup_role_label;
 	By popup_addRolesToGroup_add_button = popup_addUsersToGroup_add_button;
@@ -80,6 +81,14 @@ public class Groups_Group {
 				Assertions.assertElementExists(driver, body_users_name_link, true);
 			}
 		}
+	}
+
+	public void Assert_userIsDisplayed(String user) {
+		body_individual_UserName_label = By.xpath(
+				"//*[@id='contentScroll']//div[contains(@class,'usersPanel')]//div[contains(@ng-if,'group.users')]//p[text()='"
+						+ user + "']");
+		Assertions.assertElementExists(driver, body_individual_UserName_label, true);
+
 	}
 
 	// Assert_rolesLabelIsDisplayed
