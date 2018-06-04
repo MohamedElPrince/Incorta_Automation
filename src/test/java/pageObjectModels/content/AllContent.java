@@ -21,12 +21,14 @@ public class AllContent {
 	By body_dashboard_link;
 	By body_dashboardProperties_link;
 	By body_folderName_link;
+	By body_folderProperties_Button;
 
 	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
-
 	By popup_newFolder_folderName = By.xpath("//div[@class='inputGroup newItemModal']/input");
-	
+	By popup_folderProperties_manageFolder;
+	By popup_folderProperties_manageFolder_confirmationButton;
+
 	//// Functions
 	public AllContent(WebDriver driver) {
 		this.driver = driver;
@@ -72,5 +74,43 @@ public class AllContent {
 	{
 		body_folderName_link = By.xpath("//a[contains(string(),'"+FolderName+"')]");
 		Assertions.assertElementExists(driver, body_folderName_link, true);
+	}
+	
+	public void Assert_folderIsNotDisplayed(String FolderName)
+	{
+		body_folderName_link = By.xpath("//a[contains(string(),'"+FolderName+"')]");
+		Assertions.assertElementExists(driver, body_folderName_link, false);
+	}
+
+	public void Click_FolderProperties(String FolderName)
+	{
+		body_folderProperties_Button = By.xpath("//a[@title='"+FolderName+"']/parent::div/a[contains(@class,'menu-icon')]");
+		ElementActions.click(driver, body_folderProperties_Button);
+	}
+	
+	/**
+	 * 
+	 * @param ActionsOnFolder
+	 * shareFolder
+	 * moveFolder
+	 * renameFolder
+	 * deleteFolder
+	 */
+	public void Click_FolderProperties_ManageFolderButtons(String ActionsOnFolder)
+	{
+		popup_folderProperties_manageFolder = By.xpath("//a[@class='"+ActionsOnFolder+"']");
+		ElementActions.click(driver, popup_folderProperties_manageFolder);
+	}
+	
+	/**
+	 * 
+	 * @param ConfirmationButtonName
+	 * Delete [Confirm delete folder]
+	 * Cancel [Cancel Confirmation for delete folder]
+	 */
+	public void Click_FolderProperties_ManageFolderButtons_ConfirmationButtonsForDelete (String ConfirmationButtonName)
+	{
+		popup_folderProperties_manageFolder_confirmationButton = By.xpath("//a[contains(string(),'"+ConfirmationButtonName+"')]");
+		ElementActions.click(driver, popup_folderProperties_manageFolder_confirmationButton);
 	}
 }
