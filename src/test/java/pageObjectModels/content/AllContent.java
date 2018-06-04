@@ -22,13 +22,20 @@ public class AllContent {
 	By body_dashboardProperties_link;
 	By body_folderName_link;
 	By body_folderProperties_Button;
-
+	By body_dashboardName;
+	
 	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
 	By popup_newFolder_folderName = By.xpath("//div[@class='inputGroup newItemModal']/input");
 	By popup_folderProperties_manageFolder;
 	By popup_folderProperties_manageFolder_confirmationButton;
-
+	By popup_SchemaSettings_SharingTab_SelectFromSearchField;
+	By popup_SchemaSettings_SharingTab_ClickSearchField = By.xpath("//div[@class='shareSearch ng-scope']/input[@type=\"text\"]");
+	By popup_renameFolder;
+	By popup_renameFolder_renameButton = By.xpath("//button[contains(string(),'Rename')]");
+	By popup_renameFolder_cancelButton = By.xpath("//a[contains(string(),'Cancel')]");
+	By popup_renameFolder_doneButton =By.xpath("//button[contains(string(),'Done')]");
+	
 	//// Functions
 	public AllContent(WebDriver driver) {
 		this.driver = driver;
@@ -60,12 +67,17 @@ public class AllContent {
 		return newDashboardName;
 	}
 
-	public void AddText_NewFolder(String FolderName)
+	/**
+	 * 
+	 * @param FolderName
+	 * Could Accept Folder Name Or Dashboard Name
+	 */
+	public void AddText(String FolderName)
 	{
 		ElementActions.type(driver,popup_newFolder_folderName , FolderName);
 	}
 
-	public void Click_Create_CreateFolder(String FolderName)
+	public void Click_CreateButton()
 	{
 		ElementActions.click(driver, popup_newDashboard_create_button);
 	}
@@ -112,5 +124,39 @@ public class AllContent {
 	{
 		popup_folderProperties_manageFolder_confirmationButton = By.xpath("//a[contains(string(),'"+ConfirmationButtonName+"')]");
 		ElementActions.click(driver, popup_folderProperties_manageFolder_confirmationButton);
+	}
+	
+	public void Folder_Sharing_SearchAndSelectUsers(String SearchText)
+	{
+		popup_SchemaSettings_SharingTab_SelectFromSearchField = By.xpath("//h5[@class='UserData left ng-binding'][contains(text(),'"+SearchText+"')]");
+		ElementActions.type(driver, popup_SchemaSettings_SharingTab_ClickSearchField, SearchText);
+		ElementActions.click(driver, popup_SchemaSettings_SharingTab_SelectFromSearchField);
+	}
+
+	public void FolderProperties_RenameFolder(String FolderNewName)
+	{
+		popup_renameFolder= By.xpath("//input[@name='renameInput']");
+		ElementActions.type(driver, popup_renameFolder, FolderNewName);
+	}
+
+	public void FolderProperties_RenameFolder_RenameButton()
+	{
+		ElementActions.click(driver, popup_renameFolder_renameButton);
+	}
+	
+	public void FolderProperties_RenameFolder_CancelButton()
+	{
+		ElementActions.click(driver, popup_renameFolder_cancelButton);
+	}
+	
+	public void FolderProperties_DoneButton()
+	{
+		ElementActions.click(driver, popup_renameFolder_doneButton);
+	}
+
+	public void Assert_DashboardExist(String DashboardName)
+	{
+		By body_dashboardName = By.xpath("//a[@title='"+DashboardName+"']");
+		Assertions.assertElementExists(driver, body_dashboardName, true);
 	}
 }

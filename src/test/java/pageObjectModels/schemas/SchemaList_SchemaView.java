@@ -76,7 +76,7 @@ public class SchemaList_SchemaView {
 	By popup_SchemaSettings_SharingTab = By.xpath("//ul[@class='modalTabLinks']//a[contains(string(),'Sharing')]/parent::li");
 	
 	By popup_SchemaSettings_SharingTab_Add_Button = By.xpath("//a[contains(@class,'usersHeadAdd right')]");
-	By popup_SchemaSettings_SharingTab_CanEdit = By.xpath("//h5[contains(string(), 'Can Edit')]");
+	By popup_SchemaSettings_SharingTab_CanEdit;
 	By popup_SchemaSettings_SharingTab_ClickSearchField = By.xpath("//div[@class='shareSearch ng-scope']/input[@type=\"text\"]");
 	By popup_SchemaSettings_SharingTab_SelectFromSearchField;
 	By popup_SchemaSettings_SharingTab_SaveButton = By.xpath("//button[contains(string(), 'Save')]");
@@ -175,8 +175,17 @@ public class SchemaList_SchemaView {
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab_Add_Button);
 	}
 
-	public void Schema_Sharing_ClickOnCanEdit()
+	/**
+	 * 
+	 * @param UserPermission
+	 * Can Edit
+	 * Can View
+	 * Can Share
+	 * 
+	 */
+	public void Schema_Sharing_ClickOnUserPermission(String UserPermission)
 	{
+		popup_SchemaSettings_SharingTab_CanEdit = By.xpath("//h5[contains(string(), '"+UserPermission+"')]");
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab_CanEdit);
 	}
 	
