@@ -39,7 +39,7 @@ public class GroupsTest {
 	
 	// Prerequisite, Login using Admin + A predefined group, user, role
 	// Prerequisites, To be created manually for now
-	String groupNameToBeSelected = "Abdelsalam_group";
+	String groupNameToBeSelected = "Abdelsalam_group_to_Delete";
 	String userNameAddedToTheGroup = "Abdelsalam_User";
 	String groupNameForTheUser = "Test_group";
 	String clickOnGroupName = "Abdelsalam_group_automation";
@@ -120,8 +120,8 @@ public class GroupsTest {
 		driver = BrowserFactory.getBrowser(testDataReader);
 		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
-				testDataReader.getCellData("Password"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"), testDataReader.getCellData("Username", "Data7"), 
+				testDataReader.getCellData("Password", "Data7"));
 	}
 
 	@AfterMethod
