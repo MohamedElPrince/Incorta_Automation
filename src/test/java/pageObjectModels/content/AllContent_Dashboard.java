@@ -26,7 +26,8 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_add_button = By.xpath("//button[@type='button'][normalize-space()='Add']");
 	By popup_sendDashboard_reciever_label; // div[contains(@class,'folderUserRow')][contains(normalize-space(.),'mohab.mohie@incorta.com')]//h5[contains(@class,'UserData')]
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
-
+	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
+	
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')]/following-sibling::i/parent::a");
@@ -40,10 +41,17 @@ public class AllContent_Dashboard {
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");
 
 	//// Functions
+	
 	public AllContent_Dashboard(WebDriver driver) {
 		this.driver = driver;
 	}
+	
+	public void Assert_shared_button_dimmed() {
 
+			Assertions.assertElementAttribute(driver, popup_dashboard_menu_share_button, "class",
+					"shareFolder dimmedAction", true);
+		}
+	
 	public void Assert_dashboardName(String name) {
 		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", "(.*" + name + ".*)", true);
 	}

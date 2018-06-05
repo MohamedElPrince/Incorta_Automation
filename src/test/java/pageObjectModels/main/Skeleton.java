@@ -33,11 +33,21 @@ public class Skeleton {
 	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
+	By header_exportStatus_button = By.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
+
+	
+	
 
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
 	}
+	
+	public void assertExportIconIsNotDisplayed() {
+
+			Assertions.assertElementAttribute(driver, header_exportStatus_button ,"class" ,"dropdown right ng-hide", true);
+
+		}
 	// Assert_logoIsDisplayed
 	// Navigate_toSideMenuItem
 
