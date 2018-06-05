@@ -9,6 +9,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;
+import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.data.DataSources;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
@@ -37,7 +38,7 @@ public class LoginTest {
 			SchemaList_SchemaView schemasViewPage;
 			AllContent allContentPage;
 			AllContent_Dashboard dashboardPage;
-
+			AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
 
 		// Declaring public variables that will be shared between tests
 			String NewSchemaName = "Abdelsalam_Automation_Schema";
@@ -54,6 +55,8 @@ public class LoginTest {
 			String FolderToBeRenamed = "New Folder";
 			String RenameFolderName = "NewFolderRenamed";
 			String NewDashboardName = "New Dashboard";
+			String SchemaNameForInsight = "Automation_Schema_1525933948339";
+			
 					
 		//Prerequisites, Analyzer User [User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1]
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
@@ -344,7 +347,7 @@ public class LoginTest {
 			schemasViewPage.Assertion_UserCanEdit(UserToShareWithFolder, "Can Edit");
 		}
 		//Prerequisites, Analyzer user + Folder name to update + New Folder NAME after updating 
-		@Test(priority = 13, description = "TC C60531_4 - Users permissions - Analyzer User")
+		@Test(priority = 14, description = "TC C60531_4 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and update folder name. Then folder will be updated successfully.")
 		@Severity(SeverityLevel.NORMAL)
 		public void Analyzer_Permissions_UpdateFolder() 
@@ -363,11 +366,10 @@ public class LoginTest {
 			allContentPage.Assert_folderIsDisplayed(RenameFolderName);
 		}
 		//Prerequisites, Analyzer user
-		//*****************************In Progress*****************************
-		@Test(priority = 14, description = "TC C60531_5 - Users permissions - Analyzer User")
-		@Description("When I log in with Analyzer User, and navigate to content tab, and click on create new dashboard. Then dashboard is created and accessed.")
+		@Test(priority = 15, description = "TC C60531_5 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, navigate to content tab, click on create new dashboard and create a new insight. Then dashboard and insight are created successfully.")
 		@Severity(SeverityLevel.NORMAL)
-		public void Analyzer_Permissions_CreateDashboard() 
+		public void Analyzer_Permissions_CreateDashboardAndInsight() 
 		{
 			loginPage = new Login(driver);
 			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
@@ -381,10 +383,15 @@ public class LoginTest {
 			mainPage.Select_fromDropdownMenu("Create Dashboard");
 			
 			String NewDashBoradName = allContentPage.setNewDashboardName();
-			//use above instead of below:
-			//Need to delete below and replace them with abov in other TCs.
-			//allContentPage.AddText(NewDashboardName);
-			//allContentPage.Click_CreateButton();
+
+			analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
+			//Need to be rechecked...
+			analyzeInsightPage.addTableorSchemaToInsight(SchemaNameForInsight);
+			analyzeInsightPage.addColumnToInsight("sales","Revenue");
+			analyzeInsightPage.addColumnToInsight("sales", "Quarter");
+			mainPage.Click_ChooseVisualization();
+			analyzeInsightPage.selectVisualization("Aggregated");
+			
 			mainPage.Click_done();
 			mainPage.Click_Element_Sidemenu("contentItem");
 
@@ -393,7 +400,7 @@ public class LoginTest {
 			mainPage.SearchForContentAndOpenResult(NewDashBoradName);
 			
 			dashboardPage = new AllContent_Dashboard(driver);
-			dashboardPage.Assert_dashboardName(NewDashboardName);
+			dashboardPage.Assert_dashboardName(NewDashBoradName);
 		}
 					
 		@BeforeMethod
