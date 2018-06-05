@@ -24,9 +24,17 @@ public class AllContent {
 	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
 
+	By dashboards_menu_button;	
+
 	//// Functions
 	public AllContent(WebDriver driver) {
 		this.driver = driver;
+	}
+	
+	public void selectDashboardMenuButton(String dashboard_name) {
+		dashboards_menu_button = By.xpath("//a[@title='" + dashboard_name
+				+ "']//following-sibling::a[@class='menu-icon flex-box flex-align-center flex-justify-center flex-shrink-0']");
+		ElementActions.click(driver, dashboards_menu_button);
 	}
 
 	public void Navigate_toURL() {
