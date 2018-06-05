@@ -54,8 +54,19 @@ public class UsersTest {
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
 	}
+	
+	@Test(priority = 2, description = "C16118 - User profile picture")
+	@Description("Given I am logged in, When I navigate to the security.users page, And I change profile picture of existing user, And I save changes, Then the new profile picture sill be displayed")
+	@Severity(SeverityLevel.CRITICAL)
+	public void changeProfilePicture() {
+		usersPage = new Users(driver);
+		usersPage.Navigate_toURL();
+		usersPage.Click_name(TempUser);
+		usersPage.UploadProfilePicture(Picture);
+		usersPage.Assert_imageIsDisplayed(TempUser);
+	}
 
-	@Test(priority = 2, description = "C471 - Delete Users")
+	@Test(priority = 3, description = "C471 - Delete Users")
 	@Description("Given I am logged in, When I navigate to the security.users page, And I select existing user, And I delete this selected user, Then user will not be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void deleteUser() {
@@ -67,17 +78,6 @@ public class UsersTest {
 		mainPage.Select_fromDropdownMenu("Delete selection");
 		usersPage.ConfirmUserDeletion();
 		usersPage.Assert_nameIsNotDisplayed(TempUser);
-	}
-
-	@Test(priority = 3, description = "C16118 - User profile picture")
-	@Description("Given I am logged in, When I navigate to the security.users page, And I change profile picture of existing user, And I save changes, Then the new profile picture sill be displayed")
-	@Severity(SeverityLevel.CRITICAL)
-	public void changeProfilePicture() {
-		usersPage = new Users(driver);
-		usersPage.Navigate_toURL();
-		usersPage.Click_name(TempUser);
-		usersPage.UploadProfilePicture(Picture);
-		usersPage.Assert_imageIsDisplayed(TempUser);
 	}
 
 	@Test(priority = 4, description = "C53308 - Testing that during the impersonation session, the UI will be always showing a message indicating that this is an impersonated session")
@@ -107,8 +107,8 @@ public class UsersTest {
 
 		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
-				testDataReader.getCellData("Password"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"), testDataReader.getCellData("Username", "Data7"), 
+				testDataReader.getCellData("Password", "Data7"));
 	}
 
 	@AfterMethod
