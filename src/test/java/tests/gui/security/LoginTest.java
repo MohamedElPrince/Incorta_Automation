@@ -56,7 +56,9 @@ public class LoginTest {
 			String RenameFolderName = "NewFolderRenamed";
 			String NewDashboardName = "New Dashboard";
 			String SchemaNameForInsight = "Automation_Schema_1525933948339";
-			
+			String FolderNameToBeMoved = "MoveFolder";
+			String FolderNameToMoveTo = "Mohamed";
+			String DashboardNameToBeDeleted = "H_A_L";
 					
 		//Prerequisites, Analyzer User [User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1]
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
@@ -305,7 +307,7 @@ public class LoginTest {
 			
 			allContentPage.AddText(NewFolderName);
 			allContentPage.Click_CreateButton();
-			allContentPage.Assert_folderIsDisplayed(NewFolderName);
+			allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
 		}
 		//Prerequisites, Analyzer user + Folder to be deleted
 		@Test(priority = 12, description = "TC C60531_2 - Users permissions - Analyzer User")
@@ -320,10 +322,10 @@ public class LoginTest {
 			allContentPage = new AllContent(driver);
 			allContentPage.Assert_allContentTabIsSelected();
 								
-			allContentPage.Click_FolderProperties(FolderNameToDelete);
+			allContentPage.Click_Folder_Dashboard_Properties(FolderNameToDelete);
 			allContentPage.Click_FolderProperties_ManageFolderButtons("deleteFolder");
-			allContentPage.Click_FolderProperties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
-			allContentPage.Assert_folderIsNotDisplayed(FolderNameToDelete);
+			allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
+			allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToDelete);
 		}
 		//Prerequisites, Analyzer user + Folder to be shared + User to share with
 		@Test(priority = 13, description = "TC C60531_3 - Users permissions - Analyzer User")
@@ -337,7 +339,7 @@ public class LoginTest {
 					
 			allContentPage = new AllContent(driver);
 			allContentPage.Assert_allContentTabIsSelected();		
-			allContentPage.Click_FolderProperties(FolderNameToShare);
+			allContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
 			allContentPage.Click_FolderProperties_ManageFolderButtons("shareFolder");
 			
 			schemasViewPage = new SchemaList_SchemaView(driver);
@@ -358,15 +360,35 @@ public class LoginTest {
 							
 			allContentPage = new AllContent(driver);
 			allContentPage.Assert_allContentTabIsSelected();		
-			allContentPage.Click_FolderProperties(FolderToBeRenamed);
+			allContentPage.Click_Folder_Dashboard_Properties(FolderToBeRenamed);
 			allContentPage.Click_FolderProperties_ManageFolderButtons("renameFolder");
 			allContentPage.FolderProperties_RenameFolder(RenameFolderName);
-			allContentPage.FolderProperties_RenameFolder_RenameButton();
-			allContentPage.FolderProperties_DoneButton();
-			allContentPage.Assert_folderIsDisplayed(RenameFolderName);
+			allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Rename");
+			allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Done");
+			allContentPage.Assert_folder_Dashboard_IsDisplayed(RenameFolderName);
+		}
+		//Prerequisites, Analyzer user + Folder name to move + Folder name to move to 
+		@Test(priority = 15, description = "TC C60531_5 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options, move folder and select a nre folder location. Then folder is moved successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_MoveFolder() 
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+					testDataReader.getCellData("Password", "Data1"));
+			
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();		
+			allContentPage.Click_Folder_Dashboard_Properties(FolderNameToBeMoved);
+			allContentPage.Click_FolderProperties_ManageFolderButtons("moveFolder");
+			allContentPage.Click_FolderProperties_MoveFolder_FolderNameToMoveTo(FolderNameToMoveTo);
+			allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Move");
+			allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToBeMoved);
+			allContentPage.Click_FolderName(FolderNameToMoveTo);
+			allContentPage.Assert_FolderExist_InsideFolder(FolderNameToBeMoved); 
 		}
 		//Prerequisites, Analyzer user
-		@Test(priority = 15, description = "TC C60531_5 - Users permissions - Analyzer User")
+		@Test(priority = 16, description = "TC C60531_6 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, navigate to content tab, click on create new dashboard and create a new insight. Then dashboard and insight are created successfully.")
 		@Severity(SeverityLevel.NORMAL)
 		public void Analyzer_Permissions_CreateDashboardAndInsight() 
@@ -385,11 +407,12 @@ public class LoginTest {
 			String NewDashBoradName = allContentPage.setNewDashboardName();
 
 			analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
-			//Need to be rechecked...
 			analyzeInsightPage.addTableorSchemaToInsight(SchemaNameForInsight);
 			analyzeInsightPage.addColumnToInsight("sales","Revenue");
 			analyzeInsightPage.addColumnToInsight("sales", "Quarter");
+			
 			mainPage.Click_ChooseVisualization();
+			
 			analyzeInsightPage.selectVisualization("Aggregated");
 			
 			mainPage.Click_done();
@@ -402,7 +425,25 @@ public class LoginTest {
 			dashboardPage = new AllContent_Dashboard(driver);
 			dashboardPage.Assert_dashboardName(NewDashBoradName);
 		}
+		//Prerequisites, Analyzer user + Dashboard to be deleted
+		@Test(priority = 17, description = "TC C60531_7 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_DeleteDashboard() 
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+					testDataReader.getCellData("Password", "Data1"));
 					
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
+								
+			allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("deleteFolder", "Delete");
+			allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
+			allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToDelete);
+		}
+		
 		@BeforeMethod
 		public void beforeMethod()
 		{
@@ -427,4 +468,5 @@ public class LoginTest {
 			BrowserFactory.closeAllDrivers();
 			ReportManager.getFullLog();
 		}
+
 }
