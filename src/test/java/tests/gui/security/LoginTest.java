@@ -14,18 +14,23 @@ import com.shaftEngine.ioActionLibrary.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import pageObjectModels.content.AllContent;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
+import pageObjectModels.security.Users;
 
 public class LoginTest {
   
 		// Declaring web-driver and excel reader instances
 			WebDriver driver;
 			ExcelFileManager testDataReader;
+			String[] newUserData;
 			
 		// Declaring Page Objects that will be used in the tests
 			Login loginPage;
-			Skeleton mainPage;
+			Skeleton mainPage;	
+			AllContent allContentPage;
+			Users usersPage;
  					
 		//Prerequisites, Manually created 'Analyzer User' [User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1]
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
@@ -123,6 +128,52 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("dataSourcesItem");
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
+		}
+		
+		@Test(priority = 7, description = "C1275 - Successful Login")
+	    @Description("When I navigate to the login page, And I login using valid credentials Then login is done successfully and all content tab page is displayed")
+	    @Severity(SeverityLevel.CRITICAL)
+	    public void assertLoginWorksAsExpected() {
+	        loginPage = new Login(driver);
+	        loginPage.Navigate_toURL();
+	        loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"), testDataReader.getCellData("Username", "Data7"),
+	                testDataReader.getCellData("Password", "Data7"));
+	        allContentPage = new AllContent(driver);
+	        allContentPage.Assert_allContentTabIsSelected();
+	    }
+		
+		/* Login Using New Created User,
+		 * Need to be logged in with Admin/User manager account, because user is created first then login with the new account created*/
+		@Test(priority = 8, description = "C60950 - Login using new user created.")
+		@Description("When I login with new created user, Then I will be redirected to change password page, And I will logged in successfully")
+		@Severity(SeverityLevel.CRITICAL)
+		public void loginUsingNewlyCreatedUserAccount() {
+
+			loginPage = new Login(driver);
+	        loginPage.Navigate_toURL();
+	        loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"), testDataReader.getCellData("Username", "Data7"),
+	                testDataReader.getCellData("Password", "Data7"));
+	        
+	     // Create New User
+	        
+	        usersPage = new Users(driver);
+			usersPage.Navigate_toURL();
+
+			mainPage = new Skeleton(driver);
+			mainPage.Click_add();
+
+			newUserData = usersPage.AddNewUser();
+			usersPage.Assert_nameIsDisplayed(newUserData[2]);
+
+			// Navigate to login page, and login using the new created user.
+			loginPage = new Login(driver);
+			loginPage.Navigate_toURL();
+			loginPage.UserLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
+			
+			// Actions for first time login
+			loginPage.FirstTimeLogin(newUserData[1],newUserData[0],newUserData[0]);  // take user name as input for the new password
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
 		}
 			
 		@BeforeMethod
