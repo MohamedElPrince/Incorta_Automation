@@ -14,6 +14,7 @@ import com.shaftEngine.ioActionLibrary.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import pageObjectModels.content.AllContent;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
 
@@ -25,7 +26,8 @@ public class LoginTest {
 			
 		// Declaring Page Objects that will be used in the tests
 			Login loginPage;
-			Skeleton mainPage;
+			Skeleton mainPage;	
+			AllContent allContentPage;
  					
 		//Prerequisites, Manually created 'Analyzer User' [User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1]
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
@@ -124,6 +126,18 @@ public class LoginTest {
 			mainPage.AssertElementExist_Sidemenu("schemaItem");
 			mainPage.AssertElementExist_Sidemenu("businessSchemaItem");
 		}
+		
+		@Test(priority = 7, description = "C1275 - Successful Login")
+	    @Description("When I navigate to the login page, And I login using valid credentials Then login is done successfully and all content tab page is displayed")
+	    @Severity(SeverityLevel.CRITICAL)
+	    public void assertLoginWorksAsExpected() {
+	        loginPage = new Login(driver);
+	        loginPage.Navigate_toURL();
+	        loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"), testDataReader.getCellData("Username", "Data7"),
+	                testDataReader.getCellData("Password", "Data7"));
+	        allContentPage = new AllContent(driver);
+	        allContentPage.Assert_allContentTabIsSelected();
+	    }
 			
 		@BeforeMethod
 		public void beforeMethod()
