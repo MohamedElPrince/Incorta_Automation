@@ -214,7 +214,7 @@ public class SchemaList_SchemaView {
 	 * Can View
 	 * Can Share
 	 */
-	public void Assertion_UserCanEdit(String SharedWithUser, String Permission)
+	public void Assertion_UserPermission(String SharedWithUser, String Permission)
 	{
 		popup_SchemaSettings_SharingTab_UsersCanEdit = 
 				By.xpath("//h5[@class='left ng-binding'][contains(string(),'"+SharedWithUser+"')]//parent::div//following-sibling::div/a[contains(string(),'"+Permission+"')]/parent::div");
