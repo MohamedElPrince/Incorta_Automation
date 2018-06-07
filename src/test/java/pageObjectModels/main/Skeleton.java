@@ -34,6 +34,7 @@ public class Skeleton {
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
 	By header_exportStatus_button = By.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
+	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 
 	
 	
@@ -94,6 +95,11 @@ public class Skeleton {
 
 	public void Click_ChooseVisualization() {
 		ElementActions.click(driver, header_chooseVisualization_button);
+	}
+	
+	public void Click_Settings()
+	{
+		ElementActions.click(driver, header_settings_button);
 	}
 
 	public void Select_fromDropdownMenu(String functionName) {
