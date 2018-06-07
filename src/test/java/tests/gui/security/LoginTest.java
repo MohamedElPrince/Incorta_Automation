@@ -427,6 +427,7 @@ public class LoginTest {
 			dashboardPage.Assert_dashboardName(NewDashBoradName);
 		}
 		//Prerequisites, Analyzer user + Dashboard to be deleted
+			//**********************In Progress**********************
 		@Test(priority = 17, description = "TC C60531_7 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
 		@Severity(SeverityLevel.NORMAL)
@@ -441,7 +442,7 @@ public class LoginTest {
 								
 			allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
 			
-			allContentPage.Click_DashboardProperties_ManageDashboardButtons("deleteFolder", "Delete");
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("deleteFolder","Delete");
 			
 			allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
 			

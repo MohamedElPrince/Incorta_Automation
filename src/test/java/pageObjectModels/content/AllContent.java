@@ -126,7 +126,7 @@ public class AllContent {
 	 */
 	public void Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete (String ConfirmationButtonName)
 	{
-		popup_folderProperties_manageFolder_confirmationButton = By.xpath("//a[contains(string(),'"+ConfirmationButtonName+"')]");
+		popup_folderProperties_manageFolder_confirmationButton = By.xpath("//div[contains(@class,'DeleteModal')]//a[contains(string(),'"+ConfirmationButtonName+"')]");
 		ElementActions.click(driver, popup_folderProperties_manageFolder_confirmationButton);
 	}
 	
@@ -195,8 +195,8 @@ public class AllContent {
 	public void Click_DashboardProperties_ManageDashboardButtons(String ActionsOnFolder, String Actions)
 	{
 		//Delete Dashboard
-		//a[@class="deleteFolder"]/div[contains(string(),"Delete")]
-		body_dashboardProperties_Button = By.xpath("//a[@class='"+ActionsOnFolder+"']/div[contains(string(),'"+Actions+"')]");
+		//Used this variable ActionsOnFolder --> To avoid duplications between 2 buttons [Delete and export].
+		body_dashboardProperties_Button = By.xpath("//a[@class='"+ActionsOnFolder+"']/div[contains(string(),'"+Actions+"')]//parent::a");
 		ElementActions.click(driver, body_folderProperties_Button);
 		//Share Dashboard
 		//Rename Dashboard
