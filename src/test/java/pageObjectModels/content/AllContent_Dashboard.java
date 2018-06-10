@@ -46,6 +46,14 @@ public class AllContent_Dashboard {
 		this.driver = driver;
 	}
 	
+
+	public void Assert_shared_button_Active() {
+
+		Assertions.assertElementAttribute(driver, popup_dashboard_menu_share_button, "class",
+				"shareFolder", true);
+
+	}
+	
 	public void Assert_shared_button_dimmed() {
 
 			Assertions.assertElementAttribute(driver, popup_dashboard_menu_share_button, "class",
