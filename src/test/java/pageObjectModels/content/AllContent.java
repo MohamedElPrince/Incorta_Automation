@@ -25,7 +25,7 @@ public class AllContent {
 	By body_dashboardProperties_Button;
 	By body_dashboardName;
 	By body_FolderName_InsideFolder;
-	
+	By body_dashboardName_Button;
 	
 	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
@@ -186,17 +186,19 @@ public class AllContent {
 	}
 	
 	/**
-	 * 
-	 * @param ActionsOnFolder
-	 * deleteFolder
 	 * @param Actions
 	 * Delete
+	 * Rename
+	 * Copy
+	 * Share
+	 * Export
+	 * Move
 	 */
-	public void Click_DashboardProperties_ManageDashboardButtons(String ActionsOnFolder, String Actions)
+	public void Click_DashboardProperties_ManageDashboardButtons(String Actions)
 	{
 		//Delete Dashboard
 		//Used this variable ActionsOnFolder --> To avoid duplications between 2 buttons [Delete and export].
-		body_dashboardProperties_Button = By.xpath("//a[@class='"+ActionsOnFolder+"']/div[contains(string(),'"+Actions+"')]//parent::a");
+		body_dashboardProperties_Button = By.xpath("//a[@class='"+Actions+"']//following-sibling::a");
 		ElementActions.click(driver, body_folderProperties_Button);
 		//Share Dashboard
 		//Rename Dashboard
@@ -204,4 +206,11 @@ public class AllContent {
 		//Move Dashboard
 		//Export Dashboard
 	}
+
+	public void Click_Dashboard(String DashboradName)
+	{
+		body_dashboardName_Button = By.xpath("//a[@title='"+DashboradName+"']");
+		ElementActions.click(driver, body_folderProperties_Button);
+	}
+	
 }

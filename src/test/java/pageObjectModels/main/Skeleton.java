@@ -33,6 +33,7 @@ public class Skeleton {
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
+	By header_export_button_ExportOptions;
 	
 	//// Functions
 	public Skeleton(WebDriver driver) {
@@ -144,4 +145,16 @@ public class Skeleton {
 		ElementActions.click(driver, SideMenu_GenericSideMenuItem_Link);
 	}
 	
+	/**
+	 * 
+	 * @param ExportOptions
+	 * Share
+	 * Send
+	 * Schedule
+	 */
+	public void Click_FromExportMenu(String ExportOptions)
+	{
+		header_export_button_ExportOptions = By.xpath("//li[@class = \"importExport\"][contains(string(),'"+ExportOptions+"')]");
+		ElementActions.click(driver, header_export_button_ExportOptions);
+	}
 }

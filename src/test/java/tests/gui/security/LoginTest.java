@@ -59,6 +59,7 @@ public class LoginTest {
 			String FolderNameToBeMoved = "MoveFolder";
 			String FolderNameToMoveTo = "Mohamed";
 			String DashboardNameToBeDeleted = "H_A_L";
+			String DashboardToBeShared = "SendDashboard";
 					
 		//Prerequisites, Analyzer User [User name/Pass: AbdelsalamAnalyzer/AbdelsalamAnalyzer1]
 		@Test(priority = 1, description = "TC C60554_1 - Users permissions - Analyzer User")
@@ -427,7 +428,7 @@ public class LoginTest {
 			dashboardPage.Assert_dashboardName(NewDashBoradName);
 		}
 		//Prerequisites, Analyzer user + Dashboard to be deleted
-			//**********************In Progress**********************
+			//**********************On Hold**********************
 		@Test(priority = 17, description = "TC C60531_7 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
 		@Severity(SeverityLevel.NORMAL)
@@ -442,11 +443,31 @@ public class LoginTest {
 								
 			allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
 			
-			allContentPage.Click_DashboardProperties_ManageDashboardButtons("deleteFolder","Delete");
-			
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("deleteFolder");
+		
 			allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
 			
 			allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
+		}
+		//Prerequisite, Analyzer user + dashboard to work on
+		//**********************In Progress**********************
+		@Test(priority = 18, description = "TC C60531_8 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and nI click on any dashboard, and I click on export and I click on send, and. Then dashboard will be shared via mail direct successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_ShareDashboardViaMail_Direct() 
+		{
+			loginPage = new Login(driver);
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+					testDataReader.getCellData("Password", "Data1"));
+					
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
+			allContentPage.Click_Dashboard(DashboardToBeShared);		
+			
+			mainPage = new Skeleton(driver);
+			mainPage.Click_export();
+			mainPage.Click_FromExportMenu("Send");
+			
 		}
 		
 		@BeforeMethod
