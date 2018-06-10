@@ -33,22 +33,24 @@ public class Skeleton {
 	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
-	By header_exportStatus_button = By.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
+	By header_exportStatus_button = By
+			.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
-
-	
-	
 
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	public void assertExportIconIsNotDisplayed() {
 
-			Assertions.assertElementAttribute(driver, header_exportStatus_button ,"class" ,"dropdown right ng-hide", true);
+		Assertions.assertElementAttribute(driver, header_exportStatus_button, "class", "dropdown right ng-hide", true);
+	}
 
-		}
+	public void assertExportIconIsDisplayed() {
+		Assertions.assertElementExists(driver, header_export_button, true);
+		Assertions.assertElementAttribute(driver, header_exportStatus_button, "class", "dropdown right ng-hide", false);
+	}
 	// Assert_logoIsDisplayed
 	// Navigate_toSideMenuItem
 
@@ -96,9 +98,8 @@ public class Skeleton {
 	public void Click_ChooseVisualization() {
 		ElementActions.click(driver, header_chooseVisualization_button);
 	}
-	
-	public void Click_Settings()
-	{
+
+	public void Click_Settings() {
 		ElementActions.click(driver, header_settings_button);
 	}
 
@@ -161,5 +162,4 @@ public class Skeleton {
 		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
 		ElementActions.click(driver, SideMenu_GenericSideMenuItem_Link);
 	}
-
 }

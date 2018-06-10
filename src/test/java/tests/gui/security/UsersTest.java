@@ -14,9 +14,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.AllContent;
-import pageObjectModels.content.AllContent_Dashboard;
-import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.security.Users;
@@ -32,7 +29,6 @@ public class UsersTest {
 	 */
 
 	//// Variables
-	String newDashboardName, newInsightName;
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
@@ -43,9 +39,6 @@ public class UsersTest {
 	Login loginPage;
 	Users usersPage;
 	Skeleton mainPage;
-	AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
-	AllContent_Dashboard dashboardPage;
-	AllContent allContentPage;
 
 	//// Test Cases
 	@Test(priority = 1, description = "C478 - Create User")
@@ -103,76 +96,6 @@ public class UsersTest {
 		usersPage.Assert_impersonationUIElementsAreDisplayed();
 
 		mainPage = new Skeleton(driver);
-	}
-
-	@Test(priority = 5, description = "C60533 - Individual Analyzer")
-	@Description("Given I login With Individual Analyzer , When I  Create Dashboard, Then Dashboard is Created sucessfully, And I can't share,schedular or send it")
-	@Severity(SeverityLevel.CRITICAL)
-	public void IndividualAnalyzerRole() {
-
-		/*
-		 * prerequisite to this test case you need to create a user and add the user to
-		 * Individual analyzer role to him by adding the user to the group.
-		 * 
-		 * Steps: - user created with name: Individual Analyzer and password:
-		 * IndividualAnalyzer --> user data added to excel sheet - user added to
-		 * Individual Group that has an Individual Analyzer role assigned to that group
-		 * Share Schema with that user in my case "HR"
-		 * -----------------------------------------------------------------------------
-		 * ---
-		 * -----------------------------------------------------------------------------
-		 * test case steps: 1- logout from the previous user. 2- login with the
-		 * pre-created user. 3- navigate to content section. 4- create dashboard, add
-		 * table from the shared schema, select Aggregated table insight type. 5- Assert
-		 * Export icon(this icon let user to share/send/schedule) not displayed in
-		 * dashboard page. 6- Assert that dashboard and insight name are correct.
-		 * 7-assert that share icon in dashboard settings is dimmed.
-		 */
-
-		// Navigate to login page to login with the Individual analyzer user
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data2"),
-				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
-
-		// Navigate to Content page and create dashboard
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
-
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
-		mainPage.Select_fromDropdownMenu("Create Dashboard");
-
-		newDashboardName = allContentPage.setNewDashboardName();
-
-		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
-		analyzeInsightPage.addTableorSchemaToInsight("HR");
-
-		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
-		analyzeInsightPage.addColumnToInsight("EMPLOYEES", "Employee Salary");
-
-		mainPage.Click_ChooseVisualization();
-		analyzeInsightPage.selectVisualization("Aggregated");
-
-		newInsightName = analyzeInsightPage.setInsightName();
-		mainPage.Click_done();
-
-		allContentPage.Navigate_toURL();
-		mainPage.SearchForContentAndOpenResult(newDashboardName);
-
-		dashboardPage = new AllContent_Dashboard(driver);
-		// Assert that Export icon(this icon let user to share/send/schedule) is not
-		// displayed in dashboard page
-		mainPage.assertExportIconIsNotDisplayed(); //
-
-		// assert that dashboard and insight name are correct
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
-
-		allContentPage.Navigate_toURL();
-		// assert that share icon in dashboard settings is dimmed
-		allContentPage.selectDashboardMenuButton(newDashboardName);
-		dashboardPage.Assert_shared_button_dimmed();
 	}
 
 	//// Testng Annotations
