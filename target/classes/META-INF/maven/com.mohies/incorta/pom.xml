@@ -9,7 +9,7 @@
 	<properties>
 		<!-- Execution Properties -->
 		<incortaRoot>http://35.225.96.248:9080/incorta/#/</incortaRoot>
-		<incortaVersion>Rel3.2</incortaVersion>
+		<incortaVersion>Rel3.3</incortaVersion>
 		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
@@ -26,7 +26,7 @@
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-0.4.0</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-0.4.2</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>

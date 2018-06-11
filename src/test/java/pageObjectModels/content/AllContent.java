@@ -26,7 +26,7 @@ public class AllContent {
 	By body_dashboardName;
 	By body_FolderName_InsideFolder;
 	By body_dashboardName_Button;
-	
+	By dashboards_menu_button;	
 	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
 	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
 	By popup_newFolder_folderName = By.xpath("//div[@class='inputGroup newItemModal']/input");
@@ -43,6 +43,12 @@ public class AllContent {
 	//// Functions
 	public AllContent(WebDriver driver) {
 		this.driver = driver;
+	}
+	
+	public void selectDashboardMenuButton(String dashboard_name) {
+		dashboards_menu_button = By.xpath("//a[@title='" + dashboard_name
+				+ "']//following-sibling::a[@class='menu-icon flex-box flex-align-center flex-justify-center flex-shrink-0']");
+		ElementActions.click(driver, dashboards_menu_button);
 	}
 
 	public void Navigate_toURL() {

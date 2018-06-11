@@ -2,6 +2,7 @@ package pageObjectModels.schemas;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
@@ -76,12 +77,12 @@ public class SchemaList_SchemaView {
 	By popup_SchemaSettings_SharingTab = By.xpath("//ul[@class='modalTabLinks']//a[contains(string(),'Sharing')]/parent::li");
 	
 	By popup_SchemaSettings_SharingTab_Add_Button = By.xpath("//a[contains(@class,'usersHeadAdd right')]");
-	By popup_SchemaSettings_SharingTab_CanEdit;
+	By popup_SchemaSettings_SharingTab_Permission;
 	By popup_SchemaSettings_SharingTab_ClickSearchField = By.xpath("//div[@class='shareSearch ng-scope']/input[@type=\"text\"]");
 	By popup_SchemaSettings_SharingTab_SelectFromSearchField;
 	By popup_SchemaSettings_SharingTab_SaveButton = By.xpath("//button[contains(string(), 'Save')]");
 	By popup_SchemaSettings_SharingTab_UsersSharedWith;
-	By popup_SchemaSettings_SharingTab_UsersCanEdit;
+	By popup_SchemaSettings_SharingTab_UsersPermission;
 	
 	//// Functions
 	public SchemaList_SchemaView(WebDriver driver) {
@@ -156,9 +157,9 @@ public class SchemaList_SchemaView {
 		do {
 			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus, 1);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
-		} while (currentLoadStatus.equals("(.*" + initialLoadStatus + ".*)")
-				|| currentLoadStatus.equals("(.*Loading Data.*)")
-				|| currentLoadStatus.equals("(.*Please load data.*)"));
+		} while (currentLoadStatus.matches("(.*" + initialLoadStatus + ".*)")
+				|| currentLoadStatus.matches("(.*Loading Data.*)")
+				|| currentLoadStatus.matches("(.*Please load data.*)"));
 	}
 
 	public void Assert_lastLoadStatusIsUpdated(String initialLoadStatus) {
@@ -185,8 +186,8 @@ public class SchemaList_SchemaView {
 	 */
 	public void Schema_Sharing_ClickOnUserPermission(String UserPermission)
 	{
-		popup_SchemaSettings_SharingTab_CanEdit = By.xpath("//h5[contains(string(), '"+UserPermission+"')]");
-		ElementActions.click(driver, popup_SchemaSettings_SharingTab_CanEdit);
+		popup_SchemaSettings_SharingTab_Permission = By.xpath("//h5[contains(string(), '"+UserPermission+"')]");
+		ElementActions.click(driver, popup_SchemaSettings_SharingTab_Permission);
 	}
 	
 	public void Schema_Sharing_SearchAndSelectUsers(String SearchText)
@@ -214,10 +215,10 @@ public class SchemaList_SchemaView {
 	 * Can View
 	 * Can Share
 	 */
-	public void Assertion_UserCanEdit(String SharedWithUser, String Permission)
+	public void Assertion_UserPermission(String SharedWithUser, String Permission)
 	{
-		popup_SchemaSettings_SharingTab_UsersCanEdit = 
+		popup_SchemaSettings_SharingTab_UsersPermission = 
 				By.xpath("//h5[@class='left ng-binding'][contains(string(),'"+SharedWithUser+"')]//parent::div//following-sibling::div/a[contains(string(),'"+Permission+"')]/parent::div");
-		Assertions.assertElementExists(driver, popup_SchemaSettings_SharingTab_UsersCanEdit, true);
+		Assertions.assertElementExists(driver, popup_SchemaSettings_SharingTab_UsersPermission, true);
 	}
 }
