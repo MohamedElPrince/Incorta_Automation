@@ -71,20 +71,13 @@ public class AllContent {
 		return newDashboardName;
 	}
 
-	/**
-	 * 
-	 * @param FolderName
-	 * Could Accept Folder Name Or Dashboard Name
-	 */
-	public void AddText(String FolderName)
-	{
-		ElementActions.type(driver,popup_newFolder_folderName , FolderName);
-	}
-
-	public void Click_CreateButton()
-	{
-		ElementActions.click(driver, popup_newDashboard_create_button);
-	}
+	
+	public String SetNewFolderName() {
+        String newFolderName = "Automation" + "_Folder_" + String.valueOf(System.currentTimeMillis());
+        ElementActions.type(driver, popup_newFolder_folderName, newFolderName);
+        ElementActions.click(driver, popup_newDashboard_create_button);
+        return newFolderName;
+    }
 	
 	public void Assert_folder_Dashboard_IsDisplayed(String FolderName)
 	{
