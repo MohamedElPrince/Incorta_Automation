@@ -45,6 +45,10 @@ public class RolesTest {
 	Groups groupsPage;
 
 	// Declaring public variables that will be shared between tests
+	String NewFolderName;
+	String FolderNameToDelete = "ahmed";
+	String FolderNameToShare = "Folder";
+	String UserToShareWithFolder = "Abdelsalam_User";
 	String newDashboardName, newInsightName;
 	String NewSchemaName;
 	String ExistingSchemaNAME = "Abdelsalan_Automation_Schema"; // Existing Schema to be used as predefined
@@ -429,6 +433,66 @@ public class RolesTest {
 		// assert that share icon in dashboard settings is active
 		allContentPage.selectDashboardMenuButton(newDashboardName);
 		dashboardPage.Assert_shared_button_Active();
+	}
+	
+	//Prerequisites, Analyzer user
+	@Test(priority = 9, description = "TC C60531_1 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and navigate to content tab, and click on create new folder. Then new folder will be created successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_CreateFolder() 
+	{
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+				testDataReader.getCellData("Password", "Data1"));
+		
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+		
+		mainPage = new Skeleton(driver);
+		mainPage.Click_add();
+		mainPage.Select_fromDropdownMenu("Create Folder");
+		NewFolderName = allContentPage.SetNewFolderName();
+		allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
+	}
+	
+	//Prerequisites, Analyzer user + Folder to be deleted
+	@Test(priority = 10, description = "TC C60531_2 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click delete. Then folder will be deleted successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_DeleteFolder() 
+	{
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+				testDataReader.getCellData("Password", "Data1"));
+				
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+							
+		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToDelete);
+		allContentPage.Click_FolderProperties_ManageFolderButtons("deleteFolder");
+		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
+		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToDelete);
+	}
+	
+	//Prerequisites, Analyzer user + Folder to be shared + User to share with
+	@Test(priority = 11, description = "TC C60531_3 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click share and select any person to share with. Then folder will be shared successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_ShareFolder() 
+	{
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+				testDataReader.getCellData("Password", "Data1"));
+				
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+		
+		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
+		allContentPage.Click_FolderProperties_ManageFolderButtons("shareFolder");
+		
+		allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
+		
+		schemasViewPage = new SchemaList_SchemaView(driver);
+		schemasViewPage.Schema_Sharing_ClickOnUserPermission("Can Edit");
+		schemasViewPage.Click_Save_Button();
+		schemasViewPage.Assertion_UserPermission(UserToShareWithFolder, "Can Edit");
 	}
 
 	@BeforeMethod

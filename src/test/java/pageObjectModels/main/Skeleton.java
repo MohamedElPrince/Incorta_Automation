@@ -13,7 +13,7 @@ public class Skeleton {
 	//// Elements
 
 	// header_incortaLogo_image
-
+	
 	By SideMenu_GenericSideMenuItem_Link;
 
 	By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
@@ -36,7 +36,8 @@ public class Skeleton {
 	By header_exportStatus_button = By
 			.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
-
+	By header_export_button_ExportOptions;
+	
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
@@ -94,15 +95,16 @@ public class Skeleton {
 	public void Click_actions() {
 		ElementActions.click(driver, header_actions_button);
 	}
-
+	
 	public void Click_ChooseVisualization() {
 		ElementActions.click(driver, header_chooseVisualization_button);
 	}
 
-	public void Click_Settings() {
+	public void Click_Settings()
+	{
 		ElementActions.click(driver, header_settings_button);
 	}
-
+	
 	public void Select_fromDropdownMenu(String functionName) {
 		header_genericMenuItem_link = By
 				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//*[contains(normalize-space(.),'"
@@ -141,25 +143,46 @@ public class Skeleton {
 
 	/**
 	 * 
-	 * @param tabName
-	 *            --> Could have one of the following options: dataSourcesItem
-	 *            schemaItem businessSchemaItem schedulerItem contentItem
-	 *            securityItem
+	 * @param tabName --> Could have one of the following options:
+	 * dataSourcesItem
+	 * schemaItem
+	 * businessSchemaItem
+	 * schedulerItem
+	 * contentItem
+	 * securityItem
 	 */
-	public void AssertElementExist_Sidemenu(String tabName) {
+	public void AssertElementExist_Sidemenu(String tabName)
+	{
 		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
 		Assertions.assertElementExists(driver, SideMenu_GenericSideMenuItem_Link, true);
 	}
-
+	
 	/**
 	 * 
-	 * @param tabName
-	 *            --> Could have one of the following options: dataSourcesItem
-	 *            schemaItem businessSchemaItem schedulerItem contentItem
-	 *            securityItem
+	 * @param tabName --> Could have one of the following options:
+	 * dataSourcesItem
+	 * schemaItem
+	 * businessSchemaItem
+	 * schedulerItem
+	 * contentItem
+	 * securityItem
 	 */
-	public void Click_Element_Sidemenu(String tabName) {
+	public void Click_Element_Sidemenu(String tabName)
+	{
 		SideMenu_GenericSideMenuItem_Link = By.id(tabName);
 		ElementActions.click(driver, SideMenu_GenericSideMenuItem_Link);
+	}
+	
+	/**
+	 * 
+	 * @param ExportOptions
+	 * Share
+	 * Send
+	 * Schedule
+	 */
+	public void Click_FromExportMenu(String ExportOptions)
+	{
+		header_export_button_ExportOptions = By.xpath("//li[@class = \"importExport\"][contains(string(),'"+ExportOptions+"')]");
+		ElementActions.click(driver, header_export_button_ExportOptions);
 	}
 }
