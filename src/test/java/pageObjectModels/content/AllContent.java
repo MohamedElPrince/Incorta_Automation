@@ -136,10 +136,11 @@ public class AllContent {
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab_SelectFromSearchField);
 	}
 
-	public void FolderProperties_RenameFolder(String FolderNewName)
-	{
-		popup_renameFolder= By.xpath("//input[@name='renameInput']");
-		ElementActions.type(driver, popup_renameFolder, FolderNewName);
+	public String FolderProperties_RenameFolder() {
+		String newFolderName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+		popup_renameFolder = By.xpath("//input[@name='renameInput']");
+		ElementActions.type(driver, popup_renameFolder, newFolderName);
+		return newFolderName;
 	}
 
 	public void FolderProperties_RenameFolder_CancelButton()
@@ -209,7 +210,7 @@ public class AllContent {
 	public void Click_Dashboard(String DashboradName)
 	{
 		body_dashboardName_Button = By.xpath("//a[@title='"+DashboradName+"']");
-		ElementActions.click(driver, body_folderProperties_Button);
+		ElementActions.click(driver, body_dashboardName_Button);
 	}
 	
 }
