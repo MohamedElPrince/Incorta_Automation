@@ -20,6 +20,8 @@ import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.data.DataSources;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
+import pageObjectModels.scheduler.Dashboards;
+import pageObjectModels.scheduler.SchemaLoads;
 import pageObjectModels.schemas.SchemaList;
 import pageObjectModels.schemas.SchemaList_SchemaView;
 import pageObjectModels.security.Groups;
@@ -43,6 +45,8 @@ public class RolesTest {
 	AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
 	AllContent_Dashboard dashboardPage;
 	Groups groupsPage;
+	SchemaLoads schedulerSchemaLoadsPage;
+	Dashboards schedulerDashboardsPage;
 
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
@@ -61,6 +65,19 @@ public class RolesTest {
 	String initialLoadStatus;
 	String newGroupName;
 	String[] newUserData;
+	String NewSchemaDescription = "Created by a script in class LoginTest.java";
+	String FolderToBeRenamed = "New Folder";
+	String newFolderName;
+	String NewDashboardName = "New Dashboard";
+	String SchemaNameForInsight = "Automation_Schema_1525933948339";
+	String FolderNameToBeMoved = "MoveFolder";
+	String FolderNameToMoveTo = "Mohamed";
+	String DashboardNameToBeDeleted = "H_A_L";
+	String DashboardToBeShared = "SendDashboard";
+	String ToMail = "mona.amr@incorta.com";
+	String CcMail = "Ahmed.Abdelsalam@incorta.com";
+	String BccMail = "Menna.maged@incorta.com";
+	String newScheduledSendDashboardJobName;
 
 	// Prerequisites, Schema Manager user + Connection credentials to data source
 	@Test(priority = 1, description = "TC C60535_1 - Schema Manager Permissions")
@@ -434,66 +451,217 @@ public class RolesTest {
 		allContentPage.selectDashboardMenuButton(newDashboardName);
 		dashboardPage.Assert_shared_button_Active();
 	}
-	
-	//Prerequisites, Analyzer user
+
+	// Prerequisites, Analyzer user
 	@Test(priority = 9, description = "TC C60531_1 - Users permissions - Analyzer User")
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on create new folder. Then new folder will be created successfully.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Analyzer_Permissions_CreateFolder() 
-	{
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
-				testDataReader.getCellData("Password", "Data1"));
-		
+	public void Analyzer_Permissions_CreateFolder() {
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
 		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
-		
+
 		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 		mainPage.Select_fromDropdownMenu("Create Folder");
 		NewFolderName = allContentPage.SetNewFolderName();
 		allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
 	}
-	
-	//Prerequisites, Analyzer user + Folder to be deleted
+
+	// Prerequisites, Analyzer user + Folder to be deleted
 	@Test(priority = 10, description = "TC C60531_2 - Users permissions - Analyzer User")
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click delete. Then folder will be deleted successfully.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Analyzer_Permissions_DeleteFolder() 
-	{
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
-				testDataReader.getCellData("Password", "Data1"));
-				
+	public void Analyzer_Permissions_DeleteFolder() {
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
 		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
-							
+
 		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToDelete);
 		allContentPage.Click_FolderProperties_ManageFolderButtons("deleteFolder");
 		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
 		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToDelete);
 	}
-	
-	//Prerequisites, Analyzer user + Folder to be shared + User to share with
+
+	// Prerequisites, Analyzer user + Folder to be shared + User to share with
 	@Test(priority = 11, description = "TC C60531_3 - Users permissions - Analyzer User")
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click share and select any person to share with. Then folder will be shared successfully.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Analyzer_Permissions_ShareFolder() 
+	public void Analyzer_Permissions_ShareFolder() {
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+
+		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
+		allContentPage.Click_FolderProperties_ManageFolderButtons("shareFolder");
+
+		allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
+
+		schemasViewPage = new SchemaList_SchemaView(driver);
+		schemasViewPage.Schema_Sharing_ClickOnUserPermission("Can Edit");
+		schemasViewPage.Click_Save_Button();
+		schemasViewPage.Assertion_UserPermission(UserToShareWithFolder, "Can Edit");
+	}
+
+	// Prerequisites, Analyzer user + Folder name to update + New Folder NAME after
+	// updating
+	@Test(priority = 12, description = "TC C60531_4 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and update folder name. Then folder will be updated successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_UpdateFolder() {
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+		allContentPage.Click_Folder_Dashboard_Properties(FolderToBeRenamed);
+		allContentPage.Click_FolderProperties_ManageFolderButtons("renameFolder");
+		newFolderName = allContentPage.FolderProperties_RenameFolder();
+		allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Rename");
+		allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Done");
+		allContentPage.Assert_folder_Dashboard_IsDisplayed(newFolderName);
+	}
+
+	// Prerequisites, Analyzer user + Folder name to move + Folder name to move to
+	@Test(priority = 13, description = "TC C60531_5 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options, move folder and select folder location. Then folder is moved successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_MoveFolder() {
+	
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToBeMoved);
+		allContentPage.Click_FolderProperties_ManageFolderButtons("moveFolder");
+		allContentPage.Click_FolderProperties_MoveFolder_FolderNameToMoveTo(FolderNameToMoveTo);
+		allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Move");
+		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToBeMoved);
+		allContentPage.Click_FolderName(FolderNameToMoveTo);
+		allContentPage.Assert_FolderExist_InsideFolder(FolderNameToBeMoved);
+	}
+
+	// Prerequisites, Analyzer user
+	@Test(priority = 14, description = "TC C60531_6 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, navigate to content tab, click on create new dashboard and create a new insight. Then dashboard and insight are created successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_CreateDashboardAndInsight() {
+
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_add();
+		mainPage.Select_fromDropdownMenu("Create Dashboard");
+
+		String NewDashBoradName = allContentPage.setNewDashboardName();
+
+		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage.addTableorSchemaToInsight(SchemaNameForInsight);
+		analyzeInsightPage.addColumnToInsight("sales", "Revenue");
+		analyzeInsightPage.addColumnToInsight("sales", "Quarter");
+
+		mainPage.Click_ChooseVisualization();
+
+		analyzeInsightPage.selectVisualization("Aggregated");
+
+		mainPage.Click_done();
+		mainPage.Click_Element_Sidemenu("contentItem");
+
+		allContentPage.Assert_DashboardExist(NewDashBoradName);
+
+		mainPage.SearchForContentAndOpenResult(NewDashBoradName);
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage.Assert_dashboardName(NewDashBoradName);
+	}
+	
+	@Test(priority = 15, description = "TC C60531_8 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and I click on any dashboard, and I click on export and I click on send. Then dashboard will be sent via mail successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_ShareDashboardViaMail_Direct() 
 	{
 		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
 				testDataReader.getCellData("Password", "Data1"));
 				
 		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
+		allContentPage.Click_Dashboard(DashboardToBeShared);		
 		
-		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
-		allContentPage.Click_FolderProperties_ManageFolderButtons("shareFolder");
+		mainPage = new Skeleton(driver);
+		mainPage.Click_export();
+		mainPage.Click_FromExportMenu("Send");
 		
-		allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
-		
-		schemasViewPage = new SchemaList_SchemaView(driver);
-		schemasViewPage.Schema_Sharing_ClickOnUserPermission("Can Edit");
-		schemasViewPage.Click_Save_Button();
-		schemasViewPage.Assertion_UserPermission(UserToShareWithFolder, "Can Edit");
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage.SendDashboard_FillColumns("Sending Automation mail for Dashboard", "Testing");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.TypeEmailAndClickAdd(ToMail);
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.TypeEmailAndClickAdd(CcMail);
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.TypeEmailAndClickAdd(BccMail);
+		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.Assert_dashboardName(DashboardToBeShared);
 	}
+
+	@Test(priority = 16, description = "TC C60531_9 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and I click on any dashboard, and I click on export and I click on schedule. Then dashboard will be shared via scheduled job successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_ShareDashboardViaMail_Scheduler() 
+	{
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), 
+			testDataReader.getCellData("Password", "Data1"));
+					
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+		allContentPage.Click_Dashboard(DashboardToBeShared);		
+			
+		mainPage = new Skeleton(driver);
+		mainPage.Click_export();
+		mainPage.Click_FromExportMenu("Schedule");
+			
+		dashboardPage = new AllContent_Dashboard(driver);
+		newScheduledSendDashboardJobName = dashboardPage.scheduleSendDashboard(testDataReader.getCellData("SchemaLoadJobDescription"),
+				testDataReader.getCellData("SchemaLoadJobDate"),
+				testDataReader.getCellData("SchemaLoadJobTime"), testDataReader.getCellData("SchemaLoadJobTimeZone"),
+				testDataReader.getCellData("SchemaLoadJobRecurrence"), ToMail, CcMail, BccMail);
+		schedulerDashboardsPage = new Dashboards(driver); 
+		schedulerDashboardsPage.Navigate_toURL();
+		
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(newScheduledSendDashboardJobName);
+		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newScheduledSendDashboardJobName, "Active");
+	}
+
+//	// Prerequisites, Analyzer user + Dashboard to be deleted
+//	// **********************On Hold**********************
+//	@Test(priority = 17 , description = "TC C60531_7 - Users permissions - Analyzer User")
+//	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Analyzer_Permissions_DeleteDashboard() {
+//		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+//				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+//
+//		allContentPage = new AllContent(driver);
+//		allContentPage.Assert_allContentTabIsSelected();
+//
+//		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
+//
+//		allContentPage.Click_DashboardProperties_ManageDashboardButtons("deleteFolder");
+//
+//		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
+//
+//		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
+//	}
 
 	@BeforeMethod
 	public void beforeMethod() {

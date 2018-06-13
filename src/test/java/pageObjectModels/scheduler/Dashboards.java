@@ -22,6 +22,7 @@ public class Dashboards {
 	By body_dashboard_link;
 	By body_Status_label;
 	// By body_nextRun_label;
+	By body_name_link;
 
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -40,11 +41,16 @@ public class Dashboards {
 		ElementActions.select(driver, body_jobStatus_list, status);
 	}
 
-	public void Assert_nameIsDisplayed(String name) {
+	public void Assert_nameIsDisplayed(String dashboard) {
 		body_dashboard_link = By.xpath(
 				"//div[contains(@class,'usersPanel')]//p[contains(@class,'job-status')][contains(normalize-space(.),'"
-						+ name + "')]");
+						+ dashboard + "')]");
 		Assertions.assertElementExists(driver, body_dashboard_link, true);
+	}
+	
+	public void Assert_jobNameIsDisplayed(String name) {
+		body_name_link = By.xpath("//div[contains(@class,'usersPanel')]//p[@title='" + name + "']");
+		Assertions.assertElementExists(driver, body_name_link, true);
 	}
 
 	public void Assert_jobStatusIsCorrect(String name, String expectedStatus) {

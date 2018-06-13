@@ -39,6 +39,29 @@ public class AllContent_Dashboard {
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
 	By body_insight_paginationLast_button = By.xpath(
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");
+	
+	
+	By popup_scheduleSendDashboard_jobName_textBox = By
+			.xpath("//ng-form[@name='$ctrl.scheduleForm']//input[@name='jobName']");
+	By popup_scheduleSendDashboard_description_textBox = By
+			.xpath("//ng-form[@name='$ctrl.scheduleForm']//input[@name='description']");
+	By popup_scheduleSendDashboard_startByDate_textBox = By.xpath(
+			"//ng-form[@name='$ctrl.scheduleForm']//input[@ng-model='$ctrl.jobObject.startTime']/following-sibling::input[1]");
+	By popup_scheduleSendDashboard_startByTime_textBox = By.xpath(
+			"//ng-form[@name='$ctrl.scheduleForm']//input[@ng-model='$ctrl.jobObject.startTime2']/following-sibling::input[1]");
+	By popup_scheduleSendDashboard_startByTimeZone_textBox = By
+			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
+	By popup_scheduleSendDashboard_recurrenceFrequency_radioButton; 
+	By popup_scheduleSendDashboard_schedule_button = By
+			.xpath("//ng-form[@name='$ctrl.scheduleForm']//button[@ng-click='$ctrl.scheduleJob()']");
+	
+	By popup_sendDashboard_subject_textBox = By.name("subject");
+	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
+	By popup_sendDashboard_EmailPlusButton;	
+	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//div[@class='shareSearch']/input");
+	By popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton = By.xpath("//button[contains(string(),'Add')]");
+	
+	By popup_FromDatePickerTable;
 
 	//// Functions
 	
@@ -196,4 +219,65 @@ public class AllContent_Dashboard {
 		// Check that First Button works and navigated to first page
 		Assertions.assertEquals(firstRecordAfterClickingFirstButton, 1, true);
 	}	
+	
+	public void SendDashboard_FillColumns(String MailSubject, String BodyText)
+	{
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, MailSubject);
+		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
+		//ElementActions.click(driver, popup_sendDashboard_type_radioButton);
+	}
+	
+	/**
+	 * 
+	 * @param MailRecipientsType
+	 * To
+	 * Cc
+	 * Bcc
+	 */
+	public void SendDashboard_Click_AddMailRecipientsType(String MailRecipientsType)
+	{
+	popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
+	ElementActions.click(driver, popup_sendDashboard_EmailPlusButton);
+	}
+	//Create function for cancel for below
+	public void TypeEmailAndClickAdd(String Email)
+	{
+		ElementActions.type(driver, popup_sendDashboard_EmailPlusButton_TypeEmail, Email);
+		ElementActions.click(driver, popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton);
+	}
+	
+	public void Click_Send_Dashboard()
+	{
+		ElementActions.click(driver, popup_sendDashboard_send_button);
+	}
+	
+	public String scheduleSendDashboard(String description, String startByDate,
+			String startByTime, String startByTimeZone, String recurrence, String ToMail, String CcMail, String BccMail) {
+
+		String jobName = "Automation_" + "SchemaLoadJob_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_scheduleSendDashboard_jobName_textBox, jobName);
+
+		ElementActions.type(driver, popup_scheduleSendDashboard_description_textBox, description);
+
+		ElementActions.type(driver, popup_scheduleSendDashboard_startByDate_textBox, startByDate);
+		ElementActions.type(driver, popup_scheduleSendDashboard_startByTime_textBox, startByTime);
+		ElementActions.select(driver, popup_scheduleSendDashboard_startByTimeZone_textBox, startByTimeZone);
+
+		popup_scheduleSendDashboard_recurrenceFrequency_radioButton = By
+				.xpath("//ng-form[@name='$ctrl.scheduleForm']//parent::label[normalize-space()='" + recurrence
+						+ "']/input[@type='radio']");
+		
+		SendDashboard_Click_AddMailRecipientsType("To");
+		TypeEmailAndClickAdd(ToMail);
+		SendDashboard_Click_AddMailRecipientsType("Cc");
+		TypeEmailAndClickAdd(CcMail);
+		SendDashboard_Click_AddMailRecipientsType("Bcc");
+		TypeEmailAndClickAdd(BccMail);
+		
+		ElementActions.click(driver, popup_scheduleSendDashboard_recurrenceFrequency_radioButton);
+		ElementActions.click(driver, popup_scheduleSendDashboard_schedule_button);
+		
+		return jobName;	
+	}
+
 }

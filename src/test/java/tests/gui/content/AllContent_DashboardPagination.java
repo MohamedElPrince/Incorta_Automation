@@ -135,6 +135,35 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Pagination_AssertThatFirstButtontWorksAsExpected();
 	}
 	
+
+	@Test(priority = 5, description = "C77299 - Chrome: Table Insight: Verify that user can navigate to previous page")
+	@Description("When I navigate to the target dashboard, and I assert that the Previous Page button exists, and I click the Previous Page button, Then the Previous Page result is displayed correctly")
+	@Severity(SeverityLevel.NORMAL)
+
+	public void assert_Pagination_Previous_Button() {
+		
+		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
+		paginationInsightName = "7amada"; // to be removed
+
+		// Assert navigation to allContent page
+		allContentPage = new AllContent(driver);
+		allContentPage.Navigate_toURL();
+		allContentPage.Assert_allContentTabIsSelected();
+
+		// Search for dashboard name in search bar and open it
+		mainPage = new Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage.Assert_dashboardName(paginationDashboardName);
+		dashboardPage.Assert_insightName(paginationInsightName);
+		
+		// Assert previous button is displayed and functional
+		//dashboardPage.Pagination_AssertThatPreviousButtonWorksAsExpected();
+
+	}
+	
+	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "pagination/TestData.xlsx");
