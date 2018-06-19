@@ -26,7 +26,11 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_add_button = By.xpath("//button[@type='button'][normalize-space()='Add']");
 	By popup_sendDashboard_reciever_label; // div[contains(@class,'folderUserRow')][contains(normalize-space(.),'mohab.mohie@incorta.com')]//h5[contains(@class,'UserData')]
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
+	By popup_sendDashboard_Labels;
+	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath("//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+	
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
+	
 	
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
@@ -58,7 +62,9 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;	
-	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//div[@class='shareSearch']/input");
+	//Duplicate from  popup_sendDashboard_emailAddress_textBox  - Need to be re-factored.
+	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//input[@ng-model='$parent.entitySearchText']");
+	//Duplicate from  popup_sendDashboard_add_button  - Need to be re-factored.
 	By popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton = By.xpath("//button[contains(string(),'Add')]");
 	
 	By popup_FromDatePickerTable;
@@ -280,4 +286,38 @@ public class AllContent_Dashboard {
 		return jobName;	
 	}
 
+	/**
+	 * 
+	 * @param LabelName
+	 * Subject
+	 * Body
+	 * Hide Notification Text
+	 * Type
+	 * File Name
+	 * Append Timestamp
+	 * To
+	 * Cc
+	 * Bcc
+	 */
+	public void assert_labelsName_exist(String LabelName)
+	{
+		popup_sendDashboard_Labels = By.xpath("//label[contains(text(),'"+LabelName+"')]");
+		Assertions.assertElementExists(driver, popup_sendDashboard_Labels, true);
+	}
+
+	public void assert_subjectField_exist()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_subject_textBox, true);
+	}
+	
+	public void assert_bodyField_exist()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_body_textBox, true);
+	}
+
+	public void assert_checkbox_Unchecked()
+	{
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-valid ng-dirty ng-valid-parse user-success ng-touched ng-empty", true);
+	}
+	
 }
