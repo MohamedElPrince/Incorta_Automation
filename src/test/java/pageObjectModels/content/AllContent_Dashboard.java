@@ -289,15 +289,15 @@ public class AllContent_Dashboard {
 	/**
 	 * 
 	 * @param LabelName
-	 * Subject
-	 * Body
-	 * Hide Notification Text
-	 * Type
-	 * File Name
-	 * Append Timestamp
-	 * To
-	 * Cc
-	 * Bcc
+	 * "Subject"
+	 * "Body"
+	 * "Hide Notification Text"
+	 * "Type"
+	 * "File Name"
+	 * "Append Timestamp"
+	 * "To"
+	 * "Cc"
+	 * "Bcc"
 	 */
 	public void assert_labelsName_exist(String LabelName)
 	{
