@@ -8,6 +8,8 @@ import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
 
+import io.restassured.internal.assertion.Assertion;
+
 public class AllContent_Dashboard {
 	//// Variables
 	WebDriver driver;
@@ -28,9 +30,15 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
 	By popup_sendDashboard_Labels;
 	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath("//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
+	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
+	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
+
 	
+	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
-	
+	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
+
 	
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
@@ -62,6 +70,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;	
+
 	//Duplicate from  popup_sendDashboard_emailAddress_textBox  - Need to be re-factored.
 	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//input[@ng-model='$parent.entitySearchText']");
 	//Duplicate from  popup_sendDashboard_add_button  - Need to be re-factored.
@@ -291,7 +300,7 @@ public class AllContent_Dashboard {
 	 * @param LabelName
 	 * "Subject"
 	 * "Body"
-	 * "Hide Notification Text"
+	 * "Hide Notification Text
 	 * "Type"
 	 * "File Name"
 	 * "Append Timestamp"
@@ -299,25 +308,69 @@ public class AllContent_Dashboard {
 	 * "Cc"
 	 * "Bcc"
 	 */
-	public void assert_labelsName_exist(String LabelName)
+	public void sendDashboard_assert_labelsName_exist(String LabelName)
 	{
 		popup_sendDashboard_Labels = By.xpath("//label[contains(text(),'"+LabelName+"')]");
 		Assertions.assertElementExists(driver, popup_sendDashboard_Labels, true);
 	}
 
-	public void assert_subjectField_exist()
+	public void sendDashboard_assert_subjectField_exist()
 	{
 		Assertions.assertElementExists(driver, popup_sendDashboard_subject_textBox, true);
 	}
 	
-	public void assert_bodyField_exist()
+	public void sendDashboard_assert_bodyField_exist()
 	{
 		Assertions.assertElementExists(driver, popup_sendDashboard_body_textBox, true);
 	}
 
-	public void assert_checkbox_Unchecked()
+	public void sendDashboard_assert_ideNotificationText_checkbox_Unchecked()
 	{
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-valid ng-dirty ng-valid-parse user-success ng-touched ng-empty", true);
+	}
+
+	public void sendDashboard_assert_toolTipIsDiplayed()
+	{
+		By popup_sendDashboard = By.xpath("//p[contains(text(),'Incorta email notifications are sent with auto-generated text that contains the                                             sender name, the dashboard name, and for CSV/XLSX formats, the filters applied to                                             the dashboard. Toggle this option on to hide this text.')]");
+		Assertions.assertElementExists(driver, popup_sendDashboard, true);
+	}
+	
+	/**
+	 * 
+	 * @param OutputFormat
+	 * html
+	 * xlsx
+	 * csv
+	 */
+	public void sendDashboard_selectOutputFormat(String OutputFormat)
+	{
+		popup_sendDashboard_selectOutputFormat = By.xpath("//input[@value='"+OutputFormat+"']");
+		ElementActions.click(driver, popup_sendDashboard_selectOutputFormat);
+	}
+
+	public void sendDashboard_assert_HTMLOption_TextIsDisplayed()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_HTMLOption_Text, true);
+	}
+
+	public void sendDashboard_assert_appenedTimestampOption_CheckedByDefault()
+	{
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "'checkbox-input ng-valid ng-touched user-success ng-dirty ng-valid-parse ng-not-empty'", true);
+	}
+
+	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+	}
+
+	public void sendDashboard_assert_CSVOption_TextIsDisplayed()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+	}
+
+	public void sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
 	}
 	
 }
