@@ -31,8 +31,11 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
 	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
 	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
+	By popup_sendDashboard_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
+	By popup_sendDashboard_toolTip_text;
+	By popup_sendDashboard_FileNameField = By.name("fileName");
+	By popup_sendDashboardScreen = By.id("send-dashboard-modal");
 
-	
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
@@ -323,15 +326,19 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_body_textBox, true);
 	}
 
-	public void sendDashboard_assert_ideNotificationText_checkbox_Unchecked()
+	public void sendDashboard_assert_hideNotificationText_checkbox_Unchecked()
 	{
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-valid ng-dirty ng-valid-parse user-success ng-touched ng-empty", true);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-pristine ng-untouched ng-valid ng-empty", true);
 	}
 
 	public void sendDashboard_assert_toolTipIsDiplayed()
 	{
-		By popup_sendDashboard = By.xpath("//p[contains(text(),'Incorta email notifications are sent with auto-generated text that contains the                                             sender name, the dashboard name, and for CSV/XLSX formats, the filters applied to                                             the dashboard. Toggle this option on to hide this text.')]");
-		Assertions.assertElementExists(driver, popup_sendDashboard, true);
+		ElementActions.hover(driver, popup_sendDashboard_toolTip);
+		popup_sendDashboard_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
+		String ToolTipText = ElementActions.getText(driver, popup_sendDashboard_toolTip_text);
+		Assertions.assertEquals("Incorta email notifications are sent with auto-generated text that contains the sender name, the dashboard name, and for CSV/XLSX formats, the filters applied to the dashboard. Toggle this option on to hide this text.", 
+				ToolTipText, 
+				true);
 	}
 	
 	/**
@@ -377,5 +384,14 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
 	}
 
+	public void sendDashboard_assert_FileNameFieldExist()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_FileNameField, true);
+	}
+
+	public void sendDashboard_assert_DashboardScreenOpened()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboardScreen, true);
+	}
 
 }
