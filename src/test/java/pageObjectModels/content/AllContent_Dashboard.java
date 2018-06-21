@@ -8,8 +8,6 @@ import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
 
-import io.restassured.internal.assertion.Assertion;
-
 public class AllContent_Dashboard {
 	//// Variables
 	WebDriver driver;
@@ -254,6 +252,7 @@ public class AllContent_Dashboard {
 	popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
 	ElementActions.click(driver, popup_sendDashboard_EmailPlusButton);
 	}
+	
 	//Create function for cancel for below
 	public void TypeEmailAndClickAdd(String Email)
 	{
@@ -373,4 +372,10 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
 	}
 	
+	public void sendDashboard_addSubjectField(String text)
+	{
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
+	}
+
+
 }
