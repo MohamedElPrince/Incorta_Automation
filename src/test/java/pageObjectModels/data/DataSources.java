@@ -42,6 +42,8 @@ public class DataSources {
 			popup_newDataSource_done_button = By.xpath("//button[@ng-click='modal.closeMe()']");
 
 	By popup_newDataSource_headerName_label = By.xpath("//span[@ng-if='!newDataSource']");
+	
+	By body_ownername_link;
 
 	//// Functions
 	public DataSources(WebDriver driver) {
@@ -103,4 +105,17 @@ public class DataSources {
 		Assertions.assertElementAttribute(driver, popup_newDataSource_headerName_label, "text", dataSourceName, true);
 		ElementActions.click(driver, popup_newDataSource_done_button);
 	}
+	
+	public void Assert_DSnameAndOwnerIsDisplayed(String name, String ownername) {
+		body_name_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
+						+ "')]/p");
+		Assertions.assertElementExists(driver, body_name_link, true);
+		
+		body_ownername_link = By
+				.xpath("//div[contains(@class,'userName ') and contains(.,'" + name + "')]/following-sibling::div/p[@class=\"ng-binding\"][contains(.,'"+ ownername +"')]");
+		Assertions.assertElementExists(driver, body_ownername_link, true);
+		
+	}
+
 }

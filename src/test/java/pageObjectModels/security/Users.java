@@ -204,4 +204,27 @@ public class Users {
 		{
 			ElementActions.click(driver, popup_addUsersToGroup_UsersPage_add_button);
 		}
+		
+		public void ConfirmUserDeletionAndTransferOwnershipToAnother(String name) {
+			ElementActions.click(driver, popup_confirmDelete_transferOwnership_button);
+			popup_transferOwnership_targetuser_radioButton = By.xpath(
+					"//p[contains(normalize-space(),'Transfer ownership to another user')]/preceding-sibling::input[@type='radio']");
+			ElementActions.click(driver, popup_transferOwnership_targetuser_radioButton);
+			
+			////////////////////////
+			By popup_Transfer_Ownership_To_AnotherUser_Searchbox = By.xpath("//input[@ng-model='entitySearchText']");
+			By popup_Transfer_Ownership_To_AnotherUser_SearchList = By.xpath("//h5[@class='UserData left text-left ng-binding'][contains(text(),'"+ name +"')]");
+			ElementActions.click(driver, popup_Transfer_Ownership_To_AnotherUser_Searchbox);
+			ElementActions.type(driver, popup_Transfer_Ownership_To_AnotherUser_Searchbox, name);
+
+			ElementActions.click(driver, popup_Transfer_Ownership_To_AnotherUser_SearchList);
+			
+			Assertions.assertElementExists(driver, popup_Transfer_Ownership_To_AnotherUser_SearchList, true);
+
+			////////////////////////
+
+			ElementActions.click(driver, popup_transferOwnership_transferSharingPermissions_checkBox);
+			ElementActions.click(driver, popup_transferOwnership_transferOwnership_button);
+			ElementActions.click(driver, popup_confirmDelete_delete_button);
+		}
 }
