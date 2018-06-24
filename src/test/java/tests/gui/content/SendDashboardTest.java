@@ -14,7 +14,7 @@ import pageObjectModels.main.Skeleton;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-public class SendDashboardTestCases {
+public class SendDashboardTest {
 	
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
