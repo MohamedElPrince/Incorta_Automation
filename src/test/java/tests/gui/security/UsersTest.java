@@ -203,10 +203,6 @@ public class UsersTest {
 
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
-
-		// Add data source to schema
-
-		schemasPage.Navigate_toURL();
 		schemasPage.Click_schemaName(newSchemaName);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
@@ -216,9 +212,8 @@ public class UsersTest {
 		mainPage.Select_fromDropdownMenu("Schema Wizard");
 
 		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
-				testDataReader.getCellData("DatabaseTableName")); // ------> need to check if condition after this
-																	// function call
-																	// "Assert_wizardWelcomeTextIsDisplayed()"
+				testDataReader.getCellData("DatabaseTableName")); //need to check if condition after this function call
+																  // "Assert_wizardWelcomeTextIsDisplayed()"
 		newDataSourceTableName = schemasViewPage.GetNewestTableName();
 		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
 
