@@ -642,26 +642,25 @@ public class RolesTest {
 		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newScheduledSendDashboardJobName, "Active");
 	}
 
-//	// Prerequisites, Analyzer user + Dashboard to be deleted
-//	// **********************On Hold**********************
-//	@Test(priority = 17 , description = "TC C60531_7 - Users permissions - Analyzer User")
-//	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
-//	@Severity(SeverityLevel.NORMAL)
-//	public void Analyzer_Permissions_DeleteDashboard() {
-//		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
-//				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
-//
-//		allContentPage = new AllContent(driver);
-//		allContentPage.Assert_allContentTabIsSelected();
-//
-//		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
-//
-//		allContentPage.Click_DashboardProperties_ManageDashboardButtons("deleteFolder");
-//
-//		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
-//
-//		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
-//	}
+	// Prerequisites, Analyzer user + Dashboard to be deleted
+	@Test(priority = 17 , description = "TC C60531_7 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_DeleteDashboard() {
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		allContentPage = new AllContent(driver);
+		allContentPage.Assert_allContentTabIsSelected();
+
+		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
+
+		allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+
+		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
+
+		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
+	}
 
 	@BeforeMethod
 	public void beforeMethod() {

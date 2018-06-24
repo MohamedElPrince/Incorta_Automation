@@ -30,7 +30,8 @@ public class SchemaList {
 	By popup_newSchema_schemaName_textBox = By.xpath("//input[@ng-model='$parent.schemaName']");
 	By popup_newSchema_schemaDescription_textBox = By.xpath("//textarea[@ng-model='$parent.schemaDescription']");
 	By popup_newSchema_create_button = By.xpath("//button[@type='submit'][contains(text(),'Create')]");
-	By popup_newSchema_cancel_button = By.xpath("//button[@ng-click='modal.closeMe()']");;
+	By popup_newSchema_cancel_button = By.xpath("//button[@ng-click='modal.closeMe()']");
+	By body_OwnerName_link;
 
 	//// Functions
 	public SchemaList(WebDriver driver) {
@@ -86,4 +87,16 @@ public class SchemaList {
 		ElementActions.click(driver, popup_newSchema_create_button);
 		return schemaName;
 	}
+	
+	public void Assert_schemaNameIsDisplayedAndItsOwnerName(String schemaName, String name) {
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p");
+		Assertions.assertElementExists(driver, body_schemaName_link, true);
+
+		body_OwnerName_link = By.xpath("//div[contains(@class,'userName') and contains(.,'" + schemaName
+				+ "')]/following-sibling::div/p[@class=\"ng-binding\"][contains(.,'" + name + "')]");
+		Assertions.assertElementExists(driver, body_OwnerName_link, true);
+	}
+
 }
