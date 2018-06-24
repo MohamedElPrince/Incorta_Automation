@@ -373,9 +373,17 @@ public class AllContent_Dashboard {
 	{
 		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
 	}
-
-	public void sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed()
+	
+	/**
+	 * 
+	 * @param MailRecipientsType
+	 * To
+	 * Cc
+	 * Bcc
+	 */
+	public void sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed(String MailRecipientsType)
 	{
+		popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
 		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
 	}
 	

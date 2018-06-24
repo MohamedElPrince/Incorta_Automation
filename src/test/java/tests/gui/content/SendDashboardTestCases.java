@@ -95,7 +95,7 @@ public class SendDashboardTestCases {
 		dashboardPage.sendDashboard_assert_FileNameFieldExist();
 	}
 
-	@Test(priority = 7, description = "C76810 - Chrome: Fresh Installation: Verify that when selecting 'CSV', the option of fixed file name is displayed")
+	@Test(priority = 7, description = "C76811 - Chrome: Fresh Installation: Verify that when selecting 'CSV', the option of fixed file name is displayed")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard and I select CSV option. Then I'll find that File Name option is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatWhenSelectingCSVOptionFileNameDisplayedInSendDashBoard() 
@@ -105,6 +105,39 @@ public class SendDashboardTestCases {
 		dashboardPage.sendDashboard_selectOutputFormat("csv");
 		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.sendDashboard_assert_FileNameFieldExist();
+	}
+	
+	@Test(priority = 8, description = "C76716 - Chrome: Fresh Installation: Verify that 'To' section is displayed in 'Send Dashboard' Window")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. Then Mail Receipents 'To' and a plus sign beside it will be displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void AssertThatToMailReceipentsDisplayed() 
+	{		
+		dashboardPage = new AllContent_Dashboard(driver);
+		
+		dashboardPage.sendDashboard_assert_labelsName_exist("To");
+		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
+	}
+	
+	@Test(priority = 9, description = "C76717 - Chrome: Fresh Installation: Verify that 'Cc' section is displayed in 'Send Dashboard' Window")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. Then Mail Receipents 'Cc' and a plus sign beside it will be displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void AssertThatCcMailReceipentsDisplayed() 
+	{		
+		dashboardPage = new AllContent_Dashboard(driver);
+		
+		dashboardPage.sendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
+	}
+	
+	@Test(priority = 10, description = "C76718 - Chrome: Fresh Installation: Verify that 'Bcc' section is displayed in 'Send Dashboard' Window")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. Then Mail Receipents 'Bcc' and a plus sign beside it will be displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void AssertThatBccMailReceipentsDisplayed() 
+	{		
+		dashboardPage = new AllContent_Dashboard(driver);
+		
+		dashboardPage.sendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
 	
 	@BeforeMethod
