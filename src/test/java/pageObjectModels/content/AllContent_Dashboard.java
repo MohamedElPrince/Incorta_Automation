@@ -32,7 +32,10 @@ public class AllContent_Dashboard {
 //	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
 //	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
 	By popup_sendDashboard_EmailTypeOptions; // to replace previous elements 
-	
+	By popup_sendDashboard_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
+	By popup_sendDashboard_toolTip_text;
+	By popup_sendDashboard_FileNameField = By.name("fileName");
+	By popup_sendDashboardScreen = By.id("send-dashboard-modal");
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
@@ -369,13 +372,17 @@ public class AllContent_Dashboard {
 
 	public void sendDashboard_assert_HideNotificationText_checkbox_Unchecked()
 	{
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "ng-empty", true);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-pristine ng-untouched ng-valid ng-empty", true);
 	}
 
 	public void sendDashboard_assert_HideNotificationText_toolTipIsDiplayed()
 	{
-		By popup_sendDashboard = By.xpath("//div[@class='notification-info-tooltip']");// to be rechecked when create related test case
-		Assertions.assertElementExists(driver, popup_sendDashboard, true);
+		ElementActions.hover(driver, popup_sendDashboard_toolTip);
+		popup_sendDashboard_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
+		String ToolTipText = ElementActions.getText(driver, popup_sendDashboard_toolTip_text);
+		Assertions.assertEquals(testDataReader.getCellData("HideNotificationToolTipText"), 
+				ToolTipText, 
+				true);
 	}
 	
 	/**
@@ -393,10 +400,10 @@ public class AllContent_Dashboard {
 
 	public void sendDashboard_assert_appenedTimestampOption_CheckedByDefault()
 	{
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "ng-not-empty", true);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "'checkbox-input ng-valid ng-touched user-success ng-dirty ng-valid-parse ng-not-empty'", true);
 	}
-
-//	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
+	
+	//	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
 //	{
 //		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
 //	}
@@ -415,9 +422,17 @@ public class AllContent_Dashboard {
 	{
 		popup_sendDashboard_EmailTypeOptions = By.xpath("//span[contains(@ng-if,'"+type+"')]");
 	}
-
-	public void sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed()
+	
+	/**
+	 * 
+	 * @param MailRecipientsType
+	 * To
+	 * Cc
+	 * Bcc
+	 */
+	public void sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed(String MailRecipientsType)
 	{
+		popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
 		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
 	}
 	
@@ -426,5 +441,14 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
 	}
 
+	public void sendDashboard_assert_FileNameFieldExist()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_FileNameField, true);
+	}
+
+	public void sendDashboard_assert_DashboardScreenOpened()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboardScreen, true);
+	}
 
 }
