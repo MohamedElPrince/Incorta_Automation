@@ -28,10 +28,10 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
 	By popup_sendDashboard_Labels;
 	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath("//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
-	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
-	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
-	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
-
+//	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
+//	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
+//	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
+	By popup_sendDashboard_EmailTypeOptions; // to replace previous elements 
 	
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
@@ -70,7 +70,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_EmailPlusButton;	
 
 	//Duplicate from  popup_sendDashboard_emailAddress_textBox  - Need to be re-factored.
-	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//input[@ng-model='$parent.entitySearchText']");
+	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//div[@class='shareSearch']/input");
 	//Duplicate from  popup_sendDashboard_add_button  - Need to be re-factored.
 	By popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton = By.xpath("//button[contains(string(),'Add')]");
 	
@@ -347,24 +347,29 @@ public class AllContent_Dashboard {
 		ElementActions.click(driver, popup_sendDashboard_selectOutputFormat);
 	}
 
-	public void sendDashboard_assert_HTMLOption_TextIsDisplayed()
-	{
-		Assertions.assertElementExists(driver, popup_sendDashboard_HTMLOption_Text, true);
-	}
-
 	public void sendDashboard_assert_appenedTimestampOption_CheckedByDefault()
 	{
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "'checkbox-input ng-valid ng-touched user-success ng-dirty ng-valid-parse ng-not-empty'", true);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "ng-not-empty", true);
 	}
 
-	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
+//	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+//	}
+//
+//	public void sendDashboard_assert_CSVOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+//	}
+//	
+//	public void sendDashboard_assert_HTMLOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_HTMLOption_Text, true);
+//	}
+	
+	public void sendDashboard_assert_TypeOfEmailDescription(String type) // to be completed in its testcase to check element text
 	{
-		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
-	}
-
-	public void sendDashboard_assert_CSVOption_TextIsDisplayed()
-	{
-		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+		popup_sendDashboard_EmailTypeOptions = By.xpath("//span[contains(@ng-if,'"+type+"')]");
 	}
 
 	public void sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed()
