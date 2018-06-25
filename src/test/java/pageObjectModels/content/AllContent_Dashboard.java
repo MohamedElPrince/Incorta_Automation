@@ -69,11 +69,6 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;	
 
-	//Duplicate from  popup_sendDashboard_emailAddress_textBox  - Need to be re-factored.
-	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//div[@class='shareSearch']/input");
-	//Duplicate from  popup_sendDashboard_add_button  - Need to be re-factored.
-	By popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton = By.xpath("//button[contains(string(),'Add')]");
-	
 	By popup_FromDatePickerTable;
 
 	//// Functions
@@ -256,8 +251,8 @@ public class AllContent_Dashboard {
 	//Create function for cancel for below
 	public void TypeEmailAndClickAdd(String Email)
 	{
-		ElementActions.type(driver, popup_sendDashboard_EmailPlusButton_TypeEmail, Email);
-		ElementActions.click(driver, popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton);
+		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
+		ElementActions.click(driver, popup_sendDashboard_add_button);
 	}
 	
 	public void Click_Send_Dashboard()
