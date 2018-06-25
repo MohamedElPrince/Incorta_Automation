@@ -26,7 +26,17 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_add_button = By.xpath("//button[@type='button'][normalize-space()='Add']");
 	By popup_sendDashboard_reciever_label; // div[contains(@class,'folderUserRow')][contains(normalize-space(.),'mohab.mohie@incorta.com')]//h5[contains(@class,'UserData')]
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
+	By popup_sendDashboard_Labels;
+	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath("//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+//	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
+//	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
+//	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
+	By popup_sendDashboard_EmailTypeOptions; // to replace previous elements 
+	
+	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
+	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
+
 	
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
@@ -58,9 +68,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;	
-	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//div[@class='shareSearch']/input");
-	By popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton = By.xpath("//button[contains(string(),'Add')]");
-	
+
 	By popup_FromDatePickerTable;
 	By popup_dashboard_menu_share_SearchList;
 	By popup_dashboard_menu_User_List;
@@ -266,11 +274,12 @@ public class AllContent_Dashboard {
 	popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
 	ElementActions.click(driver, popup_sendDashboard_EmailPlusButton);
 	}
+	
 	//Create function for cancel for below
 	public void TypeEmailAndClickAdd(String Email)
 	{
-		ElementActions.type(driver, popup_sendDashboard_EmailPlusButton_TypeEmail, Email);
-		ElementActions.click(driver, popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton);
+		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
+		ElementActions.click(driver, popup_sendDashboard_add_button);
 	}
 	
 	public void Click_Send_Dashboard()
@@ -328,5 +337,94 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_menu_SharedWithList, true);
 		
 	}
+
+	/**
+	 * 
+	 * @param LabelName
+	 * "Subject"
+	 * "Body"
+	 * "Hide Notification Text
+	 * "Type"
+	 * "File Name"
+	 * "Append Timestamp"
+	 * "To"
+	 * "Cc"
+	 * "Bcc"
+	 */
+	public void sendDashboard_assert_labelsName_exist(String LabelName)
+	{
+		popup_sendDashboard_Labels = By.xpath("//label[contains(text(),'"+LabelName+"')]");
+		Assertions.assertElementExists(driver, popup_sendDashboard_Labels, true);
+	}
+
+	public void sendDashboard_assert_subjectField_exist()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_subject_textBox, true);
+	}
+	
+	public void sendDashboard_assert_bodyField_exist()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_body_textBox, true);
+	}
+
+	public void sendDashboard_assert_HideNotificationText_checkbox_Unchecked()
+	{
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "ng-empty", true);
+	}
+
+	public void sendDashboard_assert_HideNotificationText_toolTipIsDiplayed()
+	{
+		By popup_sendDashboard = By.xpath("//div[@class='notification-info-tooltip']");// to be rechecked when create related test case
+		Assertions.assertElementExists(driver, popup_sendDashboard, true);
+	}
+	
+	/**
+	 * 
+	 * @param OutputFormat
+	 * html
+	 * xlsx
+	 * csv
+	 */
+	public void sendDashboard_selectOutputFormat(String OutputFormat)
+	{
+		popup_sendDashboard_selectOutputFormat = By.xpath("//input[@value='"+OutputFormat+"']");
+		ElementActions.click(driver, popup_sendDashboard_selectOutputFormat);
+	}
+
+	public void sendDashboard_assert_appenedTimestampOption_CheckedByDefault()
+	{
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "ng-not-empty", true);
+	}
+
+//	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+//	}
+//
+//	public void sendDashboard_assert_CSVOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+//	}
+//	
+//	public void sendDashboard_assert_HTMLOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_HTMLOption_Text, true);
+//	}
+	
+	public void sendDashboard_assert_TypeOfEmailDescription(String type) // to be completed in its testcase to check element text
+	{
+		popup_sendDashboard_EmailTypeOptions = By.xpath("//span[contains(@ng-if,'"+type+"')]");
+	}
+
+	public void sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed()
+	{
+		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
+	}
+	
+	public void sendDashboard_addSubjectField(String text)
+	{
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
+	}
+
 
 }
