@@ -59,9 +59,9 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatHideNotificationTextFieldDisplayedInSendDashBoard() 
 	{		
-		dashboardPage.sendDashboard_assert_hideNotificationText_checkbox_Unchecked();
+		dashboardPage.sendDashboard_assert_HideNotificationText_checkbox_Unchecked();
 		dashboardPage.sendDashboard_assert_labelsName_exist("Hide Notification Text");
-		dashboardPage.sendDashboard_assert_toolTipIsDiplayed();
+		dashboardPage.sendDashboard_assert_HideNotificationText_toolTipIsDiplayed();
 	}
 	
 	@Test(priority = 5, description = "C76809 - Chrome: Fresh Installation: Testing that when selecting HTML Option no File name can be added")

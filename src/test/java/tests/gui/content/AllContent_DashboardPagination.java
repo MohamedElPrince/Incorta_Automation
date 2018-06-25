@@ -159,8 +159,7 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Assert_insightName(paginationInsightName);
 		
 		// Assert previous button is displayed and functional
-		//dashboardPage.Pagination_AssertThatPreviousButtonWorksAsExpected();
-
+		dashboardPage.Pagination_AssertThatPreviousButtonWorksAsExpected();
 	}
 	
 	

@@ -28,14 +28,14 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
 	By popup_sendDashboard_Labels;
 	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath("//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
-	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
-	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
-	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
+//	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
+//	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
+//	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
+	By popup_sendDashboard_EmailTypeOptions; // to replace previous elements 
 	By popup_sendDashboard_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
 	By popup_sendDashboard_toolTip_text;
 	By popup_sendDashboard_FileNameField = By.name("fileName");
 	By popup_sendDashboardScreen = By.id("send-dashboard-modal");
-
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
@@ -72,12 +72,14 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;	
 
-	//Duplicate from  popup_sendDashboard_emailAddress_textBox  - Need to be re-factored.
-	By popup_sendDashboard_EmailPlusButton_TypeEmail = By.xpath("//input[@ng-model='$parent.entitySearchText']");
-	//Duplicate from  popup_sendDashboard_add_button  - Need to be re-factored.
-	By popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton = By.xpath("//button[contains(string(),'Add')]");
-	
 	By popup_FromDatePickerTable;
+	By popup_dashboard_menu_share_SearchList;
+	By popup_dashboard_menu_User_List;
+	By dashboards_menu_button;
+	By popup_dashboard_menu_share_SearchtextBox = By.xpath("//input[@ng-model='$parent.$parent.entitySearchText']");
+	By popup_dashboard_menu_share_SearchSaveButton = By.xpath("//button[@type='submit'][normalize-space()='Save']");
+	By popup_dashboard_menu_share_DoneButton = By.xpath("//button[@class='btn btn-default userSaveBtn'][normalize-space()='Done']");
+	By popup_dashboard_menu_SharedWithList ;
 
 	//// Functions
 	
@@ -236,6 +238,26 @@ public class AllContent_Dashboard {
 		Assertions.assertEquals(firstRecordAfterClickingFirstButton, 1, true);
 	}	
 	
+	public void Pagination_AssertThatPreviousButtonWorksAsExpected() {
+
+		// Example 1-10 of 100
+		// Navigate to the next page to confirm previous button isn't dimmed
+		// Example 11-20 of 100
+		// In next page split by of then split again by dash to get first number
+		// Current page first row = 11
+		// Navigate back to previous page (1-10 of 100)
+		// Confirm current page last number (10) = (previous page first row -1)
+
+		// Navigate to next page
+		ElementActions.click(driver, body_insight_paginationNext_button);
+		int firstRecord_BeforeClick_Previous = Pagination_GetFirstRecordInCurrentPage();
+		// Navigate to previous page & get the last record
+		ElementActions.click(driver, body_insight_paginationPrevious_button);
+		int lasttRecord_AfterClick_Previous = Pagination_GetLastRecordInCurrentPage();
+		Assertions.assertEquals(lasttRecord_AfterClick_Previous + 1, firstRecord_BeforeClick_Previous, true);
+
+	}
+	
 	public void SendDashboard_FillColumns(String MailSubject, String BodyText)
 	{
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, MailSubject);
@@ -259,8 +281,8 @@ public class AllContent_Dashboard {
 	//Create function for cancel for below
 	public void TypeEmailAndClickAdd(String Email)
 	{
-		ElementActions.type(driver, popup_sendDashboard_EmailPlusButton_TypeEmail, Email);
-		ElementActions.click(driver, popup_sendDashboard_EmailPlusButton_TypeEmail_AddButton);
+		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
+		ElementActions.click(driver, popup_sendDashboard_add_button);
 	}
 	
 	public void Click_Send_Dashboard()
@@ -296,6 +318,28 @@ public class AllContent_Dashboard {
 		
 		return jobName;	
 	}
+	
+	public void selectShareButton() {
+		ElementActions.click(driver, popup_dashboard_menu_share_button);
+	}
+	
+	public void selectUsertoShareFromList(String name) {
+		
+		popup_dashboard_menu_share_SearchList = By.xpath("//h5[@class='UserData left ng-binding'][contains(text(),'"+ name +"')]");
+		popup_dashboard_menu_User_List = By.xpath("//h5[@class='left ng-binding'][contains(text(),'"+ name +"')]");
+		ElementActions.type(driver, popup_dashboard_menu_share_SearchtextBox, name);
+		ElementActions.click(driver, popup_dashboard_menu_share_SearchList);
+		ElementActions.click(driver, popup_dashboard_menu_share_SearchSaveButton);
+		Assertions.assertElementExists(driver, popup_dashboard_menu_User_List, true);
+		ElementActions.click(driver, popup_dashboard_menu_share_DoneButton);
+		
+	}
+	
+	public void Assert_Content_UserPermission(String SharedWithUser, String Permission ) {
+		By popup_menu_SharedWithList = By.xpath("//h5[@class='left ng-binding'][contains(string(),'"+ SharedWithUser + "')]//parent::div//following-sibling::div/a[contains(string(),'" + Permission + "')]/parent::div");
+		Assertions.assertElementExists(driver, popup_menu_SharedWithList, true);
+		
+	}
 
 	/**
 	 * 
@@ -326,12 +370,12 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_body_textBox, true);
 	}
 
-	public void sendDashboard_assert_hideNotificationText_checkbox_Unchecked()
+	public void sendDashboard_assert_HideNotificationText_checkbox_Unchecked()
 	{
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-pristine ng-untouched ng-valid ng-empty", true);
 	}
 
-	public void sendDashboard_assert_toolTipIsDiplayed()
+	public void sendDashboard_assert_HideNotificationText_toolTipIsDiplayed()
 	{
 		ElementActions.hover(driver, popup_sendDashboard_toolTip);
 		popup_sendDashboard_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
@@ -354,24 +398,29 @@ public class AllContent_Dashboard {
 		ElementActions.click(driver, popup_sendDashboard_selectOutputFormat);
 	}
 
-	public void sendDashboard_assert_HTMLOption_TextIsDisplayed()
-	{
-		Assertions.assertElementExists(driver, popup_sendDashboard_HTMLOption_Text, true);
-	}
-
 	public void sendDashboard_assert_appenedTimestampOption_CheckedByDefault()
 	{
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "'checkbox-input ng-valid ng-touched user-success ng-dirty ng-valid-parse ng-not-empty'", true);
 	}
-
-	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
+	
+	//	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+//	}
+//
+//	public void sendDashboard_assert_CSVOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+//	}
+//	
+//	public void sendDashboard_assert_HTMLOption_TextIsDisplayed()
+//	{
+//		Assertions.assertElementExists(driver, popup_sendDashboard_HTMLOption_Text, true);
+//	}
+	
+	public void sendDashboard_assert_TypeOfEmailDescription(String type) // to be completed in its testcase to check element text
 	{
-		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
-	}
-
-	public void sendDashboard_assert_CSVOption_TextIsDisplayed()
-	{
-		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
+		popup_sendDashboard_EmailTypeOptions = By.xpath("//span[contains(@ng-if,'"+type+"')]");
 	}
 	
 	/**

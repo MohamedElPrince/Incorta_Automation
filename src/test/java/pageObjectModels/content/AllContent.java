@@ -198,8 +198,8 @@ public class AllContent {
 	{
 		//Delete Dashboard
 		//Used this variable ActionsOnFolder --> To avoid duplications between 2 buttons [Delete and export].
-		body_dashboardProperties_Button = By.xpath("//a[@class='"+Actions+"']//following-sibling::a");
-		ElementActions.click(driver, body_folderProperties_Button);
+		body_dashboardProperties_Button = By.xpath("//div[contains(@class,'folderSettingsModal')]//a[contains(string(),'"+Actions+"')]");
+		ElementActions.click(driver, body_dashboardProperties_Button);
 		//Share Dashboard
 		//Rename Dashboard
 		//Copy Dashboard
@@ -211,6 +211,12 @@ public class AllContent {
 	{
 		body_dashboardName_Button = By.xpath("//a[@title='"+DashboradName+"']");
 		ElementActions.click(driver, body_dashboardName_Button);
+	}
+	
+	public void selectContentOptionButton(String Content_name) {
+		dashboards_menu_button = By.xpath("//a[@title='" + Content_name
+				+ "']//following-sibling::a[@class='menu-icon flex-box flex-align-center flex-justify-center flex-shrink-0']");
+		ElementActions.click(driver, dashboards_menu_button);
 	}
 	
 }
