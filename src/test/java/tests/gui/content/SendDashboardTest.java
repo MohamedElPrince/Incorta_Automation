@@ -31,9 +31,8 @@ public class SendDashboardTest {
 	@Test(priority = 1, description = "C76805 - Chrome: Fresh Installation : Testing that the new 'Send Dashboard' Screen is correctly displayed")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard. Then Send Dashboard screen will open")
 	@Severity(SeverityLevel.NORMAL)
-	public void AssertThatSendDashboardScreenOpened()
+	public void AssertSendDashboardScreenIsOpened()
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.sendDashboard_assert_DashboardScreenOpened();
 	}
 	
@@ -42,8 +41,6 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatSubjectFieldDisplayedInSendDashBoard() 
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-
 		dashboardPage.sendDashboard_assert_subjectField_exist();
 		dashboardPage.sendDashboard_assert_labelsName_exist("Subject");
 	}
@@ -53,56 +50,49 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatBodyFieldDisplayedInSendDashBoard() 
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-
 		dashboardPage.sendDashboard_assert_bodyField_exist();
 		dashboardPage.sendDashboard_assert_labelsName_exist("Body");
 	}
   	
 	@Test(priority = 4, description = "C76808 - Chrome: Fresh Installation: Testing that 'Hide Notification Text' Check box is displayed in 'Send Dashboard' window")
-	@Description("When I navigate to the target dashboard, and I click on send dashboard. Then I'll find that 'Hide Notification Text' field exist and a checkbox Unchecked along with a tooltip.")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. Then I'll find that 'Hide Notification Text' field exist along with a tooltip and a checkbox is Unchecked.")
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatHideNotificationTextFieldDisplayedInSendDashBoard() 
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-
 		dashboardPage.sendDashboard_assert_hideNotificationText_checkbox_Unchecked();
 		dashboardPage.sendDashboard_assert_labelsName_exist("Hide Notification Text");
 		dashboardPage.sendDashboard_assert_toolTipIsDiplayed();
 	}
 	
 	@Test(priority = 5, description = "C76809 - Chrome: Fresh Installation: Testing that when selecting HTML Option no File name can be added")
-	@Description("When I navigate to the target dashboard, and I click on send dashboard and I select HTML option. Then I'll find that File Name option is displayed.")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard and I select HTML option. Then I'll find that type option is selected and file name field is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatWhenSelectingHTMLOptionFileNameDisplayedInSendDashBoard() 
-	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-
+	{
 		dashboardPage.sendDashboard_selectOutputFormat("html");
+		// we need to assert on text message which is displayed when selecting html
 		dashboardPage.sendDashboard_assert_FileNameFieldExist();
 		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
 	}
 	
 	@Test(priority = 6, description = "C76810 - Chrome: Fresh Installation: Verify that when Selecting 'XLSX', the option of fixed file name is displayed")
-	@Description("When I navigate to the target dashboard, and I click on send dashboard and I select XLSX option. Then I'll find that File Name option is displayed.")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard and I select XLSX option. Then I'll find that type option is selected and file name field is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatWhenSelectingXLSXOptionFileNameDisplayedInSendDashBoard() 
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-		
 		dashboardPage.sendDashboard_selectOutputFormat("xlsx");
+		// we need to assert on text message which is displayed when selecting xlsx
 		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.sendDashboard_assert_FileNameFieldExist();
 	}
 
 	@Test(priority = 7, description = "C76811 - Chrome: Fresh Installation: Verify that when selecting 'CSV', the option of fixed file name is displayed")
-	@Description("When I navigate to the target dashboard, and I click on send dashboard and I select CSV option. Then I'll find that File Name option is displayed.")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard and I select CSV option. Then I'll find that type option is selected and file name field is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatWhenSelectingCSVOptionFileNameDisplayedInSendDashBoard() 
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-		
 		dashboardPage.sendDashboard_selectOutputFormat("csv");
+		// we need to assert on text message which is displayed when selecting csv
 		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.sendDashboard_assert_FileNameFieldExist();
 	}
@@ -111,9 +101,7 @@ public class SendDashboardTest {
 	@Description("When I navigate to the target dashboard, and I click on send dashboard. Then Mail Receipents 'To' and a plus sign beside it will be displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatToMailReceipentsDisplayed() 
-	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-		
+	{				
 		dashboardPage.sendDashboard_assert_labelsName_exist("To");
 		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
 	}
@@ -123,8 +111,6 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatCcMailReceipentsDisplayed() 
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-		
 		dashboardPage.sendDashboard_assert_labelsName_exist("Cc");
 		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
 	}
@@ -134,8 +120,6 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void AssertThatBccMailReceipentsDisplayed() 
 	{		
-		dashboardPage = new AllContent_Dashboard(driver);
-		
 		dashboardPage.sendDashboard_assert_labelsName_exist("Bcc");
 		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
 	}

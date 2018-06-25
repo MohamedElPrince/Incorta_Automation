@@ -336,7 +336,7 @@ public class AllContent_Dashboard {
 		ElementActions.hover(driver, popup_sendDashboard_toolTip);
 		popup_sendDashboard_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
 		String ToolTipText = ElementActions.getText(driver, popup_sendDashboard_toolTip_text);
-		Assertions.assertEquals("Incorta email notifications are sent with auto-generated text that contains the sender name, the dashboard name, and for CSV/XLSX formats, the filters applied to the dashboard. Toggle this option on to hide this text.", 
+		Assertions.assertEquals(testDataReader.getCellData("HideNotificationToolTipText"), 
 				ToolTipText, 
 				true);
 	}
