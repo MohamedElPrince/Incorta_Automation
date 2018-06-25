@@ -318,14 +318,14 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_body_textBox, true);
 	}
 
-	public void sendDashboard_assert_ideNotificationText_checkbox_Unchecked()
+	public void sendDashboard_assert_HideNotificationText_checkbox_Unchecked()
 	{
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-valid ng-dirty ng-valid-parse user-success ng-touched ng-empty", true);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "ng-empty", true);
 	}
 
-	public void sendDashboard_assert_toolTipIsDiplayed()
+	public void sendDashboard_assert_HideNotificationText_toolTipIsDiplayed()
 	{
-		By popup_sendDashboard = By.xpath("//p[contains(text(),'Incorta email notifications are sent with auto-generated text that contains the                                             sender name, the dashboard name, and for CSV/XLSX formats, the filters applied to                                             the dashboard. Toggle this option on to hide this text.')]");
+		By popup_sendDashboard = By.xpath("//div[@class='notification-info-tooltip']");// to be rechecked when create related test case
 		Assertions.assertElementExists(driver, popup_sendDashboard, true);
 	}
 	
