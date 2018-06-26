@@ -28,6 +28,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
 	By popup_sendDashboard_Labels;
 	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath("//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath("//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
 //	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
 //	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
 //	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
@@ -39,7 +40,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
-
+	By popup_sendDashboard_fileName_text;
 	
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
@@ -402,25 +403,19 @@ public class AllContent_Dashboard {
 	{
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class", "'checkbox-input ng-valid ng-touched user-success ng-dirty ng-valid-parse ng-not-empty'", true);
 	}
-	
-	//	public void sendDashboard_assert_XLSXOption_TextIsDisplayed()
-//	{
-//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
-//	}
-//
-//	public void sendDashboard_assert_CSVOption_TextIsDisplayed()
-//	{
-//		Assertions.assertElementExists(driver, popup_sendDashboard_XLSXOption_Text, true);
-//	}
-//	
-//	public void sendDashboard_assert_HTMLOption_TextIsDisplayed()
-//	{
-//		Assertions.assertElementExists(driver, popup_sendDashboard_HTMLOption_Text, true);
-//	}
-	
+
+/**
+ * 	
+ * @param type
+ * html
+ * xlsx
+ * csv
+ */
 	public void sendDashboard_assert_TypeOfEmailDescription(String type) // to be completed in its testcase to check element text
 	{
 		popup_sendDashboard_EmailTypeOptions = By.xpath("//span[contains(@ng-if,'"+type+"')]");
+		String Text = ElementActions.getText(driver, popup_sendDashboard_EmailTypeOptions);
+		Assertions.assertEquals(testDataReader.getCellData(type), Text, true);
 	}
 	
 	/**
@@ -451,4 +446,21 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboardScreen, true);
 	}
 
+	public void sendDashboard_assert_AppendTimestamp_checkbox_checked()
+	{	
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class", "checkbox-input ng-pristine ng-untouched ng-valid ng-not-empty", true);
+	}
+
+	public String sendDashboardGetFileName()
+	{
+		popup_sendDashboard_fileName_text = By.xpath("//input[@name='fileName']");
+		String Text = ElementActions.getText(driver, popup_sendDashboard_fileName_text);
+		return Text;
+	}
+	
+	public void sendDashboard_assert_dashboardNameIsFileName(String ActualValue)
+	{
+		Assertions.assertEquals(sendDashboardGetFileName(), ActualValue, true);
+	}
+	
 }

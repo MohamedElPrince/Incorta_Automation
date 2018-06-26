@@ -70,9 +70,11 @@ public class SendDashboardTest {
 	public void AssertThatWhenSelectingHTMLOptionFileNameDisplayedInSendDashBoard() 
 	{
 		dashboardPage.sendDashboard_selectOutputFormat("html");
-		// we need to assert on text message which is displayed when selecting html
-		dashboardPage.sendDashboard_assert_FileNameFieldExist();
 		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.sendDashboard_assert_FileNameFieldExist();
+		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("html");
+		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 	
 	@Test(priority = 6, description = "C76810 - Chrome: Fresh Installation: Verify that when Selecting 'XLSX', the option of fixed file name is displayed")
@@ -81,9 +83,11 @@ public class SendDashboardTest {
 	public void AssertThatWhenSelectingXLSXOptionFileNameDisplayedInSendDashBoard() 
 	{		
 		dashboardPage.sendDashboard_selectOutputFormat("xlsx");
-		// we need to assert on text message which is displayed when selecting xlsx
 		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.sendDashboard_assert_FileNameFieldExist();
+		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
+		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("xlsx");
 	}
 
 	@Test(priority = 7, description = "C76811 - Chrome: Fresh Installation: Verify that when selecting 'CSV', the option of fixed file name is displayed")
@@ -92,9 +96,11 @@ public class SendDashboardTest {
 	public void AssertThatWhenSelectingCSVOptionFileNameDisplayedInSendDashBoard() 
 	{		
 		dashboardPage.sendDashboard_selectOutputFormat("csv");
-		// we need to assert on text message which is displayed when selecting csv
 		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.sendDashboard_assert_FileNameFieldExist();
+		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("csv");
+		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 	
 	@Test(priority = 8, description = "C76716 - Chrome: Fresh Installation: Verify that 'To' section is displayed in 'Send Dashboard' Window")
