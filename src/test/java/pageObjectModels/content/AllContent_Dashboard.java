@@ -36,6 +36,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_toolTip_text;
 	By popup_sendDashboard_FileNameField = By.name("fileName");
 	By popup_sendDashboardScreen = By.id("send-dashboard-modal");
+	By popup_scheduleDashboardScreen = By.id("send-dashboard-modal");
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
@@ -69,6 +70,7 @@ public class AllContent_Dashboard {
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//button[@ng-click='$ctrl.scheduleJob()']");
 	
 	By popup_sendDashboard_subject_textBox = By.name("subject");
+	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;	
 
@@ -342,7 +344,7 @@ public class AllContent_Dashboard {
 	}
 
 	/**
-	 * 
+	 * Could be used with Send / Schedule Dashboard
 	 * @param LabelName
 	 * "Subject"
 	 * "Body"
@@ -353,6 +355,7 @@ public class AllContent_Dashboard {
 	 * "To"
 	 * "Cc"
 	 * "Bcc"
+	 * Job Name
 	 */
 	public void sendDashboard_assert_labelsName_exist(String LabelName)
 	{
@@ -449,6 +452,16 @@ public class AllContent_Dashboard {
 	public void sendDashboard_assert_DashboardScreenOpened()
 	{
 		Assertions.assertElementExists(driver, popup_sendDashboardScreen, true);
+	}
+	
+	public void scheduleDashboard_assert_DashboardScreenOpened()
+	{
+		Assertions.assertElementExists(driver, popup_scheduleDashboardScreen, true);
+	}
+	
+	public void scheduleDashboard_assert_JobNameField_exist()
+	{
+		Assertions.assertElementExists(driver, popup_scheduleDashboard_jobName_textBox, true);
 	}
 
 }
