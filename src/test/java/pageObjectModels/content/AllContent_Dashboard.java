@@ -40,7 +40,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
-
+	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
 	
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
@@ -71,6 +71,7 @@ public class AllContent_Dashboard {
 	
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
+	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;	
 
@@ -82,7 +83,7 @@ public class AllContent_Dashboard {
 	By popup_dashboard_menu_share_SearchSaveButton = By.xpath("//button[@type='submit'][normalize-space()='Save']");
 	By popup_dashboard_menu_share_DoneButton = By.xpath("//button[@class='btn btn-default userSaveBtn'][normalize-space()='Done']");
 	By popup_dashboard_menu_SharedWithList ;
-
+	By popup_schedulerDashboard_DuplicateJobName_ErrorMessage;
 	//// Functions
 	
 	public AllContent_Dashboard(WebDriver driver) {
@@ -281,6 +282,7 @@ public class AllContent_Dashboard {
 	}
 	
 	//Create function for cancel for below
+	//Need to change name to be sendDashboard_typeEmailAndClickAdd()
 	public void TypeEmailAndClickAdd(String Email)
 	{
 		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
@@ -356,6 +358,7 @@ public class AllContent_Dashboard {
 	 * "Cc"
 	 * "Bcc"
 	 * Job Name
+	 * Description
 	 */
 	public void sendDashboard_assert_labelsName_exist(String LabelName)
 	{
@@ -464,4 +467,37 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_scheduleDashboard_jobName_textBox, true);
 	}
 
+	public void scheduleDashboard_addJobName(String text)
+	{
+		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, text);
+	}
+
+	public void scheduleDashboard_Click_schedule()
+	{
+		ElementActions.click(driver, popup_scheduleSendDashboard_schedule_button);
+	}
+	
+	public void scheduleDashboard_assert_duplicateJobName_errorDisplayed()
+	{
+		popup_schedulerDashboard_DuplicateJobName_ErrorMessage = By.xpath("//div[@ng-if='error']/div[@class='ng-binding']");
+		String ErrorMessage = ElementActions.getText(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage);
+		Assertions.assertEquals(testDataReader.getCellData("DuplicateJobNameErrorMessage"), ErrorMessage, true);		
+	}
+	
+	public void ScheduleDashboard_TypeEmailAndClickAdd(String Email)
+	{
+		ElementActions.type(driver, popup_scheduleDashboard_emailAddress_textBox, Email);
+		ElementActions.click(driver, popup_sendDashboard_add_button);
+	}
+	
+	public void scheduleDashboard_assert_scheduleButton_disabled()
+	{
+		Assertions.assertElementAttribute(driver, popup_scheduleSendDashboard_schedule_button, "disabled","true", true);
+	}
+	
+	public void scheduleDashboard_assert_DescriptionField_exist()
+	{
+		Assertions.assertElementExists(driver, popup_scheduleDashboard_description_textBox, true);
+	}
+	
 }
