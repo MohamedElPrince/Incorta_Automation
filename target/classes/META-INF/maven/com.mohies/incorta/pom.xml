@@ -10,7 +10,7 @@
 		<!-- Execution Properties -->
 		<incortaRoot>http://35.225.96.248:9080/incorta/#/</incortaRoot>
 		<incortaVersion>Rel3.3-dev</incortaVersion>
-		<testSuite.name></testSuite.name>
+		<testSuite.name>Temptest</testSuite.name>
 		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
