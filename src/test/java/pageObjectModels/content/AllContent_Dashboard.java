@@ -29,9 +29,6 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_Labels;
 	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath("//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
 	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath("//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
-//	By popup_sendDashboard_HTMLOption_Text = By.xpath("//span[contains(text(),'The dashboard will be sent in the same layout it appears now. Insights can be downloaded as images.')]");
-//	By popup_sendDashboard_XLSXOption_Text = By.xpath("//span[contains(text(),'An XLSX file will be sent only for the tables and pivot tables in the dashboard.')]");
-//	By popup_sendDashboard_CSVXOption_Text = By.xpath("//span[contains(text(),'A CSV file will be sent only for the first table in this dashboard.')]");
 	By popup_sendDashboard_EmailTypeOptions; // to replace previous elements 
 	By popup_sendDashboard_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
 	By popup_sendDashboard_toolTip_text;
