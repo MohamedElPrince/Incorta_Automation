@@ -70,7 +70,7 @@ public class RolesTest {
 	String newFolderName;
 	String NewDashboardName = "New Dashboard";
 	String SchemaNameForInsight = "Automation_Schema_1525933948339";
-	String FolderNameToBeMoved = "MoveFolder";
+	String FolderNameToBeMoved = "CopyFolder";
 	String FolderNameToMoveTo = "Mohamed";
 	String DashboardNameToBeDeleted = "H_A_L";
 	String DashboardToBeShared = "SendDashboard";
@@ -78,6 +78,11 @@ public class RolesTest {
 	String CcMail = "Ahmed.Abdelsalam@incorta.com";
 	String BccMail = "Menna.maged@incorta.com";
 	String newScheduledSendDashboardJobName;
+	String FolderNameToBeMovedTo = "Folder";
+	String DashboardNameToBeCopied = "Copy Dashboard";
+	String DashboardFolderNameToBeMovedTo = "Dashboard Folder Moved";
+	String DashboardNameToMove = "Move Dashboard";
+	String DashboardNameToRename = "Rename Dashboard";
 
 	// Prerequisites, Schema Manager user + Connection credentials to data source
 	@Test(priority = 1, description = "TC C60535_1 - Schema Manager Permissions")
@@ -643,24 +648,128 @@ public class RolesTest {
 	}
 
 	// Prerequisites, Analyzer user + Dashboard to be deleted
-	@Test(priority = 17 , description = "TC C60531_7 - Users permissions - Analyzer User")
-	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
-	@Severity(SeverityLevel.NORMAL)
-	public void Analyzer_Permissions_DeleteDashboard() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		@Test(priority = 17 , description = "TC C60531_7 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_DeleteDashboard() {
+			
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+					testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
 
-		allContentPage = new AllContent(driver);
-		allContentPage.Assert_allContentTabIsSelected();
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
 
-		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
+			allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
 
-		allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 
-		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
+			allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
 
-		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
-	}
+			allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
+		}
+		
+		//Prerequisitrs, Analyzer user + Dashboard to share + User to share with
+		@Test(priority = 18 , description = "TC C60531_8 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click sharing and select any user to 'Can Edit' and click save. Then dashboard will be shared successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_ShareDashboard() {
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+					testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
+
+			allContentPage.Click_Folder_Dashboard_Properties(DashboardToBeShared);
+
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Share");
+
+			allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
+
+			allContentPage.Dashboard_Sharing_ClickOnUserPermission("Can Share");
+			
+			allContentPage.Dashboard_Sharing_Click_Save_Button();
+			
+			allContentPage.Assertion_Sharing_UserPermission(UserToShareWithFolder, "Can Share");		
+		}
+
+		//Prerequisitrs, Analyzer user + Dashboard to copy + Folder to copy to
+		@Test(priority = 19 , description = "TC C60531_9 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click copy and select any to copy to and click on copy. Then dashboard will be copied successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_CopyDashboard() {
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+					testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
+
+			allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeCopied);
+
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Copy");
+
+			allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToBeMovedTo);
+			
+			allContentPage.Dashboard_Copy_ClickCopyButton();
+			
+			allContentPage.FolderProperties_Rename_Move_Done_Buttons("Done");
+			
+			allContentPage.Assert_DashboardExist(DashboardNameToBeCopied);
+			
+			allContentPage.Click_FolderName(FolderNameToBeMovedTo);
+			
+			allContentPage.Assert_DashboardExist_Copied(DashboardNameToBeCopied);
+			
+		}
+		
+		//Prerequisitrs, Analyzer user + Dashboard to move + folder to move to
+		@Test(priority = 20 , description = "TC C60531_10 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click move and select any to move to and click on move. Then dashboard will be moved successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_MoveDashboard() {
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+					testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
+
+			allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToMove);
+
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
+			
+			allContentPage.Dashboard_popup_ClickOnFolder(DashboardFolderNameToBeMovedTo);
+					
+			allContentPage.Dashboard_Move_ClickMoveButton();
+					
+			allContentPage.Assert_DashboardNotExist(DashboardNameToMove);
+			
+			allContentPage.Click_FolderName(DashboardFolderNameToBeMovedTo);
+			
+			allContentPage.Assert_DashboardExist(DashboardNameToMove);
+		}
+		
+		//Prerequisitrs, Analyzer user + Dashboard to rename
+		@Test(priority = 21 , description = "TC C60531_11 - Users permissions - Analyzer User")
+		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click rename and type new name and click on rename. Then dashboard will be renamed successfully.")
+		@Severity(SeverityLevel.NORMAL)
+		public void Analyzer_Permissions_RenameDashboard() {
+			loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+					testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+			allContentPage = new AllContent(driver);
+			allContentPage.Assert_allContentTabIsSelected();
+
+			allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToRename);
+
+			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+			
+			newDashboardName = allContentPage.FolderProperties_Rename();
+					
+			allContentPage.Dashboard_Rename_ClickRenameButton();
+			
+			allContentPage.FolderProperties_Rename_Move_Done_Buttons("Done");
+			
+			allContentPage.Assert_DashboardExist(newDashboardName);
+		}
 
 	@BeforeMethod
 	public void beforeMethod() {

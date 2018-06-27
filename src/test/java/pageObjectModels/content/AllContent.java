@@ -40,6 +40,14 @@ public class AllContent {
 	By popup_rename_moveFolder_rename_done_move_Buttons = By.xpath("//button[contains(string(),'Done')]");
 	
 	By popup_moveFolder_folderNameToMoveTo;
+	By popup_ManageDashboard_SharingTab_Permission;
+	By popup_ManageDashboard_SharingTab_SaveButton = By.xpath("//button[contains(string(), 'Save')]");
+	By popup_ManageDashboard_SharingTab_UsersPermission;
+	By popup_ManageDashboard_Copy_FolderToCopyTo;
+	By popup_ManageDashboard_Copy_CopyButton = By.xpath("//button[contains(text(),'Copy')]");
+	By popup_ManageDashboard_Move_MoveButton = By.xpath("//button[contains(text(),'Move')]");
+	By popup_ManageDashboard_Rename_RenameButton = By.xpath("//button[contains(text(),'Rename')]");
+	
 	//// Functions
 	public AllContent(WebDriver driver) {
 		this.driver = driver;
@@ -217,6 +225,87 @@ public class AllContent {
 		dashboards_menu_button = By.xpath("//a[@title='" + Content_name
 				+ "']//following-sibling::a[@class='menu-icon flex-box flex-align-center flex-justify-center flex-shrink-0']");
 		ElementActions.click(driver, dashboards_menu_button);
+	}
+	
+	/**
+	 * 
+	 * @param UserPermission
+	 * Can Edit
+	 * Can View
+	 * Can Share
+	 * 
+	 */
+	public void Dashboard_Sharing_ClickOnUserPermission(String UserPermission)
+	{
+		popup_ManageDashboard_SharingTab_Permission = By.xpath("//h5[contains(string(), '"+UserPermission+"')]");
+		ElementActions.click(driver, popup_ManageDashboard_SharingTab_Permission);
+	}
+	
+	public void Dashboard_Sharing_Click_Save_Button()
+	{
+		ElementActions.click(driver, popup_ManageDashboard_SharingTab_SaveButton);
+	}
+	
+	public void Assertion_Sharing_UserPermission(String SharedWithUser, String Permission)
+	{
+		popup_ManageDashboard_SharingTab_UsersPermission = 
+				By.xpath("//h5[@class='left ng-binding'][contains(string(),'"+SharedWithUser+"')]"
+						+ "//parent::div//following-sibling::div/a[contains(string(),'"+Permission+"')]/parent::div");
+		Assertions.assertElementExists(driver, popup_ManageDashboard_SharingTab_UsersPermission, true);
+	}
+	
+	public void Dashboard_popup_ClickOnFolder(String FolderName)
+	{
+		popup_ManageDashboard_Copy_FolderToCopyTo = By.xpath("//a[@ng-click='openFolder(folder)']/span[@name='"+FolderName+"']/parent::a");
+		ElementActions.click(driver, popup_ManageDashboard_Copy_FolderToCopyTo);	
+	}
+	
+	public void Dashboard_Copy_ClickCopyButton()
+	{
+		ElementActions.click(driver, popup_ManageDashboard_Copy_CopyButton);
+	}
+	
+	/**
+	 * 
+	 * @param ButtonName
+	 * Done
+	 * Rename
+	 * Move
+	 */
+	public void FolderProperties_Rename_Move_Done_Buttons(String ButtonName)
+	{
+		 popup_rename_moveFolder_rename_done_move_Buttons = By.xpath("//button[contains(string(),'"+ButtonName+"')]");
+		ElementActions.click(driver, popup_rename_moveFolder_rename_done_move_Buttons);
+	}
+	
+	public void Assert_DashboardExist_Copied(String DashboardName)
+	{
+		DashboardName = DashboardName + " - Copy";
+		By body_dashboardName = By.xpath("//a[@title='"+DashboardName+"']");
+		Assertions.assertElementExists(driver, body_dashboardName, true);
+	}
+	
+	public void Dashboard_Move_ClickMoveButton()
+	{
+		ElementActions.click(driver, popup_ManageDashboard_Move_MoveButton);
+	}
+	
+	public void Assert_DashboardNotExist(String DashboardName)
+	{
+		By body_dashboardName = By.xpath("//a[@title='"+DashboardName+"']");
+		Assertions.assertElementExists(driver, body_dashboardName, false);
+	}
+	
+	public String FolderProperties_Rename() {
+		String newFolderName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+		popup_renameFolder = By.xpath("//input[@name='renameInput']");
+		ElementActions.type(driver, popup_renameFolder, newFolderName);
+		return newFolderName;
+	}
+	
+	public void Dashboard_Rename_ClickRenameButton()
+	{
+		ElementActions.click(driver, popup_ManageDashboard_Rename_RenameButton);
 	}
 	
 }
