@@ -411,7 +411,7 @@ public class AllContent_Dashboard {
  * xlsx
  * csv
  */
-	public void sendDashboard_assert_TypeOfEmailDescription(String type) // to be completed in its testcase to check element text
+	public void sendDashboard_assert_TypeOfEmailDescription(String type)
 	{
 		popup_sendDashboard_EmailTypeOptions = By.xpath("//span[contains(@ng-if,'"+type+"')]");
 		String Text = ElementActions.getText(driver, popup_sendDashboard_EmailTypeOptions);
