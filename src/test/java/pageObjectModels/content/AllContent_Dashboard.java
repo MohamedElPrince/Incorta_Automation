@@ -68,7 +68,7 @@ public class AllContent_Dashboard {
 	By popup_scheduleSendDashboard_recurrenceFrequency_radioButton; 
 	By popup_scheduleSendDashboard_schedule_button = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//button[@ng-click='$ctrl.scheduleJob()']");
-	
+	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[@ng-click='$ctrl.updateJob()']");
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
 	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
@@ -84,6 +84,7 @@ public class AllContent_Dashboard {
 	By popup_dashboard_menu_share_DoneButton = By.xpath("//button[@class='btn btn-default userSaveBtn'][normalize-space()='Done']");
 	By popup_dashboard_menu_SharedWithList ;
 	By popup_schedulerDashboard_DuplicateJobName_ErrorMessage;
+	By popup_scheduleDashboard_body_textBox = By.xpath("//textarea[@name='description']");
 	//// Functions
 	
 	public AllContent_Dashboard(WebDriver driver) {
@@ -359,6 +360,7 @@ public class AllContent_Dashboard {
 	 * "Bcc"
 	 * Job Name
 	 * Description
+	 * Body
 	 */
 	public void sendDashboard_assert_labelsName_exist(String LabelName)
 	{
@@ -379,6 +381,14 @@ public class AllContent_Dashboard {
 	public void sendDashboard_assert_HideNotificationText_checkbox_Unchecked()
 	{
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class", "checkbox-input ng-pristine ng-untouched ng-valid ng-empty", true);
+	}
+	
+	public void sendDashboard_assert_Click_HideNotificationText_checkbox_checked()
+	{
+		ElementActions.click(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty);
+		String NotEmpty = "ng-not-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
 	public void sendDashboard_assert_HideNotificationText_toolTipIsDiplayed()
@@ -477,6 +487,11 @@ public class AllContent_Dashboard {
 		ElementActions.click(driver, popup_scheduleSendDashboard_schedule_button);
 	}
 	
+	public void scheduleDashboard_JobScreen_Click_SaveChanges()
+	{
+		ElementActions.click(driver, popup_JobScreen_SaveChanges_Button);
+	}
+	
 	public void scheduleDashboard_assert_duplicateJobName_errorDisplayed()
 	{
 		popup_schedulerDashboard_DuplicateJobName_ErrorMessage = By.xpath("//div[@ng-if='error']/div[@class='ng-binding']");
@@ -498,6 +513,11 @@ public class AllContent_Dashboard {
 	public void scheduleDashboard_assert_DescriptionField_exist()
 	{
 		Assertions.assertElementExists(driver, popup_scheduleDashboard_description_textBox, true);
+	}
+	
+	public void scheduleDashboard_assert_bodyField_exist()
+	{
+		Assertions.assertElementExists(driver, popup_scheduleDashboard_body_textBox, true);
 	}
 	
 }

@@ -24,6 +24,12 @@ public class Dashboards {
 	// By body_nextRun_label;
 	By body_name_link;
 
+	By body_JobName;
+	By popup_JobScreen_RemoveEmail_Button;
+	By popup_JobScreen_SaveChanges_Button= By.xpath("//button[contains(text(),'Save Changes')]");
+	By popup_JobScreen_Email;
+	By popup_JobScreen_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
+	By popup_JobScreen_EmailAddress_add_button = By.xpath("//button[@type='button'][normalize-space()='Add']");
 	//// Functions
 	public Dashboards(WebDriver driver) {
 		this.driver = driver;
@@ -59,4 +65,43 @@ public class Dashboards {
 						+ name + "')]/following-sibling::div[contains(@class,'dataConnectionLink')]");
 		Assertions.assertElementAttribute(driver, body_Status_label, "Text", expectedStatus, true);
 	}
+
+	public void DashboardJob_ClickOnJob(String JobName, String DashboardName)
+	{
+		body_JobName = By.xpath("//p[contains(text(),'"+DashboardName+"')]/parent::a/parent::div/preceding-sibling::div/p[@title='"+JobName+"']");
+		ElementActions.click(driver, body_JobName);
+	}
+	
+	public void JobScreen_RemoveEmail_Button(String MailRecipientsType, String Email)
+	{
+		popup_JobScreen_RemoveEmail_Button = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/parent::div/following-sibling::div"
+				+ "//span[@title ='"+Email+"']/parent::div/following-sibling::div//a[contains(@ng-click,'removeUser')]");
+		ElementActions.click(driver, popup_JobScreen_RemoveEmail_Button);
+	}
+	
+	public void JobScreen_SaveChanges_Button()
+	{
+		ElementActions.click(driver, popup_JobScreen_SaveChanges_Button);
+	}
+	
+	public void JobScreen_Assert_EmailIsNotExist(String MailRecipientsType, String Email)
+	{
+		popup_JobScreen_Email = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/"
+				+ "parent::div/following-sibling::div//span[@title ='"+Email+"']");
+		Assertions.assertElementExists(driver, popup_JobScreen_Email, false);
+	}
+	
+	public void JobScreen_Assert_EmailExist(String MailRecipientsType, String Email)
+	{
+		popup_JobScreen_Email = By.xpath("//label[contains(text(),'"+MailRecipientsType+"')]/"
+				+ "parent::div/following-sibling::div//span[@title ='"+Email+"']");
+		Assertions.assertElementExists(driver, popup_JobScreen_Email, true);
+	}
+	
+	public void JobScreen_TypeEmailAndClickAdd(String Email)
+	{
+		ElementActions.type(driver, popup_JobScreen_emailAddress_textBox, Email);
+		ElementActions.click(driver, popup_JobScreen_EmailAddress_add_button);
+	}
+	
 }
