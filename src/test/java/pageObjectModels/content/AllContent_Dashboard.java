@@ -280,7 +280,6 @@ public class AllContent_Dashboard {
 	}
 
 	// Create function for cancel for below
-	// Need to change name to be sendDashboard_typeEmailAndClickAdd()
 	public void TypeEmailAndClickAdd(String Email) {
 		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
 		ElementActions.click(driver, popup_sendDashboard_add_button);
@@ -364,8 +363,9 @@ public class AllContent_Dashboard {
 	}
 
 	public void sendDashboard_assert_HideNotificationText_checkbox_Unchecked() {
+		String Empty = "ng-empty";
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty,
-				"class", "checkbox-input ng-pristine ng-untouched ng-valid ng-empty", true);
+				"class", "([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
 	}
 
 	public void sendDashboard_assert_Click_HideNotificationText_checkbox_checked() {
@@ -483,8 +483,9 @@ public class AllContent_Dashboard {
 	}
 
 	public void sendDashboard_assert_AppendTimestamp_checkbox_checked() {
+		String NotEmpty = "ng-not-empty";
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
-				"checkbox-input ng-pristine ng-untouched ng-valid ng-not-empty", true);
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
 	public String sendDashboardGetFileName() {
