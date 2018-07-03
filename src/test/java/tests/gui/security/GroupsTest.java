@@ -22,6 +22,10 @@ import pageObjectModels.security.Users;
 
 @Epic("Incorta -> Security -> Groups")
 public class GroupsTest {
+	
+	// testing pull fetch & push
+	// change done in 3.2.1
+	
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
 	ExcelFileManager testDataReader;

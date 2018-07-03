@@ -3,12 +3,13 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.security.UsersTest">
+			<class name="tests.gui.security.RolesTest">
 				<methods>
-				<include name="deletingUserWithOptionTransferOwnershipToAnotherUser" />
-				<!-- <include name="" /> -->
-				<!-- <include name="" /> -->
-				<!-- <include name="" /> -->
+				<!-- <include name="Analyzer_Permissions_DeleteDashboard" /> -->
+				<include name="Analyzer_Permissions_ShareDashboard" />
+				<!-- <include name="Analyzer_Permissions_CopyDashboard" /> -->
+				<include name="Analyzer_Permissions_MoveDashboard" />
+				<include name="Analyzer_Permissions_RenameDashboard" />
 				</methods>
 			</class>
 		</classes>

@@ -10,7 +10,7 @@
 		<!-- Execution Properties -->
 		<incortaRoot>http://35.225.96.248:9080/incorta/#/</incortaRoot>
 		<incortaVersion>Rel3.3-dev</incortaVersion>
-		<testSuite.name>Temptest</testSuite.name>
+		<testSuite.name></testSuite.name>
 		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
@@ -30,13 +30,13 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
-		<selenium.version>3.12.0</selenium.version>
+		<selenium.version>3.13.0</selenium.version>
 		<allure.version>2.6.0</allure.version>
 		<aspectj.version>1.8.13</aspectj.version>
 
 		<rest-assured.version>3.0.7</rest-assured.version>
 
-		<testng.version>6.14.2</testng.version>
+		<testng.version>6.14.3</testng.version>
 
 		<apachepoi.version>3.17</apachepoi.version>
 		<org.slf4j.version>1.7.25</org.slf4j.version>
