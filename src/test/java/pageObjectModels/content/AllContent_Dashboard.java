@@ -1,5 +1,7 @@
 package pageObjectModels.content;
 
+import static org.junit.Assume.assumeNoException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -91,7 +93,6 @@ public class AllContent_Dashboard {
 		this.driver = driver;
 	}
 	
-
 	public void Assert_shared_button_Active() {
 
 		Assertions.assertElementAttribute(driver, popup_dashboard_menu_share_button, "class",
@@ -519,5 +520,13 @@ public class AllContent_Dashboard {
 	{
 		Assertions.assertElementExists(driver, popup_scheduleDashboard_body_textBox, true);
 	}
+	
+	public void scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(String ExpectedValue)
+	{
+		
+		String DefaultFileName = ElementActions.getText(driver, popup_sendDashboard_FileNameField);
+		Assertions.assertEquals(ExpectedValue, DefaultFileName, true);
+	}
+	
 	
 }
