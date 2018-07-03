@@ -206,6 +206,7 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("Email"));
 	}
 
+	//Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 15, description = "C77039 - Firefox: Fresh Installation: Testing that 'BCC' Area new field Functionality is appeared")
 	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. Then I'll find that 'Bcc' field appeared.")
 	@Severity(SeverityLevel.NORMAL)
