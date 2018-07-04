@@ -30,6 +30,7 @@ public class Dashboards {
 	By popup_JobScreen_Email;
 	By popup_JobScreen_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
 	By popup_JobScreen_EmailAddress_add_button = By.xpath("//button[@type='button'][normalize-space()='Add']");
+	By popup_sendDashboard_EmailPlusButton;
 	//// Functions
 	public Dashboards(WebDriver driver) {
 		this.driver = driver;
@@ -102,6 +103,15 @@ public class Dashboards {
 	{
 		ElementActions.type(driver, popup_JobScreen_emailAddress_textBox, Email);
 		ElementActions.click(driver, popup_JobScreen_EmailAddress_add_button);
+	}
+	
+	 /** @param MailRecipientsType
+	 *            To Cc Bcc
+	 */
+	public void ScheduleDashboard_Click_AddMailRecipientsType(String MailRecipientsType) {
+		popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'" + MailRecipientsType
+				+ "')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
+		ElementActions.click(driver, popup_sendDashboard_EmailPlusButton);
 	}
 	
 }

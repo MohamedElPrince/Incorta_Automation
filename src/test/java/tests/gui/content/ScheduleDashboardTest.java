@@ -38,7 +38,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_ScheduleDashboardScreenIsOpened()
 	{		
-		dashboardPage.scheduleDashboard_assert_DashboardScreenOpened();
+		dashboardPage.sendDashboard_scheduleSendDashboard_assert_ScreenIsOpened();
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -131,7 +131,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationText_ToolTip_Displayed() 
 	{		
-		dashboardPage.sendDashboard_assert_HideNotificationText_toolTipIsDiplayed();
+		dashboardPage.sendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -170,12 +170,12 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_JobScreen_SaveChangesButton_WorksCorrectly() 
 	{		
-		schedulerDashboardsPage = new Dashboards(driver);
 		dashboardPage.scheduleDashboard_addJobName(testDataReader.getCellData("JobName"));
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_Click_schedule();
 		
+		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("JobName"));
@@ -183,7 +183,7 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("JobName"), testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_RemoveEmail_Button("To", testDataReader.getCellData("Email"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		schedulerDashboardsPage.ScheduleDashboard_Click_AddMailRecipientsType("Cc");
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 		
@@ -191,14 +191,14 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_RemoveEmail_Button("Cc", testDataReader.getCellData("Email"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		schedulerDashboardsPage.ScheduleDashboard_Click_AddMailRecipientsType("Bcc");
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 		
 		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("JobName"), testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_RemoveEmail_Button("Bcc", testDataReader.getCellData("Email"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		schedulerDashboardsPage.ScheduleDashboard_Click_AddMailRecipientsType("Cc");
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 		
@@ -207,8 +207,8 @@ public class ScheduleDashboardTest {
 	}
 
 	//Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 15, description = "C77039 - Firefox: Fresh Installation: Testing that 'BCC' Area new field Functionality is appeared")
-	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. Then I'll find that 'Bcc' field appeared.")
+	@Test(priority = 15, description = "C77043 - Firefox: Fresh Installation: Testing that 'File name' Area new field Functionality is appeared")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. Then I'll find that 'File Name' field appeared and It has Dashboard name by default.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_FileNameField_Displayed_ScheduleDashBoard() 
 	{		

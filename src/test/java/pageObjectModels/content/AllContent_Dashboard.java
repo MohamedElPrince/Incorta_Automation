@@ -35,8 +35,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
 	By popup_sendDashboard_toolTip_text;
 	By popup_sendDashboard_FileNameField = By.name("fileName");
-	By popup_sendDashboardScreen = By.id("send-dashboard-modal");
-	By popup_scheduleDashboardScreen = By.id("send-dashboard-modal");
+	By popup_ScheduleSendDashboardScreens = By.id("send-dashboard-modal");
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
@@ -375,7 +374,7 @@ public class AllContent_Dashboard {
 				"class", "([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
-	public void sendDashboard_assert_HideNotificationText_toolTipIsDiplayed() {
+	public void sendDashboard_assert_HideNotificationText_toolTipIsDisplayed() {
 		ElementActions.hover(driver, popup_sendDashboard_toolTip);
 		popup_sendDashboard_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
 		String ToolTipText = ElementActions.getText(driver, popup_sendDashboard_toolTip_text);
@@ -427,12 +426,8 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_FileNameField, true);
 	}
 
-	public void sendDashboard_assert_DashboardScreenOpened() {
-		Assertions.assertElementExists(driver, popup_sendDashboardScreen, true);
-	}
-
-	public void scheduleDashboard_assert_DashboardScreenOpened() {
-		Assertions.assertElementExists(driver, popup_scheduleDashboardScreen, true);
+	public void sendDashboard_scheduleSendDashboard_assert_ScreenIsOpened() {
+		Assertions.assertElementExists(driver, popup_ScheduleSendDashboardScreens, true);
 	}
 
 	public void scheduleDashboard_assert_JobNameField_exist() {
