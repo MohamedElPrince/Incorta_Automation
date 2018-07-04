@@ -38,7 +38,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_ScheduleDashboardScreenIsOpened()
 	{		
-		dashboardPage.sendDashboard_scheduleSendDashboard_assert_ScreenIsOpened();
+		dashboardPage.scheduleSendDashboard_assert_ScreenIsOpened();
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created

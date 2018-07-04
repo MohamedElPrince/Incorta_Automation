@@ -426,7 +426,7 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_FileNameField, true);
 	}
 
-	public void sendDashboard_scheduleSendDashboard_assert_ScreenIsOpened() {
+	public void scheduleSendDashboard_assert_ScreenIsOpened() {
 		Assertions.assertElementExists(driver, popup_ScheduleSendDashboardScreens, true);
 	}
 

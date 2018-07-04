@@ -33,7 +33,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_Screen_IsOpened()
 	{		
-		dashboardPage.sendDashboard_scheduleSendDashboard_assert_ScreenIsOpened();
+		dashboardPage.scheduleSendDashboard_assert_ScreenIsOpened();
 	}
 	
 	@Test(priority = 2, description = "C76806 - Chrome: Fresh Installation: Testing that 'Subject' field is displayed in 'Send Dashboard' window")
