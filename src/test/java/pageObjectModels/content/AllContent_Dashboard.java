@@ -449,8 +449,7 @@ public class AllContent_Dashboard {
 	public void scheduleDashboard_assert_duplicateJobName_errorDisplayed() {
 		popup_schedulerDashboard_DuplicateJobName_ErrorMessage = By
 				.xpath("//div[@ng-if='error']/div[@class='ng-binding']");
-		String ErrorMessage = ElementActions.getText(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage);
-		Assertions.assertEquals(testDataReader.getCellData("DuplicateJobNameErrorMessage"), ErrorMessage, true);
+		Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", testDataReader.getCellData("DuplicateJobNameErrorMessage"), true);
 	}
 
 	public void ScheduleDashboard_TypeEmailAndClickAdd(String Email) {
