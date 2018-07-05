@@ -11,11 +11,11 @@
 		<incortaRoot>http://35.225.96.248:9080/incorta/#/</incortaRoot>
 		<incortaVersion>Rel3.3-dev</incortaVersion>
 		<testSuite.name></testSuite.name>
-		<operatingSystem.version>Linux-64</operatingSystem.version>
+		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
-		<targetBrowser.name>MozillaFirefox</targetBrowser.name>
+		<targetBrowser.name>Safari</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
-			| GoogleChrome | MicrosoftEdge -->
+			| GoogleChrome | MicrosoftEdge | Safari -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
 		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
@@ -26,7 +26,7 @@
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-0.5_20180705</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-0.5_20180705_1</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
