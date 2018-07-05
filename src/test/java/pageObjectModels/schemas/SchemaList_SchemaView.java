@@ -18,7 +18,7 @@ public class SchemaList_SchemaView {
 	// By header_schemaDiscription_label;
 	// By header_lastLoadStatusHeader_label;
 	By header_lastLoadStatus_link = By
-			.xpath("//div[contains(.,'Last Load Status')]/a/*");
+			.xpath("//*[contains(@ng-if,'schemaStatus.lastLoadState')]");
 	// By header_loadingTimeHeader_label;
 	// By header_loadingTime_label;
 	// By header_tablesHeader_label;
