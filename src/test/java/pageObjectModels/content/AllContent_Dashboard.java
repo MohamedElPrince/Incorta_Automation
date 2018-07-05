@@ -32,8 +32,8 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath(
 			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
 	By popup_sendDashboard_EmailTypeOptions; // to replace previous elements
-	By popup_sendDashboard_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
-	By popup_sendDashboard_toolTip_text;
+	By popup_sendDashboard_HideNotificationText_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
+	By popup_sendDashboard_HideNotificationText_toolTip_text;
 	By popup_sendDashboard_FileNameField = By.name("fileName");
 	By popup_ScheduleSendDashboardScreens = By.id("send-dashboard-modal");
 	By popup_sendDashboard_selectOutputFormat;
@@ -73,6 +73,9 @@ public class AllContent_Dashboard {
 	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
 	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;
+	By popup_sendDashboard_toolTips;
+	By popup_scheduleDashboard_appendTimestamp_helpIcon=By.xpath("//i[contains(@class,'timestamp-info-icon')]");
+	By popup_scheduleDashboard_appendTimestamp_helpIcon_text;
 
 	By popup_FromDatePickerTable;
 	By popup_dashboard_menu_share_SearchList;
@@ -261,7 +264,7 @@ public class AllContent_Dashboard {
 
 	}
 
-	public void SendDashboard_FillColumns(String MailSubject, String BodyText) {
+	public void ScheduleSendDashboard_FillColumns(String MailSubject, String BodyText) {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, MailSubject);
 		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
 		// ElementActions.click(driver, popup_sendDashboard_type_radioButton);
@@ -375,10 +378,12 @@ public class AllContent_Dashboard {
 	}
 
 	public void ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed() {
-		ElementActions.hover(driver, popup_sendDashboard_toolTip);
-		popup_sendDashboard_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
-		String ToolTipText = ElementActions.getText(driver, popup_sendDashboard_toolTip_text);
-		Assertions.assertEquals(testDataReader.getCellData("HideNotificationToolTipText"), ToolTipText, true);
+		ElementActions.hover(driver, popup_sendDashboard_HideNotificationText_toolTip);
+		popup_sendDashboard_HideNotificationText_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
+		//Changed below function to assertElementAttribu to take a screenshot.
+		//String ToolTipText = ElementActions.getText(driver, popup_sendDashboard_HideNotificationText_toolTip_text);
+		//Assertions.assertEquals(testDataReader.getCellData("HideNotificationToolTipText"), ToolTipText, true);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_HideNotificationText_toolTip_text, "text", testDataReader.getCellData("HideNotificationToolTipText"), true);
 	}
 
 	/**
@@ -391,11 +396,12 @@ public class AllContent_Dashboard {
 		ElementActions.click(driver, popup_sendDashboard_selectOutputFormat);
 	}
 
+	/* Duplicate function from sendDashboard_assert_AppendTimestamp_checkbox_checked
 	public void sendDashboard_assert_appenedTimestampOption_CheckedByDefault() {
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class",
 				"'checkbox-input ng-valid ng-touched user-success ng-dirty ng-valid-parse ng-not-empty'", true);
 	}
-
+*/
 	/**
 	 * 
 	 * @param type
@@ -418,8 +424,12 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
 	}
 
-	public void sendDashboard_addSubjectField(String text) {
-		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
+	public String GenerateJobName() {
+		return "Automation" + "_Subject_" + String.valueOf(System.currentTimeMillis());
+	}
+	
+	public void ScheduleSendDashboard_addJobName() {
+		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, GenerateJobName());
 	}
 
 	public void ScheduleSendDashboard_assert_FileNameFieldExist() {
@@ -476,7 +486,7 @@ public class AllContent_Dashboard {
 		Assertions.assertEquals(ExpectedValue, DefaultFileName, true);
 	}
 
-	public void sendDashboard_assert_AppendTimestamp_checkbox_checked() {
+	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked() {
 		String NotEmpty = "ng-not-empty";
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
 				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
@@ -492,4 +502,10 @@ public class AllContent_Dashboard {
 		Assertions.assertEquals(sendDashboardGetFileName(), ActualValue, true);
 	}
 
+	public void ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed() {
+		ElementActions.hover(driver, popup_scheduleDashboard_appendTimestamp_helpIcon);
+		popup_scheduleDashboard_appendTimestamp_helpIcon_text = By.xpath("//div[@class='timestamp-info-tooltip']/p");
+		Assertions.assertElementAttribute(driver, popup_scheduleDashboard_appendTimestamp_helpIcon_text, "text", testDataReader.getCellData("AppendTimeStampHelpText"), true);
+	}
+	
 }

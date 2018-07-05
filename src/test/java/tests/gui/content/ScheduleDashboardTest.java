@@ -228,6 +228,47 @@ public class ScheduleDashboardTest {
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 	}
 	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 17, description = "C77047 - Firefox: Fresh Installation: Testing that 'Append Timestamp' new field validation is appeared.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. Then I'll find that 'File Name' field appeared and It has Dashboard name by default.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_AppendTimestamp_Displayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Append Timestamp");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 18, description = "C77048_1 - Firefox: Fresh Installation: Testing that user can hover on 'Append time stamp' help.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select HTML and hover on 'Append time stamp'. Then I'll find that a specific message is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectHTML_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 19, description = "C77048_2 - Firefox: Fresh Installation: Testing that user can hover on 'Append time stamp' help.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select XLSX and hover on 'Append time stamp'. Then I'll find that a specific message is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectXLSX_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 20, description = "C77048_3 - Firefox: Fresh Installation: Testing that user can hover on 'Append time stamp' help.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select CSV and hover on 'Append time stamp'. Then I'll find that a specific message is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectCSV_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+
+	
 	@BeforeMethod
 	public void beforeMethod(){
 		allContentPage = new AllContent(driver);

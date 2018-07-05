@@ -73,7 +73,7 @@ public class SendDashboardTest {
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
 		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("html");
-		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 	
@@ -85,7 +85,7 @@ public class SendDashboardTest {
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
-		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("xlsx");
 	}
@@ -99,7 +99,7 @@ public class SendDashboardTest {
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
 		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("csv");
-		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 	
