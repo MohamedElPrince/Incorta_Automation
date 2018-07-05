@@ -7,6 +7,7 @@ import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
+import com.shaftEngine.validationsLibrary.Verifications;
 
 public class Login {
 	//// Variables
@@ -56,9 +57,9 @@ public class Login {
 		ElementActions.click(driver, body_forgotPassword_link);
 	}
 
-	public void Assert_correctVersionNumberIsDisplayed() {
-		Assertions.assertElementAttribute(driver, footer_incortaCopyrights_label, "Text",
-				"([\\s\\S]*" + incortaVersion + ".*[\\s\\S]*)", true);
+	public void Verify_correctVersionNumberIsDisplayed() {
+		Verifications.verifyElementAttribute(driver, footer_incortaCopyrights_label, "text",
+				"([\\s\\S]*" + incortaVersion + "[\\s\\S]*)", true);
 
 		// ([\s\S]*Rel3.2\s[\s\S]*) This regular expression matches all characters and
 		// white spaces before the version number, then a whitespace right after the

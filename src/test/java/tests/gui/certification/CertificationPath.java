@@ -71,7 +71,7 @@ public class CertificationPath {
 	public void loginUsingAdmin() {
 		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
-		loginPage.Assert_correctVersionNumberIsDisplayed();
+		loginPage.Verify_correctVersionNumberIsDisplayed();
 		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
 		allContentPage = new AllContent(driver);

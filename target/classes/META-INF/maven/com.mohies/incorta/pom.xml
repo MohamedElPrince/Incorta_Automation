@@ -26,7 +26,7 @@
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-0.4.2</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-0.5_20180705</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
@@ -146,6 +146,7 @@
 					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<systemPropertyVariables>
+							<shaftEngineVersion>${shaft_engine.version}</shaftEngineVersion>
 							<targetOperatingSystem>${operatingSystem.version}</targetOperatingSystem>
 							<targetBrowserName>${targetBrowser.name}</targetBrowserName>
 							<screenshooterFlag>${screenshooterFlag}</screenshooterFlag>
