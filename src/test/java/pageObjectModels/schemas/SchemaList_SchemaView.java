@@ -18,7 +18,7 @@ public class SchemaList_SchemaView {
 	// By header_schemaDiscription_label;
 	// By header_lastLoadStatusHeader_label;
 	By header_lastLoadStatus_link = By
-			.xpath("//div[contains(@class,'schemaInfo')]/div[contains(.,'Last Load Status')]//p");
+			.xpath("//*[contains(@ng-if,'schemaStatus.lastLoadState')]");
 	// By header_loadingTimeHeader_label;
 	// By header_loadingTime_label;
 	// By header_tablesHeader_label;
@@ -155,7 +155,7 @@ public class SchemaList_SchemaView {
 	public void waitForDataToBeLoaded(String initialLoadStatus) {
 		String currentLoadStatus;
 		do {
-			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus, 1);
+			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus, 10);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
 		} while (currentLoadStatus.matches("(.*" + initialLoadStatus + ".*)")
 				|| currentLoadStatus.matches("(.*Loading Data.*)")
