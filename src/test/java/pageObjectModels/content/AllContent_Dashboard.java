@@ -264,10 +264,18 @@ public class AllContent_Dashboard {
 
 	}
 
-	public void ScheduleSendDashboard_FillColumns(String MailSubject, String BodyText) {
-		ElementActions.type(driver, popup_sendDashboard_subject_textBox, MailSubject);
+	public String ScheduleSendDashboard_AddSubjectName() {
+		String SubjectName = "Automation_" + "SchemaLoadJob_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);
+		// ElementActions.click(driver, popup_sendDashboard_type_radioButton);
+		return SubjectName;
+	}
+	
+	public String ScheduleSendDashboard_AddBodyName() {
+		String BodyText = "Automation_" + "SchemaLoadJob_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
 		// ElementActions.click(driver, popup_sendDashboard_type_radioButton);
+		return BodyText;
 	}
 
 	/**
@@ -425,11 +433,13 @@ public class AllContent_Dashboard {
 	}
 
 	public String GenerateJobName() {
-		return "Automation" + "_Subject_" + String.valueOf(System.currentTimeMillis());
+		return "Automation" + "_ScheduleJob_" + String.valueOf(System.currentTimeMillis());
 	}
 	
-	public void ScheduleSendDashboard_addJobName() {
-		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, GenerateJobName());
+	public String ScheduleSendDashboard_addJobName() {
+		String JobName = GenerateJobName();
+		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, JobName);
+		return JobName;
 	}
 
 	public void ScheduleSendDashboard_assert_FileNameFieldExist() {
