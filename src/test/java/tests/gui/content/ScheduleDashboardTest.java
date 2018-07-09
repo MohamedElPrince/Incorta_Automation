@@ -31,7 +31,7 @@ public class ScheduleDashboardTest {
 
 	// Declaring public variables that will be shared between tests
 	String newScheduledJobName;
-	
+
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 1, description = "C77025 - Firefox: Fresh Installation : Testing that the new Scheduler dashboard UI is correctly displayed")
 //	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. Then schedule Dashboard screen will open")
@@ -260,7 +260,7 @@ public class ScheduleDashboardTest {
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_DashboardScheduler_SavedWhenAddingNewFields() {
 //		String JobName = dashboardPage.ScheduleSendDashboard_addJobName();
-//		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectName();
+//		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
 //		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
@@ -280,36 +280,192 @@ public class ScheduleDashboardTest {
 //		schedulerDashboardsPage.JobScreen_Assert_SubjectNameIsDisplayed(SubjectName);
 //		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(BodyName);
 //	}
+//
+//	// Prerequisite, Admin User + Dashboard to create job + Job Created with [Name -
+//	// Description and Time]
+//	// In Progress -- Issue in JobScreen_Assert_JobTimeZone
+//	@Test(priority = 22, description = "C77053 - Firefox: Fresh Installation: Testing that user can edit Scheduler Dashboard.")
+//	@Description("When I navigate to the target job, and I click on it and I update any field and save changes. Then I'll find that fields is updated successfully.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_JobScreen_FieldsUpdatedSuccessfully() {
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("ScheduleJobName"),
+//				testDataReader.getCellData("DashboardName"));
+//
+//		newScheduledJobName = schedulerDashboardsPage.JobScreen_UpdateFields(
+//				testDataReader.getCellData("ScheduleJobDescription"), testDataReader.getCellData("ScheduleJobDate"),
+//				testDataReader.getCellData("ScheduleJobTime"), testDataReader.getCellData("ScheduleJobTimeZone"),
+//				testDataReader.getCellData("ScheduleJobNoRecurrence"));
+//
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(newScheduledJobName,
+//				testDataReader.getCellData("DashboardName"));
+//
+//		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(newScheduledJobName);
+//		schedulerDashboardsPage
+//				.JobScreen_Assert_DescriptionIsDisplayed(testDataReader.getCellData("ScheduleJobDescription"));
+//		schedulerDashboardsPage.JobScreen_Assert_JobDate(testDataReader.getCellData("ScheduleJobDate"));
+//		schedulerDashboardsPage.JobScreen_Assert_JobTime(testDataReader.getCellData("ScheduleJobTime"));
+//		// schedulerDashboardsPage.JobScreen_Assert_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+//		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
+//		schedulerDashboardsPage
+//				.JobScreen_Assert_JobRecurrence_Exist(testDataReader.getCellData("ScheduleJobNoRecurrence"));
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 23, description = "C77054 - Firefox: Fresh Installation: Testing that the Scheduler is working with Daily recurrence - HTML / CSV / XSLS.")
+//	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select CSV and Daily recurrence option and I click on save changes. Then I'll find that job saved successfully with this options..")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_selectCSV_selectDailyRecurrence_SavedNormally() {
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//
+//		schedulerDashboardsPage
+//				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+//		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 24, description = "C77055 - Firefox: Fresh Installation: Testing that the Scheduler is working with Weekly recurrence - HTML / CSV / XSLS.")
+//	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select CSV and weekly recurrence option and I click on save changes. Then I'll find that job saved successfully with this options..")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_selectCSV_selectWeeklyRecurrence_SavedNormally() {
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobWeeklyRecurrence"));
+//		dashboardPage.scheduleDashboard_SelectDays_WeeklyRecurrence("Mon");
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//
+//		schedulerDashboardsPage
+//				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobWeeklyRecurrence"));
+//		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 25, description = "C77056 - Firefox: Fresh Installation: Testing that the Scheduler is working with Monthly recurrence - HTML / CSV / XSLS.")
+//	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select CSV and Monthly recurrence option and I click on save changes. Then I'll find that job saved successfully with this options..")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_selectCSV_selectMonthlyRecurrence_SavedNormally() {
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//
+//		schedulerDashboardsPage
+//				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
+//		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 26, description = "C77057 - Firefox: Fresh Installation: Testing that the user can Schedule a dashboard 'No Recurrence'.")
+//	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select xlsx and No recurrence option and I click on save changes. Then I'll find that job saved successfully with this options..")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_selectCSV_selectNoRecurrence_SavedNormally() {
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobNoRecurrence"));
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//
+//		schedulerDashboardsPage
+//				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobNoRecurrence"));
+//		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 27, description = "C77061 - Firefox: Fresh Installation: Testing that Subject with Long name does not make any errors.")
+//	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I add long subject. Then I'll find that a job saved successfully.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_LongSubject_SavedNormally_ScheduleDashboard() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.ScheduleSendDashboard_AddSubjectName(testDataReader.getCellData("LongSubjectName"));
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//
+//		schedulerDashboardsPage.JobScreen_Assert_SubjectNameIsDisplayed(testDataReader.getCellData("LongSubjectName"));
+//	}
 //	
-	// Prerequisite, Admin User + Dashboard to create job + Job Created with [Name - Description and Time] 
-	//In Progress -- Issue in JobScreen_Assert_JobTimeZone
-	@Test(priority = 22, description = "C77053 - Firefox: Fresh Installation: Testing that user can edit Scheduler Dashboard.")
-	@Description("When I navigate to the target job, and I click on it and I update any field and save changes. Then I'll find that fields is updated successfully.")
+//	// Prerequisite, Admin User + Scheduler job Dashboard Created
+//	@Test(priority = 28, description = "C77169 - Firefox: Fresh Installation: Testing that the user can delete a Created dashboard Job.")
+//	@Description("When I navigate to the target Job, and I select job and click on delete selection. Then schedule dashboard is deleted successfully.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_Delete_ScheduleDashboard() 
+//	{
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("DeleteScheduleDashboard"));
+//		schedulerDashboardsPage.ScheduleDashboard_Select_ScheduleJobs(
+//				testDataReader.getCellData("DashboardName"), 
+//				testDataReader.getCellData("DeleteScheduleDashboard"));
+//		
+//		mainPage = new Skeleton(driver);
+//		mainPage.Click_actions();
+//		mainPage.Select_fromDropdownMenu("Delete selection");
+//		
+//		schedulerDashboardsPage.ScheduleDashboard_Click_ConfirmUserDeletion_Suspend("Delete");
+//		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+//				testDataReader.getCellData("DashboardName"), 
+//				testDataReader.getCellData("DeleteScheduleDashboard"));
+//	}
+	
+	// Prerequisite, Admin User + Scheduler job Dashboard Created
+	//In Progress
+	@Test(priority = 29, description = "C77169 - Firefox: Fresh Installation: Testing that the user can delete a Created dashboard Job.")
+	@Description("When I navigate to the target Job, and I select job and click on delete selection. Then schedule dashboard is deleted successfully.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_JobScreen_FieldsUpdatedSuccessfully() 
+	public void Assert_Suspend_ScheduleDashboard() 
 	{
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("ScheduleJobName"),testDataReader.getCellData("DashboardName"));
-
-		newScheduledJobName = schedulerDashboardsPage.JobScreen_UpdateFields
-			(
-				testDataReader.getCellData("ScheduleJobDescription"), 
-				testDataReader.getCellData("ScheduleJobDate"), 
-				testDataReader.getCellData("ScheduleJobTime"),
-				testDataReader.getCellData("ScheduleJobTimeZone"),
-				testDataReader.getCellData("ScheduleJobRecurrence")
-			);
-
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(newScheduledJobName, testDataReader.getCellData("DashboardName"));
-		
-		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(newScheduledJobName);
-		schedulerDashboardsPage.JobScreen_Assert_DescriptionIsDisplayed(testDataReader.getCellData("ScheduleJobDescription"));
-		schedulerDashboardsPage.JobScreen_Assert_JobDate(testDataReader.getCellData("ScheduleJobDate"));
-		schedulerDashboardsPage.JobScreen_Assert_JobTime(testDataReader.getCellData("ScheduleJobTime"));
-		//schedulerDashboardsPage.JobScreen_Assert_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
-		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
-		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence(testDataReader.getCellData("ScheduleJobRecurrence"));
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("DeleteScheduleDashboard"));
+		schedulerDashboardsPage.ScheduleDashboard_clickOnStatus(
+				testDataReader.getCellData("DashboardName"), 
+				testDataReader.getCellData("SuspendScheduleDashboard"), 
+				"Active");
+		schedulerDashboardsPage.ScheduleDashboard_Click_ConfirmUserDeletion_Suspend("OK");
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Suspended");
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobStatus(
+				testDataReader.getCellData("DashboardName"), 
+				testDataReader.getCellData("SuspendScheduleDashboard"), 
+				"Suspended");
 	}
 
 	@BeforeMethod
