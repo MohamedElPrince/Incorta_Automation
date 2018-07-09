@@ -610,11 +610,11 @@ public class RolesTest {
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.SendDashboard_FillColumns("Sending Automation mail for Dashboard", "Testing");
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.TypeEmailAndClickAdd(ToMail);
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(ToMail);
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.TypeEmailAndClickAdd(CcMail);
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(CcMail);
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
-		dashboardPage.TypeEmailAndClickAdd(BccMail);
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(BccMail);
 		dashboardPage.Click_Send_Dashboard();
 		dashboardPage.Assert_dashboardName(DashboardToBeShared);
 	}

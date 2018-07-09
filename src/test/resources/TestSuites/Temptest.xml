@@ -5,11 +5,9 @@
 		<classes>
 			<class name="tests.gui.security.RolesTest">
 				<methods>
-				<!-- <include name="IndividualAnalyzerRole" /> --> <!-- regular expression in assert insight name -->
+				<!-- <include name="IndividualAnalyzerRole" /> -->  <!-- regular expression in assert insight name in safari -->
 				<!-- <include name="userManagerRole" /> --> <!-- not working in safari only -->
 				<!-- <include name="superUserRole" /> --> <!-- not working in safari only -->
-				<include name="SchemaManager_Permissions_ShareSchemaToEdit" />
-				<!-- <include name="Analyzer_Permissions_ShareDashboardViaMail_Scheduler" /> -->
 				</methods>
 			</class>
 		</classes>

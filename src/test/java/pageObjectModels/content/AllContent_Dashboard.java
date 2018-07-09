@@ -279,7 +279,7 @@ public class AllContent_Dashboard {
 	}
 
 	// Create function for cancel for below
-	public void TypeEmailAndClickAdd(String Email) {
+	public void SendDashboard_TypeEmailAndClickAdd(String Email) {
 		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
 		ElementActions.click(driver, popup_sendDashboard_add_button);
 	}
@@ -305,11 +305,11 @@ public class AllContent_Dashboard {
 						+ "']/input[@type='radio']");
 
 		SendDashboard_Click_AddMailRecipientsType("To");
-		TypeEmailAndClickAdd(ToMail);
+		ScheduleDashboard_TypeEmailAndClickAdd(ToMail);
 		SendDashboard_Click_AddMailRecipientsType("Cc");
-		TypeEmailAndClickAdd(CcMail);
+		ScheduleDashboard_TypeEmailAndClickAdd(CcMail);
 		SendDashboard_Click_AddMailRecipientsType("Bcc");
-		TypeEmailAndClickAdd(BccMail);
+		ScheduleDashboard_TypeEmailAndClickAdd(BccMail);
 
 		ElementActions.click(driver, popup_scheduleSendDashboard_recurrenceFrequency_radioButton);
 		ElementActions.click(driver, popup_scheduleSendDashboard_schedule_button);
