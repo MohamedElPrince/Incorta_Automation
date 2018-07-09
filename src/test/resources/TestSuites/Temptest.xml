@@ -5,11 +5,11 @@
 		<classes>
 			<class name="tests.gui.security.RolesTest">
 				<methods>
-				<!-- <include name="Analyzer_Permissions_DeleteDashboard" /> -->
-				<include name="Analyzer_Permissions_ShareDashboard" />
-				<!-- <include name="Analyzer_Permissions_CopyDashboard" /> -->
-				<include name="Analyzer_Permissions_MoveDashboard" />
-				<include name="Analyzer_Permissions_RenameDashboard" />
+				<!-- <include name="IndividualAnalyzerRole" /> --> <!-- regular expression in assert insight name -->
+				<!-- <include name="userManagerRole" /> --> <!-- not working in safari only -->
+				<!-- <include name="superUserRole" /> --> <!-- not working in safari only -->
+				<include name="SchemaManager_Permissions_ShareSchemaToEdit" />
+				<!-- <include name="Analyzer_Permissions_ShareDashboardViaMail_Scheduler" /> -->
 				</methods>
 			</class>
 		</classes>

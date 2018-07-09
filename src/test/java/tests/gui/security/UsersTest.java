@@ -97,7 +97,7 @@ public class UsersTest {
 		usersPage.Assert_nameIsNotDisplayed(TempUser);
 	}
 
-	@Test(priority = 4, description = "C53308 - Testing that during the impersonation session, the UI will be always showing a message indicating that this is an impersonated session")
+	@Test(priority = 5, description = "C53308 - Testing that during the impersonation session, the UI will be always showing a message indicating that this is an impersonated session")
 	@Description("Given I am logged in with an admin account, When I navigate to the security.users page, And I click on a user (not super user), And I click on Login As User, Then a message should be displayed to state that I'm impersonating the user, And a link should be present in the users dropdown menu to take me back, And a link should be displayed in the side menu to take me back.")
 	@Severity(SeverityLevel.NORMAL)
 	public void impersonationUI() {
@@ -109,7 +109,7 @@ public class UsersTest {
 		usersPage.Assert_impersonationUIElementsAreDisplayed();
 	}
 	
-	@Test(priority = 5, description = "C647   - Testing Deleting user with option transfer ownership to another user ")
+	@Test(priority = 4, description = "C647   - Testing Deleting user with option transfer ownership to another user ")
 	@Description("Given I have two Super User Accounts, when I share content whith other user \"User1\", And I Delete \"User0\" and transferrer all his content to another user \"User2\", then all content ownership transfered to that user and shared content doesn`t get affected ")
 	@Severity(SeverityLevel.CRITICAL)
 	public void deletingUserWithOptionTransferOwnershipToAnotherUser() {
@@ -137,6 +137,8 @@ public class UsersTest {
 		 */
 
 		// Create New User
+		mainPage = new Skeleton(driver);
+		mainPage.Click_add();
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
 
