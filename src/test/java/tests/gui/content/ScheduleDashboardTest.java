@@ -50,7 +50,6 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created + Job Already Created
-	// In Progress - Need to check assertion issue
 	@Test(priority = 3, description = "C77203 - Firefox: Fresh Installation: Testing that when enter an exists 'Job name', error message appears")
 	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. and add all mandatory fields with a duplicate job name and click send. Then an error message will be displayed")
 	@Severity(SeverityLevel.NORMAL)
@@ -76,7 +75,7 @@ public class ScheduleDashboardTest {
 	@Test(priority = 5, description = "C77028 - Firefox: Fresh Installation: Testing that 'Description' field functionality is appeared")
 	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. Then I'll find that 'Description' field exist.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_JDescriptionField_Displayed_ScheduleDashBoard() {
+	public void Assert_DescriptionField_Displayed_ScheduleDashBoard() {
 		dashboardPage.scheduleDashboard_assert_DescriptionField_exist();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Description");
 	}
@@ -156,7 +155,7 @@ public class ScheduleDashboardTest {
 	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I add email in 'To' and schedule the dashboard and I go to the job and remove the email from 'To' and add it to the 'Cc' and save. and remove it from Cc and add it in bcc and click on save. Then save button is working normally and save previous changes.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_JobScreen_SaveChangesButton_WorksCorrectly() {
-		dashboardPage.scheduleDashboard_addJobName(testDataReader.getCellData("JobName"));
+		dashboardPage.scheduleDashboard_addJobName(testDataReader.getCellData("C77042JobName"));
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_Click_schedule();
@@ -164,9 +163,9 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
-		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("JobName"));
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("C77042JobName"));
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("C77042JobName"),
 				testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_RemoveEmail_Button("To", testDataReader.getCellData("Email"));
@@ -174,7 +173,7 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("C77042JobName"),
 				testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("Email"));
@@ -183,7 +182,7 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("C77042JobName"),
 				testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_RemoveEmail_Button("Bcc", testDataReader.getCellData("Email"));
@@ -191,7 +190,7 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("C77042JobName"),
 				testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("Email"));
 	}
@@ -212,7 +211,7 @@ public class ScheduleDashboardTest {
 	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I click HTML. Then I'll find that 'File Name' field exist.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_WhenSelectHTML_FileNameField_Displayed_ScheduleDashBoard() {
-		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
 		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 	}
@@ -281,8 +280,7 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(BodyName);
 	}
 
-	// Prerequisite, Admin User + Dashboard to create job + Job Created with [Name -
-	// Description and Time]
+	// Prerequisite, Admin User + Dashboard to create job + Job Created with [Name - Description and Time]
 	// In Progress -- Issue in JobScreen_Assert_JobTimeZone
 	@Test(priority = 22, description = "C77053 - Firefox: Fresh Installation: Testing that user can edit Scheduler Dashboard.")
 	@Description("When I navigate to the target job, and I click on it and I update any field and save changes. Then I'll find that fields is updated successfully.")
@@ -446,26 +444,39 @@ public class ScheduleDashboardTest {
 				testDataReader.getCellData("DeleteScheduleDashboard"));
 	}
 	
-	// Prerequisite, Admin User + Scheduler job Dashboard Created
-	//In Progress
-	@Test(priority = 29, description = "C77169 - Firefox: Fresh Installation: Testing that the user can delete a Created dashboard Job.")
-	@Description("When I navigate to the target Job, and I select job and click on delete selection. Then schedule dashboard is deleted successfully.")
+	// Prerequisite, Admin User + Scheduler job Dashboard Created Active
+	@Test(priority = 29, description = "C77170 - Firefox: Fresh Installation: Testing that the user can Suspend a dashboard job.")
+	@Description("When I navigate to the target Job, and I click on Active beside the job and click on OK. Then schedule dashboard is suspended successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Suspend_ScheduleDashboard() 
 	{
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("DeleteScheduleDashboard"));
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("SuspendScheduleDashboard"));
 		schedulerDashboardsPage.ScheduleDashboard_clickOnStatus(
 				testDataReader.getCellData("DashboardName"), 
 				testDataReader.getCellData("SuspendScheduleDashboard"), 
 				"Active");
-		schedulerDashboardsPage.ScheduleDashboard_Click_ConfirmUserDeletion_Suspend("OK");
+		schedulerDashboardsPage.ScheduleDashboard_Click_Suspend_Ok();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Suspended");
 		schedulerDashboardsPage.ScheduleDashboard_Assert_JobStatus(
 				testDataReader.getCellData("DashboardName"), 
 				testDataReader.getCellData("SuspendScheduleDashboard"), 
 				"Suspended");
+	}
+	
+	// Prerequisite, Admin User
+	@Test(priority = 30, description = "C77171 - Firefox: Fresh Installation: Check dashboard Jobs menu.")
+	@Description("When I navigate to the scheduler dashboard screen, and I click on the status. Then 4 options [All,Suspended,Active,Completed] will be displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_Statuses_Exist_ScheduleDashboard() 
+	{
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_Assert_StatusFiltersExist("Active");
+		schedulerDashboardsPage.ScheduleDashboard_Assert_StatusFiltersExist("All");
+		schedulerDashboardsPage.ScheduleDashboard_Assert_StatusFiltersExist("Suspended");
+		schedulerDashboardsPage.ScheduleDashboard_Assert_StatusFiltersExist("Completed");
 	}
 
 	@BeforeMethod

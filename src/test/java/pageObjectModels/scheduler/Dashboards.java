@@ -24,10 +24,10 @@ public class Dashboards {
 	// By body_nextRun_label;
 	By body_name_link;
 	By body_checkBox_scheduleDashboard;
-	By Body_StatusFilter = By.name("name='displayedJobStatus'");
+	By Body_StatusFilter = By.name("displayedJobStatus");
 	By body_StatusFilter_Options;
 	By body_Status;
-	
+
 	By body_JobName;
 	By popup_JobScreen_RemoveEmail_Button;
 	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[contains(text(),'Save Changes')]");
@@ -51,6 +51,7 @@ public class Dashboards {
 	By popup_JobScreen_recurrenceFrequency_radioButton_Selected;
 	By popup_jobScreen_selectOutputFormat;
 	By popup_confirmation_Delete_Cancel_ScheduleDashboard;
+	By popup_confirmation_Suspend_ScheduleDashboard;
 
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -112,8 +113,8 @@ public class Dashboards {
 	}
 
 	public void JobScreen_Assert_EmailExist(String MailRecipientsType, String Email) {
-		popup_JobScreen_Email = By.xpath("//label[contains(text(),'" + MailRecipientsType + "')]/"
-				+ "parent::div/following-sibling::div//span[@title ='" + Email + "']");
+		popup_JobScreen_Email = By.xpath("//label[contains(text(),'" + MailRecipientsType
+				+ "')]/parent::div/following-sibling::div//span[@title ='" + Email + "']");
 		Assertions.assertElementExists(driver, popup_JobScreen_Email, true);
 	}
 
@@ -229,11 +230,17 @@ public class Dashboards {
 	/**
 	 * 
 	 * @param Button
-	 *            Delete Cancel OK
+	 *            Delete Cancel
 	 */
 	public void ScheduleDashboard_Click_ConfirmUserDeletion_Suspend(String Button) {
 		popup_confirmation_Delete_Cancel_ScheduleDashboard = By.xpath("//button[contains(text(),'" + Button + "')]");
 		ElementActions.click(driver, popup_confirmation_Delete_Cancel_ScheduleDashboard);
+	}
+
+	// Below function for test
+	public void ScheduleDashboard_Click_Suspend_Ok() {
+		popup_confirmation_Suspend_ScheduleDashboard = By.xpath("//button[contains(@class,'userSaveBtn')]");
+		ElementActions.click(driver, popup_confirmation_Suspend_ScheduleDashboard);
 	}
 
 	public void ScheduleDashboard_Assert_JobNotExist(String DashboardName, String JobName) {
@@ -241,43 +248,53 @@ public class Dashboards {
 				+ "')]/parent::a/parent::div/preceding-sibling::div/p[@title='" + JobName + "']");
 		Assertions.assertElementExists(driver, body_JobName, false);
 	}
-	
+
 	/**
 	 * 
 	 * @param DashboardName
 	 * @param JobName
-	 * @param Status "Active" "Suspended"
+	 * @param Status
+	 *            "Active" "Suspended"
 	 */
-	public void ScheduleDashboard_clickOnStatus(String DashboardName, String JobName, String Status)
-	{
-		 body_Status = By.xpath("//p[contains(text(),'"+DashboardName+"')]/parent::a/parent::div/preceding-sibling::div"
-				+ "/p[@title='"+JobName+"']/parent::div"
-				+ "/following-sibling::div[@class='dataConnectionLink left']"
-				+ "/a[contains(text(),'"+Status+"')]");
+	public void ScheduleDashboard_clickOnStatus(String DashboardName, String JobName, String Status) {
+		body_Status = By.xpath("//p[contains(text(),'" + DashboardName
+				+ "')]/parent::a/parent::div/preceding-sibling::div" + "/p[@title='" + JobName + "']/parent::div"
+				+ "/following-sibling::div[@class='dataConnectionLink left']" + "/a[contains(text(),'" + Status
+				+ "')]");
 		ElementActions.click(driver, body_Status);
 	}
 
 	/**
 	 * 
 	 * @param Status
-	 * "Active"
-	 * "Completed"
-	 * "Suspended"
-	 * "Completed"
+	 *            "Active" "Completed" "Suspended" "Completed"
 	 */
-	public void ScheduleDashboard_StatusFilter_SelectFilter(String Status)
-	{
+	public void ScheduleDashboard_StatusFilter_SelectFilter(String Status) {
 		ElementActions.click(driver, Body_StatusFilter);
-		body_StatusFilter_Options = By.xpath("//option[@value = '"+Status+"']");
+		body_StatusFilter_Options = By.xpath("//option[@value = '" + Status + "']");
 		ElementActions.click(driver, body_StatusFilter_Options);
 	}
-	
-	public void ScheduleDashboard_Assert_JobStatus(String DashboardName, String JobName, String Status)
-	{
-		 body_Status = By.xpath("//p[contains(text(),'"+DashboardName+"')]/parent::a/parent::div/preceding-sibling::div"
-					+ "/p[@title='"+JobName+"']/parent::div"
-					+ "/following-sibling::div[@class='dataConnectionLink left']"
-					+ "/a[contains(text(),'"+Status+"')]");
-		 Assertions.assertElementExists(driver, body_Status, true);
+
+	public void ScheduleDashboard_Assert_JobStatus(String DashboardName, String JobName, String Status) {
+		body_Status = By.xpath("//p[contains(text(),'" + DashboardName
+				+ "')]/parent::a/parent::div/preceding-sibling::div" + "/p[@title='" + JobName + "']/parent::div"
+				+ "/following-sibling::div[@class='dataConnectionLink left']" + "/a[contains(text(),'" + Status
+				+ "')]");
+		Assertions.assertElementExists(driver, body_Status, true);
 	}
+
+	public void ScheduleDashboard_Open_StatusFilter() {
+		ElementActions.click(driver, Body_StatusFilter);
+	}
+
+	/**
+	 * 
+	 * @param Status
+	 *            "Active" "Suspended" "Comepleted" "All"
+	 */
+	public void ScheduleDashboard_Assert_StatusFiltersExist(String Status) {
+		body_StatusFilter_Options = By.xpath("//option[@value = '" + Status + "']");
+		Assertions.assertElementExists(driver, body_StatusFilter_Options, true);
+	}
+
 }
