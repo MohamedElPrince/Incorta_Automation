@@ -449,7 +449,6 @@ public class AllContent_Dashboard {
 	public void scheduleDashboard_assert_duplicateJobName_errorDisplayed() {
 		popup_schedulerDashboard_DuplicateJobName_ErrorMessage = By
 				.xpath("//div[@ng-if='error']/div[@class='ng-binding']");
-		//Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", testDataReader.getCellData("DuplicateJobNameErrorMessage"), true);
 		Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", "INC_004010050:Another SCHEDULER with the same name \\[Duplicate Job Name\\] already exists." , true);
 	}
 
@@ -472,9 +471,6 @@ public class AllContent_Dashboard {
 	}
 
 	public void scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(String ExpectedValue) {
-
-		//String DefaultFileName = ElementActions.getText(driver, popup_sendDashboard_FileNameField);
-		//Assertions.assertEquals(ExpectedValue, DefaultFileName, true);
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_FileNameField, "text", ExpectedValue, true);
 	}
 
@@ -484,17 +480,6 @@ public class AllContent_Dashboard {
 				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
-/*	public String sendDashboard_GetFileName() {
-		popup_sendDashboard_fileName_text = By.xpath("//input[@name='fileName']");
-		String Text = ElementActions.getText(driver, popup_sendDashboard_fileName_text);
-		return Text;
-	}
-
-	public void sendDashboard_assert_dashboardNameIsFileName(String ExpectedValue) {
-		Assertions.assertEquals(ExpectedValue, sendDashboard_GetFileName(), true);
-	}
-	*/
-	//Below function instead of above 2 to take a screenshot for the text..Will remove commented functions after reviewing.
 	public void sendDashboard_assert_dashboardNameIsFileName(String ExpectedValue) {
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_fileName_text, "text", ExpectedValue , true);
 	}
