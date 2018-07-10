@@ -104,11 +104,11 @@ public class AllContent_Dashboard {
 	}
 
 	public void Assert_dashboardName(String name) {
-		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", "(.*" + name + ".*)", true);
+		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", name.trim(), true);
 	}
 
 	public void Assert_insightName(String name) {
-		Assertions.assertElementAttribute(driver, body_insightName_label, "Text", "(.*" + name + ".*)", true);
+		Assertions.assertElementAttribute(driver, body_insightName_label, "Text", name.trim(), true);
 	}
 
 	public void selectEmailFormat(String format) {
