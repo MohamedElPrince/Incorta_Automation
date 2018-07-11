@@ -26,7 +26,7 @@
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-0.5_20180711</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-0.5_20180711_1</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
