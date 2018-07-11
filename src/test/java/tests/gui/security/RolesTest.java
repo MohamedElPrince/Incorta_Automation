@@ -608,7 +608,8 @@ public class RolesTest {
 		mainPage.Click_FromExportMenu("Send");
 		
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.ScheduleSendDashboard_FillColumns("Sending Automation mail for Dashboard", "Testing");
+		dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
+		dashboardPage.ScheduleSendDashboard_AddBodyNameAutomated();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(ToMail);
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");

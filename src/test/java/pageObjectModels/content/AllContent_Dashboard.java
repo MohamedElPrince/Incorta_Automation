@@ -39,8 +39,9 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
-	By popup_sendDashboard_fileName_text = By.xpath("//input[@name='fileName']");
-
+	By popup_sendDashboard_fileName_text;
+	By popup_scheduleScreen_recurrenceFrequency_radioButton;
+	By popup_scheduleScreen_weeklyRecurrence_days;
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')]/following-sibling::i/parent::a");
@@ -70,12 +71,13 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
 	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
-	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
+	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='description']");
 	By popup_sendDashboard_EmailPlusButton;
 	By popup_sendDashboard_toolTips;
 	By popup_scheduleDashboard_appendTimestamp_helpIcon=By.xpath("//i[contains(@class,'timestamp-info-icon')]");
 	By popup_scheduleDashboard_appendTimestamp_helpIcon_text;
-
+	By popup_scheduleDashboard_CSV_OK_Button = By.xpath("//button[contains(text(),'Ok')]"); 
+	
 	By popup_FromDatePickerTable;
 	By popup_dashboard_menu_share_SearchList;
 	By popup_dashboard_menu_User_List;
@@ -263,10 +265,20 @@ public class AllContent_Dashboard {
 
 	}
 
-	public void ScheduleSendDashboard_FillColumns(String MailSubject, String BodyText) {
-		ElementActions.type(driver, popup_sendDashboard_subject_textBox, MailSubject);
+	public String ScheduleSendDashboard_AddSubjectNameAutomated() {
+		String SubjectName = "Automation_" + "Subject_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);
+		return SubjectName;
+	}
+	
+	public void ScheduleSendDashboard_AddSubjectName(String SubjectName) {
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);
+	}
+	
+	public String ScheduleSendDashboard_AddBodyNameAutomated() {
+		String BodyText = "Automation_" + "Body_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
-		// ElementActions.click(driver, popup_sendDashboard_type_radioButton);
+		return BodyText;
 	}
 
 	/**
@@ -414,12 +426,8 @@ public class AllContent_Dashboard {
 		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
 	}
 
-	public String GenerateJobName() {
-		return "Automation" + "_Subject_" + String.valueOf(System.currentTimeMillis());
-	}
-	
-	public void ScheduleSendDashboard_addJobName() {
-		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, GenerateJobName());
+	public void sendDashboard_addSubjectField(String text) {
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
 	}
 
 	public void ScheduleSendDashboard_assert_FileNameFieldExist() {
@@ -437,6 +445,13 @@ public class AllContent_Dashboard {
 	public void scheduleDashboard_addJobName(String text) {
 		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, text);
 	}
+	
+	public String scheduleDashboard_addJobNameAutomatic()
+	{
+		String jobName = "Automation_" + "ScheduleJob_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, jobName);
+		return jobName;
+	}
 
 	public void scheduleDashboard_Click_schedule() {
 		ElementActions.click(driver, popup_scheduleSendDashboard_schedule_button);
@@ -449,7 +464,8 @@ public class AllContent_Dashboard {
 	public void scheduleDashboard_assert_duplicateJobName_errorDisplayed() {
 		popup_schedulerDashboard_DuplicateJobName_ErrorMessage = By
 				.xpath("//div[@ng-if='error']/div[@class='ng-binding']");
-		Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", "INC_004010050:Another SCHEDULER with the same name \\[Duplicate Job Name\\] already exists." , true);
+	//	Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", testDataReader.getCellData("DuplicateJobNameErrorMessage"), true);
+		Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", "INC_004010050:Another SCHEDULER with the same name \\[Duplicate Job Name\\] already exists.", true);
 	}
 
 	public void ScheduleDashboard_TypeEmailAndClickAdd(String Email) {
@@ -488,6 +504,42 @@ public class AllContent_Dashboard {
 		ElementActions.hover(driver, popup_scheduleDashboard_appendTimestamp_helpIcon);
 		popup_scheduleDashboard_appendTimestamp_helpIcon_text = By.xpath("//div[@class='timestamp-info-tooltip']/p");
 		Assertions.assertElementAttribute(driver, popup_scheduleDashboard_appendTimestamp_helpIcon_text, "text", testDataReader.getCellData("AppendTimeStampHelpText"), true);
+	}
+	
+	/**
+	 * 
+	 * @param recurrence
+	 * No Recurrence
+	 * Daily
+	 */
+	public void scheduleDashboard_AddRecurrence(String recurrence)
+	{
+		popup_scheduleScreen_recurrenceFrequency_radioButton = By
+				.xpath("//ng-form[@name='$ctrl.scheduleForm']//parent::label[normalize-space()='" + recurrence
+						+ "']/input[@type='radio']");
+		ElementActions.click(driver, popup_scheduleScreen_recurrenceFrequency_radioButton);
+	}
+	
+	/**
+	 * 
+	 * @param Day
+	 * Sat
+	 * Sun
+	 * Mon
+	 * Tue
+	 * Wed
+	 * Thu
+	 * Fri
+	 */
+	public void scheduleDashboard_SelectDays_WeeklyRecurrence(String Day)
+	{
+		popup_scheduleScreen_weeklyRecurrence_days = By.xpath("//input[@value ='"+Day+"']");
+		ElementActions.click(driver, popup_scheduleScreen_weeklyRecurrence_days);
+	}
+	
+	public void scheduleDashboard_CSV_XLSX_ClickOK()
+	{
+		ElementActions.click(driver, popup_scheduleDashboard_CSV_OK_Button);
 	}
 	
 }
