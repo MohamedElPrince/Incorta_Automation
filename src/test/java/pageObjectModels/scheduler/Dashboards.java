@@ -134,9 +134,6 @@ public class Dashboards {
 	}
 
 	public void JobScreen_Assert_JobNameIsDisplayed(String JobName) {
-		// String ActualJobName = ElementActions.getText(driver,
-		// popup_JobScreen_JobNameField);
-		// Assertions.assertEquals(JobName, ActualJobName, true);
 		Assertions.assertElementAttribute(driver, popup_JobScreen_JobNameField, "text", JobName, true);
 	}
 
@@ -145,23 +142,14 @@ public class Dashboards {
 	}
 
 	public void JobScreen_Assert_SubjectNameIsDisplayed(String SubjectName) {
-		// String ActualSubjectName = ElementActions.getText(driver,
-		// popup_JobScreen_SubjectField);
-		// Assertions.assertEquals(SubjectName, ActualSubjectName, true);
 		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SubjectName, true);
 	}
 
 	public void JobScreen_Assert_BodyTextIsDisplayed(String BodyText) {
-		// String ActualBodyText = ElementActions.getText(driver,
-		// popup_JobScreen_BodyField);
-		// Assertions.assertEquals(BodyText, ActualBodyText, true);
 		Assertions.assertElementAttribute(driver, popup_JobScreen_BodyField, "text", BodyText, true);
 	}
 
 	public void JobScreen_Assert_SubjectTextIsDisplayed(String SubjectText) {
-		// String ActualBodyText = ElementActions.getText(driver,
-		// popup_JobScreen_BodyField);
-		// Assertions.assertEquals(BodyText, ActualBodyText, true);
 		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SubjectText, true);
 	}	
 	
@@ -297,7 +285,7 @@ public class Dashboards {
 	/**
 	 * 
 	 * @param Status
-	 *            "Active" "Suspended" "Comepleted" "All"
+	 *            "Active" "Suspended" "Completed" "All"
 	 */
 	public void ScheduleDashboard_Assert_StatusFiltersExist(String Status) {
 		body_StatusFilter_Options = By.xpath("//option[@value = '" + Status + "']");
