@@ -38,7 +38,6 @@ public class AllContent_Dashboard {
 	By popup_ScheduleSendDashboardScreens = By.id("send-dashboard-modal");
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
-	By popup_sendDashboard_appenedTimestamp_checkbox = By.xpath("//input[@ng-model='appendTimestamp']");
 	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
 	By popup_sendDashboard_fileName_text;
 
@@ -380,9 +379,6 @@ public class AllContent_Dashboard {
 	public void ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed() {
 		ElementActions.hover(driver, popup_sendDashboard_HideNotificationText_toolTip);
 		popup_sendDashboard_HideNotificationText_toolTip_text = By.xpath("//div[@class='notification-info-tooltip']");
-		//Changed below function to assertElementAttribu to take a screenshot.
-		//String ToolTipText = ElementActions.getText(driver, popup_sendDashboard_HideNotificationText_toolTip_text);
-		//Assertions.assertEquals(testDataReader.getCellData("HideNotificationToolTipText"), ToolTipText, true);
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_HideNotificationText_toolTip_text, "text", testDataReader.getCellData("HideNotificationToolTipText"), true);
 	}
 
@@ -395,13 +391,7 @@ public class AllContent_Dashboard {
 		popup_sendDashboard_selectOutputFormat = By.xpath("//input[@value='" + OutputFormat + "']");
 		ElementActions.click(driver, popup_sendDashboard_selectOutputFormat);
 	}
-
-	/* Duplicate function from sendDashboard_assert_AppendTimestamp_checkbox_checked
-	public void sendDashboard_assert_appenedTimestampOption_CheckedByDefault() {
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_appenedTimestamp_checkbox, "class",
-				"'checkbox-input ng-valid ng-touched user-success ng-dirty ng-valid-parse ng-not-empty'", true);
-	}
-*/
+	 
 	/**
 	 * 
 	 * @param type
