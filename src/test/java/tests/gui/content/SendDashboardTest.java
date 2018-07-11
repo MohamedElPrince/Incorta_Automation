@@ -41,8 +41,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SubjectField_Displayed_SendDashboard() 
 	{		
-		dashboardPage.sendDashboard_assert_subjectField_exist();
-		dashboardPage.sendDashboard_assert_labelsName_exist("Subject");
+		dashboardPage.ScheduleSendDashboard_assert_subjectField_exist();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Subject");
 	}
 	
 	@Test(priority = 3, description = "C76807 - Chrome: Fresh Installation: Testing that 'Body' field is displayed in 'Send Dashboard' window")
@@ -51,7 +51,7 @@ public class SendDashboardTest {
 	public void Assert_BodyField_Displayed_SendDashBoard() 
 	{		
 		dashboardPage.sendDashboard_assert_bodyField_exist();
-		dashboardPage.sendDashboard_assert_labelsName_exist("Body");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Body");
 	}
   	
 	@Test(priority = 4, description = "C76808 - Chrome: Fresh Installation: Testing that 'Hide Notification Text' Check box is displayed in 'Send Dashboard' window")
@@ -59,9 +59,9 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationTextField_Displayed_SendDashBoard() 
 	{		
-		dashboardPage.sendDashboard_assert_HideNotificationText_checkbox_Unchecked();
-		dashboardPage.sendDashboard_assert_labelsName_exist("Hide Notification Text");
-		dashboardPage.sendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
+		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Hide Notification Text");
+		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
 	}
 	
 	@Test(priority = 5, description = "C76809 - Chrome: Fresh Installation: Testing that when selecting HTML Option no File name can be added")
@@ -69,11 +69,11 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Selecting_HTML_Option_InSendDashBoard() 
 	{
-		dashboardPage.sendDashboard_selectOutputFormat("html");
-		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
-		dashboardPage.sendDashboard_assert_FileNameFieldExist();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
 		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("html");
-		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 	
@@ -82,10 +82,10 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Selecting_XLSX_Option_InSendDashBoard() 
 	{		
-		dashboardPage.sendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
-		dashboardPage.sendDashboard_assert_FileNameFieldExist();
-		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("xlsx");
 	}
@@ -95,11 +95,11 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Selecting_CSV_Option_InSendDashBoard()
 	{		
-		dashboardPage.sendDashboard_selectOutputFormat("csv");
-		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
-		dashboardPage.sendDashboard_assert_FileNameFieldExist();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
 		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("csv");
-		dashboardPage.sendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 	
@@ -108,8 +108,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_To_MailReceipents_Displayed()
 	{				
-		dashboardPage.sendDashboard_assert_labelsName_exist("To");
-		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
 	}
 	
 	@Test(priority = 9, description = "C76717 - Chrome: Fresh Installation: Verify that 'Cc' section is displayed in 'Send Dashboard' Window")
@@ -117,8 +117,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Cc_MailReceipents_Displayed()
 	{		
-		dashboardPage.sendDashboard_assert_labelsName_exist("Cc");
-		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
 	}
 	
 	@Test(priority = 10, description = "C76718 - Chrome: Fresh Installation: Verify that 'Bcc' section is displayed in 'Send Dashboard' Window")
@@ -126,8 +126,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Bcc_MailReceipents_Displayed() 
 	{		
-		dashboardPage.sendDashboard_assert_labelsName_exist("Bcc");
-		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
 	
 	@BeforeMethod

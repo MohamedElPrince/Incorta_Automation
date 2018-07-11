@@ -48,7 +48,7 @@ public class ScheduleDashboardTest {
 	public void Assert_JobNameField_Displayed_ScheduleDashBoard() 
 	{		
 		dashboardPage.scheduleDashboard_assert_JobNameField_exist();
-		dashboardPage.sendDashboard_assert_labelsName_exist("Job Name");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Job Name");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created + Job Already Created
@@ -83,7 +83,7 @@ public class ScheduleDashboardTest {
 	public void Assert_JDescriptionField_Displayed_ScheduleDashBoard() 
 	{		
 		dashboardPage.scheduleDashboard_assert_DescriptionField_exist();
-		dashboardPage.sendDashboard_assert_labelsName_exist("Description");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Description");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -92,8 +92,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SubjectField_Displayed_ScheduleDashBoard() 
 	{		
-		dashboardPage.sendDashboard_assert_subjectField_exist();
-		dashboardPage.sendDashboard_assert_labelsName_exist("Subject");
+		dashboardPage.ScheduleSendDashboard_assert_subjectField_exist();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Subject");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -103,7 +103,7 @@ public class ScheduleDashboardTest {
 	public void Assert_BodyField_Displayed_ScheduleDashBoard() 
 	{		
 		dashboardPage.scheduleDashboard_assert_bodyField_exist();
-		dashboardPage.sendDashboard_assert_labelsName_exist("Body");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Body");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -112,7 +112,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationText_Label_Displayed() 
 	{		
-		dashboardPage.sendDashboard_assert_labelsName_exist("Hide Notification Text");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Hide Notification Text");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -121,8 +121,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationText_Checkbox_WorksCorrectly() 
 	{		
-		dashboardPage.sendDashboard_assert_HideNotificationText_checkbox_Unchecked();
-		dashboardPage.sendDashboard_assert_Click_HideNotificationText_checkbox_checked();
+		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
+		dashboardPage.ScheduleSendDashboard_assert_Click_HideNotificationText_checkbox_checked();
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -131,7 +131,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationText_ToolTip_Displayed() 
 	{		
-		dashboardPage.sendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
+		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -140,8 +140,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_ToField_Displayed_ScheduleDashBoard() 
 	{		
-		dashboardPage.sendDashboard_assert_labelsName_exist("To");
-		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -150,8 +150,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_CcField_Displayed_ScheduleDashBoard() 
 	{		
-		dashboardPage.sendDashboard_assert_labelsName_exist("Cc");
-		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -160,8 +160,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_BccField_Displayed_ScheduleDashBoard() 
 	{		
-		dashboardPage.sendDashboard_assert_labelsName_exist("Bcc");
-		dashboardPage.sendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
 	
 	//Prerequisite, Admin User + Dashboard Created
@@ -212,10 +212,62 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_FileNameField_Displayed_ScheduleDashBoard() 
 	{		
-		dashboardPage.sendDashboard_assert_FileNameFieldExist();
-		dashboardPage.sendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(testDataReader.getCellData("DashboardName"));
 	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 16, description = "C77046 - Firefox: Fresh Installation: Testing that 'File name' should be disappear when user select HTML type")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I click HTML. Then I'll find that 'File Name' field exist.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_WhenSelectHTML_FileNameField_Displayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
+	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 17, description = "C77047 - Firefox: Fresh Installation: Testing that 'Append Timestamp' new field validation is appeared.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard. Then I'll find that 'File Name' field appeared and It has Dashboard name by default.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_AppendTimestamp_Displayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Append Timestamp");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 18, description = "C77048_1 - Firefox: Fresh Installation: Testing that user can hover on 'Append time stamp' help.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select HTML and hover on 'Append time stamp'. Then I'll find that a specific message is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectHTML_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 19, description = "C77048_2 - Firefox: Fresh Installation: Testing that user can hover on 'Append time stamp' help.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select XLSX and hover on 'Append time stamp'. Then I'll find that a specific message is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectXLSX_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+	
+	//Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 20, description = "C77048_3 - Firefox: Fresh Installation: Testing that user can hover on 'Append time stamp' help.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I select CSV and hover on 'Append time stamp'. Then I'll find that a specific message is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectCSV_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() 
+	{		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+
 	
 	@BeforeMethod
 	public void beforeMethod(){
