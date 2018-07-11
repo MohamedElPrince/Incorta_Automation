@@ -14,8 +14,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.modules.content.Content_AllContent;
-import pageObjectModels.modules.login.Login_Login;
+import pageObjectModels.content.AllContent;
+import pageObjectModels.login.Login;
 
 @Epic("incorta [toast] Certification Path.")
 public class ToastCertification {
@@ -24,18 +24,18 @@ public class ToastCertification {
 	ExcelFileManager testDataReader;
 
 	// Declaring Page Objects that will be used throughout the test
-	Login_Login loginPage;
-	Content_AllContent allContentPage;
+	Login loginPage;
+	AllContent allContentPage;
 
 	@Test(priority = 1, description = "Login using Admin Account.")
 	@Description("When I navigate to the login page, And I login using valid credentials Then all content tab is selected.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void loginUsingAdmin() {
-		loginPage = new Login_Login(driver);
+		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
-		loginPage.Login(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
-		allContentPage = new Content_AllContent(driver);
+		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
 	}
 
