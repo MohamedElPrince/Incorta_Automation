@@ -109,11 +109,11 @@ public class AllContent_Dashboard {
 	}
 
 	public void Assert_dashboardName(String name) {
-		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", "(.*" + name + ".*)", true);
+		Assertions.assertElementAttribute(driver, header_dashboardName_textBox, "Text", name.trim(), true);
 	}
 
 	public void Assert_insightName(String name) {
-		Assertions.assertElementAttribute(driver, body_insightName_label, "Text", "(.*" + name + ".*)", true);
+		Assertions.assertElementAttribute(driver, body_insightName_label, "Text", name.trim(), true);
 	}
 
 	public void selectEmailFormat(String format) {
@@ -296,7 +296,7 @@ public class AllContent_Dashboard {
 	}
 
 	// Create function for cancel for below
-	public void TypeEmailAndClickAdd(String Email) {
+	public void SendDashboard_TypeEmailAndClickAdd(String Email) {
 		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
 		ElementActions.click(driver, popup_sendDashboard_add_button);
 	}
@@ -322,11 +322,11 @@ public class AllContent_Dashboard {
 						+ "']/input[@type='radio']");
 
 		SendDashboard_Click_AddMailRecipientsType("To");
-		TypeEmailAndClickAdd(ToMail);
+		ScheduleDashboard_TypeEmailAndClickAdd(ToMail);
 		SendDashboard_Click_AddMailRecipientsType("Cc");
-		TypeEmailAndClickAdd(CcMail);
+		ScheduleDashboard_TypeEmailAndClickAdd(CcMail);
 		SendDashboard_Click_AddMailRecipientsType("Bcc");
-		TypeEmailAndClickAdd(BccMail);
+		ScheduleDashboard_TypeEmailAndClickAdd(BccMail);
 
 		ElementActions.click(driver, popup_scheduleSendDashboard_recurrenceFrequency_radioButton);
 		ElementActions.click(driver, popup_scheduleSendDashboard_schedule_button);
@@ -447,6 +447,10 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, JobName);
 		return JobName;
 	}
+	
+	public void sendDashboard_addSubjectField(String text) {
+		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
+	}
 
 	public void ScheduleSendDashboard_assert_FileNameFieldExist() {
 		Assertions.assertElementExists(driver, popup_sendDashboard_FileNameField, true);
@@ -505,9 +509,7 @@ public class AllContent_Dashboard {
 	}
 
 	public void scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(String ExpectedValue) {
-
-		String DefaultFileName = ElementActions.getText(driver, popup_sendDashboard_FileNameField);
-		Assertions.assertEquals(ExpectedValue, DefaultFileName, true);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_FileNameField, "text", ExpectedValue, true);
 	}
 
 	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked() {
@@ -516,14 +518,8 @@ public class AllContent_Dashboard {
 				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
-	public String sendDashboardGetFileName() {
-		popup_sendDashboard_fileName_text = By.xpath("//input[@name='fileName']");
-		String Text = ElementActions.getText(driver, popup_sendDashboard_fileName_text);
-		return Text;
-	}
-
-	public void sendDashboard_assert_dashboardNameIsFileName(String ActualValue) {
-		Assertions.assertEquals(sendDashboardGetFileName(), ActualValue, true);
+	public void sendDashboard_assert_dashboardNameIsFileName(String ExpectedValue) {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_fileName_text, "text", ExpectedValue , true);
 	}
 
 	public void ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed() {

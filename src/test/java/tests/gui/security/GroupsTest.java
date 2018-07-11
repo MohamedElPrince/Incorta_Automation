@@ -22,10 +22,7 @@ import pageObjectModels.security.Users;
 
 @Epic("Incorta -> Security -> Groups")
 public class GroupsTest {
-	
-	// testing pull fetch & push
-	// change done in 3.2.1
-	
+
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
 	ExcelFileManager testDataReader;
@@ -40,7 +37,7 @@ public class GroupsTest {
 	// Declaring Variables that will be used in below tests
 	String newGroupName;
 	String AddedRoles[];
-	
+
 	// Prerequisite, Login using Admin + A predefined group, user, role
 	// Prerequisites, To be created manually for now
 	String groupNameToBeSelected = "Abdelsalam_group_to_Delete";
@@ -50,12 +47,12 @@ public class GroupsTest {
 
 	@Test(priority = 1, description = "TC_C474 - Create New Group.")
 	@Description("Given I've logged in. When I navigate to Security Tab, And go to Groups and click on the "
-			+ " and add Group name and description, Click 'Add User' Button. Then, A new group will be added to group list.")
+			+ " and add Group name and description. Then, A new group will be added to group list.")
 	@Severity(SeverityLevel.NORMAL)
 	public void createNewGroup() {
 		groupsPage = new Groups(driver);
-		mainPage = new Skeleton(driver);
 		groupsPage.Navigate_toURL();
+		mainPage = new Skeleton(driver);
 		mainPage.Click_add();
 		newGroupName = groupsPage.AddNewGroup();
 		groupsPage.Navigate_toURL();
@@ -63,7 +60,7 @@ public class GroupsTest {
 	}
 
 	@Test(priority = 2, description = "TC_C473 - Add user to group.")
-	@Description("Given I've a created user. When I navigate to Security Tab -> Users and select user, And I click on Actions -> Add to group, And I select group, And I click on Add button. Then user is added to the group successfully.")
+	@Description("Given I've a created user. When I navigate to Security Tab -> Users and select user, And I click on Actions -> Add to group, Then user is added to the group successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void addUserToGroup() {
 		usersPage = new Users(driver);
@@ -84,7 +81,6 @@ public class GroupsTest {
 		groupPage.Assert_userIsDisplayed(userNameAddedToTheGroup);
 	}
 
-	
 	// [groupNameToBeSelected] is needed to be created to be used when deleting
 	// group.
 	@Test(priority = 3, description = "TC_C467 - Delete Group.")
@@ -108,9 +104,8 @@ public class GroupsTest {
 		groupsPage = new Groups(driver);
 		groupsPage.Navigate_toURL();
 		groupsPage.Click_group(clickOnGroupName);
-		
+
 		groupPage = new Groups_Group(driver);
-		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		AddedRoles = new String[] { testDataReader.getCellData("GroupRoles", "Data1") };
 		groupPage.AddRoles(AddedRoles);
 		groupPage.Assert_rolesAreDisplayed(AddedRoles);
@@ -118,14 +113,13 @@ public class GroupsTest {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("testDataFilePath",
-				System.getProperty("testDataFolderPath") + "security/TestData.xlsx");
+		System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "security/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"), testDataReader.getCellData("Username", "Data7"), 
-				testDataReader.getCellData("Password", "Data7"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 	}
 
 	@AfterMethod

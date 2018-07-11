@@ -611,11 +611,11 @@ public class RolesTest {
 		dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
 		dashboardPage.ScheduleSendDashboard_AddBodyName();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.TypeEmailAndClickAdd(ToMail);
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(ToMail);
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.TypeEmailAndClickAdd(CcMail);
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(CcMail);
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
-		dashboardPage.TypeEmailAndClickAdd(BccMail);
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(BccMail);
 		dashboardPage.Click_Send_Dashboard();
 		dashboardPage.Assert_dashboardName(DashboardToBeShared);
 	}
@@ -670,7 +670,7 @@ public class RolesTest {
 		}
 		
 		//Prerequisitrs, Analyzer user + Dashboard to share + User to share with
-		@Test(priority = 18 , description = "TC C60531_8 - Users permissions - Analyzer User")
+		@Test(priority = 18 , description = "TC C60531_10 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click sharing and select any user to 'Can Edit' and click save. Then dashboard will be shared successfully.")
 		@Severity(SeverityLevel.NORMAL)
 		public void Analyzer_Permissions_ShareDashboard() {
@@ -694,7 +694,7 @@ public class RolesTest {
 		}
 
 		//Prerequisitrs, Analyzer user + Dashboard to copy + Folder to copy to
-		@Test(priority = 19 , description = "TC C60531_9 - Users permissions - Analyzer User")
+		@Test(priority = 19 , description = "TC C60531_11 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click copy and select any to copy to and click on copy. Then dashboard will be copied successfully.")
 		@Severity(SeverityLevel.NORMAL)
 		public void Analyzer_Permissions_CopyDashboard() {
@@ -723,7 +723,7 @@ public class RolesTest {
 		}
 		
 		//Prerequisitrs, Analyzer user + Dashboard to move + folder to move to
-		@Test(priority = 20 , description = "TC C60531_10 - Users permissions - Analyzer User")
+		@Test(priority = 20 , description = "TC C60531_12 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click move and select any to move to and click on move. Then dashboard will be moved successfully.")
 		@Severity(SeverityLevel.NORMAL)
 		public void Analyzer_Permissions_MoveDashboard() {
@@ -749,7 +749,7 @@ public class RolesTest {
 		}
 		
 		//Prerequisitrs, Analyzer user + Dashboard to rename
-		@Test(priority = 21 , description = "TC C60531_11 - Users permissions - Analyzer User")
+		@Test(priority = 21 , description = "TC C60531_13 - Users permissions - Analyzer User")
 		@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click rename and type new name and click on rename. Then dashboard will be renamed successfully.")
 		@Severity(SeverityLevel.NORMAL)
 		public void Analyzer_Permissions_RenameDashboard() {
