@@ -158,6 +158,13 @@ public class Dashboards {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_BodyField, "text", BodyText, true);
 	}
 
+	public void JobScreen_Assert_SubjectTextIsDisplayed(String SubjectText) {
+		// String ActualBodyText = ElementActions.getText(driver,
+		// popup_JobScreen_BodyField);
+		// Assertions.assertEquals(BodyText, ActualBodyText, true);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SubjectText, true);
+	}	
+	
 	/**
 	 * 
 	 * @param recurrence
