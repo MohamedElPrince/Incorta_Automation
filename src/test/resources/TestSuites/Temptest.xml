@@ -3,9 +3,9 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.security.RolesTest">
+			<class name="tests.gui.content.SendDashboardTest">
 				<methods>
-				<!-- <include name="IndividualAnalyzerRole" /> -->  <!-- regular expression in assert insight name in safari -->
+				<include name="Assert_Subject_NotMandatory" />
 				<!-- <include name="userManagerRole" /> --> <!-- not working in safari only -->
 				<!-- <include name="superUserRole" /> --> <!-- not working in safari only -->
 				</methods>

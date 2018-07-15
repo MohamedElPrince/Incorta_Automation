@@ -39,7 +39,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
-	By popup_sendDashboard_fileName_text;
+	By popup_sendDashboard_fileName_text = By.xpath("//input[@name='fileName']");
 	By popup_scheduleScreen_recurrenceFrequency_radioButton;
 	By popup_scheduleScreen_weeklyRecurrence_days;
 	// Pagination Elements
@@ -71,7 +71,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
 	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
-	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='description']");
+	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;
 	By popup_sendDashboard_toolTips;
 	By popup_scheduleDashboard_appendTimestamp_helpIcon=By.xpath("//i[contains(@class,'timestamp-info-icon')]");
@@ -540,6 +540,11 @@ public class AllContent_Dashboard {
 	public void scheduleDashboard_CSV_XLSX_ClickOK()
 	{
 		ElementActions.click(driver, popup_scheduleDashboard_CSV_OK_Button);
+	}
+	
+	public void sendDashboard_assert_sendButton_enabled() {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_send_button, "disabled", "null",
+				true);
 	}
 	
 }

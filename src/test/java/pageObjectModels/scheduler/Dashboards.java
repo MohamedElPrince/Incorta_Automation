@@ -29,6 +29,8 @@ public class Dashboards {
 	By body_Status;
 
 	By body_JobName;
+	By body_Last_JobName = By.xpath("//div[@class='usersTableRow flex-box flex-align-center ng-scope'][last()]//div[@class='userName left MainNav ellipsis']/p");
+	
 	By popup_JobScreen_RemoveEmail_Button;
 	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[contains(text(),'Save Changes')]");
 	By popup_JobScreen_Email;
@@ -290,6 +292,15 @@ public class Dashboards {
 	public void ScheduleDashboard_Assert_StatusFiltersExist(String Status) {
 		body_StatusFilter_Options = By.xpath("//option[@value = '" + Status + "']");
 		Assertions.assertElementExists(driver, body_StatusFilter_Options, true);
+	}
+	
+	public String GetLastJobName() {
+		String JobName = ElementActions.getText(driver, body_Last_JobName);
+		return JobName;
+	}
+	
+	public void Assert_lastJobName(String PreviousJobName) {
+		Assertions.assertEquals(PreviousJobName, ElementActions.getText(driver, body_Last_JobName), false);
 	}
 
 }
