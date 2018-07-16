@@ -27,7 +27,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_reciever_label; // div[contains(@class,'folderUserRow')][contains(normalize-space(.),'mohab.mohie@incorta.com')]//h5[contains(@class,'UserData')]
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
 	By popup_sendDashboard_Labels;
-	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath(
+	By popup_sendScheduleDashboard_label_hideNotificationText_checkbox_empty = By.xpath(
 			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
 	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath(
 			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
@@ -377,14 +377,14 @@ public class AllContent_Dashboard {
 
 	public void ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked() {
 		String Empty = "ng-empty";
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty,
+		Assertions.assertElementAttribute(driver, popup_sendScheduleDashboard_label_hideNotificationText_checkbox_empty,
 				"class", "([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
 	}
 
 	public void ScheduleSendDashboard_assert_Click_HideNotificationText_checkbox_checked() {
-		ElementActions.click(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty);
+		ElementActions.click(driver, popup_sendScheduleDashboard_label_hideNotificationText_checkbox_empty);
 		String NotEmpty = "ng-not-empty";
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty,
+		Assertions.assertElementAttribute(driver, popup_sendScheduleDashboard_label_hideNotificationText_checkbox_empty,
 				"class", "([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
@@ -475,6 +475,11 @@ public class AllContent_Dashboard {
 
 	public void scheduleDashboard_assert_scheduleButton_disabled() {
 		Assertions.assertElementAttribute(driver, popup_scheduleSendDashboard_schedule_button, "disabled", "true",
+				true);
+	}
+	
+	public void scheduleDashboard_assert_scheduleButton_enabled() {
+		Assertions.assertElementAttribute(driver, popup_scheduleSendDashboard_schedule_button, "disabled", "null",
 				true);
 	}
 
