@@ -50,12 +50,18 @@ public class Dashboards {
 	By popup_JobScreen_recurrenceFrequency_radioButton;
 	By popup_JobScreen_recurrenceFrequency_radioButton_Selected;
 	By popup_jobScreen_selectOutputFormat;
+	By popup_sendDashboard_FileNameField = By.name("fileName");
+
+	
 	By popup_confirmation_Delete_Cancel_ScheduleDashboard;
 	By popup_confirmation_Suspend_ScheduleDashboard;
 
 	By popup_JobScreen_label_hideNotificationText_checkbox_empty = By.xpath(
 			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
 
+	By popup_JobScreen_label_AppendTimestamp_checkbox = By.xpath(
+			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
+	
 	
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -308,4 +314,15 @@ public class Dashboards {
 				"class", "([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
 	}
 	
+	public void jobScreen_Assert_fileNameField(String expectedValue)
+	{
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_FileNameField, "text", expectedValue, true);
+	}
+	
+	public void JobScreen_assert_AppendTimestamp_checkbox_checked() {
+		String NotEmpty = "ng-not-empty";
+		Assertions.assertElementAttribute(driver, popup_JobScreen_label_AppendTimestamp_checkbox, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
+	}
+
 }

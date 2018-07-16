@@ -258,9 +258,10 @@ public class ScheduleDashboardTest {
 //	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I add fields 'subject,body,to and cc' and I click on save. Then I'll find that job is saved from the job screen.")
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_DashboardScheduler_SavedWhenAddingNewFields() {
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
-//		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
-//		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyNameAutomated();
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectName();
+//		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyName();
+//		
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
@@ -280,7 +281,8 @@ public class ScheduleDashboardTest {
 //		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(BodyName);
 //	}
 //
-//	// Prerequisite, Admin User + Dashboard to create job + Job Created with [Name - Description and Time]
+//	// Prerequisite, Admin User + Dashboard to create job + Job Created with [Name -
+//	// Description and Time]
 //	@Test(priority = 22, description = "C77053 - Firefox: Fresh Installation: Testing that user can edit Scheduler Dashboard.")
 //	@Description("When I navigate to the target job, and I click on it and I update any field and save changes. Then I'll find that fields is updated successfully.")
 //	@Severity(SeverityLevel.NORMAL)
@@ -314,7 +316,7 @@ public class ScheduleDashboardTest {
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_selectCSV_selectDailyRecurrence_SavedNormally() {
 //		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
@@ -337,7 +339,7 @@ public class ScheduleDashboardTest {
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_selectCSV_selectWeeklyRecurrence_SavedNormally() {
 //		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobWeeklyRecurrence"));
 //		dashboardPage.scheduleDashboard_SelectDays_WeeklyRecurrence("Mon");
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
@@ -361,7 +363,7 @@ public class ScheduleDashboardTest {
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_selectCSV_selectMonthlyRecurrence_SavedNormally() {
 //		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
@@ -384,7 +386,7 @@ public class ScheduleDashboardTest {
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_selectCSV_selectNoRecurrence_SavedNormally() {
 //		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobNoRecurrence"));
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
@@ -406,7 +408,7 @@ public class ScheduleDashboardTest {
 //	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I add long subject. Then I'll find that a job saved successfully.")
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_LongSubject_SavedNormally_ScheduleDashboard() {
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 //		dashboardPage.ScheduleSendDashboard_AddSubjectName(testDataReader.getCellData("LongSubjectName"));
@@ -418,57 +420,48 @@ public class ScheduleDashboardTest {
 //
 //		schedulerDashboardsPage.JobScreen_Assert_SubjectNameIsDisplayed(testDataReader.getCellData("LongSubjectName"));
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Scheduler job Dashboard Created
 //	@Test(priority = 28, description = "C77169 - Firefox: Fresh Installation: Testing that the user can delete a Created dashboard Job.")
 //	@Description("When I navigate to the target Job, and I select job and click on delete selection. Then schedule dashboard is deleted successfully.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_Delete_ScheduleDashboard() 
-//	{
+//	public void Assert_Delete_ScheduleDashboard() {
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("DeleteScheduleDashboard"));
-//		schedulerDashboardsPage.ScheduleDashboard_Select_ScheduleJobs(
-//				testDataReader.getCellData("DashboardName"), 
+//		schedulerDashboardsPage.ScheduleDashboard_Select_ScheduleJobs(testDataReader.getCellData("DashboardName"),
 //				testDataReader.getCellData("DeleteScheduleDashboard"));
-//		
+//
 //		mainPage = new Skeleton(driver);
 //		mainPage.Click_actions();
 //		mainPage.Select_fromDropdownMenu("Delete selection");
-//		
+//
 //		schedulerDashboardsPage.ScheduleDashboard_Click_ConfirmUserDeletion_Suspend("Delete");
-//		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
-//				testDataReader.getCellData("DashboardName"), 
+//		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(testDataReader.getCellData("DashboardName"),
 //				testDataReader.getCellData("DeleteScheduleDashboard"));
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Scheduler job Dashboard Created Active
 //	@Test(priority = 29, description = "C77170 - Firefox: Fresh Installation: Testing that the user can Suspend a dashboard job.")
 //	@Description("When I navigate to the target Job, and I click on Active beside the job and click on OK. Then schedule dashboard is suspended successfully.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_Suspend_ScheduleDashboard() 
-//	{
+//	public void Assert_Suspend_ScheduleDashboard() {
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("SuspendScheduleDashboard"));
-//		schedulerDashboardsPage.ScheduleDashboard_clickOnStatus(
-//				testDataReader.getCellData("DashboardName"), 
-//				testDataReader.getCellData("SuspendScheduleDashboard"), 
-//				"Active");
+//		schedulerDashboardsPage.ScheduleDashboard_clickOnStatus(testDataReader.getCellData("DashboardName"),
+//				testDataReader.getCellData("SuspendScheduleDashboard"), "Active");
 //		schedulerDashboardsPage.ScheduleDashboard_Click_Suspend_Ok();
 //		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Suspended");
-//		schedulerDashboardsPage.ScheduleDashboard_Assert_JobStatus(
-//				testDataReader.getCellData("DashboardName"), 
-//				testDataReader.getCellData("SuspendScheduleDashboard"), 
-//				"Suspended");
+//		schedulerDashboardsPage.ScheduleDashboard_Assert_JobStatus(testDataReader.getCellData("DashboardName"),
+//				testDataReader.getCellData("SuspendScheduleDashboard"), "Suspended");
 //	}
-//	
+//
 //	// Prerequisite, Admin User
 //	@Test(priority = 30, description = "C77171 - Firefox: Fresh Installation: Check dashboard Jobs menu.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I click on the status. Then 4 options [All,Suspended,Active,Completed] will be displayed.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_JobStatuses_Exist_ScheduleDashboard() 
-//	{
+//	public void Assert_JobStatuses_Exist_ScheduleDashboard() {
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.ScheduleDashboard_Assert_StatusFiltersExist("Active");
@@ -476,167 +469,421 @@ public class ScheduleDashboardTest {
 //		schedulerDashboardsPage.ScheduleDashboard_Assert_StatusFiltersExist("Suspended");
 //		schedulerDashboardsPage.ScheduleDashboard_Assert_StatusFiltersExist("Completed");
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 31, description = "C77031 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Subject' name.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields including subject field and I click on schedule. Then Mail will be sent successfully.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_SubjectField_SavedAndSent_ScheduleDashboard() 
-//	{
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//	public void Assert_SubjectField_SavedAndSent_ScheduleDashboard() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-//		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
+//		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectName();
 //
 //		dashboardPage.scheduleDashboard_Click_schedule();
-//			
+//
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
 //		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
 //		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(SubjectName);
-//		//Need to check that mail is sent successfully with subject.
+//		// Need to check that mail is sent successfully with subject.
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 32, description = "C77032 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Body Area'.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields including body field and I click on schedule. Then Mail will be sent successfully.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_bodyField_SavedAndSent_ScheduleDashboard() 
-//	{
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//	public void Assert_bodyField_SavedAndSent_ScheduleDashboard() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-//		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyNameAutomated();
+//		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyName();
 //
 //		dashboardPage.scheduleDashboard_Click_schedule();
-//			
+//
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
 //		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
 //		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(BodyName);
-//		//Need to check that mail is sent successfully with body.
+//		// Need to check that mail is sent successfully with body.
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 33, description = "C77036_1 - Firefox: Fresh Installation: Testing that the mail is received successful with/witout 'Hide Notification Text'.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and leave 'hide notification text' enabled and I click on schedule. Then Mail will be sent successfully without the default notification.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_HideNotificationtext_Enabled_SavedAndSent_ScheduleDashboard() 
-//	{
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//	public void Assert_HideNotificationtext_Enabled_SavedAndSent_ScheduleDashboard() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 //		dashboardPage.ScheduleSendDashboard_assert_Click_HideNotificationText_checkbox_checked();
 //
 //		dashboardPage.scheduleDashboard_Click_schedule();
-//			
+//
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
 //		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
 //		schedulerDashboardsPage.JobScreen_assert_HideNotificationText_checkbox_checked();
-//		//Need to check that mail is sent successfully without hide notification text.
+//		// Need to check that mail is sent successfully without hide notification text.
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 35, description = "C77036_2 - Firefox: Fresh Installation: Testing that the mail is received successful with/witout 'Hide Notification Text'.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and leave 'hide notification text' disabled and I click on schedule. Then Mail will be sent successfully with the default notification.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_HideNotificationtext_Disabled_SavedAndSent_ScheduleDashboard() 
-//	{
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//	public void Assert_HideNotificationtext_Disabled_SavedAndSent_ScheduleDashboard() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 //		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
 //
 //		dashboardPage.scheduleDashboard_Click_schedule();
-//			
+//
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
 //		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
 //		schedulerDashboardsPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
-//		//Need to check that mail is sent successfully with hide notification text.
+//		// Need to check that mail is sent successfully with hide notification text.
 //	}
-//	
-	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 36, description = "C77040 - Firefox: Fresh Installation: Testing that 'Cc' on schedule dashboard does not give an error when 'To' is empty.")
-	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and CC field and leave To field empty and I click on schedule. Then Mail will be sent successfullyTo will not give an error.")
-	@Severity(SeverityLevel.NORMAL)
-	public void Assert_AddCCMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() 
-	{
-		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_assert_scheduleButton_enabled();
-
-		dashboardPage.scheduleDashboard_Click_schedule();
-			
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
-		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("Email"));
-		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
-		//Need to check that mail is sent successfully with cc.
-	}
-//	
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 36, description = "C77040 - Firefox: Fresh Installation: Testing that 'Cc' on schedule dashboard does not give an error when 'To' is empty.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and CC field and leave To field empty and I click on schedule. Then Mail will be sent successfullyTo will not give an error.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_AddCCMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleDashboard_assert_scheduleButton_enabled();
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("Email"));
+//		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
+//		// Need to check that mail is sent successfully with cc.
+//	}
+//
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 37, description = "C77041 - Firefox: Fresh Installation: Testing that 'Bcc' on schedule dashboard does not give an error when 'To' is empty.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and Bcc field and leave To field empty and I click on schedule. Then Mail will be sent successfullyTo will not give an error.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_AddBccMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() 
-//	{
-//		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//	public void Assert_AddBccMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 //		dashboardPage.scheduleDashboard_assert_scheduleButton_enabled();
 //
 //		dashboardPage.scheduleDashboard_Click_schedule();
-//			
+//
 //		schedulerDashboardsPage = new Dashboards(driver);
 //		schedulerDashboardsPage.Navigate_toURL();
 //		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
 //		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
 //		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("Email"));
 //		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
-//		//Need to check that mail is sent successfully with Bcc.
+//		// Need to check that mail is sent successfully with Bcc.
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 38, description = "C77044_1 - Firefox: Fresh Installation: Testing that the mail is received successful with 'File name' for XLSX/ CSV files.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select CSV and I click on schedule. Then Mail will be sent successfully with file named with the file name.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_SelectCSV_MailReceived_NamedByFileName_ScheduleDashboard() 
-//	{
-//		dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//	public void Assert_SelectCSV_MailReceived_NamedByFileName_ScheduleDashboard() {
+//		dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 //		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-//		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(testDataReader.getCellData("DashboardName"));
+//		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(
+//				testDataReader.getCellData("DashboardName"));
 //		dashboardPage.scheduleDashboard_Click_schedule();
 //
-//		//Need to check that mail is sent successfully with CSV name is same as file name in schedule screen.
+//		// Need to check that mail is sent successfully with CSV name is same as file
+//		// name in schedule screen.
 //	}
-//	
+//
 //	// Prerequisite, Admin User + Dashboard Created
 //	@Test(priority = 39, description = "C77044_2 - Firefox: Fresh Installation: Testing that the mail is received successful with 'File name' for XLSX/ CSV files.")
 //	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select CSV and I click on schedule. Then Mail will be sent successfully with file named with the file name.")
 //	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_SelectXLSX_MailReceived_NamedByFileName_ScheduleDashboard() 
-//	{
-//		dashboardPage.scheduleDashboard_addJobNameAutomatic();
+//	public void Assert_SelectXLSX_MailReceived_NamedByFileName_ScheduleDashboard() {
+//		dashboardPage.scheduleDashboard_addJobName();
 //		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 //		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 //		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-//		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(testDataReader.getCellData("DashboardName"));
+//		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(
+//				testDataReader.getCellData("DashboardName"));
 //		dashboardPage.scheduleDashboard_Click_schedule();
 //
-//		//Need to check that mail is sent successfully with xlsx name is same as file name in schedule screen.
+//		// Need to check that mail is sent successfully with xlsx name is same as file
+//		// name in schedule screen.
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 40, description = "C77045_1 - Firefox: Fresh Installation: Testing that the mail is received successful with default 'File name' when user leaves it blank.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select xlsx and empty field filename I click on schedule. Then Mail will be sent successfully with file named with the dashboard name.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_fileNameIsDashboardName_WhenLeaveItBlankInScheduleDashboard_selectXLSX() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//		dashboardPage.scheduleDashboard_TypeFileNameField("");
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.jobScreen_Assert_fileNameField(testDataReader.getCellData("DashboardName"));
+//
+//		// Need to check that mail is sent successfully with xlsx name is same as file
+//		// name in Job screen.
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 41, description = "C77045_2 - Firefox: Fresh Installation: Testing that the mail is received successful with default 'File name' when user leaves it blank.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select CSV and empty field filename and I click on schedule. Then Mail will be sent successfully with file named with the dashboard name.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_fileNameIsDashboardName_WhenLeaveItBlankInScheduleDashboard_selectCSV() {
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+//		dashboardPage.scheduleDashboard_TypeFileNameField("");
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.jobScreen_Assert_fileNameField(testDataReader.getCellData("DashboardName"));
+//
+//		// Need to check that mail is sent successfully with xlsx name is same as file
+//		// name in Job screen.
+//	}
+//
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 42, description = "C77049 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for XLSX.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select xlsx and select append time stamp and I click on schedule. Then Mail will be sent successfully with timestamp for xlsx.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_TimeStampForXLSX() 
+//	{
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+//		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.JobScreen_assert_AppendTimestamp_checkbox_checked();
+//		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+//
+//		//Need to check that mail is sent successfully with XLSX with time stamp.
 //	}
 //	
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 43, description = "C77050 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for CSV.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select csv and select append time stamp and I click on schedule. Then Mail will be sent successfully with timestamp for xlsx.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_TimeStampForCSV() 
+//	{
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+//		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.JobScreen_assert_AppendTimestamp_checkbox_checked();
+//		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+//
+//		//Need to check that mail is sent successfully with csv with time stamp.
+//	}
+//	
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 44, description = "C77058 - Firefox: Fresh Installation: Verify that when sending the Scheduler Email 'Subject and Body' are displayed correctly.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and I click on schedule. Then Mail will be sent successfully with subject and body.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_BodyAndSubjectExistAndCorrect() 
+//	{
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		String BodyText = dashboardPage.ScheduleSendDashboard_AddBodyName();
+//		String SubjectText = dashboardPage.ScheduleSendDashboard_AddSubjectName();
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(BodyText);
+//		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(SubjectText);
+//		
+//		//Need to check that mail is sent successfully withbody and subject.
+//	}
+//	
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 45, description = "C77059 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Arabic Letters'.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add arabic letter in the subject and I click on schedule. Then Mail will be sent successfully with subject [Arabic Letters].")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_ArabicLetterInSubject() 
+//	{
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.ScheduleSendDashboard_AddSubjectName(testDataReader.getCellData("ArabicSubject"));
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(testDataReader.getCellData("ArabicSubject"));
+//		
+//		//Need to check that mail is sent successfully with arabic letter in subject.
+//	}
+//	
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 46, description = "C77060 - Firefox: Fresh Installation: Testing that the mail is received successful with Subject contains 'Special characters'.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add special chars in the subject and I click on schedule. Then Mail will be sent successfully with subject [special chars].")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_SpecialCharactersInSubject() 
+//	{
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.ScheduleSendDashboard_AddSubjectName(testDataReader.getCellData("SpecialCharactersSubject"));
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		String replace = testDataReader.getCellData("SpecialCharactersSubject").replace("@", "\\@").replace("_", "\\_").replace("$", "\\$").replace("#", "\\#");
+//
+//		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(replace);
+//
+//		//Need to check that mail is sent successfully with special characters in subject.
+//	}
+//	
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 47, description = "C77062 - Firefox: Fresh Installation: Testing that Body with very long message does not make any errors.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and very long body and I click on schedule. Then Mail will be sent successfully with the long body.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_LongMessages_BodyField() 
+//	{
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("LongBody"));
+//
+//		//Need to check that mail is sent successfully with special characters in subject.
+//	}
+//	
+//	// Prerequisite, Admin User + Dashboard Created
+//	@Test(priority = 48, description = "C77063 - Firefox: Fresh Installation: Testing that Body with with Space and Enter does not make any errors.")
+//	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and very long body and I click on schedule. Then Mail will be sent successfully with the long body.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_LongMessages_BodyField() 
+//	{
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
+//
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//
+//		schedulerDashboardsPage = new Dashboards(driver);
+//		schedulerDashboardsPage.Navigate_toURL();
+//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+//		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+//		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("LongBody"));
+//
+//		//Need to check that mail is sent successfully with special characters in subject.
+//	}
+	
+	// Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 49, description = "C77064 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Arabic letters'.")
+	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add arabic letter in the body and I click on schedule. Then Mail will be sent successfully with body [Arabic Letters].")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MailSent_ArabicLetter_bodyField() 
+	{
+		String JobName = dashboardPage.scheduleDashboard_addJobName();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("ArabicSubject"));
+
+		dashboardPage.scheduleDashboard_Click_schedule();
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("ArabicSubject"));
+		
+		//Need to check that mail is sent successfully with arabic letter in subject.
+	}
+	
+	// Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 50, description = "C77065 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Special Characters'.")
+	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add special chars in the body and I click on schedule. Then Mail will be sent successfully with body [special chars].")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MailSent_SpecialCharacters_bodyField() 
+	{
+		String JobName = dashboardPage.scheduleDashboard_addJobName();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("SpecialCharactersSubject"));
+
+		dashboardPage.scheduleDashboard_Click_schedule();
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+		String replace = testDataReader.getCellData("SpecialCharactersSubject").replace("@", "\\@").replace("_", "\\_").replace("$", "\\$").replace("#", "\\#");
+
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(replace);
+
+		//Need to check that mail is sent successfully with special characters in subject.
+	}
+	
 	@BeforeMethod
 	public void beforeMethod() {
 		allContentPage = new AllContent(driver);
@@ -653,6 +900,7 @@ public class ScheduleDashboardTest {
 		mainPage.Select_fromDropdownMenu("Schedule");
 	}
 
+	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",

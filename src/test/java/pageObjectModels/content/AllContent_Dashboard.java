@@ -29,7 +29,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_Labels;
 	By popup_sendScheduleDashboard_label_hideNotificationText_checkbox_empty = By.xpath(
 			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
-	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath(
+	By popup_sendDashboard_label_AppendTimestamp_checkbox = By.xpath(
 			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
 	By popup_sendDashboard_EmailTypeOptions; // to replace previous elements
 	By popup_sendDashboard_HideNotificationText_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
@@ -265,7 +265,7 @@ public class AllContent_Dashboard {
 
 	}
 
-	public String ScheduleSendDashboard_AddSubjectNameAutomated() {
+	public String ScheduleSendDashboard_AddSubjectName() {
 		String SubjectName = "Automation_" + "Subject_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);
 		return SubjectName;
@@ -275,12 +275,16 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);
 	}
 	
-	public String ScheduleSendDashboard_AddBodyNameAutomated() {
+	public String ScheduleSendDashboard_AddBodyName() {
 		String BodyText = "Automation_" + "Body_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
 		return BodyText;
 	}
 
+	public void ScheduleSendDashboard_AddBodyName(String BodyText) {
+		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
+	}
+	
 	/**
 	 * 
 	 * @param MailRecipientsType
@@ -446,7 +450,7 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, text);
 	}
 	
-	public String scheduleDashboard_addJobNameAutomatic()
+	public String scheduleDashboard_addJobName()
 	{
 		String jobName = "Automation_" + "ScheduleJob_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_scheduleDashboard_jobName_textBox, jobName);
@@ -497,7 +501,7 @@ public class AllContent_Dashboard {
 
 	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked() {
 		String NotEmpty = "ng-not-empty";
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox, "class",
 				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
@@ -545,6 +549,10 @@ public class AllContent_Dashboard {
 	public void scheduleDashboard_CSV_XLSX_ClickOK()
 	{
 		ElementActions.click(driver, popup_scheduleDashboard_CSV_OK_Button);
+	}
+	
+	public void scheduleDashboard_TypeFileNameField(String text) {
+		ElementActions.type(driver, popup_sendDashboard_FileNameField, text);
 	}
 	
 }
