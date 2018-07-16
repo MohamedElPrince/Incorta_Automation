@@ -9,9 +9,9 @@
 	<properties>
 		<!-- Execution Properties -->
 		<incortaRoot>http://qa.incorta.com:1230/incorta/#/</incortaRoot>
-		<incortaVersion>Rel3.3-dev</incortaVersion>
+		<incortaVersion>Rel3.3_automation</incortaVersion>
 		<testSuite.name>Temptest</testSuite.name>
-		<operatingSystem.version>Mac-64</operatingSystem.version>
+		<operatingSystem.version>Windows-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 

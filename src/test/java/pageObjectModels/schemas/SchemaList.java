@@ -17,6 +17,7 @@ public class SchemaList {
 	//// Elements
 	By header_schemaListTabHeader_link = By
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Schemas']");
+
 	// header_schemaList_label;
 	// body_tableHeader_label;
 	By body_schemaName_link;
@@ -26,6 +27,10 @@ public class SchemaList {
 	// body_owner_label;
 	// body_lastLoadStatus_label;
 	// body_memoryUsed_label;
+	By popup_schema_schedule_header = By.xpath("//span[contains(@class,'ng-scope')][text()='Schedule Schema Load']");
+	By popup_schema_schedule_View = By.id("send-dashboard-modal");
+	By popup_schema_schedule_lable;
+	By popup_schema_schedule_label_textBox;
 
 	By popup_newSchema_schemaName_textBox = By.xpath("//input[@ng-model='$parent.schemaName']");
 	By popup_newSchema_schemaDescription_textBox = By.xpath("//textarea[@ng-model='$parent.schemaDescription']");
@@ -46,6 +51,21 @@ public class SchemaList {
 		Assertions.assertElementAttribute(driver, header_schemaListTabHeader_link, "class", "selectedTab", true);
 	}
 
+	public void Assert_schemaSchedule_popup_is_displayed() {
+		Assertions.assertElementExists(driver, popup_schema_schedule_View, true);
+		Assertions.assertElementExists(driver, popup_schema_schedule_header, true);
+	}
+
+	public void Assert_schemaSchedule_label_contents(String schedule_lable_field) {
+
+		popup_schema_schedule_lable = By.xpath("//label[contains(text(),'" + schedule_lable_field + "')]");
+		Assertions.assertElementExists(driver, popup_schema_schedule_lable, true);
+
+		popup_schema_schedule_label_textBox = By.xpath("//input[contains(@placeholder,'" + schedule_lable_field + "')]");
+		Assertions.assertElementExists(driver, popup_schema_schedule_label_textBox, true);
+
+	}
+
 	public void Assert_schemaNameIsDisplayed(String schemaName) {
 		body_schemaName_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
@@ -62,6 +82,13 @@ public class SchemaList {
 		body_schemaName_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
 						+ schemaName + "')]/p");
+		ElementActions.click(driver, body_schemaName_link);
+	}
+
+	public void select_schemaName(String schemaName) {
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p/parent::div/preceding-sibling::div");
 		ElementActions.click(driver, body_schemaName_link);
 	}
 
@@ -87,7 +114,7 @@ public class SchemaList {
 		ElementActions.click(driver, popup_newSchema_create_button);
 		return schemaName;
 	}
-	
+
 	public void Assert_schemaNameIsDisplayedAndItsOwnerName(String schemaName, String name) {
 		body_schemaName_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
