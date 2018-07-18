@@ -5,9 +5,10 @@
 		<classes>
 			<class name="tests.gui.content.SendDashboardTest">
 				<methods>
+				<!-- <include name="Assert_email_subject" />
 				<include name="Assert_Subject_NotMandatory" />
-				<!-- <include name="userManagerRole" /> --> <!-- not working in safari only -->
-				<!-- <include name="superUserRole" /> --> <!-- not working in safari only -->
+				<include name="Assert_email_Arabic_subject" /> -->
+				<include name="Assert_email_SpecialCharacters_subject" />
 				</methods>
 			</class>
 		</classes>

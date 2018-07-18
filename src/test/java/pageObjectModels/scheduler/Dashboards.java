@@ -302,5 +302,12 @@ public class Dashboards {
 	public void Assert_lastJobName(String PreviousJobName) {
 		Assertions.assertEquals(PreviousJobName, ElementActions.getText(driver, body_Last_JobName), false);
 	}
+	public void Click_On_LastJobName() {
+		ElementActions.click(driver, body_Last_JobName);
+	}
+	
+	public void Assert_Subject_Equal_DashboardName(String DashboardName) {
+		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", DashboardName, true);
+	}
 
 }
