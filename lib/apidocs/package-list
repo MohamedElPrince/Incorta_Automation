@@ -2,4 +2,5 @@ com.shaftEngine.browserActionLibrary
 com.shaftEngine.elementActionLibrary
 com.shaftEngine.ioActionLibrary
 com.shaftEngine.restAssuredActionLibrary
+com.shaftEngine.supportActionLibrary
 com.shaftEngine.validationsLibrary
