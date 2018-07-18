@@ -36,7 +36,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_Screen_IsOpened()
 	{		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_assert_ScreenIsOpened();
 	}
 	
@@ -45,7 +45,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SubjectField_Displayed_SendDashboard() 
 	{		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.ScheduleSendDashboard_assert_subjectField_exist();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Subject");
 	}
@@ -55,7 +55,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_BodyField_Displayed_SendDashBoard() 
 	{		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_assert_bodyField_exist();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Body");
 	}
@@ -65,7 +65,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationTextField_Displayed_SendDashBoard() 
 	{	
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Hide Notification Text");
 		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
@@ -76,7 +76,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Selecting_HTML_Option_InSendDashBoard() 
 	{
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
@@ -90,7 +90,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Selecting_XLSX_Option_InSendDashBoard() 
 	{		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
@@ -104,7 +104,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Selecting_CSV_Option_InSendDashBoard()
 	{	
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
@@ -118,7 +118,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_To_MailReceipents_Displayed()
 	{		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
 		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
 	}
@@ -128,7 +128,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Cc_MailReceipents_Displayed()
 	{		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
 		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
 	}
@@ -138,7 +138,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Bcc_MailReceipents_Displayed() 
 	{	
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
 		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
@@ -154,7 +154,7 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
@@ -180,7 +180,7 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
@@ -206,7 +206,7 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
@@ -232,7 +232,7 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 		
-		navigate_to_sendDshboard();
+		navigate_to_sendDashboard();
 		
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
@@ -263,7 +263,7 @@ public class SendDashboardTest {
 	}
 	
 	
-	public void navigate_to_sendDshboard() {
+	public void navigate_to_sendDashboard() {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
