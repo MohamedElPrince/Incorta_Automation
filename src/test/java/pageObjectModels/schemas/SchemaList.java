@@ -13,7 +13,7 @@ public class SchemaList {
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_schemas_schemaList");
-
+	String popup_schema_schedule_Error_Message_Body = testDataReader.getCellData("SchemaLoadSameNameError");
 	//// Elements
 	By header_schemaListTabHeader_link = By
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Schemas']");
@@ -29,8 +29,11 @@ public class SchemaList {
 	// body_memoryUsed_label;
 	By popup_schema_schedule_header = By.xpath("//span[contains(@class,'ng-scope')][text()='Schedule Schema Load']");
 	By popup_schema_schedule_View = By.id("send-dashboard-modal");
-	By popup_schema_schedule_lable;
+	By popup_schema_schedule_label;
 	By popup_schema_schedule_label_textBox;
+	By popup_schema_schedule_button =  By.xpath("//button[@type='button'][contains(text(),'Schedule')]");
+	By popup_schema_schedule_Error_Message_Body_label = By.xpath("//div[contains(@class,'text-center')]/child::div[@class='ng-binding']");
+	
 
 	By popup_newSchema_schemaName_textBox = By.xpath("//input[@ng-model='$parent.schemaName']");
 	By popup_newSchema_schemaDescription_textBox = By.xpath("//textarea[@ng-model='$parent.schemaDescription']");
@@ -56,16 +59,42 @@ public class SchemaList {
 		Assertions.assertElementExists(driver, popup_schema_schedule_header, true);
 	}
 
-	public void Assert_schemaSchedule_label_contents(String schedule_lable_field) {
+	public void Assert_schemaSchedule_label_contents(String schedule_label_field) {
 
-		popup_schema_schedule_lable = By.xpath("//label[contains(text(),'" + schedule_lable_field + "')]");
-		Assertions.assertElementExists(driver, popup_schema_schedule_lable, true);
-
-		popup_schema_schedule_label_textBox = By.xpath("//input[contains(@placeholder,'" + schedule_lable_field + "')]");
+		popup_schema_schedule_label = By.xpath("//label[contains(text(),'" + schedule_label_field + "')]");
+		Assertions.assertElementExists(driver, popup_schema_schedule_label, true);
+		
+		popup_schema_schedule_label_textBox = By.xpath("//input[contains(@placeholder,'" + schedule_label_field + "')]");
 		Assertions.assertElementExists(driver, popup_schema_schedule_label_textBox, true);
 
 	}
+	
+	public void Schema_Schedule_Type_data(String schedule_label_field, String schedule_label_data) {
+		
+		popup_schema_schedule_label_textBox = By.xpath("//input[contains(@placeholder,'" + schedule_label_field + "')]");
+	
+		ElementActions.type(driver, popup_schema_schedule_label_textBox, schedule_label_data);
+		
+	
+	}
 
+	
+	public void Schema_Schedule_Click_Schedule_Button () {
+		
+		ElementActions.click(driver, popup_schema_schedule_button);
+
+	}
+	
+	public void Assert_dublicate_Schema_Schedule_job_Name_Error_Message() {
+		
+		
+		Assertions.assertElementAttribute(driver, popup_schema_schedule_Error_Message_Body_label, "text", popup_schema_schedule_Error_Message_Body,
+				true);
+		
+		
+		
+	}
+	
 	public void Assert_schemaNameIsDisplayed(String schemaName) {
 		body_schemaName_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
