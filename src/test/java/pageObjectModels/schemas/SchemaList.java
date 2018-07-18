@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.supportActionLibrary.JavaActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class SchemaList {
@@ -13,7 +14,7 @@ public class SchemaList {
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_schemas_schemaList");
-	String popup_schema_schedule_Error_Message_Body = testDataReader.getCellData("SchemaLoadSameNameError");
+	String popup_schema_schedule_Error_Message_Body = replace_regularExpression(testDataReader.getCellData("SchemaLoadSameNameError"));
 	//// Elements
 	By header_schemaListTabHeader_link = By
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Schemas']");
@@ -153,6 +154,12 @@ public class SchemaList {
 		body_OwnerName_link = By.xpath("//div[contains(@class,'userName') and contains(.,'" + schemaName
 				+ "')]/following-sibling::div/p[@class=\"ng-binding\"][contains(.,'" + name + "')]");
 		Assertions.assertElementExists(driver, body_OwnerName_link, true);
+	}
+	
+	public String replace_regularExpression(String text) {
+		String arr[] = {"[","]"};
+		text = JavaActions.replaceRegex(arr, text);
+		return text;
 	}
 
 }

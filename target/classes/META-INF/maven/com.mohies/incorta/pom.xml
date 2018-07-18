@@ -9,8 +9,8 @@
 	<properties>
 		<!-- Execution Properties -->
 		<incortaRoot>http://qa.incorta.com:1230/incorta/#/</incortaRoot>
-		<incortaVersion>Rel3.3_automation</incortaVersion>
-		<testSuite.name>Temptest</testSuite.name>
+		<incortaVersion>dev</incortaVersion>
+		<testSuite.name>testSuite01</testSuite.name>
 		<operatingSystem.version>Windows-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
@@ -26,7 +26,7 @@
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180715_1</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180718</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>

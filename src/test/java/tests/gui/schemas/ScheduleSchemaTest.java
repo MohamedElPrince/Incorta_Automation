@@ -55,7 +55,7 @@ public class ScheduleSchemaTest {
 
 	}
 
-	@Test(priority = 1, description = "C77116 - Firefox: Fresh Installation: Testing that Job name Area field Functionality is appeared")
+	@Test(priority = 2, description = "C77116 - Firefox: Fresh Installation: Testing that Job name Area field Functionality is appeared")
 	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view, Job name displayed correctly.")
 	@Severity(SeverityLevel.NORMAL)
 	public void SchedulerSchemaViewJobNameCheck() {
@@ -76,7 +76,7 @@ public class ScheduleSchemaTest {
 
 	
 	
-	@Test(priority = 1, description = "C77208 - Firefox: Fresh Installation: Testing that when enter an exists Job name for the same schema, error message appears")
+	@Test(priority = 3, description = "C77208 - Firefox: Fresh Installation: Testing that when enter an exists Job name for the same schema, error message appears")
 	@Description("When I navigate to the schema list page,Given that there is a pre-created job created, And I create schedule job for the same schema with the same name, then ")
 	@Severity(SeverityLevel.NORMAL)
 	public void Scheduler_Schema_Job_Exists_Error_Check() {
