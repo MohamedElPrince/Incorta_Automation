@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.supportActionLibrary.JavaActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Dashboards {
@@ -306,7 +307,13 @@ public class Dashboards {
 		ElementActions.click(driver, body_Last_JobName);
 	}
 	
-	public void Assert_Subject_Equal_DashboardName(String DashboardName) {
+	public void Assert_SpecialCharacters_Subject(String SpecialCharactersSubject) {
+		String specialCharacters[] = {"@","#","$","^","&","*"};
+		SpecialCharactersSubject = JavaActions.replaceRegex(specialCharacters,SpecialCharactersSubject);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SpecialCharactersSubject, true);
+	}
+	
+	public void Assert_Subject_Value(String DashboardName) {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", DashboardName, true);
 	}
 
