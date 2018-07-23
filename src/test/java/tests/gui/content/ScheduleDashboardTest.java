@@ -260,7 +260,7 @@ public class ScheduleDashboardTest {
 	public void Assert_DashboardScheduler_SavedWhenAddingNewFields() {
 		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
 		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
-		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyNameAutomated();
+		String BodyName = dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
@@ -507,7 +507,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobNameAutomatic();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyNameAutomated();
+		String BodyName = dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
 
 		dashboardPage.scheduleDashboard_Click_schedule();
 			

@@ -210,7 +210,7 @@ public class SendDashboardTest {
 		
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("ArabicSubject"));
+		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("Arabic"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 		
@@ -218,7 +218,7 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
 		schedulerDashboardsPage.Assert_lastJobName(JobName);
 		schedulerDashboardsPage.Click_On_LastJobName();
-		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("ArabicSubject"));
+		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("Arabic"));
 		//Need to check that mail is sent successfully with Arabic subject name
 	}
 	
@@ -236,7 +236,7 @@ public class SendDashboardTest {
 		
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("SpecialCharactersSubject"));
+		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("SpecialCharacters"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 		
@@ -244,7 +244,7 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
 		schedulerDashboardsPage.Assert_lastJobName(JobName);
 		schedulerDashboardsPage.Click_On_LastJobName();
-		schedulerDashboardsPage.Assert_SpecialCharacters_Subject(testDataReader.getCellData("SpecialCharactersSubject"));
+		schedulerDashboardsPage.Assert_SpecialCharacters_Subject(testDataReader.getCellData("SpecialCharacters"));
 		//Need to check that mail is sent successfully with Special Characters subject name
 	}
 	
@@ -298,6 +298,137 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.Click_On_LastJobName();
 		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("Numbers"));
 		//Need to check that mail is sent successfully with Numbers subject name
+	}
+	
+	@Test(priority = 17, description = "C76821 - Firefox: Fresh Installation: Verify that the user can send a dashboard with Body")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with body, then It should be sent successfully and body displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_body() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String body = dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
+		//Need to check that mail is sent successfully with correct body
+		
+	}
+	
+	@Test(priority = 18, description = "C76822 - Firefox: Fresh Installation: Verify that the user can send a dashboard with Body contains Special Characters")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with body containing special characters, then It should be sent successfully and body is displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_body_specialCharacters() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.ScheduleSendDashboard_AddBody(testDataReader.getCellData("SpecialCharacters"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.Assert_SpecialCharacters_Body(testDataReader.getCellData("SpecialCharacters"));
+		//Need to check that mail is sent successfully with Special Characters in the body
+	}
+	
+	@Test(priority = 19, description = "C76823 - Firefox: Fresh Installation: Verify that the user can send a dashboard with body contains Arabic letters")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with Arabic body, then It should be sent successfully and body is displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_Arabic_body() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.ScheduleSendDashboard_AddBody(testDataReader.getCellData("Arabic"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("Arabic"));
+		//Need to check that mail is sent successfully with Arabic body
+	}
+	
+	@Test(priority = 20, description = "C76824 - Firefox: Fresh Installation: Verify that the user can send a dashboard with body Contains Numbers")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with numbers in the body, then It should be sent successfully and body is displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_numbers_body() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.ScheduleSendDashboard_AddBody(testDataReader.getCellData("Numbers"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("Numbers"));
+		//Need to check that mail is sent successfully with body containing numbers
+	}
+	
+	@Test(priority = 21, description = "C76826 - Firefox: Fresh Installation: Verify that the user can send a dashboard with Body contains non English characters (French , Chinese ..)")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with non-English characters in the body, then It should be sent successfully and body is displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_NonEnglish_body() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.ScheduleSendDashboard_AddBody(testDataReader.getCellData("NonEnglish"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("NonEnglish"));
+		//Need to check that mail is sent successfully with body containing NonEnglish characters
 	}
 	
 	public void navigate_to_sendDashboard() {

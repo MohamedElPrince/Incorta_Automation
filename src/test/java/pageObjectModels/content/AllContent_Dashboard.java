@@ -275,10 +275,14 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);
 	}
 	
-	public String ScheduleSendDashboard_AddBodyNameAutomated() {
+	public String ScheduleSendDashboard_Add_Body_Automated() {
 		String BodyText = "Automation_" + "Body_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
 		return BodyText;
+	}
+	
+	public void ScheduleSendDashboard_AddBody(String body) {
+		ElementActions.type(driver, popup_sendDashboard_body_textBox, body);
 	}
 
 	/**

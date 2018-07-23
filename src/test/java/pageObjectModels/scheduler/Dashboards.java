@@ -30,7 +30,7 @@ public class Dashboards {
 	By body_Status;
 
 	By body_JobName;
-	By body_Last_JobName = By.xpath("//div[@class='usersTableRow flex-box flex-align-center ng-scope'][last()]//div[@class='userName left MainNav ellipsis']/p");
+	By body_Last_JobName = By.xpath("(//p[@title='Sending Dashboard']//ancestor::div[contains(@class,'usersTableRow')]//p[contains(@title,'System generated')])[last()]");
 	
 	By popup_JobScreen_RemoveEmail_Button;
 	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[contains(text(),'Save Changes')]");
@@ -311,6 +311,12 @@ public class Dashboards {
 		String specialCharacters[] = {"@","#","$","^","&","*"};
 		SpecialCharactersSubject = JavaActions.replaceRegex(specialCharacters,SpecialCharactersSubject);
 		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SpecialCharactersSubject, true);
+	}
+	
+	public void Assert_SpecialCharacters_Body(String SpecialCharactersBody) {
+		String specialCharacters[] = {"@","#","$","^","&","*"};
+		SpecialCharactersBody = JavaActions.replaceRegex(specialCharacters,SpecialCharactersBody);
+		Assertions.assertElementAttribute(driver,popup_JobScreen_BodyField , "text", SpecialCharactersBody, true);
 	}
 	
 	public void Assert_Subject_Value(String DashboardName) {

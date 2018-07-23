@@ -5,12 +5,17 @@
 		<classes>
 			<class name="tests.gui.content.SendDashboardTest">
 				<methods>
-				<include name="Assert_Subject_NotMandatory" />
+				<!-- <include name="Assert_Subject_NotMandatory" />
 				<include name="Assert_email_subject" />
-				<include name="Assert_email_Arabic_subject" />
+			    <include name="Assert_email_Arabic_subject" />
 				<include name="Assert_email_SpecialCharacters_subject" />
 				<include name="Assert_email_NonEnglish_subject" />
 				<include name="Assert_email_numbers_subject" />
+				<include name="Assert_email_body" />
+				<include name="Assert_email_body_specialCharacters" />
+				<include name="Assert_email_Arabic_body"/>
+				<include name="Assert_email_numbers_body"/> -->
+				<include name="Assert_email_NonEnglish_body"/>
 				</methods>
 			</class>
 		</classes>
