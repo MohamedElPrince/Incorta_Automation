@@ -32,5 +32,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/AFarid/git/qa/lib/SHAFT_ENGINE-1.0.20180718-javadoc.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

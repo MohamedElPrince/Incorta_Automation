@@ -22,6 +22,9 @@ public class SchemaLoads {
 	// By body_owner_link;
 	By body_schema_link;
 	By body_status_label;
+	By body_Job_status_label;
+	By body_schemaName_link;
+	By popup_schema_schedule_radio_button;
 	// By body_nextRun_label;
 
 	By popup_scheduleSchemaLoad_jobName_textBox = By
@@ -69,6 +72,36 @@ public class SchemaLoads {
 				+ "']/parent::div[contains(@class,'userName')]/following-sibling::div[contains(@class,'dataConnectionLink')]");
 		Assertions.assertElementAttribute(driver, body_status_label, "Text", expectedStatus, true);
 	}
+	
+	
+	public void Assert_SchemaJob_Created(String job_name, String schema_name) {
+		body_Job_status_label = By.xpath("//p[@title='"+ job_name +"']/parent::div[contains(@class,'userName')]/following-sibling::div[contains(@class,'userName')]//p[contains(text(),'" + schema_name + "')]");
+		Assertions.assertElementAttribute(driver, body_Job_status_label, "Text", schema_name, true);
+	}
+
+	
+	
+	
+
+	public void select_schemaName(String schemaName) {
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p");
+		ElementActions.click(driver, body_schemaName_link);
+		
+		
+	}
+	
+public void Assert_SchemaScheduler_Radio_Button_selected(String Radio_Button_Name) {
+		
+		popup_schema_schedule_radio_button = By.xpath("//input[@type='radio'][@value= '" + Radio_Button_Name + "']");		
+		Assertions.assertElementAttribute(driver, popup_schema_schedule_radio_button, "checked", "true", true);
+		
+		
+	}
+	
+		
+	
 
 	public String scheduleSchemaLoad(String description, String schemaName, String loadType, String startByDate,
 			String startByTime, String startByTimeZone, String recurrence) {

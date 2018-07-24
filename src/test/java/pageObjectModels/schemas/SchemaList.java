@@ -32,8 +32,12 @@ public class SchemaList {
 	By popup_schema_schedule_View = By.id("send-dashboard-modal");
 	By popup_schema_schedule_label;
 	By popup_schema_schedule_label_textBox;
+	By popup_schema_schedule_JobName_textBox = By.xpath("//input[contains(@placeholder,'Job Name')]");
+	By popup_schema_schedule_Description_textBox;
 	By popup_schema_schedule_button =  By.xpath("//button[@type='button'][contains(text(),'Schedule')]");
+	By popup_schema_schedule_button_disabled = By.xpath("//button[@type='button'][@disabled='disabled'][contains(text(),'Schedule')]");
 	By popup_schema_schedule_Error_Message_Body_label = By.xpath("//div[contains(@class,'text-center')]/child::div[@class='ng-binding']");
+	By popup_schema_schedule_radio_button;
 	
 
 	By popup_newSchema_schemaName_textBox = By.xpath("//input[@ng-model='$parent.schemaName']");
@@ -70,7 +74,36 @@ public class SchemaList {
 
 	}
 	
-	public void Schema_Schedule_Type_data(String schedule_label_field, String schedule_label_data) {
+	
+	public void Assert_SchemaScheduler_Radio_Button_selected(String Radio_Button_Name) {
+		
+		popup_schema_schedule_radio_button = By.xpath("//input[@type='radio'][@value= '" + Radio_Button_Name + "']");		
+		Assertions.assertElementAttribute(driver, popup_schema_schedule_radio_button, "checked", "true", true);
+		
+		
+	}
+	
+	public void Select_schema_scheduler_radio_button(String Radio_button_name) {
+		
+		popup_schema_schedule_radio_button = By.xpath("//input[@type='radio'][@value= '" + Radio_button_name + "']");
+		ElementActions.click(driver, popup_schema_schedule_radio_button);
+	}
+	
+	
+	
+	
+	public void Assert_schemaSchedule_lable_textbox_empty(String label_name) {
+		
+		
+		popup_schema_schedule_label_textBox =By.xpath("//input[contains(@class,'ng-empty')][contains(@placeholder,'" + label_name + "')]");
+		Assertions.assertElementExists(driver, popup_schema_schedule_label_textBox, true);
+		
+		
+	}
+	
+	
+	
+	public void Type_Schema_Schedule_jobNameOrDescription(String schedule_label_field, String schedule_label_data) {
 		
 		popup_schema_schedule_label_textBox = By.xpath("//input[contains(@placeholder,'" + schedule_label_field + "')]");
 	
@@ -78,12 +111,26 @@ public class SchemaList {
 		
 	
 	}
+	
+	
+	public String Auto_Type_Schedule_Schema_JobName() {
+		String newSchemaSchdule_jobName = "Automation" + "_Schedule_Schema_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.click(driver, popup_schema_schedule_JobName_textBox);
+		ElementActions.type(driver, popup_schema_schedule_JobName_textBox, newSchemaSchdule_jobName);
+		return newSchemaSchdule_jobName;
+	}
 
 	
 	public void Schema_Schedule_Click_Schedule_Button () {
 		
 		ElementActions.click(driver, popup_schema_schedule_button);
 
+	}
+	
+	public void Assert_Schedule_button_disabled() {
+		
+		Assertions.assertElementExists(driver, popup_schema_schedule_button_disabled, true);
+		
 	}
 	
 	public void Assert_dublicate_Schema_Schedule_job_Name_Error_Message() {
