@@ -190,7 +190,7 @@ public class Dashboards {
 
 	//Not working - Assert that specific time zone is selected
 	public void JobScreen_Assert_JobTimeZone(String JobTimeZone) {
-		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox_Value, "text", JobTimeZone, true);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox, "text", JobTimeZone, true);
 	}
 
 	public String JobScreen_UpdateFields(String description, String startByDate, String startByTime,
