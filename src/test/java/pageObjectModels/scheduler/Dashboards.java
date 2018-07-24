@@ -49,6 +49,7 @@ public class Dashboards {
 			"//ng-form[@name='$ctrl.scheduleForm']//input[@ng-model='$ctrl.jobObject.startTime2']/following-sibling::input[1]");
 	By popup_JobScreen_startByTimeZone_textBox = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
+	By popup_JobScreen_startByTimeZone_textBox_Value = By.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']/option");
 	By popup_JobScreen_recurrenceFrequency_radioButton;
 	By popup_JobScreen_recurrenceFrequency_radioButton_Selected;
 	By popup_jobScreen_selectOutputFormat;
@@ -64,6 +65,7 @@ public class Dashboards {
 	By popup_JobScreen_label_AppendTimestamp_checkbox = By.xpath(
 			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
 	
+	By popup_jobScreen_dailyRecurrence_Type;
 	
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -186,8 +188,9 @@ public class Dashboards {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTime_textBox, "text", JobTime, true);
 	}
 
+	//Not working - Assert that specific time zone is selected
 	public void JobScreen_Assert_JobTimeZone(String JobTimeZone) {
-		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox, "value", JobTimeZone, true);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox_Value, "text", JobTimeZone, true);
 	}
 
 	public String JobScreen_UpdateFields(String description, String startByDate, String startByTime,
@@ -344,6 +347,23 @@ public class Dashboards {
 				+ "/parent::div/following-sibling::div[@class='dataConnectionLink left']/p[contains(text(),'Completed')]");
 		Assertions.assertElementExists(driver, body_CompletedStatus, true);
 	}
+	
+	/**
+	 * 
+	 * @param Type
+	 * Minute
+	 * Hour
+	 * Day
+	 * @param Number
+	 * Min "min='1' - max='59'"
+	 * Hour"min='1' - max='23'"
+	 * Days"min='1' - max='31'"
+	 */
+	public void JobScreen_Assert_dailyRecurrence_RepeatType(String Type)
+	{
+		popup_jobScreen_dailyRecurrence_Type = By.xpath("//div[@ng-switch-when='Daily']//option[@value='"+Type+"']");
+		Assertions.assertElementAttribute(driver, popup_jobScreen_dailyRecurrence_Type, "ng-selected", "true", true);
+	}	
 	
 }
 

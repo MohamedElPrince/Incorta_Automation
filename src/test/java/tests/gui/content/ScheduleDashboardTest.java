@@ -1157,6 +1157,37 @@ public class ScheduleDashboardTest {
 		//Need to check that dashboard is sent successfully filtered in mail.
 	}
 	
+	
+	//******************************Old Schedule Dash board Test cases******************************
+	//************************in progress************************************************
+	// Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 60, description = "C54221 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Special Characters'.")
+	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add time zone and repeate type and number and I click on schedule. Then Mail will be sent successfully with time zone and repeate type and number.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MailSent_DashboardSchedueled_DailyRecurrence_Minutes() 
+	{
+		navigate_to_scheduleDashboard();
+		String JobName = dashboardPage.scheduleDashboard_addJobName();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+		dashboardPage.scheduleDashboard_dailyRecurrence_RepeatType("Minute", "20");
+		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+		dashboardPage.scheduleDashboard_Click_schedule();
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("DashboardName"),JobName);
+
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+		schedulerDashboardsPage.JobScreen_Assert_dailyRecurrence_RepeatType("Minute");
+		
+		//Need to check that mail is sent successfully with special characters in subject.
+	}
+	
 	public void navigate_to_scheduleDashboard()
 	{
 		allContentPage = new AllContent(driver);
@@ -1173,7 +1204,6 @@ public class ScheduleDashboardTest {
 		mainPage.Select_fromDropdownMenu("Schedule");
 	}
 
-	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",

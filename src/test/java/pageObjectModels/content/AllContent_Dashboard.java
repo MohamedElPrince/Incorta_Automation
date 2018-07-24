@@ -41,6 +41,11 @@ public class AllContent_Dashboard {
 	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
 	By popup_sendDashboard_fileName_text;
 	By popup_scheduleScreen_recurrenceFrequency_radioButton;
+	By popup_scheduleScreen_dailyRecurrence_Type;
+	By popup_scheduleScreen_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
+	By popup_scheduleScreen_startByTimeZone_textBox = By
+			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
+
 	By popup_scheduleScreen_weeklyRecurrence_days;
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
@@ -89,6 +94,7 @@ public class AllContent_Dashboard {
 	By popup_dashboard_menu_SharedWithList;
 	By popup_schedulerDashboard_DuplicateJobName_ErrorMessage;
 	By popup_scheduleDashboard_body_textBox = By.xpath("//textarea[@name='description']");
+
 	//// Functions
 
 	public AllContent_Dashboard(WebDriver driver) {
@@ -527,6 +533,29 @@ public class AllContent_Dashboard {
 				.xpath("//ng-form[@name='$ctrl.scheduleForm']//parent::label[normalize-space()='" + recurrence
 						+ "']/input[@type='radio']");
 		ElementActions.click(driver, popup_scheduleScreen_recurrenceFrequency_radioButton);
+	}
+	
+	/**
+	 * 
+	 * @param Type
+	 * Minute
+	 * Hour
+	 * Day
+	 * @param Number
+	 * Min "min='1' - max='59'"
+	 * Hour"min='1' - max='23'"
+	 * Days"min='1' - max='31'"
+	 */
+	public void scheduleDashboard_dailyRecurrence_RepeatType(String Type, String Number)
+	{
+		popup_scheduleScreen_dailyRecurrence_Type = By.xpath("//div[@ng-switch-when='Daily']//option[@value='"+Type+"']");
+		ElementActions.click(driver, popup_scheduleScreen_dailyRecurrence_Type);
+		ElementActions.type(driver, popup_scheduleScreen_dailyRecurrence_number, Number);
+	}	
+	
+	public void JobScreen_Select_JobTimeZone(String startByTimeZone)
+	{
+		ElementActions.select(driver, popup_scheduleScreen_startByTimeZone_textBox, startByTimeZone);	
 	}
 	
 	/**
