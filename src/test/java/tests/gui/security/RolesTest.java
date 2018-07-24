@@ -207,7 +207,7 @@ public class RolesTest {
 		schemasPage = new SchemaList(driver);
 		schemasPage.Click_schemaName(ShareSchema);
 
-		mainPage.Click_Settings();
+		mainPage.Click_Settings_schemaView();
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Click_Sharing_Tab();

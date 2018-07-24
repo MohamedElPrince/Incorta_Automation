@@ -27,7 +27,9 @@ public class Dashboards {
 	By Body_StatusFilter = By.name("displayedJobStatus");
 	By body_StatusFilter_Options;
 	By body_Status;
-
+	By body_CompletedStatus;
+	By body_ActiveStatus;
+	
 	By body_JobName;
 	By popup_JobScreen_RemoveEmail_Button;
 	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[contains(text(),'Save Changes')]");
@@ -325,4 +327,24 @@ public class Dashboards {
 				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
+	/**
+	 * 
+	 * @param DashboardName
+	 * @param JobName
+	 */
+	public void ScheduleDashboard_Assert_ActiveStatus(String DashboardName, String JobName) {
+		body_ActiveStatus = By.xpath("//p[contains(text(),'" + DashboardName
+				+ "')]/parent::a/parent::div/preceding-sibling::div" + "/p[@title='" + JobName + "']/parent::div"
+				+ "/following-sibling::div[@class='dataConnectionLink left']" + "/a[contains(text(),'Active')]");
+		Assertions.assertElementExists(driver, body_ActiveStatus, true);
+	}
+	
+	public void ScheduleDashboard_Assert_CompletedStatus(String DashboardName, String JobName) {
+		body_CompletedStatus = By.xpath("//p[contains(text(),'"+DashboardName+"')]/parent::a/parent::div/preceding-sibling::div/p[@title='"+JobName+"']"
+				+ "/parent::div/following-sibling::div[@class='dataConnectionLink left']/p[contains(text(),'Completed')]");
+		Assertions.assertElementExists(driver, body_CompletedStatus, true);
+	}
+	
 }
+
+

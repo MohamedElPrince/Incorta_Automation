@@ -37,7 +37,8 @@ public class Skeleton {
 			.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 	By header_export_button_ExportOptions;
-	
+	By header_settings_button_allContent_dashboard = By.xpath("//button[@id='dropdownMenu1']//img[contains(@src,'settings')]");
+	By header_settings_menuItem_filtersAndPrompts = By.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//*[contains(normalize-space(.),'Filters and Prompts')]");
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
@@ -100,10 +101,21 @@ public class Skeleton {
 		ElementActions.click(driver, header_chooseVisualization_button);
 	}
 
-	public void Click_Settings()
+	public void Click_Settings_schemaView()
 	{
 		ElementActions.click(driver, header_settings_button);
 	}
+		
+	public void click_settings_allContent_dashboard()
+	{
+		ElementActions.click(driver, header_settings_button_allContent_dashboard);
+	}
+	
+	public void select_fromDorpDownMenu_settings_AllContentDashboard_filtersAndPrompts()
+	{
+		ElementActions.click(driver, header_settings_menuItem_filtersAndPrompts);
+	}
+
 	
 	public void Select_fromDropdownMenu(String functionName) {
 		header_genericMenuItem_link = By
@@ -111,6 +123,9 @@ public class Skeleton {
 						+ functionName + "')][@role='menuitem' or @class='importExport']");
 		ElementActions.click(driver, header_genericMenuItem_link);
 	}
+	
+	
+	
 
 	public void Hover_overDropdownMenu(String functionName) {
 		header_genericMenuItem_link = By
