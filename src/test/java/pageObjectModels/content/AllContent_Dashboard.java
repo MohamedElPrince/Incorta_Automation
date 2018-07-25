@@ -45,6 +45,10 @@ public class AllContent_Dashboard {
 	By popup_scheduleScreen_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
 	By popup_scheduleScreen_startByTimeZone_textBox = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
+	By popup_scheduleScreen_monthleyRecurrence_Type_radioButton;
+	By popup_scheduleScreen_monthleyRecurrence_Type_DayNumber = By.xpath("//select[@name='nth']");
+	By popup_scheduleScreen_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
+	By popup_scheduleScreen_monthleyRecurrence_Type_DayOfMonth = By.xpath("(//input[@type='radio'][@value='Week']/parent::div/input)[last()]");
 
 	By popup_scheduleScreen_weeklyRecurrence_days;
 	// Pagination Elements
@@ -533,6 +537,30 @@ public class AllContent_Dashboard {
 				.xpath("//ng-form[@name='$ctrl.scheduleForm']//parent::label[normalize-space()='" + recurrence
 						+ "']/input[@type='radio']");
 		ElementActions.click(driver, popup_scheduleScreen_recurrenceFrequency_radioButton);
+	}
+	
+	/**
+	 * @param SelectType
+	 * Week
+	 * Day
+	 * @param DayNumber
+	 * 1st - 2nd - 3rd - 4th - 5th
+	 * @param DayOfWeek
+	 * Sun
+	 * Mon
+	 * Tue
+	 * Wed
+	 * Thu
+	 * Fri
+	 * Sat
+	 */
+	public void scheduleDashboard_monthlyRecurrence_selectType_2ndOption(String SelectType, String DayNumber, String DayOfWeek, String DayOfMonth)
+	{
+		popup_scheduleScreen_monthleyRecurrence_Type_radioButton = By.xpath("//input[@value='"+SelectType+"']");
+		ElementActions.click(driver, popup_scheduleScreen_monthleyRecurrence_Type_radioButton);
+		ElementActions.select(driver, popup_scheduleScreen_monthleyRecurrence_Type_DayNumber, DayNumber);
+		ElementActions.select(driver, popup_scheduleScreen_monthleyRecurrence_Type_DayOfWeek, DayOfWeek);
+		ElementActions.type(driver, popup_scheduleScreen_monthleyRecurrence_Type_DayOfMonth, DayOfMonth);
 	}
 	
 	/**

@@ -53,8 +53,16 @@ public class Dashboards {
 	By popup_JobScreen_recurrenceFrequency_radioButton;
 	By popup_JobScreen_recurrenceFrequency_radioButton_Selected;
 	By popup_jobScreen_selectOutputFormat;
+	By popup_JobScreen_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
+	By popup_jobScreen_weeklyRecurrence_days;
+	
+	By popup_jobScreen_monthleyRecurrence_Type_radioButton;
+	By popup_jobScreen_monthleyRecurrence_Type_DayNumber = By.xpath("//select[@name='nth']");
+	By popup_jobScreen_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
+	By popup_jobScreen_monthleyRecurrence_Type_DayOfMonth = By.xpath("(//input[@type='radio'][@value='Week']/parent::div/input)[last()]");
+	By popup_jobScreen_repeat_noEnd = By.xpath("//input[@value='0']");
+	
 	By popup_sendDashboard_FileNameField = By.name("fileName");
-
 	
 	By popup_confirmation_Delete_Cancel_ScheduleDashboard;
 	By popup_confirmation_Suspend_ScheduleDashboard;
@@ -188,9 +196,8 @@ public class Dashboards {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTime_textBox, "text", JobTime, true);
 	}
 
-	//Not working - Assert that specific time zone is selected
 	public void JobScreen_Assert_JobTimeZone(String JobTimeZone) {
-		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox, "text", JobTimeZone, true);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox, "value", JobTimeZone, true);
 	}
 
 	public String JobScreen_UpdateFields(String description, String startByDate, String startByTime,
@@ -228,6 +235,12 @@ public class Dashboards {
 		popup_JobScreen_recurrenceFrequency_radioButton_Selected = By
 				.xpath("//div[@ng-switch-when='" + recurrence + "']");
 		Assertions.assertElementExists(driver, popup_JobScreen_recurrenceFrequency_radioButton_Selected, true);
+	}
+	
+	public void JobScreen_SelectDays_WeeklyRecurrence(String Day)
+	{
+		popup_jobScreen_weeklyRecurrence_days = By.xpath("//input[@value ='"+Day+"']");
+		Assertions.assertElementAttribute(driver, popup_jobScreen_weeklyRecurrence_days, "text", Day, true);
 	}
 
 	public void ScheduleDashboard_Select_ScheduleJobs(String DashboardName, String JobName) {
@@ -359,11 +372,36 @@ public class Dashboards {
 	 * Hour"min='1' - max='23'"
 	 * Days"min='1' - max='31'"
 	 */
-	public void JobScreen_Assert_dailyRecurrence_RepeatType(String Type)
+	public void JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin(String Type, String Number)
 	{
 		popup_jobScreen_dailyRecurrence_Type = By.xpath("//div[@ng-switch-when='Daily']//option[@value='"+Type+"']");
 		Assertions.assertElementAttribute(driver, popup_jobScreen_dailyRecurrence_Type, "ng-selected", "true", true);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_dailyRecurrence_number, "text", Number, true);
 	}	
+/**
+ * 
+ * @param SelectType
+ * Day Week
+ * @param DayNumber
+ * 1st =1
+ * 2nd =2
+ * 3rd =3
+ * 4th -4
+ * 5th =5
+ * @param DayOfWeek
+ * Sat Sun ...
+ * @param DayOfMonth
+ * 1-12
+ */
+	public void JobScreen_Assert_monthlyRecurrence_selectType_2ndOption(String SelectType, String DayNumber, String DayOfWeek, String DayOfMonth)
+	{
+		popup_jobScreen_monthleyRecurrence_Type_radioButton = By.xpath("//input[@value='"+SelectType+"']");
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_radioButton, "checked", "true", true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayNumber, "value", DayNumber, true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayOfWeek, "value", DayOfWeek, true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayOfMonth, "text", DayOfMonth, true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_repeat_noEnd, "checked", "true", true);
+	}
 	
 }
 
