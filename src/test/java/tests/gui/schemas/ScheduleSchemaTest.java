@@ -32,12 +32,13 @@ public class ScheduleSchemaTest {
 	// Declaring Page Objects that will be used throughout the test
 	Login loginPage;
 	SchemaList schemasPage;
-	SchemaLoads schema_Status;
+	SchemaLoads schema_Schedule_View_Status;
 	Skeleton mainPage;
 
 	// Declaring public variables that will be shared between tests
 	// String SchemaName;
 
+	
 	@Test(priority = 1, description = "C77115 - Firefox: Fresh Installation: Testing that the new Scheduler Schema UI is correctly displayed.")
 	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then scheduler view displayed correctly.")
 	@Severity(SeverityLevel.CRITICAL)
@@ -117,9 +118,9 @@ public class ScheduleSchemaTest {
 		schemasPage.Type_Schema_Schedule_jobNameOrDescription("Job Name", testDataReader.getCellData("SchemaLoadJobName"));
 		schemasPage.Schema_Schedule_Click_Schedule_Button();
 
-		schema_Status = new SchemaLoads(driver);
-		schema_Status.Navigate_toURL();
-		schema_Status.Assert_SchemaJob_Created(testDataReader.getCellData("SchemaLoadJobName"),
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(testDataReader.getCellData("SchemaLoadJobName"),
 				testDataReader.getCellData("SchemaName", "Data2"));
 
 	}
@@ -190,17 +191,288 @@ public class ScheduleSchemaTest {
 		
 		
 		
-		schema_Status = new SchemaLoads(driver);
-		schema_Status.Navigate_toURL();
-		schema_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
-		schema_Status.select_schemaName(NewSchduleJobName);
-		schema_Status.Assert_SchemaScheduler_Radio_Button_selected("Daily");
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Daily");
 		
 	}
 	
 	
+	
+	@Test(priority = 8, description = "C77120 - Firefox: Fresh Installation: Testing that the Scheduler is working with Weekly recurrence")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Weekly recurrence")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_Weekly_recurrence() {
+
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Select_schema_scheduler_radio_button("Weekly");
+		schemasPage.Select_SchemaSchedule_Weekly_day_CheckBox("Mon");
+		
+		String NewSchduleJobName = schemasPage.Auto_Type_Schedule_Schema_JobName();
+		schemasPage.Schema_Schedule_Click_Schedule_Button();
+		
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Weekly");
+		schema_Schedule_View_Status.Assert_SchemaSchedule_Weekly_day_CheckBox("Mon");
+		
+		
+	}
+	
+
+	@Test(priority =9 , description = "C77121 - Firefox: Fresh Installation: Testing that the Scheduler is working with Monthly recurrence")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Monthly recurrence")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_Monthly_recurrence() {
+
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Select_schema_scheduler_radio_button("Monthly");
+		
+		String NewSchduleJobName = schemasPage.Auto_Type_Schedule_Schema_JobName();
+		schemasPage.Schema_Schedule_Click_Schedule_Button();
+		
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Monthly");
+
+	}
+	
+
+	
+	@Test(priority =10 , description = "C77122 - Firefox: Fresh Installation: Testing that the Scheduler is working with No recurrence")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with No recurrence")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_No_recurrence() {
+
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Select_schema_scheduler_radio_button("No Recurrence");
+		
+		String NewSchduleJobName = schemasPage.Auto_Type_Schedule_Schema_JobName();
+		schemasPage.Schema_Schedule_Click_Schedule_Button();
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("No Recurrence");
+
+	}
 
 
+	
+	
+	@Test(priority =11 , description = "C77123 - Firefox: Fresh Installation: Testing that the user can create New Schema Job - Full Load")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Full Load")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_Full_Load() {
+
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Select_schema_scheduler_radio_button("Daily");
+		
+		
+		String NewSchduleJobName = schemasPage.Auto_Type_Schedule_Schema_JobName();
+		schemasPage.Select_SchemaSchedule_LoadType_dropdownMenu("Full");
+		schemasPage.Schema_Schedule_Click_Schedule_Button();
+		
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Daily");
+		schema_Schedule_View_Status.Assert_SchemaSchedule_LoadType_dropdownMenu("Full");
+
+	}
+	
+	
+	@Test(priority =12 , description = "C77124 - Firefox: Fresh Installation: Testing that the user can create New Schema Job - Incremental Load")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Incremental Load")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_Incremental_Load() {
+
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Select_schema_scheduler_radio_button("Daily");
+		
+		
+		String NewSchduleJobName = schemasPage.Auto_Type_Schedule_Schema_JobName();
+		schemasPage.Select_SchemaSchedule_LoadType_dropdownMenu("Incremental");
+		schemasPage.Schema_Schedule_Click_Schedule_Button();
+		
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Daily");
+		schema_Schedule_View_Status.Assert_SchemaSchedule_LoadType_dropdownMenu("Incremental");
+
+	}
+	
+	
+	@Test(priority =13 , description = "C77125 - Firefox: Fresh Installation: Testing that the user can create New Schema Job - Staging")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Staging")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_Staging_Load() {
+
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Select_schema_scheduler_radio_button("Daily");
+		
+		
+		String NewSchduleJobName = schemasPage.Auto_Type_Schedule_Schema_JobName();
+		schemasPage.Select_SchemaSchedule_LoadType_dropdownMenu("Staging");
+		schemasPage.Schema_Schedule_Click_Schedule_Button();
+		
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Daily");
+		schema_Schedule_View_Status.Assert_SchemaSchedule_LoadType_dropdownMenu("Staging");
+
+	}
+	
+	
+	
+	@Test(priority =14 , description = "C77126 - Firefox: Fresh Installation: Testing that the user can create New Schema Job -Snapshot")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Snapshot")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_Snapshot_Load() {
+
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Select_schema_scheduler_radio_button("Daily");
+		
+		
+		String NewSchduleJobName = schemasPage.Auto_Type_Schedule_Schema_JobName();
+		schemasPage.Select_SchemaSchedule_LoadType_dropdownMenu("Snapshot");
+		schemasPage.Schema_Schedule_Click_Schedule_Button();
+		
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(NewSchduleJobName,testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(NewSchduleJobName);
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Daily");
+		schema_Schedule_View_Status.Assert_SchemaSchedule_LoadType_dropdownMenu("Snapshot");
+
+	}
+	
+
+
+	
+	// Admin user
+	// Per-created schema
+	// Per-created schema schedule job with diff. name. 
+	//here i open existing schema job created and edit its recurrence option, then save the change and open the job back to see if the change reflected and saved or not
+	@Test(priority =15 , description = "C77127 - Firefox: Fresh Installation: Testing that the user can edit in a Created Schema Job")
+	@Description("When I navigate to the schema load list page, And I select a  pre-created schema edit it, Then  scheduled job can be edit and saved")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_Can_be_Edited() {
+		
+		
+		schema_Schedule_View_Status = new SchemaLoads(driver);
+		schema_Schedule_View_Status.Navigate_toURL();
+		
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(testDataReader.getCellData("SchemaLoadJobName"),testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(testDataReader.getCellData("SchemaName"));
+		
+		schema_Schedule_View_Status.Select_schema_scheduler_radio_button("Weekly");
+		schema_Schedule_View_Status.Select_SchemaSchedule_Weekly_day_CheckBox("Tue");
+		
+		
+		schema_Schedule_View_Status.Schema_Schedule_Click_Save_Changes_button_Button();
+		
+		
+        schema_Schedule_View_Status.Navigate_toURL();
+		schema_Schedule_View_Status.Assert_SchemaJob_Created(testDataReader.getCellData("SchemaLoadJobName"),testDataReader.getCellData("SchemaName"));
+		schema_Schedule_View_Status.select_schemaName(testDataReader.getCellData("SchemaName"));
+		
+		
+		
+		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Weekly");
+		schema_Schedule_View_Status.Assert_SchemaSchedule_Weekly_day_CheckBox("Tue");
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@BeforeClass
 	public void beforeClass() {

@@ -18,6 +18,7 @@ public class SchemaLoads {
 	By header_schemasTabHeader_link = By
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Schema Loads']");
 	By body_jobStatus_list = By.xpath("//select[@ng-change='jobStatusChanged()']");
+	By popup_schema_schedule_Save_Changes_button =  By.xpath("//button[@type='button'][contains(text(),'Save Changes')]");
 	By body_name_link;
 	// By body_owner_link;
 	By body_schema_link;
@@ -25,6 +26,8 @@ public class SchemaLoads {
 	By body_Job_status_label;
 	By body_schemaName_link;
 	By popup_schema_schedule_radio_button;
+	By popup_schema_schedule_weekly_Day_check_box;
+	By popup_schema_schedule_LoadType_dropdownMenu;
 	// By body_nextRun_label;
 
 	By popup_scheduleSchemaLoad_jobName_textBox = By
@@ -92,6 +95,21 @@ public class SchemaLoads {
 		
 	}
 	
+
+
+	
+	
+
+
+public void Select_schema_scheduler_radio_button(String Radio_button_name) {
+	
+	popup_schema_schedule_radio_button = By.xpath("//input[@type='radio'][@value= '" + Radio_button_name + "']");
+	ElementActions.click(driver, popup_schema_schedule_radio_button);
+}
+
+
+
+	
 public void Assert_SchemaScheduler_Radio_Button_selected(String Radio_Button_Name) {
 		
 		popup_schema_schedule_radio_button = By.xpath("//input[@type='radio'][@value= '" + Radio_Button_Name + "']");		
@@ -99,6 +117,51 @@ public void Assert_SchemaScheduler_Radio_Button_selected(String Radio_Button_Nam
 		
 		
 	}
+
+
+
+
+public void Select_SchemaSchedule_Weekly_day_CheckBox(String Day) {
+	
+	
+	popup_schema_schedule_weekly_Day_check_box = By.xpath("//div//input[@ng-model='w.selected'][@value='"+ Day +"']");
+	
+	ElementActions.click(driver, popup_schema_schedule_weekly_Day_check_box);
+}
+
+
+public void Assert_SchemaSchedule_Weekly_day_CheckBox(String Day) {
+	
+	
+	popup_schema_schedule_weekly_Day_check_box = By.xpath("//input[@ng-model='w.selected'][@value='"+ Day +"']");
+	
+	Assertions.assertElementAttribute(driver, popup_schema_schedule_weekly_Day_check_box, "checked", "true", true);
+		
+	
+}
+
+
+public void Assert_SchemaSchedule_LoadType_dropdownMenu(String LoadType){
+	
+	popup_schema_schedule_LoadType_dropdownMenu = By.xpath("//select[@name='loadType']//option[@value='"+ LoadType+"']");
+	Assertions.assertElementAttribute(driver, popup_schema_schedule_LoadType_dropdownMenu, "value", LoadType, true);
+	
+	
+}
+
+
+public void Select_SchemaSchedule_LoadType_dropdownMenu(String LoadType){
+	
+	popup_schema_schedule_LoadType_dropdownMenu = By.xpath("//select[@name='loadType']//option[@value='"+ LoadType+"']");
+	ElementActions.click(driver, popup_schema_schedule_LoadType_dropdownMenu);
+	
+}
+
+public void Schema_Schedule_Click_Save_Changes_button_Button () {
+	
+	ElementActions.click(driver, popup_schema_schedule_Save_Changes_button);
+
+}
 	
 		
 	

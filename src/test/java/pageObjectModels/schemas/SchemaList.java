@@ -38,6 +38,8 @@ public class SchemaList {
 	By popup_schema_schedule_button_disabled = By.xpath("//button[@type='button'][@disabled='disabled'][contains(text(),'Schedule')]");
 	By popup_schema_schedule_Error_Message_Body_label = By.xpath("//div[contains(@class,'text-center')]/child::div[@class='ng-binding']");
 	By popup_schema_schedule_radio_button;
+	By popup_schema_schedule_weekly_Day_check_box;
+	By popup_schema_schedule_LoadType_dropdownMenu;
 	
 
 	By popup_newSchema_schemaName_textBox = By.xpath("//input[@ng-model='$parent.schemaName']");
@@ -90,6 +92,24 @@ public class SchemaList {
 	}
 	
 	
+	public void Select_SchemaSchedule_Weekly_day_CheckBox(String Day) {
+		
+		
+		popup_schema_schedule_weekly_Day_check_box = By.xpath("//div//input[@ng-model='w.selected'][@value='"+ Day +"']");
+		
+		ElementActions.click(driver, popup_schema_schedule_weekly_Day_check_box);
+		
+		
+	}
+	
+	public void Select_SchemaSchedule_LoadType_dropdownMenu(String LoadType){
+		
+		popup_schema_schedule_LoadType_dropdownMenu = By.xpath("//select[@name='loadType']//option[@value='"+ LoadType+"']");
+		//ElementActions.select(driver, popup_schema_schedule_LoadType_dropdownMenu, LoadType);
+		ElementActions.click(driver, popup_schema_schedule_LoadType_dropdownMenu);
+		
+	}
+	
 	
 	
 	public void Assert_schemaSchedule_lable_textbox_empty(String label_name) {
@@ -109,7 +129,6 @@ public class SchemaList {
 	
 		ElementActions.type(driver, popup_schema_schedule_label_textBox, schedule_label_data);
 		
-	
 	}
 	
 	
