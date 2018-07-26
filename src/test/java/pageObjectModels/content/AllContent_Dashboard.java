@@ -577,44 +577,44 @@ public class AllContent_Dashboard {
 			Robot robot = new Robot();
 			WebElement element = driver.findElement(popup_sendDashboard_body_textBox);
 			ElementActions.click(driver, popup_sendDashboard_FileNameField);
-//			robot.keyPress(KeyEvent.VK_CONTROL);
-//			JSWaiter.sleep(200); 
-//			robot.keyPress(KeyEvent.VK_A); 
-//			JSWaiter.sleep(200);
-//			robot.keyRelease(KeyEvent.VK_CONTROL); 
-//			JSWaiter.sleep(200);
-//			robot.keyRelease(KeyEvent.VK_A); 
-//			JSWaiter.sleep(200);
-//			robot.keyPress(KeyEvent.VK_CONTROL);
-//			JSWaiter.sleep(200); 
-//			robot.keyPress(KeyEvent.VK_C); 
-//			JSWaiter.sleep(200);
-//			robot.keyRelease(KeyEvent.VK_CONTROL); 
-//			JSWaiter.sleep(200);
-//			robot.keyRelease(KeyEvent.VK_C); 
-//			JSWaiter.sleep(200);
-			
-			robot.keyPress(KeyEvent.VK_COPY);
+			robot.keyPress(KeyEvent.VK_CONTROL);
 			JSWaiter.sleep(200); 
-			robot.keyRelease(KeyEvent.VK_COPY); 
+			robot.keyPress(KeyEvent.VK_A); 
 			JSWaiter.sleep(200);
+			robot.keyRelease(KeyEvent.VK_CONTROL); 
+			JSWaiter.sleep(200);
+			robot.keyRelease(KeyEvent.VK_A); 
+			JSWaiter.sleep(200);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			JSWaiter.sleep(200); 
+			robot.keyPress(KeyEvent.VK_C); 
+			JSWaiter.sleep(200);
+			robot.keyRelease(KeyEvent.VK_CONTROL); 
+			JSWaiter.sleep(200);
+			robot.keyRelease(KeyEvent.VK_C); 
+			JSWaiter.sleep(200);
+			
+//			robot.keyPress(KeyEvent.VK_COPY);
+//			JSWaiter.sleep(200); 
+//			robot.keyRelease(KeyEvent.VK_COPY); 
+//			JSWaiter.sleep(200);
 			
 			ElementActions.click(driver, popup_sendDashboard_body_textBox);
 			
-			robot.keyPress(KeyEvent.VK_PASTE);
-			JSWaiter.sleep(200); 
-			robot.keyRelease(KeyEvent.VK_PASTE); 
-			JSWaiter.sleep(200);
-			
-			
-//			robot.keyPress(KeyEvent.VK_CONTROL);
+//			robot.keyPress(KeyEvent.VK_PASTE);
 //			JSWaiter.sleep(200); 
-//			robot.keyPress(KeyEvent.VK_V); 
+//			robot.keyRelease(KeyEvent.VK_PASTE); 
 //			JSWaiter.sleep(200);
-//			robot.keyRelease(KeyEvent.VK_CONTROL); 
-//			JSWaiter.sleep(200);
-//			robot.keyRelease(KeyEvent.VK_V); 
-//			JSWaiter.sleep(200);
+			
+			
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			JSWaiter.sleep(200); 
+			robot.keyPress(KeyEvent.VK_V); 
+			JSWaiter.sleep(200);
+			robot.keyRelease(KeyEvent.VK_CONTROL); 
+			JSWaiter.sleep(200);
+			robot.keyRelease(KeyEvent.VK_V); 
+			JSWaiter.sleep(200);
 			
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
