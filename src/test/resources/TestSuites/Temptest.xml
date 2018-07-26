@@ -14,8 +14,18 @@
 				<include name="Assert_email_body" />
 				<include name="Assert_email_body_specialCharacters" />
 				<include name="Assert_email_Arabic_body"/>
-				<include name="Assert_email_numbers_body"/> -->
+				<include name="Assert_email_numbers_body"/>
 				<include name="Assert_email_NonEnglish_body"/>
+				<include name="Assert_email_bodyWithEnter"/>
+				<include name="Assert_email_without_body"/>
+				<include name="Assert_email_without_bodyAndSubject"/>
+				<include name="Assert_email_long_subject"/>
+				<include name="Assert_email_long_body"/>
+				<include name="Assert_email_body_with_HideNotification"/>
+				<include name="Assert_email_body_without_HideNotification"/>
+				<include name="Assert_email_without_body_without_HideNotification"/> 
+				<include name="Assert_email_without_body_with_HideNotification"/> -->
+				<include name="Assert_email_with_copyAndPasteText_body"/>
 				</methods>
 			</class>
 		</classes>

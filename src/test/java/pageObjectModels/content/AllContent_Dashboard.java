@@ -1,9 +1,17 @@
 package pageObjectModels.content;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
+import com.shaftEngine.elementActionLibrary.JSWaiter;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
@@ -27,7 +35,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_reciever_label; // div[contains(@class,'folderUserRow')][contains(normalize-space(.),'mohab.mohie@incorta.com')]//h5[contains(@class,'UserData')]
 	By popup_sendDashboard_send_button = By.xpath("//button[@type='button'][normalize-space()='Send']");
 	By popup_sendDashboard_Labels;
-	By popup_sendDashboard_label_hideNotificationText_checkbox_empty = By.xpath(
+	By popup_sendDashboard_label_hideNotificationText_checkbox = By.xpath(
 			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
 	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath(
 			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
@@ -381,16 +389,22 @@ public class AllContent_Dashboard {
 
 	public void ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked() {
 		String Empty = "ng-empty";
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty,
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox,
 				"class", "([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
 	}
 
 	public void ScheduleSendDashboard_assert_Click_HideNotificationText_checkbox_checked() {
-		ElementActions.click(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty);
+		ElementActions.click(driver, popup_sendDashboard_label_hideNotificationText_checkbox);
 		String NotEmpty = "ng-not-empty";
-		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox_empty,
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox,
 				"class", "([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
+	
+	public void ScheduleSendDashboard_Click_HideNotificationText_checkbox() {
+		ElementActions.click(driver, popup_sendDashboard_label_hideNotificationText_checkbox);
+	}
+	
+	
 
 	public void ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed() {
 		ElementActions.hover(driver, popup_sendDashboard_HideNotificationText_toolTip);
@@ -549,6 +563,72 @@ public class AllContent_Dashboard {
 	public void sendDashboard_assert_sendButton_enabled() {
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_send_button, "disabled", "null",
 				true);
+	}
+	// WebDriver driver, By elementLocator
+	public void copy() {
+//		Actions act = new Actions(driver);
+//		WebElement element = driver.findElement(popup_sendDashboard_body_textBox);
+//		act.moveToElement(element).doubleClick().build().perform();
+//		act.sendKeys(Keys.chord(Keys.CONTROL,"c")).perform();
+//		ElementActions.click(driver, popup_sendDashboard_body_textBox);
+//		element.sendKeys(Keys.ENTER);
+//		act.sendKeys(element, Keys.chord(Keys.CONTROL,"v")).perform();
+		try {
+			Robot robot = new Robot();
+			WebElement element = driver.findElement(popup_sendDashboard_body_textBox);
+			ElementActions.click(driver, popup_sendDashboard_FileNameField);
+//			robot.keyPress(KeyEvent.VK_CONTROL);
+//			JSWaiter.sleep(200); 
+//			robot.keyPress(KeyEvent.VK_A); 
+//			JSWaiter.sleep(200);
+//			robot.keyRelease(KeyEvent.VK_CONTROL); 
+//			JSWaiter.sleep(200);
+//			robot.keyRelease(KeyEvent.VK_A); 
+//			JSWaiter.sleep(200);
+//			robot.keyPress(KeyEvent.VK_CONTROL);
+//			JSWaiter.sleep(200); 
+//			robot.keyPress(KeyEvent.VK_C); 
+//			JSWaiter.sleep(200);
+//			robot.keyRelease(KeyEvent.VK_CONTROL); 
+//			JSWaiter.sleep(200);
+//			robot.keyRelease(KeyEvent.VK_C); 
+//			JSWaiter.sleep(200);
+			
+			robot.keyPress(KeyEvent.VK_COPY);
+			JSWaiter.sleep(200); 
+			robot.keyRelease(KeyEvent.VK_COPY); 
+			JSWaiter.sleep(200);
+			
+			ElementActions.click(driver, popup_sendDashboard_body_textBox);
+			
+			robot.keyPress(KeyEvent.VK_PASTE);
+			JSWaiter.sleep(200); 
+			robot.keyRelease(KeyEvent.VK_PASTE); 
+			JSWaiter.sleep(200);
+			
+			
+//			robot.keyPress(KeyEvent.VK_CONTROL);
+//			JSWaiter.sleep(200); 
+//			robot.keyPress(KeyEvent.VK_V); 
+//			JSWaiter.sleep(200);
+//			robot.keyRelease(KeyEvent.VK_CONTROL); 
+//			JSWaiter.sleep(200);
+//			robot.keyRelease(KeyEvent.VK_V); 
+//			JSWaiter.sleep(200);
+			
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	// WebDriver driver, By elementLocator
+	public void paste() {
+		Actions act = new Actions(driver);
+		WebElement element = driver.findElement(popup_sendDashboard_body_textBox);
+		ElementActions.click(driver, popup_sendDashboard_body_textBox);
+		element.sendKeys(Keys.ENTER);
+		act.keyDown(Keys.COMMAND).sendKeys("v").keyUp(Keys.COMMAND).perform();
+//		driver.findElement (popup_sendDashboard_body_textBox).sendKeys(Keys.COMMAND, "v");
 	}
 	
 }

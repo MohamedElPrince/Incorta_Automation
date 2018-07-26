@@ -55,6 +55,8 @@ public class Dashboards {
 	By popup_jobScreen_selectOutputFormat;
 	By popup_confirmation_Delete_Cancel_ScheduleDashboard;
 	By popup_confirmation_Suspend_ScheduleDashboard;
+	By popup_sendDashboard_label_hideNotificationText_checkbox = By.xpath(
+			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
 
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -321,6 +323,17 @@ public class Dashboards {
 	
 	public void Assert_Subject_Value(String DashboardName) {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", DashboardName, true);
+	}
+	
+	public void Assert_HideNotificationText_checkbox_checked() {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox,
+				"checked", "true", true);
+	}
+	
+	public void Assert_HideNotificationText_checkbox_unchecked() {
+		String Empty = "ng-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox,
+				"class", "([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
 	}
 
 }

@@ -14,7 +14,10 @@ import pageObjectModels.main.Skeleton;
 import pageObjectModels.scheduler.Dashboards;
 
 import org.testng.annotations.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class SendDashboardTest {
 	
@@ -429,6 +432,275 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.Click_On_LastJobName();
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("NonEnglish"));
 		//Need to check that mail is sent successfully with body containing NonEnglish characters
+	}
+	
+	@Test(priority = 22, description = "C76826 - Firefox: Fresh Installation: Verify that the user can send a dashboard with \"Body\" contains Enter")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with body contains Enter, then It should be sent successfully and body is displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_bodyWithEnter() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.ScheduleSendDashboard_AddBody(testDataReader.getCellData("BodyWithEnter"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("BodyWithEnter"));
+		//Need to check that mail is sent successfully with body contains Enter
+	}
+	
+	@Test(priority = 23, description = "C76829 - Firefox: Fresh Installation: Verify that the user can send a dashboard with Empty Body")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with empty body, then It should be sent successfully without body")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_without_body() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
+		//Need to check that mail is sent successfully with Empty body 
+	}
+	
+	@Test(priority = 24, description = "C76830 - Firefox: Fresh Installation: Verify that the user can send a dashboard with Empty Body and Subject")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with empty body and empty subject, then It should be sent successfully without body and with dashboard name as email subject")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_without_bodyAndSubject() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
+		//Need to check that mail is sent successfully with Empty body and subject
+	}
+	
+	@Test(priority = 25, description = "C76834 - Firefox: Fresh Installation: Verify that the user can add a long Subject")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with long subject, Then It should be sent successfully and subject displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_long_subject() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("LongSubject"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("LongSubject"));
+		//Need to check that mail is sent successfully with long subject
+	}
+	
+	@Test(priority = 26, description = "C76835 - Firefox: Fresh Installation: Verify that the user can add a long Body")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with long body, then It should be sent successfully and body is displayed successfully")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_long_body() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.ScheduleSendDashboard_AddBody(testDataReader.getCellData("LongBody"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("LongBody"));
+		//Need to check that mail is sent successfully with long body
+	}
+	
+	@Test(priority = 27, description = "C76827 - Firefox: Fresh Installation Verify that the user can send an email with Body and Hide notification TXT is checked")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with body and Hide notification TXT is checked, then It should be sent successfully and body is displayed successfully without notification message")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_body_with_HideNotification() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String body = dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
+		dashboardPage.ScheduleSendDashboard_Click_HideNotificationText_checkbox();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
+		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_checked();
+		//Need to check that mail is sent successfully with body and without notification 
+	}
+	
+	@Test(priority = 28, description = "C76828 - Firefox: Fresh Installation: Verify that he user can send an email with Body and Hide notification text is unchecked")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with body and Hide notification TXT is unchecked, then It should be sent successfully and body is displayed successfully with notification message")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_body_without_HideNotification() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String body = dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
+		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_unchecked();
+		//Need to check that mail is sent successfully with body and with notification message
+	}
+	
+	@Test(priority = 29, description = "C76831 - Firefox: Fresh Installation: Verify that the user can send a dashboard with Empty body and Hide notification text is checked")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with empty body and Hide notification TXT is checked, then It should be sent successfully and body is displayed successfully without notification message")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_without_body_without_HideNotification() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.ScheduleSendDashboard_Click_HideNotificationText_checkbox();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
+		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_checked();
+		//Need to check that mail is sent successfully without body and without notification message
+	}
+	
+	@Test(priority = 30, description = "C76832 - Firefox: Fresh Installation: Verify that the user can send a dashboard with Empty body and Hide notification Text is unchecked")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with empty body and Hide notification TXT is unchecked, then It should be sent successfully and body is displayed successfully with notification message")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_without_body_with_HideNotification() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
+		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_unchecked();
+		//Need to check that mail is sent successfully without body and with notification message
+	}
+	
+	@Test(priority = 31, description = "C76833 - Firefox: Fresh Installation: Verify that the user can copy and paste text in the \"Body\" Area")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with paseted text in the body, then It should be sent successfully and body is displayed successfully with copied text")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_copyAndPasteText_body() {
+		
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		
+		navigate_to_sendDashboard();
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String body = dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
+		dashboardPage.copy();
+		//dashboardPage.paste();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		//Need to check that mail is sent successfully with pasted text
+	}
+	
+	public void copy(WebDriver driver, By elementLocator) {
+		(new Actions(driver)).moveToElement(driver.findElement(elementLocator)).doubleClick().build().perform();
+		(driver.findElement(elementLocator)).sendKeys(Keys.chord(Keys.CONTROL,"c"));
 	}
 	
 	public void navigate_to_sendDashboard() {
