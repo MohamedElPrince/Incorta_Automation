@@ -24,10 +24,18 @@ public class SchemaLoads {
 	By body_schema_link;
 	By body_status_label;
 	By body_Job_status_label;
-	By body_schemaName_link;
+	By body_schemaJobName_link;
 	By popup_schema_schedule_radio_button;
 	By popup_schema_schedule_weekly_Day_check_box;
 	By popup_schema_schedule_LoadType_dropdownMenu;
+	By body_Status;
+	
+	
+	//Confirm Delete popup view
+	By popup_schema_schedule_Delete_button = By.xpath("//button[@ng-click='confirmDeleteScheduler();'][contains(text(),'Delete')]");
+	
+	
+	
 	// By body_nextRun_label;
 
 	By popup_scheduleSchemaLoad_jobName_textBox = By
@@ -81,19 +89,28 @@ public class SchemaLoads {
 		body_Job_status_label = By.xpath("//p[@title='"+ job_name +"']/parent::div[contains(@class,'userName')]/following-sibling::div[contains(@class,'userName')]//p[contains(text(),'" + schema_name + "')]");
 		Assertions.assertElementAttribute(driver, body_Job_status_label, "Text", schema_name, true);
 	}
+	
+	
+	
+	public void Assert_SchemaJob_Deleted(String job_name, String schema_name) {
+		body_schemaJobName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"+ schema_name + "')]/p/parent::div/preceding-sibling::div");
+				Assertions.assertElementExists(driver, body_schemaJobName_link, false);
+	}
+
 
 	
 	
 	
 
 	public void select_schemaName(String schemaName) {
-		body_schemaName_link = By
-				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
-						+ schemaName + "')]/p");
-		ElementActions.click(driver, body_schemaName_link);
+		body_schemaJobName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"+ schemaName + "')]/p/parent::div/preceding-sibling::div");
 		
+		ElementActions.click(driver, body_schemaJobName_link);
 		
 	}
+	
 	
 
 
@@ -162,6 +179,26 @@ public void Schema_Schedule_Click_Save_Changes_button_Button () {
 	ElementActions.click(driver, popup_schema_schedule_Save_Changes_button);
 
 }
+
+
+public void Select_Schema_Schedule_Click_Delete_Button() {
+	
+	
+	ElementActions.click(driver, popup_schema_schedule_Delete_button);
+	
+}
+
+//public void Schedule_Schema_Change_JobStatus(String SchemaName, String JobName, String Status) {
+//	body_Status = By.xpath("//p[contains(text(),'" + SchemaName
+//			+ "')]/parent::a/parent::div/preceding-sibling::div" + "/p[@title='" + JobName + "']/parent::div"
+//			+ "/following-sibling::div[@class='dataConnectionLink left']" + "/a[contains(text(),'" + Status
+//			+ "')]");
+//	Assertions.assertElementExists(driver, body_Status, true);
+//}
+
+
+
+
 	
 		
 	
