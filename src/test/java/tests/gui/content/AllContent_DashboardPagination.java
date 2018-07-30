@@ -190,8 +190,8 @@ public class AllContent_DashboardPagination {
 //	}
 
 	//In Progress
-	@Test(priority = 7, description = "C77301 - Chrome: Table Insight: Verify that when reaching the end of the set, the buttons on the right should be disabled and vice-versa")
-	@Description("When I navigate to the target dashboard, and I assert that the first arrow button disabled, and I click the next Page button, Then the all buttons is enabled")
+	@Test(priority = 7, description = "C77476 - Chrome: Table insight: Verify that the pagination starts with 1.")
+	@Description("When I navigate to the target dashboard, Then The Numbering of the pagination is correctly displayed")
 	@Severity(SeverityLevel.NORMAL)
 	public void assert_Pagination_Enabled_Buttons() {
 
@@ -209,7 +209,8 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Assert_insightName(paginationInsightName);
 
 		dashboardPage.Pagination_AssertThatPaginationStartsWithNumber1();
-		dashboardPage.Pagination_Count_RowsInTable();
+		//UnderConstruction
+		dashboardPage.Pagination_Assert_PaginationIsCorrect();
 	}
 	
 	@BeforeClass

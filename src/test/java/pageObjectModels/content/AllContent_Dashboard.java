@@ -306,10 +306,11 @@ public class AllContent_Dashboard {
 	}
 	
 	//In progress - Trying to count the rows in the table to compare it with number in pagination [Last number in current page]
-	public void Pagination_Count_RowsInTable()
+	public void Pagination_Assert_PaginationIsCorrect()
 	{
-		By Pagination_Rows_Count = By.xpath("//div[@class='ht_clone_left handsontable']//div[@class='wtHider']//table[@class='htCore']//tbody)");
-		Assertions.assertEquals(Pagination_GetLastRecordInCurrentPage(), Pagination_Rows_Count, true);
+		By Pagination_Rows_Count = By.xpath("//div[@class='ht_clone_left handsontable']//div[@class='wtHider']//table[@class='htCore']//tbody/tr[position()>3]");
+		
+		Assertions.assertEquals(ElementActions.getSize(driver, Pagination_Rows_Count), Pagination_GetLastRecordInCurrentPage(), true);
 	}
 	
 	public String ScheduleSendDashboard_AddSubjectNameAutomated() {
