@@ -1,12 +1,16 @@
 package pageObjectModels.content;
 
+import org.apache.poi.ss.formula.functions.Count;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
+
+import io.restassured.internal.assertion.Assertion;
 
 public class AllContent_Dashboard {
 	//// Variables
@@ -52,8 +56,8 @@ public class AllContent_Dashboard {
 	By body_insight_paginationNext_button = By.xpath(
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
 	By body_insight_paginationLast_button = By.xpath(
-			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");
-
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");	
+	
 	By popup_scheduleSendDashboard_jobName_textBox = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//input[@name='jobName']");
 	By popup_scheduleSendDashboard_description_textBox = By
@@ -264,7 +268,50 @@ public class AllContent_Dashboard {
 		Assertions.assertEquals(lasttRecord_AfterClick_Previous + 1, firstRecord_BeforeClick_Previous, true);
 
 	}
+	
+	public void Pagination_AssertThatFirstArrow_Disabled()
+	{
+		Assertions.assertElementAttribute(driver, body_insight_paginationFirst_button, "class", "disabled-btn", true);
+	}
+	
+	public void Pagination_NavigateToNextPage() 
+	{
+		ElementActions.click(driver, body_insight_paginationNext_button);
+	}
+	
+	public void Pagination_AssertThatFirstButton_Enabled()
+	{
+		Assertions.assertElementAttribute(driver, body_insight_paginationFirst_button, "class", "disabled-btn", false);
+	}
+	
+	public void Pagination_AssertThatPreviousButton_Enabled()
+	{
+		Assertions.assertElementAttribute(driver, body_insight_paginationPrevious_button, "class", "disabled-btn", false);
+	}
+	
+	public void Pagination_AssertThatNextButton_Enabled()
+	{
+		Assertions.assertElementAttribute(driver, body_insight_paginationNext_button, "class", "disabled-btn", false);
+	}
 
+	public void Pagination_AssertThatLastButton_Enabled()
+	{
+		Assertions.assertElementAttribute(driver, body_insight_paginationLast_button, "class", "disabled-btn", false);
+	}
+	
+	public void Pagination_AssertThatPaginationStartsWithNumber1()
+	{
+		int firstRecordInFirstPage = Pagination_GetFirstRecordInCurrentPage();
+		Assertions.assertEquals("1", firstRecordInFirstPage, true);
+	}
+	
+	//In progress - Trying to count the rows in the table to compare it with number in pagination [Last number in current page]
+	public void Pagination_Count_RowsInTable()
+	{
+		By Pagination_Rows_Count = By.xpath("//div[@class='ht_clone_left handsontable']//div[@class='wtHider']//table[@class='htCore']//tbody)");
+		Assertions.assertEquals(Pagination_GetLastRecordInCurrentPage(), Pagination_Rows_Count, true);
+	}
+	
 	public String ScheduleSendDashboard_AddSubjectNameAutomated() {
 		String SubjectName = "Automation_" + "Subject_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);

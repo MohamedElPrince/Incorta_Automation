@@ -8,10 +8,10 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://72.55.136.12:6080/incorta/#/</incortaRoot>
-		<incortaVersion>dev</incortaVersion>
+		<incortaRoot>http://qa.incorta.com:1230/incorta/#/</incortaRoot>
+		<incortaVersion>Rel3.3</incortaVersion>
 		<testSuite.name>testSuite01</testSuite.name>
-		<operatingSystem.version>Linux-64</operatingSystem.version>
+		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
