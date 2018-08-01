@@ -59,7 +59,7 @@ public class AllContent_Dashboard {
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");	
 	By body_insight_EditPagination_button = By.xpath("//a[@class='action analyze-icon ng-scope']//img");
 	By body_insight_PaginationSettings_PageSizeField = By.xpath("//label[contains(string(),'Page Size')]//following-sibling::input[@inputmode='numeric']");
-	
+	By body_insight_Pagination_TableRows = By.xpath("//div[contains(@class,'ht_master')]//a[contains(@onclick,'SALES.COUNTRIES.COUNTRY_NAME')][contains(@onclick,'row')]");
 	
 	By popup_scheduleSendDashboard_jobName_textBox = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//input[@name='jobName']");
@@ -322,6 +322,25 @@ public class AllContent_Dashboard {
 	{
 		ElementActions.type(driver, body_insight_PaginationSettings_PageSizeField, PageSize);
 		ElementActions.keyPress(driver, body_insight_PaginationSettings_PageSizeField, "Enter");
+	}
+	//Need to update below function to be int instead of double after Mohab update in count function
+	public void Pagination_Assert_NumberOfRowsEqualTo_LastRecordInCurrentPageInPagination()
+	{
+		double lastRecordBeforeClickingNext = Pagination_GetLastRecordInCurrentPage();
+		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		Assertions.assertEquals(lastRecordBeforeClickingNext, CountTableRows, true);
+	}
+	//Need to update below function to be int instead of double after Mohab update in count function
+	public void Pagination_Assert_PageSizeEquelToNumberOfRowsInTable(String PageSize)
+	{
+		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		Assertions.assertEquals(PageSize, CountTableRows, true);
+	}
+	//Need to update below function to be int instead of double after Mohab update in count function
+	public void Pagination_Assert_PageSizeNotEquelToNumberOfRowsInTable(String PageSize)
+	{
+		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		Assertions.assertEquals(PageSize, CountTableRows, false);
 	}
 	
 	public String ScheduleSendDashboard_AddSubjectNameAutomated() {

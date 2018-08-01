@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
 
@@ -191,8 +190,7 @@ public class AllContent_DashboardPagination {
 		dashboardPage.Pagination_AssertThatLastButton_Enabled();
 	}
 
-	//Prerequisite: Dashboard [Automation_Pivot_Pagination_Dashboard] created + Insight with pagination created [Automation_Insight]
-	//In Progress - Hold until Mohab update the Framework with count function
+	//Prerequisite: Dashboard [Automation_Pivot_Pagination_Dashboard] created + Insight with pagination created [Automation_Insight] + Update page size to be 5
 	@Test(priority = 7, description = "C77476 - Chrome: Table insight: Verify that the pagination starts with 1.")
 	@Description("When I navigate to the target dashboard, Then The Numbering of the pagination is correctly displayed")
 	@Severity(SeverityLevel.NORMAL)
@@ -207,11 +205,14 @@ public class AllContent_DashboardPagination {
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
 		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
-
+		
+		dashboardPage.Pagination_ClickOnEditInsight();
+		mainPage.Open_SettingsList();
+		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize"));			
+		
 		dashboardPage.Pagination_AssertThatPaginationStartsWithNumber1();
-		//UnderConstruction -- Waiting count function by Mohab
-		//Need to count table rows to assert that it's same as pagination
-		//dashboardPage.Pagination_Assert_PaginationIsCorrect();
+		dashboardPage.Pagination_Assert_NumberOfRowsEqualTo_LastRecordInCurrentPageInPagination();
+		
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
@@ -234,7 +235,6 @@ public class AllContent_DashboardPagination {
 		mainPage.Open_SettingsList();
 		dashboardPage.Pagination_Assert_PageSize(testDataReader.getCellData("DefaultPageSize"));
 	}
-	
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
 	@Test(priority = 9, description = "C77489 - Chrome: Table insight: check that 'Page Size' can be changed and saved correctly.")
@@ -254,15 +254,16 @@ public class AllContent_DashboardPagination {
 
 		dashboardPage.Pagination_ClickOnEditInsight();
 		mainPage.Open_SettingsList();
-		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize"));	
-		dashboardPage.Pagination_Assert_PageSize(testDataReader.getCellData("PageSize"));
-		mainPage.Click_done();
-		//Need to count table rows to make sure it's same as page size
+		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize"));			
+		dashboardPage.Pagination_Assert_PageSizeEquelToNumberOfRowsInTable(testDataReader.getCellData("PageSize"));
+
+		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize5"));			
+		dashboardPage.Pagination_Assert_PageSizeEquelToNumberOfRowsInTable(testDataReader.getCellData("PageSize5"));
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
 	@Test(priority = 10, description = "C77490 - Chrome: Table insight: Check that 'Page Size' value is Positive integer number only.")
-	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings and I update the page size to non positive integer value, Then The page size will not accept it.")
+	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings and I update the page size to non positive integer value, Then The page size will not accept it and will return to the default value.")
 	@Severity(SeverityLevel.NORMAL)
 	public void assert_Pagination_PageSize_DoNotAccept_NonPositiveIntegerValue() {
 
@@ -278,9 +279,9 @@ public class AllContent_DashboardPagination {
 
 		dashboardPage.Pagination_ClickOnEditInsight();
 		mainPage.Open_SettingsList();
-		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize"));	
-		//Need to count table rows to make sure it's same as page size
-		//Need to check how to assert that User should not be able to enter non positive integer values in page size field from Mona 
+		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("NonPositiveIntegerPageSize"));	
+
+		dashboardPage.Pagination_Assert_PageSizeNotEquelToNumberOfRowsInTable(testDataReader.getCellData("NonPositiveIntegerPageSize"));
 	}
 	
 	@BeforeClass
