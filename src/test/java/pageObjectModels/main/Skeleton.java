@@ -37,6 +37,7 @@ public class Skeleton {
 			.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 	By header_export_button_ExportOptions;
+	By header_settings_list = By.id("settings-button");
 	
 	//// Functions
 	public Skeleton(WebDriver driver) {
@@ -75,7 +76,7 @@ public class Skeleton {
 	// public void Click_securityTab() {
 	// ElementActions.click(driver, sideMenu_security_link);
 	// }
-
+	
 	public void Click_load() {
 		ElementActions.click(driver, header_load_button);
 	}
@@ -103,6 +104,11 @@ public class Skeleton {
 	public void Click_Settings()
 	{
 		ElementActions.click(driver, header_settings_button);
+	}
+	
+	public void Open_SettingsList()
+	{
+		ElementActions.click(driver, header_settings_list);
 	}
 	
 	public void Select_fromDropdownMenu(String functionName) {

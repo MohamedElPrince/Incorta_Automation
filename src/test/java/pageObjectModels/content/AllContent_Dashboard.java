@@ -57,6 +57,9 @@ public class AllContent_Dashboard {
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
 	By body_insight_paginationLast_button = By.xpath(
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");	
+	By body_insight_EditPagination_button = By.xpath("//a[@class='action analyze-icon ng-scope']//img");
+	By body_insight_PaginationSettings_PageSizeField = By.xpath("//label[contains(string(),'Page Size')]//following-sibling::input[@inputmode='numeric']");
+	
 	
 	By popup_scheduleSendDashboard_jobName_textBox = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//input[@name='jobName']");
@@ -305,12 +308,20 @@ public class AllContent_Dashboard {
 		Assertions.assertEquals("1", firstRecordInFirstPage, true);
 	}
 	
-	//In progress - Trying to count the rows in the table to compare it with number in pagination [Last number in current page]
-	public void Pagination_Assert_PaginationIsCorrect()
+	public void Pagination_ClickOnEditInsight()
 	{
-		By Pagination_Rows_Count = By.xpath("//div[@class='ht_clone_left handsontable']//div[@class='wtHider']//table[@class='htCore']//tbody/tr[position()>3]");
-		
-		Assertions.assertEquals(ElementActions.getSize(driver, Pagination_Rows_Count), Pagination_GetLastRecordInCurrentPage(), true);
+		ElementActions.click(driver, body_insight_EditPagination_button);
+	}
+	
+	public void Pagination_Assert_PageSize(String PageSize)
+	{
+		Assertions.assertElementAttribute(driver, body_insight_PaginationSettings_PageSizeField, "text", PageSize, true);
+	}
+	
+	public void Pagination_AddPageSize(String PageSize)
+	{
+		ElementActions.type(driver, body_insight_PaginationSettings_PageSizeField, PageSize);
+		ElementActions.keyPress(driver, body_insight_PaginationSettings_PageSizeField, "Enter");
 	}
 	
 	public String ScheduleSendDashboard_AddSubjectNameAutomated() {
