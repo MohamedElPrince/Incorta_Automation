@@ -57,6 +57,10 @@ public class Dashboards {
 	By popup_confirmation_Suspend_ScheduleDashboard;
 	By popup_sendDashboard_label_hideNotificationText_checkbox = By.xpath(
 			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+	
+	By popup_sendDashboard_FileNameField = By.name("fileName");
+	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath(
+			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
 
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -334,6 +338,22 @@ public class Dashboards {
 		String Empty = "ng-empty";
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox,
 				"class", "([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
+	}
+	
+	public void Assert_FileName(String Expected_FileName) {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_FileNameField, "text", Expected_FileName, true);
+	}
+	
+	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked() {
+		String NotEmpty = "ng-not-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
+	}
+	
+	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked() {
+		String NotEmpty = "ng-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
 }

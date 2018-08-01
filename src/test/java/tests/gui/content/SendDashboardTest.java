@@ -697,6 +697,190 @@ public class SendDashboardTest {
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
 		// Need to check that mail is sent successfully with pasted text
 	}
+	
+	@Test(priority = 32, description = "C76836 - Firefox: Fresh Installation: Verify that When Selecting XLSX the user can add \"File name\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and correct file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_XLSX_FileType() {
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.uncheck_AppendTimestamp();
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
+		
+		// Need to check that mail is sent successfully with file type xlsx and correct file name 
+	}
+	
+	@Test(priority = 33, description = "C76837 - Firefox: Fresh Installation: Verify that When Selecting XLSX the user can add \"File name\" With Arabic Characters")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and Arabic file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_XLSX_ArabicFileName() {
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("Arabic"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("Arabic"));
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		
+		// Need to check that mail is sent successfully with file type xlsx and arabic file name with timestamp 
+	}
+	
+	@Test(priority = 34, description = "C76838 - Firefox: Fresh Installation: Verify that when selecting XLSX the user can amend timestamp to filename")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and timestamp appended to file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_XLSX_AppendTimestamp() {
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		// Need to check that mail is sent successfully with file type xlsx and correct file name with timestamp appended to file name
+	}
+	
+	@Test(priority = 35, description = "C76839 - Firefox: Fresh Installation: Verify that when selecting XLSX the dashboard name will be added by default in File Name field")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and default file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_XLSX_DefaultFileName() {
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.uncheck_AppendTimestamp();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
+		
+		// Need to check that mail is sent successfully with file type xlsx and default file name 
+	}
+	
+	@Test(priority = 36, description = "C76842 - Firefox: Fresh Installation: Verify that When Selecting CSV the user can add \"File name\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with CSV File type, then It should be sent successfully with file type CSV and correct file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_CSV_FileType() {
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.uncheck_AppendTimestamp();
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
+		
+		// Need to check that mail is sent successfully with file type csv and correct file name
+	}
+	
+	
+	
+	@Test(priority = 37, description = "C76845 - Firefox: Fresh Installation: Verify that when selecting CSV the dashboard name will be added by default in File Name field")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with CSV File type, then It should be sent successfully with file type CSV and default file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_CSV_DefaultFileName() {
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.uncheck_AppendTimestamp();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+		
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Click_On_LastJobName();
+		
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
+		
+		// Need to check that mail is sent successfully with file type csv and default file name 
+	}
+	
 
 	public void navigate_to_sendDashboard() {
 		allContentPage = new AllContent(driver);

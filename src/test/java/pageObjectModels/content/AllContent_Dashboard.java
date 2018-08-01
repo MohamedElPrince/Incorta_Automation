@@ -439,6 +439,16 @@ public class AllContent_Dashboard {
 	public void sendDashboard_addSubjectField(String text) {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
 	}
+	
+	public String SendDashboard_Automated_AddFileName() {
+		String FileName = "Automation_" + "FileName_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_sendDashboard_FileNameField , FileName);
+		return FileName;
+	}
+	
+	public void SendDashboard_AddFileName(String fileName) {
+		ElementActions.type(driver, popup_sendDashboard_FileNameField , fileName);
+	}
 
 	public void ScheduleSendDashboard_assert_FileNameFieldExist() {
 		Assertions.assertElementExists(driver, popup_sendDashboard_FileNameField, true);
@@ -560,5 +570,9 @@ public class AllContent_Dashboard {
 	public String GetBodyText() {
 		String BodyText = ElementActions.getText(driver, popup_sendDashboard_body_textBox);
 		return BodyText;
+	}
+	
+	public void uncheck_AppendTimestamp() {
+		ElementActions.click(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty);
 	}
 }
