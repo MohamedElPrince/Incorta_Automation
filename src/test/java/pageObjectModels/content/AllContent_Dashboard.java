@@ -1,16 +1,12 @@
 package pageObjectModels.content;
 
-import org.apache.poi.ss.formula.functions.Count;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
-
-import io.restassured.internal.assertion.Assertion;
 
 public class AllContent_Dashboard {
 	//// Variables
@@ -327,8 +323,8 @@ public class AllContent_Dashboard {
 	//Need to update below function to be int instead of double after Mohab update in count function
 	public void Pagination_Assert_NumberOfRowsEqualTo_LastRecordInCurrentPageInPagination()
 	{
-		double lastRecordBeforeClickingNext = Pagination_GetLastRecordInCurrentPage();
-		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		int lastRecordBeforeClickingNext = Pagination_GetLastRecordInCurrentPage();
+		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(lastRecordBeforeClickingNext, CountTableRows, true);
 	}
 	//Need to update below function to be int instead of double after Mohab update in count function
@@ -340,7 +336,7 @@ public class AllContent_Dashboard {
 	//Need to update below function to be int instead of double after Mohab update in count function
 	public void Pagination_Assert_PageSizeNotEquelToNumberOfRowsInTable(String PageSize)
 	{
-		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(PageSize, CountTableRows, false);
 	}
 	

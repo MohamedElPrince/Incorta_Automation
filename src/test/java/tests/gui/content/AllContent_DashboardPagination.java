@@ -191,6 +191,7 @@ public class AllContent_DashboardPagination {
 	}
 
 	//Prerequisite: Dashboard [Automation_Pivot_Pagination_Dashboard] created + Insight with pagination created [Automation_Insight] + Update page size to be 5
+	//Waiting Mohab Update in engine to re-test.
 	@Test(priority = 7, description = "C77476 - Chrome: Table insight: Verify that the pagination starts with 1.")
 	@Description("When I navigate to the target dashboard, Then The Numbering of the pagination is correctly displayed")
 	@Severity(SeverityLevel.NORMAL)
@@ -216,6 +217,7 @@ public class AllContent_DashboardPagination {
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
+	//Waiting Mohab Update in engine to re-test.
 	@Test(priority = 8, description = "C77488 - Chrome: Table insight: Check that 'Page Size' Setting is displayed correctly and has default value '1000'.")
 	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings, Then The page size will by default 1000")
 	@Severity(SeverityLevel.NORMAL)
@@ -237,6 +239,7 @@ public class AllContent_DashboardPagination {
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
+	//Waiting Mohab Update in engine to re-test.
 	@Test(priority = 9, description = "C77489 - Chrome: Table insight: check that 'Page Size' can be changed and saved correctly.")
 	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings and I update the page size to 10, Then The page size will be 10 in the table.")
 	@Severity(SeverityLevel.NORMAL)
@@ -262,6 +265,7 @@ public class AllContent_DashboardPagination {
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
+	//Waiting Mohab Update in engine to re-test.
 	@Test(priority = 10, description = "C77490 - Chrome: Table insight: Check that 'Page Size' value is Positive integer number only.")
 	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings and I update the page size to non positive integer value, Then The page size will not accept it and will return to the default value.")
 	@Severity(SeverityLevel.NORMAL)
