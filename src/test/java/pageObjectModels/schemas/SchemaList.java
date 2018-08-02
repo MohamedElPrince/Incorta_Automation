@@ -14,7 +14,7 @@ public class SchemaList {
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_schemas_schemaList");
-	String popup_schema_schedule_Error_Message_Body = replace_regularExpression(testDataReader.getCellData("SchemaLoadSameNameError"));
+	String popup_schema_schedule_Error_Message =replace_regularExpression("INC_004010050:Another SCHEDULER with the same name [Schema Load] already exists.");
 	//// Elements
 	By header_schemaListTabHeader_link = By
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Schemas']");
@@ -66,7 +66,7 @@ public class SchemaList {
 		Assertions.assertElementExists(driver, popup_schema_schedule_header, true);
 	}
 
-	public void Assert_schemaSchedule_label_contents(String schedule_label_field) {
+	public void Assert_schemaSchedule_label_Name(String schedule_label_field) {
 
 		popup_schema_schedule_label = By.xpath("//label[contains(text(),'" + schedule_label_field + "')]");
 		Assertions.assertElementExists(driver, popup_schema_schedule_label, true);
@@ -155,7 +155,7 @@ public class SchemaList {
 	public void Assert_dublicate_Schema_Schedule_job_Name_Error_Message() {
 		
 		
-		Assertions.assertElementAttribute(driver, popup_schema_schedule_Error_Message_Body_label, "text", popup_schema_schedule_Error_Message_Body,
+		Assertions.assertElementAttribute(driver, popup_schema_schedule_Error_Message_Body_label, "text", popup_schema_schedule_Error_Message,
 				true);
 		
 		
