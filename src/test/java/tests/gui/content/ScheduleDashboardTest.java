@@ -583,7 +583,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 35, description = "C77036_2 - Firefox: Fresh Installation: Testing that the mail is received successful with/witout 'Hide Notification Text'.")
+	@Test(priority = 34, description = "C77036_2 - Firefox: Fresh Installation: Testing that the mail is received successful with/witout 'Hide Notification Text'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and leave 'hide notification text' disabled and I click on schedule. Then Mail will be sent successfully with the default notification.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationtext_Disabled_SavedAndSent_ScheduleDashboard() {
@@ -606,7 +606,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 36, description = "C77040 - Firefox: Fresh Installation: Testing that 'Cc' on schedule dashboard does not give an error when 'To' is empty.")
+	@Test(priority = 35, description = "C77040 - Firefox: Fresh Installation: Testing that 'Cc' on schedule dashboard does not give an error when 'To' is empty.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and CC field and leave To field empty and I click on schedule. Then Mail will be sent successfullyTo will not give an error.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_AddCCMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() {
@@ -630,7 +630,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 37, description = "C77041 - Firefox: Fresh Installation: Testing that 'Bcc' on schedule dashboard does not give an error when 'To' is empty.")
+	@Test(priority = 36, description = "C77041 - Firefox: Fresh Installation: Testing that 'Bcc' on schedule dashboard does not give an error when 'To' is empty.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and Bcc field and leave To field empty and I click on schedule. Then Mail will be sent successfullyTo will not give an error.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_AddBccMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() {
@@ -654,7 +654,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 38, description = "C77044_1 - Firefox: Fresh Installation: Testing that the mail is received successful with 'File name' for XLSX/ CSV files.")
+	@Test(priority = 37, description = "C77044_1 - Firefox: Fresh Installation: Testing that the mail is received successful with 'File name' for XLSX/ CSV files.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select CSV and I click on schedule. Then Mail will be sent successfully with file named with the file name.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SelectCSV_MailReceived_NamedByFileName_ScheduleDashboard() {
@@ -676,7 +676,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 39, description = "C77044_2 - Firefox: Fresh Installation: Testing that the mail is received successful with 'File name' for XLSX/ CSV files.")
+	@Test(priority = 38, description = "C77044_2 - Firefox: Fresh Installation: Testing that the mail is received successful with 'File name' for XLSX/ CSV files.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select CSV and I click on schedule. Then Mail will be sent successfully with file named with the file name.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SelectXLSX_MailReceived_NamedByFileName_ScheduleDashboard() {
@@ -698,7 +698,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 40, description = "C77045_1 - Firefox: Fresh Installation: Testing that the mail is received successful with default 'File name' when user leaves it blank.")
+	@Test(priority = 39, description = "C77045_1 - Firefox: Fresh Installation: Testing that the mail is received successful with default 'File name' when user leaves it blank.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select xlsx and empty field filename I click on schedule. Then Mail will be sent successfully with file named with the dashboard name.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_fileNameIsDashboardName_WhenLeaveItBlankInScheduleDashboard_selectXLSX() {
@@ -725,7 +725,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 41, description = "C77045_2 - Firefox: Fresh Installation: Testing that the mail is received successful with default 'File name' when user leaves it blank.")
+	@Test(priority = 40, description = "C77045_2 - Firefox: Fresh Installation: Testing that the mail is received successful with default 'File name' when user leaves it blank.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select CSV and empty field filename and I click on schedule. Then Mail will be sent successfully with file named with the dashboard name.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_fileNameIsDashboardName_WhenLeaveItBlankInScheduleDashboard_selectCSV() {
@@ -752,7 +752,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 42, description = "C77049 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for XLSX.")
+	@Test(priority = 41, description = "C77049 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for XLSX.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select xlsx and select append time stamp and I click on schedule. Then Mail will be sent successfully with timestamp for xlsx.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_TimeStampForXLSX() 
@@ -780,7 +780,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 43, description = "C77050 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for CSV.")
+	@Test(priority = 42, description = "C77050 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for CSV.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select csv and select append time stamp and I click on schedule. Then Mail will be sent successfully with timestamp for xlsx.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_TimeStampForCSV() 
@@ -808,7 +808,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 44, description = "C77058 - Firefox: Fresh Installation: Verify that when sending the Scheduler Email 'Subject and Body' are displayed correctly.")
+	@Test(priority = 43, description = "C77058 - Firefox: Fresh Installation: Verify that when sending the Scheduler Email 'Subject and Body' are displayed correctly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and I click on schedule. Then Mail will be sent successfully with subject and body.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_BodyAndSubjectExistAndCorrect() 
@@ -835,7 +835,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 45, description = "C77059 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Arabic Letters'.")
+	@Test(priority = 44, description = "C77059 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Arabic Letters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add arabic letter in the subject and I click on schedule. Then Mail will be sent successfully with subject [Arabic Letters].")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_ArabicLetterInSubject() 
@@ -860,7 +860,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 46, description = "C77060 - Firefox: Fresh Installation: Testing that the mail is received successful with Subject contains 'Special characters'.")
+	@Test(priority = 45, description = "C77060 - Firefox: Fresh Installation: Testing that the mail is received successful with Subject contains 'Special characters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add special chars in the subject and I click on schedule. Then Mail will be sent successfully with subject [special chars].")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_SpecialCharactersInSubject() 
@@ -887,7 +887,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 47, description = "C77062 - Firefox: Fresh Installation: Testing that Body with very long message does not make any errors.")
+	@Test(priority = 46, description = "C77062 - Firefox: Fresh Installation: Testing that Body with very long message does not make any errors.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and very long body and I click on schedule. Then Mail will be sent successfully with the long body.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_LongMessages_BodyField() 
@@ -912,7 +912,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 48, description = "C77063 - Firefox: Fresh Installation: Testing that Body with with Space and Enter does not make any errors.")
+	@Test(priority = 47, description = "C77063 - Firefox: Fresh Installation: Testing that Body with with Space and Enter does not make any errors.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and very long body and I click on schedule. Then Mail will be sent successfully with the long body.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_MessagesWithSpacesAndEnter_BodyField() 
@@ -937,7 +937,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 49, description = "C77064 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Arabic letters'.")
+	@Test(priority = 48, description = "C77064 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Arabic letters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add arabic letter in the body and I click on schedule. Then Mail will be sent successfully with body [Arabic Letters].")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_ArabicLetter_bodyField() 
@@ -962,7 +962,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 50, description = "C77065 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Special Characters'.")
+	@Test(priority = 49, description = "C77065 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Special Characters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add special chars in the body and I click on schedule. Then Mail will be sent successfully with body [special chars].")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_SpecialCharacters_bodyField() 
@@ -989,7 +989,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created with prompts [Automation_Dashboard_Prompt_Filter]
-	@Test(priority = 51, description = "C77201 - Firefox: Fresh Installation: Testing that the Scheduler is working with Prompt Filter.")
+	@Test(priority = 50, description = "C77201 - Firefox: Fresh Installation: Testing that the Scheduler is working with Prompt Filter.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with making prompt filter mandatory and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_PromptMandatory_schedulerDashboard() 
@@ -1021,7 +1021,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created with prompts [Automation_Dashboard_Prompt_Filter]
-	@Test(priority = 52, description = "C77225 - Firefox: Fresh Installation: Check that prompt filter applied not sent in the email in case hide notification check box applied.")
+	@Test(priority = 51, description = "C77225 - Firefox: Fresh Installation: Check that prompt filter applied not sent in the email in case hide notification check box applied.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and check hide notification text along with making prompt filter mandatory and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully without notification.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_PromptMandatory_withoutNotificationText_schedulerDashboard() 
@@ -1055,7 +1055,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created with applied filter [Automation_Dashboard_Applied_Filter]
-	@Test(priority = 53, description = "C77202 - Firefox: Fresh Installation: Testing that the Scheduler is working with Applied Filter.")
+	@Test(priority = 52, description = "C77202 - Firefox: Fresh Installation: Testing that the Scheduler is working with Applied Filter.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with making applied filter mandatory and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_AppliedFilter_schedulerDashboard() 
@@ -1090,7 +1090,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created with presentation variables [AutomationDashboardPresentationVariables]
-	@Test(priority = 54, description = "C77209 - Firefox: Fresh Installation: Testing that the Scheduler is working with Presentation Variables.")
+	@Test(priority = 53, description = "C77209 - Firefox: Fresh Installation: Testing that the Scheduler is working with Presentation Variables.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with making presentation variables and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully with filter.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_PresentationVariables_schedulerDashboard() 
@@ -1125,7 +1125,7 @@ public class ScheduleDashboardTest {
 	}
 
 	// Prerequisite, Admin User + Dashboard Created with presentation variables [AutomationDashboardPresentationVariables]
-	@Test(priority = 55, description = "C77219 - Firefox: Fresh Installation: Testing that the Scheduler is working with Bookmark.")
+	@Test(priority = 54, description = "C77219 - Firefox: Fresh Installation: Testing that the Scheduler is working with Bookmark.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with filter and bookmark and I click on schedule. Then scheduler will work with filter successfully and Mail will be sent successfully with filter.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_Bookmark_schedulerDashboard() 
@@ -1161,7 +1161,7 @@ public class ScheduleDashboardTest {
 	
 	//******************************Old Schedule Dash board Test cases******************************
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 56, description = "C54221 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x min: Testing that: Schedule is working properly.")
+	@Test(priority = 55, description = "C54221 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x min: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add time zone and repeate type min and number and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Minute and number of minutes.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_DashboardSchedueled_DailyRecurrence_Minutes() 
@@ -1190,7 +1190,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 57, description = "C54232 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x hour: Testing that: Schedule is working properly.")
+	@Test(priority = 56, description = "C54232 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x hour: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add time zone and repeate type hour and number and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Hour and number of Hours.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_DashboardSchedueled_DailyRecurrence_Hours() 
@@ -1220,7 +1220,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 58, description = "C54223 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Monthly: Testing that: Schedule is working properly.")
+	@Test(priority = 57, description = "C54223 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Monthly: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and repeate type Monthley and start with specific day and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Monthley.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_DashboardSchedueled_monthlyRecurrence_Weeks() 
@@ -1249,7 +1249,7 @@ public class ScheduleDashboardTest {
 	
 //	// Prerequisite, Admin User + Dashboard Created
 //	//************************On Hold - until Mona Update TCs - Invalid steps (4 TCs) [C54226-C54227-C54228-C54229]************************
-//	@Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
+//	@Test(priority = 58, description = "C54226 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
 //	@Description("When I  and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Monthley.")
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_MailSent_DashboardsSchedueledAndShared_Testtesttesttest() 
