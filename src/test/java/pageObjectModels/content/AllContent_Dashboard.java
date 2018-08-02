@@ -49,8 +49,10 @@ public class AllContent_Dashboard {
 	By popup_scheduleScreen_monthleyRecurrence_Type_DayNumber = By.xpath("//select[@name='nth']");
 	By popup_scheduleScreen_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
 	By popup_scheduleScreen_monthleyRecurrence_Type_DayOfMonth = By.xpath("(//input[@type='radio'][@value='Week']/parent::div/input)[last()]");
-
 	By popup_scheduleScreen_weeklyRecurrence_days;
+	By popup_scheduleScreen_EndBy = By.xpath("//div[@class='flex-box']/label[contains(string(),'End By')]/input");
+	By popup_scheduleScreen_EndBy_Date = By.xpath("//div[@class='flex-box']//input[contains(@class,'ws-date')]");
+
 	// Pagination Elements
 	By body_insight_paginationFirst_button = By.xpath(
 			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')]/following-sibling::i/parent::a");
@@ -610,6 +612,12 @@ public class AllContent_Dashboard {
 	
 	public void scheduleDashboard_TypeFileNameField(String text) {
 		ElementActions.type(driver, popup_sendDashboard_FileNameField, text);
+	}
+	
+	public void scheduleDashboard_Repeate_SelectEndBy(String Date)
+	{
+		ElementActions.click(driver, popup_scheduleScreen_EndBy);
+		ElementActions.type(driver, popup_scheduleScreen_EndBy_Date, Date);
 	}
 	
 }

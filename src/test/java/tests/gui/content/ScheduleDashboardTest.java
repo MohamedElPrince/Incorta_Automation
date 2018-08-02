@@ -1160,7 +1160,6 @@ public class ScheduleDashboardTest {
 	}
 	
 	//******************************Old Schedule Dash board Test cases******************************
-	//************************In Progress - To check Next Run************************************************
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 56, description = "C54221 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x min: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add time zone and repeate type min and number and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Minute and number of minutes.")
@@ -1182,15 +1181,14 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("DashboardName"),JobName);
 		
 		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
-		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
+		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 		schedulerDashboardsPage.JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin("Minute","20");
-		
+		schedulerDashboardsPage.JobScreen_Assert_Repeat_NoEnd_Checked();
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("Email"));
 		//Need to check that mail is sent successfully with the right intervals in minutes.
 	}
 	
-	//************************in progress************************************************
-	//************************In Progress - To check Next Run************************************************
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 57, description = "C54232 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x hour: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add time zone and repeate type hour and number and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Hour and number of Hours.")
@@ -1204,6 +1202,7 @@ public class ScheduleDashboardTest {
 		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 		dashboardPage.scheduleDashboard_dailyRecurrence_RepeatType("Hour", "20");
 		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+		dashboardPage.scheduleDashboard_Repeate_SelectEndBy(testDataReader.getCellData("ScheduleJobDate"));
 		dashboardPage.scheduleDashboard_Click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
@@ -1212,9 +1211,10 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("DashboardName"),JobName);
 
 		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
-		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
+		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 		schedulerDashboardsPage.JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin("Hour","20");
+		schedulerDashboardsPage.scheduleDashboard_Assert_Repeate_EndByChecked_DateSelected(testDataReader.getCellData("ScheduleJobDate"));
 
 		//Need to check that mail is sent successfully with the right intervals in Hours.
 	}
@@ -1247,22 +1247,22 @@ public class ScheduleDashboardTest {
 		//Need to check that mail is sent successfully with the right intervals in Hours.
 	}
 	
-	// Prerequisite, Admin User + Dashboard Created
-	//************************In progress************************
-	@Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
-	@Description("When I  and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Monthley.")
-	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_DashboardsSchedueledAndShared_Testtesttesttest() 
-	{
-		navigate_to_scheduleDashboard();
-		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
-		dashboardPage.scheduleDashboard_monthlyRecurrence_selectType_2ndOption("Week", "2nd", "Sun", "11");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
-		dashboardPage.scheduleDashboard_Click_schedule();
-	}
+//	// Prerequisite, Admin User + Dashboard Created
+//	//************************On Hold - until Mona Update TCs - Invalid steps (4 TCs) [C54226-C54227-C54228-C54229]************************
+//	@Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
+//	@Description("When I  and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Monthley.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Assert_MailSent_DashboardsSchedueledAndShared_Testtesttesttest() 
+//	{
+//		navigate_to_scheduleDashboard();
+//		String JobName = dashboardPage.scheduleDashboard_addJobName();
+//		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
+//		dashboardPage.scheduleDashboard_monthlyRecurrence_selectType_2ndOption("Week", "2nd", "Sun", "11");
+//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+//		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+//		dashboardPage.scheduleDashboard_Click_schedule();
+//	}
 	
 	public void navigate_to_scheduleDashboard()
 	{

@@ -61,6 +61,11 @@ public class Dashboards {
 	By popup_jobScreen_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
 	By popup_jobScreen_monthleyRecurrence_Type_DayOfMonth = By.xpath("(//input[@type='radio'][@value='Week']/parent::div/input)[last()]");
 	By popup_jobScreen_repeat_noEnd = By.xpath("//input[@value='0']");
+	By popup_jobScreen_EndBy = By.xpath("//div[@class='flex-box']/label[contains(string(),'End By')]/input");
+	By popup_jobScreen_EndBy_Date = By.xpath("//div[@class='flex-box']//input[contains(@class,'ws-date')]");
+
+	
+	
 	
 	By popup_sendDashboard_FileNameField = By.name("fileName");
 	
@@ -378,6 +383,7 @@ public class Dashboards {
 		Assertions.assertElementAttribute(driver, popup_jobScreen_dailyRecurrence_Type, "ng-selected", "true", true);
 		Assertions.assertElementAttribute(driver, popup_JobScreen_dailyRecurrence_number, "text", Number, true);
 	}	
+
 /**
  * 
  * @param SelectType
@@ -401,6 +407,17 @@ public class Dashboards {
 		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayOfWeek, "value", DayOfWeek, true);
 		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayOfMonth, "text", DayOfMonth, true);
 		Assertions.assertElementAttribute(driver, popup_jobScreen_repeat_noEnd, "checked", "true", true);
+	}
+	
+	public void JobScreen_Assert_Repeat_NoEnd_Checked()
+	{
+		Assertions.assertElementAttribute(driver, popup_jobScreen_repeat_noEnd, "checked", "true", true);
+	}
+	
+	public void scheduleDashboard_Assert_Repeate_EndByChecked_DateSelected(String Date)
+	{
+		Assertions.assertElementAttribute(driver, popup_jobScreen_EndBy, "Checked", "true", true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_EndBy_Date, "text", Date, true);
 	}
 	
 }
