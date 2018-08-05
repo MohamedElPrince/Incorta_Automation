@@ -39,7 +39,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_selectOutputFormat;
 	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
 	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
-	By popup_sendDashboard_fileName_text;
+	By popup_sendDashboard_fileName_text = By.xpath("//input[@name='fileName']");
 	By popup_scheduleScreen_recurrenceFrequency_radioButton;
 	By popup_scheduleScreen_dailyRecurrence_Type;
 	By popup_scheduleScreen_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
@@ -82,7 +82,7 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_subject_textBox = By.name("subject");
 	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
 	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
-	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='description']");
+	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
 	By popup_sendDashboard_EmailPlusButton;
 	By popup_sendDashboard_toolTips;
 	By popup_scheduleDashboard_appendTimestamp_helpIcon=By.xpath("//i[contains(@class,'timestamp-info-icon')]");
@@ -403,6 +403,10 @@ public class AllContent_Dashboard {
 		Assertions.assertElementAttribute(driver, popup_sendScheduleDashboard_label_hideNotificationText_checkbox_empty,
 				"class", "([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
+	
+	public void ScheduleSendDashboard_Click_HideNotificationText_checkbox() {
+		ElementActions.click(driver, popup_sendScheduleDashboard_label_hideNotificationText_checkbox_empty);
+	}
 
 	public void ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed() {
 		ElementActions.hover(driver, popup_sendDashboard_HideNotificationText_toolTip);
@@ -444,6 +448,16 @@ public class AllContent_Dashboard {
 
 	public void sendDashboard_addSubjectField(String text) {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, text);
+	}
+	
+	public String SendDashboard_Automated_AddFileName() {
+		String FileName = "Automation_" + "FileName_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_sendDashboard_FileNameField , FileName);
+		return FileName;
+	}
+	
+	public void SendDashboard_AddFileName(String fileName) {
+		ElementActions.type(driver, popup_sendDashboard_FileNameField , fileName);
 	}
 
 	public void ScheduleSendDashboard_assert_FileNameFieldExist() {
@@ -604,10 +618,26 @@ public class AllContent_Dashboard {
 		popup_scheduleScreen_weeklyRecurrence_days = By.xpath("//input[@value ='"+Day+"']");
 		ElementActions.click(driver, popup_scheduleScreen_weeklyRecurrence_days);
 	}
-	
-	public void scheduleDashboard_CSV_XLSX_ClickOK()
-	{
+
+	public void scheduleDashboard_CSV_XLSX_ClickOK() {
 		ElementActions.click(driver, popup_scheduleDashboard_CSV_OK_Button);
+	}
+
+	public void sendDashboard_assert_sendButton_enabled() {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_send_button, "disabled", "null", true);
+	}
+	
+	public void copy_Body_Text(){
+		ElementActions.clipboardActions(driver, popup_sendDashboard_body_textBox, "copy");
+	}
+	
+	public void paste_Text_Body(){
+		ElementActions.clipboardActions(driver, popup_sendDashboard_body_textBox, "paste");
+	}
+	
+	public String GetBodyText() {
+		String BodyText = ElementActions.getText(driver, popup_sendDashboard_body_textBox);
+		return BodyText;
 	}
 	
 	public void scheduleDashboard_TypeFileNameField(String text) {
@@ -618,6 +648,10 @@ public class AllContent_Dashboard {
 	{
 		ElementActions.click(driver, popup_scheduleScreen_EndBy);
 		ElementActions.type(driver, popup_scheduleScreen_EndBy_Date, Date);
+	}
+	
+		public void uncheck_AppendTimestamp() {
+		ElementActions.click(driver, popup_sendDashboard_label_AppendTimestamp_checkbox);
 	}
 	
 }

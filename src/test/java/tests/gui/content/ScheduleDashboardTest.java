@@ -1,10 +1,15 @@
 package tests.gui.content;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.elementActionLibrary.JSWaiter;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
+
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -13,9 +18,6 @@ import pageObjectModels.content.AllContent_Dashboard;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.scheduler.Dashboards;
-
-import org.testng.annotations.*;
-import org.openqa.selenium.WebDriver;
 
 public class ScheduleDashboardTest {
 

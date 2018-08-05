@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mohies</groupId>
 	<artifactId>SHAFT_ENGINE</artifactId>
-	<version>1.0.20180715</version>
+	<version>1.0.20180802</version>
 	<name>SHAFT_ENGINE</name>
 	<description>Selenium Hybrid Automation Framework for Testing [SHAFT]</description>
 
 
 	<properties>
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180715</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180802</shaft_engine.version>
 
 		<!-- Execution Properties -->
 		<!-- <testSuite.name>cucumber_testSuite</testSuite.name> -->
@@ -28,6 +28,7 @@
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
+		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
 
 		<!-- Version Numbers Properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,7 +36,7 @@
 		<jdk.version>1.8</jdk.version>
 
 		<selenium.version>3.13.0</selenium.version>
-		<allure.version>2.6.0</allure.version>
+		<allure.version>2.7.0</allure.version>
 		<aspectj.version>1.8.13</aspectj.version>
 
 		<rest-assured.version>3.0.7</rest-assured.version>
@@ -52,10 +53,37 @@
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 		<maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
 
-		<cucumber.version>1.2.5</cucumber.version> <!-- reintegrate cucumber with the proper latest version -->
+		<cucumber.version>3.0.2</cucumber.version>
+
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>6.1.0</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-java</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- remote ssh commands -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.cverges</groupId>
+			<artifactId>expect4j</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+
 		<!-- Selenium and Allure Dependencies -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -71,6 +99,11 @@
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-cucumber-jvm</artifactId>
+			<version>${allure.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-rest-assured</artifactId> <!-- for testing reasons -->
 			<version>${allure.version}</version>
 		</dependency>
 
@@ -90,21 +123,15 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Cucumber Dependencies -->
+		<!-- Cucumber Dependencies --> <!-- attempting upgrade -->
 		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-jvm</artifactId>
-			<version>${cucumber.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
@@ -166,6 +193,7 @@
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
 							<defaultElementIdentificationTimeout>${defaultElementIdentificationTimeout}</defaultElementIdentificationTimeout>
+							<allureResultsFolderPath>${allureResultsFolderPath}</allureResultsFolderPath>
 						</systemPropertyVariables>
 						<!-- To continue execution after validation errors are thrown in the 
 							before method -->
