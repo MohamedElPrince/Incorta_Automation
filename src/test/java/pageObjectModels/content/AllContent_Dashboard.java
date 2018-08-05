@@ -287,14 +287,25 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_sendDashboard_subject_textBox, SubjectName);
 	}
 	
-	public String ScheduleSendDashboard_AddBodyName() {
+	public String SendDashboard_AddBodyName() {
 		String BodyText = "Automation_" + "Body_" + String.valueOf(System.currentTimeMillis());
 		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
 		return BodyText;
 	}
+	
+	public String ScheduleDashboard_AddBodyName() {
+		String BodyText = "Automation_" + "Body_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_scheduleDashboard_body_textBox, BodyText);
+		return BodyText;
+	}
 
-	public void ScheduleSendDashboard_AddBodyName(String BodyText) {
+
+	public void SendDashboard_AddBodyName(String BodyText) {
 		ElementActions.type(driver, popup_sendDashboard_body_textBox, BodyText);
+	}
+
+	public void ScheduleDashboard_AddBodyName(String BodyText) {
+		ElementActions.type(driver, popup_scheduleDashboard_body_textBox, BodyText);
 	}
 	
 	/**

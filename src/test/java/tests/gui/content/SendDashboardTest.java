@@ -308,7 +308,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		String body = dashboardPage.ScheduleSendDashboard_AddBodyName();
+		String body = dashboardPage.SendDashboard_AddBodyName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -335,7 +335,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("SpecialCharacters"));
+		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("SpecialCharacters"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -362,7 +362,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("Arabic"));
+		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("Arabic"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -388,7 +388,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("Numbers"));
+		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("Numbers"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -414,7 +414,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("NonEnglish"));
+		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("NonEnglish"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -441,7 +441,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("BodyWithEnter"));
+		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("BodyWithEnter"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -544,7 +544,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
+		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -570,7 +570,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		String body = dashboardPage.ScheduleSendDashboard_AddBodyName();
+		String body = dashboardPage.SendDashboard_AddBodyName();
 		dashboardPage.ScheduleSendDashboard_Click_HideNotificationText_checkbox();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
@@ -599,7 +599,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		String body = dashboardPage.ScheduleSendDashboard_AddBodyName();
+		String body = dashboardPage.SendDashboard_AddBodyName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.Click_Send_Dashboard();
 
@@ -682,7 +682,7 @@ public class SendDashboardTest {
 
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName();
+		dashboardPage.SendDashboard_AddBodyName();
 		dashboardPage.copy_Body_Text();
 		dashboardPage.paste_Text_Body();
 		String body = dashboardPage.GetBodyText();

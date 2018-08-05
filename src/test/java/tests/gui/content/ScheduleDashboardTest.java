@@ -286,7 +286,7 @@ public class ScheduleDashboardTest {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectName();
-		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyName();
+		String BodyName = dashboardPage.ScheduleDashboard_AddBodyName();
 		
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
@@ -547,7 +547,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		String BodyName = dashboardPage.ScheduleSendDashboard_AddBodyName();
+		String BodyName = dashboardPage.ScheduleDashboard_AddBodyName();
 
 		dashboardPage.scheduleDashboard_Click_schedule();
 
@@ -782,7 +782,7 @@ public class ScheduleDashboardTest {
 	}
 	
 	// Prerequisite, Admin User + Dashboard Created
-	@Test(priority = 42, description = "C77050 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for CSV.")
+	@Test(priority = 42, description = "	 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for CSV.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select csv and select append time stamp and I click on schedule. Then Mail will be sent successfully with timestamp for xlsx.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_MailSent_TimeStampForCSV() 
@@ -819,7 +819,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		String BodyText = dashboardPage.ScheduleSendDashboard_AddBodyName();
+		String BodyText = dashboardPage.ScheduleDashboard_AddBodyName();
 		String SubjectText = dashboardPage.ScheduleSendDashboard_AddSubjectName();
 
 		dashboardPage.scheduleDashboard_Click_schedule();
@@ -898,7 +898,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
+		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
 
 		dashboardPage.scheduleDashboard_Click_schedule();
 
@@ -923,7 +923,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("BodyWithSpacesAndEnter"));
+		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("BodyWithSpacesAndEnter"));
 
 		dashboardPage.scheduleDashboard_Click_schedule();
 
@@ -948,7 +948,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("ArabicSubject"));
+		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("ArabicSubject"));
 
 		dashboardPage.scheduleDashboard_Click_schedule();
 
@@ -973,7 +973,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_AddBodyName(testDataReader.getCellData("SpecialCharactersSubject"));
+		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("SpecialCharactersSubject"));
 
 		dashboardPage.scheduleDashboard_Click_schedule();
 
