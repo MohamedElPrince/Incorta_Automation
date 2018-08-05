@@ -67,7 +67,7 @@ public class Dashboards {
 	By popup_jobScreen_EndBy = By.xpath("//div[@class='flex-box']/label[contains(string(),'End By')]/input");
 	By popup_jobScreen_EndBy_Date = By.xpath("//div[@class='flex-box']//input[contains(@class,'ws-date')]");
 
-	
+	By body_nextRun;
 	
 	
 	By popup_confirmation_Delete_Cancel_ScheduleDashboard;
@@ -212,6 +212,11 @@ public class Dashboards {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox, "value", JobTimeZone, true);
 	}
 
+	public void JobScreen_Select_JobTimeZone(String startByTimeZone)
+	{
+		ElementActions.select(driver, popup_JobScreen_startByTimeZone_textBox, startByTimeZone);	
+	}
+	
 	public String JobScreen_UpdateFields(String description, String startByDate, String startByTime,
 			String startByTimeZone, String recurrence) {
 
@@ -482,6 +487,13 @@ public class Dashboards {
 		Assertions.assertElementAttribute(driver, popup_jobScreen_EndBy_Date, "text", Date, true);
 	}
 	
+	public void Assert_NextRunTimeZoneCorrect(String TimeZone, String DashboardName, String JobName)
+	{
+		body_nextRun = By.xpath("//p[contains(text(),'"+DashboardName+"')]/parent::a/parent::div/preceding-sibling::div/p[@title='"+JobName+"']/parent::div/following-sibling::div[@class='dataTypeName right']/p");
+		Assertions.assertElementAttribute(driver, body_nextRun, "text", "([\\s\\S]*" + TimeZone + ".*[\\s\\S]*)", true);
+	}
+	
+
 }
 
 

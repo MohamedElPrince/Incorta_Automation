@@ -43,8 +43,8 @@ public class AllContent_Dashboard {
 	By popup_scheduleScreen_recurrenceFrequency_radioButton;
 	By popup_scheduleScreen_dailyRecurrence_Type;
 	By popup_scheduleScreen_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
-	By popup_scheduleScreen_startByTimeZone_textBox = By
-			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
+//	By popup_scheduleScreen_startByTimeZone_textBox = By
+//			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
 	By popup_scheduleScreen_monthleyRecurrence_Type_radioButton;
 	By popup_scheduleScreen_monthleyRecurrence_Type_DayNumber = By.xpath("//select[@name='nth']");
 	By popup_scheduleScreen_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
@@ -608,9 +608,9 @@ public class AllContent_Dashboard {
 		ElementActions.type(driver, popup_scheduleScreen_dailyRecurrence_number, Number);
 	}	
 	
-	public void JobScreen_Select_JobTimeZone(String startByTimeZone)
+	public void scheduleDashboard_Select_JobTimeZone(String startByTimeZone)
 	{
-		ElementActions.select(driver, popup_scheduleScreen_startByTimeZone_textBox, startByTimeZone);	
+		ElementActions.select(driver, popup_scheduleSendDashboard_startByTimeZone_textBox, startByTimeZone);	
 	}
 	
 	/**

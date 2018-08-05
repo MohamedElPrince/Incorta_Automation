@@ -323,7 +323,7 @@ public class ScheduleDashboardTest {
 
 		newScheduledJobName = schedulerDashboardsPage.JobScreen_UpdateFields(
 				testDataReader.getCellData("ScheduleJobDescription"), testDataReader.getCellData("ScheduleJobDate"),
-				testDataReader.getCellData("ScheduleJobTime"), testDataReader.getCellData("ScheduleJobTimeZone"),
+				testDataReader.getCellData("ScheduleJobTime"), testDataReader.getCellData("ScheduleJobPositiveTimeZone"),
 				testDataReader.getCellData("ScheduleJobNoRecurrence"));
 
 		schedulerDashboardsPage.DashboardJob_ClickOnJob(newScheduledJobName,
@@ -1174,7 +1174,7 @@ public class ScheduleDashboardTest {
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 		dashboardPage.scheduleDashboard_dailyRecurrence_RepeatType("Minute", "20");
-		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
 		dashboardPage.scheduleDashboard_Click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
@@ -1203,7 +1203,7 @@ public class ScheduleDashboardTest {
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
 		dashboardPage.scheduleDashboard_dailyRecurrence_RepeatType("Hour", "20");
-		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
 		dashboardPage.scheduleDashboard_Repeate_SelectEndBy(testDataReader.getCellData("ScheduleJobDate"));
 		dashboardPage.scheduleDashboard_Click_schedule();
 
@@ -1233,7 +1233,7 @@ public class ScheduleDashboardTest {
 		dashboardPage.scheduleDashboard_monthlyRecurrence_selectType_2ndOption("Week", "2nd", "Sun", "11");
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
 		dashboardPage.scheduleDashboard_Click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
@@ -1249,9 +1249,47 @@ public class ScheduleDashboardTest {
 		//Need to check that mail is sent successfully with the right intervals in Hours.
 	}
 	
+	// Prerequisite, Admin User + Dashboard Created
+	@Test(priority = 58, description = "C77051 - Firefox: Fresh Installation: Testing that Scheduler is working with different Timezones.")
+	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I updatet time zone and I click on save and from job screen update it again and click on save. Then next run [time zone]will be changed with every save.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_DashboardScheduler_workingWithDifferentTimeZones() {
+		navigate_to_scheduleDashboard();
+		String JobName = dashboardPage.scheduleDashboard_addJobName();
+		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
+		
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+
+		dashboardPage.scheduleDashboard_Click_schedule();
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("DashboardName"),JobName);
+		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\+03:00",testDataReader.getCellData("DashboardName"),JobName);
+
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
+		schedulerDashboardsPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobNegativeTimeZone"));
+		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
+		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\-03:00",testDataReader.getCellData("DashboardName"),JobName);
+
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\-03:00");
+		schedulerDashboardsPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
+		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\±00:00",testDataReader.getCellData("DashboardName"),JobName);
+
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\±00:00");
+	}
+
+	
 //	// Prerequisite, Admin User + Dashboard Created
 //	//************************On Hold - until Mona Update TCs - Invalid steps (4 TCs) [C54226-C54227-C54228-C54229]************************
-//	@Test(priority = 58, description = "C54226 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
+//	@Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
 //	@Description("When I  and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Monthley.")
 //	@Severity(SeverityLevel.NORMAL)
 //	public void Assert_MailSent_DashboardsSchedueledAndShared_Testtesttesttest() 
