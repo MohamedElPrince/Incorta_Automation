@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.supportActionLibrary.JavaActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
 
@@ -90,6 +91,9 @@ public class AllContent_Dashboard {
 	By popup_dashboard_menu_SharedWithList;
 	By popup_schedulerDashboard_DuplicateJobName_ErrorMessage;
 	By popup_scheduleDashboard_body_textBox = By.xpath("//textarea[@name='description']");
+	
+	By popup_sendDashboard_invalidFileName = By.xpath("//div[@class='flex-box job-details-item']//span[@ng-if='fileInvalidCharAlert']");
+	By popup_sendDashboard_firstemail_searchresult = By.xpath("//div[@class='folderDetails shareSearchResults']//a[@class='folderUserRow ng-scope'][position()=1]");
 	//// Functions
 
 	public AllContent_Dashboard(WebDriver driver) {
@@ -301,6 +305,15 @@ public class AllContent_Dashboard {
 	public void SendDashboard_TypeEmailAndClickAdd(String Email) {
 		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
 		ElementActions.click(driver, popup_sendDashboard_add_button);
+	}
+	
+	public void SendDashboard_TypeEmailAndSelectFirstSearchResult(String Email) {
+		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
+		ElementActions.click(driver, popup_sendDashboard_firstemail_searchresult);
+	}
+	
+	public void SendDashboard_TypeEmail(String Email) {
+		ElementActions.type(driver, popup_sendDashboard_emailAddress_textBox, Email);
 	}
 
 	public void Click_Send_Dashboard() {
@@ -559,6 +572,10 @@ public class AllContent_Dashboard {
 		Assertions.assertElementAttribute(driver, popup_sendDashboard_send_button, "disabled", "null", true);
 	}
 	
+	public void sendDashboard_assert_sendButton_disabled() {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_send_button, "disabled", "true", true);
+	}
+	
 	public void copy_Body_Text(){
 		ElementActions.clipboardActions(driver, popup_sendDashboard_body_textBox, "copy");
 	}
@@ -574,5 +591,24 @@ public class AllContent_Dashboard {
 	
 	public void uncheck_AppendTimestamp() {
 		ElementActions.click(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty);
+	}
+	
+	public void assert_invalidFileName_errorMessage() {
+		String errorMessage = testDataReader.getCellData("InvalidFileNameErrorMessage");
+		String[] specialCharacters = {"\\","/","?","*",":","\"","<",">","|"};
+		errorMessage = JavaActions.replaceRegex(specialCharacters, errorMessage);
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_invalidFileName, "text",errorMessage, true);
+	}
+	
+	public void SendDashboard_assert_placeholder_ToField(){
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_emailAddress_textBox, "placeholder",testDataReader.getCellData("ToPlaceholder"), true);
+	}
+	
+	public void SendDashboard_assert_placeholder_CcBccField(){
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_emailAddress_textBox, "placeholder",testDataReader.getCellData("CcBccPlaceholder"), true);
+	}
+	
+	public void SendDashboard_assert_no_searchResult() {
+		Assertions.assertElementExists(driver, popup_sendDashboard_firstemail_searchresult, false);
 	}
 }
