@@ -39,7 +39,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_Screen_IsOpened() {
 		navigate_to_sendDashboard();
-		dashboardPage.scheduleSendDashboard_assert_ScreenIsOpened();
+		dashboardPage.scheduleSendDashboard_assert_screenIsOpened();
 	}
 
 	@Test(priority = 2, description = "C76806 - Firefox: Fresh Installation: Testing that 'Subject' field is displayed in 'Send Dashboard' window")
@@ -47,8 +47,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SubjectField_Displayed_SendDashboard() {
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_subjectField_exist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Subject");
+		dashboardPage.scheduleSendDashboard_assert_subjectField_exist();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Subject");
 	}
 
 	@Test(priority = 3, description = "C76807 - Firefox: Fresh Installation: Testing that 'Body' field is displayed in 'Send Dashboard' window")
@@ -57,7 +57,7 @@ public class SendDashboardTest {
 	public void Assert_BodyField_Displayed_SendDashBoard() {
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_assert_bodyField_exist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Body");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Body");
 	}
 
 	@Test(priority = 4, description = "C76808 - Firefox: Fresh Installation: Testing that 'Hide Notification Text' Check box is displayed in 'Send Dashboard' window")
@@ -65,9 +65,9 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationTextField_Displayed_SendDashBoard() {
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Hide Notification Text");
-		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
+		dashboardPage.scheduleSendDashboard_assert_hideNotificationText_checkbox_unchecked();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Hide Notification Text");
+		dashboardPage.scheduleSendDashboard_assert_hideNotificationText_toolTipIsDisplayed();
 	}
 
 	@Test(priority = 5, description = "C76809 - Firefox: Fresh Installation: Testing that when selecting HTML Option no File name can be added")
@@ -76,10 +76,10 @@ public class SendDashboardTest {
 	public void Assert_Selecting_HTML_Option_InSendDashBoard() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
-		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
-		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("html");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.scheduleSendDashboard_assert_fileNameFieldExist();
+		dashboardPage.sendDashboard_assert_typeOfEmailDescription("html");
+		dashboardPage.scheduleSendDashboard_assert_appendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 
@@ -89,11 +89,11 @@ public class SendDashboardTest {
 	public void Assert_Selecting_XLSX_Option_InSendDashBoard() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
-		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.scheduleSendDashboard_assert_fileNameFieldExist();
+		dashboardPage.scheduleSendDashboard_assert_appendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
-		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("xlsx");
+		dashboardPage.sendDashboard_assert_typeOfEmailDescription("xlsx");
 	}
 
 	@Test(priority = 7, description = "C76811 - Firefox: Fresh Installation: Verify that when selecting 'CSV', the option of fixed file name is displayed")
@@ -102,10 +102,10 @@ public class SendDashboardTest {
 	public void Assert_Selecting_CSV_Option_InSendDashBoard() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
-		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
-		dashboardPage.sendDashboard_assert_TypeOfEmailDescription("csv");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.scheduleSendDashboard_assert_fileNameFieldExist();
+		dashboardPage.sendDashboard_assert_typeOfEmailDescription("csv");
+		dashboardPage.scheduleSendDashboard_assert_appendTimestamp_checkbox_checked();
 		dashboardPage.sendDashboard_assert_dashboardNameIsFileName(testDataReader.getCellData("DashboardName"));
 	}
 
@@ -114,8 +114,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_To_MailReceipents_Displayed() {
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("To");
 	}
 
 	@Test(priority = 9, description = "C76813 - Firefox: Fresh Installation: Verify that 'Cc' section is displayed in 'Send Dashboard' Window")
@@ -123,8 +123,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Cc_MailReceipents_Displayed() {
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Cc");
 	}
 
 	@Test(priority = 10, description = "C76814 - Firefox: Fresh Installation: Verify that 'Bcc' section is displayed in 'Send Dashboard' Window")
@@ -132,8 +132,8 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Bcc_MailReceipents_Displayed() {
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
 
 	// Prerequisites: Admin user + dashboard created
@@ -149,10 +149,10 @@ public class SendDashboardTest {
 		navigate_to_sendDashboard();
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -174,11 +174,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		String subject = dashboardPage.ScheduleSendDashboard_AddSubjectName();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String subject = dashboardPage.scheduleSendDashboard_addSubjectName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -200,11 +200,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("Arabic"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -226,11 +226,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("SpecialCharacters"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -253,11 +253,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("NonEnglish"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -280,11 +280,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("Numbers"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -306,11 +306,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		String body = dashboardPage.SendDashboard_AddBodyName();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String body = dashboardPage.sendDashboard_addBodyName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -333,11 +333,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("SpecialCharacters"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addBodyName(testDataReader.getCellData("SpecialCharacters"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -360,11 +360,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("Arabic"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addBodyName(testDataReader.getCellData("Arabic"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -386,11 +386,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("Numbers"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addBodyName(testDataReader.getCellData("Numbers"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -412,11 +412,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("NonEnglish"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addBodyName(testDataReader.getCellData("NonEnglish"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -439,11 +439,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("BodyWithEnter"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addBodyName(testDataReader.getCellData("BodyWithEnter"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -465,10 +465,10 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -490,10 +490,10 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -516,11 +516,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_addSubjectField(testDataReader.getCellData("LongSubject"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -542,11 +542,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addBodyName(testDataReader.getCellData("LongBody"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -568,12 +568,12 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		String body = dashboardPage.SendDashboard_AddBodyName();
-		dashboardPage.ScheduleSendDashboard_Click_HideNotificationText_checkbox();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String body = dashboardPage.sendDashboard_addBodyName();
+		dashboardPage.scheduleSendDashboard_click_hideNotificationText_checkbox();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -597,11 +597,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		String body = dashboardPage.SendDashboard_AddBodyName();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		String body = dashboardPage.sendDashboard_addBodyName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -625,11 +625,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.ScheduleSendDashboard_Click_HideNotificationText_checkbox();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_click_hideNotificationText_checkbox();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -653,10 +653,10 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -680,14 +680,14 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_AddBodyName();
-		dashboardPage.copy_Body_Text();
-		dashboardPage.paste_Text_Body();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_addBodyName();
+		dashboardPage.copy_body_text();
+		dashboardPage.paste_text_body();
 		String body = dashboardPage.GetBodyText();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -709,13 +709,13 @@ public class SendDashboardTest {
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.uncheck_AppendTimestamp();
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.uncheck_appendTimestamp();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 		
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -740,12 +740,12 @@ public class SendDashboardTest {
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("Arabic"));
+		dashboardPage.sendDashboard_addFileName(testDataReader.getCellData("Arabic"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 		
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -770,12 +770,12 @@ public class SendDashboardTest {
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 		
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -799,12 +799,12 @@ public class SendDashboardTest {
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.uncheck_AppendTimestamp();
+		dashboardPage.uncheck_appendTimestamp();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 		
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -829,13 +829,13 @@ public class SendDashboardTest {
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.uncheck_AppendTimestamp();
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.uncheck_appendTimestamp();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 		
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -862,12 +862,12 @@ public class SendDashboardTest {
 		String JobName = schedulerDashboardsPage.GetLastJobName();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.uncheck_AppendTimestamp();
+		dashboardPage.uncheck_appendTimestamp();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 		
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
@@ -891,7 +891,7 @@ public class SendDashboardTest {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("DashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("DashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("DashboardName"));
 
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Send");

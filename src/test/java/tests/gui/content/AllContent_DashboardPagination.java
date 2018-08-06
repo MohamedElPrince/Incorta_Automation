@@ -59,10 +59,10 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.assert_dashboardName(paginationDashboardName);
+		dashboardPage.assert_insightName(paginationInsightName);
 
-		dashboardPage.Pagination_Verify_UiElementsExist();
+		dashboardPage.pagination_verify_uiElementsExist();
 	}
 
 	@Test(priority = 2, description = "C77297 - Chrome: Table Insight: Verify that user can navigate to Next Page.", dependsOnMethods = {
@@ -81,14 +81,14 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.assert_dashboardName(paginationDashboardName);
+		dashboardPage.assert_insightName(paginationInsightName);
 
 		// first page = ^1 -
 		// last page = number of number$
 		// next page = ^(last record of current page + 1) -
 		// previous page = - (first record of current page -1) of
-		dashboardPage.Pagination_AssertThatNextButtonWorksAsExpected();
+		dashboardPage.pagination_assertThatNextButtonWorksAsExpected();
 	}
 
 	@Test(priority = 3, description = "C77298 - Chrome: Table Insight: Verify that user can navigate to Last Page.", dependsOnMethods = {
@@ -107,10 +107,10 @@ public class AllContent_DashboardPagination {
 	mainPage.SearchForContentAndOpenResult(paginationDashboardName);
 	
 	dashboardPage = new AllContent_Dashboard(driver);
-	dashboardPage.Assert_dashboardName(paginationDashboardName);
-	dashboardPage.Assert_insightName(paginationInsightName);
+	dashboardPage.assert_dashboardName(paginationDashboardName);
+	dashboardPage.assert_insightName(paginationInsightName);
 	
-	dashboardPage.Pagination_AssertThatLastButtonWorksAsExpected();
+	dashboardPage.pagination_assertThatLastButtonWorksAsExpected();
 	}
 	
 	@Test(priority = 4, description = "C77300 - Chrome: Table Insight: Verify that user can return back to first page.")
@@ -129,10 +129,10 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.assert_dashboardName(paginationDashboardName);
+		dashboardPage.assert_insightName(paginationInsightName);
 
-		dashboardPage.Pagination_AssertThatFirstButtontWorksAsExpected();
+		dashboardPage.pagination_assertThatFirstButtontWorksAsExpected();
 	}
 	
 
@@ -155,11 +155,11 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.assert_dashboardName(paginationDashboardName);
+		dashboardPage.assert_insightName(paginationInsightName);
 		
 		// Assert previous button is displayed and functional
-		dashboardPage.Pagination_AssertThatPreviousButtonWorksAsExpected();
+		dashboardPage.pagination_assertThatPreviousButtonWorksAsExpected();
 	}
 	
 	

@@ -362,8 +362,8 @@ public class CertificationPath {
 		mainPage.SearchForContentAndOpenResult(newDashboardName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
 	}
 
 	@Test(priority = 17, description = "TC017 - Validate Insight Data (Aggregated Table).", dependsOnMethods = {
@@ -376,25 +376,25 @@ public class CertificationPath {
 		mainPage.SearchForContentAndOpenResult(newDashboardName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
 
-		dashboardPage.AssertData_AggregatedTableContent("row", 1,
+		dashboardPage.assertData_aggregatedTableContent("row", 1,
 				testDataReader.getCellData("InsightDataRows", "Data1"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 2,
+		dashboardPage.assertData_aggregatedTableContent("row", 2,
 				testDataReader.getCellData("InsightDataRows", "Data2"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 3,
+		dashboardPage.assertData_aggregatedTableContent("row", 3,
 				testDataReader.getCellData("InsightDataRows", "Data3"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 4,
+		dashboardPage.assertData_aggregatedTableContent("row", 4,
 				testDataReader.getCellData("InsightDataRows", "Data4"));
 
-		dashboardPage.AssertData_AggregatedTableContent("measure", 1,
+		dashboardPage.assertData_aggregatedTableContent("measure", 1,
 				testDataReader.getCellData("InsightDataMeasures", "Data1"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 2,
+		dashboardPage.assertData_aggregatedTableContent("measure", 2,
 				testDataReader.getCellData("InsightDataMeasures", "Data2"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 3,
+		dashboardPage.assertData_aggregatedTableContent("measure", 3,
 				testDataReader.getCellData("InsightDataMeasures", "Data3"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 4,
+		dashboardPage.assertData_aggregatedTableContent("measure", 4,
 				testDataReader.getCellData("InsightDataMeasures", "Data4"));
 	}
 

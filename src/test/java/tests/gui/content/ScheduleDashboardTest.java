@@ -41,7 +41,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_ScheduleDashboardScreenIsOpened() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.scheduleSendDashboard_assert_ScreenIsOpened();
+		dashboardPage.scheduleSendDashboard_assert_screenIsOpened();
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -50,8 +50,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_JobNameField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.scheduleDashboard_assert_JobNameField_exist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Job Name");
+		dashboardPage.scheduleDashboard_assert_jobNameField_exist();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Job Name");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created + Job Already Created
@@ -61,9 +61,9 @@ public class ScheduleDashboardTest {
 	public void Assert_JobNameField_DoesNotAcceptDuplicate() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleDashboard_addJobName(testDataReader.getCellData("Automation_Scheduler_DuplicateJobName"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
 		dashboardPage.scheduleDashboard_assert_duplicateJobName_errorDisplayed();
 	}
 
@@ -73,8 +73,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_JobNameField_DoNotAcceptNULL_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_assert_scheduleButton_disabled();
 	}
 
@@ -85,7 +85,7 @@ public class ScheduleDashboardTest {
 	public void Assert_DescriptionField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleDashboard_assert_DescriptionField_exist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Description");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Description");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -94,8 +94,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SubjectField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_subjectField_exist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Subject");
+		dashboardPage.scheduleSendDashboard_assert_subjectField_exist();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Subject");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -105,7 +105,7 @@ public class ScheduleDashboardTest {
 	public void Assert_BodyField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleDashboard_assert_bodyField_exist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Body");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Body");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -114,7 +114,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationText_Label_Displayed() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Hide Notification Text");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Hide Notification Text");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -123,8 +123,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationText_Checkbox_WorksCorrectly() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
-		dashboardPage.ScheduleSendDashboard_assert_Click_HideNotificationText_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_assert_hideNotificationText_checkbox_unchecked();
+		dashboardPage.scheduleSendDashboard_assert_click_hideNotificationText_checkbox_checked();
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -133,7 +133,7 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_HideNotificationText_ToolTip_Displayed() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_toolTipIsDisplayed();
+		dashboardPage.scheduleSendDashboard_assert_hideNotificationText_toolTipIsDisplayed();
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -142,8 +142,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_ToField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("To");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -152,8 +152,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_CcField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Cc");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -162,8 +162,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_BccField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -173,9 +173,9 @@ public class ScheduleDashboardTest {
 	public void Assert_JobScreen_SaveChangesButton_WorksCorrectly() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleDashboard_addJobName(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -220,8 +220,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_FileNameField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.scheduleSendDashboard_assert_fileNameFieldExist();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("File Name");
 		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 	}
@@ -233,8 +233,8 @@ public class ScheduleDashboardTest {
 	public void Assert_WhenSelectHTML_FileNameField_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
-		dashboardPage.ScheduleSendDashboard_assert_FileNameFieldExist();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("File Name");
+		dashboardPage.scheduleSendDashboard_assert_fileNameFieldExist();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("File Name");
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -243,8 +243,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_AppendTimestamp_Displayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Append Timestamp");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Append Timestamp");
+		dashboardPage.scheduleSendDashboard_assert_appendTimestamp_checkbox_checked();
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -254,7 +254,7 @@ public class ScheduleDashboardTest {
 	public void Assert_selectHTML_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+		dashboardPage.scheduleSendDashboard_assert_appendTimeStamp_helpIsDisplayed();
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -264,7 +264,7 @@ public class ScheduleDashboardTest {
 	public void Assert_selectXLSX_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+		dashboardPage.scheduleSendDashboard_assert_appendTimeStamp_helpIsDisplayed();
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -274,7 +274,7 @@ public class ScheduleDashboardTest {
 	public void Assert_selectCSV_HoverOnAppendTimeStamp_MessageDisplayed_ScheduleDashBoard() {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+		dashboardPage.scheduleSendDashboard_assert_appendTimeStamp_helpIsDisplayed();
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
@@ -285,14 +285,14 @@ public class ScheduleDashboardTest {
 	public void Assert_DashboardScheduler_SavedWhenAddingNewFields() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectName();
-		String BodyName = dashboardPage.ScheduleDashboard_AddBodyName();
+		String SubjectName = dashboardPage.scheduleSendDashboard_addSubjectName();
+		String BodyName = dashboardPage.scheduleDashboard_addBodyName();
 		
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -347,11 +347,11 @@ public class ScheduleDashboardTest {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -372,12 +372,12 @@ public class ScheduleDashboardTest {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobWeeklyRecurrence"));
-		dashboardPage.scheduleDashboard_SelectDays_WeeklyRecurrence("Mon");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobWeeklyRecurrence"));
+		dashboardPage.scheduleDashboard_selectDays_weeklyRecurrence("Mon");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -400,11 +400,11 @@ public class ScheduleDashboardTest {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -426,11 +426,11 @@ public class ScheduleDashboardTest {
 		navigate_to_scheduleDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobNoRecurrence"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobNoRecurrence"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -452,10 +452,10 @@ public class ScheduleDashboardTest {
 	public void Assert_LongSubject_SavedNormally_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_AddSubjectName(testDataReader.getCellData("LongSubjectName"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleSendDashboard_addSubjectName(testDataReader.getCellData("LongSubjectName"));
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -522,11 +522,11 @@ public class ScheduleDashboardTest {
 	public void Assert_SubjectField_SavedAndSent_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		String SubjectName = dashboardPage.ScheduleSendDashboard_AddSubjectName();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		String SubjectName = dashboardPage.scheduleSendDashboard_addSubjectName();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -545,11 +545,11 @@ public class ScheduleDashboardTest {
 	public void Assert_bodyField_SavedAndSent_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		String BodyName = dashboardPage.ScheduleDashboard_AddBodyName();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		String BodyName = dashboardPage.scheduleDashboard_addBodyName();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -568,11 +568,11 @@ public class ScheduleDashboardTest {
 	public void Assert_HideNotificationtext_Enabled_SavedAndSent_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_assert_Click_HideNotificationText_checkbox_checked();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleSendDashboard_assert_click_hideNotificationText_checkbox_checked();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -591,11 +591,11 @@ public class ScheduleDashboardTest {
 	public void Assert_HideNotificationtext_Disabled_SavedAndSent_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleSendDashboard_assert_hideNotificationText_checkbox_unchecked();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -614,11 +614,11 @@ public class ScheduleDashboardTest {
 	public void Assert_AddCCMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_assert_scheduleButton_enabled();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -638,11 +638,11 @@ public class ScheduleDashboardTest {
 	public void Assert_AddBccMail_ToMailIsEmpty_ToNotGivingAnError_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_assert_scheduleButton_enabled();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -662,12 +662,12 @@ public class ScheduleDashboardTest {
 	public void Assert_SelectCSV_MailReceived_NamedByFileName_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
 		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
@@ -684,12 +684,12 @@ public class ScheduleDashboardTest {
 	public void Assert_SelectXLSX_MailReceived_NamedByFileName_ScheduleDashboard() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
 		dashboardPage.scheduleDashboard_assert_fileNameField_filledWithDashboardNameByDefault(
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
@@ -706,13 +706,13 @@ public class ScheduleDashboardTest {
 	public void Assert_fileNameIsDashboardName_WhenLeaveItBlankInScheduleDashboard_selectXLSX() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.scheduleDashboard_TypeFileNameField("");
+		dashboardPage.scheduleDashboard_typeFileNameField("");
 
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -733,13 +733,13 @@ public class ScheduleDashboardTest {
 	public void Assert_fileNameIsDashboardName_WhenLeaveItBlankInScheduleDashboard_selectCSV() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.scheduleDashboard_TypeFileNameField("");
+		dashboardPage.scheduleDashboard_typeFileNameField("");
 
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -761,13 +761,13 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_assert_appendTimestamp_checkbox_checked();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -789,13 +789,13 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		dashboardPage.scheduleSendDashboard_assert_appendTimestamp_checkbox_checked();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
-		dashboardPage.scheduleDashboard_CSV_XLSX_ClickOK();
+		dashboardPage.scheduleDashboard_click_schedule();
+		dashboardPage.scheduleDashboard_csv_xlsx_clickOK();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -817,12 +817,12 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		String BodyText = dashboardPage.ScheduleDashboard_AddBodyName();
-		String SubjectText = dashboardPage.ScheduleSendDashboard_AddSubjectName();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		String BodyText = dashboardPage.scheduleDashboard_addBodyName();
+		String SubjectText = dashboardPage.scheduleSendDashboard_addSubjectName();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -844,11 +844,11 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_AddSubjectName(testDataReader.getCellData("ArabicSubject"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleSendDashboard_addSubjectName(testDataReader.getCellData("ArabicSubject"));
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -869,11 +869,11 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_AddSubjectName(testDataReader.getCellData("SpecialCharactersSubject"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleSendDashboard_addSubjectName(testDataReader.getCellData("SpecialCharactersSubject"));
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -896,11 +896,11 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("LongBody"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addBodyName(testDataReader.getCellData("LongBody"));
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -921,11 +921,11 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("BodyWithSpacesAndEnter"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addBodyName(testDataReader.getCellData("BodyWithSpacesAndEnter"));
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -946,11 +946,11 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("ArabicSubject"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addBodyName(testDataReader.getCellData("ArabicSubject"));
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -971,11 +971,11 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleDashboard_AddBodyName(testDataReader.getCellData("SpecialCharactersSubject"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addBodyName(testDataReader.getCellData("SpecialCharactersSubject"));
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1004,15 +1004,15 @@ public class ScheduleDashboardTest {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("AutomationDashboardPrompts"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("AutomationDashboardPrompts"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardPrompts"));
 		
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
 		
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1036,17 +1036,17 @@ public class ScheduleDashboardTest {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("AutomationDashboardPrompts"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("AutomationDashboardPrompts"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardPrompts"));
 		
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
 		
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.ScheduleSendDashboard_assert_Click_HideNotificationText_checkbox_checked();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleSendDashboard_assert_click_hideNotificationText_checkbox_checked();
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1070,18 +1070,18 @@ public class ScheduleDashboardTest {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("AutomationDashboardAppliedFilter"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("AutomationDashboardAppliedFilter"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardAppliedFilter"));
 		
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
 		
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_AddRecurrence("Daily");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addRecurrence("Daily");
 	    dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
 		
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1105,18 +1105,18 @@ public class ScheduleDashboardTest {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("AutomationDashboardPresentationVariables"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("AutomationDashboardPresentationVariables"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardPresentationVariables"));
 		
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
 		
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_AddRecurrence("Daily");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addRecurrence("Daily");
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
 		
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1140,18 +1140,18 @@ public class ScheduleDashboardTest {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("AutomationDashboardBookmark"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("AutomationDashboardBookmark"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardBookmark"));
 		
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
 		
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_AddRecurrence("Daily");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addRecurrence("Daily");
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
 		
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1170,12 +1170,12 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
-		dashboardPage.scheduleDashboard_dailyRecurrence_RepeatType("Minute", "20");
-		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+		dashboardPage.scheduleDashboard_dailyRecurrence_repeatType("Minute", "20");
+		dashboardPage.scheduleDashboard_select_jobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1199,13 +1199,13 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
-		dashboardPage.scheduleDashboard_dailyRecurrence_RepeatType("Hour", "20");
-		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
-		dashboardPage.scheduleDashboard_Repeate_SelectEndBy(testDataReader.getCellData("ScheduleJobDate"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+		dashboardPage.scheduleDashboard_dailyRecurrence_repeatType("Hour", "20");
+		dashboardPage.scheduleDashboard_select_jobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
+		dashboardPage.scheduleDashboard_repeate_selectEndBy(testDataReader.getCellData("ScheduleJobDate"));
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1229,12 +1229,12 @@ public class ScheduleDashboardTest {
 	{
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
+		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
 		dashboardPage.scheduleDashboard_monthlyRecurrence_selectType_2ndOption("Week", "2nd", "Sun", "11");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.scheduleDashboard_select_jobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1256,12 +1256,12 @@ public class ScheduleDashboardTest {
 	public void Assert_DashboardScheduler_workingWithDifferentTimeZones() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
-		dashboardPage.scheduleDashboard_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
+		dashboardPage.scheduleDashboard_select_jobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
 		
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 
-		dashboardPage.scheduleDashboard_Click_schedule();
+		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -1314,7 +1314,7 @@ public class ScheduleDashboardTest {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
