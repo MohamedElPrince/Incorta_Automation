@@ -16,9 +16,9 @@ public class AllContent_Dashboard {
 	//// Elements
 	By header_dashboardName_textBox = By.xpath("//div[@id='dashboardHeader']//input");
 	By body_insightName_label = By.xpath("//header/span");
-
 	By body_aggregatedTable_dataCell_text;
 
+	//Send Dashboard pop up elements
 	By popup_sendDashboard_type_radioButton; // label[normalize-space(.)='HTML']/input[@type='radio']
 	By popup_sendDashboard_plusReciever_button = By
 			.xpath("//*[contains(@ng-click,\"!error && goToState('addUsers', 'to')\")]");
@@ -35,36 +35,35 @@ public class AllContent_Dashboard {
 	By popup_sendDashboard_HideNotificationText_toolTip = By.xpath("//i[@class='fa fa-question-circle notification-info-icon']");
 	By popup_sendDashboard_HideNotificationText_toolTip_text;
 	By popup_sendDashboard_FileNameField = By.name("fileName");
-	By popup_ScheduleSendDashboardScreens = By.id("send-dashboard-modal");
 	By popup_sendDashboard_selectOutputFormat;
-	By popup_dashboard_menu_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
-	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
 	By popup_sendDashboard_fileName_text = By.xpath("//input[@name='fileName']");
-	By popup_scheduleScreen_recurrenceFrequency_radioButton;
-	By popup_scheduleScreen_dailyRecurrence_Type;
-	By popup_scheduleScreen_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
-//	By popup_scheduleScreen_startByTimeZone_textBox = By
-//			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
-	By popup_scheduleScreen_monthleyRecurrence_Type_radioButton;
-	By popup_scheduleScreen_monthleyRecurrence_Type_DayNumber = By.xpath("//select[@name='nth']");
-	By popup_scheduleScreen_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
-	By popup_scheduleScreen_monthleyRecurrence_Type_DayOfMonth = By.xpath("(//input[@type='radio'][@value='Week']/parent::div/input)[last()]");
-	By popup_scheduleScreen_weeklyRecurrence_days;
-	By popup_scheduleScreen_EndBy = By.xpath("//div[@class='flex-box']/label[contains(string(),'End By')]/input");
-	By popup_scheduleScreen_EndBy_Date = By.xpath("//div[@class='flex-box']//input[contains(@class,'ws-date')]");
+	By popup_sendDashboard_subject_textBox = By.name("subject");
+	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
+	By popup_sendDashboard_EmailPlus_Button;
+	By popup_sendDashboard_toolTips;
+	
+	//Schedule Dashboard pop up elements
+	By popup_scheduleDashboard_emailAddress_textBox = By.xpath("//input[@ng-model='$ctrl.entitySearchText']");
+	By popup_scheduleDashboard_recurrenceFrequency_radioButton;
+	By popup_scheduleDashboard_dailyRecurrence_Type;
+	By popup_scheduleDashboard_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
+	By popup_scheduleDashboard_monthleyRecurrence_Type_radioButton;
+	By popup_scheduleDashboard_monthleyRecurrence_Type_DayNumber = By.xpath("//select[@name='nth']");
+	By popup_scheduleDashboard_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
+	By popup_scheduleDashboard_monthleyRecurrence_Type_DayOfMonth = By.xpath("(//input[@type='radio'][@value='Week']/parent::div/input)[last()]");
+	By popup_scheduleDashboard_weeklyRecurrence_days;
+	By popup_scheduleDashboard_EndBy_RadioButton = By.xpath("//div[@class='flex-box']/label[contains(string(),'End By')]/input");
+	By popup_scheduleDashboard_EndBy_Date_Field = By.xpath("//div[@class='flex-box']//input[contains(@class,'ws-date')]");
+	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
+	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
+	By popup_scheduleDashboard_appendTimestamp_helpIcon=By.xpath("//i[contains(@class,'timestamp-info-icon')]");
+	By popup_scheduleDashboard_appendTimestamp_helpIcon_text;
+	By popup_scheduleDashboard_CSV_OK_Button = By.xpath("//button[contains(text(),'Ok')]"); 
+	By popup_scheduleDashboard_DuplicateJobName_ErrorMessage;
+	By popup_scheduleDashboard_body_textBox = By.xpath("//textarea[@name='description']");
 
-	// Pagination Elements
-	By body_insight_paginationFirst_button = By.xpath(
-			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')]/following-sibling::i/parent::a");
-	By body_insight_paginationPrevious_button = By.xpath(
-			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
-	By body_insight_paginationNumberOfRecords_text = By.xpath(
-			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/span[contains(text(),'of')][contains(text(),'-')]");
-	By body_insight_paginationNext_button = By.xpath(
-			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
-	By body_insight_paginationLast_button = By.xpath(
-			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");
-
+	//Common Elements between [Schedule / Send] Dashboard pop ups
+	By popup_ScheduleSendDashboardScreens = By.id("send-dashboard-modal");
 	By popup_scheduleSendDashboard_jobName_textBox = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//input[@name='jobName']");
 	By popup_scheduleSendDashboard_description_textBox = By
@@ -78,30 +77,29 @@ public class AllContent_Dashboard {
 	By popup_scheduleSendDashboard_recurrenceFrequency_radioButton;
 	By popup_scheduleSendDashboard_schedule_button = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//button[@ng-click='$ctrl.scheduleJob()']");
-	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[@ng-click='$ctrl.updateJob()']");
-	By popup_sendDashboard_subject_textBox = By.name("subject");
-	By popup_scheduleDashboard_jobName_textBox = By.name("jobName");
-	By popup_scheduleDashboard_description_textBox = By.xpath("//input[@name='description']");
-	By popup_sendDashboard_body_textBox = By.xpath("//textarea[@name='body']");
-	By popup_sendDashboard_EmailPlusButton;
-	By popup_sendDashboard_toolTips;
-	By popup_scheduleDashboard_appendTimestamp_helpIcon=By.xpath("//i[contains(@class,'timestamp-info-icon')]");
-	By popup_scheduleDashboard_appendTimestamp_helpIcon_text;
-	By popup_scheduleDashboard_CSV_OK_Button = By.xpath("//button[contains(text(),'Ok')]"); 
 	
-	By popup_FromDatePickerTable;
-	By popup_dashboard_menu_share_SearchList;
-	By popup_dashboard_menu_User_List;
-	By dashboards_menu_button;
-	By popup_dashboard_menu_share_SearchtextBox = By.xpath("//input[@ng-model='$parent.$parent.entitySearchText']");
-	By popup_dashboard_menu_share_SearchSaveButton = By.xpath("//button[@type='submit'][normalize-space()='Save']");
-	By popup_dashboard_menu_share_DoneButton = By
-			.xpath("//button[@class='btn btn-default userSaveBtn'][normalize-space()='Done']");
-	By popup_dashboard_menu_SharedWithList;
-	By popup_schedulerDashboard_DuplicateJobName_ErrorMessage;
-	By popup_scheduleDashboard_body_textBox = By.xpath("//textarea[@name='description']");
+	// Pagination Elements
+	By body_insight_paginationFirst_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')]/following-sibling::i/parent::a");
+	By body_insight_paginationPrevious_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-left')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
+	By body_insight_paginationNumberOfRecords_text = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/span[contains(text(),'of')][contains(text(),'-')]");
+	By body_insight_paginationNext_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')][not(following-sibling::i)][not(preceding-sibling::i)]/parent::a");
+	By body_insight_paginationLast_button = By.xpath(
+			"// div[contains(@class,'ht_master')]//div[@class='table-rows-limit-msg']/a/i[contains(@class,'angle-right')]/following-sibling::i/parent::a");
 
-	//// Functions
+	//Activity Monitor Elements [Folder Options]
+	By popup_ActivityMonitor_Folder_share_button = By.xpath("//a[contains(@class,'shareFolder')]");
+	By popup_activityMonitor_Share_SelectUserFromSearchList;
+	By popup_ActivityMonitor_SharedWith_List;
+	By popup_ActivityMonitor_share_UserSearch_textBox = By.xpath("//input[@ng-model='$parent.$parent.entitySearchText']");
+	By popup_ActivityMonitor_share_SaveButton = By.xpath("//button[@type='submit'][normalize-space()='Save']");
+	By popup_ActivityMonitor_DoneButton = By
+			.xpath("//button[@class='btn btn-default userSaveBtn'][normalize-space()='Done']");
+
+	// Functions
 
 	public AllContent_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -109,13 +107,13 @@ public class AllContent_Dashboard {
 
 	public void Assert_shared_button_Active() {
 
-		Assertions.assertElementAttribute(driver, popup_dashboard_menu_share_button, "class", "shareFolder", true);
+		Assertions.assertElementAttribute(driver, popup_ActivityMonitor_Folder_share_button, "class", "shareFolder", true);
 
 	}
 
 	public void Assert_shared_button_dimmed() {
 
-		Assertions.assertElementAttribute(driver, popup_dashboard_menu_share_button, "class",
+		Assertions.assertElementAttribute(driver, popup_ActivityMonitor_Folder_share_button, "class",
 				"shareFolder dimmedAction", true);
 	}
 
@@ -314,9 +312,9 @@ public class AllContent_Dashboard {
 	 *            To Cc Bcc
 	 */
 	public void SendDashboard_Click_AddMailRecipientsType(String MailRecipientsType) {
-		popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'" + MailRecipientsType
+		popup_sendDashboard_EmailPlus_Button = By.xpath("//label[contains(text(),'" + MailRecipientsType
 				+ "')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
-		ElementActions.click(driver, popup_sendDashboard_EmailPlusButton);
+		ElementActions.click(driver, popup_sendDashboard_EmailPlus_Button);
 	}
 
 	// Create function for cancel for below
@@ -359,19 +357,19 @@ public class AllContent_Dashboard {
 	}
 
 	public void selectShareButton() {
-		ElementActions.click(driver, popup_dashboard_menu_share_button);
+		ElementActions.click(driver, popup_ActivityMonitor_Folder_share_button);
 	}
 
 	public void selectUsertoShareFromList(String name) {
 
-		popup_dashboard_menu_share_SearchList = By
+		popup_activityMonitor_Share_SelectUserFromSearchList = By
 				.xpath("//h5[@class='UserData left ng-binding'][contains(text(),'" + name + "')]");
-		popup_dashboard_menu_User_List = By.xpath("//h5[@class='left ng-binding'][contains(text(),'" + name + "')]");
-		ElementActions.type(driver, popup_dashboard_menu_share_SearchtextBox, name);
-		ElementActions.click(driver, popup_dashboard_menu_share_SearchList);
-		ElementActions.click(driver, popup_dashboard_menu_share_SearchSaveButton);
-		Assertions.assertElementExists(driver, popup_dashboard_menu_User_List, true);
-		ElementActions.click(driver, popup_dashboard_menu_share_DoneButton);
+		popup_ActivityMonitor_SharedWith_List = By.xpath("//h5[@class='left ng-binding'][contains(text(),'" + name + "')]");
+		ElementActions.type(driver, popup_ActivityMonitor_share_UserSearch_textBox, name);
+		ElementActions.click(driver, popup_activityMonitor_Share_SelectUserFromSearchList);
+		ElementActions.click(driver, popup_ActivityMonitor_share_SaveButton);
+		Assertions.assertElementExists(driver, popup_ActivityMonitor_SharedWith_List, true);
+		ElementActions.click(driver, popup_ActivityMonitor_DoneButton);
 
 	}
 
@@ -452,9 +450,9 @@ public class AllContent_Dashboard {
 	 *            To Cc Bcc
 	 */
 	public void ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed(String MailRecipientsType) {
-		popup_sendDashboard_EmailPlusButton = By.xpath("//label[contains(text(),'" + MailRecipientsType
+		popup_sendDashboard_EmailPlus_Button = By.xpath("//label[contains(text(),'" + MailRecipientsType
 				+ "')]/parent::div//following-sibling::div[@class='items-list-title']//i[@class = 'fa fa-plus']");
-		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlusButton, true);
+		Assertions.assertElementExists(driver, popup_sendDashboard_EmailPlus_Button, true);
 	}
 
 	public void sendDashboard_addSubjectField(String text) {
@@ -498,15 +496,11 @@ public class AllContent_Dashboard {
 		ElementActions.click(driver, popup_scheduleSendDashboard_schedule_button);
 	}
 
-	public void scheduleDashboard_JobScreen_Click_SaveChanges() {
-		ElementActions.click(driver, popup_JobScreen_SaveChanges_Button);
-	}
-
 	public void scheduleDashboard_assert_duplicateJobName_errorDisplayed() {
-		popup_schedulerDashboard_DuplicateJobName_ErrorMessage = By
+		popup_scheduleDashboard_DuplicateJobName_ErrorMessage = By
 				.xpath("//div[@ng-if='error']/div[@class='ng-binding']");
 	//	Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", testDataReader.getCellData("DuplicateJobNameErrorMessage"), true);
-		Assertions.assertElementAttribute(driver, popup_schedulerDashboard_DuplicateJobName_ErrorMessage, "text", "INC_004010050:Another SCHEDULER with the same name \\[Duplicate Job Name\\] already exists.", true);
+		Assertions.assertElementAttribute(driver, popup_scheduleDashboard_DuplicateJobName_ErrorMessage, "text", "INC_004010050:Another SCHEDULER with the same name \\[Automation_Scheduler_DuplicateJobName\\] already exists.", true);
 	}
 
 	public void ScheduleDashboard_TypeEmailAndClickAdd(String Email) {
@@ -560,10 +554,10 @@ public class AllContent_Dashboard {
 	 */
 	public void scheduleDashboard_AddRecurrence(String recurrence)
 	{
-		popup_scheduleScreen_recurrenceFrequency_radioButton = By
+		popup_scheduleDashboard_recurrenceFrequency_radioButton = By
 				.xpath("//ng-form[@name='$ctrl.scheduleForm']//parent::label[normalize-space()='" + recurrence
 						+ "']/input[@type='radio']");
-		ElementActions.click(driver, popup_scheduleScreen_recurrenceFrequency_radioButton);
+		ElementActions.click(driver, popup_scheduleDashboard_recurrenceFrequency_radioButton);
 	}
 	
 	/**
@@ -583,11 +577,11 @@ public class AllContent_Dashboard {
 	 */
 	public void scheduleDashboard_monthlyRecurrence_selectType_2ndOption(String SelectType, String DayNumber, String DayOfWeek, String DayOfMonth)
 	{
-		popup_scheduleScreen_monthleyRecurrence_Type_radioButton = By.xpath("//input[@value='"+SelectType+"']");
-		ElementActions.click(driver, popup_scheduleScreen_monthleyRecurrence_Type_radioButton);
-		ElementActions.select(driver, popup_scheduleScreen_monthleyRecurrence_Type_DayNumber, DayNumber);
-		ElementActions.select(driver, popup_scheduleScreen_monthleyRecurrence_Type_DayOfWeek, DayOfWeek);
-		ElementActions.type(driver, popup_scheduleScreen_monthleyRecurrence_Type_DayOfMonth, DayOfMonth);
+		popup_scheduleDashboard_monthleyRecurrence_Type_radioButton = By.xpath("//input[@value='"+SelectType+"']");
+		ElementActions.click(driver, popup_scheduleDashboard_monthleyRecurrence_Type_radioButton);
+		ElementActions.select(driver, popup_scheduleDashboard_monthleyRecurrence_Type_DayNumber, DayNumber);
+		ElementActions.select(driver, popup_scheduleDashboard_monthleyRecurrence_Type_DayOfWeek, DayOfWeek);
+		ElementActions.type(driver, popup_scheduleDashboard_monthleyRecurrence_Type_DayOfMonth, DayOfMonth);
 	}
 	
 	/**
@@ -603,9 +597,9 @@ public class AllContent_Dashboard {
 	 */
 	public void scheduleDashboard_dailyRecurrence_RepeatType(String Type, String Number)
 	{
-		popup_scheduleScreen_dailyRecurrence_Type = By.xpath("//div[@ng-switch-when='Daily']//option[@value='"+Type+"']");
-		ElementActions.click(driver, popup_scheduleScreen_dailyRecurrence_Type);
-		ElementActions.type(driver, popup_scheduleScreen_dailyRecurrence_number, Number);
+		popup_scheduleDashboard_dailyRecurrence_Type = By.xpath("//div[@ng-switch-when='Daily']//option[@value='"+Type+"']");
+		ElementActions.click(driver, popup_scheduleDashboard_dailyRecurrence_Type);
+		ElementActions.type(driver, popup_scheduleDashboard_dailyRecurrence_number, Number);
 	}	
 	
 	public void scheduleDashboard_Select_JobTimeZone(String startByTimeZone)
@@ -626,8 +620,8 @@ public class AllContent_Dashboard {
 	 */
 	public void scheduleDashboard_SelectDays_WeeklyRecurrence(String Day)
 	{
-		popup_scheduleScreen_weeklyRecurrence_days = By.xpath("//input[@value ='"+Day+"']");
-		ElementActions.click(driver, popup_scheduleScreen_weeklyRecurrence_days);
+		popup_scheduleDashboard_weeklyRecurrence_days = By.xpath("//input[@value ='"+Day+"']");
+		ElementActions.click(driver, popup_scheduleDashboard_weeklyRecurrence_days);
 	}
 
 	public void scheduleDashboard_CSV_XLSX_ClickOK() {
@@ -657,8 +651,8 @@ public class AllContent_Dashboard {
 	
 	public void scheduleDashboard_Repeate_SelectEndBy(String Date)
 	{
-		ElementActions.click(driver, popup_scheduleScreen_EndBy);
-		ElementActions.type(driver, popup_scheduleScreen_EndBy_Date, Date);
+		ElementActions.click(driver, popup_scheduleDashboard_EndBy_RadioButton);
+		ElementActions.type(driver, popup_scheduleDashboard_EndBy_Date_Field, Date);
 	}
 	
 		public void uncheck_AppendTimestamp() {
