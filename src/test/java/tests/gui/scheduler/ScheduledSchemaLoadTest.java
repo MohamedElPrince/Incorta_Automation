@@ -1,4 +1,4 @@
-package test.gui.scheduler;
+package tests.gui.scheduler;
 
 import org.testng.annotations.Test;
 
@@ -30,7 +30,7 @@ public class ScheduledSchemaLoadTest {
 
 	// Declaring Page Objects that will be used throughout the test
 	Skeleton mainPage;
-	SchemaLoads schema_Schedule_View_Status;
+	SchemaLoads scheduledSchema;
 	Login loginPage;
 	// Declaring public variables that will be shared between tests
 
@@ -44,30 +44,30 @@ public class ScheduledSchemaLoadTest {
 	@Test(priority = 1, description = "C77127 - Firefox: Fresh Installation: Testing that the user can edit a Created Schema Job")
 	@Description("When I navigate to the schema load list page, And I select a  pre-created schema and edit it, Then  scheduled job can be edit and saved")
 	@Severity(SeverityLevel.NORMAL)
-	public void Scheduler_SchemaView_Can_be_Edited() {
+	public void ScheduledSchemaCanBeEdited() {
 
-		schema_Schedule_View_Status = new SchemaLoads(driver);
-		schema_Schedule_View_Status.Navigate_toURL();
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
 
 		// schema_Schedule_View_Status.Assert_SchemaJob_Created(testDataReader.getCellData("SchemaJobName_C77127"),
 		// testDataReader.getCellData("SchemaName")); to be deleted"Check schemaJob name
 		// available or not"
 
-		schema_Schedule_View_Status.select_schemaName(testDataReader.getCellData("SchemaJobName_C77127"),
+		scheduledSchema.select_schemaName(testDataReader.getCellData("SchemaJobName_C77127"),
 				testDataReader.getCellData("SchemaName"));
 
-		schema_Schedule_View_Status.Select_schema_scheduler_radio_button("Weekly");
-		schema_Schedule_View_Status.Select_SchemaSchedule_Weekly_day_CheckBox("Tue");
+		scheduledSchema.Select_schedulerSchema_radioButton("Weekly");
+		scheduledSchema.select_scheduleSchema_weeklyDay_CheckBox("Tue");
 
-		schema_Schedule_View_Status.Schema_Schedule_Click_Save_Changes_button_Button();
+		scheduledSchema.Click_scheduleSchema_saveChanges_button();
 
-		schema_Schedule_View_Status.Navigate_toURL();
-		schema_Schedule_View_Status.Assert_SchemaJob_Created(testDataReader.getCellData("SchemaJobName_C77127"),
+		scheduledSchema.Navigate_toURL();
+		scheduledSchema.assert_schemaJob_created(testDataReader.getCellData("SchemaJobName_C77127"),
 				testDataReader.getCellData("SchemaName"));
-		schema_Schedule_View_Status.select_schemaName(testDataReader.getCellData("SchemaJobName_C77127"),
+		scheduledSchema.select_schemaName(testDataReader.getCellData("SchemaJobName_C77127"),
 				testDataReader.getCellData("SchemaName"));
-		schema_Schedule_View_Status.Assert_SchemaScheduler_Radio_Button_selected("Weekly");
-		schema_Schedule_View_Status.Assert_SchemaSchedule_Weekly_day_CheckBox("Tue");
+		scheduledSchema.assert_schedulerSchema_radioButton_selected("Weekly");
+		scheduledSchema.Assert_scheduleSchema_weeklyDay_CheckBox("Tue");
 	}
 
 	// Admin user
@@ -77,20 +77,20 @@ public class ScheduledSchemaLoadTest {
 	@Test(priority = 2, description = "C77128 - Firefox: Fresh Installation: Testing that the user can delete a Created Schema Job")
 	@Description("When I navigate to the schema load list page, And I select a  pre-created schema delete it, Then  scheduled job deleted successfully ")
 	@Severity(SeverityLevel.NORMAL)
-	public void Scheduler_SchemaView_Can_be_Deleted() {
+	public void ScheduledSchemaCanJobBeDeleted() {
 
-		schema_Schedule_View_Status = new SchemaLoads(driver);
-		schema_Schedule_View_Status.Navigate_toURL();
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
 
-		schema_Schedule_View_Status.select_schemaNameCheckBox(testDataReader.getCellData("SchemaJobName_C77128"));
+		scheduledSchema.select_schemaNameCheckBox(testDataReader.getCellData("SchemaJobName_C77128"));
 
 		mainPage = new Skeleton(driver);
 		mainPage.Click_actions();
 		mainPage.Select_fromDropdownMenu("Delete selection");
 
-		schema_Schedule_View_Status.Select_Schema_Schedule_Click_Delete_Button();
+		scheduledSchema.Click_scheduleSchema_deleteButton();
 
-		schema_Schedule_View_Status.Assert_SchemaJob_Deleted(testDataReader.getCellData("SchemaJobName_C77128"),
+		scheduledSchema.Assert_schemaJob_deleted(testDataReader.getCellData("SchemaJobName_C77128"),
 				testDataReader.getCellData("SchemaName"));
 
 	}
@@ -103,20 +103,20 @@ public class ScheduledSchemaLoadTest {
 	@Test(priority = 3, description = "C77129 - Firefox: Fresh Installation: Testing that the user can Suspend a Schema job")
 	@Description("When I navigate to the schema load list page, And I changed the target schemajob status, Then  scheduled job status changed successfully ")
 	@Severity(SeverityLevel.NORMAL)
-	public void Scheduler_SchemaView_Can_Change_status_state() {
+	public void ScheduledSchemaStatusCanBeChange() {
 
-		schema_Schedule_View_Status = new SchemaLoads(driver);
-		schema_Schedule_View_Status.Navigate_toURL();
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
 
 		// schema_Schedule_View_Status.Schedule_Schema_JobStatus_Check(testDataReader.getCellData("SchemaName"),testDataReader.getCellData("SchemaJobName_C77129"),
 		// "Active");// to check the status o the created job"to be deleted"
 
-		schema_Schedule_View_Status.ChangeJobStatus_Filter("All");// to See All SchemaJobs
+		scheduledSchema.changejobStatusFilter("All");// to See All SchemaJobs
 
-		schema_Schedule_View_Status.Schedule_Schema_JobStatus_Change(testDataReader.getCellData("SchemaName"),
+		scheduledSchema.Change_scheduleSchema_JobStatus_(testDataReader.getCellData("SchemaName"),
 				testDataReader.getCellData("SchemaJobName_C77129"), "Active");
 
-		schema_Schedule_View_Status.Schedule_Schema_JobStatus_Check(testDataReader.getCellData("SchemaName"),
+		scheduledSchema.Assert_scheduleSchema_jobStatus(testDataReader.getCellData("SchemaName"),
 				testDataReader.getCellData("SchemaJobName_C77129"), "Suspended");
 
 	}
@@ -124,15 +124,15 @@ public class ScheduledSchemaLoadTest {
 	@Test(priority = 4, description = "C77130 - Firefox: Fresh Installation: Check Schema Jobs menu")
 	@Description("When I navigate to the schema load list page, And I cleck on schemajob status list, Then  All ststus list appears")
 	@Severity(SeverityLevel.NORMAL)
-	public void ALLScheduler_Schema_Status_Filters_verification() {
+	public void ALLScheduledSchema_statusFilters_verification() {
 
-		schema_Schedule_View_Status = new SchemaLoads(driver);
-		schema_Schedule_View_Status.Navigate_toURL();
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
 
-		schema_Schedule_View_Status.Verify_jobStatusOptionIsDisplayed("All");
-		schema_Schedule_View_Status.Verify_jobStatusOptionIsDisplayed("Active");
-		schema_Schedule_View_Status.Verify_jobStatusOptionIsDisplayed("Suspended");
-		schema_Schedule_View_Status.Verify_jobStatusOptionIsDisplayed("Completed");
+		scheduledSchema.verify_jobStatusOptionIsDisplayed("All");
+		scheduledSchema.verify_jobStatusOptionIsDisplayed("Active");
+		scheduledSchema.verify_jobStatusOptionIsDisplayed("Suspended");
+		scheduledSchema.verify_jobStatusOptionIsDisplayed("Completed");
 
 	}
 

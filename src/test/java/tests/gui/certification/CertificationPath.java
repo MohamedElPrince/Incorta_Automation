@@ -243,7 +243,7 @@ public class CertificationPath {
 	public void addDatasourceToSchemaUsingWizard() {
 		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
-		schemasPage.Click_schemaName(newSchemaName);
+		schemasPage.click_schemaName(newSchemaName);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
@@ -265,7 +265,7 @@ public class CertificationPath {
 	public void addDatafileToSchemaWithLoadFilter() {
 		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
-		schemasPage.Click_schemaName(newSchemaName);
+		schemasPage.click_schemaName(newSchemaName);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
@@ -294,7 +294,7 @@ public class CertificationPath {
 	public void fullLoadSchema() {
 		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
-		schemasPage.Click_schemaName(newSchemaName);
+		schemasPage.click_schemaName(newSchemaName);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
