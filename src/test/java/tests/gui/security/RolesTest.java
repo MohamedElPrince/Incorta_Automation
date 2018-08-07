@@ -609,7 +609,7 @@ public class RolesTest {
 		
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
-		dashboardPage.ScheduleSendDashboard_AddBodyNameAutomated();
+		dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndClickAdd(ToMail);
 		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");

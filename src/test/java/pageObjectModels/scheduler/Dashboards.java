@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.supportActionLibrary.JavaActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Dashboards {
@@ -29,6 +30,8 @@ public class Dashboards {
 	By body_Status;
 
 	By body_JobName;
+	By body_Last_JobName = By.xpath("(//p[@title='Sending Dashboard']//ancestor::div[contains(@class,'usersTableRow')]//p[contains(@title,'System generated')])[last()]");
+	
 	By popup_JobScreen_RemoveEmail_Button;
 	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[contains(text(),'Save Changes')]");
 	By popup_JobScreen_Email;
@@ -52,6 +55,12 @@ public class Dashboards {
 	By popup_jobScreen_selectOutputFormat;
 	By popup_confirmation_Delete_Cancel_ScheduleDashboard;
 	By popup_confirmation_Suspend_ScheduleDashboard;
+	By popup_sendDashboard_label_hideNotificationText_checkbox = By.xpath(
+			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+	
+	By popup_sendDashboard_FileNameField = By.name("fileName");
+	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath(
+			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
 
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -290,6 +299,61 @@ public class Dashboards {
 	public void ScheduleDashboard_Assert_StatusFiltersExist(String Status) {
 		body_StatusFilter_Options = By.xpath("//option[@value = '" + Status + "']");
 		Assertions.assertElementExists(driver, body_StatusFilter_Options, true);
+	}
+	
+	public String GetLastJobName() {
+		String JobName = ElementActions.getText(driver, body_Last_JobName);
+		return JobName;
+	}
+	
+	public void Assert_lastJobName(String PreviousJobName) {
+		Assertions.assertEquals(PreviousJobName, ElementActions.getText(driver, body_Last_JobName), false);
+	}
+	public void Click_On_LastJobName() {
+		ElementActions.click(driver, body_Last_JobName);
+	}
+	
+	public void Assert_SpecialCharacters_Subject(String SpecialCharactersSubject) {
+		String specialCharacters[] = {"@","#","$","^","&","*"};
+		SpecialCharactersSubject = JavaActions.replaceRegex(specialCharacters,SpecialCharactersSubject);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SpecialCharactersSubject, true);
+	}
+	
+	public void Assert_SpecialCharacters_Body(String SpecialCharactersBody) {
+		String specialCharacters[] = {"@","#","$","^","&","*"};
+		SpecialCharactersBody = JavaActions.replaceRegex(specialCharacters,SpecialCharactersBody);
+		Assertions.assertElementAttribute(driver,popup_JobScreen_BodyField , "text", SpecialCharactersBody, true);
+	}
+	
+	public void Assert_Subject_Value(String DashboardName) {
+		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", DashboardName, true);
+	}
+	
+	public void Assert_HideNotificationText_checkbox_checked() {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox,
+				"checked", "true", true);
+	}
+	
+	public void Assert_HideNotificationText_checkbox_unchecked() {
+		String Empty = "ng-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox,
+				"class", "([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
+	}
+	
+	public void Assert_FileName(String Expected_FileName) {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_FileNameField, "text", Expected_FileName, true);
+	}
+	
+	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked() {
+		String NotEmpty = "ng-not-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
+	}
+	
+	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked() {
+		String NotEmpty = "ng-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
 	}
 
 }
