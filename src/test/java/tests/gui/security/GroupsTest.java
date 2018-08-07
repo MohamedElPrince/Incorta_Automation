@@ -40,10 +40,10 @@ public class GroupsTest {
 
 	// Prerequisite, Login using Admin + A predefined group, user, role
 	// Prerequisites, To be created manually for now
-	String groupNameToBeSelected = "Abdelsalam_group_to_Delete";
-	String userNameAddedToTheGroup = "Abdelsalam_User";
-	String groupNameForTheUser = "Test_group";
-	String clickOnGroupName = "Abdelsalam_group_automation";
+	String groupNameToBeSelected = "Automation_Group_GroupToBeDeleted";
+	String userNameAddedToTheGroup = "Automation_User_NormalUser";
+	String groupNameForTheUser = "Automation_Group_AddUserToGroup";
+	String clickOnGroupName = "Automation_Group_AddRoleToGroup";
 
 	@Test(priority = 1, description = "TC_C474 - Create New Group.")
 	@Description("Given I've logged in. When I navigate to Security Tab, And go to Groups and click on the "

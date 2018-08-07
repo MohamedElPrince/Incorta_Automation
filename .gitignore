@@ -1,3 +1,11 @@
 /target/
+/target/classes/
 /test-output/
 /allure-results/
+/.settings/
+/.github/
+/.project
+/.DS_Store
+
+/bin/
+/.classpath
