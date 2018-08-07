@@ -24,6 +24,7 @@
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
+		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
 		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 
 		<!-- Version Numbers Properties -->
@@ -158,6 +159,7 @@
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
 							<defaultElementIdentificationTimeout>${defaultElementIdentificationTimeout}</defaultElementIdentificationTimeout>
+							<allureResultsFolderPath>${allureResultsFolderPath}</allureResultsFolderPath>
 							<automaticallyGenerateAllureReport>${automaticallyGenerateAllureReport}</automaticallyGenerateAllureReport>
 						</systemPropertyVariables>
 						<!-- To continue execution after validation errors are thrown in the 
