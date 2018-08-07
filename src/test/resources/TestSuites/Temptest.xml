@@ -5,9 +5,7 @@
 		<classes>
 			<class name="tests.gui.content.SendDashboardTest">
 				<methods>
-				<include name="Assert_SendDashboard_SharedFolder_CSV_ToField"/>
-				<include name="Assert_SendDashboard_SharedFolder_CSV_CcField"/>
-				<include name="Assert_SendDashboard_SharedFolder_CSV_BccField"/>
+				<include name="Assert_Subject_NotMandatory"/>
 				</methods>
 			</class>
 		</classes>
