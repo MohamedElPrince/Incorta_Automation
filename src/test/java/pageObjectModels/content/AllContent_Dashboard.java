@@ -323,20 +323,20 @@ public class AllContent_Dashboard {
 	//Need to update below function to be int instead of double after Mohab update in count function
 	public void Pagination_Assert_NumberOfRowsEqualTo_LastRecordInCurrentPageInPagination()
 	{
-		int lastRecordBeforeClickingNext = Pagination_GetLastRecordInCurrentPage();
-		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		double lastRecordBeforeClickingNext = Pagination_GetLastRecordInCurrentPage();
+		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(lastRecordBeforeClickingNext, CountTableRows, true);
 	}
 	//Need to update below function to be int instead of double after Mohab update in count function
 	public void Pagination_Assert_PageSizeEquelToNumberOfRowsInTable(String PageSize)
 	{
-		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(PageSize, CountTableRows, true);
 	}
 	//Need to update below function to be int instead of double after Mohab update in count function
 	public void Pagination_Assert_PageSizeNotEquelToNumberOfRowsInTable(String PageSize)
 	{
-		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(PageSize, CountTableRows, false);
 	}
 	

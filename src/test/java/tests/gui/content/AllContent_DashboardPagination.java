@@ -48,19 +48,16 @@ public class AllContent_DashboardPagination {
 	@Description("When I navigate to the target dashboard, then the correct UI elements (arrows and numbers) should exist")
 	@Severity(SeverityLevel.NORMAL)
 	public void verifyPaginationUiExists() {
-		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-		paginationInsightName = "7amada"; // to be removed
-
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_Verify_UiElementsExist();
 	}
@@ -70,19 +67,16 @@ public class AllContent_DashboardPagination {
 	@Description("When I navigate to the target dashboard, and I assert that the next button exists, and I click the next button, Then the first result displayed will be (the last result +1)")
 	@Severity(SeverityLevel.NORMAL)
 	public void assertThatNextButtonWorks() {
-		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-		paginationInsightName = "7amada"; // to be removed
-
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		// first page = ^1 -
 		// last page = number of number$
@@ -96,19 +90,16 @@ public class AllContent_DashboardPagination {
 	@Description("When I navigate to the target dashboard, and I assert that the Last Page button exists, and I click the Last Page button, Then the Last Page result displayed will be (the total of records)")
 	@Severity(SeverityLevel.NORMAL)
 	public void assertThatLastPageButtonWorks() {
-		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-		paginationInsightName = "7amada"; // to be removed
-
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_AssertThatLastButtonWorksAsExpected();
 	}
@@ -118,19 +109,16 @@ public class AllContent_DashboardPagination {
 			+ " and next I click the first button, Then the first record result displayed will be ( 1 ) sample: ( 1 - No. of TotalNumber)")
 	@Severity(SeverityLevel.NORMAL)
 	public void assertThatFirstButtontWorks() {
-		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-		paginationInsightName = "7amada"; // to be removed
-
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_AssertThatFirstButtontWorksAsExpected();
 	}
@@ -140,10 +128,6 @@ public class AllContent_DashboardPagination {
 	@Severity(SeverityLevel.NORMAL)
 
 	public void assert_Pagination_Previous_Button() {
-
-		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-		paginationInsightName = "7amada"; // to be removed
-
 		// Assert navigation to allContent page
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
@@ -151,11 +135,11 @@ public class AllContent_DashboardPagination {
 
 		// Search for dashboard name in search bar and open it
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		// Assert previous button is displayed and functional
 		dashboardPage.Pagination_AssertThatPreviousButtonWorksAsExpected();
@@ -166,19 +150,15 @@ public class AllContent_DashboardPagination {
 	@Description("When I navigate to the target dashboard, and I assert that the first arrow button disabled, and I click the next Page button, Then the all buttons is enabled")
 	@Severity(SeverityLevel.NORMAL)
 	public void assert_Pagination_Disabled_Buttons() {
-
-		paginationDashboardName = "Automation_Pivot_Pagination_Dashboard";
-		paginationInsightName = "Automation_Insight";
-
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(paginationDashboardName);
-		dashboardPage.Assert_insightName(paginationInsightName);
+		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_AssertThatFirstArrow_Disabled();
 		
@@ -196,7 +176,6 @@ public class AllContent_DashboardPagination {
 	@Description("When I navigate to the target dashboard, Then The Numbering of the pagination is correctly displayed")
 	@Severity(SeverityLevel.NORMAL)
 	public void assert_PaginationNumbering_Correct() {
-
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
@@ -250,9 +229,9 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
 		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_ClickOnEditInsight();
