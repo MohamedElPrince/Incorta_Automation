@@ -696,10 +696,10 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_XLSX_InvalidFileName() {
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("FileNameWithSpecialCharacters"));
+		dashboardPage.sendDashboard_addFileName(testDataReader.getCellData("FileNameWithSpecialCharacters"));
 		dashboardPage.sendDashboard_assert_sendButton_disabled();
 		dashboardPage.assert_invalidFileName_errorMessage();
 	}
@@ -712,11 +712,11 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -761,12 +761,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("Arabic"));
+		dashboardPage.sendDashboard_addFileName(testDataReader.getCellData("Arabic"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -785,12 +785,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -808,12 +808,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.uncheck_AppendTimestamp();
+		dashboardPage.uncheck_appendTimestamp();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -830,10 +830,10 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_CSV_InvalidFileName() {
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("FileNameWithSpecialCharacters"));
+		dashboardPage.sendDashboard_addFileName(testDataReader.getCellData("FileNameWithSpecialCharacters"));
 		dashboardPage.sendDashboard_assert_sendButton_disabled();
 		dashboardPage.assert_invalidFileName_errorMessage();
 	}
@@ -850,7 +850,7 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -869,12 +869,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -893,12 +893,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -917,12 +917,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -948,12 +948,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -972,12 +972,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -996,12 +996,12 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
-		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.scheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1020,7 +1020,7 @@ public class SendDashboardTest {
 	public void Assert_selectCSV_HoverOnAppendTimeStamp_MessageDisplayed_SendDashBoard() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+		dashboardPage.scheduleSendDashboard_assert_appendTimeStamp_helpIsDisplayed();
 	}
 
 	@Test(priority = 51, description = "C76855 - Firefox: Fresh Installation: Verify the tool tip of Amend time stamp is working in case of XLSX")
@@ -1030,7 +1030,7 @@ public class SendDashboardTest {
 	public void Assert_selectXLSX_HoverOnAppendTimeStamp_MessageDisplayed_SendDashBoard() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+		dashboardPage.scheduleSendDashboard_assert_appendTimeStamp_helpIsDisplayed();
 	}
 
 	@Test(priority = 52, description = "C76856 - Firefox: Fresh Installation: Verify that the user can add combination of Users and Groups in To / CC / Bcc")
@@ -1040,20 +1040,20 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1084,11 +1084,11 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_assert_placeholder_ToField();
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1106,7 +1106,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_SharedFolder_HTML_CcField() {
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
 		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.SendDashboard_assert_no_searchResult();
@@ -1118,7 +1118,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_SharedFolder_HTML_BccField() {
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
 		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.SendDashboard_assert_no_searchResult();
@@ -1133,11 +1133,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_assert_placeholder_ToField();
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1158,7 +1158,7 @@ public class SendDashboardTest {
 	public void Assert_SendDashboard_SharedFolder_XLSX_CcField() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
 		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.SendDashboard_assert_no_searchResult();
@@ -1171,7 +1171,7 @@ public class SendDashboardTest {
 	public void Assert_SendDashboard_SharedFolder_XLSX_BccField() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
 		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.SendDashboard_assert_no_searchResult();
@@ -1186,11 +1186,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_assert_placeholder_ToField();
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1211,7 +1211,7 @@ public class SendDashboardTest {
 	public void Assert_SendDashboard_SharedFolder_CSV_CcField() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
 		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.SendDashboard_assert_no_searchResult();
@@ -1224,7 +1224,7 @@ public class SendDashboardTest {
 	public void Assert_SendDashboard_SharedFolder_CSV_BccField() {
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
 		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.SendDashboard_assert_no_searchResult();
@@ -1239,9 +1239,9 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.uncheck_appendTimestamp();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
@@ -1266,11 +1266,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1294,12 +1294,12 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
-		dashboardPage.uncheck_AppendTimestamp();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
+		dashboardPage.uncheck_appendTimestamp();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1321,11 +1321,11 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
-		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1347,22 +1347,22 @@ public class SendDashboardTest {
 		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
-		dashboardPage.Click_Send_Dashboard();
+		dashboardPage.click_send_dashboard();
 
 		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
 
@@ -1407,7 +1407,7 @@ public class SendDashboardTest {
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Send");
 	}
-	
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
