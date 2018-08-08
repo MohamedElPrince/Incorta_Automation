@@ -136,16 +136,14 @@ public class SendDashboardTest {
 		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
 
-	// Prerequisites: Admin user + dashboard created
+	// Prerequisites: Admin user + dashboard created with name "Sending Dashboard" +
+	// Sending Dashboard is already sent before and completed job exists with name
+	// starts with System generated"
 	@Test(priority = 11, description = "C76815 - Firefox: Fresh installation: Verify that Subject is not mandatory field")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email without subject, Then It should be sent successfully and subject displayed successfully with dashboard name")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_Subject_NotMandatory() {
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
-
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 		navigate_to_sendDashboard();
 
 		dashboardPage = new AllContent_Dashboard(driver);
@@ -154,10 +152,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("DashboardName"));
 		// Need to check that mail is sent successfully with DashboardName as subject
 	}
@@ -167,23 +163,16 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_subject() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
-
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 		navigate_to_sendDashboard();
-
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		String subject = dashboardPage.scheduleSendDashboard_addSubjectName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_Subject_Value(subject);
 		// Need to check that mail is sent successfully with correct subject name
 	}
@@ -193,10 +182,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_Arabic_subject() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -206,10 +192,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("Arabic"));
 		// Need to check that mail is sent successfully with Arabic subject name
 	}
@@ -219,10 +203,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_SpecialCharacters_subject() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -232,10 +213,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_SpecialCharacters_Subject(testDataReader.getCellData("SpecialCharacters"));
 		// Need to check that mail is sent successfully with Special Characters subject
 		// name
@@ -246,10 +225,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_NonEnglish_subject() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -259,10 +235,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("NonEnglish"));
 		// Need to check that mail is sent successfully with non English Characters
 		// subject name
@@ -273,10 +247,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_numbers_subject() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -286,10 +257,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("Numbers"));
 		// Need to check that mail is sent successfully with Numbers subject name
 	}
@@ -299,10 +268,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_body() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -312,10 +278,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
 		// Need to check that mail is sent successfully with correct body
 
@@ -326,10 +290,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_body_specialCharacters() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -339,10 +300,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_SpecialCharacters_Body(testDataReader.getCellData("SpecialCharacters"));
 		// Need to check that mail is sent successfully with Special Characters in the
 		// body
@@ -353,10 +312,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_Arabic_body() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -366,10 +322,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("Arabic"));
 		// Need to check that mail is sent successfully with Arabic body
 	}
@@ -379,10 +333,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_numbers_body() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -392,10 +343,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("Numbers"));
 		// Need to check that mail is sent successfully with body containing numbers
 	}
@@ -405,10 +354,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_NonEnglish_body() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -418,10 +364,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("NonEnglish"));
 		// Need to check that mail is sent successfully with body containing NonEnglish
 		// characters
@@ -432,10 +376,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_bodyWithEnter() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -445,10 +386,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("BodyWithEnter"));
 		// Need to check that mail is sent successfully with body contains Enter
 	}
@@ -458,10 +397,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_without_body() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -470,10 +406,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
 		// Need to check that mail is sent successfully with Empty body
 	}
@@ -483,10 +417,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_without_bodyAndSubject() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -495,10 +426,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
 		// Need to check that mail is sent successfully with Empty body and subject
@@ -509,10 +438,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_long_subject() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -522,10 +448,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.Assert_Subject_Value(testDataReader.getCellData("LongSubject"));
 		// Need to check that mail is sent successfully with long subject
 	}
@@ -535,10 +459,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_long_body() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -548,10 +469,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("LongBody"));
 		// Need to check that mail is sent successfully with long body
 	}
@@ -561,10 +480,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_body_with_HideNotification() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -575,10 +491,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
 		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_checked();
 		// Need to check that mail is sent successfully with body and without
@@ -590,10 +504,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_body_without_HideNotification() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -603,10 +514,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
 		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_unchecked();
 		// Need to check that mail is sent successfully with body and with notification
@@ -618,10 +527,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_without_body_without_HideNotification() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -631,10 +537,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
 		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_checked();
 		// Need to check that mail is sent successfully without body and without
@@ -646,10 +550,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_without_body_with_HideNotification() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -658,10 +559,8 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed("");
 		schedulerDashboardsPage.Assert_HideNotificationText_checkbox_unchecked();
 		// Need to check that mail is sent successfully without body and with
@@ -673,10 +572,7 @@ public class SendDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_copyAndPasteText_body() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 
@@ -689,24 +585,18 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
 
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
-		
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(body);
 		// Need to check that mail is sent successfully with pasted text
 	}
-	
+
 	@Test(priority = 32, description = "C76836 - Firefox: Fresh Installation: Verify that When Selecting XLSX the user can add \"File name\"")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and correct file name")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_XLSX_FileType() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -716,28 +606,23 @@ public class SendDashboardTest {
 		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
-		
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
-		
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
 		schedulerDashboardsPage.Assert_FileName(FileName);
 		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
-		
-		// Need to check that mail is sent successfully with file type xlsx and correct file name 
+
+		// Need to check that mail is sent successfully with file type xlsx and correct
+		// file name
 	}
-	
+
 	@Test(priority = 33, description = "C76837 - Firefox: Fresh Installation: Verify that When Selecting XLSX the user can add \"File name\" With Arabic Characters")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and Arabic file name")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_XLSX_ArabicFileName() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -746,28 +631,23 @@ public class SendDashboardTest {
 		dashboardPage.sendDashboard_addFileName(testDataReader.getCellData("Arabic"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
-		
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
-		
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
 		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("Arabic"));
 		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
-		
-		// Need to check that mail is sent successfully with file type xlsx and arabic file name with timestamp 
+
+		// Need to check that mail is sent successfully with file type xlsx and arabic
+		// file name with timestamp
 	}
-	
+
 	@Test(priority = 34, description = "C76838 - Firefox: Fresh Installation: Verify that when selecting XLSX the user can amend timestamp to filename")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and timestamp appended to file name")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_XLSX_AppendTimestamp() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -776,27 +656,22 @@ public class SendDashboardTest {
 		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
-		
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
-		
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
 		schedulerDashboardsPage.Assert_FileName(FileName);
 		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
-		// Need to check that mail is sent successfully with file type xlsx and correct file name with timestamp appended to file name
+		// Need to check that mail is sent successfully with file type xlsx and correct
+		// file name with timestamp appended to file name
 	}
-	
+
 	@Test(priority = 35, description = "C76839 - Firefox: Fresh Installation: Verify that when selecting XLSX the dashboard name will be added by default in File Name field")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and default file name")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_XLSX_DefaultFileName() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -805,29 +680,60 @@ public class SendDashboardTest {
 		dashboardPage.uncheck_appendTimestamp();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
-		
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
-		
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
 		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
 		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
-		
-		// Need to check that mail is sent successfully with file type xlsx and default file name 
+
+		// Need to check that mail is sent successfully with file type xlsx and default
+		// file name
 	}
-	
-	@Test(priority = 36, description = "C76842 - Firefox: Fresh Installation: Verify that When Selecting CSV the user can add \"File name\"")
+
+	@Test(priority = 36, description = "C76840 - Firefox: Fresh Installation: Verify that when selecting XLSX verify that File name has same validation done when saving excel locally")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and enter XLSX File name with special characters,then validation error message should be displayed")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_XLSX_InvalidFileName() {
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("FileNameWithSpecialCharacters"));
+		dashboardPage.sendDashboard_assert_sendButton_disabled();
+		dashboardPage.assert_invalidFileName_errorMessage();
+	}
+
+	@Test(priority = 37, description = "C76841 - Firefox: Fresh Installation: Verify that when selecting XLSX and amend timestamp option the dashboard name will be dashboardname_Timestamp")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with XLSX File type, then It should be sent successfully with file type XLSX and default file name with timestamp")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_XLSX_DefaultFileName_withTimestamp() {
+
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+
+		// Need to check that mail is sent successfully with file type xlsx and default
+		// file name with timestamp
+	}
+
+	@Test(priority = 38, description = "C76842 - Firefox: Fresh Installation: Verify that When Selecting CSV the user can add \"File name\"")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with CSV File type, then It should be sent successfully with file type CSV and correct file name")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_CSV_FileType() {
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
-
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
@@ -836,51 +742,656 @@ public class SendDashboardTest {
 		String FileName = dashboardPage.sendDashboard_automated_addFileName();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
-		
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
-		schedulerDashboardsPage.Click_On_LastJobName();
-		
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
 		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
 		schedulerDashboardsPage.Assert_FileName(FileName);
 		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
-		
-		// Need to check that mail is sent successfully with file type csv and correct file name
+
+		// Need to check that mail is sent successfully with file type csv and correct
+		// file name
 	}
-	
-	
-	
-	@Test(priority = 37, description = "C76845 - Firefox: Fresh Installation: Verify that when selecting CSV the dashboard name will be added by default in File Name field")
+
+	@Test(priority = 39, description = "C76843 - Firefox: Fresh Installation: Verify that When Selecting CSV the user can add \"File name\" With Arabic Characters")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with CSV File type, then It should be sent successfully with file type XLSX and Arabic file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_CSV_ArabicFileName() {
+
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("Arabic"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("Arabic"));
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+
+		// Need to check that mail is sent successfully with file type csv and arabic
+		// file name with timestamp
+	}
+
+	@Test(priority = 40, description = "C76844 - Firefox: Fresh Installation: Verify that when selecting CSV the user can amend timestamp to filename")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with CSV File type, then It should be sent successfully with file type CSV and timestamp appended to file name")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_CSV_AppendTimestamp() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+		// Need to check that mail is sent successfully with file type csv and correct
+		// file name with timestamp appended to file name
+	}
+
+	@Test(priority = 41, description = "C76845 - Firefox: Fresh Installation: Verify that when selecting CSV the dashboard name will be added by default in File Name field")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with CSV File type, then It should be sent successfully with file type CSV and default file name")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_with_CSV_DefaultFileName() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		String JobName = schedulerDashboardsPage.GetLastJobName();
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.uncheck_AppendTimestamp();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
+
+		// Need to check that mail is sent successfully with file type csv and default
+		// file name
+	}
+
+	@Test(priority = 42, description = "C76846 - Firefox: Fresh Installation: Verify that when selecting CSV verify that File name has same validation done when saving CSV file locally")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and enter CSV File name with special characters,then validation error message should be displayed")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_with_CSV_InvalidFileName() {
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.SendDashboard_AddFileName(testDataReader.getCellData("FileNameWithSpecialCharacters"));
+		dashboardPage.sendDashboard_assert_sendButton_disabled();
+		dashboardPage.assert_invalidFileName_errorMessage();
+	}
+
+	@Test(priority = 43, description = "C76847 - Firefox: Fresh Installation: Verify that when selecting CSV and amend timestamp option the dashboard name will be dashboard name_Timestamp")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and sending email with CSV File type, then It should be sent successfully with file type CSV and default file name with timestamp")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_email_CSV_DefaultFileName_withTimestamp() {
+
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+
+		// Need to check that mail is sent successfully with file type csv and default
+		// file name with timestamp
+	}
+
+	@Test(priority = 44, description = "C76848 - Firefox: Fresh Installation:Verify that the user can send dashboard adding users in \"TO\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"TO\" field is displayed and user can add email to send dashboard to")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_ToField() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Cc", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("EmailAddress"));
+
+		// Need to check that mail is sent successfully to user email added to "To"
+		// field and "Cc"\"Bcc" is empty
+	}
+
+	@Test(priority = 45, description = "C76849 - Firefox: Fresh Installation: Verify that the user can send dashboard adding users in \"CC\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"CC\" field is displayed and user can add email to send dashboard to")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_CcField() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("EmailAddress"));
+
+		// Need to check that mail is sent successfully to user email added to "Cc"
+		// field and "To"\"Bcc" is empty
+	}
+
+	@Test(priority = 46, description = "C76850 - Firefox: Fresh Installation: Verify that the user can send dashboard adding users in \"Bcc\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"BCC\" field is displayed and user can add email to send dashboard to")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_BccField() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Cc", testDataReader.getCellData("EmailAddress"));
+
+		// Need to check that mail is sent successfully to user email added to "Bcc"
+		// field and "To"\"Cc" is empty
+	}
+
+	// Prerequisites:
+	// - Admin user
+	// - dashboard created with name "Sending Dashboard"
+	// - Sending Dashboard is already sent before and completed job exists with name
+	// starts with System generated"
+	// - group of certain users created and exists
+
+	@Test(priority = 47, description = "C76848 - Firefox: Fresh Installation:Verify that the user can send dashboard adding users in \"TO\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"TO\" field is displayed and user can add email to send dashboard to certain group")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_ToField_GroupOfUsers() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("To");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("To");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Cc", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("GroupToSendTo"));
+
+		// Need to check that mail is sent successfully to the group of useres added to
+		// "To" field and "Cc"\"Bcc" is empty
+	}
+
+	@Test(priority = 48, description = "C76849 - Firefox: Fresh Installation: Verify that the user can send dashboard adding users in \"CC\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"CC\" field is displayed and user can add email to send dashboard to to certain group")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_CcField_GroupOfUsers() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Cc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Cc");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("GroupToSendTo"));
+
+		// Need to check that mail is sent successfully to the group of useres added to
+		// "Cc" field and "To"\"Bcc" is empty
+	}
+
+	@Test(priority = 49, description = "C76850 - Firefox: Fresh Installation: Verify that the user can send dashboard adding users in \"Bcc\"")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"BCC\" field is displayed and user can add email to send dashboard to to certain group")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_BccField_GroupOfUsers() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.ScheduleSendDashboard_assert_labelsName_exist("Bcc");
+		dashboardPage.ScheduleSendDashboard_assert_MailRecipientsType_plusSignIsDisplayed("Bcc");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Cc", testDataReader.getCellData("GroupToSendTo"));
+
+		// Need to check that mail is sent successfully to the group of useres added to
+		// "Bcc" field and "To"\"Cc" is empty
+	}
+
+	@Test(priority = 50, description = "C76854 - Firefox: Fresh Installation: Verify the tool tip of Amend time stamp is working in case of CSV")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and choose CSV as File type, and hover on help icon of Append Timestamp\n"
+			+ ",then tool tip text should be displayed")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectCSV_HoverOnAppendTimeStamp_MessageDisplayed_SendDashBoard() {
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+
+	@Test(priority = 51, description = "C76855 - Firefox: Fresh Installation: Verify the tool tip of Amend time stamp is working in case of XLSX")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and choose XLSX as File type, and hover on help icon of Append Timestamp\n"
+			+ ",then tool tip text should be displayed")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_selectXLSX_HoverOnAppendTimeStamp_MessageDisplayed_SendDashBoard() {
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.ScheduleSendDashboard_assert_AppendTimeStamp_HelpIsDisplayed();
+	}
+
+	@Test(priority = 52, description = "C76856 - Firefox: Fresh Installation: Verify that the user can add combination of Users and Groups in To / CC / Bcc")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and add users and groups in TO, CC and BCC, then mail should be sent correctly to correct users")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_Combination_GroupsAndUsers() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("GroupToSendTo"));
+
+		// Need to check that mail is sent successfully to groups and useres added to
+		// "Bcc", "To" and "Cc"
+	}
+
+	// Prerequisites:
+	// - Admin user
+	// - dashboard created with name "Sending Dashboard"
+	// - Sending Dashboard is already sent before and completed job exists with name
+	// starts with System generated"
+	// - group of certain users created and exists
+	// - shared folder is configured through admin portal
+
+	@Test(priority = 53, description = "C76857-1 - Firefox: Fresh Installation: User can send dashboard to shared folder as HTML")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select HTML as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_HTML_ToField() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_assert_placeholder_ToField();
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Cc", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+
+		// Need to check that mail is sent successfully to sharedFolder added to "To"
+	}
+
+	@Test(priority = 54, description = "C76857-2 - Firefox: Fresh Installation: User can send dashboard to shared folder as HTML")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select HTML as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_HTML_CcField() {
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
+		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.SendDashboard_assert_no_searchResult();
+	}
+
+	@Test(priority = 55, description = "C76857-3 - Firefox: Fresh Installation: User can send dashboard to shared folder as HTML")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select HTML as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_HTML_BccField() {
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
+		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.SendDashboard_assert_no_searchResult();
+	}
+
+	@Test(priority = 56, description = "C76858-1 - Firefox: Fresh Installation: User can send dashboard to shared folder as XLSX")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select XLSX as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_XLSX_ToField() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_assert_placeholder_ToField();
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Cc", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+
+		// Need to check that XLSX file is sent successfully to sharedFolder added to
+		// "To"
+	}
+
+	@Test(priority = 57, description = "C76858-2 - Firefox: Fresh Installation: User can send dashboard to shared folder as XLSX")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select XLSX as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_XLSX_CcField() {
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
+		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.SendDashboard_assert_no_searchResult();
+	}
+
+	@Test(priority = 58, description = "C76858-3 - Firefox: Fresh Installation: User can send dashboard to shared folder as XLSX")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select XLSX as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_XLSX_BccField() {
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
+		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.SendDashboard_assert_no_searchResult();
+	}
+
+	@Test(priority = 59, description = "C76862-1 - Firefox: Fresh Installation: User can send dashboard to shared folder as CSV")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select CSV as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_CSV_ToField() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_assert_placeholder_ToField();
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Cc", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+
+		// Need to check that CSV file is sent successfully to sharedFolder added to
+		// "To"
+	}
+
+	@Test(priority = 60, description = "C76862-2 - Firefox: Fresh Installation: User can send dashboard to shared folder as CSV")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select CSV as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_CSV_CcField() {
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
+		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.SendDashboard_assert_no_searchResult();
+	}
+
+	@Test(priority = 61, description = "C76862-3 - Firefox: Fresh Installation: User can send dashboard to shared folder as CSV")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select CSV as file type, and add Shared Folder in TO, CC and BCC,"
+			+ "then mail should be sent correctly to shared folder in To & not appear in search result of CC & BCC")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_CSV_BccField() {
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_assert_placeholder_CcBccField();
+		dashboardPage.SendDashboard_TypeEmail(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.SendDashboard_assert_no_searchResult();
+	}
+
+	@Test(priority = 62, description = "C76859 - Firefox: Fresh Installation: User can send dashboard to shared folder as XLSX with fixed file name and no time stamp")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select XLSX as file type, and uncheck append timestamp and add Shared Folder in TO"
+			+ "then mail should be sent correctly to shared folder in To with file name and no timestamp")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_XLSX_ToField_noTimestamp() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
 		dashboardPage.uncheck_appendTimestamp();
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
 		dashboardPage.click_send_dashboard();
-		
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
+
+		// Need to check that XLSX file is sent successfully to sharedFolder added to
+		// "To" field with automated file name and no timestamp
+	}
+
+	@Test(priority = 63, description = "C76860 - Firefox: Fresh Installation: User can send dashboard to shared folder as XLSX with fixed file name and with timestamp")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select XLSX as file type, and check append timestamp and add Shared Folder in TO"
+			+ "then mail should be sent correctly to shared folder in To with file name and timestamp")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_XLSX_ToField_withTimestamp() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("xlsx");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+
+		// Need to check that XLSX file is sent successfully to sharedFolder added to
+		// "To" field with automated file name and with timestamp
+		// note: automated file name has timestamp, and timestamp is checked too, so
+		// when manually test this, you are supposed to find two timestamps
+	}
+
+	@Test(priority = 64, description = "C76863 - Firefox: Fresh Installation: User can send dashboard to shared folder as CSV with fixed file name and no time stamp")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select CSV as file type, and uncheck append timestamp and add Shared Folder in TO"
+			+ "then mail should be sent correctly to shared folder in To with file name and no timestamp")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_CSV_ToField_noTimestamp() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.uncheck_AppendTimestamp();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
+
+		// Need to check that CSV file is sent successfully to sharedFolder added to
+		// "To" field with automated file name and no timestamp
+	}
+
+	@Test(priority = 65, description = "C76864 - Firefox: Fresh Installation: User can send dashboard to shared folder as CSV with fixed file name and with timestamp")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and select CSV as file type, and check append timestamp and add Shared Folder in TO"
+			+ "then mail should be sent correctly to shared folder in To with file name and timestamp")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_SharedFolder_CSV_ToField_withTimestamp() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("csv");
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		String FileName = dashboardPage.SendDashboard_Automated_AddFileName();
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.Assert_FileName(FileName);
+		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
+		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked();
+
+		// Need to check that CSV file is sent successfully to sharedFolder added to
+		// "To" field with automated file name and with timestamp
+		// note: automated file name has timestamp, and timestamp is checked too, so
+		// when manually test this, you are supposed to find two timestamps
+	}
+
+	@Test(priority = 66, description = "C76866 - Firefox: Fresh Installation: User can add combination of Users , Groups , and Shared Folder")
+	@Description("When I navigate to the target dashboard, and I click on send dashboard, and add users, groups and shared folder in TO, CC and BCC, then mail should be sent correctly to correct users")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_SendDashboard_Combination_GroupsUsersSharedFolders() {
+		String LastJobName = navigateToSchedulerPage_CompletedFilter_getLastJob();
+
+		navigate_to_sendDashboard();
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
+		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
+		dashboardPage.sendDashboard_assert_sendButton_enabled();
+		dashboardPage.Click_Send_Dashboard();
+
+		navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(LastJobName);
+
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("SharedFolder"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("GroupToSendTo"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("EmailAddress"));
+		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("GroupToSendTo"));
+
+		// Need to check that mail is sent successfully to groups and useres and shared
+		// folder added to "Bcc", "To" and "Cc"
+	}
+
+	public void navigateToSchedulerPage_CompletedFilter_assertAndClickLastJob(String previousLastJob) {
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.Assert_lastJobName(JobName);
+		schedulerDashboardsPage.Assert_lastJobName(previousLastJob);
 		schedulerDashboardsPage.Click_On_LastJobName();
-		
-		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
-		schedulerDashboardsPage.Assert_FileName(testDataReader.getCellData("DashboardName"));
-		schedulerDashboardsPage.ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked();
-		
-		// Need to check that mail is sent successfully with file type csv and default file name 
 	}
-	
+
+	public String navigateToSchedulerPage_CompletedFilter_getLastJob() {
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
+		String JobName = schedulerDashboardsPage.GetLastJobName();
+		return JobName;
+	}
 
 	public void navigate_to_sendDashboard() {
 		allContentPage = new AllContent(driver);
