@@ -37,7 +37,7 @@ public class Skeleton {
 			.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 	By header_export_button_ExportOptions;
-	
+	By header_allContentDashboard_Settings_Button = By.xpath("//button[@id='dropdownMenu1']//img[contains(@src,'settings')]");
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
@@ -104,6 +104,11 @@ public class Skeleton {
 	{
 		ElementActions.click(driver, header_settings_button);
 	}
+		
+	public void click_settings_allContent_dashboard()
+	{
+		ElementActions.click(driver, header_allContentDashboard_Settings_Button);
+	}
 	
 	public void Select_fromDropdownMenu(String functionName) {
 		header_genericMenuItem_link = By
@@ -111,6 +116,9 @@ public class Skeleton {
 						+ functionName + "')][@role='menuitem' or @class='importExport']");
 		ElementActions.click(driver, header_genericMenuItem_link);
 	}
+	
+	
+	
 
 	public void Hover_overDropdownMenu(String functionName) {
 		header_genericMenuItem_link = By
