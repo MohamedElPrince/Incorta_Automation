@@ -15,14 +15,17 @@ public class NewUI_Header {
 	WebDriver driver;
 
 	//// Elements
-
-	By header_incortaLogo_image = By.xpath("//header//img[contains(@src,'incorta-white-logo')]");
-	By header_sectionHeader_link; // li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='Content']
-	By header_user_image = By.xpath("//header//div[@class='header-menu']//img");
-	By header_user_userName_label = By.className("header--user-details-name");
-	By header_user_userEmail_label = By.className("header--user-details-email");
-	By header_user_about_button = By.xpath("//header//span[text()='About']//ancestor::button");
-	By header_user_signOut_button = By.xpath("//header//span[text()='Sign Out']//ancestor::button");
+	// first menu
+	By navigationWrapper_incortaLogo_image = By
+			.xpath("//div[@class='nav-wrapper']//img[contains(@src,'incorta-white-logo')]");
+	By navigationWrapper_sectionHeader_link; // li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='Content']
+	By navigationWrapper_userMenu_image = By.xpath("//div[@class='nav-wrapper']//div[@class='header-menu']//img");
+	By navigationWrapper_userMenu_userName_label = By.className("header--user-details-name");
+	By navigationWrapper_userMenu_userEmail_label = By.className("header--user-details-email");
+	By navigationWrapper_userMenu_about_button = By
+			.xpath("//div[@class='nav-wrapper']//span[text()='About']//ancestor::button");
+	By navigationWrapper_userMenu_signOut_button = By
+			.xpath("//div[@class='nav-wrapper']//span[text()='Sign Out']//ancestor::button");
 
 	//// Functions
 	public NewUI_Header(WebDriver driver) {
@@ -30,7 +33,7 @@ public class NewUI_Header {
 	}
 
 	public void assert_incortaLogo_isDisplayed() {
-		Assertions.assertElementExists(driver, header_incortaLogo_image, true);
+		Assertions.assertElementExists(driver, navigationWrapper_incortaLogo_image, true);
 	}
 
 	public void verify_allSectionHeaders_areDisplayed() {
@@ -39,10 +42,10 @@ public class NewUI_Header {
 				"Security");
 
 		sectionNames.forEach((sectionName) -> {
-			header_sectionHeader_link = By
+			navigationWrapper_sectionHeader_link = By
 					.xpath("// li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='"
 							+ sectionName + "']");
-			Verifications.verifyElementExists(driver, header_sectionHeader_link, true);
+			Verifications.verifyElementExists(driver, navigationWrapper_sectionHeader_link, true);
 		});
 	}
 
@@ -55,10 +58,10 @@ public class NewUI_Header {
 	 *            "Security"
 	 */
 	public void assert_sectionHeader_isSelected(String sectionName) {
-		header_sectionHeader_link = By
+		navigationWrapper_sectionHeader_link = By
 				.xpath("// li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='"
 						+ sectionName + "']");
-		Assertions.assertElementAttribute(driver, header_sectionHeader_link, "class", ".*selected.*", true);
+		Assertions.assertElementAttribute(driver, navigationWrapper_sectionHeader_link, "class", ".*selected.*", true);
 	}
 
 	/**
@@ -69,14 +72,14 @@ public class NewUI_Header {
 	 *            "Security"
 	 */
 	public void navigate_toSection(String sectionName) {
-		header_sectionHeader_link = By
+		navigationWrapper_sectionHeader_link = By
 				.xpath("// li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='"
 						+ sectionName + "']");
-		ElementActions.click(driver, header_sectionHeader_link);
+		ElementActions.click(driver, navigationWrapper_sectionHeader_link);
 	}
 
 	public void expandUserMenu() {
-		ElementActions.click(driver, header_user_image);
+		ElementActions.click(driver, navigationWrapper_userMenu_image);
 	}
 
 	/**
@@ -86,7 +89,7 @@ public class NewUI_Header {
 	 * @param userName
 	 */
 	public void assert_userName(String userName) {
-		Assertions.assertElementAttribute(driver, header_user_userName_label, "text", userName, true);
+		Assertions.assertElementAttribute(driver, navigationWrapper_userMenu_userName_label, "text", userName, true);
 	}
 
 	/**
@@ -96,7 +99,7 @@ public class NewUI_Header {
 	 * @param userEmail
 	 */
 	public void assert_userEmail(String userEmail) {
-		Assertions.assertElementAttribute(driver, header_user_userEmail_label, "text", userEmail, true);
+		Assertions.assertElementAttribute(driver, navigationWrapper_userMenu_userEmail_label, "text", userEmail, true);
 
 	}
 
@@ -118,7 +121,7 @@ public class NewUI_Header {
 	 * Given that the userMenu is expanded, clicks the signOut button
 	 */
 	public void signOut() {
-		ElementActions.click(driver, header_user_signOut_button);
+		ElementActions.click(driver, navigationWrapper_userMenu_signOut_button);
 	}
 
 }

@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mohies</groupId>
 	<artifactId>SHAFT_ENGINE</artifactId>
-	<version>1.0.20180807</version>
+	<version>1.0.20180808</version>
 	<name>SHAFT_ENGINE</name>
 	<description>Selenium Hybrid Automation Framework for Testing [SHAFT]</description>
 
 
 	<properties>
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180807</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180808</shaft_engine.version>
 
 		<!-- Execution Properties -->
 		<!-- <testSuite.name>cucumber_testSuite</testSuite.name> -->
@@ -21,7 +21,7 @@
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge | Safari -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
-		<screenshooterFlag>Always</screenshooterFlag>
+		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
 		<executionAddress>local</executionAddress>
 		<!-- <executionAddress>localhost:4444</executionAddress> -->

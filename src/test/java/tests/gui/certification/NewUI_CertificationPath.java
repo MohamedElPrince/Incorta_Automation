@@ -18,6 +18,7 @@ import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;
 import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
+import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.data.DataFiles;
 import pageObjectModels.data.DataSources;
 import pageObjectModels.login.NewUI_Login;
@@ -41,9 +42,10 @@ public class NewUI_CertificationPath {
 
 	// Declaring Page Objects that will be used throughout the test
 	NewUI_Login newLoginPage;
+	NewUI_SignOut newSignOutPage;
 	NewUI_Header newHeaderObject;
 	NewUI_Content newContentPage;
-	NewUI_SignOut newSignOutPage;
+	NewUI_Content_Dashboard newDashboardPage;
 	Skeleton subHeaderObject;
 	Users usersPage;
 	Groups groupsPage;
@@ -310,8 +312,8 @@ public class NewUI_CertificationPath {
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		// String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
-		String initialLoadStatus = "Please load data";
+		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
+		// String initialLoadStatus = "Please load data";
 		subHeaderObject = new Skeleton(driver);
 		subHeaderObject.Click_load();
 		subHeaderObject.Hover_overDropdownMenu("Load now");
@@ -369,12 +371,25 @@ public class NewUI_CertificationPath {
 		newInsightName = analyzeInsightPage.setInsightName();
 		subHeaderObject.Click_done();
 
-		contentPage.Navigate_toURL(); //do this on new ui
-		subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
+		// contentPage.Navigate_toURL(); // do this on new ui
+		// subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
+		// dashboardPage = new AllContent_Dashboard(driver);
+		// dashboardPage.Assert_dashboardName(newDashboardName);
+		// dashboardPage.Assert_insightName(newInsightName);
 
-		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+		// newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		// newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
+		// newContentPage.navigate_toContentSearchResult(newDashboardName);
+		newContentPage.changeCatalogView("Table");
+		newContentPage.tableView_assert_contentTableEntry_exists(newDashboardName);
+		newContentPage.tableView_navigate_toContentTableEntry(newDashboardName);
+
+		newDashboardPage = new NewUI_Content_Dashboard(driver);
+		newDashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+		newDashboardPage.assert_insightName_isCorrect(newInsightName);
+
 	}
 
 	@Test(priority = 17, description = "TC017 - Validate Insight Data (Aggregated Table).", dependsOnMethods = {
@@ -382,31 +397,60 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the newly created insight, Then the insight will be displayed, And the data within it will be correct.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void validateInsightData() {
-		contentPage = new AllContent(driver);
-		contentPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
+		// contentPage = new AllContent(driver);
+		// contentPage.Navigate_toURL();
+		// subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+		// newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		// newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
+		// newContentPage.navigate_toContentSearchResult(newDashboardName);
+		newContentPage.changeCatalogView("Card");
+		newContentPage.cardView_navigate_toContentCard(newDashboardName);
 
-		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		// dashboardPage = new AllContent_Dashboard(driver);
+		// dashboardPage.Assert_dashboardName(newDashboardName);
+		// dashboardPage.Assert_insightName(newInsightName);
+		newDashboardPage = new NewUI_Content_Dashboard(driver);
 
-		dashboardPage.AssertData_AggregatedTableContent("row", 1,
+		// dashboardPage.AssertData_AggregatedTableContent("row", 1,
+		// testDataReader.getCellData("InsightDataRows", "Data1"));
+		// dashboardPage.AssertData_AggregatedTableContent("row", 2,
+		// testDataReader.getCellData("InsightDataRows", "Data2"));
+		// dashboardPage.AssertData_AggregatedTableContent("row", 3,
+		// testDataReader.getCellData("InsightDataRows", "Data3"));
+		// dashboardPage.AssertData_AggregatedTableContent("row", 4,
+		// testDataReader.getCellData("InsightDataRows", "Data4"));
+		//
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 1,
+		// testDataReader.getCellData("InsightDataMeasures", "Data1"));
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 2,
+		// testDataReader.getCellData("InsightDataMeasures", "Data2"));
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 3,
+		// testDataReader.getCellData("InsightDataMeasures", "Data3"));
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 4,
+		// testDataReader.getCellData("InsightDataMeasures", "Data4"));
+
+		newDashboardPage.aggregatedTable_assert_columnHeader_isCorrect(1, "Quarter");
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 1,
 				testDataReader.getCellData("InsightDataRows", "Data1"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 2,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 2,
 				testDataReader.getCellData("InsightDataRows", "Data2"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 3,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 3,
 				testDataReader.getCellData("InsightDataRows", "Data3"));
-		dashboardPage.AssertData_AggregatedTableContent("row", 4,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 4,
 				testDataReader.getCellData("InsightDataRows", "Data4"));
 
-		dashboardPage.AssertData_AggregatedTableContent("measure", 1,
+		newDashboardPage.aggregatedTable_assert_columnHeader_isCorrect(2, "Units");
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 1,
 				testDataReader.getCellData("InsightDataMeasures", "Data1"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 2,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 2,
 				testDataReader.getCellData("InsightDataMeasures", "Data2"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 3,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 3,
 				testDataReader.getCellData("InsightDataMeasures", "Data3"));
-		dashboardPage.AssertData_AggregatedTableContent("measure", 4,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 4,
 				testDataReader.getCellData("InsightDataMeasures", "Data4"));
+
 	}
 
 	@Test(priority = 18, description = "TC018 - Send Dashboard via email.", dependsOnMethods = {
@@ -444,7 +488,11 @@ public class NewUI_CertificationPath {
 		newContentPage.navigate_toURL();
 
 		logout();
-		loginUsingAdmin();
+
+		newLoginPage = new NewUI_Login(driver);
+		newLoginPage.navigate_toURL();
+		newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+				testDataReader.getCellData("Password"));
 	}
 
 	@Test(priority = 20, description = "TC020 - Delete User and Transfer Ownership to self.", dependsOnMethods = {
