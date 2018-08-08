@@ -50,16 +50,16 @@ public class RolesTest {
 
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
-	String FolderNameToDelete = "ahmed";
-	String FolderNameToShare = "Folder";
-	String UserToShareWithFolder = "Abdelsalam_User";
+	String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
+	String FolderNameToShare = "Automation_Folder_FolderToBeShared";
+	String UserToShareWithFolder = "Automation_User_UserToShareFolderWith";
 	String newDashboardName, newInsightName;
 	String NewSchemaName;
-	String ExistingSchemaNAME = "Abdelsalan_Automation_Schema"; // Existing Schema to be used as predefined
+	String ExistingSchemaNAME = "Automation_Schema_SchemaAddDataSource"; // Existing Schema to be used as predefined
 	String NewDataSourceTableName; // Table name to be used in assertion
-	String LoadDataSchema = "LoadDataSchema1";// Predefined Schema with data source to load data into it.
-	String ShareSchema = "ShareSchema";
-	String UserToShareWith = "AbdelsalamSuper"; // User To Share With as a predefined, he should be super user or schema
+	String LoadDataSchema = "Automation_Schema_SchemaLoad";// Predefined Schema with data source to load data into it.
+	String ShareSchema = "Automaton_Schema_SchemaShare";
+	String UserToShareWith = "Automation_User_UserToShareSchemaWith"; // User To Share With as a predefined, he should be super user or schema
 												// manager to grant 'Can Edit' permission
 	String DataSourceName;
 	String initialLoadStatus;

@@ -3,35 +3,18 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.content.SendDashboardTest">
+			<class name="tests.gui.security.RolesTest">
 				<methods>
-				<include name="Assert_Subject_NotMandatory" />
-				<include name="Assert_email_subject" />
-			    <include name="Assert_email_Arabic_subject" />
-				<include name="Assert_email_SpecialCharacters_subject" />
-				<include name="Assert_email_NonEnglish_subject" />
-				<include name="Assert_email_numbers_subject" />
-				<include name="Assert_email_body" />
-				<include name="Assert_email_body_specialCharacters" />
-				<include name="Assert_email_Arabic_body"/>
-				<include name="Assert_email_numbers_body"/>
-				<include name="Assert_email_NonEnglish_body"/>
-				<include name="Assert_email_bodyWithEnter"/>
-				<include name="Assert_email_without_body"/>
-				<include name="Assert_email_without_bodyAndSubject"/>
-				<include name="Assert_email_long_subject"/>
-				<include name="Assert_email_long_body"/>
-				<include name="Assert_email_body_with_HideNotification"/>
-				<include name="Assert_email_body_without_HideNotification"/>
-				<include name="Assert_email_without_body_without_HideNotification"/> 
-				<include name="Assert_email_without_body_with_HideNotification"/>
-				<include name="Assert_email_with_copyAndPasteText_body"/> 
-				<include name="Assert_email_with_XLSX_FileType"/> 
-				<include name="Assert_email_with_CSV_FileType"/> 
-				<include name="Assert_email_XLSX_DefaultFileName"/> 
-				<include name="Assert_email_with_CSV_DefaultFileName"/> 
-				<include name="Assert_email_with_XLSX_ArabicFileName"/> 
-				<include name="Assert_email_with_XLSX_AppendTimestamp"/>
+					<!-- <include name="SchemaManager_Permissions_AddDataSourceToSchema" 
+						/> -->
+					<!-- include name="SchemaManager_Permissions_LoadData" /> -->
+					<!-- <include name="SchemaManager_Permissions_ShareSchemaToEdit" /> -->
+					<!-- <include name="IndividualAnalyzerRole" /> -->
+					<!-- <include name="userManagerRole" /> -->
+					<!-- <include name="superUserRole" /> -->
+					<!-- <include name="Analyzer_Permissions_CreateFolder" /> -->
+					<!-- <include name="Analyzer_Permissions_DeleteFolder" /> -->
+					<include name="Analyzer_Permissions_ShareFolder" />
 				</methods>
 			</class>
 		</classes>
