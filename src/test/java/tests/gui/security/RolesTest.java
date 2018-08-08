@@ -152,7 +152,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(ExistingSchemaNAME);
+		schemasPage.click_schemaName(ExistingSchemaNAME);
 
 		mainPage.Click_add();
 		mainPage.Select_fromDropdownMenu("Schema Wizard");
@@ -178,7 +178,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(LoadDataSchema);
+		schemasPage.click_schemaName(LoadDataSchema);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		initialLoadStatus = schemasViewPage.GetLastLoadStatus();
@@ -205,7 +205,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(ShareSchema);
+		schemasPage.click_schemaName(ShareSchema);
 
 		mainPage.Click_Settings();
 
@@ -380,8 +380,8 @@ public class RolesTest {
 		/* 9- Assert that dashboard and insight name are correct . */
 		/* 10- assert that share icon in dashboard setting is active. */
 
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data6"),
-				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data8"),
+				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
 
 		// Create New User
 		usersPage = new Users(driver);

@@ -41,7 +41,7 @@ public class UsersTest {
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
-	String TempUser = "Test_User"; // to be replaced later with dynamic one created at prepare test data phase
+	String TempUser = "Automation_User_User_To_Be_Edited_And_Deleted"; // to be replaced later with dynamic one created at prepare test data phase
 	String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data phase
 	String newPassword;
 	String newDataSourceName;
@@ -146,7 +146,7 @@ public class UsersTest {
 		groupsPage = new Groups(driver);
 		groupsPage.Navigate_toURL();
 
-		mainPage.SearchForContentAndOpenResult("Supers");
+		mainPage.SearchForContentAndOpenResult("Automation_Group_SuperRole");
 		groups_groupPage = new Groups_Group(driver);
 		groups_groupPage.AddUsers(new String[] { newUserData[2] });
 		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
@@ -187,7 +187,7 @@ public class UsersTest {
 
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
-		schemasPage.Click_schemaName(newSchemaName);
+		schemasPage.click_schemaName(newSchemaName);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
@@ -265,8 +265,8 @@ public class UsersTest {
 		mainPage.Select_fromUserMenu("Logout");
 		loginPage.Navigate_toURL();
 
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data6"),
-				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
 		// Delete User and Transfer Ownership to another user
 		usersPage.Navigate_toURL();
