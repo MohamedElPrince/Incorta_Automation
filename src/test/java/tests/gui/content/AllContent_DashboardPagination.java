@@ -56,14 +56,8 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-<<<<<<< HEAD
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
-=======
-		dashboardPage.assert_dashboardName(paginationDashboardName);
-		dashboardPage.assert_insightName(paginationInsightName);
->>>>>>> branch 'Rel3.3' of https://github.com/Incorta/qa.git
-
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 		dashboardPage.pagination_verify_uiElementsExist();
 	}
 
@@ -80,13 +74,8 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-<<<<<<< HEAD
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
-=======
-		dashboardPage.assert_dashboardName(paginationDashboardName);
-		dashboardPage.assert_insightName(paginationInsightName);
->>>>>>> branch 'Rel3.3' of https://github.com/Incorta/qa.git
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		// first page = ^1 -
 		// last page = number of number$
@@ -100,11 +89,6 @@ public class AllContent_DashboardPagination {
 	@Description("When I navigate to the target dashboard, and I assert that the Last Page button exists, and I click the Last Page button, Then the Last Page result displayed will be (the total of records)")
 	@Severity(SeverityLevel.NORMAL)
 	public void assertThatLastPageButtonWorks() {
-<<<<<<< HEAD
-=======
-	paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-	paginationInsightName = "7amada"; // to be removed
-	
 	allContentPage = new AllContent(driver);
 	allContentPage.Navigate_toURL();
 	allContentPage.Assert_allContentTabIsSelected();
@@ -113,8 +97,8 @@ public class AllContent_DashboardPagination {
 	mainPage.SearchForContentAndOpenResult(paginationDashboardName);
 	
 	dashboardPage = new AllContent_Dashboard(driver);
-	dashboardPage.assert_dashboardName(paginationDashboardName);
-	dashboardPage.assert_insightName(paginationInsightName);
+	dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+	dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 	
 	dashboardPage.pagination_assertThatLastButtonWorksAsExpected();
 	}
@@ -124,10 +108,6 @@ public class AllContent_DashboardPagination {
 			+ " and next I click the first button, Then the first record result displayed will be ( 1 ) sample: ( 1 - No. of TotalNumber)")
 	@Severity(SeverityLevel.NORMAL)
 	public void assertThatFirstButtontWorks() {
-		paginationDashboardName = "Pivot_Pagination Dashboard - Copy"; // to be removed
-		paginationInsightName = "7amada"; // to be removed
-
->>>>>>> branch 'Rel3.3' of https://github.com/Incorta/qa.git
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
@@ -136,32 +116,8 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-<<<<<<< HEAD
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
-
-		dashboardPage.Pagination_AssertThatLastButtonWorksAsExpected();
-	}
-
-	@Test(priority = 4, description = "C77300 - Chrome: Table Insight: Verify that user can return back to first page.")
-	@Description("When I navigate to the target dashboard, Given that I am not in the first page, And if I found that its the first page, I navigate to last page"
-			+ " and next I click the first button, Then the first record result displayed will be ( 1 ) sample: ( 1 - No. of TotalNumber)")
-	@Severity(SeverityLevel.NORMAL)
-	public void assertThatFirstButtontWorks() {
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
-		allContentPage.Assert_allContentTabIsSelected();
-
-		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
-
-		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
-=======
-		dashboardPage.assert_dashboardName(paginationDashboardName);
-		dashboardPage.assert_insightName(paginationInsightName);
->>>>>>> branch 'Rel3.3' of https://github.com/Incorta/qa.git
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.pagination_assertThatFirstButtontWorksAsExpected();
 	}
@@ -181,16 +137,9 @@ public class AllContent_DashboardPagination {
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-<<<<<<< HEAD
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
-=======
-		dashboardPage.assert_dashboardName(paginationDashboardName);
-		dashboardPage.assert_insightName(paginationInsightName);
-		
->>>>>>> branch 'Rel3.3' of https://github.com/Incorta/qa.git
-		// Assert previous button is displayed and functional
 		dashboardPage.pagination_assertThatPreviousButtonWorksAsExpected();
 	}
 
@@ -206,8 +155,8 @@ public class AllContent_DashboardPagination {
 		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_AssertThatFirstArrow_Disabled();
 		
@@ -232,8 +181,8 @@ public class AllContent_DashboardPagination {
 		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 		
 		dashboardPage.Pagination_ClickOnEditInsight();
 		mainPage.Open_SettingsList();
@@ -258,8 +207,8 @@ public class AllContent_DashboardPagination {
 		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardNamePageSize"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardNamePageSize"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_ClickOnEditInsight();
 		mainPage.Open_SettingsList();
@@ -280,8 +229,8 @@ public class AllContent_DashboardPagination {
 		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_ClickOnEditInsight();
 		mainPage.Open_SettingsList();
@@ -306,8 +255,8 @@ public class AllContent_DashboardPagination {
 		mainPage = new Skeleton(driver);
 		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardNamePageSize"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(testDataReader.getCellData("paginationDashboardNamePageSize"));
-		dashboardPage.Assert_insightName(testDataReader.getCellData("paginationInsightName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_ClickOnEditInsight();
 		mainPage.Open_SettingsList();
