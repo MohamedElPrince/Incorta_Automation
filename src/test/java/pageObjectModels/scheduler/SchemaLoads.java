@@ -7,6 +7,7 @@ import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
+import com.shaftEngine.validationsLibrary.Verifications;
 
 public class SchemaLoads {
 	//// Variables
@@ -22,6 +23,20 @@ public class SchemaLoads {
 	// By body_owner_link;
 	By body_schema_link;
 	By body_status_label;
+	By body_Job_status_label;
+	By body_schemajobName_link;
+	By body_jobStatus_state;
+
+	By popup_scheduleSchema_repeat_radioButton;
+	By popup_scheduleSchema_weeklyDay_checkBox;
+	By popup_scheduleSchema_loadType_dropDownMenu;
+	By popup_scheduleSchema_confirmChangingStatusOk_button;
+	By popup_scheduleSchema_saveChanges_button = By.xpath("//button[@type='button'][contains(text(),'Save Changes')]");
+
+	// Confirm Delete popup view
+	By popup_scheduleSchema_delete_button = By
+			.xpath("//button[@ng-click='confirmDeleteScheduler();'][contains(text(),'Delete')]");
+
 	// By body_nextRun_label;
 
 	By popup_scheduleSchemaLoad_jobName_textBox = By
@@ -55,8 +70,17 @@ public class SchemaLoads {
 		Assertions.assertElementAttribute(driver, header_schemasTabHeader_link, "class", "selectedTab", true);
 	}
 
-	public void ChangeJobStatus(String status) {
+	public void changejobStatusFilter(String status) {
 		ElementActions.select(driver, body_jobStatus_list, status);
+	}
+
+	public void verify_jobStatusOptionIsDisplayed(String jobStatusOption) {
+
+		body_jobStatus_list = By
+				.xpath("//select[@ng-change='jobStatusChanged()']/option[contains(.,'" + jobStatusOption + "')]");
+		// Verifications.verifyElementAttribute(driver, body_jobStatus_list,
+		// "text",jobStatusOption, true);
+		Verifications.verifyElementExists(driver, body_jobStatus_list, true);
 	}
 
 	public void Assert_nameIsDisplayed(String name) {
@@ -68,6 +92,173 @@ public class SchemaLoads {
 		body_status_label = By.xpath("//div[contains(@class,'usersPanel')]//p[@title='" + name
 				+ "']/parent::div[contains(@class,'userName')]/following-sibling::div[contains(@class,'dataConnectionLink')]");
 		Assertions.assertElementAttribute(driver, body_status_label, "Text", expectedStatus, true);
+	}
+
+	public void assert_schemaJob_created(String job_name, String schema_name) {
+		body_Job_status_label = By.xpath("//p[@title='" + job_name
+				+ "']/parent::div[contains(@class,'userName')]/following-sibling::div[contains(@class,'userName')]//p[contains(text(),'"
+				+ schema_name + "')]");
+		Assertions.assertElementAttribute(driver, body_Job_status_label, "Text", schema_name, true);
+	}
+
+	public void Assert_schemaJob_deleted(String job_name, String schema_name) {
+		body_schemajobName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schema_name + "')]/p/parent::div/preceding-sibling::div");
+		Assertions.assertElementExists(driver, body_schemajobName_link, false);
+	}
+
+	public void select_schemaName(String schemaName) {
+		body_schemajobName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]");
+		ElementActions.click(driver, body_schemajobName_link);
+
+	}
+
+	public void select_schemaNameCheckBox(String schemaJobName) {
+
+		body_schemajobName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaJobName + "')]/p/parent::div/preceding-sibling::div");
+		ElementActions.click(driver, body_schemajobName_link);
+
+	}
+
+	public void select_schemaName(String jobName, String schemaName) {
+
+		body_schemajobName_link = By.xpath("//p[contains(text(),'" + schemaName
+				+ "')]/ancestor::div[contains(@class,'userName')]/preceding-sibling::div[contains(@class,'userName')]//p[@title='"
+				+ jobName + "']");
+		ElementActions.click(driver, body_schemajobName_link);
+
+	}
+
+	/**
+	 * This function to select repeat radio button choice  
+	 * @param Radio_Button_Name
+	 * 
+	 *            Daily, Weekly, Monthly,No End, No Recurrence
+	 * 
+	 */
+	public void Select_schedulerSchema_radioButton(String Radio_button_name) {
+
+		popup_scheduleSchema_repeat_radioButton = By
+				.xpath("//input[@type='radio'][@value= '" + Radio_button_name + "']");
+		ElementActions.click(driver, popup_scheduleSchema_repeat_radioButton);
+	}
+
+	/**
+	 * This function to assert the selected radio button
+	 * @param Radio_Button_Name
+	 * 
+	 *            Daily, Weekly, Monthly,No End, No Recurrence
+	 * 
+	 */
+	public void assert_schedulerSchema_radioButton_selected(String Radio_Button_Name) {
+
+		popup_scheduleSchema_repeat_radioButton = By
+				.xpath("//input[@type='radio'][@value= '" + Radio_Button_Name + "']");
+		Assertions.assertElementAttribute(driver, popup_scheduleSchema_repeat_radioButton, "checked", "true", true);
+
+	}
+
+	/**
+	 * This function to select one day from the weekly days section
+	 * 
+	 * @param weekday_checkbox
+	 * 
+	 *            Sun, Mon, Tue, Wed, Thu, Fri, Sat
+	 * 
+	 */
+	public void select_scheduleSchema_weeklyDay_CheckBox(String Day) {
+
+		popup_scheduleSchema_weeklyDay_checkBox = By
+				.xpath("//div//input[@ng-model='w.selected'][@value='" + Day + "']");
+
+		ElementActions.click(driver, popup_scheduleSchema_weeklyDay_checkBox);
+	}
+	
+	
+	/**
+	 * This function to assert the selected day from the weekly days section
+	 * 
+	 * @param weekday_checkbox
+	 * 
+	 *            Sun, Mon, Tue, Wed, Thu, Fri, Sat
+	 * 
+	 */
+	public void Assert_scheduleSchema_weeklyDay_CheckBox(String Day) {
+
+		popup_scheduleSchema_weeklyDay_checkBox = By.xpath("//input[@ng-model='w.selected'][@value='" + Day + "']");
+
+		Assertions.assertElementAttribute(driver, popup_scheduleSchema_weeklyDay_checkBox, "checked", "true", true);
+
+	}
+
+	
+	/**
+	 * This function to Assert the selected loadtype from the dropdown list
+	 * 
+	 * @param LoadType DropDown
+	 * 
+	 *            Incremental, Full, Staging, Snapshot
+	 * 
+	 */
+	public void Assert_scheduleSchema_loadType_dropDownMenu(String LoadType) {
+
+		popup_scheduleSchema_loadType_dropDownMenu = By
+				.xpath("//select[@name='loadType']//option[@value='" + LoadType + "']");
+		Assertions.assertElementAttribute(driver, popup_scheduleSchema_loadType_dropDownMenu, "value", LoadType, true);
+
+	}
+
+	/**
+	 * This function to select loadtype from the dropdown list
+	 * 
+	 * @param LoadType DropDown
+	 * 
+	 *            Incremental, Full, Staging, Snapshot
+	 * 
+	 */
+	
+	public void Select_scheduleSchema_loadType_dropDownMenu(String LoadType) {
+
+		popup_scheduleSchema_loadType_dropDownMenu = By
+				.xpath("//select[@name='loadType']//option[@value='" + LoadType + "']");
+		ElementActions.click(driver, popup_scheduleSchema_loadType_dropDownMenu);
+
+	}
+
+	public void Click_scheduleSchema_saveChanges_button() {
+
+		ElementActions.click(driver, popup_scheduleSchema_saveChanges_button);
+
+	}
+
+	public void Click_scheduleSchema_deleteButton() {
+
+		ElementActions.click(driver, popup_scheduleSchema_delete_button);
+
+	}
+
+	public void Assert_scheduleSchema_jobStatus(String SchemaName, String JobName, String Status) {
+		body_jobStatus_state = By.xpath("//p[contains(text(),'" + SchemaName
+				+ "')]/parent::a/parent::div/preceding-sibling::div" + "/p[@title='" + JobName
+				+ "']/parent::div/following-sibling::div[@class='dataConnectionLink left']" + "/a[contains(text(),'"
+				+ Status + "')]");
+		Assertions.assertElementExists(driver, body_jobStatus_state, true);
+	}
+
+	public void Change_scheduleSchema_JobStatus_(String SchemaName, String JobName, String Status) {
+		body_jobStatus_state = By.xpath("//p[contains(text(),'" + SchemaName
+				+ "')]/parent::a/parent::div/preceding-sibling::div" + "/p[@title='" + JobName
+				+ "']/parent::div/following-sibling::div[@class='dataConnectionLink left']" + "/a[contains(text(),'"
+				+ Status + "')]");
+		ElementActions.click(driver, body_jobStatus_state);
+		popup_scheduleSchema_confirmChangingStatusOk_button = By.xpath("//button[contains(text(),'Ok')]");
+		ElementActions.click(driver, popup_scheduleSchema_confirmChangingStatusOk_button);
+
 	}
 
 	public String scheduleSchemaLoad(String description, String schemaName, String loadType, String startByDate,

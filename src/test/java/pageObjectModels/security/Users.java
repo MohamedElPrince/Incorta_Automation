@@ -113,8 +113,8 @@ public class Users {
 		// the column name
 		String[] userData = new String[10];
 		userData[0] = "Automation_User"; // Login Name
-		userData[1] = "a"; // Password
-		userData[2] = "a"; // Confirm Password
+		userData[1] = "a123"; // Password
+		userData[2] = "a123"; // Confirm Password
 		userData[3] = "automation_user"; // Display Name
 		userData[4] = "a@a.a"; // Email
 		userData[5] = "Arabic"; // Language

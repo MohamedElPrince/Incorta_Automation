@@ -152,7 +152,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(ExistingSchemaNAME);
+		schemasPage.click_schemaName(ExistingSchemaNAME);
 
 		mainPage.Click_add();
 		mainPage.Select_fromDropdownMenu("Schema Wizard");
@@ -178,7 +178,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(LoadDataSchema);
+		schemasPage.click_schemaName(LoadDataSchema);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		initialLoadStatus = schemasViewPage.GetLastLoadStatus();
@@ -205,7 +205,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(ShareSchema);
+		schemasPage.click_schemaName(ShareSchema);
 
 		mainPage.Click_Settings();
 
@@ -281,13 +281,13 @@ public class RolesTest {
 		mainPage.assertExportIconIsNotDisplayed(); //
 
 		// assert that dashboard and insight name are correct
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is dimmed
 		allContentPage.selectDashboardMenuButton(newDashboardName);
-		dashboardPage.Assert_shared_button_dimmed();
+		dashboardPage.assert_shared_button_dimmed();
 	}
 
 	@Test(priority = 7, description = "C60535 - User Manager")
@@ -380,8 +380,8 @@ public class RolesTest {
 		/* 9- Assert that dashboard and insight name are correct . */
 		/* 10- assert that share icon in dashboard setting is active. */
 
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data6"),
-				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data8"),
+				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
 
 		// Create New User
 		usersPage = new Users(driver);
@@ -448,13 +448,13 @@ public class RolesTest {
 		dashboardPage = new AllContent_Dashboard(driver);
 
 		// assert that dashboard and insight name are correct
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is active
 		allContentPage.selectDashboardMenuButton(newDashboardName);
-		dashboardPage.Assert_shared_button_Active();
+		dashboardPage.assert_shared_button_active();
 	}
 
 	// Prerequisites, Analyzer user
@@ -588,7 +588,7 @@ public class RolesTest {
 		mainPage.SearchForContentAndOpenResult(NewDashBoradName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(NewDashBoradName);
+		dashboardPage.assert_dashboardName(NewDashBoradName);
 	}
 	
 	@Test(priority = 15, description = "TC C60531_8 - Users permissions - Analyzer User")
@@ -608,16 +608,17 @@ public class RolesTest {
 		mainPage.Click_FromExportMenu("Send");
 		
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
-		dashboardPage.ScheduleSendDashboard_Add_Body_Automated();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(ToMail);
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(CcMail);
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(BccMail);
-		dashboardPage.Click_Send_Dashboard();
-		dashboardPage.Assert_dashboardName(DashboardToBeShared);
+		dashboardPage.scheduleSendDashboard_addSubjectName();
+		dashboardPage.sendDashboard_addBodyName();
+
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(ToMail);
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(CcMail);
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(BccMail);
+		dashboardPage.click_send_dashboard();
+		dashboardPage.assert_dashboardName(DashboardToBeShared);
 	}
 
 	@Test(priority = 16, description = "TC C60531_9 - Users permissions - Analyzer User")
