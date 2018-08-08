@@ -3,9 +3,16 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.content.SendDashboardTest">
+			<class name="tests.gui.security.RolesTest">
 				<methods>
-				<include name="Assert_Subject_NotMandatory"/>
+					<!-- include name="SchemaManager_Permissions_LoadData" /> -->
+					<!-- <include name="SchemaManager_Permissions_ShareSchemaToEdit" /> -->
+					<!-- <include name="IndividualAnalyzerRole" /> -->
+					<!-- <include name="userManagerRole" /> -->
+					<!-- <include name="superUserRole" /> -->
+					<!-- <include name="Analyzer_Permissions_CreateFolder" /> -->
+					<!-- <include name="Analyzer_Permissions_DeleteFolder" /> -->
+					<include name="Analyzer_Permissions_ShareFolder" />
 				</methods>
 			</class>
 		</classes>
