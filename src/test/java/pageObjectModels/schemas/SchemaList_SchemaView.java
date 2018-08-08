@@ -17,8 +17,7 @@ public class SchemaList_SchemaView {
 	By header_schemaName_label = By.xpath("//div[@class='schema-header']//div[@class='schemaName']");
 	// By header_schemaDiscription_label;
 	// By header_lastLoadStatusHeader_label;
-	By header_lastLoadStatus_link = By
-			.xpath("//*[contains(@ng-if,'schemaStatus.lastLoadState')]");
+	By header_lastLoadStatus_link = By.xpath("//*[contains(@ng-if,'schemaStatus.lastLoadState')]");
 	// By header_loadingTimeHeader_label;
 	// By header_loadingTime_label;
 	// By header_tablesHeader_label;
@@ -73,17 +72,21 @@ public class SchemaList_SchemaView {
 
 	By popup_dataLoading_load_button = By.xpath("//button[normalize-space(.)='Load']");
 
-	//By popup_SchemaSettings_SharingTab = By.xpath("//ul[@class='modalTabLinks']//a[@ng-click='tabState = 'sharing'']");
-	By popup_SchemaSettings_SharingTab = By.xpath("//ul[@class='modalTabLinks']//a[contains(string(),'Sharing')]/parent::li");
-	
+	// By popup_SchemaSettings_SharingTab =
+	// By.xpath("//ul[@class='modalTabLinks']//a[@ng-click='tabState =
+	// 'sharing'']");
+	By popup_SchemaSettings_SharingTab = By
+			.xpath("//ul[@class='modalTabLinks']//a[contains(string(),'Sharing')]/parent::li");
+
 	By popup_SchemaSettings_SharingTab_Add_Button = By.xpath("//a[contains(@class,'usersHeadAdd right')]");
 	By popup_SchemaSettings_SharingTab_Permission;
-	By popup_SchemaSettings_SharingTab_ClickSearchField = By.xpath("//div[@class='shareSearch ng-scope']/input[@type=\"text\"]");
+	By popup_SchemaSettings_SharingTab_ClickSearchField = By
+			.xpath("//div[@class='shareSearch ng-scope']/input[@type=\"text\"]");
 	By popup_SchemaSettings_SharingTab_SelectFromSearchField;
 	By popup_SchemaSettings_SharingTab_SaveButton = By.xpath("//button[contains(string(), 'Save')]");
 	By popup_SchemaSettings_SharingTab_UsersSharedWith;
 	By popup_SchemaSettings_SharingTab_UsersPermission;
-	
+
 	//// Functions
 	public SchemaList_SchemaView(WebDriver driver) {
 		this.driver = driver;
@@ -153,12 +156,11 @@ public class SchemaList_SchemaView {
 	}
 
 	public void waitForDataToBeLoaded(String initialLoadStatus) {
-		String currentLoadStatus;
+		String currentLoadStatus = initialLoadStatus;
 		do {
-			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, initialLoadStatus, 10);
+			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, currentLoadStatus, 10);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
-		} while (currentLoadStatus.matches("(.*" + initialLoadStatus + ".*)")
-				|| currentLoadStatus.matches("(.*Loading Data.*)")
+		} while (currentLoadStatus.equals(initialLoadStatus) || currentLoadStatus.matches("(.*Loading Data.*)")
 				|| currentLoadStatus.matches("(.*Please load data.*)"));
 	}
 
@@ -166,59 +168,52 @@ public class SchemaList_SchemaView {
 		Assertions.assertElementAttribute(driver, header_lastLoadStatus_link, "Text", initialLoadStatus, false);
 	}
 
-	public void Click_Sharing_Tab()
-	{
+	public void Click_Sharing_Tab() {
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab);
 	}
 
-	public void Click_AddButton_SharingTab()
-	{
+	public void Click_AddButton_SharingTab() {
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab_Add_Button);
 	}
 
 	/**
 	 * 
 	 * @param UserPermission
-	 * Can Edit
-	 * Can View
-	 * Can Share
+	 *            Can Edit Can View Can Share
 	 * 
 	 */
-	public void Schema_Sharing_ClickOnUserPermission(String UserPermission)
-	{
-		popup_SchemaSettings_SharingTab_Permission = By.xpath("//h5[contains(string(), '"+UserPermission+"')]");
+	public void Schema_Sharing_ClickOnUserPermission(String UserPermission) {
+		popup_SchemaSettings_SharingTab_Permission = By.xpath("//h5[contains(string(), '" + UserPermission + "')]");
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab_Permission);
 	}
-	
-	public void Schema_Sharing_SearchAndSelectUsers(String SearchText)
-	{
-		popup_SchemaSettings_SharingTab_SelectFromSearchField = By.xpath("//h5[@class='UserData left text-left ng-binding'][contains(text(),'"+SearchText+"')]");
+
+	public void Schema_Sharing_SearchAndSelectUsers(String SearchText) {
+		popup_SchemaSettings_SharingTab_SelectFromSearchField = By
+				.xpath("//h5[@class='UserData left text-left ng-binding'][contains(text(),'" + SearchText + "')]");
 		ElementActions.type(driver, popup_SchemaSettings_SharingTab_ClickSearchField, SearchText);
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab_SelectFromSearchField);
 	}
-	
-	public void Click_Save_Button()
-	{
+
+	public void Click_Save_Button() {
 		ElementActions.click(driver, popup_SchemaSettings_SharingTab_SaveButton);
 	}
-	
-	public void Assertion_UserSharedWith(String SearchText)
-	{
-		popup_SchemaSettings_SharingTab_UsersSharedWith = By.xpath("//div[@class='folderUserRow ng-scope']//h5[contains(string(), '"+SearchText+"')]");
+
+	public void Assertion_UserSharedWith(String SearchText) {
+		popup_SchemaSettings_SharingTab_UsersSharedWith = By
+				.xpath("//div[@class='folderUserRow ng-scope']//h5[contains(string(), '" + SearchText + "')]");
 		Assertions.assertElementExists(driver, popup_SchemaSettings_SharingTab_UsersSharedWith, true);
 	}
+
 	/**
 	 * 
 	 * @param SharedWithUser
-	 * @param Permission 
-	 * Can Edit
-	 * Can View
-	 * Can Share
+	 * @param Permission
+	 *            Can Edit Can View Can Share
 	 */
-	public void Assertion_UserPermission(String SharedWithUser, String Permission)
-	{
-		popup_SchemaSettings_SharingTab_UsersPermission = 
-				By.xpath("//h5[@class='left ng-binding'][contains(string(),'"+SharedWithUser+"')]//parent::div//following-sibling::div/a[contains(string(),'"+Permission+"')]/parent::div");
+	public void Assertion_UserPermission(String SharedWithUser, String Permission) {
+		popup_SchemaSettings_SharingTab_UsersPermission = By.xpath("//h5[@class='left ng-binding'][contains(string(),'"
+				+ SharedWithUser + "')]//parent::div//following-sibling::div/a[contains(string(),'" + Permission
+				+ "')]/parent::div");
 		Assertions.assertElementExists(driver, popup_SchemaSettings_SharingTab_UsersPermission, true);
 	}
 }

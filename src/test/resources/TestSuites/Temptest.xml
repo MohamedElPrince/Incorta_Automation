@@ -5,8 +5,6 @@
 		<classes>
 			<class name="tests.gui.security.RolesTest">
 				<methods>
-					<!-- <include name="SchemaManager_Permissions_AddDataSourceToSchema" 
-						/> -->
 					<!-- include name="SchemaManager_Permissions_LoadData" /> -->
 					<!-- <include name="SchemaManager_Permissions_ShareSchemaToEdit" /> -->
 					<!-- <include name="IndividualAnalyzerRole" /> -->
