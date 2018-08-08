@@ -41,7 +41,7 @@ public class UsersTest {
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
-	String TempUser = "Test_User"; // to be replaced later with dynamic one created at prepare test data phase
+	String TempUser = "automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one created at prepare test data phase
 	String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data phase
 	String newPassword;
 	String newDataSourceName;
@@ -146,7 +146,7 @@ public class UsersTest {
 		groupsPage = new Groups(driver);
 		groupsPage.Navigate_toURL();
 
-		mainPage.SearchForContentAndOpenResult("Supers");
+		mainPage.SearchForContentAndOpenResult("Automation_Group_SuperRole");
 		groups_groupPage = new Groups_Group(driver);
 		groups_groupPage.AddUsers(new String[] { newUserData[2] });
 		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
@@ -187,7 +187,7 @@ public class UsersTest {
 
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
-		schemasPage.Click_schemaName(newSchemaName);
+		schemasPage.click_schemaName(newSchemaName);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
@@ -221,7 +221,7 @@ public class UsersTest {
 		newFolderName = allContentPage.SetNewFolderName();
 
 		allContentPage.selectContentOptionButton(newFolderName);
-		dashboardPage.Assert_shared_button_Active();
+		dashboardPage.assert_shared_button_active();
 		// share Folder with another user with Can View
 		dashboardPage.selectShareButton();
 		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
@@ -248,14 +248,14 @@ public class UsersTest {
 		allContentPage.Navigate_toURL();
 		mainPage.SearchForContentAndOpenResult(newDashboardName);
 
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
 
 		allContentPage.Navigate_toURL();
 
 		// assert that share icon in dashboard settings is active
 		allContentPage.selectContentOptionButton(newDashboardName);
-		dashboardPage.Assert_shared_button_Active();
+		dashboardPage.assert_shared_button_active();
 
 		// share dashboard with another user with Can View
 		dashboardPage.selectShareButton();
@@ -265,8 +265,8 @@ public class UsersTest {
 		mainPage.Select_fromUserMenu("Logout");
 		loginPage.Navigate_toURL();
 
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data6"),
-				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
 		// Delete User and Transfer Ownership to another user
 		usersPage.Navigate_toURL();
@@ -302,15 +302,15 @@ public class UsersTest {
 		allContentPage.Navigate_toURL();
 		mainPage.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
 		allContentPage.selectContentOptionButton(newDashboardName);
-		dashboardPage.Assert_Content_UserPermission(Owner, "Owner");
-		dashboardPage.Assert_Content_UserPermission(testDataReader.getCellData("Username", "Data9"), "Can View"); 
+		dashboardPage.assert_content_userPermission(Owner, "Owner");
+		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View"); 
 		// do we need to add click on Done after assert the permission for the user,will result an issue if i use this method to check more than one user
 
 		// Check Folder owner after transfer
 		allContentPage.Navigate_toURL();
 		allContentPage.selectContentOptionButton(newFolderName);
-		dashboardPage.Assert_Content_UserPermission(Owner, "Owner");
-		dashboardPage.Assert_Content_UserPermission(testDataReader.getCellData("Username", "Data9"), "Can View");
+		dashboardPage.assert_content_userPermission(Owner, "Owner");
+		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View");
 	}
 
 	//// Testng Annotations

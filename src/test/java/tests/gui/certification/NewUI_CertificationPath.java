@@ -17,10 +17,13 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;
 import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content;
+import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.data.DataFiles;
 import pageObjectModels.data.DataSources;
-import pageObjectModels.login.Login;
-import pageObjectModels.login.Logout;
+import pageObjectModels.login.NewUI_Login;
+import pageObjectModels.login.NewUI_SignOut;
+import pageObjectModels.main.NewUI_Header;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.scheduler.Dashboards;
 import pageObjectModels.scheduler.SchemaLoads;
@@ -31,22 +34,25 @@ import pageObjectModels.security.Groups;
 import pageObjectModels.security.Groups_Group;
 import pageObjectModels.security.Users;
 
-@Epic("incorta Certification Path.")
-public class CertificationPath {
+@Epic("incorta Certification Path - New UI.")
+public class NewUI_CertificationPath {
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 
 	// Declaring Page Objects that will be used throughout the test
-	Login loginPage;
-	AllContent allContentPage;
+	NewUI_Login newLoginPage;
+	NewUI_SignOut newSignOutPage;
+	NewUI_Header newHeaderObject;
+	NewUI_Content newContentPage;
+	NewUI_Content_Dashboard newDashboardPage;
+	Skeleton subHeaderObject;
 	Users usersPage;
-	Skeleton mainPage;
 	Groups groupsPage;
 	Groups_Group groupPage;
-	Logout logoutPage;
 	DataSources dataSourcesPage;
 	DataFiles dataFilesPage;
+	AllContent contentPage;
 	SchemaList schemasPage;
 	SchemaList_SchemaView schemasViewPage;
 	SchemaList_Table schemaTablePage;
@@ -66,16 +72,18 @@ public class CertificationPath {
 	String newDashboardName, newInsightName;
 
 	@Test(priority = 1, description = "TC001 - Login using Admin Account.")
-	@Description("When I navigate to the login page, And I login using valid credentials Then all content tab is selected.")
+	@Description("When I navigate to the login page, And I login using valid credentials Then all the section headers will be displayed, and the content tab is selected.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void loginUsingAdmin() {
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
-		loginPage.Verify_correctVersionNumberIsDisplayed();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+		newLoginPage = new NewUI_Login(driver);
+		newLoginPage.navigate_toURL();
+		newLoginPage.verify_correctVersionNumberIsDisplayed();
+		newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
-		allContentPage = new AllContent(driver);
-		allContentPage.Assert_allContentTabIsSelected();
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.verify_allSectionHeaders_areDisplayed();
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
 	}
 
 	@Test(priority = 2, description = "TC002 - Create User.", dependsOnMethods = { "loginUsingAdmin" })
@@ -85,8 +93,8 @@ public class CertificationPath {
 		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
 
 		newUserData = usersPage.AddNewUser();
 		// usersPage.Navigate_toURL();
@@ -100,15 +108,15 @@ public class CertificationPath {
 		groupsPage = new Groups(driver);
 		groupsPage.Navigate_toURL();
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
 
 		newGroupName = groupsPage.AddNewGroup();
 		groupsPage.Navigate_toURL();
 		// groupsPage.Assert_groupIsDisplayed(newGroupName);
 		// using search instead as the name is not found on the list after reaching 200
 		// entries
-		mainPage.SearchForContentAndAssertResultIsDisplayed(newGroupName);
+		subHeaderObject.SearchForContentAndAssertResultIsDisplayed(newGroupName);
 	}
 
 	@Test(priority = 4, description = "TC004 - Add Roles to Group.", dependsOnMethods = { "loginUsingAdmin",
@@ -122,8 +130,8 @@ public class CertificationPath {
 		// using search instead as the name is not found on the list after reaching 200
 		// entries
 
-		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(newGroupName);
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
 
 		groupPage = new Groups_Group(driver);
 		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
@@ -143,8 +151,8 @@ public class CertificationPath {
 		// using search instead as the name is not found on the list after reaching 200
 		// entries
 
-		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(newGroupName);
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
 
 		groupPage = new Groups_Group(driver);
 
@@ -152,15 +160,19 @@ public class CertificationPath {
 		groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
 	}
 
-	@Test(priority = 6, description = "TC006 - Logout from Admin Account.", dependsOnMethods = { "loginUsingAdmin" })
-	@Description("Given I am logged in, When I logout, Then logout success message is displayed.")
+	@Test(priority = 6, description = "TC006 - SignOut from Admin Account.", dependsOnMethods = { "loginUsingAdmin" })
+	@Description("Given I am logged in, When I SigOut, Then SignOut success message is displayed.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void logout() {
-		mainPage = new Skeleton(driver);
-		mainPage.Select_fromUserMenu("Logout");
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
 
-		logoutPage = new Logout(driver);
-		logoutPage.Assert_logoutMessageHeaderAndBodyAreCorrect();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+
+		newSignOutPage = new NewUI_SignOut(driver);
+		newSignOutPage.assert_signOutMessageHeaderAndBodyAreCorrect();
 	}
 
 	@Test(priority = 7, description = "TC007 - Login using Newly Created User Account.", dependsOnMethods = {
@@ -168,16 +180,17 @@ public class CertificationPath {
 	@Description("When I navigate to the login page, And I login using valid credentials, And I insert and confirm my new password, Then all content tab is selected.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void loginUsingNewlyCreatedUserAccount() {
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
+		newLoginPage = new NewUI_Login(driver);
+		newLoginPage.navigate_toURL();
+		newLoginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
 		// Actions for first time login
-		String newPassword = "Automation";
-		loginPage.FirstTimeLogin(newUserData[1], newPassword, newPassword);
+		String newPassword = "Automation@123";
+		newLoginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
 		// Storing the newly created password
 		newUserData[1] = newPassword;
-		allContentPage = new AllContent(driver);
-		allContentPage.Assert_allContentTabIsSelected();
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
 	}
 
 	@Test(priority = 8, description = "TC008 - Create DataSource.", dependsOnMethods = {
@@ -189,8 +202,8 @@ public class CertificationPath {
 		dataSourcesPage.Navigate_toURL();
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
 
 		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
 		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
@@ -206,8 +219,8 @@ public class CertificationPath {
 		dataFilesPage.Navigate_toURL();
 		dataFilesPage.Assert_dataFilesTabIsSelected();
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
 
 		newDataFileExtension = testDataReader.getCellData("DataFileExtension");
 		newDataFileName = dataFilesPage.AddDataFile(testDataReader.getCellData("DataFileName"),
@@ -226,9 +239,9 @@ public class CertificationPath {
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaListTabIsSelected();
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
-		mainPage.Select_fromDropdownMenu("Create Schema");
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
+		subHeaderObject.Select_fromDropdownMenu("Create Schema");
 
 		newSchemaName = schemasPage.createNewSchema();
 
@@ -248,9 +261,9 @@ public class CertificationPath {
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
-		mainPage.Select_fromDropdownMenu("Schema Wizard");
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
+		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
 
 		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
 				testDataReader.getCellData("DatabaseTableName"));
@@ -270,10 +283,10 @@ public class CertificationPath {
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
-		mainPage.Hover_overDropdownMenu("Table");
-		mainPage.Select_fromDropdownMenu("File System");
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
+		subHeaderObject.Hover_overDropdownMenu("Table");
+		subHeaderObject.Select_fromDropdownMenu("File System");
 
 		schemaTablePage = new SchemaList_Table(driver);
 		schemaTablePage.Assert_AddDatasourcePopupIsDisplayed();
@@ -283,7 +296,7 @@ public class CertificationPath {
 
 		newDataFileTableName = schemaTablePage.SetTableName();
 		schemaTablePage.SetLoadFilter();
-		mainPage.Click_done();
+		subHeaderObject.Click_done();
 		schemasViewPage.Assert_tableNameIsDisplayed(newDataFileTableName);
 	}
 
@@ -300,11 +313,11 @@ public class CertificationPath {
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
 		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
-
-		mainPage = new Skeleton(driver);
-		mainPage.Click_load();
-		mainPage.Hover_overDropdownMenu("Load now");
-		mainPage.Select_fromDropdownMenu("Full");
+		// String initialLoadStatus = "Please load data";
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_load();
+		subHeaderObject.Hover_overDropdownMenu("Load now");
+		subHeaderObject.Select_fromDropdownMenu("Full");
 		schemasViewPage.confirmLoadingData();
 
 		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
@@ -320,8 +333,8 @@ public class CertificationPath {
 		schedulerSchemaLoadsPage.Navigate_toURL();
 		schedulerSchemaLoadsPage.Assert_schemasTabIsSelected();
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
 
 		newScheduledSchemaLoadJobName = schedulerSchemaLoadsPage.scheduleSchemaLoad(
 				testDataReader.getCellData("SchemaLoadJobDescription"), newSchemaName,
@@ -338,32 +351,45 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Content.AllContent\" page, And click on add, And create a dashboard, And add all the tables of the schema that was created previously to a new insight, Then the dashboard will be displayed in the list, And the insight will be displayed inside it.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createDashboardAndInsight() {
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
+		contentPage = new AllContent(driver);
+		contentPage.Navigate_toURL();
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_add();
-		mainPage.Select_fromDropdownMenu("Create Dashboard");
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_add();
+		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
 
-		newDashboardName = allContentPage.setNewDashboardName();
+		newDashboardName = contentPage.setNewDashboardName();
 
 		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
 		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
 		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
 
-		mainPage.Click_ChooseVisualization();
+		subHeaderObject.Click_ChooseVisualization();
 		analyzeInsightPage.selectVisualization("Aggregated");
 
 		newInsightName = analyzeInsightPage.setInsightName();
-		mainPage.Click_done();
+		subHeaderObject.Click_done();
 
-		allContentPage.Navigate_toURL();
-		mainPage.SearchForContentAndOpenResult(newDashboardName);
+		// contentPage.Navigate_toURL(); // do this on new ui
+		// subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
+		// dashboardPage = new AllContent_Dashboard(driver);
+		// dashboardPage.Assert_dashboardName(newDashboardName);
+		// dashboardPage.Assert_insightName(newInsightName);
 
-		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(newDashboardName);
-		dashboardPage.assert_insightName(newInsightName);
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+		// newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		// newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
+		// newContentPage.navigate_toContentSearchResult(newDashboardName);
+		newContentPage.changeCatalogView("Table");
+		newContentPage.tableView_assert_contentTableEntry_exists(newDashboardName);
+		newContentPage.tableView_navigate_toContentTableEntry(newDashboardName);
+
+		newDashboardPage = new NewUI_Content_Dashboard(driver);
+		newDashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+		newDashboardPage.assert_insightName_isCorrect(newInsightName);
+
 	}
 
 	@Test(priority = 17, description = "TC017 - Validate Insight Data (Aggregated Table).", dependsOnMethods = {
@@ -371,31 +397,60 @@ public class CertificationPath {
 	@Description("When I navigate to the newly created insight, Then the insight will be displayed, And the data within it will be correct.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void validateInsightData() {
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
-		mainPage.SearchForContentAndOpenResult(newDashboardName);
+		// contentPage = new AllContent(driver);
+		// contentPage.Navigate_toURL();
+		// subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+		// newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		// newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
+		// newContentPage.navigate_toContentSearchResult(newDashboardName);
+		newContentPage.changeCatalogView("Card");
+		newContentPage.cardView_navigate_toContentCard(newDashboardName);
 
-		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(newDashboardName);
-		dashboardPage.assert_insightName(newInsightName);
+		// dashboardPage = new AllContent_Dashboard(driver);
+		// dashboardPage.Assert_dashboardName(newDashboardName);
+		// dashboardPage.Assert_insightName(newInsightName);
+		newDashboardPage = new NewUI_Content_Dashboard(driver);
 
-		dashboardPage.assertData_aggregatedTableContent("row", 1,
+		// dashboardPage.AssertData_AggregatedTableContent("row", 1,
+		// testDataReader.getCellData("InsightDataRows", "Data1"));
+		// dashboardPage.AssertData_AggregatedTableContent("row", 2,
+		// testDataReader.getCellData("InsightDataRows", "Data2"));
+		// dashboardPage.AssertData_AggregatedTableContent("row", 3,
+		// testDataReader.getCellData("InsightDataRows", "Data3"));
+		// dashboardPage.AssertData_AggregatedTableContent("row", 4,
+		// testDataReader.getCellData("InsightDataRows", "Data4"));
+		//
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 1,
+		// testDataReader.getCellData("InsightDataMeasures", "Data1"));
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 2,
+		// testDataReader.getCellData("InsightDataMeasures", "Data2"));
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 3,
+		// testDataReader.getCellData("InsightDataMeasures", "Data3"));
+		// dashboardPage.AssertData_AggregatedTableContent("measure", 4,
+		// testDataReader.getCellData("InsightDataMeasures", "Data4"));
+
+		newDashboardPage.aggregatedTable_assert_columnHeader_isCorrect(1, "Quarter");
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 1,
 				testDataReader.getCellData("InsightDataRows", "Data1"));
-		dashboardPage.assertData_aggregatedTableContent("row", 2,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 2,
 				testDataReader.getCellData("InsightDataRows", "Data2"));
-		dashboardPage.assertData_aggregatedTableContent("row", 3,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 3,
 				testDataReader.getCellData("InsightDataRows", "Data3"));
-		dashboardPage.assertData_aggregatedTableContent("row", 4,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 4,
 				testDataReader.getCellData("InsightDataRows", "Data4"));
 
-		dashboardPage.assertData_aggregatedTableContent("measure", 1,
+		newDashboardPage.aggregatedTable_assert_columnHeader_isCorrect(2, "Units");
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 1,
 				testDataReader.getCellData("InsightDataMeasures", "Data1"));
-		dashboardPage.assertData_aggregatedTableContent("measure", 2,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 2,
 				testDataReader.getCellData("InsightDataMeasures", "Data2"));
-		dashboardPage.assertData_aggregatedTableContent("measure", 3,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 3,
 				testDataReader.getCellData("InsightDataMeasures", "Data3"));
-		dashboardPage.assertData_aggregatedTableContent("measure", 4,
+		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 4,
 				testDataReader.getCellData("InsightDataMeasures", "Data4"));
+
 	}
 
 	@Test(priority = 18, description = "TC018 - Send Dashboard via email.", dependsOnMethods = {
@@ -403,13 +458,13 @@ public class CertificationPath {
 	@Description("When I navigate to the \"Content.AllContent\" page, And open a dashboard, And send it to an email address, Then a completed scheduled task will be displayed in the scheduled tasks list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void sendDashboardViaEmail() {
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
+		contentPage = new AllContent(driver);
+		contentPage.Navigate_toURL();
 
-		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(newDashboardName);
-		mainPage.Click_export();
-		mainPage.Select_fromDropdownMenu("Send");
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
+		subHeaderObject.Click_export();
+		subHeaderObject.Select_fromDropdownMenu("Send");
 
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.selectEmailFormat(testDataReader.getCellData("EmailFormat"));
@@ -429,11 +484,15 @@ public class CertificationPath {
 	@Description("When I logout, And login as an administrator, Then I will be redirected to the All Content tab.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void switchToAdminAccount() {
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
 
 		logout();
-		loginUsingAdmin();
+
+		newLoginPage = new NewUI_Login(driver);
+		newLoginPage.navigate_toURL();
+		newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+				testDataReader.getCellData("Password"));
 	}
 
 	@Test(priority = 20, description = "TC020 - Delete User and Transfer Ownership to self.", dependsOnMethods = {
@@ -445,9 +504,9 @@ public class CertificationPath {
 		usersPage.Navigate_toURL();
 		usersPage.Select_nameCheckbox(newUserData[2]);
 
-		mainPage = new Skeleton(driver);
-		mainPage.Click_actions();
-		mainPage.Select_fromDropdownMenu("Delete selection");
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.Click_actions();
+		subHeaderObject.Select_fromDropdownMenu("Delete selection");
 
 		usersPage.ConfirmUserDeletionAndTransferOwnershipToSelf();
 		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
@@ -472,11 +531,11 @@ public class CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsDashboard() {
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
+		contentPage = new AllContent(driver);
+		contentPage.Navigate_toURL();
 		// allContentPage.Assert_dashboardIsDisplayed(newDashboardName);
-		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
+		subHeaderObject = new Skeleton(driver);
+		subHeaderObject.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
 	}
 
 	@Test(priority = 23, description = "TC023 - Search for Transfered Ownership Elements: Datasource", dependsOnMethods = {
@@ -513,7 +572,7 @@ public class CertificationPath {
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
-				System.getProperty("testDataFolderPath") + "certification/TestData.xlsx");
+				System.getProperty("testDataFolderPath") + "certification_newUI/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}

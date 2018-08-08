@@ -6,12 +6,12 @@
 	<artifactId>incorta</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 
-<properties>
+	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://qa.incorta.com:1230/incorta/#/</incortaRoot>
-		<incortaVersion>Rel3.3</incortaVersion>
-		<testSuite.name>testSuite01</testSuite.name>
-		<operatingSystem.version>Mac-64</operatingSystem.version>
+		<incortaRoot>http://qa.incorta.com:5059/incorta/</incortaRoot>
+		<incortaVersion>Rel4.0</incortaVersion>
+		<testSuite.name>Temptest</testSuite.name>
+		<operatingSystem.version>Linux-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
@@ -24,9 +24,11 @@
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
+		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
+		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180802</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180808</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
@@ -157,6 +159,8 @@
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
 							<defaultElementIdentificationTimeout>${defaultElementIdentificationTimeout}</defaultElementIdentificationTimeout>
+							<allureResultsFolderPath>${allureResultsFolderPath}</allureResultsFolderPath>
+							<automaticallyGenerateAllureReport>${automaticallyGenerateAllureReport}</automaticallyGenerateAllureReport>
 						</systemPropertyVariables>
 						<!-- To continue execution after validation errors are thrown in the 
 							before method -->

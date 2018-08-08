@@ -38,7 +38,7 @@ public class Skeleton {
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 	By header_export_button_ExportOptions;
 	By header_settings_list = By.id("settings-button");
-	
+	By header_allContentDashboard_Settings_Button = By.xpath("//button[@id='dropdownMenu1']//img[contains(@src,'settings')]");
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
@@ -104,6 +104,11 @@ public class Skeleton {
 	public void Click_Settings()
 	{
 		ElementActions.click(driver, header_settings_button);
+	}
+		
+	public void click_settings_allContent_dashboard()
+	{
+		ElementActions.click(driver, header_allContentDashboard_Settings_Button);
 	}
 	
 	public void Open_SettingsList()
