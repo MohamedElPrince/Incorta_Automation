@@ -250,9 +250,10 @@ public class Dashboards {
 	 *            "Daily" "Weekly" "Monthly" "No Recurrence"
 	 */
 	public void JobScreen_Assert_JobRecurrence_Selected(String recurrence) {
-		popup_JobScreen_recurrenceFrequency_radioButton_Selected = By
-				.xpath("//div[@ng-switch-when='" + recurrence + "']");
-		Assertions.assertElementExists(driver, popup_JobScreen_recurrenceFrequency_radioButton_Selected, true);
+	By popup_scheduleDashboard_recurrenceFrequency_radioButton = By
+	.xpath("//ng-form[@name='$ctrl.scheduleForm']//parent::label[normalize-space()='" + recurrence
+	+ "']/input[@type='radio']");
+	Assertions.assertElementAttribute(driver, popup_scheduleDashboard_recurrenceFrequency_radioButton, "checked", "true", true);
 	}
 
 	public void JobScreen_SelectDays_WeeklyRecurrence(String Day) {
