@@ -41,7 +41,7 @@ public class UsersTest {
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
-	String TempUser = "automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one created at prepare test data phase
+	String TempUser = "Automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one created at prepare test data phase
 	String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data phase
 	String newPassword;
 	String newDataSourceName;

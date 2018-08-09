@@ -46,7 +46,9 @@ public class Skeleton {
 
 	public void assertExportIconIsNotDisplayed() {
 
-		Assertions.assertElementAttribute(driver, header_exportStatus_button, "class", "dropdown right ng-hide", true);
+		// Assertions.assertElementAttribute(driver, header_exportStatus_button, "class", "dropdown right ng-hide", true);
+		Assertions.assertElementExists(driver, header_exportStatus_button, false);
+		
 	}
 
 	public void assertExportIconIsDisplayed() {

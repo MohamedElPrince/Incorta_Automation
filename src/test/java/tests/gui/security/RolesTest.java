@@ -66,26 +66,26 @@ public class RolesTest {
 	String newGroupName;
 	String[] newUserData;
 	String NewSchemaDescription = "Created by a script in class LoginTest.java";
-	String FolderToBeRenamed = "New Folder";
+	String FolderToBeRenamed = "Automation_Folder_FolderToBeRenamed";
 	String newFolderName;
 	String NewDashboardName = "New Dashboard";
-	String SchemaNameForInsight = "Automation_Schema_1525933948339";
-	String FolderNameToBeMoved = "CopyFolder";
-	String FolderNameToMoveTo = "Mohamed";
-	String DashboardNameToBeDeleted = "H_A_L";
-	String DashboardToBeShared = "SendDashboard";
-	String ToMail = "mona.amr@incorta.com";
-	String CcMail = "Ahmed.Abdelsalam@incorta.com";
-	String BccMail = "Menna.maged@incorta.com";
+	String SchemaNameForInsight = "Automaton_Schema_SchemaShare";
+	String FolderNameToBeMoved = "Automation_Folder_FolderToBeMoved";
+	String FolderNameToMoveTo = "Automation_Folder_MovedFolder";
+	String DashboardNameToBeDeleted = "Automation_Dashboard_DashboardtoBeDeleted";
+	String DashboardToBeShared = "Automation_Dashboard_DashboardToBeSharedOrSend";
+	String ToMail = "automation_robot@incorta.com";
+	String CcMail = "automation_robot@incorta.com";
+	String BccMail = "automation_robot@incorta.com";
 	String newScheduledSendDashboardJobName;
-	String FolderNameToBeMovedTo = "Folder";
-	String DashboardNameToBeCopied = "Copy Dashboard";
-	String DashboardFolderNameToBeMovedTo = "Dashboard Folder Moved";
-	String DashboardNameToMove = "Move Dashboard";
-	String DashboardNameToRename = "Rename Dashboard";
+	//String FolderNameToBeMovedTo = "Folder";
+	String DashboardNameToBeCopied = "Automation_Dashboard_ToBeCopied";   
+	//String DashboardFolderNameToBeMovedTo = "Dashboard Folder Moved";
+	String DashboardNameToMove = "Automation_Dashboard_Move";
+	String DashboardNameToRename = "Automation_Dashboard_Rename";
 
 	// Prerequisites, Schema Manager user + Connection credentials to data source
-	@Test(priority = 1, description = "TC C60535_1 - Schema Manager Permissions")
+	@Test(priority = 14, description = "TC C60535_1 - Schema Manager Permissions")
 	@Description("When I log in with Schema manager user and click add data source, then a new data source will be created.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void SchemaManager_Permissions_AddDataSource() {
@@ -554,7 +554,7 @@ public class RolesTest {
 	}
 
 	// Prerequisites, Analyzer user
-	@Test(priority = 14, description = "TC C60531_6 - Users permissions - Analyzer User")
+	@Test(priority = 1, description = "TC C60531_6 - Users permissions - Analyzer User")
 	@Description("When I log in with Analyzer User, navigate to content tab, click on create new dashboard and create a new insight. Then dashboard and insight are created successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_CreateDashboardAndInsight() {
@@ -709,7 +709,7 @@ public class RolesTest {
 
 			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Copy");
 
-			allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToBeMovedTo);
+			allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToMoveTo);
 			
 			allContentPage.Dashboard_Copy_ClickCopyButton();
 			
@@ -717,7 +717,7 @@ public class RolesTest {
 			
 			allContentPage.Assert_DashboardExist(DashboardNameToBeCopied);
 			
-			allContentPage.Click_FolderName(FolderNameToBeMovedTo);
+			allContentPage.Click_FolderName(FolderNameToMoveTo);
 			
 			allContentPage.Assert_DashboardExist_Copied(DashboardNameToBeCopied);
 			
@@ -738,13 +738,13 @@ public class RolesTest {
 
 			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
 			
-			allContentPage.Dashboard_popup_ClickOnFolder(DashboardFolderNameToBeMovedTo);
+			allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToMoveTo);
 					
 			allContentPage.Dashboard_Move_ClickMoveButton();
 					
 			allContentPage.Assert_DashboardNotExist(DashboardNameToMove);
 			
-			allContentPage.Click_FolderName(DashboardFolderNameToBeMovedTo);
+			allContentPage.Click_FolderName(FolderNameToMoveTo);
 			
 			allContentPage.Assert_DashboardExist(DashboardNameToMove);
 		}
