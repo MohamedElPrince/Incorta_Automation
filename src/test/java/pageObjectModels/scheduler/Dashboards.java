@@ -33,7 +33,7 @@ public class Dashboards {
 
 	By body_JobName;
 	By body_Last_JobName = By.xpath(
-			"(//p[@title='Sending Dashboard']//ancestor::div[contains(@class,'usersTableRow')]//p[contains(@title,'System generated')])[last()]");
+			"(//p[@title='Automation_Dashboard_SendDashboard']//ancestor::div[contains(@class,'usersTableRow')]//p[contains(@title,'System generated')])[last()]");
 
 	By popup_JobScreen_RemoveEmail_Button;
 	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[contains(text(),'Save Changes')]");
