@@ -1041,15 +1041,15 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
@@ -1348,17 +1348,17 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
