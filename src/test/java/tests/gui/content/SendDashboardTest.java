@@ -136,8 +136,8 @@ public class SendDashboardTest {
 		dashboardPage.scheduleSendDashboard_assert_mailRecipientsType_plusSignIsDisplayed("Bcc");
 	}
 
-	// Prerequisites: Admin user + dashboard created with name "Sending Dashboard" +
-	// Sending Dashboard is already sent before and completed job exists with name
+	// Prerequisites: Admin user + dashboard created with name "Automation_Dashboard_SendDashboard" +
+	// Automation_Dashboard_SendDashboard is already sent before and completed job exists with name
 	// starts with System generated"
 	@Test(priority = 11, description = "C76815 - Firefox: Fresh installation: Verify that Subject is not mandatory field")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email without subject, Then It should be sent successfully and subject displayed successfully with dashboard name")
@@ -936,8 +936,8 @@ public class SendDashboardTest {
 
 	// Prerequisites:
 	// - Admin user
-	// - dashboard created with name "Sending Dashboard"
-	// - Sending Dashboard is already sent before and completed job exists with name
+	// - dashboard created with name "Automation_Dashboard_SendDashboard"
+	// - Automation_Dashboard_SendDashboard is already sent before and completed job exists with name
 	// starts with System generated"
 	// - group of certain users created and exists
 
@@ -1041,15 +1041,15 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
@@ -1070,8 +1070,8 @@ public class SendDashboardTest {
 
 	// Prerequisites:
 	// - Admin user
-	// - dashboard created with name "Sending Dashboard"
-	// - Sending Dashboard is already sent before and completed job exists with name
+	// - dashboard created with name "Automation_Dashboard_SendDashboard"
+	// - Automation_Dashboard_SendDashboard is already sent before and completed job exists with name
 	// starts with System generated"
 	// - group of certain users created and exists
 	// - shared folder is configured through admin portal
@@ -1348,17 +1348,17 @@ public class SendDashboardTest {
 
 		navigate_to_sendDashboard();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("SharedFolder"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
-		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("EmailAddress"));
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(testDataReader.getCellData("EmailAddress"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
 		dashboardPage.SendDashboard_TypeEmailAndSelectFirstSearchResult(testDataReader.getCellData("GroupToSendTo"));
 		dashboardPage.sendDashboard_assert_sendButton_enabled();
