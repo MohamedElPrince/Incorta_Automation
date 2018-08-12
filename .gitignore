@@ -1,11 +1,6 @@
-/target/
-/target/classes/
-/target/classes/META-INF
-/test-output/
-/allure-results/
-/.settings/
-/.github/
-/.project
-/.DS_Store
-/bin/
-/.classpath
+*
+!src/
+!lib/
+!pom.xml
+!generate*.*
+!*gitignore

@@ -1,5 +1,0 @@
-place .m2 in your home directory
-place incorta in your eclipse-workspace
-from eclipse, file > import > existing maven projects
-browse to select incorta from eclipse-workspace
-right-click the project from the project explorer > maven > update project > check force update of snapshots/releases > ok

@@ -14,7 +14,7 @@ public class SchemaList {
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_schemas_schemaList");
-	String popup_schema_schedule_Error_Message =replace_regularExpression("INC_004010050:Another SCHEDULER with the same name [Schema Load] already exists.");
+	String popup_schema_schedule_Error_Message =replace_regularExpression("INC_004010050:Another SCHEDULER with the same name [Automation_ScheduleSchema_Load] already exists.");
 	//// Elements
 	By header_schemaListTabHeader_link = By
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Schemas']");
