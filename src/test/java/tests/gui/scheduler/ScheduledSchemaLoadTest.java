@@ -1,5 +1,9 @@
 package tests.gui.scheduler;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
@@ -13,12 +17,6 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.scheduler.SchemaLoads;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 
 @Epic("ScheduledSchemaLoadTest")
 
@@ -159,11 +157,6 @@ public class ScheduledSchemaLoadTest {
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();
-	}
-
-	@BeforeMethod
-	public void beforeMethod() {
-
 	}
 
 }
