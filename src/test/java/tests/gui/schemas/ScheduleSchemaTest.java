@@ -245,6 +245,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
 
+		scheduledSchema.changeJobStatusFilter("All");
 		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
 				testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);

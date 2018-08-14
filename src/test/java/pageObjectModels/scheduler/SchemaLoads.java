@@ -70,7 +70,7 @@ public class SchemaLoads {
 		Assertions.assertElementAttribute(driver, header_schemasTabHeader_link, "class", "selectedTab", true);
 	}
 
-	public void changejobStatusFilter(String status) {
+	public void changeJobStatusFilter(String status) {
 		ElementActions.select(driver, body_jobStatus_list, status);
 	}
 
