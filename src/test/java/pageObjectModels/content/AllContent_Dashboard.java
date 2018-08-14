@@ -4,16 +4,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.elementActionLibrary.JSWaiter;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.supportActionLibrary.JavaActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
 
+import pageObjectModels.main.Skeleton;
+
 public class AllContent_Dashboard {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+	Skeleton mainPage;
+	AllContent_Dashboard dashboardPage;
 
 	//// Elements
 	By header_dashboardName_textBox = By.xpath("//div[@id='dashboardHeader']//input");
@@ -698,7 +701,7 @@ public class AllContent_Dashboard {
 	}
 
 
-public void Pagination_AssertThatFirstArrow_Disabled()
+	public void Pagination_AssertThatFirstArrow_Disabled()
 	{
 		Assertions.assertElementAttribute(driver, body_insight_paginationFirst_button, "class", "disabled-btn", true);
 	}
@@ -749,37 +752,30 @@ public void Pagination_AssertThatFirstArrow_Disabled()
 	{
 		Assertions.assertElementAttribute(driver, body_insight_PaginationSettings_PageSizeField, "text", PageSize, true);
 	}
-	
-	public void Pagination_AddPageSize(String PageSize)
-	{
-		ElementActions.type(driver, body_insight_PaginationSettings_PageSizeField, PageSize);
-		ElementActions.keyPress(driver, body_insight_PaginationSettings_PageSizeField, "Enter");
-		JSWaiter.sleep(1000);
-	}
-	//Need to update below function to be int instead of double after Mohab update in count function
+
 	public void Pagination_Assert_NumberOfRowsEqualTo_LastRecordInCurrentPageInPagination()
 	{
-		double lastRecordBeforeClickingNext = pagination_getLastRecordInCurrentPage();
-		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		int lastRecordBeforeClickingNext = pagination_getLastRecordInCurrentPage();
+		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(lastRecordBeforeClickingNext, CountTableRows, true);
 	}
 	
-	public void TestFunctionCount()
-	{
-		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
-		System.out.println(CountTableRows);
-	}
-	
-	//Need to update below function to be int instead of double after Mohab update in count function
 	public void Pagination_Assert_PageSizeEquelToNumberOfRowsInTable(String PageSize)
 	{
 		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(PageSize, CountTableRows, true);
 	}
-	//Need to update below function to be int instead of double after Mohab update in count function
+
 	public void Pagination_Assert_PageSizeNotEquelToNumberOfRowsInTable(String PageSize)
 	{
-		double CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
+		int CountTableRows = ElementActions.getElementsCount(driver, body_insight_Pagination_TableRows);
 		Assertions.assertEquals(PageSize, CountTableRows, false);
 	}
+
+	public void Pagination_AddPageSize(String PageSize)
+	{
+		ElementActions.type(driver, body_insight_PaginationSettings_PageSizeField, PageSize);
+		ElementActions.keyPress(driver, body_insight_PaginationSettings_PageSizeField, "Enter");
+	}
+	
 }
