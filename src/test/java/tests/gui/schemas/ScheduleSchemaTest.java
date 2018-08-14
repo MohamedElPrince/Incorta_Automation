@@ -363,6 +363,31 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 	}
 	
+	// *************************** Old Schedule Dash board Test cases ******************************
+	
+	@Test(priority = 15, description = "C54158 - Fresh: Oracle: Java Sun: Schema Scheduler: Daily Every x min: Testing that: Schedule is working properly")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Daily recurrence and Every x min")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_dailyRecurrence_min() {
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		//schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
+
+		String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
+		schemasPage.click_scheduleSchema_scheduleButton();
+
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
+				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.select_schemaName(NewSchduleJobName);
+		//scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
+
+	}
 	
 	public void navigateToSchemaListPage() {
 		
