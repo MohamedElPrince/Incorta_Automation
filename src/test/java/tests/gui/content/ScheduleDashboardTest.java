@@ -172,7 +172,8 @@ public class ScheduleDashboardTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_JobScreen_SaveChangesButton_WorksCorrectly() {
 		navigate_to_scheduleDashboard();
-		dashboardPage.scheduleDashboard_addJobName(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"));
+		dashboardPage
+				.scheduleDashboard_addJobName(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_click_schedule();
@@ -180,11 +181,14 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
-		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"));
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"), testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"));
+		schedulerDashboardsPage
+				.Assert_jobNameIsDisplayed(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"));
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"),
+				testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"));
 
-		
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(
+				testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_RemoveEmail_Button("To", testDataReader.getCellData("Email"));
@@ -192,7 +196,8 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(
+				testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("Email"));
@@ -201,7 +206,8 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(
+				testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_RemoveEmail_Button("Bcc", testDataReader.getCellData("Email"));
@@ -209,7 +215,8 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(
+				testDataReader.getCellData("Automation_Scheduler_SaveChnages_JobName"),
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("Bcc", testDataReader.getCellData("Email"));
 	}
@@ -287,7 +294,7 @@ public class ScheduleDashboardTest {
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		String SubjectName = dashboardPage.scheduleSendDashboard_addSubjectName();
 		String BodyName = dashboardPage.scheduleDashboard_addBodyName();
-		
+
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
@@ -298,9 +305,11 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(JobName);
@@ -316,14 +325,18 @@ public class ScheduleDashboardTest {
 	public void Assert_JobScreen_FieldsUpdatedSuccessfully() {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),testDataReader.getCellData("Automation_Scheduler_UpdateJobName"));
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"),
+				testDataReader.getCellData("Automation_Scheduler_UpdateJobName"));
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(testDataReader.getCellData("Automation_Scheduler_UpdateJobName"),
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(
+				testDataReader.getCellData("Automation_Scheduler_UpdateJobName"),
 				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		newScheduledJobName = schedulerDashboardsPage.JobScreen_UpdateFields(
 				testDataReader.getCellData("ScheduleJobDescription"), testDataReader.getCellData("ScheduleJobDate"),
-				testDataReader.getCellData("ScheduleJobTime"), testDataReader.getCellData("ScheduleJobPositiveTimeZone"),
+				testDataReader.getCellData("ScheduleJobTime"),
+				testDataReader.getCellData("ScheduleJobPositiveTimeZone"),
 				testDataReader.getCellData("ScheduleJobNoRecurrence"));
 
 		schedulerDashboardsPage.DashboardJob_ClickOnJob(newScheduledJobName,
@@ -355,8 +368,10 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		schedulerDashboardsPage
 				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
@@ -381,9 +396,11 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		schedulerDashboardsPage
 				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobWeeklyRecurrence"));
@@ -408,9 +425,11 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		schedulerDashboardsPage
 				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
@@ -435,9 +454,11 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Completed");
-		schedulerDashboardsPage.ScheduleDashboard_Assert_CompletedStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_CompletedStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		schedulerDashboardsPage
 				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobNoRecurrence"));
@@ -459,9 +480,11 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		schedulerDashboardsPage.JobScreen_Assert_SubjectNameIsDisplayed(testDataReader.getCellData("LongSubjectName"));
 	}
@@ -474,7 +497,8 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("Automation_Schedule_DeleteJob"));
-		schedulerDashboardsPage.ScheduleDashboard_Select_ScheduleJobs(testDataReader.getCellData("Automation_Scheduler_DashboardName"),
+		schedulerDashboardsPage.ScheduleDashboard_Select_ScheduleJobs(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"),
 				testDataReader.getCellData("Automation_Schedule_DeleteJob"));
 
 		mainPage = new Skeleton(driver);
@@ -482,7 +506,8 @@ public class ScheduleDashboardTest {
 		mainPage.Select_fromDropdownMenu("Delete selection");
 
 		schedulerDashboardsPage.ScheduleDashboard_Click_ConfirmUserDeletion_Suspend("Delete");
-		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(testDataReader.getCellData("Automation_Scheduler_DashboardName"),
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"),
 				testDataReader.getCellData("Automation_Schedule_DeleteJob"));
 	}
 
@@ -494,11 +519,13 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(testDataReader.getCellData("Automation_Schedule_SuspendJob"));
-		schedulerDashboardsPage.ScheduleDashboard_clickOnStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),
+		schedulerDashboardsPage.ScheduleDashboard_clickOnStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"),
 				testDataReader.getCellData("Automation_Schedule_SuspendJob"), "Active");
 		schedulerDashboardsPage.ScheduleDashboard_Click_Suspend_Ok();
 		schedulerDashboardsPage.ScheduleDashboard_StatusFilter_SelectFilter("Suspended");
-		schedulerDashboardsPage.ScheduleDashboard_Assert_JobStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"),
 				testDataReader.getCellData("Automation_Schedule_SuspendJob"), "Suspended");
 	}
 
@@ -531,9 +558,11 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(SubjectName);
 		// Need to check that mail is sent successfully with subject.
 	}
@@ -553,10 +582,12 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(BodyName);
 		// Need to check that mail is sent successfully with body.
 	}
@@ -577,9 +608,11 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_assert_HideNotificationText_checkbox_checked();
 		// Need to check that mail is sent successfully without hide notification text.
 	}
@@ -600,9 +633,11 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked();
 		// Need to check that mail is sent successfully with hide notification text.
 	}
@@ -623,9 +658,11 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Cc", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
 		// Need to check that mail is sent successfully with cc.
@@ -647,9 +684,11 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("Bcc", testDataReader.getCellData("Email"));
 		schedulerDashboardsPage.JobScreen_Assert_EmailIsNotExist("To", testDataReader.getCellData("Email"));
 		// Need to check that mail is sent successfully with Bcc.
@@ -671,7 +710,8 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
 		// Need to check that mail is sent successfully with CSV name is same as file
 		// name in schedule screen.
@@ -693,7 +733,8 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
 		// Need to check that mail is sent successfully with xlsx name is same as file
 		// name in schedule screen.
@@ -717,10 +758,13 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
-		schedulerDashboardsPage.jobScreen_Assert_fileNameField(testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage
+				.jobScreen_Assert_fileNameField(testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		// Need to check that mail is sent successfully with xlsx name is same as file
 		// name in Job screen.
@@ -744,10 +788,13 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
-		schedulerDashboardsPage.jobScreen_Assert_fileNameField(testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage
+				.jobScreen_Assert_fileNameField(testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
 		// Need to check that mail is sent successfully with xlsx name is same as file
 		// name in Job screen.
@@ -757,8 +804,7 @@ public class ScheduleDashboardTest {
 	@Test(priority = 41, description = "C77049 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for XLSX.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select xlsx and select append time stamp and I click on schedule. Then Mail will be sent successfully with timestamp for xlsx.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_TimeStampForXLSX() 
-	{
+	public void Assert_MailSent_TimeStampForXLSX() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -772,21 +818,22 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_assert_AppendTimestamp_checkbox_checked();
 		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("xlsx");
 
-		//Need to check that mail is sent successfully with XLSX with time stamp.
+		// Need to check that mail is sent successfully with XLSX with time stamp.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 42, description = "	 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Time stamp' for CSV.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and select csv and select append time stamp and I click on schedule. Then Mail will be sent successfully with timestamp for xlsx.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_TimeStampForCSV() 
-	{
+	public void Assert_MailSent_TimeStampForCSV() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -800,21 +847,22 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_assert_AppendTimestamp_checkbox_checked();
 		schedulerDashboardsPage.JobScreen_Assert_OutputFormat("csv");
 
-		//Need to check that mail is sent successfully with csv with time stamp.
+		// Need to check that mail is sent successfully with csv with time stamp.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 43, description = "C77058 - Firefox: Fresh Installation: Verify that when sending the Scheduler Email 'Subject and Body' are displayed correctly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and I click on schedule. Then Mail will be sent successfully with subject and body.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_BodyAndSubjectExistAndCorrect() 
-	{
+	public void Assert_MailSent_BodyAndSubjectExistAndCorrect() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -827,21 +875,22 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(BodyText);
 		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(SubjectText);
-		
-		//Need to check that mail is sent successfully withbody and subject.
+
+		// Need to check that mail is sent successfully withbody and subject.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 44, description = "C77059 - Firefox: Fresh Installation: Testing that the mail is received successful with 'Arabic Letters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add arabic letter in the subject and I click on schedule. Then Mail will be sent successfully with subject [Arabic Letters].")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_ArabicLetterInSubject() 
-	{
+	public void Assert_MailSent_ArabicLetterInSubject() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -853,20 +902,21 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(testDataReader.getCellData("ArabicSubject"));
-		
-		//Need to check that mail is sent successfully with arabic letter in subject.
+
+		// Need to check that mail is sent successfully with arabic letter in subject.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 45, description = "C77060 - Firefox: Fresh Installation: Testing that the mail is received successful with Subject contains 'Special characters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add special chars in the subject and I click on schedule. Then Mail will be sent successfully with subject [special chars].")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_SpecialCharactersInSubject() 
-	{
+	public void Assert_MailSent_SpecialCharactersInSubject() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -878,22 +928,25 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
-		String replace = testDataReader.getCellData("SpecialCharactersSubject").replace("@", "\\@").replace("_", "\\_").replace("$", "\\$").replace("#", "\\#");
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		String replace = testDataReader.getCellData("SpecialCharactersSubject").replace("@", "\\@").replace("_", "\\_")
+				.replace("$", "\\$").replace("#", "\\#");
 
 		schedulerDashboardsPage.JobScreen_Assert_SubjectTextIsDisplayed(replace);
 
-		//Need to check that mail is sent successfully with special characters in subject.
+		// Need to check that mail is sent successfully with special characters in
+		// subject.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 46, description = "C77062 - Firefox: Fresh Installation: Testing that Body with very long message does not make any errors.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and very long body and I click on schedule. Then Mail will be sent successfully with the long body.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_LongMessages_BodyField() 
-	{
+	public void Assert_MailSent_LongMessages_BodyField() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -905,20 +958,22 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("LongBody"));
 
-		//Need to check that mail is sent successfully with special characters in subject.
+		// Need to check that mail is sent successfully with special characters in
+		// subject.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 47, description = "C77063 - Firefox: Fresh Installation: Testing that Body with with Space and Enter does not make any errors.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and very long body and I click on schedule. Then Mail will be sent successfully with the long body.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_MessagesWithSpacesAndEnter_BodyField() 
-	{
+	public void Assert_MailSent_MessagesWithSpacesAndEnter_BodyField() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -930,20 +985,23 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
-		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("BodyWithSpacesAndEnter"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage
+				.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("BodyWithSpacesAndEnter"));
 
-		//Need to check that mail is sent successfully with special characters in subject.
+		// Need to check that mail is sent successfully with special characters in
+		// subject.
 	}
 
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 48, description = "C77064 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Arabic letters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add arabic letter in the body and I click on schedule. Then Mail will be sent successfully with body [Arabic Letters].")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_ArabicLetter_bodyField() 
-	{
+	public void Assert_MailSent_ArabicLetter_bodyField() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -955,20 +1013,21 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(testDataReader.getCellData("ArabicSubject"));
-		
-		//Need to check that mail is sent successfully with arabic letter in subject.
+
+		// Need to check that mail is sent successfully with arabic letter in subject.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 49, description = "C77065 - Firefox: Fresh Installation: Testing that the mail is received successful with Body contains 'Special Characters'.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add special chars in the body and I click on schedule. Then Mail will be sent successfully with body [special chars].")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_SpecialCharacters_bodyField() 
-	{
+	public void Assert_MailSent_SpecialCharacters_bodyField() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -980,22 +1039,26 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
-		String replace = testDataReader.getCellData("SpecialCharactersSubject").replace("@", "\\@").replace("_", "\\_").replace("$", "\\$").replace("#", "\\#");
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		String replace = testDataReader.getCellData("SpecialCharactersSubject").replace("@", "\\@").replace("_", "\\_")
+				.replace("$", "\\$").replace("#", "\\#");
 
 		schedulerDashboardsPage.JobScreen_Assert_BodyTextIsDisplayed(replace);
 
-		//Need to check that mail is sent successfully with special characters in subject.
+		// Need to check that mail is sent successfully with special characters in
+		// subject.
 	}
 
-	// Prerequisite, Admin User + Dashboard Created with prompts [Automation_Dashboard_Prompt_Filter]
+	// Prerequisite, Admin User + Dashboard Created with prompts
+	// [Automation_Dashboard_Prompt_Filter]
 	@Test(priority = 50, description = "C77201 - Firefox: Fresh Installation: Testing that the Scheduler is working with Prompt Filter.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with making prompt filter mandatory and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_PromptMandatory_schedulerDashboard() 
-	{
+	public void Assert_MailSent_PromptMandatory_schedulerDashboard() {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
@@ -1005,10 +1068,10 @@ public class ScheduleDashboardTest {
 
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardPrompts"));
-		
+
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
-		
+
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
@@ -1017,17 +1080,18 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("AutomationDashboardPrompts"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("AutomationDashboardPrompts"), JobName);
 
-		//Need to check that dashboard is sent successfully filtered in mail.
+		// Need to check that dashboard is sent successfully filtered in mail.
 	}
 
-	// Prerequisite, Admin User + Dashboard Created with prompts [Automation_Dashboard_Prompt_Filter]
+	// Prerequisite, Admin User + Dashboard Created with prompts
+	// [Automation_Dashboard_Prompt_Filter]
 	@Test(priority = 51, description = "C77225 - Firefox: Fresh Installation: Check that prompt filter applied not sent in the email in case hide notification check box applied.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and check hide notification text along with making prompt filter mandatory and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully without notification.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_PromptMandatory_withoutNotificationText_schedulerDashboard() 
-	{
+	public void Assert_MailSent_PromptMandatory_withoutNotificationText_schedulerDashboard() {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
@@ -1037,10 +1101,10 @@ public class ScheduleDashboardTest {
 
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardPrompts"));
-		
+
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
-		
+
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
@@ -1051,17 +1115,19 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("AutomationDashboardPrompts"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("AutomationDashboardPrompts"), JobName);
 
-		//Need to check that dashboard is sent successfully filtered in mail without notification text.
+		// Need to check that dashboard is sent successfully filtered in mail without
+		// notification text.
 	}
 
-	// Prerequisite, Admin User + Dashboard Created with applied filter [Automation_Dashboard_Applied_Filter]
+	// Prerequisite, Admin User + Dashboard Created with applied filter
+	// [Automation_Dashboard_Applied_Filter]
 	@Test(priority = 52, description = "C77202 - Firefox: Fresh Installation: Testing that the Scheduler is working with Applied Filter.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with making applied filter mandatory and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_AppliedFilter_schedulerDashboard() 
-	{
+	public void Assert_MailSent_AppliedFilter_schedulerDashboard() {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
@@ -1071,32 +1137,33 @@ public class ScheduleDashboardTest {
 
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardAppliedFilter"));
-		
+
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
-		
+
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_addRecurrence("Daily");
-	    dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
-		
+		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
+
 		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("AutomationDashboardAppliedFilter"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("AutomationDashboardAppliedFilter"), JobName);
 
-		//Need to check that dashboard is sent successfully filtered in mail.
+		// Need to check that dashboard is sent successfully filtered in mail.
 	}
 
-	// Prerequisite, Admin User + Dashboard Created with presentation variables [AutomationDashboardPresentationVariables]
+	// Prerequisite, Admin User + Dashboard Created with presentation variables
+	// [AutomationDashboardPresentationVariables]
 	@Test(priority = 53, description = "C77209 - Firefox: Fresh Installation: Testing that the Scheduler is working with Presentation Variables.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with making presentation variables and I click on schedule. Then scheduler will work with prompt successfully and Mail will be sent successfully with filter.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_PresentationVariables_schedulerDashboard() 
-	{
+	public void Assert_MailSent_PresentationVariables_schedulerDashboard() {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
@@ -1106,32 +1173,33 @@ public class ScheduleDashboardTest {
 
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardPresentationVariables"));
-		
+
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
-		
+
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_addRecurrence("Daily");
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
-		
+
 		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("AutomationDashboardPresentationVariables"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("AutomationDashboardPresentationVariables"), JobName);
 
-		//Need to check that dashboard is sent successfully filtered in mail.
+		// Need to check that dashboard is sent successfully filtered in mail.
 	}
 
-	// Prerequisite, Admin User + Dashboard Created with presentation variables [AutomationDashboardPresentationVariables]
+	// Prerequisite, Admin User + Dashboard Created with presentation variables
+	// [AutomationDashboardPresentationVariables]
 	@Test(priority = 54, description = "C77219 - Firefox: Fresh Installation: Testing that the Scheduler is working with Bookmark.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields along with filter and bookmark and I click on schedule. Then scheduler will work with filter successfully and Mail will be sent successfully with filter.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_Bookmark_schedulerDashboard() 
-	{
+	public void Assert_MailSent_Bookmark_schedulerDashboard() {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
@@ -1141,33 +1209,34 @@ public class ScheduleDashboardTest {
 
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.assert_dashboardName(testDataReader.getCellData("AutomationDashboardBookmark"));
-		
+
 		mainPage.Click_export();
 		mainPage.Select_fromDropdownMenu("Schedule");
-		
+
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 		dashboardPage.scheduleDashboard_addRecurrence("Daily");
 		dashboardPage.scheduleSendDashboard_selectOutputFormat("html");
-		
+
 		dashboardPage.scheduleDashboard_click_schedule();
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("AutomationDashboardBookmark"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("AutomationDashboardBookmark"), JobName);
 
-		//Need to check that dashboard is sent successfully filtered in mail.
+		// Need to check that dashboard is sent successfully filtered in mail.
 	}
-	
-	//******************************Old Schedule Dash board Test cases******************************
+
+	// ******************************Old Schedule Dash board Test
+	// cases******************************
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 55, description = "C54221 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x min: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add time zone and repeate type min and number and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Minute and number of minutes.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_DashboardSchedueled_DailyRecurrence_Minutes() 
-	{
+	public void Assert_MailSent_DashboardSchedueled_DailyRecurrence_Minutes() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -1180,23 +1249,26 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
-		
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
+
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
-		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
-		schedulerDashboardsPage.JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin("Minute","20");
+		schedulerDashboardsPage
+				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+		schedulerDashboardsPage.JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin("Minute", "20");
 		schedulerDashboardsPage.JobScreen_Assert_Repeat_NoEnd_Checked();
 		schedulerDashboardsPage.JobScreen_Assert_EmailExist("To", testDataReader.getCellData("Email"));
-		//Need to check that mail is sent successfully with the right intervals in minutes.
+		// Need to check that mail is sent successfully with the right intervals in
+		// minutes.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 56, description = "C54232 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Daily Every x hour: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and add time zone and repeate type hour and number and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Hour and number of Hours.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_DashboardSchedueled_DailyRecurrence_Hours() 
-	{
+	public void Assert_MailSent_DashboardSchedueled_DailyRecurrence_Hours() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
@@ -1210,23 +1282,27 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
-		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
-		schedulerDashboardsPage.JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin("Hour","20");
-		schedulerDashboardsPage.scheduleDashboard_Assert_Repeate_EndByChecked_DateSelected(testDataReader.getCellData("ScheduleJobDate"));
+		schedulerDashboardsPage
+				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobDailyRecurrence"));
+		schedulerDashboardsPage.JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin("Hour", "20");
+		schedulerDashboardsPage.scheduleDashboard_Assert_Repeate_EndByChecked_DateSelected(
+				testDataReader.getCellData("ScheduleJobDate"));
 
-		//Need to check that mail is sent successfully with the right intervals in Hours.
+		// Need to check that mail is sent successfully with the right intervals in
+		// Hours.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 57, description = "C54223 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Monthly: Testing that: Schedule is working properly.")
 	@Description("When I navigate to the scheduler dashboard screen, and I fill all fields and repeate type Monthley and start with specific day and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Monthley.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MailSent_DashboardSchedueled_monthlyRecurrence_Weeks() 
-	{
+	public void Assert_MailSent_DashboardSchedueled_monthlyRecurrence_Weeks() {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.scheduleDashboard_addRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
@@ -1238,17 +1314,21 @@ public class ScheduleDashboardTest {
 
 		schedulerDashboardsPage = new Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 
-		schedulerDashboardsPage.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
+		schedulerDashboardsPage
+				.JobScreen_Assert_JobRecurrence_Selected(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
 		schedulerDashboardsPage.JobScreen_Assert_JobNameIsDisplayed(JobName);
 		schedulerDashboardsPage.JobScreen_Assert_monthlyRecurrence_selectType_2ndOption("Week", "2", "Sun", "11");
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
-		//Need to check that mail is sent successfully with the right intervals in Hours.
+		// Need to check that mail is sent successfully with the right intervals in
+		// Hours.
 	}
-	
+
 	// Prerequisite, Admin User + Dashboard Created
 	@Test(priority = 58, description = "C77051 - Firefox: Fresh Installation: Testing that Scheduler is working with different Timezones.")
 	@Description("When I navigate to the target dashboard, and I click on schedule dashboard and I updatet time zone and I click on save and from job screen update it again and click on save. Then next run [time zone]will be changed with every save.")
@@ -1257,7 +1337,7 @@ public class ScheduleDashboardTest {
 		navigate_to_scheduleDashboard();
 		String JobName = dashboardPage.scheduleDashboard_addJobName();
 		dashboardPage.scheduleDashboard_select_jobTimeZone(testDataReader.getCellData("ScheduleJobPositiveTimeZone"));
-		
+
 		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
 		dashboardPage.scheduleDashboard_typeEmailAndClickAdd(testDataReader.getCellData("Email"));
 
@@ -1267,45 +1347,55 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.Navigate_toURL();
 		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(JobName);
-		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
-		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\+03:00",testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.ScheduleDashboard_Assert_ActiveStatus(
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
+		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\+03:00",
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\+03:00");
 		schedulerDashboardsPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobNegativeTimeZone"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
-		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\-03:00",testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\-03:00",
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\-03:00");
 		schedulerDashboardsPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
 		schedulerDashboardsPage.JobScreen_SaveChanges_Button();
-		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\±00:00",testDataReader.getCellData("Automation_Scheduler_DashboardName"),JobName);
+		schedulerDashboardsPage.Assert_NextRunTimeZoneCorrect("GMT\\±00:00",
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"), JobName);
 
-		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName, testDataReader.getCellData("Automation_Scheduler_DashboardName"));
+		schedulerDashboardsPage.DashboardJob_ClickOnJob(JobName,
+				testDataReader.getCellData("Automation_Scheduler_DashboardName"));
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\±00:00");
 	}
 
-	
-//	// Prerequisite, Admin User + Dashboard Created
-//	//************************On Hold - until Mona Update TCs - Invalid steps (4 TCs) [C54226-C54227-C54228-C54229]************************
-//	@Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
-//	@Description("When I  and I click on schedule. Then Mail will be sent successfully with time zone and repeate type Monthley.")
-//	@Severity(SeverityLevel.NORMAL)
-//	public void Assert_MailSent_DashboardsSchedueledAndShared_Testtesttesttest() 
-//	{
-//		navigate_to_scheduleDashboard();
-//		String JobName = dashboardPage.scheduleDashboard_addJobName();
-//		dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
-//		dashboardPage.scheduleDashboard_monthlyRecurrence_selectType_2ndOption("Week", "2nd", "Sun", "11");
-//		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-//		dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-//		dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
-//		dashboardPage.scheduleDashboard_Click_schedule();
-//	}
-	
-	public void navigate_to_scheduleDashboard()
-	{
+	// // Prerequisite, Admin User + Dashboard Created
+	// //************************On Hold - until Mona Update TCs - Invalid steps (4
+	// TCs) [C54226-C54227-C54228-C54229]************************
+	// @Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun:
+	// Dashboard Scheduler: Testing that: Schedule is working properly, when it can
+	// be viewed by Tenant Owner.")
+	// @Description("When I and I click on schedule. Then Mail will be sent
+	// successfully with time zone and repeate type Monthley.")
+	// @Severity(SeverityLevel.NORMAL)
+	// public void Assert_MailSent_DashboardsSchedueledAndShared_Testtesttesttest()
+	// {
+	// navigate_to_scheduleDashboard();
+	// String JobName = dashboardPage.scheduleDashboard_addJobName();
+	// dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
+	// dashboardPage.scheduleDashboard_monthlyRecurrence_selectType_2ndOption("Week",
+	// "2nd", "Sun", "11");
+	// dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
+	// dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
+	// dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
+	// dashboardPage.scheduleDashboard_Click_schedule();
+	// }
+
+	public void navigate_to_scheduleDashboard() {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 		allContentPage.Assert_allContentTabIsSelected();
