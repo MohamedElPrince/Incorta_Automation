@@ -109,7 +109,7 @@ public class ScheduledSchemaLoadTest {
 		// schema_Schedule_View_Status.Schedule_Schema_JobStatus_Check(testDataReader.getCellData("SchemaName"),testDataReader.getCellData("SchemaJobName_C77129"),
 		// "Active");// to check the status o the created job"to be deleted"
 
-		scheduledSchema.changejobStatusFilter("All");// to See All SchemaJobs
+		scheduledSchema.changeJobStatusFilter("All");// to See All SchemaJobs
 
 		scheduledSchema.Change_scheduleSchema_JobStatus_(testDataReader.getCellData("SchemaName"),
 				testDataReader.getCellData("SchemaJobName_C77129"), "Active");

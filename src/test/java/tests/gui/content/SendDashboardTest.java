@@ -373,7 +373,7 @@ public class SendDashboardTest {
 		// characters
 	}
 
-	@Test(priority = 22, description = "C76826 - Firefox: Fresh Installation: Verify that the user can send a dashboard with \"Body\" contains Enter")
+	@Test(priority = 22, description = "C76825 - Firefox: Fresh Installation: Verify that the user can send a dashboard with \"Body\" contains Enter")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard. And sending email with body contains Enter, then It should be sent successfully and body is displayed successfully")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_email_bodyWithEnter() {
@@ -944,7 +944,7 @@ public class SendDashboardTest {
 	// starts with System generated"
 	// - group of certain users created and exists
 
-	@Test(priority = 47, description = "C76848 - Firefox: Fresh Installation:Verify that the user can send dashboard adding users in \"TO\"")
+	@Test(priority = 47, description = "C76851 - Firefox: Fresh Installation:Verify that the user can send dashboard adding Groups in \"TO\"")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"TO\" field is displayed and user can add email to send dashboard to certain group")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_ToField_GroupOfUsers() {
@@ -968,7 +968,7 @@ public class SendDashboardTest {
 		// "To" field and "Cc"\"Bcc" is empty
 	}
 
-	@Test(priority = 48, description = "C76849 - Firefox: Fresh Installation: Verify that the user can send dashboard adding users in \"CC\"")
+	@Test(priority = 48, description = "C76852 - Firefox: Fresh Installation:Verify that the user can send dashboard adding Groups in \"CC\"")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"CC\" field is displayed and user can add email to send dashboard to to certain group")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_CcField_GroupOfUsers() {
@@ -992,7 +992,7 @@ public class SendDashboardTest {
 		// "Cc" field and "To"\"Bcc" is empty
 	}
 
-	@Test(priority = 49, description = "C76850 - Firefox: Fresh Installation: Verify that the user can send dashboard adding users in \"Bcc\"")
+	@Test(priority = 49, description = "C76853 - Firefox: Fresh Installation:Verify that the user can send dashboard adding Groups in \"Bcc\"")
 	@Description("When I navigate to the target dashboard, and I click on send dashboard, then It \"BCC\" field is displayed and user can add email to send dashboard to to certain group")
 	@Severity(SeverityLevel.NORMAL)
 	public void Assert_SendDashboard_BccField_GroupOfUsers() {
