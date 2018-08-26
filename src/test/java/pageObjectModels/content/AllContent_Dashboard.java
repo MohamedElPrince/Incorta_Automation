@@ -9,13 +9,10 @@ import com.shaftEngine.supportActionLibrary.JavaActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 import com.shaftEngine.validationsLibrary.Verifications;
 
-import pageObjectModels.main.Skeleton;
-
 public class AllContent_Dashboard {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
-	Skeleton mainPage;
 	AllContent_Dashboard dashboardPage;
 
 	//// Elements

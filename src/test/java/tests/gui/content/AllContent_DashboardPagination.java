@@ -281,7 +281,7 @@ public class AllContent_DashboardPagination {
 		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
 		loginPage.Verify_correctVersionNumberIsDisplayed();
-		loginPage.UserLogin(testDataReader.getCellData("TenantDemo"), testDataReader.getCellData("Username"),
+		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
 	}
 
