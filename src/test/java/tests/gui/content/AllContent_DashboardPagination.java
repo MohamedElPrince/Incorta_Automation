@@ -32,7 +32,7 @@ public class AllContent_DashboardPagination {
 	AllContent_Dashboard dashboardPage;
 
 	// Declaring public variables that will be shared between tests
-	String paginationDashboardName, paginationInsightName;
+	String Automation_Pivot_PaginationDashboard_PageSize20, paginationInsightName;
 
 	// before suite
 	// user is already logged in
@@ -41,7 +41,7 @@ public class AllContent_DashboardPagination {
 	// components)
 
 	// dashboard name will be dynamic > store dashboard name
-	// [paginationDashboardName]
+	// [Automation_Pivot_PaginationDashboard_PageSize20]
 	// pagination Insight Name??
 
 	@Test(priority = 1, description = "C77296 - Chrome: Table Insight: Verify that the pagination UI is displayed correctly.")
@@ -53,10 +53,10 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 		dashboardPage.pagination_verify_uiElementsExist();
 	}
@@ -71,10 +71,10 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		// first page = ^1 -
@@ -94,10 +94,10 @@ public class AllContent_DashboardPagination {
 	allContentPage.Assert_allContentTabIsSelected();
 	
 	mainPage = new Skeleton(driver);
-	mainPage.SearchForContentAndOpenResult(paginationDashboardName);
+	mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 	
 	dashboardPage = new AllContent_Dashboard(driver);
-	dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+	dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 	dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 	
 	dashboardPage.pagination_assertThatLastButtonWorksAsExpected();
@@ -113,10 +113,10 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.pagination_assertThatFirstButtontWorksAsExpected();
@@ -134,16 +134,16 @@ public class AllContent_DashboardPagination {
 
 		// Search for dashboard name in search bar and open it
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.pagination_assertThatPreviousButtonWorksAsExpected();
 	}
 
-	//Prerequisite: Dashboard [Automation_Pivot_Pagination_Dashboard] created + Insight with pagination created [Automation_Insight]
+	//Prerequisite: Dashboard [Automation_Pivot_Pagination_Dashboard] created + Insight with pagination created [Automation_Insight] + pagination on page should have more than one page
 	@Test(priority = 6, description = "C77301 - Chrome: Table Insight: Verify that when reaching the end of the set, the buttons on the right should be disabled and vice-versa")
 	@Description("When I navigate to the target dashboard, and I assert that the first arrow button disabled, and I click the next Page button, Then the all buttons is enabled")
 	@Severity(SeverityLevel.NORMAL)
@@ -153,23 +153,23 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
-
 		dashboardPage.Pagination_AssertThatFirstArrow_Disabled();
-		
+
 		dashboardPage.Pagination_NavigateToNextPage();
-		
 		dashboardPage.Pagination_AssertThatFirstButton_Enabled();
 		dashboardPage.Pagination_AssertThatPreviousButton_Enabled();
 		dashboardPage.Pagination_AssertThatNextButton_Enabled();
 		dashboardPage.Pagination_AssertThatLastButton_Enabled();
+		
+		dashboardPage.Pagination_NavigateToLastPage_Assert_LastButtonDisabled();
+		
 	}
 
 	//Prerequisite: Dashboard [Automation_Pivot_Pagination_Dashboard] created + Insight with pagination created [Automation_Insight] + Update page size to be 5
-	//Waiting Mohab Update in engine to re-test.
 	@Test(priority = 7, description = "C77476 - Chrome: Table insight: Verify that the pagination starts with 1.")
 	@Description("When I navigate to the target dashboard, Then The Numbering of the pagination is correctly displayed")
 	@Severity(SeverityLevel.NORMAL)
@@ -179,22 +179,20 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
+		
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
-		
-		dashboardPage.Pagination_ClickOnEditInsight();
-		mainPage.Open_SettingsList();
-		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize"));			
-		
+
 		dashboardPage.Pagination_AssertThatPaginationStartsWithNumber1();
 		dashboardPage.Pagination_Assert_NumberOfRowsEqualTo_LastRecordInCurrentPageInPagination();
-		
+		dashboardPage.pagination_assertThatLastButtonWorksAsExpected();
+
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
-	//Waiting Mohab Update in engine to re-test.
+	//Pagination_Assert_PageSize function is not working which causing next TC to fail
 	@Test(priority = 8, description = "C77488 - Chrome: Table insight: Check that 'Page Size' Setting is displayed correctly and has default value '1000'.")
 	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings, Then The page size will by default 1000")
 	@Severity(SeverityLevel.NORMAL)
@@ -205,9 +203,9 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_DefaultPageSize"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_DefaultPageSize"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_ClickOnEditInsight();
@@ -216,7 +214,6 @@ public class AllContent_DashboardPagination {
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
-	//Waiting Mohab Update in engine to re-test.
 	@Test(priority = 9, description = "C77489 - Chrome: Table insight: check that 'Page Size' can be changed and saved correctly.")
 	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings and I update the page size to 10, Then The page size will be 10 in the table.")
 	@Severity(SeverityLevel.NORMAL)
@@ -227,22 +224,16 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardName"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardName"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_PageSize20"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
-		dashboardPage.Pagination_ClickOnEditInsight();
-		mainPage.Open_SettingsList();
-		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize"));			
-		dashboardPage.Pagination_Assert_PageSizeEquelToNumberOfRowsInTable(testDataReader.getCellData("PageSize"));
-
-		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("PageSize5"));			
-		dashboardPage.Pagination_Assert_PageSizeEquelToNumberOfRowsInTable(testDataReader.getCellData("PageSize5"));
+		Pagination_AddPageSize_AssertPageSizeIsCorrect(testDataReader.getCellData("PageSize"));
+		Pagination_AddPageSize_AssertPageSizeIsCorrect(testDataReader.getCellData("PageSize5"));
 	}
 
 	//Prerequisite: Dashboard [Automation_Pagination_Dashboard_PageSize] created without changing page size in it + Insight with pagination created [Automation_Insight]
-	//Waiting Mohab Update in engine to re-test.
 	@Test(priority = 10, description = "C77490 - Chrome: Table insight: Check that 'Page Size' value is Positive integer number only.")
 	@Description("When I navigate to the target dashboard,and I click on use table insights and I click on settings and I update the page size to non positive integer value, Then The page size will not accept it and will return to the default value.")
 	@Severity(SeverityLevel.NORMAL)
@@ -253,16 +244,31 @@ public class AllContent_DashboardPagination {
 		allContentPage.Assert_allContentTabIsSelected();
 
 		mainPage = new Skeleton(driver);
-		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		mainPage.SearchForContentAndOpenResult(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_DefaultPageSize"));
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_dashboardName(testDataReader.getCellData("paginationDashboardNamePageSize"));
+		dashboardPage.assert_dashboardName(testDataReader.getCellData("Automation_Pivot_PaginationDashboard_DefaultPageSize"));
 		dashboardPage.assert_insightName(testDataReader.getCellData("paginationInsightName"));
 
 		dashboardPage.Pagination_ClickOnEditInsight();
 		mainPage.Open_SettingsList();
-		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("NonPositiveIntegerPageSize"));	
-
+		dashboardPage.Pagination_AddPageSize(testDataReader.getCellData("NonPositiveIntegerPageSize"));
 		dashboardPage.Pagination_Assert_PageSizeNotEquelToNumberOfRowsInTable(testDataReader.getCellData("NonPositiveIntegerPageSize"));
+	}
+
+	
+
+	public void Pagination_AddPageSize_AssertPageSizeIsCorrect(String PageSize)
+	{
+		dashboardPage.Pagination_ClickOnEditInsight();
+		mainPage = new Skeleton(driver);
+		mainPage.Open_SettingsList();
+
+		dashboardPage.Pagination_AddPageSize(PageSize);
+		mainPage.Click_doneAndRefresh();
+		
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage.Pagination_Assert_NumberOfRowsEqualTo_LastRecordInCurrentPageInPagination();
+		
 	}
 	
 	@BeforeClass
@@ -275,7 +281,7 @@ public class AllContent_DashboardPagination {
 		loginPage = new Login(driver);
 		loginPage.Navigate_toURL();
 		loginPage.Verify_correctVersionNumberIsDisplayed();
-		loginPage.UserLogin(testDataReader.getCellData("TenantDemo"), testDataReader.getCellData("Username"),
+		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
 	}
 

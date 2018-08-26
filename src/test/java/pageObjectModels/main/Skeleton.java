@@ -3,6 +3,7 @@ package pageObjectModels.main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
@@ -89,6 +90,11 @@ public class Skeleton {
 
 	public void Click_done() {
 		ElementActions.click(driver, header_done_link);
+	}
+	
+	public void Click_doneAndRefresh() {
+		ElementActions.click(driver, header_done_link);
+		BrowserActions.refreshCurrentPage(driver);
 	}
 
 	public void Click_export() {
