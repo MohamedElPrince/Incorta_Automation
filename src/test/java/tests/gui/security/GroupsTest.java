@@ -14,7 +14,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.login.Login;
+import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.security.Groups;
 import pageObjectModels.security.Groups_Group;
@@ -29,7 +29,7 @@ public class GroupsTest {
 
 	// Declaring Page Objects that will be used in the tests
 	Groups groupsPage;
-	Login loginPage;
+	NewUI_Login loginPage;
 	Skeleton mainPage;
 	Users usersPage;
 	Groups_Group groupPage;
@@ -116,9 +116,9 @@ public class GroupsTest {
 		System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "security/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 	}
 

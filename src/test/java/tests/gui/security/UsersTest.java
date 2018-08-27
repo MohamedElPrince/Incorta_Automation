@@ -19,7 +19,7 @@ import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;
 import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.data.DataSources;
-import pageObjectModels.login.Login;
+import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.schemas.SchemaList;
 import pageObjectModels.schemas.SchemaList_SchemaView;
@@ -41,7 +41,8 @@ public class UsersTest {
 	WebDriver driver;
 	ExcelFileManager testDataReader;
 	String[] newUserData;
-	String TempUser = "Automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one created at prepare test data phase
+	String TempUser = "Automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one created at
+																	// prepare test data phase
 	String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data phase
 	String newPassword;
 	String newDataSourceName;
@@ -52,7 +53,7 @@ public class UsersTest {
 	String newInsightName;
 
 	//// Page Objects
-	Login loginPage;
+	NewUI_Login loginPage;
 	Users usersPage;
 	Skeleton mainPage;
 	Groups groupsPage;
@@ -101,14 +102,14 @@ public class UsersTest {
 	@Description("Given I am logged in with an admin account, When I navigate to the security.users page, And I click on a user (not super user), And I click on Login As User, Then a message should be displayed to state that I'm impersonating the user, And a link should be present in the users dropdown menu to take me back, And a link should be displayed in the side menu to take me back.")
 	@Severity(SeverityLevel.NORMAL)
 	public void impersonationUI() {
-	
+
 		String impersonationUserName = testDataReader.getCellData("ImpersonationUserName");
 		usersPage.Assert_nameIsDisplayed(impersonationUserName);
 		usersPage.Click_name(impersonationUserName);
 		usersPage.Click_impersonation();
 		usersPage.Assert_impersonationUIElementsAreDisplayed();
 	}
-	
+
 	@Test(priority = 4, description = "C647   - Testing Deleting user with option transfer ownership to another user ")
 	@Description("Given I have two Super User Accounts, when I share content whith other user \"User1\", And I Delete \"User0\" and transferrer all his content to another user \"User2\", then all content ownership transfered to that user and shared content doesn`t get affected ")
 	@Severity(SeverityLevel.CRITICAL)
@@ -153,12 +154,12 @@ public class UsersTest {
 
 		// logout and login using the new account created
 		mainPage.Select_fromUserMenu("Logout");
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
 
 		// Actions for first time login
 		newPassword = "Automation";
-		loginPage.FirstTimeLogin(newUserData[1], newPassword, newPassword);
+		loginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
 
 		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
@@ -176,7 +177,7 @@ public class UsersTest {
 
 		// Create Schema
 
-	    schemasPage = new SchemaList(driver);
+		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaListTabIsSelected();
 
@@ -196,8 +197,8 @@ public class UsersTest {
 		mainPage.Select_fromDropdownMenu("Schema Wizard");
 
 		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
-				testDataReader.getCellData("DatabaseTableName")); //need to check if condition after this function call
-																  // "Assert_wizardWelcomeTextIsDisplayed()"
+				testDataReader.getCellData("DatabaseTableName")); // need to check if condition after this function call
+																	// "Assert_wizardWelcomeTextIsDisplayed()"
 		newDataSourceTableName = schemasViewPage.GetNewestTableName();
 		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
 
@@ -263,9 +264,9 @@ public class UsersTest {
 
 		// Switch to another admin account
 		mainPage.Select_fromUserMenu("Logout");
-		loginPage.Navigate_toURL();
+		loginPage.navigate_toURL();
 
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
 		// Delete User and Transfer Ownership to another user
@@ -281,9 +282,9 @@ public class UsersTest {
 		// Switch to another admin account user in data5 and check the transfered
 		// content.
 		mainPage.Select_fromUserMenu("Logout");
-		loginPage.Navigate_toURL();
+		loginPage.navigate_toURL();
 
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data8"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data8"),
 				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
 
 		String Owner = testDataReader.getCellData("Username", "Data8");
@@ -303,8 +304,9 @@ public class UsersTest {
 		mainPage.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
 		allContentPage.selectContentOptionButton(newDashboardName);
 		dashboardPage.assert_content_userPermission(Owner, "Owner");
-		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View"); 
-		// do we need to add click on Done after assert the permission for the user,will result an issue if i use this method to check more than one user
+		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View");
+		// do we need to add click on Done after assert the permission for the user,will
+		// result an issue if i use this method to check more than one user
 
 		// Check Folder owner after transfer
 		allContentPage.Navigate_toURL();
@@ -314,22 +316,22 @@ public class UsersTest {
 	}
 
 	//// Testng Annotations
-	
+
 	@BeforeMethod
 	public void beforeMethod() {
 		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
 	}
-	
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "security/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 	}
 

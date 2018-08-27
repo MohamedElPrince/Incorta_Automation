@@ -15,7 +15,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;
-import pageObjectModels.login.Login;
+import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.scheduler.Dashboards;
 
@@ -26,7 +26,7 @@ public class ScheduleDashboardTest {
 	ExcelFileManager testDataReader;
 
 	// Declaring Page Objects that will be used throughout the test
-	Login loginPage;
+	NewUI_Login loginPage;
 	AllContent allContentPage;
 	Skeleton mainPage;
 	AllContent_Dashboard dashboardPage;
@@ -1517,9 +1517,9 @@ public class ScheduleDashboardTest {
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
 	}
 

@@ -16,7 +16,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
-import pageObjectModels.login.Login;
+import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.security.Users;
 
@@ -28,7 +28,7 @@ public class LoginTest {
 	ExcelFileManager testDataReader;
 
 	// Declaring Page Objects that will be used in the tests
-	Login loginPage;
+	NewUI_Login loginPage;
 	Skeleton mainPage;
 	AllContent allContentPage;
 	Users usersPage;
@@ -42,7 +42,7 @@ public class LoginTest {
 	@Description("When I log in with Analyzer User, Then only scheduler and content tab will be exist.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void LoginWithAnalyzer() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data1"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
 				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
 
 		mainPage = new Skeleton(driver);
@@ -56,7 +56,7 @@ public class LoginTest {
 	@Description("When I log in with Individual User, Then only scheduler and content tab will be exist.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void LoginWithIndividual() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data2"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data2"),
 				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
 
 		mainPage = new Skeleton(driver);
@@ -70,7 +70,7 @@ public class LoginTest {
 	@Description("When I log in with a normal User, Then only scheduler and content tab will be exist.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void LoginWithNormalUser() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data4"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data4"),
 				testDataReader.getCellData("Username", "Data4"), testDataReader.getCellData("Password", "Data4"));
 
 		mainPage = new Skeleton(driver);
@@ -84,7 +84,7 @@ public class LoginTest {
 	@Description("When I log in with Schema Manager User. Then only scheduler, content, Data Sources, Business Schema and Schemas tabs will be exist.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void LoginWithSchemaManager() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data3"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
 		mainPage = new Skeleton(driver);
@@ -101,7 +101,7 @@ public class LoginTest {
 	@Description("When I log in with User Manager User. Then only scheduler, content and security tabs will be exist.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void LoginWithUserManager() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data5"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
 				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
 
 		mainPage = new Skeleton(driver);
@@ -116,7 +116,7 @@ public class LoginTest {
 	@Description("When I log in with Super User. Then all tabs will exist.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void LoginWithSuperUser() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data6"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data6"),
 				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
 
 		mainPage = new Skeleton(driver);
@@ -132,7 +132,7 @@ public class LoginTest {
 	@Description("When I navigate to the login page, And I login using valid credentials Then login is done successfully and all content tab page is displayed")
 	@Severity(SeverityLevel.CRITICAL)
 	public void assertLoginWorksAsExpected() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
@@ -147,7 +147,7 @@ public class LoginTest {
 	@Description("When I login with new created user, Then I will be redirected to change password page, And I will logged in successfully")
 	@Severity(SeverityLevel.CRITICAL)
 	public void loginUsingNewlyCreatedUserAccount() {
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data7"),
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
 		// Create New User
@@ -161,11 +161,11 @@ public class LoginTest {
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
 
 		// Navigate to login page, and login using the new created user.
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
 
 		// Actions for first time login
-		loginPage.FirstTimeLogin(newUserData[1], newUserData[0], newUserData[0]); // take user name as input for the new
+		loginPage.firstTimeLogin(newUserData[1], newUserData[0], newUserData[0]); // take user name as input for the new
 																					// password
 		allContentPage = new AllContent(driver);
 		allContentPage.Assert_allContentTabIsSelected();
@@ -173,8 +173,8 @@ public class LoginTest {
 
 	@BeforeMethod
 	public void beforeMethod() {
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
 	}
 
 	@BeforeClass

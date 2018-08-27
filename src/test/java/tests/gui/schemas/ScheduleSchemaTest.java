@@ -1,5 +1,10 @@
 package tests.gui.schemas;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
@@ -10,16 +15,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.login.Login;
+import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.Skeleton;
 import pageObjectModels.scheduler.SchemaLoads;
 import pageObjectModels.schemas.SchemaList;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 
 @Epic("ScheduleSchema Test")
 
@@ -30,7 +29,7 @@ public class ScheduleSchemaTest {
 	ExcelFileManager testDataReader;
 
 	// Declaring Page Objects that will be used throughout the test
-	Login loginPage;
+	NewUI_Login loginPage;
 	SchemaList schemasPage;
 	SchemaLoads scheduledSchema;
 	Skeleton mainPage;
@@ -58,7 +57,6 @@ public class ScheduleSchemaTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void scheduleSchemaLoad_jobNameIsDisplayed() {
 
-
 		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 		mainPage = new Skeleton(driver);
@@ -73,7 +71,6 @@ public class ScheduleSchemaTest {
 	@Description("When I navigate to the schema list page,Given that there is a pre-created job created, And I create schedule job for the same schema with the same name, then error message appeare")
 	@Severity(SeverityLevel.NORMAL)
 	public void schemaScheduler_jobExistsErrorIsDisplayed() {
-
 
 		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
@@ -116,7 +113,7 @@ public class ScheduleSchemaTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void SchedulerSchema_withJobNameEmpty_CanNotBeSaved() {
 
-schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 		mainPage = new Skeleton(driver);
 		mainPage.Click_actions();
@@ -151,7 +148,6 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 	@Severity(SeverityLevel.NORMAL)
 	public void Scheduler_SchemaView_dailyRecurrence() {
 
-
 		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 		mainPage = new Skeleton(driver);
@@ -164,8 +160,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
 
@@ -191,8 +186,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
 
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Weekly");
 		scheduledSchema.Assert_scheduleSchema_weeklyDay_CheckBox("Mon");
@@ -203,7 +197,6 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Monthly recurrence")
 	@Severity(SeverityLevel.NORMAL)
 	public void scheduleSchema_monthlyRecurrence() {
-
 
 		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
@@ -219,8 +212,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
 
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Monthly");
 
@@ -230,7 +222,6 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with No recurrence")
 	@Severity(SeverityLevel.NORMAL)
 	public void Scheduler_schemaView_noRecurrence() {
-
 
 		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
@@ -246,8 +237,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema.Navigate_toURL();
 
 		scheduledSchema.changeJobStatusFilter("All");
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("No Recurrence");
 
@@ -274,8 +264,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
 
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
 		scheduledSchema.Assert_scheduleSchema_loadType_dropDownMenu("Full");
@@ -301,8 +290,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
 
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
 		scheduledSchema.Assert_scheduleSchema_loadType_dropDownMenu("Incremental");
@@ -328,8 +316,7 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
 
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
@@ -356,16 +343,16 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
 
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
 		scheduledSchema.Assert_scheduleSchema_loadType_dropDownMenu("Snapshot");
 
 	}
-	
-	// *************************** Old Schedule Dash board Test cases ******************************
-	
+
+	// *************************** Old Schedule Dash board Test cases
+	// ******************************
+
 	@Test(priority = 15, description = "C54158 - Fresh: Oracle: Java Sun: Schema Scheduler: Daily Every x min: Testing that: Schedule is working properly")
 	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Daily recurrence and Every x min")
 	@Severity(SeverityLevel.NORMAL)
@@ -384,14 +371,14 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
 		scheduledSchema.JobScreen_Assert_dailyRecurrence_RepeatType("Minute", "20");
-		// Need to check that mail is sent successfully with the right intervals in minutes.
+		// Need to check that mail is sent successfully with the right intervals in
+		// minutes.
 	}
-	
+
 	@Test(priority = 16, description = "C54159 - Fresh: Oracle: Java Sun: Schema Scheduler: Daily Every x hour: Testing that: Schedule is working properly")
 	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Daily recurrence and Every x hour")
 	@Severity(SeverityLevel.NORMAL)
@@ -410,14 +397,14 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
 		scheduledSchema.JobScreen_Assert_dailyRecurrence_RepeatType("Hour", "2");
-		// Need to check that mail is sent successfully with the right intervals in hours.
+		// Need to check that mail is sent successfully with the right intervals in
+		// hours.
 	}
-	
+
 	@Test(priority = 17, description = "C54170 - Fresh: Oracle: Java Sun: Schema Scheduler: Daily Every x Days: Testing that: Schedule is working properly")
 	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Daily recurrence and Every x day")
 	@Severity(SeverityLevel.NORMAL)
@@ -436,20 +423,20 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 		scheduledSchema = new SchemaLoads(driver);
 		scheduledSchema.Navigate_toURL();
-		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
-				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 		scheduledSchema.select_schemaName(NewSchduleJobName);
 		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
 		scheduledSchema.JobScreen_Assert_dailyRecurrence_RepeatType("Day", "5");
-		// Need to check that mail is sent successfully with the right intervals in days.
+		// Need to check that mail is sent successfully with the right intervals in
+		// days.
 	}
-	
+
 	public void navigateToSchemaListPage() {
-		
+
 		schemasPage = new SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaListTabIsSelected();
-		
+
 	}
 
 	@BeforeClass
@@ -459,9 +446,9 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 
-		loginPage = new Login(driver);
-		loginPage.Navigate_toURL();
-		loginPage.UserLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
 
 	}
@@ -479,8 +466,8 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 	@BeforeMethod
 	public void beforeMethod() {
-		
-		 navigateToSchemaListPage();
+
+		navigateToSchemaListPage();
 
 	}
 
