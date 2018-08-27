@@ -8,9 +8,9 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://qa.incorta.com:1230/incorta/#/</incortaRoot>
-		<incortaVersion>Rel3.3</incortaVersion>
-		<testSuite.name>Temptest</testSuite.name>
+		<incortaRoot>http://qa.incorta.com:7010/incorta/#/</incortaRoot>
+		<incortaVersion>Rel4.0_automation</incortaVersion>
+		<testSuite.name>newCertificationPath</testSuite.name>
 		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
@@ -25,7 +25,7 @@
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
-		<automaticallyGenerateAllureReport>true</automaticallyGenerateAllureReport>
+		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 
 		<!-- Version Numbers Properties -->
 		<shaft_engine.version>SHAFT_ENGINE-1.0.20180819</shaft_engine.version>
