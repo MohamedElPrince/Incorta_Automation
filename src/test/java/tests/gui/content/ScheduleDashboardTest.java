@@ -1373,27 +1373,127 @@ public class ScheduleDashboardTest {
 		schedulerDashboardsPage.JobScreen_Assert_JobTimeZone("GMT\\±00:00");
 	}
 
-	// // Prerequisite, Admin User + Dashboard Created
-	// //************************On Hold - until Mona Update TCs - Invalid steps (4
-	// TCs) [C54226-C54227-C54228-C54229]************************
-	// @Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun:
-	// Dashboard Scheduler: Testing that: Schedule is working properly, when it can
-	// be viewed by Tenant Owner.")
-	// @Description("When I and I click on schedule. Then Mail will be sent
-	// successfully with time zone and repeate type Monthley.")
-	// @Severity(SeverityLevel.NORMAL)
-	// public void Assert_MailSent_DashboardsSchedueledAndShared_Testtesttesttest()
-	// {
-	// navigate_to_scheduleDashboard();
-	// String JobName = dashboardPage.scheduleDashboard_addJobName();
-	// dashboardPage.scheduleDashboard_AddRecurrence(testDataReader.getCellData("ScheduleJobMonthlyRecurrence"));
-	// dashboardPage.scheduleDashboard_monthlyRecurrence_selectType_2ndOption("Week",
-	// "2nd", "Sun", "11");
-	// dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-	// dashboardPage.ScheduleDashboard_TypeEmailAndClickAdd(testDataReader.getCellData("Email"));
-	// dashboardPage.JobScreen_Select_JobTimeZone(testDataReader.getCellData("ScheduleJobTimeZone"));
-	// dashboardPage.scheduleDashboard_Click_schedule();
-	// }
+	// Prerequisite, analyzer User to create and share [ Dashboard / jobs with
+	// insights] with admin [Super mode disabled]
+	// Need to check an issue with assertion log. Also need to check issue [Make
+	// admin super user and run the TC - TC will not fail].
+	@Test(priority = 59, description = "C54226 - Fresh: Oracle: Java Sun:Dashboard Scheduler: Testing that: Schedule is working properly, when it can be viewed by Tenant Owner.")
+	@Description("When I create Dashboard and jobs, and I share it view only to Admin and I disable super user for admin and I login using admin to check the jobs. Then jobs will not be view by the Admin.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_AdminCanNot_View_ScheduleJobs_SharedView_SuperUserDisabled() {
+		allContentPage = new AllContent(driver);
+		allContentPage.Navigate_toURL();
+		allContentPage.Assert_allContentTabIsSelected();
+
+		mainPage = new Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedViewWith_Admin"));
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage
+				.assert_dashboardName(testDataReader.getCellData("Automation_Schedule_Dashboard_SharedViewWith_Admin"));
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedViewWith_Admin"),
+				testDataReader.getCellData("Automation_Job_Daily"));
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedViewWith_Admin"),
+				testDataReader.getCellData("Automation_Job_Weekly"));
+	}
+
+	// Prerequisite, analyzer User to create and share [ Dashboard / jobs with
+	// insights] with admin [Super mode disabled]
+	@Test(priority = 60, description = "C54227 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be shared by Tenant Owner.")
+	@Description("When I create Dashboard and jobs, and I share it [Share] only to Admin and I disable super user for admin and I login using admin to check the jobs. Then jobs will not be [Shared] by the Admin.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_AdminCanNot_View_ScheduleJobs_SharedShare_SuperUserDisabled() {
+		allContentPage = new AllContent(driver);
+		allContentPage.Navigate_toURL();
+		allContentPage.Assert_allContentTabIsSelected();
+
+		mainPage = new Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedShareWith_Admin"));
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage.assert_dashboardName(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedShareWith_Admin"));
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedShareWith_Admin"),
+				testDataReader.getCellData("Automation_Job_Daily"));
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedShareWith_Admin"),
+				testDataReader.getCellData("Automation_Job_Weekly"));
+	}
+
+	// Prerequisite, analyzer User to create and share [ Dashboard / jobs with
+	// insights] with admin [Super mode disabled]
+	@Test(priority = 61, description = "C54228 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it can be edited by Tenant Owner.")
+	@Description("When I create Dashboard and jobs, and I share it [Edit] only to Admin and I disable super user for admin and I login using admin to check the jobs. Then jobs will not be [Edit] by the Admin.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_AdminCanNot_View_ScheduleJobs_SharedEdit_SuperUserDisabled() {
+		allContentPage = new AllContent(driver);
+		allContentPage.Navigate_toURL();
+		allContentPage.Assert_allContentTabIsSelected();
+
+		mainPage = new Skeleton(driver);
+		mainPage.SearchForContentAndOpenResult(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedEditWith_Admin"));
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage
+				.assert_dashboardName(testDataReader.getCellData("Automation_Schedule_Dashboard_SharedEditWith_Admin"));
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedEditWith_Admin"),
+				testDataReader.getCellData("Automation_Job_Daily"));
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_SharedEditWith_Admin"),
+				testDataReader.getCellData("Automation_Job_Weekly"));
+	}
+
+	// Prerequisite, analyzer User to create and share [ Dashboard / jobs with
+	// insights] with admin [Super mode disabled]
+	@Test(priority = 62, description = "C54229 - Fresh: Oracle: Java Sun: Dashboard Scheduler: Testing that: Schedule is working properly, when it is not shared with Tenant Owner.")
+	@Description("When I create Dashboard and jobs, and I share it [anything] not to Admin and I disable super user for admin and I login using admin to check the jobs. Then jobs will not be [shared] with the Admin.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_AdminCanNot_Check_ScheduleJobs_NotSharedWithAdmin_SuperUserDisabled() {
+		allContentPage = new AllContent(driver);
+		allContentPage.Navigate_toURL();
+		allContentPage.Assert_allContentTabIsSelected();
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		allContentPage
+				.Assert_DashboardNotExist(testDataReader.getCellData("Automation_Schedule_Dashboard_NoShared_Admin"));
+
+		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+		schedulerDashboardsPage.Assert_allDashboardsTabIsSelected();
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_NoShared_Admin"),
+				testDataReader.getCellData("Automation_Job_Daily"));
+
+		schedulerDashboardsPage.ScheduleDashboard_Assert_JobNotExist(
+				testDataReader.getCellData("Automation_Schedule_Dashboard_NoShared_Admin"),
+				testDataReader.getCellData("Automation_Job_Weekly"));
+	}
 
 	public void navigate_to_scheduleDashboard() {
 		allContentPage = new AllContent(driver);
