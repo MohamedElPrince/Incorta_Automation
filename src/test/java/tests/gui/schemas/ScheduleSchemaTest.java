@@ -364,6 +364,85 @@ schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
 	}
 	
+	// *************************** Old Schedule Dash board Test cases ******************************
+	
+	@Test(priority = 15, description = "C54158 - Fresh: Oracle: Java Sun: Schema Scheduler: Daily Every x min: Testing that: Schedule is working properly")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Daily recurrence and Every x min")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_dailyRecurrence_min() {
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
+		schemasPage.scheduleSchema_dailyRecurrence_repeatType("Minute", "20");
+
+		String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
+		schemasPage.click_scheduleSchema_scheduleButton();
+
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
+				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.select_schemaName(NewSchduleJobName);
+		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
+		scheduledSchema.JobScreen_Assert_dailyRecurrence_RepeatType("Minute", "20");
+		// Need to check that mail is sent successfully with the right intervals in minutes.
+	}
+	
+	@Test(priority = 16, description = "C54159 - Fresh: Oracle: Java Sun: Schema Scheduler: Daily Every x hour: Testing that: Schedule is working properly")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Daily recurrence and Every x hour")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_dailyRecurrence_hour() {
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
+		schemasPage.scheduleSchema_dailyRecurrence_repeatType("Hour", "2");
+
+		String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
+		schemasPage.click_scheduleSchema_scheduleButton();
+
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
+				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.select_schemaName(NewSchduleJobName);
+		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
+		scheduledSchema.JobScreen_Assert_dailyRecurrence_RepeatType("Hour", "2");
+		// Need to check that mail is sent successfully with the right intervals in hours.
+	}
+	
+	@Test(priority = 17, description = "C54170 - Fresh: Oracle: Java Sun: Schema Scheduler: Daily Every x Days: Testing that: Schedule is working properly")
+	@Description("When I navigate to the schema list page, And I select a schema and select schedule, Then in scheduler view check that Scheduler is working with Daily recurrence and Every x day")
+	@Severity(SeverityLevel.NORMAL)
+	public void Scheduler_SchemaView_dailyRecurrence_day() {
+
+		schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
+
+		mainPage = new Skeleton(driver);
+		mainPage.Click_actions();
+		mainPage.Select_fromDropdownMenu("Schedule");
+		schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
+		schemasPage.scheduleSchema_dailyRecurrence_repeatType("Day", "5");
+
+		String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
+		schemasPage.click_scheduleSchema_scheduleButton();
+
+		scheduledSchema = new SchemaLoads(driver);
+		scheduledSchema.Navigate_toURL();
+		scheduledSchema.assert_schemaJob_created(NewSchduleJobName,
+				testDataReader.getCellData("SchemaName"));
+		scheduledSchema.select_schemaName(NewSchduleJobName);
+		scheduledSchema.assert_schedulerSchema_radioButton_selected("Daily");
+		scheduledSchema.JobScreen_Assert_dailyRecurrence_RepeatType("Day", "5");
+		// Need to check that mail is sent successfully with the right intervals in days.
+	}
 	
 	public void navigateToSchemaListPage() {
 		

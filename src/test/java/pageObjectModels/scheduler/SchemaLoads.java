@@ -32,6 +32,9 @@ public class SchemaLoads {
 	By popup_scheduleSchema_loadType_dropDownMenu;
 	By popup_scheduleSchema_confirmChangingStatusOk_button;
 	By popup_scheduleSchema_saveChanges_button = By.xpath("//button[@type='button'][contains(text(),'Save Changes')]");
+	By popup_scheduleSchema_dailyRecurrence_Type;
+	By popup_scheduleSchema_dailyRecurrence_day_hour = By
+			.xpath("//div[@ng-switch-when='Daily']//input[@type='number']/following-sibling::input");
 
 	// Confirm Delete popup view
 	By popup_scheduleSchema_delete_button = By
@@ -135,7 +138,8 @@ public class SchemaLoads {
 	}
 
 	/**
-	 * This function to select repeat radio button choice  
+	 * This function to select repeat radio button choice
+	 * 
 	 * @param Radio_Button_Name
 	 * 
 	 *            Daily, Weekly, Monthly,No End, No Recurrence
@@ -150,6 +154,7 @@ public class SchemaLoads {
 
 	/**
 	 * This function to assert the selected radio button
+	 * 
 	 * @param Radio_Button_Name
 	 * 
 	 *            Daily, Weekly, Monthly,No End, No Recurrence
@@ -178,8 +183,7 @@ public class SchemaLoads {
 
 		ElementActions.click(driver, popup_scheduleSchema_weeklyDay_checkBox);
 	}
-	
-	
+
 	/**
 	 * This function to assert the selected day from the weekly days section
 	 * 
@@ -196,11 +200,11 @@ public class SchemaLoads {
 
 	}
 
-	
 	/**
 	 * This function to Assert the selected loadtype from the dropdown list
 	 * 
-	 * @param LoadType DropDown
+	 * @param LoadType
+	 *            DropDown
 	 * 
 	 *            Incremental, Full, Staging, Snapshot
 	 * 
@@ -216,12 +220,13 @@ public class SchemaLoads {
 	/**
 	 * This function to select loadtype from the dropdown list
 	 * 
-	 * @param LoadType DropDown
+	 * @param LoadType
+	 *            DropDown
 	 * 
 	 *            Incremental, Full, Staging, Snapshot
 	 * 
 	 */
-	
+
 	public void Select_scheduleSchema_loadType_dropDownMenu(String LoadType) {
 
 		popup_scheduleSchema_loadType_dropDownMenu = By
@@ -282,5 +287,37 @@ public class SchemaLoads {
 
 		ElementActions.click(driver, popup_scheduleSchemaLoad_schedule_button);
 		return jobName;
+	}
+
+	/**
+	 * 
+	 * @param Type
+	 *            Minute Hour Day
+	 * @param Number
+	 *            Min "min='1' - max='59'" Hour"min='1' - max='23'" Days"min='1' -
+	 *            max='31'"
+	 */
+	public void JobScreen_Assert_dailyRecurrence_RepeatType(String Type, String Number) {
+		popup_scheduleSchema_dailyRecurrence_Type = By
+				.xpath("//div[@ng-switch-when='Daily']//option[@value='" + Type + "']");
+		By popup_scheduleSchema_dailyRecurrence_number = By.xpath(
+				"//div[@ng-switch-when='Daily']//select[@ng-options='value as value for value in $ctrl.minutes']//option[contains(.,'"
+						+ Number + "')]");
+		Assertions.assertElementAttribute(driver, popup_scheduleSchema_dailyRecurrence_Type, "ng-selected", "true",
+				true);
+		switch (Type) {
+		case ("Minute"):
+			Assertions.assertElementAttribute(driver, popup_scheduleSchema_dailyRecurrence_number, "text", Number,
+					true);
+			break;
+		case ("Day"):
+			String day = ElementActions.getText(driver, popup_scheduleSchema_dailyRecurrence_day_hour);
+			Assertions.assertEquals(Number, day, true);
+			break;
+		case ("Hour"):
+			String hour = ElementActions.getText(driver, popup_scheduleSchema_dailyRecurrence_day_hour);
+		Assertions.assertEquals(Number, hour, true);
+			break;
+		}
 	}
 }
