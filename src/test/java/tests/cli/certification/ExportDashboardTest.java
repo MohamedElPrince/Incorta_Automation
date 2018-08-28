@@ -24,10 +24,15 @@ public class ExportDashboardTest {
 	// close incorta first]
 	String hostname = "72.55.136.10";
 	int sshPortNumber = 5022;
-	int apiPortNumber = 1230;
+	int apiPortNumber = 7010;
 	String username = "incorta";
 	String keyFileFolderName = System.getProperty("testDataFolderPath");
 	String keyFileName = "iWebQALast.key";
+
+	String installationDirectory = "incorta_4_Typical/IncortaNode";
+	String tenantName = "cli";
+	String tenantUsername = "admin";
+	String tenantPassword = "admin";
 
 	CLI cli_instance;
 	Python py_instance;
@@ -187,9 +192,10 @@ public class ExportDashboardTest {
 
 	@BeforeClass // Setup method, to be run once before the first test
 	public void beforeClass() {
-		cli_instance = new CLI(hostname, sshPortNumber, username, keyFileFolderName, keyFileName);
-		py_instance = new Python(cli_instance, "http://" + hostname + ":" + apiPortNumber + "/incorta", "demo", "admin",
-				"admin", false, "IncortaAnalytics_Automation/bin");
+		cli_instance = new CLI(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
+				installationDirectory);
+		py_instance = new Python(cli_instance, "http://" + hostname + ":" + apiPortNumber + "/incorta", tenantName,
+				tenantUsername, tenantPassword, false, installationDirectory + "/bin");
 	}
 
 	@BeforeMethod // Setup method, to be run once before every test

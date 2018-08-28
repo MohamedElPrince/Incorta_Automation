@@ -28,7 +28,7 @@ public class Python {
 		this.verifyCertificate = verifyCertificate;
 		this.instance = instance;
 
-		this.pathToBinFolder = this.instance.getAbsolutePathToFile("IncortaAnalytics_Automation/bin");
+		this.pathToBinFolder = this.instance.getAbsolutePathToFile(relativePathToBinFolder);
 		this.pathToAutomationShellScript = pathToBinFolder + "/" + automationBaseScriptFile;
 		this.pathToAutomationOutputFolder = pathToBinFolder + "/" + "Automation_Output/";
 

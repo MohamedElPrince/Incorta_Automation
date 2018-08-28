@@ -5,20 +5,25 @@ import com.shaftEngine.supportActionLibrary.SSHActions;
 
 public class CLI {
 	//// Variables
-	String hostname, username, keyFileFolderName, keyFileName;
+	String hostname, username, keyFileFolderName, keyFileName, installationDirectory;
 	int sshPortNumber;
 
 	//// Commands
-	String stopIncorta = "bash --login -c 'cd IncortaAnalytics_Automation && ./stop.sh'";
-	String startIncorta = "bash --login -c 'cd IncortaAnalytics_Automation && ./start.sh'";
-	String getIncortaPID = "bash --login -c 'cd IncortaAnalytics_Automation && cat tomcat.pid'";
+	String stopIncorta, startIncorta, getIncortaPID;
 
-	public CLI(String hostname, int sshPortNumber, String username, String keyFileFolderName, String keyFileName) {
+	public CLI(String hostname, int sshPortNumber, String username, String keyFileFolderName, String keyFileName,
+			String installationDirectory) {
 		this.hostname = hostname;
 		this.sshPortNumber = sshPortNumber;
 		this.username = username;
 		this.keyFileFolderName = keyFileFolderName;
 		this.keyFileName = keyFileName;
+		this.installationDirectory = installationDirectory;
+
+		// initialize commands
+		stopIncorta = "bash --login -c 'cd " + installationDirectory + " && ./stop.sh'";
+		startIncorta = "bash --login -c 'cd " + installationDirectory + " && ./start.sh'";
+		getIncortaPID = "bash --login -c 'cd " + installationDirectory + " && cat tomcat.pid'";
 	}
 
 	//// Functions
