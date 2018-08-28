@@ -3,6 +3,7 @@ package pageObjectModels.main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
@@ -37,7 +38,8 @@ public class Skeleton {
 			.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 	By header_export_button_ExportOptions;
-	
+	By header_settings_list = By.id("settings-button");
+	By header_allContentDashboard_Settings_Button = By.xpath("//button[@id='dropdownMenu1']//img[contains(@src,'settings')]");
 	//// Functions
 	public Skeleton(WebDriver driver) {
 		this.driver = driver;
@@ -45,7 +47,9 @@ public class Skeleton {
 
 	public void assertExportIconIsNotDisplayed() {
 
-		Assertions.assertElementAttribute(driver, header_exportStatus_button, "class", "dropdown right ng-hide", true);
+		// Assertions.assertElementAttribute(driver, header_exportStatus_button, "class", "dropdown right ng-hide", true);
+		Assertions.assertElementExists(driver, header_exportStatus_button, false);
+		
 	}
 
 	public void assertExportIconIsDisplayed() {
@@ -75,7 +79,7 @@ public class Skeleton {
 	// public void Click_securityTab() {
 	// ElementActions.click(driver, sideMenu_security_link);
 	// }
-
+	
 	public void Click_load() {
 		ElementActions.click(driver, header_load_button);
 	}
@@ -86,6 +90,11 @@ public class Skeleton {
 
 	public void Click_done() {
 		ElementActions.click(driver, header_done_link);
+	}
+	
+	public void Click_doneAndRefresh() {
+		ElementActions.click(driver, header_done_link);
+		BrowserActions.refreshCurrentPage(driver);
 	}
 
 	public void Click_export() {
@@ -103,6 +112,16 @@ public class Skeleton {
 	public void Click_Settings()
 	{
 		ElementActions.click(driver, header_settings_button);
+	}
+		
+	public void click_settings_allContent_dashboard()
+	{
+		ElementActions.click(driver, header_allContentDashboard_Settings_Button);
+	}
+	
+	public void Open_SettingsList()
+	{
+		ElementActions.click(driver, header_settings_list);
 	}
 	
 	public void Select_fromDropdownMenu(String functionName) {

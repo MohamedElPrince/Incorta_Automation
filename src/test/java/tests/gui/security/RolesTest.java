@@ -50,42 +50,42 @@ public class RolesTest {
 
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
-	String FolderNameToDelete = "ahmed";
-	String FolderNameToShare = "Folder";
-	String UserToShareWithFolder = "Abdelsalam_User";
+	String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
+	String FolderNameToShare = "Automation_Folder_FolderToBeShared";
+	String UserToShareWithFolder = "Automation_User_UserToShareFolderWith";
 	String newDashboardName, newInsightName;
 	String NewSchemaName;
-	String ExistingSchemaNAME = "Abdelsalan_Automation_Schema"; // Existing Schema to be used as predefined
+	String ExistingSchemaNAME = "Automation_Schema_SchemaAddDataSource"; // Existing Schema to be used as predefined
 	String NewDataSourceTableName; // Table name to be used in assertion
-	String LoadDataSchema = "LoadDataSchema1";// Predefined Schema with data source to load data into it.
-	String ShareSchema = "ShareSchema";
-	String UserToShareWith = "AbdelsalamSuper"; // User To Share With as a predefined, he should be super user or schema
+	String LoadDataSchema = "Automation_Schema_SchemaLoad";// Predefined Schema with data source to load data into it.
+	String ShareSchema = "Automaton_Schema_SchemaShare";
+	String UserToShareWith = "Automation_User_UserToShareSchemaWith"; // User To Share With as a predefined, he should be super user or schema
 												// manager to grant 'Can Edit' permission
 	String DataSourceName;
 	String initialLoadStatus;
 	String newGroupName;
 	String[] newUserData;
 	String NewSchemaDescription = "Created by a script in class LoginTest.java";
-	String FolderToBeRenamed = "New Folder";
+	String FolderToBeRenamed = "Automation_Folder_FolderToBeRenamed";
 	String newFolderName;
 	String NewDashboardName = "New Dashboard";
-	String SchemaNameForInsight = "Automation_Schema_1525933948339";
-	String FolderNameToBeMoved = "CopyFolder";
-	String FolderNameToMoveTo = "Mohamed";
-	String DashboardNameToBeDeleted = "H_A_L";
-	String DashboardToBeShared = "SendDashboard";
-	String ToMail = "mona.amr@incorta.com";
-	String CcMail = "Ahmed.Abdelsalam@incorta.com";
-	String BccMail = "Menna.maged@incorta.com";
+	String SchemaNameForInsight = "Automaton_Schema_SchemaShare";
+	String FolderNameToBeMoved = "Automation_Folder_FolderToBeMoved";
+	String FolderNameToMoveTo = "Automation_Folder_MovedFolder";
+	String DashboardNameToBeDeleted = "Automation_Dashboard_DashboardtoBeDeleted";
+	String DashboardToBeShared = "Automation_Dashboard_DashboardToBeSharedOrSend";
+	String ToMail = "automation_robot@incorta.com";
+	String CcMail = "automation_robot@incorta.com";
+	String BccMail = "automation_robot@incorta.com";
 	String newScheduledSendDashboardJobName;
-	String FolderNameToBeMovedTo = "Folder";
-	String DashboardNameToBeCopied = "Copy Dashboard";
-	String DashboardFolderNameToBeMovedTo = "Dashboard Folder Moved";
-	String DashboardNameToMove = "Move Dashboard";
-	String DashboardNameToRename = "Rename Dashboard";
+	//String FolderNameToBeMovedTo = "Folder";
+	String DashboardNameToBeCopied = "Automation_Dashboard_ToBeCopied";   
+	//String DashboardFolderNameToBeMovedTo = "Dashboard Folder Moved";
+	String DashboardNameToMove = "Automation_Dashboard_Move";
+	String DashboardNameToRename = "Automation_Dashboard_Rename";
 
 	// Prerequisites, Schema Manager user + Connection credentials to data source
-	@Test(priority = 1, description = "TC C60535_1 - Schema Manager Permissions")
+	@Test(priority = 14, description = "TC C60535_1 - Schema Manager Permissions")
 	@Description("When I log in with Schema manager user and click add data source, then a new data source will be created.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void SchemaManager_Permissions_AddDataSource() {
@@ -152,7 +152,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(ExistingSchemaNAME);
+		schemasPage.click_schemaName(ExistingSchemaNAME);
 
 		mainPage.Click_add();
 		mainPage.Select_fromDropdownMenu("Schema Wizard");
@@ -178,7 +178,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(LoadDataSchema);
+		schemasPage.click_schemaName(LoadDataSchema);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
 		initialLoadStatus = schemasViewPage.GetLastLoadStatus();
@@ -205,7 +205,7 @@ public class RolesTest {
 		mainPage.Click_Element_Sidemenu("schemaItem");
 
 		schemasPage = new SchemaList(driver);
-		schemasPage.Click_schemaName(ShareSchema);
+		schemasPage.click_schemaName(ShareSchema);
 
 		mainPage.Click_Settings();
 
@@ -281,13 +281,13 @@ public class RolesTest {
 		mainPage.assertExportIconIsNotDisplayed(); //
 
 		// assert that dashboard and insight name are correct
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is dimmed
 		allContentPage.selectDashboardMenuButton(newDashboardName);
-		dashboardPage.Assert_shared_button_dimmed();
+		dashboardPage.assert_shared_button_dimmed();
 	}
 
 	@Test(priority = 7, description = "C60535 - User Manager")
@@ -380,8 +380,8 @@ public class RolesTest {
 		/* 9- Assert that dashboard and insight name are correct . */
 		/* 10- assert that share icon in dashboard setting is active. */
 
-		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data6"),
-				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
+		loginPage.UserLogin(testDataReader.getCellData("Tenant", "Data8"),
+				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
 
 		// Create New User
 		usersPage = new Users(driver);
@@ -448,13 +448,13 @@ public class RolesTest {
 		dashboardPage = new AllContent_Dashboard(driver);
 
 		// assert that dashboard and insight name are correct
-		dashboardPage.Assert_dashboardName(newDashboardName);
-		dashboardPage.Assert_insightName(newInsightName);
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is active
 		allContentPage.selectDashboardMenuButton(newDashboardName);
-		dashboardPage.Assert_shared_button_Active();
+		dashboardPage.assert_shared_button_active();
 	}
 
 	// Prerequisites, Analyzer user
@@ -554,7 +554,7 @@ public class RolesTest {
 	}
 
 	// Prerequisites, Analyzer user
-	@Test(priority = 14, description = "TC C60531_6 - Users permissions - Analyzer User")
+	@Test(priority = 1, description = "TC C60531_6 - Users permissions - Analyzer User")
 	@Description("When I log in with Analyzer User, navigate to content tab, click on create new dashboard and create a new insight. Then dashboard and insight are created successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_CreateDashboardAndInsight() {
@@ -588,7 +588,7 @@ public class RolesTest {
 		mainPage.SearchForContentAndOpenResult(NewDashBoradName);
 
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.Assert_dashboardName(NewDashBoradName);
+		dashboardPage.assert_dashboardName(NewDashBoradName);
 	}
 	
 	@Test(priority = 15, description = "TC C60531_8 - Users permissions - Analyzer User")
@@ -608,16 +608,17 @@ public class RolesTest {
 		mainPage.Click_FromExportMenu("Send");
 		
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.ScheduleSendDashboard_AddSubjectNameAutomated();
-		dashboardPage.ScheduleSendDashboard_AddBodyNameAutomated();
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("To");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(ToMail);
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Cc");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(CcMail);
-		dashboardPage.SendDashboard_Click_AddMailRecipientsType("Bcc");
-		dashboardPage.SendDashboard_TypeEmailAndClickAdd(BccMail);
-		dashboardPage.Click_Send_Dashboard();
-		dashboardPage.Assert_dashboardName(DashboardToBeShared);
+		dashboardPage.scheduleSendDashboard_addSubjectName();
+		dashboardPage.sendDashboard_addBodyName();
+
+		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(ToMail);
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(CcMail);
+		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
+		dashboardPage.sendDashboard_typeEmailAndClickAdd(BccMail);
+		dashboardPage.click_send_dashboard();
+		dashboardPage.assert_dashboardName(DashboardToBeShared);
 	}
 
 	@Test(priority = 16, description = "TC C60531_9 - Users permissions - Analyzer User")
@@ -708,7 +709,7 @@ public class RolesTest {
 
 			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Copy");
 
-			allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToBeMovedTo);
+			allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToMoveTo);
 			
 			allContentPage.Dashboard_Copy_ClickCopyButton();
 			
@@ -716,7 +717,7 @@ public class RolesTest {
 			
 			allContentPage.Assert_DashboardExist(DashboardNameToBeCopied);
 			
-			allContentPage.Click_FolderName(FolderNameToBeMovedTo);
+			allContentPage.Click_FolderName(FolderNameToMoveTo);
 			
 			allContentPage.Assert_DashboardExist_Copied(DashboardNameToBeCopied);
 			
@@ -737,13 +738,13 @@ public class RolesTest {
 
 			allContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
 			
-			allContentPage.Dashboard_popup_ClickOnFolder(DashboardFolderNameToBeMovedTo);
+			allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToMoveTo);
 					
 			allContentPage.Dashboard_Move_ClickMoveButton();
 					
 			allContentPage.Assert_DashboardNotExist(DashboardNameToMove);
 			
-			allContentPage.Click_FolderName(DashboardFolderNameToBeMovedTo);
+			allContentPage.Click_FolderName(FolderNameToMoveTo);
 			
 			allContentPage.Assert_DashboardExist(DashboardNameToMove);
 		}

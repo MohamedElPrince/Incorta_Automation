@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.supportActionLibrary.JavaActions;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class Dashboards {
@@ -27,8 +28,13 @@ public class Dashboards {
 	By Body_StatusFilter = By.name("displayedJobStatus");
 	By body_StatusFilter_Options;
 	By body_Status;
+	By body_CompletedStatus;
+	By body_ActiveStatus;
 
 	By body_JobName;
+	By body_Last_JobName = By.xpath(
+			"(//p[@title='Automation_Dashboard_SendDashboard']//ancestor::div[contains(@class,'usersTableRow')]//p[contains(@title,'System generated')])[last()]");
+
 	By popup_JobScreen_RemoveEmail_Button;
 	By popup_JobScreen_SaveChanges_Button = By.xpath("//button[contains(text(),'Save Changes')]");
 	By popup_JobScreen_Email;
@@ -47,11 +53,41 @@ public class Dashboards {
 			"//ng-form[@name='$ctrl.scheduleForm']//input[@ng-model='$ctrl.jobObject.startTime2']/following-sibling::input[1]");
 	By popup_JobScreen_startByTimeZone_textBox = By
 			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']");
+	By popup_JobScreen_startByTimeZone_textBox_Value = By
+			.xpath("//ng-form[@name='$ctrl.scheduleForm']//select[@ng-model='$ctrl.jobObject.timezone']/option");
 	By popup_JobScreen_recurrenceFrequency_radioButton;
 	By popup_JobScreen_recurrenceFrequency_radioButton_Selected;
 	By popup_jobScreen_selectOutputFormat;
+	By popup_JobScreen_dailyRecurrence_number = By.xpath("//div[@ng-switch-when='Daily']//input[@type='text']");
+	By popup_jobScreen_weeklyRecurrence_days;
+
+	By popup_jobScreen_monthleyRecurrence_Type_radioButton;
+	By popup_jobScreen_monthleyRecurrence_Type_DayNumber = By.xpath("//select[@name='nth']");
+	By popup_jobScreen_monthleyRecurrence_Type_DayOfWeek = By.xpath("//select[contains(@ng-model,'dayOfWeek')]");
+	By popup_jobScreen_monthleyRecurrence_Type_DayOfMonth = By
+			.xpath("(//input[@type='radio'][@value='Week']/parent::div/input)[last()]");
+	By popup_jobScreen_repeat_noEnd = By.xpath("//input[@value='0']");
+	By popup_jobScreen_EndBy = By.xpath("//div[@class='flex-box']/label[contains(string(),'End By')]/input");
+	By popup_jobScreen_EndBy_Date = By.xpath("//div[@class='flex-box']//input[contains(@class,'ws-date')]");
+
+	By body_nextRun;
+
 	By popup_confirmation_Delete_Cancel_ScheduleDashboard;
 	By popup_confirmation_Suspend_ScheduleDashboard;
+	By popup_sendDashboard_label_hideNotificationText_checkbox = By.xpath(
+			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+
+	By popup_sendDashboard_FileNameField = By.name("fileName");
+	By popup_sendDashboard_label_AppendTimestamp_checkbox_empty = By.xpath(
+			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
+
+	By popup_JobScreen_label_hideNotificationText_checkbox_empty = By.xpath(
+			"//label[contains(text(),'Hide Notification Text')]/following-sibling::input[contains(@class,'checkbox')]");
+
+	By popup_JobScreen_label_AppendTimestamp_checkbox = By.xpath(
+			"//label[contains(text(),'Append Timestamp')]/following-sibling::input[contains(@class,'checkbox')]");
+
+	By popup_jobScreen_dailyRecurrence_Type;
 
 	//// Functions
 	public Dashboards(WebDriver driver) {
@@ -151,8 +187,8 @@ public class Dashboards {
 
 	public void JobScreen_Assert_SubjectTextIsDisplayed(String SubjectText) {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SubjectText, true);
-	}	
-	
+	}
+
 	/**
 	 * 
 	 * @param recurrence
@@ -176,6 +212,10 @@ public class Dashboards {
 
 	public void JobScreen_Assert_JobTimeZone(String JobTimeZone) {
 		Assertions.assertElementAttribute(driver, popup_JobScreen_startByTimeZone_textBox, "value", JobTimeZone, true);
+	}
+
+	public void JobScreen_Select_JobTimeZone(String startByTimeZone) {
+		ElementActions.select(driver, popup_JobScreen_startByTimeZone_textBox, startByTimeZone);
 	}
 
 	public String JobScreen_UpdateFields(String description, String startByDate, String startByTime,
@@ -210,9 +250,15 @@ public class Dashboards {
 	 *            "Daily" "Weekly" "Monthly" "No Recurrence"
 	 */
 	public void JobScreen_Assert_JobRecurrence_Selected(String recurrence) {
-		popup_JobScreen_recurrenceFrequency_radioButton_Selected = By
-				.xpath("//div[@ng-switch-when='" + recurrence + "']");
-		Assertions.assertElementExists(driver, popup_JobScreen_recurrenceFrequency_radioButton_Selected, true);
+	By popup_scheduleDashboard_recurrenceFrequency_radioButton = By
+	.xpath("//ng-form[@name='$ctrl.scheduleForm']//parent::label[normalize-space()='" + recurrence
+	+ "']/input[@type='radio']");
+	Assertions.assertElementAttribute(driver, popup_scheduleDashboard_recurrenceFrequency_radioButton, "checked", "true", true);
+	}
+
+	public void JobScreen_SelectDays_WeeklyRecurrence(String Day) {
+		popup_jobScreen_weeklyRecurrence_days = By.xpath("//input[@value ='" + Day + "']");
+		Assertions.assertElementAttribute(driver, popup_jobScreen_weeklyRecurrence_days, "text", Day, true);
 	}
 
 	public void ScheduleDashboard_Select_ScheduleJobs(String DashboardName, String JobName) {
@@ -290,6 +336,162 @@ public class Dashboards {
 	public void ScheduleDashboard_Assert_StatusFiltersExist(String Status) {
 		body_StatusFilter_Options = By.xpath("//option[@value = '" + Status + "']");
 		Assertions.assertElementExists(driver, body_StatusFilter_Options, true);
+	}
+
+	public String GetLastJobName() {
+		if (ElementActions.getElementsCount(driver, body_Last_JobName) == 0) {
+			return "";
+		} else {
+			return ElementActions.getText(driver, body_Last_JobName);
+		}
+	}
+
+	public void Assert_lastJobName(String PreviousJobName) {
+		Assertions.assertEquals(PreviousJobName, ElementActions.getText(driver, body_Last_JobName), false);
+	}
+
+	public void Click_On_LastJobName() {
+		ElementActions.click(driver, body_Last_JobName);
+	}
+
+	public void Assert_SpecialCharacters_Subject(String SpecialCharactersSubject) {
+		String specialCharacters[] = { "@", "#", "$", "^", "&", "*" };
+		SpecialCharactersSubject = JavaActions.replaceRegex(specialCharacters, SpecialCharactersSubject);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", SpecialCharactersSubject, true);
+	}
+
+	public void Assert_SpecialCharacters_Body(String SpecialCharactersBody) {
+		String specialCharacters[] = { "@", "#", "$", "^", "&", "*" };
+		SpecialCharactersBody = JavaActions.replaceRegex(specialCharacters, SpecialCharactersBody);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_BodyField, "text", SpecialCharactersBody, true);
+	}
+
+	public void Assert_Subject_Value(String DashboardName) {
+		Assertions.assertElementAttribute(driver, popup_JobScreen_SubjectField, "text", DashboardName, true);
+	}
+
+	public void Assert_HideNotificationText_checkbox_checked() {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox, "checked",
+				"true", true);
+	}
+
+	public void Assert_HideNotificationText_checkbox_unchecked() {
+		String Empty = "ng-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_hideNotificationText_checkbox, "class",
+				"([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
+	}
+
+	public void Assert_FileName(String Expected_FileName) {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_FileNameField, "text", Expected_FileName, true);
+	}
+
+	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_checked() {
+		String NotEmpty = "ng-not-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
+	}
+
+	public void ScheduleSendDashboard_assert_AppendTimestamp_checkbox_unchecked() {
+		String NotEmpty = "ng-empty";
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_label_AppendTimestamp_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
+	}
+
+	public void JobScreen_assert_HideNotificationText_checkbox_checked() {
+		String NotEmpty = "ng-not-empty";
+		Assertions.assertElementAttribute(driver, popup_JobScreen_label_hideNotificationText_checkbox_empty, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
+	}
+
+	public void ScheduleSendDashboard_assert_HideNotificationText_checkbox_Unchecked() {
+		String Empty = "ng-empty";
+		Assertions.assertElementAttribute(driver, popup_JobScreen_label_hideNotificationText_checkbox_empty, "class",
+				"([\\s\\S]*" + Empty + ".*[\\s\\S]*)", true);
+	}
+
+	public void jobScreen_Assert_fileNameField(String expectedValue) {
+		Assertions.assertElementAttribute(driver, popup_sendDashboard_FileNameField, "text", expectedValue, true);
+	}
+
+	public void JobScreen_assert_AppendTimestamp_checkbox_checked() {
+		String NotEmpty = "ng-not-empty";
+		Assertions.assertElementAttribute(driver, popup_JobScreen_label_AppendTimestamp_checkbox, "class",
+				"([\\s\\S]*" + NotEmpty + ".*[\\s\\S]*)", true);
+	}
+
+	/**
+	 * 
+	 * @param DashboardName
+	 * @param JobName
+	 */
+	public void ScheduleDashboard_Assert_ActiveStatus(String DashboardName, String JobName) {
+		body_ActiveStatus = By.xpath("//p[contains(text(),'" + DashboardName
+				+ "')]/parent::a/parent::div/preceding-sibling::div" + "/p[@title='" + JobName + "']/parent::div"
+				+ "/following-sibling::div[@class='dataConnectionLink left']" + "/a[contains(text(),'Active')]");
+		Assertions.assertElementExists(driver, body_ActiveStatus, true);
+	}
+
+	public void ScheduleDashboard_Assert_CompletedStatus(String DashboardName, String JobName) {
+		body_CompletedStatus = By.xpath("//p[contains(text(),'" + DashboardName
+				+ "')]/parent::a/parent::div/preceding-sibling::div/p[@title='" + JobName + "']"
+				+ "/parent::div/following-sibling::div[@class='dataConnectionLink left']/p[contains(text(),'Completed')]");
+		Assertions.assertElementExists(driver, body_CompletedStatus, true);
+	}
+
+	/**
+	 * 
+	 * @param Type
+	 *            Minute Hour Day
+	 * @param Number
+	 *            Min "min='1' - max='59'" Hour"min='1' - max='23'" Days"min='1' -
+	 *            max='31'"
+	 */
+	public void JobScreen_Assert_dailyRecurrence_RepeatType_NumOfMin(String Type, String Number) {
+		popup_jobScreen_dailyRecurrence_Type = By
+				.xpath("//div[@ng-switch-when='Daily']//option[@value='" + Type + "']");
+		Assertions.assertElementAttribute(driver, popup_jobScreen_dailyRecurrence_Type, "ng-selected", "true", true);
+		Assertions.assertElementAttribute(driver, popup_JobScreen_dailyRecurrence_number, "text", Number, true);
+	}
+
+	/**
+	 * 
+	 * @param SelectType
+	 *            Day Week
+	 * @param DayNumber
+	 *            1st =1 2nd =2 3rd =3 4th -4 5th =5
+	 * @param DayOfWeek
+	 *            Sat Sun ...
+	 * @param DayOfMonth
+	 *            1-12
+	 */
+	public void JobScreen_Assert_monthlyRecurrence_selectType_2ndOption(String SelectType, String DayNumber,
+			String DayOfWeek, String DayOfMonth) {
+		popup_jobScreen_monthleyRecurrence_Type_radioButton = By.xpath("//input[@value='" + SelectType + "']");
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_radioButton, "checked",
+				"true", true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayNumber, "value", DayNumber,
+				true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayOfWeek, "value", DayOfWeek,
+				true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_monthleyRecurrence_Type_DayOfMonth, "text",
+				DayOfMonth, true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_repeat_noEnd, "checked", "true", true);
+	}
+
+	public void JobScreen_Assert_Repeat_NoEnd_Checked() {
+		Assertions.assertElementAttribute(driver, popup_jobScreen_repeat_noEnd, "checked", "true", true);
+	}
+
+	public void scheduleDashboard_Assert_Repeate_EndByChecked_DateSelected(String Date) {
+		Assertions.assertElementAttribute(driver, popup_jobScreen_EndBy, "Checked", "true", true);
+		Assertions.assertElementAttribute(driver, popup_jobScreen_EndBy_Date, "text", Date, true);
+	}
+
+	public void Assert_NextRunTimeZoneCorrect(String TimeZone, String DashboardName, String JobName) {
+		body_nextRun = By.xpath(
+				"//p[contains(text(),'" + DashboardName + "')]/parent::a/parent::div/preceding-sibling::div/p[@title='"
+						+ JobName + "']/parent::div/following-sibling::div[@class='dataTypeName right']/p");
+		Assertions.assertElementAttribute(driver, body_nextRun, "text", "([\\s\\S]*" + TimeZone + ".*[\\s\\S]*)", true);
 	}
 
 }

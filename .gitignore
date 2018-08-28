@@ -1,3 +1,7 @@
-/target/
-/test-output/
-/allure-results/
+*
+!src/
+!lib/
+!pom.xml
+!generate*.*
+!*gitignore
+/generatedReport.zip

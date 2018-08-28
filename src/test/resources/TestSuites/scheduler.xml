@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Scheduler" verbose="10">
+	<test name="ScheduleDashboardTest" >
+		<classes>
+			<class name="tests.gui.content.ScheduleDashboardTest">
+			</class>
+		</classes>
+	</test>
+	<test name="SendDashboardTest">
+		<classes>
+			<class name="tests.gui.content.SendDashboardTest">
+			</class>
+		</classes>
+	</test>
+	<test name="ScheduledSchemaLoadTest">
+		<classes>
+			<class name="tests.gui.scheduler.ScheduledSchemaLoadTest">
+			</class>
+		</classes>
+	</test>
+	<test name="ScheduleSchemaTest">
+		<classes>
+			<class name="tests.gui.schemas.ScheduleSchemaTest">
+			</class>
+		</classes>
+	</test>
+</suite>
