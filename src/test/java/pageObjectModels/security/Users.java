@@ -116,7 +116,7 @@ public class Users {
 		userData[1] = "a123"; // Password
 		userData[2] = "a123"; // Confirm Password
 		userData[3] = "automation_user"; // Display Name
-		userData[4] = "a@a.a"; // Email
+		userData[4] = "a@a.com"; // Email
 		userData[5] = "Arabic"; // Language
 		userData[6] = "Egypt"; // Region Format
 		userData[7] = "-- Time Zone --"; // Time Zone
