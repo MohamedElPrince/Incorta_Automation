@@ -13,11 +13,12 @@ public class NewUI_Content {
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_content");
+	int customElementIdentificationTimeout = 2;
 
 	//// Elements
 	// first nested header
 	By pageDetails_title_label = By.xpath("//span[@class='page-details-title']/h1");
-	
+
 	// second_nested_header
 	By searchWrapper_search_textBox = By.xpath("//div[@class='ant-select-search__field__wrap']//input");
 	By searchWrapper_searchResult_label = By.className("inc-search-option__item");
@@ -29,9 +30,23 @@ public class NewUI_Content {
 
 	// body-cardView
 	By cardView_contentCard_label; // div[@class='inc-card-title'][text()='']
+	By cardView_contentCardFolder_link;
+	By cardView_contentCardDashboard_link;
+
+	By cardView_contentCardGenericFolder_link = By
+			.xpath("//div[contains(@class,'inc-folder-view--cards')]//span[@class='inc-card-title-text']");
+	By cardView_contentCardGenericDashboard_link = By
+			.xpath("//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text']");
 
 	// body-tableView
-	By tableView_contentTableEntry_link; // tbody[@class='ant-table-tbody']//a[text()='']
+	By tableView_contentTableEntry_link; // tbody[@class='ant-table-tbody']//a
+	By tableView_contentTableFolder_link;
+	By tableView_contentTableDashboard_link;
+
+	By tableView_contentTableGenericFolder_link = By
+			.xpath("//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a");
+	By tableView_contentTableGenericDashboard_link = By
+			.xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
 
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
@@ -142,14 +157,14 @@ public class NewUI_Content {
 	/**
 	 * Navigates to a sub page of the "Content" section
 	 * 
-	 * @param pageName
+	 * @param subPageName
 	 *            All Content | Shared | Owned
 	 */
-	public void navigate_toPage(String pageName) {
+	public void navigate_toSubPage(String subPageName) {
 		ElementActions.click(driver, searchWrapper_searchDropDown_button);
 		searchWrapper_searchDropDownOption_label = By
-				.xpath("//span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='" + pageName
-						+ "']");
+				.xpath("//span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='"
+						+ subPageName + "']");
 		ElementActions.click(driver, searchWrapper_searchDropDownOption_label);
 	}
 
@@ -183,6 +198,54 @@ public class NewUI_Content {
 	}
 
 	/**
+	 * Given that cardView is selected, navigates to the cardDashboard that matches
+	 * the target dashboardIndex
+	 * 
+	 * @param dashboardIndex
+	 */
+	public void cardView_navigate_toContentTableDashboard(int dashboardIndex) {
+		cardView_contentCardDashboard_link = By
+				.xpath("(//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text'])["
+						+ dashboardIndex + "]");
+		ElementActions.click(driver, cardView_contentCardDashboard_link);
+
+	}
+
+	/**
+	 * Given that cardView is selected, navigates to the cardFolder that matches the
+	 * target folderIndex
+	 * 
+	 * @param folderIndex
+	 */
+	public void cardView_navigate_toContentTableFolder(int folderIndex) {
+		cardView_contentCardFolder_link = By
+				.xpath("(//div[contains(@class,'inc-folder-view--cards')]//span[@class='inc-card-title-text'])["
+						+ folderIndex + "]");
+		ElementActions.click(driver, cardView_contentCardFolder_link);
+
+	}
+
+	/**
+	 * Given that cardView is selected, counts all cardDashboards
+	 * 
+	 * @return tableDashboards count
+	 */
+	public int cardView_countDashboards() {
+		return ElementActions.getElementsCount(driver, cardView_contentCardGenericDashboard_link,
+				customElementIdentificationTimeout);
+	}
+
+	/**
+	 * Given that cardView is selected, counts all cardFolders
+	 * 
+	 * @return tableFolders count
+	 */
+	public int cardView_countFolders() {
+		return ElementActions.getElementsCount(driver, cardView_contentCardGenericFolder_link,
+				customElementIdentificationTimeout);
+	}
+
+	/**
 	 *********************************************************************
 	 * The following is the tableView section
 	 *********************************************************************
@@ -201,7 +264,7 @@ public class NewUI_Content {
 	}
 
 	/**
-	 * Given that tableView is selected, navigates to the contentCard that contains
+	 * Given that tableView is selected, navigates to the tableEntry that contains
 	 * the target contentName
 	 * 
 	 * @param contentName
@@ -210,6 +273,52 @@ public class NewUI_Content {
 		tableView_contentTableEntry_link = By
 				.xpath("//tbody[@class='ant-table-tbody']//a[text()='" + contentName + "']");
 		ElementActions.click(driver, tableView_contentTableEntry_link);
+	}
+
+	/**
+	 * Given that tableView is selected, navigates to the tableDashboard that
+	 * matches the target dashboardIndex
+	 * 
+	 * @param dashboardIndex
+	 */
+	public void tableView_navigate_toContentTableDashboard(int dashboardIndex) {
+		tableView_contentTableDashboard_link = By
+				.xpath("(//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a)[" + dashboardIndex + "]");
+		ElementActions.click(driver, tableView_contentTableDashboard_link);
+
+	}
+
+	/**
+	 * Given that tableView is selected, navigates to the tableFolder that matches
+	 * the target folderIndex
+	 * 
+	 * @param folderIndex
+	 */
+	public void tableView_navigate_toContentTableFolder(int folderIndex) {
+		tableView_contentTableFolder_link = By
+				.xpath("(//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a)[" + folderIndex + "]");
+		ElementActions.click(driver, tableView_contentTableFolder_link);
+
+	}
+
+	/**
+	 * Given that tableView is selected, counts all tableDashboards
+	 * 
+	 * @return tableDashboards count
+	 */
+	public int tableView_countDashboards() {
+		return ElementActions.getElementsCount(driver, tableView_contentTableGenericDashboard_link,
+				customElementIdentificationTimeout);
+	}
+
+	/**
+	 * Given that tableView is selected, counts all tableFolders
+	 * 
+	 * @return tableFolders count
+	 */
+	public int tableView_countFolders() {
+		return ElementActions.getElementsCount(driver, tableView_contentTableGenericFolder_link,
+				customElementIdentificationTimeout);
 	}
 
 }

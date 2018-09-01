@@ -3,6 +3,7 @@ package pageObjectModels.content;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
@@ -10,6 +11,7 @@ public class NewUI_Content_Dashboard {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+	int customElementIdentificationTimeout = 2;
 
 	//// Elements
 	// first nested header
@@ -26,6 +28,11 @@ public class NewUI_Content_Dashboard {
 	By filterBar_filter_button = By.xpath("//div[@class='inc-filter-bar']//button[contains(@class,'filter-icon')]");
 	By filterBar_search_textBox = By.xpath("//div[@class='inc-filter-bar']//input");
 
+	// spinner
+	By loadingSpinner;
+	By genericInsight_div = By.xpath("//div[@class='draggable-insight-wrapper']");
+	By insight_div;
+
 	// body-insightHeader
 	By insightHeader_insightName_label = By.className("insight__header-title");
 	By insightHeader_insightActions_button = By.xpath("//span[@class='insight__header-actions']/button");
@@ -37,6 +44,20 @@ public class NewUI_Content_Dashboard {
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
+		waitForDashboardToFullyLoad();
+	}
+
+	private void waitForDashboardToFullyLoad() {
+
+	}
+
+	public int countInsights() {
+		return ElementActions.getElementsCount(driver, genericInsight_div, customElementIdentificationTimeout);
+	}
+
+	public void assert_insightContent_isDisplayed(int insightIndex) {
+		insight_div = By.xpath("(//div[@class='draggable-insight-wrapper'])[" + insightIndex + "]");
+		Assertions.assertElementExists(driver, insight_div, true);
 	}
 
 	/**
