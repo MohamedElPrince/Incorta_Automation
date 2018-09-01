@@ -17,6 +17,7 @@
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge | Safari -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
+		<takeFullPageScreenshots>false</takeFullPageScreenshots>
 		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
 		<executionAddress>local</executionAddress>
@@ -174,6 +175,7 @@
 							<screenshooterFlag>${screenshooterFlag}</screenshooterFlag>
 							<executionAddress>${executionAddress}</executionAddress>
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
+							<takeFullPageScreenshots>${takeFullPageScreenshots}</takeFullPageScreenshots>
 							<incortaRoot>${incortaRoot}</incortaRoot>
 							<incortaVersion>${incortaVersion}</incortaVersion>
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
