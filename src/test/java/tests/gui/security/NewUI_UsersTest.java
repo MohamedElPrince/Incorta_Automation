@@ -18,6 +18,7 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;
 import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.data.DataSources;
 import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.NewUI_Header;
@@ -66,7 +67,8 @@ public class NewUI_UsersTest {
 	AllContent_Dashboard dashboardPage;
 	AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
 	NewUI_Header newHeaderObject;
-
+	NewUI_Content newContentPage;
+	
 	//// Test Cases
 	@Test(priority = 1, description = "C478 - Create User")
 	@Description("Given I am logged in, When I navigate to the security.users page, And I create a new user, And I navigate back to the security.users page, Then the new user will be displayed in the users list.")
@@ -155,7 +157,13 @@ public class NewUI_UsersTest {
 		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
 
 		// logout and login using the new account created
-		subHeaderObject.Select_fromUserMenu("Logout");
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+
 		loginPage.navigate_toURL();
 		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
 
