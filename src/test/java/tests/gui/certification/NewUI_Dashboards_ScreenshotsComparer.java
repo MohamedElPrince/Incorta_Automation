@@ -83,6 +83,8 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 				totalDashboardsCounter++;
 				newContentPage.cardView_navigate_toContentTableDashboard(dashboardIndex);
 				newDashboardPage = new NewUI_Content_Dashboard(driver);
+				newDashboardPage.waitForDashboardToFullyLoad();
+				newDashboardPage.reportcurrentDashboardURL();
 				newDashboardPage.assert_dashboardName_isCorrect(".*");
 				crawlInsightsInCurrentDashboard();
 				BrowserActions.navigateBack(driver);
@@ -91,7 +93,7 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 	}
 
 	private void crawlInsightsInCurrentDashboard() {
-		BrowserActions.refreshCurrentPage(driver);
+		// BrowserActions.refreshCurrentPage(driver);
 		newDashboardPage = new NewUI_Content_Dashboard(driver);
 		int insightsCount = newDashboardPage.countInsights();
 		if (insightsCount > 0) {
