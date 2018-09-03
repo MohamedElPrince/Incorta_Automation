@@ -11,12 +11,13 @@
 		<incortaRoot>http://qa.incorta.com:7010/incorta/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
 		<testSuite.name>newCertificationPath</testSuite.name>
-		<operatingSystem.version>Mac-64</operatingSystem.version>
+		<operatingSystem.version>Linux-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge | Safari -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
+		<takeFullPageScreenshots>false</takeFullPageScreenshots>
 		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
 		<executionAddress>local</executionAddress>
@@ -25,10 +26,10 @@
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
-		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
+		<automaticallyGenerateAllureReport>true</automaticallyGenerateAllureReport>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180827</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180902</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -174,6 +175,7 @@
 							<screenshooterFlag>${screenshooterFlag}</screenshooterFlag>
 							<executionAddress>${executionAddress}</executionAddress>
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
+							<takeFullPageScreenshots>${takeFullPageScreenshots}</takeFullPageScreenshots>
 							<incortaRoot>${incortaRoot}</incortaRoot>
 							<incortaVersion>${incortaVersion}</incortaVersion>
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
