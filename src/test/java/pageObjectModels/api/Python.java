@@ -1,5 +1,6 @@
 package pageObjectModels.api;
 
+import java.nio.file.FileSystems;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class Python {
 		this.instance = instance;
 
 		this.pathToBinFolder = this.instance.getAbsolutePathToFile(relativePathToBinFolder);
-		this.pathToAutomationShellScript = pathToBinFolder + "/" + automationBaseScriptFile;
-		this.pathToAutomationOutputFolder = pathToBinFolder + "/" + "Automation_Output/";
+		this.pathToAutomationShellScript = pathToBinFolder + FileSystems.getDefault().getSeparator() + automationBaseScriptFile;
+		this.pathToAutomationOutputFolder = pathToBinFolder + FileSystems.getDefault().getSeparator() + "Automation_Output/";
 
 	}
 
