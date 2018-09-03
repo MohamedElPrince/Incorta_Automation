@@ -154,9 +154,9 @@ public class NewUI_LoginTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
-		// Create New User
 		usersPage = new Users(driver);
 		usersPage.Navigate_toURL();
+		// Create New User
 
 		subHeaderObject = new Skeleton(driver);
 		subHeaderObject.Click_add();

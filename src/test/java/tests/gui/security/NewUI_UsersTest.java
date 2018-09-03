@@ -163,7 +163,6 @@ public class NewUI_UsersTest {
 		newPassword = "Automation";
 		loginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
 
-		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
 		// Create new data source

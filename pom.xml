@@ -8,8 +8,8 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://qa.incorta.com:7010/incorta/#/</incortaRoot>
-		<incortaVersion>Rel4.0_automation</incortaVersion>
+		<incortaRoot>http://qa.incorta.com:7010/incorta/</incortaRoot>
+		<incortaVersion>Release4.0_automation</incortaVersion>
 		<testSuite.name>newCertificationPath</testSuite.name>
 		<operatingSystem.version>Mac-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->

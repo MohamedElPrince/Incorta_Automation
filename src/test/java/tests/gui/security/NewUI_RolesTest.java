@@ -95,14 +95,13 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
-		
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.navigate_toSection("Data");
-		newHeaderObject.assert_sectionHeader_isSelected("Data");
+		dataSourcesPage = new DataSources(driver);
+		dataSourcesPage.Navigate_toURL();
+		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 		
 		subHeaderObject = new Skeleton(driver);
 		subHeaderObject.Click_add();
-
+	
 		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
 		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(DataSourceName);
 		dataSourcesPage.Assert_nameIsDisplayed(DataSourceName);
@@ -117,17 +116,16 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 		
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.navigate_toSection("Schema");
-
+		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
+		
 		subHeaderObject = new Skeleton(driver);
 		subHeaderObject.Click_add();
 		subHeaderObject.Select_fromDropdownMenu("Create Schema");
 
-		schemasPage = new SchemaList(driver);
 		NewSchemaName = schemasPage.createNewSchema();
 
-		newHeaderObject.navigate_toSection("Schema");
+		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaNameIsDisplayed(NewSchemaName);
 	}
 
@@ -142,9 +140,9 @@ public class NewUI_RolesTest {
 
 		// Create new data source as a prerequisite.
 		
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.navigate_toSection("Data");
-		newHeaderObject.assert_sectionHeader_isSelected("Data");
+		dataSourcesPage = new DataSources(driver);
+		dataSourcesPage.Navigate_toURL();
+		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 		
 		subHeaderObject = new Skeleton(driver);
 		subHeaderObject.Click_add();
@@ -155,9 +153,8 @@ public class NewUI_RolesTest {
 		dataSourcesPage.Assert_nameIsDisplayed(DataSourceName);
 
 		// Add Data Source to schema
-		newHeaderObject.navigate_toSection("Schema");
-
 		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(ExistingSchemaNAME);
 
 		subHeaderObject.Click_add();
@@ -180,10 +177,8 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.navigate_toSection("Schema");
-		
 		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(LoadDataSchema);
 
 		schemasViewPage = new SchemaList_SchemaView(driver);
@@ -208,10 +203,8 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.navigate_toSection("Schema");
-		
 		schemasPage = new SchemaList(driver);
+		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(ShareSchema);
 
 		subHeaderObject = new Skeleton(driver);
