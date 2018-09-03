@@ -3,18 +3,14 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.security.RolesTest">
+			<class name="tests.gui.security.NewUI_UsersTest">
 				<methods>
-					<!-- include name="SchemaManager_Permissions_LoadData" /> -->
-					<!-- <include name="SchemaManager_Permissions_ShareSchemaToEdit" /> -->
-					<!-- <include name="IndividualAnalyzerRole" /> -->
-					<!-- <include name="userManagerRole" /> -->
-					<!-- <include name="superUserRole" /> -->
-					<!-- <include name="Analyzer_Permissions_CreateFolder" /> -->
-					<!-- <include name="Analyzer_Permissions_DeleteFolder" /> -->
-					<include name="Analyzer_Permissions_ShareFolder" />
+				<include name="createNewUser" />
+				<!-- <include name="createDatasource" /> -->
+				<!-- <include name="createSchema" /> -->
+				<!-- <include name="addDatasourceToSchemaUsingWizard" /> -->
 				</methods>
-			</class>
+			</class>			
 		</classes>
 	</test>
 </suite>
