@@ -35,11 +35,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.8</jdk.version>
 
-		<selenium.version>3.13.0</selenium.version>
+		<selenium.version>3.14.0</selenium.version>
 		<allure.version>2.7.0</allure.version>
 		<aspectj.version>1.9.1</aspectj.version>
 
-		<rest-assured.version>3.1.0</rest-assured.version>
+		<rest-assured.version>3.1.1</rest-assured.version>
 
 		<testng.version>6.14.3</testng.version>
 
@@ -90,6 +90,16 @@
 			<version>${selenium.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
 			<version>${allure.version}</version>
@@ -119,6 +129,20 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Cucumber Dependencies --> <!-- attempting upgrade -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 
