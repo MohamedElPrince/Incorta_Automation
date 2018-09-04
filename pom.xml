@@ -21,15 +21,15 @@
 		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
 		<executionAddress>local</executionAddress>
-		<!-- <executionAddress>localhost:4444</executionAddress> -->
+		<!-- <executionAddress>104.198.215.156:4444</executionAddress> -->
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
-		<automaticallyGenerateAllureReport>true</automaticallyGenerateAllureReport>
+		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180902</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180904</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
