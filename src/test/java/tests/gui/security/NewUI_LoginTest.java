@@ -155,7 +155,7 @@ public class NewUI_LoginTest {
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
 		usersPage = new Users(driver);
-		usersPage.Navigate_toURL();
+		usersPage.Navigate_toURL_with_iframe();
 		// Create New User
 
 		subHeaderObject = new Skeleton(driver);

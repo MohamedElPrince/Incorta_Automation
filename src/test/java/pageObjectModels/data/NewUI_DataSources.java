@@ -8,7 +8,7 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-public class DataSources {
+public class NewUI_DataSources {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -17,13 +17,8 @@ public class DataSources {
 	//// Elements
 	By header_dataSourcesTabHeader_link = By
 			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Data Sources']");
-	// header_dataSources_label;
-	// body_tableHeader_label;
+
 	By body_name_link;
-	// body_database_label;
-	// body_permission_label;
-	// body_testConnection_link;
-	// body_owner_label;
 
 	By popup_addNewDatasource_dataSource_list = By
 			.xpath("//select[@ng-model='$parent.dataSource.properties.database']");
@@ -42,44 +37,36 @@ public class DataSources {
 			popup_newDataSource_done_button = By.xpath("//button[@ng-click='modal.closeMe()']");
 
 	By popup_newDataSource_headerName_label = By.xpath("//span[@ng-if='!newDataSource']");
-	
+
 	By body_ownername_link;
 	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
 
 	//// Functions
-	public DataSources(WebDriver driver) {
+	public NewUI_DataSources(WebDriver driver) {
 		this.driver = driver;
 	}
 
 	public void Navigate_toURL() {
 		BrowserActions.navigateToURL(driver, url);
 	}
-	
-	public void Navigate_toURL_with_iframe() {
-		BrowserActions.navigateToURL(driver, url);
-		ElementActions.switchToIframe(driver, body_iframe);
-	}
 
 	public void Assert_dataSourcesTabIsSelected() {
+		ElementActions.switchToIframe(driver, body_iframe);
 		Assertions.assertElementAttribute(driver, header_dataSourcesTabHeader_link, "class", "selectedTab", true);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Assert_nameIsDisplayed(String name) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
 		Assertions.assertElementExists(driver, body_name_link, true);
+		ElementActions.switchToDefaultContent(driver);
 	}
-	// Assert_databaseIsDisplayed
-	// Assert_permissionIsDisplayed
-	// Assert_testConnectionIsDisplayed
-	// Assert_ownerIsDisplayed
-
-	// Assert_connectionIsWorking
-
-	// Click_name
 
 	public String AddDataSource(String dataSourceType) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		String dataSourceName;
 		String username;
 		String password;
@@ -103,25 +90,28 @@ public class DataSources {
 		ElementActions.type(driver, popup_addNewDatasource_connectionPool_textBox, connectionPool);
 		ElementActions.type(driver, popup_addNewDatasource_connectionString_textBox, connectionString);
 		ElementActions.click(driver, popup_addNewDatasource_addDataSource_button);
+		ElementActions.switchToDefaultContent(driver);
 		return dataSourceName;
-
 	}
 
 	public void Assert_dataSourceCreationWasSuccessful(String dataSourceName) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		Assertions.assertElementAttribute(driver, popup_newDataSource_headerName_label, "text", dataSourceName, true);
 		ElementActions.click(driver, popup_newDataSource_done_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
-	
+
 	public void Assert_DSnameAndOwnerIsDisplayed(String name, String ownername) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
 		Assertions.assertElementExists(driver, body_name_link, true);
-		
-		body_ownername_link = By
-				.xpath("//div[contains(@class,'userName ') and contains(.,'" + name + "')]/following-sibling::div/p[@class=\"ng-binding\"][contains(.,'"+ ownername +"')]");
+
+		body_ownername_link = By.xpath("//div[contains(@class,'userName ') and contains(.,'" + name
+				+ "')]/following-sibling::div/p[@class=\"ng-binding\"][contains(.,'" + ownername + "')]");
 		Assertions.assertElementExists(driver, body_ownername_link, true);
-		
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 }

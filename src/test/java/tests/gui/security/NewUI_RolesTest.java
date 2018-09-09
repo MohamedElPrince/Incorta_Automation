@@ -16,18 +16,19 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;
-import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
-import pageObjectModels.data.DataSources;
+import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.data.NewUI_DataSources;
 import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.NewUI_Header;
-import pageObjectModels.main.Skeleton;
-import pageObjectModels.scheduler.Dashboards;
-import pageObjectModels.scheduler.SchemaLoads;
-import pageObjectModels.schemas.SchemaList;
-import pageObjectModels.schemas.SchemaList_SchemaView;
-import pageObjectModels.security.Groups;
-import pageObjectModels.security.Groups_Group;
-import pageObjectModels.security.Users;
+import pageObjectModels.main.NewUI_Skeleton;
+import pageObjectModels.scheduler.NewUI_Dashboards;
+import pageObjectModels.scheduler.NewUI_SchemaLoads;
+import pageObjectModels.schemas.NewUI_SchemaList;
+import pageObjectModels.schemas.NewUI_SchemaList_SchemaView;
+import pageObjectModels.security.NewUI_Groups;
+import pageObjectModels.security.NewUI_Groups_Group;
+import pageObjectModels.security.NewUI_Users;
+import pageObjectModels.content.NewUI_Content;
 
 public class NewUI_RolesTest {
 
@@ -37,18 +38,20 @@ public class NewUI_RolesTest {
 
 	// Declaring Page Objects that will be used in the tests
 	NewUI_Login loginPage;
-	Skeleton subHeaderObject;
-	DataSources dataSourcesPage;
-	SchemaList schemasPage;
-	SchemaList_SchemaView schemasViewPage;
+	NewUI_Skeleton subHeaderObject;
+	NewUI_DataSources dataSourcesPage;
+	NewUI_SchemaList schemasPage;
+	NewUI_SchemaList_SchemaView schemasViewPage;
 	AllContent allContentPage;
-	Users usersPage;
-	AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	NewUI_Users usersPage;
+	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
 	AllContent_Dashboard dashboardPage;
-	Groups groupsPage;
-	SchemaLoads schedulerSchemaLoadsPage;
-	Dashboards schedulerDashboardsPage;
+	NewUI_Groups groupsPage;
+	NewUI_SchemaLoads schedulerSchemaLoadsPage;
+	NewUI_Dashboards schedulerDashboardsPage;
 	NewUI_Header newHeaderObject;
+	NewUI_Content newContentPage;
+	NewUI_Groups_Group groups_groupPage;
 
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
@@ -95,11 +98,11 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
-		dataSourcesPage = new DataSources(driver);
+		dataSourcesPage = new NewUI_DataSources(driver);
 		dataSourcesPage.Navigate_toURL();
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 		
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 	
 		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
@@ -116,10 +119,10 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 		
-		schemasPage = new SchemaList(driver);
+		schemasPage = new NewUI_SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 		subHeaderObject.Select_fromDropdownMenu("Create Schema");
 
@@ -140,27 +143,27 @@ public class NewUI_RolesTest {
 
 		// Create new data source as a prerequisite.
 		
-		dataSourcesPage = new DataSources(driver);
+		dataSourcesPage = new NewUI_DataSources(driver);
 		dataSourcesPage.Navigate_toURL();
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 		
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 
-		dataSourcesPage = new DataSources(driver);
+		dataSourcesPage = new NewUI_DataSources(driver);
 		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
 		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(DataSourceName);
 		dataSourcesPage.Assert_nameIsDisplayed(DataSourceName);
 
 		// Add Data Source to schema
-		schemasPage = new SchemaList(driver);
+		schemasPage = new NewUI_SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(ExistingSchemaNAME);
 
 		subHeaderObject.Click_add();
 		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
 
-		schemasViewPage = new SchemaList_SchemaView(driver);
+		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
 		schemasViewPage.Wizard_AddDataSourceTable(DataSourceName, true, "MySQL",
 				testDataReader.getCellData("DatabaseTableName"));
 
@@ -177,14 +180,14 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
-		schemasPage = new SchemaList(driver);
+		schemasPage = new NewUI_SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(LoadDataSchema);
 
-		schemasViewPage = new SchemaList_SchemaView(driver);
+		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
 		initialLoadStatus = schemasViewPage.GetLastLoadStatus();
 		
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_load();
 		subHeaderObject.Hover_overDropdownMenu("Load now");
 		subHeaderObject.Select_fromDropdownMenu("Full");
@@ -203,14 +206,14 @@ public class NewUI_RolesTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
-		schemasPage = new SchemaList(driver);
+		schemasPage = new NewUI_SchemaList(driver);
 		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(ShareSchema);
 
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_Settings();
 
-		schemasViewPage = new SchemaList_SchemaView(driver);
+		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
 		schemasViewPage.Click_Sharing_Tab();
 		schemasViewPage.Click_AddButton_SharingTab();
 		schemasViewPage.Schema_Sharing_SearchAndSelectUsers(UserToShareWith);// User To Share With as a predefined,
@@ -255,13 +258,13 @@ public class NewUI_RolesTest {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
 
 		newDashboardName = allContentPage.setNewDashboardName();
 
-		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.addTableorSchemaToInsight("HR");
 
 		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
@@ -316,10 +319,10 @@ public class NewUI_RolesTest {
 				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
 
 		// Create New User
-		usersPage = new Users(driver);
+		usersPage = new NewUI_Users(driver);
 		usersPage.Navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 
 		newUserData = usersPage.AddNewUser();
@@ -327,7 +330,7 @@ public class NewUI_RolesTest {
 
 		// Create New Group
 
-		groupsPage = new Groups(driver);
+		groupsPage = new NewUI_Groups(driver);
 		groupsPage.Navigate_toURL();
 
 		subHeaderObject.Click_add();
@@ -339,7 +342,7 @@ public class NewUI_RolesTest {
 		// Add roles to group
 		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
 
-		Groups_Group groups_groupPage = new Groups_Group(driver);
+		groups_groupPage = new NewUI_Groups_Group(driver);
 		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
 				testDataReader.getCellData("GroupRoles", "Data2") };
 		groups_groupPage.AddRoles(AddedRoles);
@@ -385,10 +388,10 @@ public class NewUI_RolesTest {
 				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
 
 		// Create New User
-		usersPage = new Users(driver);
+		usersPage = new NewUI_Users(driver);
 		usersPage.Navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 
 		newUserData = usersPage.AddNewUser();
@@ -396,7 +399,7 @@ public class NewUI_RolesTest {
 
 		// Create New Group
 
-		groupsPage = new Groups(driver);
+		groupsPage = new NewUI_Groups(driver);
 		groupsPage.Navigate_toURL();
 
 		subHeaderObject.Click_add();
@@ -408,7 +411,7 @@ public class NewUI_RolesTest {
 		// Add roles to group
 		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
 
-		Groups_Group groups_groupPage = new Groups_Group(driver);
+		groups_groupPage = new NewUI_Groups_Group(driver);
 		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
 				testDataReader.getCellData("GroupRoles", "Data2") };
 		groups_groupPage.AddRoles(AddedRoles);
@@ -429,7 +432,7 @@ public class NewUI_RolesTest {
 
 		newDashboardName = allContentPage.setNewDashboardName();
 
-		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.addTableorSchemaToInsight("HR");
 
 		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
@@ -471,7 +474,7 @@ public class NewUI_RolesTest {
 		
 		allContentPage = new AllContent(driver);
 
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 		subHeaderObject.Select_fromDropdownMenu("Create Folder");
 		NewFolderName = allContentPage.SetNewFolderName();
@@ -513,7 +516,7 @@ public class NewUI_RolesTest {
 
 		allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
 
-		schemasViewPage = new SchemaList_SchemaView(driver);
+		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
 		schemasViewPage.Schema_Sharing_ClickOnUserPermission("Can Edit");
 		schemasViewPage.Click_Save_Button();
 		schemasViewPage.Assertion_UserPermission(UserToShareWithFolder, "Can Edit");
@@ -574,14 +577,14 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add();
 		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
 
 		allContentPage = new AllContent(driver);
 		String NewDashBoradName = allContentPage.setNewDashboardName();
 
-		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.addTableorSchemaToInsight(SchemaNameForInsight);
 		analyzeInsightPage.addColumnToInsight("sales", "Revenue");
 		analyzeInsightPage.addColumnToInsight("sales", "Quarter");
@@ -614,7 +617,7 @@ public class NewUI_RolesTest {
 		allContentPage = new AllContent(driver);
 		allContentPage.Click_Dashboard(DashboardToBeShared);
 
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_export();
 		subHeaderObject.Click_FromExportMenu("Send");
 
@@ -642,10 +645,10 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
-		allContentPage = new AllContent(driver);
-		allContentPage.Click_Dashboard(DashboardToBeShared);
+		newContentPage = new NewUI_Content(driver);
+		//allContentPage.Click_Dashboard(DashboardToBeShared);
 
-		subHeaderObject = new Skeleton(driver);
+		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_export();
 		subHeaderObject.Click_FromExportMenu("Schedule");
 
@@ -654,7 +657,7 @@ public class NewUI_RolesTest {
 				testDataReader.getCellData("SchemaLoadJobDescription"), testDataReader.getCellData("SchemaLoadJobDate"),
 				testDataReader.getCellData("SchemaLoadJobTime"), testDataReader.getCellData("SchemaLoadJobTimeZone"),
 				testDataReader.getCellData("SchemaLoadJobRecurrence"), ToMail, CcMail, BccMail);
-		schedulerDashboardsPage = new Dashboards(driver);
+		schedulerDashboardsPage = new NewUI_Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 
 		schedulerDashboardsPage.Assert_jobNameIsDisplayed(newScheduledSendDashboardJobName);
@@ -673,15 +676,15 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
-		allContentPage = new AllContent(driver);
+		newContentPage = new NewUI_Content(driver);
 
-		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
+		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
 
-		allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 
-		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
+		//allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
 
-		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
+		//allContentPage.Assert_folder_Dashboard_IsNotDisplayed(DashboardNameToBeDeleted);
 	}
 
 	// Prerequisitrs, Analyzer user + Dashboard to share + User to share with
@@ -695,19 +698,19 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
-		allContentPage = new AllContent(driver);
+		newContentPage = new NewUI_Content(driver);
 
-		allContentPage.Click_Folder_Dashboard_Properties(DashboardToBeShared);
+		newContentPage.Click_Folder_Dashboard_Properties(DashboardToBeShared);
 
-		allContentPage.Click_DashboardProperties_ManageDashboardButtons("Share");
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share");
 
-		allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
+		//allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
 
-		allContentPage.Dashboard_Sharing_ClickOnUserPermission("Can Share");
+		//allContentPage.Dashboard_Sharing_ClickOnUserPermission("Can Share");
 
-		allContentPage.Dashboard_Sharing_Click_Save_Button();
+		//allContentPage.Dashboard_Sharing_Click_Save_Button();
 
-		allContentPage.Assertion_Sharing_UserPermission(UserToShareWithFolder, "Can Share");
+		//allContentPage.Assertion_Sharing_UserPermission(UserToShareWithFolder, "Can Share");
 	}
 
 	// Prerequisitrs, Analyzer user + Dashboard to copy + Folder to copy to
@@ -721,23 +724,21 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
-		allContentPage = new AllContent(driver);
+		newContentPage = new NewUI_Content(driver);
 
-		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeCopied);
+		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeCopied);
 
-		allContentPage.Click_DashboardProperties_ManageDashboardButtons("Copy");
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
-		allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToMoveTo);
+		newContentPage.dashboard_popup_clickOnFolder(FolderNameToMoveTo);
 
-		allContentPage.Dashboard_Copy_ClickCopyButton();
+		newContentPage.dashboardProperties_copyTo_copy_button();
 
-		allContentPage.FolderProperties_Rename_Move_Done_Buttons("Done");
+		newContentPage.Assert_DashboardExist(DashboardNameToBeCopied);
 
-		allContentPage.Assert_DashboardExist(DashboardNameToBeCopied);
+		newContentPage.click_on_folder_dashboard(FolderNameToMoveTo);
 
-		allContentPage.Click_FolderName(FolderNameToMoveTo);
-
-		allContentPage.Assert_DashboardExist_Copied(DashboardNameToBeCopied);
+		newContentPage.Assert_DashboardExist_Copied(DashboardNameToBeCopied);
 
 	}
 
@@ -752,21 +753,21 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
-		allContentPage = new AllContent(driver);
+		newContentPage = new NewUI_Content(driver);
 
-		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToMove);
+		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToMove);
 
-		allContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
 
-		allContentPage.Dashboard_popup_ClickOnFolder(FolderNameToMoveTo);
+		newContentPage.dashboard_popup_clickOnFolder(FolderNameToMoveTo);
 
-		allContentPage.Dashboard_Move_ClickMoveButton();
+		newContentPage.dashboard_move_clickMoveButton();
 
-		allContentPage.Assert_DashboardNotExist(DashboardNameToMove);
+		newContentPage.assert_dashboardNotExist(DashboardNameToMove);
 
-		allContentPage.Click_FolderName(FolderNameToMoveTo);
+		newContentPage.click_on_folder_dashboard(FolderNameToMoveTo);
 
-		allContentPage.Assert_DashboardExist(DashboardNameToMove);
+		newContentPage.Assert_DashboardExist(DashboardNameToMove);
 	}
 
 	// Prerequisitrs, Analyzer user + Dashboard to rename
@@ -780,19 +781,17 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		
-		allContentPage = new AllContent(driver);
+		newContentPage = new NewUI_Content(driver);
 
-		allContentPage.Click_Folder_Dashboard_Properties(DashboardNameToRename);
+		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToRename);
 
-		allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");// can't detect xpath of 'rename' option
 
-		newDashboardName = allContentPage.FolderProperties_Rename();
+		newDashboardName = newContentPage.FolderProperties_Rename();
 
-		allContentPage.Dashboard_Rename_ClickRenameButton();
+		newContentPage.Dashboard_Rename_ClickRenameButton();
 
-		allContentPage.FolderProperties_Rename_Move_Done_Buttons("Done");
-
-		allContentPage.Assert_DashboardExist(newDashboardName);
+		newContentPage.Assert_DashboardExist(newDashboardName);
 	}
 
 	@BeforeMethod

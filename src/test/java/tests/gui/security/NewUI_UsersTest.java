@@ -106,7 +106,6 @@ public class NewUI_UsersTest {
 	@Description("Given I am logged in with an admin account, When I navigate to the security.users page, And I click on a user (not super user), And I click on Login As User, Then a message should be displayed to state that I'm impersonating the user, And a link should be present in the users dropdown menu to take me back, And a link should be displayed in the side menu to take me back.")
 	@Severity(SeverityLevel.NORMAL)
 	public void impersonationUI() {
-
 		String impersonationUserName = testDataReader.getCellData("ImpersonationUserName");
 		usersPage.Assert_nameIsDisplayed(impersonationUserName);
 		usersPage.Click_name(impersonationUserName);
@@ -281,7 +280,7 @@ public class NewUI_UsersTest {
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
 		// Delete User and Transfer Ownership to another user
-		usersPage.Navigate_toURL();
+		usersPage.Navigate_toURL_with_iframe();
 		usersPage.Select_nameCheckbox(newUserData[2]);
 
 		subHeaderObject.Click_actions();
@@ -331,7 +330,7 @@ public class NewUI_UsersTest {
 	@BeforeMethod
 	public void beforeMethod() {
 		usersPage = new Users(driver);
-		usersPage.Navigate_toURL();
+		usersPage.Navigate_toURL_with_iframe();
 	}
 
 	@BeforeClass

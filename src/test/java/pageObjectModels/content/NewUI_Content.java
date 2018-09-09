@@ -17,6 +17,9 @@ public class NewUI_Content {
 
 	//// Elements
 	// first nested header
+	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
+	By body_dashboardName_folderName;
+	By body_folderName_dashboardName_insideFolder;
 	By pageDetails_title_label = By.xpath("//span[@class='page-details-title']/h1");
 
 	// second_nested_header
@@ -42,11 +45,18 @@ public class NewUI_Content {
 	By tableView_contentTableEntry_link; // tbody[@class='ant-table-tbody']//a
 	By tableView_contentTableFolder_link;
 	By tableView_contentTableDashboard_link;
+	By tableView_folderDashboardProperties_Button;
+	By tableView_dashboardProperties_listOption;
 
 	By tableView_contentTableGenericFolder_link = By
 			.xpath("//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a");
 	By tableView_contentTableGenericDashboard_link = By
 			.xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
+	
+	By popup_renameFolder;
+	By popup_Rename_RenameButton = By.xpath("//button//span[contains(text(),'Rename')]");
+	By popup_manageDashboard_copy_folderToCopyTo;
+	By popup_manageDashboard_move_moveButton = By.xpath("//button//span[contains(text(),'Move')]");
 
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
@@ -56,7 +66,7 @@ public class NewUI_Content {
 	public void navigate_toURL() {
 		BrowserActions.navigateToURL(driver, url);
 	}
-
+	
 	/**
 	 * Asserts that the mentioned pageTitle matches with the displayed pageTitle
 	 * 
@@ -319,6 +329,75 @@ public class NewUI_Content {
 	public int tableView_countFolders() {
 		return ElementActions.getElementsCount(driver, tableView_contentTableGenericFolder_link,
 				customElementIdentificationTimeout);
+	}
+	
+	
+	
+	public void Click_Folder_Dashboard_Properties(String FolderName)
+	{
+		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[contains(text(), '"+FolderName+"')]//parent::div//following-sibling::div//button");
+		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
+	}
+	
+	public void Click_DashboardProperties_ManageDashboardButtons(String Actions)
+	{
+		tableView_dashboardProperties_listOption = By.xpath("//div[@class='ant-dropdown ant-dropdown-placement-bottomLeft']//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"+Actions+"')]");
+		ElementActions.click(driver, tableView_dashboardProperties_listOption);
+	}
+	
+	public String FolderProperties_Rename() {
+		String newFolderName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+		popup_renameFolder = By.id("inc-rename-catalog-item__control");
+		ElementActions.type(driver, popup_renameFolder, newFolderName);
+		return newFolderName;
+	}
+	
+	public void Dashboard_Rename_ClickRenameButton()
+	{
+		ElementActions.click(driver, popup_Rename_RenameButton);
+	}
+	
+	public void Assert_DashboardExist(String DashboardName)
+	{
+		By body_dashboardName = By.xpath("//div[@class='inc-card-title']//span[contains(text(), '"+DashboardName+"')]");
+		Assertions.assertElementExists(driver, body_dashboardName, true);
+	}
+	
+	public void dashboard_popup_clickOnFolder(String FolderName)
+	{
+		popup_manageDashboard_copy_folderToCopyTo = By.xpath("//span[@class='ant-tree-title']//span[text()='"+FolderName+"']");
+		ElementActions.click(driver, popup_manageDashboard_copy_folderToCopyTo);	
+	}
+
+	public void dashboard_move_clickMoveButton()
+		{
+			ElementActions.click(driver, popup_manageDashboard_move_moveButton);
+		}
+	
+	public void assert_dashboardNotExist(String DashboardFolderName)
+	{
+		body_dashboardName_folderName = By.xpath("//span[text()='"+DashboardFolderName+"']");
+		Assertions.assertElementExists(driver, body_dashboardName_folderName, false);
+	}
+	
+	public void dashboardProperties_copyTo_copy_button()
+	{
+		By popup_dashboardProperties_copyTo_copy_button = By.xpath("//span[text()='Copy']");
+		ElementActions.click(driver, popup_dashboardProperties_copyTo_copy_button);
+	}
+	
+	public void click_on_folder_dashboard(String DashboardFolderName)
+		{
+			body_folderName_dashboardName_insideFolder = By.xpath("//span[text()='"+DashboardFolderName+"']");
+			ElementActions.click(driver, body_folderName_dashboardName_insideFolder);
+		}
+	
+	
+	public void Assert_DashboardExist_Copied(String DashboardName)
+	{
+		DashboardName = DashboardName + " Copy";
+		By body_folderName_dashboardName_insideFolder = By.xpath("//span[text()='"+DashboardName+"']");
+		Assertions.assertElementExists(driver, body_folderName_dashboardName_insideFolder, true);
 	}
 
 }

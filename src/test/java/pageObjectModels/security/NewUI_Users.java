@@ -7,13 +7,12 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.elementActionLibrary.JSWaiter;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 import pageObjectModels.main.Skeleton;
 
-public class Users {
+public class NewUI_Users {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -70,49 +69,52 @@ public class Users {
 			.xpath("//div[contains(@class,'userDetailsModal')]//button[@type='submit'][normalize-space(.)='Add']");
 
 	//// Functions
-	public Users(WebDriver driver) {
+	public NewUI_Users(WebDriver driver) {
 		this.driver = driver;
 	}
 
 	public void Navigate_toURL() {
 		BrowserActions.navigateToURL(driver, url);
 	}
-	
-	public void Navigate_toURL_with_iframe() {
-		BrowserActions.navigateToURL(driver, url);
-		ElementActions.switchToIframe(driver, body_iframe);
-	}
 	// Assert_usersTabIsSelected
 	// Assert_usersLabelIsDisplayed
 	// Assert_usersNumberIsCorrect
 
 	public void Assert_nameIsDisplayed(String name) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
 		Assertions.assertElementExists(driver, body_name_link, true);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Assert_nameIsNotDisplayed(String name) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
 		Assertions.assertElementExists(driver, body_name_link, false);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	// Assert_lastSignedInForUserNameIsCorrect
 	public void Select_nameCheckbox(String name) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_name_checkbox = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/preceding-sibling::div[contains(@class,'userSelection')]/input");
 		ElementActions.click(driver, body_name_checkbox);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Click_name(String name) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'" + name
 						+ "')]/p");
 		ElementActions.click(driver, body_name_link);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public String[] AddNewUser() {
@@ -133,6 +135,7 @@ public class Users {
 	}
 
 	public String[] AddNewUser(String[] userData) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		String timeStamp = String.valueOf(System.currentTimeMillis());
 		String loginName = userData[0] + "_" + timeStamp;
 		ElementActions.type(driver, popup_addNewUser_loginName_textBox, loginName);
@@ -150,12 +153,14 @@ public class Users {
 		String UserImagePath = imagesFolderPath + userData[9];
 		UserImagePath = (new File(UserImagePath)).getAbsolutePath();
 		ElementActions.typeFileLocationForUpload(driver, popup_addNewUser_uploadImage_textBox, UserImagePath);
-		
+
 		ElementActions.click(driver, popup_addNewUser_addUser_button);
+		ElementActions.switchToDefaultContent(driver);
 		return new String[] { loginName, userData[1], displayName }; // return username,password,displayname
 	}
 
 	public void ConfirmUserDeletionAndTransferOwnershipToSelf() {
+		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, popup_confirmDelete_transferOwnership_button);
 		popup_transferOwnership_targetuser_radioButton = By.xpath(
 				"//p[contains(normalize-space(),'Transfer ownership to the current user')]/preceding-sibling::input[@type='radio']");
@@ -163,36 +168,47 @@ public class Users {
 		ElementActions.click(driver, popup_transferOwnership_transferSharingPermissions_checkBox);
 		ElementActions.click(driver, popup_transferOwnership_transferOwnership_button);
 		ElementActions.click(driver, popup_confirmDelete_delete_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void ConfirmUserDeletionAnyway() {
+		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, popup_confirmDelete_deleteAnyway_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void UploadProfilePicture(String pictureName) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		String UserImagePath = imagesFolderPath + pictureName;
 		UserImagePath = (new File(UserImagePath)).getAbsolutePath();
 		ElementActions.typeFileLocationForUpload(driver, popup_addNewUser_uploadImage_textBox, UserImagePath);
 		ElementActions.click(driver, popup_existingUser_saveChanges_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Assert_imageIsDisplayed(String userName) {
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_image_icon = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
 						+ userName + "')]//preceding-sibling::div[contains(@class,'userImage')]/img");
 		Assertions.assertElementAttribute(driver, body_image_icon, "src", "./content/images/defaultUser.png", false);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void ConfirmUserDeletion() {
-		JSWaiter.sleep(5000);
+		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, popup_confirmDelete_delete_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Click_impersonation() {
+		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, popup_userInformation_userDetails_LoginAsUser_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Assert_impersonationUIElementsAreDisplayed() {
+		ElementActions.switchToIframe(driver, body_iframe);
 		Assertions.assertElementExists(driver, popup_impersonationMessage, true);
 		Assertions.assertElementAttribute(driver, popup_impersonationMessage, "text",
 				testDataReader.getCellData("ImpersonationMessage"), true);
@@ -201,39 +217,46 @@ public class Users {
 		mainPage = new Skeleton(driver);
 		mainPage.Assert_impersonation_switchBack_link_IsDisplayed();
 		mainPage.Assert_fromUserMenu("Switch Back");
+		ElementActions.switchToDefaultContent(driver);
 	}
-	
-		public void SelectGroupForUserFromUsersPage(String GroupName)
-		{
-			popup_UsersToBeAdded_checkbox = By.name(GroupName);
-			ElementActions.click(driver, popup_UsersToBeAdded_checkbox);
-		}
-		
-		public void ClickAddToSelectGroupForUser ()
-		{
-			ElementActions.click(driver, popup_addUsersToGroup_UsersPage_add_button);
-		}
-		
-		public void ConfirmUserDeletionAndTransferOwnershipToAnother(String name) {
-			ElementActions.click(driver, popup_confirmDelete_transferOwnership_button);
-			popup_transferOwnership_targetuser_radioButton = By.xpath(
-					"//p[contains(normalize-space(),'Transfer ownership to another user')]/preceding-sibling::input[@type='radio']");
-			ElementActions.click(driver, popup_transferOwnership_targetuser_radioButton);
-			
-			////////////////////////
-			By popup_Transfer_Ownership_To_AnotherUser_Searchbox = By.xpath("//input[@ng-model='entitySearchText']");
-			By popup_Transfer_Ownership_To_AnotherUser_SearchList = By.xpath("//h5[@class='UserData left text-left ng-binding'][contains(text(),'"+ name +"')]");
-			ElementActions.click(driver, popup_Transfer_Ownership_To_AnotherUser_Searchbox);
-			ElementActions.type(driver, popup_Transfer_Ownership_To_AnotherUser_Searchbox, name);
 
-			ElementActions.click(driver, popup_Transfer_Ownership_To_AnotherUser_SearchList);
-			
-			Assertions.assertElementExists(driver, popup_Transfer_Ownership_To_AnotherUser_SearchList, true);
+	public void SelectGroupForUserFromUsersPage(String GroupName) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_UsersToBeAdded_checkbox = By.name(GroupName);
+		ElementActions.click(driver, popup_UsersToBeAdded_checkbox);
+		ElementActions.switchToDefaultContent(driver);
+	}
 
-			////////////////////////
+	public void ClickAddToSelectGroupForUser() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver, popup_addUsersToGroup_UsersPage_add_button);
+		ElementActions.switchToDefaultContent(driver);
+	}
 
-			ElementActions.click(driver, popup_transferOwnership_transferSharingPermissions_checkBox);
-			ElementActions.click(driver, popup_transferOwnership_transferOwnership_button);
-			ElementActions.click(driver, popup_confirmDelete_delete_button);
-		}
+	public void ConfirmUserDeletionAndTransferOwnershipToAnother(String name) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver, popup_confirmDelete_transferOwnership_button);
+		popup_transferOwnership_targetuser_radioButton = By.xpath(
+				"//p[contains(normalize-space(),'Transfer ownership to another user')]/preceding-sibling::input[@type='radio']");
+		ElementActions.click(driver, popup_transferOwnership_targetuser_radioButton);
+
+		////////////////////////
+		By popup_Transfer_Ownership_To_AnotherUser_Searchbox = By.xpath("//input[@ng-model='entitySearchText']");
+		By popup_Transfer_Ownership_To_AnotherUser_SearchList = By
+				.xpath("//h5[@class='UserData left text-left ng-binding'][contains(text(),'" + name + "')]");
+		ElementActions.click(driver, popup_Transfer_Ownership_To_AnotherUser_Searchbox);
+		ElementActions.type(driver, popup_Transfer_Ownership_To_AnotherUser_Searchbox, name);
+
+		ElementActions.click(driver, popup_Transfer_Ownership_To_AnotherUser_SearchList);
+
+		Assertions.assertElementExists(driver, popup_Transfer_Ownership_To_AnotherUser_SearchList, true);
+
+		////////////////////////
+
+		ElementActions.click(driver, popup_transferOwnership_transferSharingPermissions_checkBox);
+		ElementActions.click(driver, popup_transferOwnership_transferOwnership_button);
+		ElementActions.click(driver, popup_confirmDelete_delete_button);
+		ElementActions.switchToDefaultContent(driver);
+	}
 }
