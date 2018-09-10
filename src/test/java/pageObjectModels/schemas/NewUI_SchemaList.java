@@ -219,11 +219,9 @@ public class NewUI_SchemaList {
 	}
 
 	public String createNewSchema(String schemaName, String schemaDesription) {
-		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.type(driver, popup_newSchema_schemaName_textBox, schemaName);
 		ElementActions.type(driver, popup_newSchema_schemaDescription_textBox, schemaDesription);
 		ElementActions.click(driver, popup_newSchema_create_button);
-		ElementActions.switchToDefaultContent(driver);
 		return schemaName;
 	}
 

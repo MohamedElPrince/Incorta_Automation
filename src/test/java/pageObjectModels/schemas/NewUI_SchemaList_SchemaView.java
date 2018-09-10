@@ -162,8 +162,9 @@ public class NewUI_SchemaList_SchemaView {
 
 	public String GetLastLoadStatus() {
 		ElementActions.switchToIframe(driver, body_iframe);
+		String status =  ElementActions.getText(driver, header_lastLoadStatus_link);
 		ElementActions.switchToDefaultContent(driver);
-		return ElementActions.getText(driver, header_lastLoadStatus_link);
+		return status;
 	}
 
 	public void confirmLoadingData() {
