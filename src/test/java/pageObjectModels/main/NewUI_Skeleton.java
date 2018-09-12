@@ -20,15 +20,21 @@ public class NewUI_Skeleton {
 
 	By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
 
-	By header_search_textBox = By.xpath("//input[@placeholder='Search content']");
-	By header_searchResult_link;
+	By header_search_textBox_security = By.xpath("//input[@placeholder='Search']");
+	By header_search_textBox_content = By.xpath("//input[@placeholder='Search content']");
+
+	By header_searchResult_link_security;
+	By header_searchResult_link_content;
 
 	By header_load_button = By.id("load_types_btn");
 	By header_loadMenuItem_link;
 	By header_actions_button = By.xpath("//span[text()='Actions']");
 	By header_export_button = By.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]");
 	// header_settings_button
-	By header_add_button = By.xpath("//i[@class='anticon anticon-plus']//parent::span//parent::span//parent::button");
+	By header_add_content_button = By.xpath("//i[@class='anticon anticon-plus']//parent::span//parent::span//parent::button");
+	By header_add_security_button = By.xpath("//a[@class='btn ']/img[contains(@src,'plus_icon')]");
+	
+	
 	By header_genericMenuItem_link;
 	By header_user_button = By
 			.xpath("//img[contains(@ng-src,'getUserPicture')]//ancestor::a[@class='dropdown-toggle']");
@@ -60,17 +66,28 @@ public class NewUI_Skeleton {
 	// Assert_logoIsDisplayed
 	// Navigate_toSideMenuItem
 
-	public void SearchForContentAndOpenResult(String query) {
-		ElementActions.type(driver, header_search_textBox, query);
-		header_searchResult_link = By.xpath("//span[@class='inc-search-option__item--left']//mark[text()='"+query+"']");
-		ElementActions.click(driver, header_searchResult_link);
+	public void SearchForContentAndOpenResult_security(String query) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.type(driver, header_search_textBox_security, query);
+		header_searchResult_link_security = By.xpath("//*[@id='search-box-container']//h5[contains(normalize-space(),'" + query
+				+ "')]/ancestor::a[contains(@id,'searchBoxItem')]");
+		ElementActions.click(driver, header_searchResult_link_security);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
-	public void SearchForContentAndAssertResultIsDisplayed(String query) {
-		ElementActions.type(driver, header_search_textBox, query);
-		header_searchResult_link = By.xpath("//*[@id='search-box-container']//h5[contains(normalize-space(),'" + query
+	public void SearchForContentAndAssertResultIsDisplayed_security(String query) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.type(driver, header_search_textBox_security, query);
+		header_searchResult_link_security = By.xpath("//*[@id='search-box-container']//h5[contains(normalize-space(),'" + query
 				+ "')]/ancestor::a[contains(@id,'searchBoxItem')]");
-		Assertions.assertElementExists(driver, header_searchResult_link, true);
+		Assertions.assertElementExists(driver, header_searchResult_link_security, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+	
+	public void SearchForContentAndOpenResult_content(String query) {
+		ElementActions.type(driver, header_search_textBox_content, query);
+		header_searchResult_link_content = By.xpath("//span[@class='inc-search-option__item--left']//mark[contains(text(),'"+query+"')]");
+		ElementActions.click(driver, header_searchResult_link_content);
 	}
 
 	// Assert_searchResultIsDisplayed
@@ -86,8 +103,14 @@ public class NewUI_Skeleton {
 		ElementActions.switchToDefaultContent(driver);
 	}
 
-	public void Click_add() {
-		ElementActions.click(driver, header_add_button);
+	public void Click_add_content() {
+		ElementActions.click(driver, header_add_content_button);
+	}
+	
+	public void Click_add_security() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver, header_add_security_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Click_done() {

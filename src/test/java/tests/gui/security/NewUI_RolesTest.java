@@ -29,6 +29,7 @@ import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
 import pageObjectModels.security.NewUI_Users;
 import pageObjectModels.content.NewUI_Content;
+import pageObjectModels.content.NewUI_Content_Dashboard;
 
 public class NewUI_RolesTest {
 
@@ -46,14 +47,15 @@ public class NewUI_RolesTest {
 	NewUI_Content NewUI_allContentPage;
 	NewUI_Users usersPage;
 	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
-	AllContent_Dashboard dashboardPage;
+	//AllContent_Dashboard dashboardPage;
 	NewUI_Groups groupsPage;
 	NewUI_SchemaLoads schedulerSchemaLoadsPage;
 	NewUI_Dashboards schedulerDashboardsPage;
 	NewUI_Header newHeaderObject;
 	NewUI_Content newContentPage;
 	NewUI_Groups_Group groups_groupPage;
-
+	NewUI_Content_Dashboard dashboardPage;
+	
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
 	String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
@@ -104,7 +106,7 @@ public class NewUI_RolesTest {
 //		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 //		
 //		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_add();
+//		subHeaderObject.Click_add_content();
 //	
 //		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
 //		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(DataSourceName);
@@ -124,7 +126,7 @@ public class NewUI_RolesTest {
 //		schemasPage.Navigate_toURL();
 //		
 //		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_add();
+//		subHeaderObject.Click_add_content();
 //		subHeaderObject.Select_fromDropdownMenu("Create Schema");
 //
 //		NewSchemaName = schemasPage.createNewSchema();
@@ -149,7 +151,7 @@ public class NewUI_RolesTest {
 //		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 //		
 //		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_add();
+//		subHeaderObject.Click_add_content();
 //
 //		dataSourcesPage = new NewUI_DataSources(driver);
 //		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
@@ -161,7 +163,7 @@ public class NewUI_RolesTest {
 //		schemasPage.Navigate_toURL();
 //		schemasPage.click_schemaName(ExistingSchemaNAME);
 //
-//		subHeaderObject.Click_add();
+//		subHeaderObject.Click_add_content();
 //		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
 //
 //		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
@@ -225,182 +227,114 @@ public class NewUI_RolesTest {
 //		schemasViewPage.Assertion_UserPermission(UserToShareWith, "Can Edit");
 //	}
 //
-	@Test(priority = 6, description = "C60533 - Individual Analyzer")
-	@Description("Given I login With Individual Analyzer , When I CreateDashboard,Then Dashboardis Created sucessfully,And I can'tshare,schedular or send it")
-
-	@Severity(SeverityLevel.CRITICAL)
-	public void IndividualAnalyzerRole() {
-
-		/*
-		 * prerequisite to this test case you need to create a user and add the user to
-		 * Individual analyzer role to him by adding the user to the group.
-		 *
-		 * Steps: - user created with name: Individual Analyzer and password:
-		 * IndividualAnalyzer --> user data added to excel sheet - user added to
-		 * Individual Group that has an Individual Analyzer role assigned to that group
-		 * Share Schema with that user in my case "HR"
-		 *
-		 * -----------------------------------------------------------------------------
-		 * ---
-		 *
-		 * -----------------------------------------------------------------------------
-		 * test case steps: 1- logout from the previous user. 2- login with the
-		 * pre-created user. 3- navigate to content section. 4- create dashboard, add
-		 * table from the shared schema, select Aggregated table insight type. 5- Assert
-		 * Export icon(this icon let user to share/send/schedule) not displayed in
-		 * dashboard page. 6- Assert that dashboard and insight name are correct.
-		 * 7-assert that share icon in dashboard settings is dimmed.
-		 */
-
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data2"),
-				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
-
-		// Navigate to Content page and create dashboard
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
-
-		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
-
-		newDashboardName = allContentPage.setNewDashboardName();
-
-		NewUI_allContentPage = new NewUI_Content(driver);
-		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
-		
-		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
-		analyzeInsightPage.clickOn_addInsight_button();
-		analyzeInsightPage.selectVisualization("Aggregated");
-		
-		analyzeInsightPage.addTableorSchemaToInsight("HR");
-
-		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
-		analyzeInsightPage.addColumnToInsight("EMPLOYEES", "Employee Salary");
-
-//		subHeaderObject.Click_ChooseVisualization();
-//		analyzeInsightPage.selectVisualization("Aggregated");
-
-		newInsightName = analyzeInsightPage.setInsightName();
-		subHeaderObject.Click_done();
-
-		allContentPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
-
-		dashboardPage = new AllContent_Dashboard(driver);
-		// Assert that Export icon(this icon let user to share/send/schedule) is not
-		// displayed in dashboard page
-		subHeaderObject.assertExportIconIsNotDisplayed();
-
-		// assert that dashboard and insight name are correct
-		dashboardPage.assert_dashboardName(newDashboardName);
-		dashboardPage.assert_insightName(newInsightName);
-
-		allContentPage.Navigate_toURL();
-		// assert that share icon in dashboard settings is dimmed
-		//allContentPage.selectDashboardMenuButton(newDashboardName);
-		NewUI_allContentPage.Click_Folder_Dashboard_Properties(newDashboardName);
-		dashboardPage.assert_shared_button_dimmed();
-	}
-
-	@Test(priority = 7, description = "C60535 - User Manager")
-	@Description("Given I login With User Manager, When I Create new User andGroup,Then userand groupcreated successfullyand ICan adduser androle to that group")
-	@Severity(SeverityLevel.CRITICAL)
-	public void userManagerRole() {
-
-		/*
-		 * prerequisite to this test case you need to create a user and add the user to
-		 * User Manager role by adding the user to the group.
-		 *
-		 * Steps: - user created with name: User_Manager and password: UserManager -->
-		 * user data added to excel sheet - user added to User Manager Group that has a
-		 * User Manager role assigned to that group
-		 *
-		 * -----------------------------------------------------------------------------
-		 *
-		 *
-		 * -----------------------------------------------------------------------------
-		 * test case steps: 1- Login with the pre-created user "User Manager". 2- Create
-		 * new user. 3- Create new group. 4- Assign user to the group.
-		 *
-		 */
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
-				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
-
-		// Create New User
-		usersPage = new NewUI_Users(driver);
-		usersPage.Navigate_toURL();
-
-		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add();
-
-		newUserData = usersPage.AddNewUser();
-		usersPage.Assert_nameIsDisplayed(newUserData[2]);
-
-		// Create New Group
-
-		groupsPage = new NewUI_Groups(driver);
-		groupsPage.Navigate_toURL();
-
-		subHeaderObject.Click_add();
-
-		newGroupName = groupsPage.AddNewGroup();
-		groupsPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndAssertResultIsDisplayed(newGroupName);
-
-		// Add roles to group
-		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
-
-		groups_groupPage = new NewUI_Groups_Group(driver);
-		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
-				testDataReader.getCellData("GroupRoles", "Data2") };
-		groups_groupPage.AddRoles(AddedRoles);
-		groups_groupPage.Assert_rolesAreDisplayed(AddedRoles);
-
-		// Add user to The new created Group
-
-		groups_groupPage.AddUsers(new String[] { newUserData[2] });
-		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
-	}
-
-//	@Test(priority = 8, description = "C60530 - Super Role")
-//	@Description("Given I login With Super User, When I Create or manage (Users,Groups,Roles,Dashboards),Then I Can manage all of them sucessfully")
+//	@Test(priority = 6, description = "C60533 - Individual Analyzer")
+//	@Description("Given I login With Individual Analyzer , When I CreateDashboard,Then Dashboardis Created sucessfully,And I can'tshare,schedular or send it")
+//
 //	@Severity(SeverityLevel.CRITICAL)
-//	public void superUserRole() {
+//	public void IndividualAnalyzerRole() {
 //
 //		/*
-//		 * prerequisite to this test case you need to create a user and assign Super
-//		 * role to him by adding the user to the group.
-//		 * 
-//		 * Steps: - user created with name: superuser and password: superuser --> user
-//		 * data added to excel sheet - user added to Super Group that has a SuperRole
-//		 * role assigned to that group
+//		 * prerequisite to this test case you need to create a user and add the user to
+//		 * Individual analyzer role to him by adding the user to the group.
+//		 *
+//		 * Steps: - user created with name: Individual Analyzer and password:
+//		 * IndividualAnalyzer --> user data added to excel sheet - user added to
+//		 * Individual Group that has an Individual Analyzer role assigned to that group
+//		 * Share Schema with that user in my case "HR"
+//		 *
 //		 * -----------------------------------------------------------------------------
+//		 * ---
+//		 *
 //		 * -----------------------------------------------------------------------------
-//		 * 
-//		 * /* TCs order.
+//		 * test case steps: 1- logout from the previous user. 2- login with the
+//		 * pre-created user. 3- navigate to content section. 4- create dashboard, add
+//		 * table from the shared schema, select Aggregated table insight type. 5- Assert
+//		 * Export icon(this icon let user to share/send/schedule) not displayed in
+//		 * dashboard page. 6- Assert that dashboard and insight name are correct.
+//		 * 7-assert that share icon in dashboard settings is dimmed.
 //		 */
-//		/* 1- login with the pre-created user "Superuser". */
-//		/* 2- create new user. 3- create new group. */
-//		/* 4- assign role to group */
-//		/* 5- add user to the group. */
-//		/* 6- navigate to content section. */
-//		/*
-//		 * 7- create dashboard, add table from the shared schema, select Aggregated
-//		 * table insight type. 8- Assert Export icon(this icon let user to
-//		 * share/send/schedule) is displayed in dashboard page.
-//		 */
-//		/* 9- Assert that dashboard and insight name are correct . */
-//		/* 10- assert that share icon in dashboard setting is active. */
 //
-//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data8"),
-//				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
+//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data2"),
+//				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
+//
+//		// Navigate to Content page and create dashboard
+//		allContentPage = new AllContent(driver);
+//		allContentPage.Navigate_toURL();
+//
+//		subHeaderObject = new NewUI_Skeleton(driver);
+//		subHeaderObject.Click_add_content();
+//		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+//
+//		newDashboardName = allContentPage.setNewDashboardName();
+//
+//		NewUI_allContentPage = new NewUI_Content(driver);
+//		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
+//		
+//		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
+//		analyzeInsightPage.clickOn_addInsight_button();
+//		analyzeInsightPage.selectVisualization("Aggregated");
+//		
+//		analyzeInsightPage.addTableorSchemaToInsight("HR");
+//
+//		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
+//		analyzeInsightPage.addColumnToInsight("EMPLOYEES", "Employee Salary");
+//
+////		subHeaderObject.Click_ChooseVisualization();
+////		analyzeInsightPage.selectVisualization("Aggregated");
+//
+//		newInsightName = analyzeInsightPage.setInsightName();
+//		subHeaderObject.Click_done();
+//
+//		allContentPage.Navigate_toURL();
+//		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
+//
+//		dashboardPage = new AllContent_Dashboard(driver);
+//		// Assert that Export icon(this icon let user to share/send/schedule) is not
+//		// displayed in dashboard page
+//		//Update below function to work...
+//		subHeaderObject.assertExportIconIsNotDisplayed();
+//
+//		// assert that dashboard and insight name are correct
+//		dashboardPage.assert_dashboardName(newDashboardName);
+//		dashboardPage.assert_insightName(newInsightName);
+//
+//		allContentPage.Navigate_toURL();
+//		// assert that share icon in dashboard settings is dimmed
+//		//allContentPage.selectDashboardMenuButton(newDashboardName);
+//		NewUI_allContentPage.Click_Folder_Dashboard_Properties(newDashboardName);
+//		dashboardPage.assert_shared_button_dimmed();
+//	}
+//
+//	@Test(priority = 7, description = "C60535 - User Manager")
+//	@Description("Given I login With User Manager, When I Create new User andGroup,Then userand groupcreated successfullyand ICan adduser androle to that group")
+//	@Severity(SeverityLevel.CRITICAL)
+//	public void userManagerRole() {
+//
+//		/*
+//		 * prerequisite to this test case you need to create a user and add the user to
+//		 * User Manager role by adding the user to the group.
+//		 *
+//		 * Steps: - user created with name: User_Manager and password: UserManager -->
+//		 * user data added to excel sheet - user added to User Manager Group that has a
+//		 * User Manager role assigned to that group
+//		 *
+//		 * -----------------------------------------------------------------------------
+//		 *
+//		 *
+//		 * -----------------------------------------------------------------------------
+//		 * test case steps: 1- Login with the pre-created user "User Manager". 2- Create
+//		 * new user. 3- Create new group. 4- Assign user to the group.
+//		 *
+//		 */
+//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
+//				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
 //
 //		// Create New User
 //		usersPage = new NewUI_Users(driver);
 //		usersPage.Navigate_toURL();
 //
 //		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_add();
+//		subHeaderObject.Click_add_security();
 //
 //		newUserData = usersPage.AddNewUser();
 //		usersPage.Assert_nameIsDisplayed(newUserData[2]);
@@ -410,14 +344,58 @@ public class NewUI_RolesTest {
 //		groupsPage = new NewUI_Groups(driver);
 //		groupsPage.Navigate_toURL();
 //
-//		subHeaderObject.Click_add();
+//		subHeaderObject.Click_add_security();
 //
 //		newGroupName = groupsPage.AddNewGroup();
 //		groupsPage.Navigate_toURL();
-//		subHeaderObject.SearchForContentAndAssertResultIsDisplayed(newGroupName);
+//		subHeaderObject.SearchForContentAndAssertResultIsDisplayed_security(newGroupName);
 //
 //		// Add roles to group
-//		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
+//		subHeaderObject.SearchForContentAndOpenResult_security(newGroupName);
+//
+//		groups_groupPage = new NewUI_Groups_Group(driver);
+//		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
+//				testDataReader.getCellData("GroupRoles", "Data2") };
+//		groups_groupPage.AddRoles(AddedRoles);
+//		groups_groupPage.Assert_rolesAreDisplayed(AddedRoles);
+//
+//		// Add user to The new created Group
+//
+//		groups_groupPage.AddUsers(new String[] { newUserData[2] });
+//		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
+//	}
+//
+//	@Test(priority = 8, description = "C60530 - Super Role")
+//	@Description("Given I login With Super User, When I Create or manage (Users,Groups,Roles,Dashboards),Then I Can manage all of them sucessfully")
+//	@Severity(SeverityLevel.CRITICAL)
+//	public void superUserRole() {
+//
+//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data8"),
+//				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
+//
+//		// Create New User
+//		usersPage = new NewUI_Users(driver);
+//		usersPage.Navigate_toURL();
+//
+//		subHeaderObject = new NewUI_Skeleton(driver);
+//		subHeaderObject.Click_add_security();
+//
+//		newUserData = usersPage.AddNewUser();
+//		usersPage.Assert_nameIsDisplayed(newUserData[2]);
+//
+//		// Create New Group
+//
+//		groupsPage = new NewUI_Groups(driver);
+//		groupsPage.Navigate_toURL();
+//
+//		subHeaderObject.Click_add_security();
+//
+//		newGroupName = groupsPage.AddNewGroup();
+//		groupsPage.Navigate_toURL();
+//		subHeaderObject.SearchForContentAndAssertResultIsDisplayed_security(newGroupName);
+//
+//		// Add roles to group
+//		subHeaderObject.SearchForContentAndOpenResult_security(newGroupName);
 //
 //		groups_groupPage = new NewUI_Groups_Group(driver);
 //		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
@@ -431,41 +409,42 @@ public class NewUI_RolesTest {
 //		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
 //
 //		// Navigate to Content page and create dashboard
-//
+//		
 //		allContentPage = new AllContent(driver);
 //		allContentPage.Navigate_toURL();
 //
-//		subHeaderObject.Click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
+//		subHeaderObject.Click_add_content();
+//		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 //
-//		newDashboardName = allContentPage.setNewDashboardName();
-//
+//		newContentPage = new NewUI_Content(driver);
+//		newDashboardName = newContentPage.setNewDashboardName();
+//		NewUI_allContentPage = new NewUI_Content(driver);
+//		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
+//		
 //		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
+//		analyzeInsightPage.clickOn_addInsight_button();
+//		analyzeInsightPage.selectVisualization("Aggregated");
+//		
 //		analyzeInsightPage.addTableorSchemaToInsight("HR");
 //
 //		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
 //		analyzeInsightPage.addColumnToInsight("EMPLOYEES", "Employee Salary");
 //
-//		subHeaderObject.Click_ChooseVisualization();
-//		analyzeInsightPage.selectVisualization("Aggregated");
-//
 //		newInsightName = analyzeInsightPage.setInsightName();
 //		subHeaderObject.Click_done();
 //
 //		allContentPage.Navigate_toURL();
-//		subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
-//
-//		subHeaderObject.assertExportIconIsDisplayed();
-//
-//		dashboardPage = new AllContent_Dashboard(driver);
-//
+//		subHeaderObject.SearchForContentAndOpenResult_content(newDashboardName);
+//		
 //		// assert that dashboard and insight name are correct
-//		dashboardPage.assert_dashboardName(newDashboardName);
-//		dashboardPage.assert_insightName(newInsightName);
 //
+//		dashboardPage = new NewUI_Content_Dashboard(driver);
+//		dashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+//		dashboardPage.assert_insightName_isCorrect(newInsightName);
+//		
 //		allContentPage.Navigate_toURL();
 //		// assert that share icon in dashboard settings is active
-//		allContentPage.selectDashboardMenuButton(newDashboardName);
+//		newContentPage.Click_Folder_Dashboard_Properties(newDashboardName);
 //		dashboardPage.assert_shared_button_active();
 //	}
 //
@@ -483,10 +462,13 @@ public class NewUI_RolesTest {
 //		allContentPage = new AllContent(driver);
 //
 //		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Create Folder");
-//		NewFolderName = allContentPage.SetNewFolderName();
-//		allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
+//		subHeaderObject.Click_add_content();
+//		subHeaderObject.Select_fromDropdownMenu("Add Folder");
+//		
+//		newContentPage = new NewUI_Content(driver);
+//		NewFolderName = newContentPage.SetNewFolderName();
+//		newContentPage.Assert_DashboardExist(NewFolderName);
+//		//allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
 //	}
 //
 //	// Prerequisites, Analyzer user + Folder to be deleted
@@ -500,36 +482,32 @@ public class NewUI_RolesTest {
 //		newHeaderObject = new NewUI_Header(driver);
 //		newHeaderObject.assert_sectionHeader_isSelected("Content");
 //		
-//		allContentPage = new AllContent(driver);
-//		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToDelete);
-//		allContentPage.Click_FolderProperties_ManageFolderButtons("deleteFolder");
-//		allContentPage.Click_Folder_Dashboard_Properties_ManageFolderButtons_ConfirmationButtonsForDelete("Delete");
-//		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToDelete);
+//		newContentPage = new NewUI_Content(driver);
+//		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToDelete);
+//		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");		
+//		newContentPage.dashboard_folder_properties_delete_confirmationButtons("Delete");
+//		newContentPage.assert_dashboard_folder_notExist(FolderNameToDelete);
 //	}
 //
-//	// Prerequisites, Analyzer user + Folder to be shared + User to share with
-//	@Test(priority = 11, description = "TC C60531_3 - Users permissions - Analyzer User")
-//	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click share and select any person to share with. Then folder will be shared successfully.")
-//	@Severity(SeverityLevel.NORMAL)
-//	public void Analyzer_Permissions_ShareFolder() {
-//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-//				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
-//
-//		newHeaderObject = new NewUI_Header(driver);
-//		newHeaderObject.assert_sectionHeader_isSelected("Content");
-//		
-//		allContentPage = new AllContent(driver);
-//		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
-//		allContentPage.Click_FolderProperties_ManageFolderButtons("shareFolder");
-//
-//		allContentPage.Folder_Sharing_SearchAndSelectUsers(UserToShareWithFolder);
-//
-//		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
-//		schemasViewPage.Schema_Sharing_ClickOnUserPermission("Can Edit");
-//		schemasViewPage.Click_Save_Button();
-//		schemasViewPage.Assertion_UserPermission(UserToShareWithFolder, "Can Edit");
-//	}
-//
+	// Prerequisites, Analyzer user + Folder to be shared + User to share with
+	@Test(priority = 11, description = "TC C60531_3 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click share and select any person to share with. Then folder will be shared successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_ShareFolder() {
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share Access");		
+		newContentPage.folderProperties_shareAccess_typeAndSelectInSearchField(UserToShareWithFolder,"Can Edit");
+//Need to complete below assertion before delivery
+		schemasViewPage.Assertion_UserPermission(UserToShareWithFolder, "Can Edit");
+	}
+
 //	// Prerequisites, Analyzer user + Folder name to update + New Folder NAME after
 //	// updating
 //	@Test(priority = 12, description = "TC C60531_4 - Users permissions - Analyzer User")
@@ -586,7 +564,7 @@ public class NewUI_RolesTest {
 //		newHeaderObject.assert_sectionHeader_isSelected("Content");
 //		
 //		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_add();
+//		subHeaderObject.Click_add_content();
 //		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
 //
 //		allContentPage = new AllContent(driver);
@@ -606,7 +584,7 @@ public class NewUI_RolesTest {
 //		
 //		allContentPage.Assert_DashboardExist(NewDashBoradName);
 //
-//		subHeaderObject.SearchForContentAndOpenResult(NewDashBoradName);
+//		subHeaderObject.SearchForContentAndOpenResult_security(NewDashBoradName);
 //
 //		dashboardPage = new AllContent_Dashboard(driver);
 //		dashboardPage.assert_dashboardName(NewDashBoradName);
@@ -771,7 +749,7 @@ public class NewUI_RolesTest {
 //
 //		newContentPage.dashboard_move_clickMoveButton();
 //
-//		newContentPage.assert_dashboardNotExist(DashboardNameToMove);
+//		newContentPage.assert_dashboard_folder_notExist(DashboardNameToMove);
 //
 //		newContentPage.click_on_folder_dashboard(FolderNameToMoveTo);
 //
@@ -801,7 +779,7 @@ public class NewUI_RolesTest {
 //
 //		newContentPage.Assert_DashboardExist(newDashboardName);
 //	}
-//
+
 	@BeforeMethod
 	public void beforeMethod() {
 		loginPage = new NewUI_Login(driver);

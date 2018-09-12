@@ -44,6 +44,10 @@ public class NewUI_Content_Dashboard {
 	By aggregatedTable_columnHeader_link;
 	By aggregatedTable_cellValue_link;
 
+	//popup settings dashboard menu
+	By popup_dashboard_folder_share_button = By.xpath("//a/span[contains(text(),'Share Access')]");
+
+	
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -137,4 +141,12 @@ public class NewUI_Content_Dashboard {
 		Assertions.assertElementAttribute(driver, aggregatedTable_cellValue_link, "text", cellValue, true);
 	}
 
+	public void assert_shared_button_active() {
+		Assertions.assertElementExists(driver, popup_dashboard_folder_share_button, true);
+	}
+	
+	public void assert_shared_button_disabled() {
+		Assertions.assertElementExists(driver, popup_dashboard_folder_share_button, false);
+	}
+	
 }

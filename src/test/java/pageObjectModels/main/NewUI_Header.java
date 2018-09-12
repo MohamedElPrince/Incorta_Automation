@@ -59,8 +59,7 @@ public class NewUI_Header {
 	 */
 	public void assert_sectionHeader_isSelected(String sectionName) {
 		navigationWrapper_sectionHeader_link = By
-				.xpath("// li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='"
-						+ sectionName + "']");
+				.xpath("//li[@class='inc-header-item']/a[contains(@href,'#/')][normalize-space(.)='"+sectionName+"']");
 		Assertions.assertElementAttribute(driver, navigationWrapper_sectionHeader_link, "class", ".*selected.*", true);
 	}
 

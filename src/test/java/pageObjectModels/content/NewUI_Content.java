@@ -58,6 +58,17 @@ public class NewUI_Content {
 	By popup_manageDashboard_copy_folderToCopyTo;
 	By popup_manageDashboard_move_moveButton = By.xpath("//button//span[contains(text(),'Move')]");
 
+	// popup menu
+	By popup_newDashboard_dashboardName_textBox = By.xpath("//label/span[text()='Name']//following-sibling::input");
+	By popup_newDashboard_newFolder_add_buttons = By.xpath("//button[@type='button']//span[contains(text(),'Add')]");
+	By popup_newFolder_folderName = By.xpath("//input[@id='name']");
+	By popup_folderDashboardProperties_delete_confirmationButtons;
+	
+	By popup_share_searchField;
+	By popup_share_searchField_selectUser;
+	By popup_share_shareTypeOptionsMenu = By.xpath("//i[@class='anticon anticon-eye-o']");
+	By popup_share_selectShareType;
+	By popup_share_clickOnShareButton;
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
 		this.driver = driver;
@@ -331,8 +342,6 @@ public class NewUI_Content {
 				customElementIdentificationTimeout);
 	}
 	
-	
-	
 	public void Click_Folder_Dashboard_Properties(String FolderName)
 	{
 		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[contains(text(), '"+FolderName+"')]//parent::div//following-sibling::div//button");
@@ -343,6 +352,12 @@ public class NewUI_Content {
 	{
 		tableView_dashboardProperties_listOption = By.xpath("//div[@class='ant-dropdown ant-dropdown-placement-bottomLeft']//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"+Actions+"')]");
 		ElementActions.click(driver, tableView_dashboardProperties_listOption);
+	}
+	
+	public void dashboard_folder_properties_delete_confirmationButtons(String button)
+	{
+		popup_folderDashboardProperties_delete_confirmationButtons = By.xpath("//button[@type='button']//span[contains(text(),'"+button+"')]");
+		ElementActions.click(driver, popup_folderDashboardProperties_delete_confirmationButtons);
 	}
 	
 	public String FolderProperties_Rename() {
@@ -374,7 +389,7 @@ public class NewUI_Content {
 			ElementActions.click(driver, popup_manageDashboard_move_moveButton);
 		}
 	
-	public void assert_dashboardNotExist(String DashboardFolderName)
+	public void assert_dashboard_folder_notExist(String DashboardFolderName)
 	{
 		body_dashboardName_folderName = By.xpath("//span[text()='"+DashboardFolderName+"']");
 		Assertions.assertElementExists(driver, body_dashboardName_folderName, false);
@@ -400,4 +415,39 @@ public class NewUI_Content {
 		Assertions.assertElementExists(driver, body_folderName_dashboardName_insideFolder, true);
 	}
 
+	public String setNewDashboardName() {
+		String newDashboardName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+		ElementActions.type(driver, popup_newDashboard_dashboardName_textBox, newDashboardName);
+		ElementActions.click(driver, popup_newDashboard_newFolder_add_buttons);
+		return newDashboardName;
+	}
+
+	public String SetNewFolderName() {
+        String newFolderName = "Automation" + "_Folder_" + String.valueOf(System.currentTimeMillis());
+        ElementActions.type(driver, popup_newFolder_folderName, newFolderName);
+        ElementActions.click(driver, popup_newDashboard_newFolder_add_buttons);
+        return newFolderName;
+    }
+	
+	/**
+	 * 
+	 * @param Email
+	 * Can Share
+	 * Can Edit
+	 * Can View
+	 */
+	public void folderProperties_shareAccess_typeAndSelectInSearchField(String Email, String shareType)
+	{
+		popup_share_searchField = By.xpath("//input[@placeholder='Search names, emails, and groups']");
+		ElementActions.type(driver, popup_share_searchField, Email);
+		popup_share_searchField_selectUser = By.xpath("//div[@class='inc-search-option']//span/mark[text()='"+Email+"']");
+		ElementActions.click(driver, popup_share_searchField_selectUser);
+		ElementActions.click(driver, popup_share_shareTypeOptionsMenu);
+		popup_share_selectShareType = By.xpath("//button[@class='inc-clickable share-dropdown ant-dropdown-trigger']"
+				+ "//following-sibling::div//li[@class='ant-dropdown-menu-item']//span[text()='"+shareType+"']");
+		ElementActions.click(driver, popup_share_selectShareType);
+		popup_share_clickOnShareButton = By.xpath("//a[@class='share-button']//span");
+		ElementActions.click(driver, popup_share_clickOnShareButton);
+	}
+	
 }
