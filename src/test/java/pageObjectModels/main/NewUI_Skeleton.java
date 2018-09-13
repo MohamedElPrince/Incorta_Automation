@@ -89,6 +89,14 @@ public class NewUI_Skeleton {
 		header_searchResult_link_content = By.xpath("//span[@class='inc-search-option__item--left']//mark[contains(text(),'"+query+"')]");
 		ElementActions.click(driver, header_searchResult_link_content);
 	}
+	
+	public void SearchForContentAndAssertResultIsDisplayed_content(String query) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.type(driver, header_search_textBox_content, query);
+		header_searchResult_link_content = By.xpath("//span[@class='inc-search-option__item--left']//mark[contains(text(),'"+query+"')]");
+		Assertions.assertElementExists(driver, header_searchResult_link_content, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
 
 	// Assert_searchResultIsDisplayed
 	// Navigate_toSearchResult

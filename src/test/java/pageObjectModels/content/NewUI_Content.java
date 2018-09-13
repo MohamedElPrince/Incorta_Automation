@@ -66,9 +66,14 @@ public class NewUI_Content {
 	
 	By popup_share_searchField;
 	By popup_share_searchField_selectUser;
-	By popup_share_shareTypeOptionsMenu = By.xpath("//i[@class='anticon anticon-eye-o']");
+	By popup_share_shareTypeOptionsMenu = By.xpath("//span[@class='share-search']//i[@class='anticon anticon-eye-o']");
 	By popup_share_selectShareType;
 	By popup_share_clickOnShareButton;
+	By popup_shareAccessScreen_shareDropDownMenuForUser_button;
+	By popup_shareAccess_shareDropDown_shareType;
+	
+	By popup_moveFolder_folderNameToMoveTo;
+	By popup_moveFolder_select_folderNameToMoveTo;
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
 		this.driver = driver;
@@ -374,7 +379,7 @@ public class NewUI_Content {
 	
 	public void Assert_DashboardExist(String DashboardName)
 	{
-		By body_dashboardName = By.xpath("//div[@class='inc-card-title']//span[contains(text(), '"+DashboardName+"')]");
+		By body_dashboardName = By.xpath("//div[@class='inc-card-title']//span[text()= '"+DashboardName+"']");
 		Assertions.assertElementExists(driver, body_dashboardName, true);
 	}
 	
@@ -403,6 +408,7 @@ public class NewUI_Content {
 	
 	public void click_on_folder_dashboard(String DashboardFolderName)
 		{
+			BrowserActions.refreshCurrentPage(driver);
 			body_folderName_dashboardName_insideFolder = By.xpath("//span[text()='"+DashboardFolderName+"']");
 			ElementActions.click(driver, body_folderName_dashboardName_insideFolder);
 		}
@@ -448,6 +454,31 @@ public class NewUI_Content {
 		ElementActions.click(driver, popup_share_selectShareType);
 		popup_share_clickOnShareButton = By.xpath("//a[@class='share-button']//span");
 		ElementActions.click(driver, popup_share_clickOnShareButton);
+	}
+	
+	/**
+	 * 
+	 * @param Email
+	 * @param shareType
+	 * Can Edit
+	 * Can Share
+	 * Can View
+	 */
+	public void assert_folder_dashboard_sharedSuccessfully(String Email, String shareType)
+	{
+		popup_shareAccessScreen_shareDropDownMenuForUser_button = By.xpath("//div[@class='inc-search-option__item'][contains(.,'"+Email+"')]//button[contains(@class,'share-dropdown')]");
+		ElementActions.click(driver, popup_shareAccessScreen_shareDropDownMenuForUser_button);
+		popup_shareAccess_shareDropDown_shareType = By.xpath("//div[@class='inc-search-option__item'][contains(.,'"+Email+"')]//li[.='"+shareType+"']");
+		Assertions.assertElementAttribute(driver, popup_shareAccess_shareDropDown_shareType, "aria-disabled", "true", true);
+	}
+	
+	public void Click_FolderProperties_MoveFolder_FolderNameToMoveTo(String FolderName)
+	{
+		popup_moveFolder_folderNameToMoveTo = By.xpath("//input[@placeholder='Search Folders']");
+		ElementActions.type(driver, popup_moveFolder_folderNameToMoveTo, FolderName);
+		
+		popup_moveFolder_select_folderNameToMoveTo = By.xpath("//li[@role='treeitem']//span[contains(text(),'"+FolderName+"')]");
+		ElementActions.click(driver, popup_moveFolder_select_folderNameToMoveTo);
 	}
 	
 }

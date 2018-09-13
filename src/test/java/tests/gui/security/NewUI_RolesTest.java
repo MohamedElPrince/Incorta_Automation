@@ -7,7 +7,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
+import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
 
@@ -229,7 +231,6 @@ public class NewUI_RolesTest {
 //
 //	@Test(priority = 6, description = "C60533 - Individual Analyzer")
 //	@Description("Given I login With Individual Analyzer , When I CreateDashboard,Then Dashboardis Created sucessfully,And I can'tshare,schedular or send it")
-//
 //	@Severity(SeverityLevel.CRITICAL)
 //	public void IndividualAnalyzerRole() {
 //
@@ -489,25 +490,24 @@ public class NewUI_RolesTest {
 //		newContentPage.assert_dashboard_folder_notExist(FolderNameToDelete);
 //	}
 //
-	// Prerequisites, Analyzer user + Folder to be shared + User to share with
-	@Test(priority = 11, description = "TC C60531_3 - Users permissions - Analyzer User")
-	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click share and select any person to share with. Then folder will be shared successfully.")
-	@Severity(SeverityLevel.NORMAL)
-	public void Analyzer_Permissions_ShareFolder() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
-
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_sectionHeader_isSelected("Content");
-
-		newContentPage = new NewUI_Content(driver);
-		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
-		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share Access");		
-		newContentPage.folderProperties_shareAccess_typeAndSelectInSearchField(UserToShareWithFolder,"Can Edit");
-//Need to complete below assertion before delivery
-		schemasViewPage.Assertion_UserPermission(UserToShareWithFolder, "Can Edit");
-	}
-
+//	// Prerequisites, Analyzer user + Folder to be shared + User to share with
+//	@Test(priority = 11, description = "TC C60531_3 - Users permissions - Analyzer User")
+//	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click share and select any person to share with. Then folder will be shared successfully.")
+//	@Severity(SeverityLevel.NORMAL)
+//	public void Analyzer_Permissions_ShareFolder() {
+//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
+//				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+//
+//		newHeaderObject = new NewUI_Header(driver);
+//		newHeaderObject.assert_sectionHeader_isSelected("Content");
+//
+//		newContentPage = new NewUI_Content(driver);
+//		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
+//		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share Access");		
+//		newContentPage.folderProperties_shareAccess_typeAndSelectInSearchField(UserToShareWithFolder,"Can Edit");
+//		newContentPage.assert_folder_dashboard_sharedSuccessfully(UserToShareWithFolder, "Can Edit");
+//	}
+//
 //	// Prerequisites, Analyzer user + Folder name to update + New Folder NAME after
 //	// updating
 //	@Test(priority = 12, description = "TC C60531_4 - Users permissions - Analyzer User")
@@ -520,13 +520,18 @@ public class NewUI_RolesTest {
 //		newHeaderObject = new NewUI_Header(driver);
 //		newHeaderObject.assert_sectionHeader_isSelected("Content");
 //		
-//		allContentPage = new AllContent(driver);		
-//		allContentPage.Click_Folder_Dashboard_Properties(FolderToBeRenamed);
-//		allContentPage.Click_FolderProperties_ManageFolderButtons("renameFolder");
-//		newFolderName = allContentPage.FolderProperties_RenameFolder();
-//		allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Rename");
-//		allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Done");
-//		allContentPage.Assert_folder_Dashboard_IsDisplayed(newFolderName);
+//		newContentPage = new NewUI_Content(driver);
+//
+//		newContentPage.Click_Folder_Dashboard_Properties(FolderToBeRenamed);
+//
+//		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");		
+//
+//		newFolderName = newContentPage.FolderProperties_Rename();
+//		
+//		newContentPage.Dashboard_Rename_ClickRenameButton();
+//		
+//		newContentPage.Assert_DashboardExist(newFolderName);
+//
 //	}
 //
 //	// Prerequisites, Analyzer user + Folder name to move + Folder name to move to
@@ -540,15 +545,18 @@ public class NewUI_RolesTest {
 //
 //		newHeaderObject = new NewUI_Header(driver);
 //		newHeaderObject.assert_sectionHeader_isSelected("Content");
+//
+//		newContentPage = new NewUI_Content(driver);
+//		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToBeMoved);
+//		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move to...");
+//
+//		newContentPage.Click_FolderProperties_MoveFolder_FolderNameToMoveTo(FolderNameToMoveTo);
+//		newContentPage.dashboard_move_clickMoveButton();
 //		
-//		allContentPage = new AllContent(driver);
-//		allContentPage.Click_Folder_Dashboard_Properties(FolderNameToBeMoved);
-//		allContentPage.Click_FolderProperties_ManageFolderButtons("moveFolder");
-//		allContentPage.Click_FolderProperties_MoveFolder_FolderNameToMoveTo(FolderNameToMoveTo);
-//		allContentPage.FolderProperties_Rename_MoveFolder_Buttons("Move");
-//		allContentPage.Assert_folder_Dashboard_IsNotDisplayed(FolderNameToBeMoved);
-//		allContentPage.Click_FolderName(FolderNameToMoveTo);
-//		allContentPage.Assert_FolderExist_InsideFolder(FolderNameToBeMoved);
+//		newContentPage.assert_dashboard_folder_notExist(FolderNameToBeMoved);
+//		newContentPage.click_on_folder_dashboard(FolderNameToMoveTo);
+//		newContentPage.Assert_DashboardExist(FolderNameToBeMoved);
+//		
 //	}
 //
 //	// Prerequisites, Analyzer user
@@ -565,29 +573,29 @@ public class NewUI_RolesTest {
 //		
 //		subHeaderObject = new NewUI_Skeleton(driver);
 //		subHeaderObject.Click_add_content();
-//		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
+//		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 //
-//		allContentPage = new AllContent(driver);
-//		String NewDashBoradName = allContentPage.setNewDashboardName();
-//
+//		newContentPage = new NewUI_Content(driver);
+//		String NewDashBoradName = newContentPage.setNewDashboardName();
+//		
+//		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
+//	
 //		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
+//		analyzeInsightPage.clickOn_addInsight_button();
+//		analyzeInsightPage.selectVisualization("Aggregated");
 //		analyzeInsightPage.addTableorSchemaToInsight(SchemaNameForInsight);
 //		analyzeInsightPage.addColumnToInsight("sales", "Revenue");
 //		analyzeInsightPage.addColumnToInsight("sales", "Quarter");
-//
-//		subHeaderObject.Click_ChooseVisualization();
-//
-//		analyzeInsightPage.selectVisualization("Aggregated");
+//		newInsightName = analyzeInsightPage.setInsightName();
 //
 //		subHeaderObject.Click_done();
-//		newHeaderObject.navigate_toSection("Content");
 //		
-//		allContentPage.Assert_DashboardExist(NewDashBoradName);
+//		dashboardPage = new NewUI_Content_Dashboard(driver);
+//		dashboardPage.assert_dashboardName_isCorrect(NewDashBoradName);
+//		dashboardPage.assert_insightName_isCorrect(newInsightName);
 //
-//		subHeaderObject.SearchForContentAndOpenResult_security(NewDashBoradName);
-//
-//		dashboardPage = new AllContent_Dashboard(driver);
-//		dashboardPage.assert_dashboardName(NewDashBoradName);
+//		newContentPage.navigate_toURL();
+//		newContentPage.Assert_DashboardExist(NewDashBoradName);
 //	}
 //
 //	@Test(priority = 15, description = "TC C60531_8 - Users permissions - Analyzer User")
@@ -599,26 +607,14 @@ public class NewUI_RolesTest {
 //
 //		newHeaderObject = new NewUI_Header(driver);
 //		newHeaderObject.assert_sectionHeader_isSelected("Content");
-//		
-//		allContentPage = new AllContent(driver);
-//		allContentPage.Click_Dashboard(DashboardToBeShared);
-//
+//				
 //		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_export();
-//		subHeaderObject.Click_FromExportMenu("Send");
-//
-//		dashboardPage = new AllContent_Dashboard(driver);
-//		dashboardPage.scheduleSendDashboard_addSubjectName();
-//		dashboardPage.sendDashboard_addBodyName();
-//
-//		dashboardPage.sendDashboard_click_addMailRecipientsType("To");
-//		dashboardPage.sendDashboard_typeEmailAndClickAdd(ToMail);
-//		dashboardPage.sendDashboard_click_addMailRecipientsType("Cc");
-//		dashboardPage.sendDashboard_typeEmailAndClickAdd(CcMail);
-//		dashboardPage.sendDashboard_click_addMailRecipientsType("Bcc");
-//		dashboardPage.sendDashboard_typeEmailAndClickAdd(BccMail);
-//		dashboardPage.click_send_dashboard();
-//		dashboardPage.assert_dashboardName(DashboardToBeShared);
+//		subHeaderObject.SearchForContentAndOpenResult_content(DashboardToBeShared);
+//		
+//		dashboardPage = new NewUI_Content_Dashboard(driver);
+//		dashboardPage.click_shareOptions_sendNow_button();
+//		dashboardPage.sendDashboard_addFields_clickSendDashboard("", "This is body area", "HTML", ToMail, CcMail, BccMail);
+//		//Need to check that mail is sent successfully
 //	}
 //
 //	@Test(priority = 16, description = "TC C60531_9 - Users permissions - Analyzer User")

@@ -45,9 +45,20 @@ public class NewUI_Content_Dashboard {
 	By aggregatedTable_cellValue_link;
 
 	//popup settings dashboard menu
-	By popup_dashboard_folder_share_button = By.xpath("//a/span[contains(text(),'Share Access')]");
+	By popup_dashboard_folder_shareAccess_button = By.xpath("//a/span[contains(text(),'Share Access')]");
+	By popup_dashboard_folder_sendNow_button = By.xpath("//a/span[contains(text(),'Send Now')]");
 
+
+	//body Dashboard
+	By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
 	
+	//Send Dashboard
+	By body_sendDashboard_bodyField = By.xpath("//div[@class='input-group body-box']//textarea");
+	By body_sendDashboard_dataFormat;
+	By body_sendDashboard_subjectField = By.xpath("//div[@class='inc-schedule-email']//input[@type='text']");
+	By body_sendDashboard_addRecipients = By.xpath("//span[@class='recipients-search']//input");
+	By body_sendDashboard_addRecipients_recipientsTypeMenu = By.xpath("//span[@class='recipient-menu']//button");
+	By body_sendDashboard_send_button = By.xpath("//button[.='Send']");
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -142,11 +153,56 @@ public class NewUI_Content_Dashboard {
 	}
 
 	public void assert_shared_button_active() {
-		Assertions.assertElementExists(driver, popup_dashboard_folder_share_button, true);
+		Assertions.assertElementExists(driver, popup_dashboard_folder_shareAccess_button, true);
 	}
 	
 	public void assert_shared_button_disabled() {
-		Assertions.assertElementExists(driver, popup_dashboard_folder_share_button, false);
+		Assertions.assertElementExists(driver, popup_dashboard_folder_shareAccess_button, false);
+	}
+	
+	public void click_shareOptions_sendNow_button()
+	{
+		ElementActions.click(driver, body_shareButton);
+		ElementActions.click(driver, popup_dashboard_folder_sendNow_button);
+	}
+	
+	public void sendDashboard_addFields_clickSendDashboard(String subjectArea, String bodyArea, String dataFormat, String ToEmailAddress, String CcEmailAddress, String BccEmailAddress)
+	{
+		//Subject
+		if(subjectArea!=null) {
+		ElementActions.typeAppend(driver, body_sendDashboard_subjectField, subjectArea);
+		}
+		//Body
+		if(bodyArea!=null) {
+		ElementActions.type(driver, body_sendDashboard_bodyField, bodyArea);
+		}
+		//Data format
+		body_sendDashboard_dataFormat = By.xpath("//div/label[contains(@class,'ant-radio-button-wrapper')][contains(.,'"+dataFormat+"')]");
+		ElementActions.click(driver, body_sendDashboard_dataFormat);
+		//Recipients 
+		if (ToEmailAddress!=null) 
+		{
+		ElementActions.type(driver, body_sendDashboard_addRecipients, ToEmailAddress);
+		ElementActions.click(driver, body_sendDashboard_addRecipients_recipientsTypeMenu);
+		By body_sendDashboard_addRecipients_selectRecipientsType_To = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'To')]");
+		ElementActions.click(driver, body_sendDashboard_addRecipients_selectRecipientsType_To);
+		}
+		else if (CcEmailAddress!=null)
+		{
+		ElementActions.type(driver, body_sendDashboard_addRecipients, CcEmailAddress);
+		ElementActions.click(driver, body_sendDashboard_addRecipients_recipientsTypeMenu);	
+		By body_sendDashboard_addRecipients_selectRecipientsType_Cc = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Cc')]");
+		ElementActions.click(driver, body_sendDashboard_addRecipients_selectRecipientsType_Cc);
+		}		
+		else if (BccEmailAddress!=null)
+		{
+		ElementActions.type(driver, body_sendDashboard_addRecipients, BccEmailAddress);
+		ElementActions.click(driver, body_sendDashboard_addRecipients_recipientsTypeMenu);	
+		By body_sendDashboard_addRecipients_selectRecipientsType_Bcc = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Bcc')]");
+		ElementActions.click(driver, body_sendDashboard_addRecipients_selectRecipientsType_Bcc);
+		}
+		//Click Send
+		ElementActions.click(driver, body_sendDashboard_send_button);
 	}
 	
 }
