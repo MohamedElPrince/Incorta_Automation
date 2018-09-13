@@ -194,15 +194,16 @@
 					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<systemPropertyVariables>
+							<incortaRoot>${incortaRoot}</incortaRoot>
+							<incortaVersion>${incortaVersion}</incortaVersion>
 							<shaftEngineVersion>${shaft_engine.version}</shaftEngineVersion>
 							<targetOperatingSystem>${operatingSystem.version}</targetOperatingSystem>
 							<targetBrowserName>${targetBrowser.name}</targetBrowserName>
-							<screenshooterFlag>${screenshooterFlag}</screenshooterFlag>
+							<screenshotParams_whenToTakeAScreenshot>${screenshotParams_whenToTakeAScreenshot}</screenshotParams_whenToTakeAScreenshot>
+							<screenshotParams_isFullPageScreenshot>${screenshotParams_isFullPageScreenshot}</screenshotParams_isFullPageScreenshot>
+							<screenshotParams_skippedElementsFromScreenshot>${screenshotParams_skippedElementsFromScreenshot}</screenshotParams_skippedElementsFromScreenshot>
 							<executionAddress>${executionAddress}</executionAddress>
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
-							<takeFullPageScreenshots>${takeFullPageScreenshots}</takeFullPageScreenshots>
-							<incortaRoot>${incortaRoot}</incortaRoot>
-							<incortaVersion>${incortaVersion}</incortaVersion>
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
 							<defaultElementIdentificationTimeout>${defaultElementIdentificationTimeout}</defaultElementIdentificationTimeout>
