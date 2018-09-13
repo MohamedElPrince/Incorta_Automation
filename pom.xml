@@ -8,7 +8,7 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://35.184.27.139:9091/incorta/#/</incortaRoot>
+		<incortaRoot>http://35.188.194.238:9092/incorta/#/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
 		<testSuite.name>newCertificationPath</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
@@ -30,7 +30,7 @@
 		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180909</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180913</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
