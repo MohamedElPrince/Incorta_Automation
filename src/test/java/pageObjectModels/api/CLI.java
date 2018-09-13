@@ -8,18 +8,39 @@ public class CLI {
 	String hostname, username, keyFileFolderName, keyFileName, installationDirectory;
 	int sshPortNumber;
 
+	String dockerName = "", dockerUsername = "";
+
 	//// Commands
 	String stopIncorta, startIncorta, getIncortaPID;
 
 	public CLI(String hostname, int sshPortNumber, String username, String keyFileFolderName, String keyFileName,
 			String installationDirectory) {
+
+		initializeVariables(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, installationDirectory);
+		initializeCommands();
+	}
+
+	public CLI(String hostname, int sshPortNumber, String username, String keyFileFolderName, String keyFileName,
+			String dockerName, String dockerUsername, String installationDirectory) {
+
+		initializeVariables(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, installationDirectory);
+		initializeCommands();
+
+		this.dockerName = dockerName;
+		this.dockerUsername = dockerUsername;
+	}
+
+	private void initializeVariables(String hostname, int sshPortNumber, String username, String keyFileFolderName,
+			String keyFileName, String installationDirectory) {
 		this.hostname = hostname;
 		this.sshPortNumber = sshPortNumber;
 		this.username = username;
 		this.keyFileFolderName = keyFileFolderName;
 		this.keyFileName = keyFileName;
 		this.installationDirectory = installationDirectory;
+	}
 
+	private void initializeCommands() {
 		// initialize commands
 		stopIncorta = "bash --login -c 'cd " + installationDirectory + " && ./stop.sh'";
 		startIncorta = "bash --login -c 'cd " + installationDirectory + " && ./start.sh'";
@@ -27,22 +48,29 @@ public class CLI {
 	}
 
 	//// Functions
+	protected String performCommand(String command) {
+		if (!dockerName.equals("")) {
+			return SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
+					dockerName, dockerUsername, command).trim();
+		} else {
+			return SSHActions
+					.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, command)
+					.trim();
+		}
+	}
+
 	public String getIncortaPID() {
-		return SSHActions
-				.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, getIncortaPID)
-				.trim();
+		return performCommand(getIncortaPID);
 	}
 
 	public String getIcortaRunningDirectory() {
 		String getIcortaRunningDirectory = "pwdx " + getIncortaPID();
-		return SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-				getIcortaRunningDirectory);
+		return performCommand(getIcortaRunningDirectory);
 	}
 
 	public void startIncorta() {
 		if (getIcortaRunningDirectory().contains("No such process")) {
-			SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-					startIncorta);
+			performCommand(startIncorta);
 		} else {
 			ReportManager.log("Incorta instance is already started.");
 		}
@@ -52,13 +80,11 @@ public class CLI {
 		if (getIcortaRunningDirectory().contains("No such process")) {
 			ReportManager.log("Incorta instance is already stopped.");
 		} else {
-			SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-					stopIncorta);
+			performCommand(stopIncorta);
 		}
 	}
 
 	public String getAbsolutePathToFile(String relativePathToFile) {
-		return SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-				"cd " + relativePathToFile + " && pwd").trim();
+		return performCommand("'cd " + relativePathToFile + " && pwd'");
 	}
 }

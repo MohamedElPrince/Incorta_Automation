@@ -8,7 +8,7 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://qa.incorta.com:7010/incorta/</incortaRoot>
+		<incortaRoot>http://35.184.27.139:9091/incorta/#/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
 		<testSuite.name>newCertificationPath</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
@@ -17,11 +17,12 @@
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge | Safari -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
-		<takeFullPageScreenshots>false</takeFullPageScreenshots>
-		<screenshooterFlag>ValidationPointsOnly</screenshooterFlag>
+		<screenshotParams_whenToTakeAScreenshot>ValidationPointsOnly</screenshotParams_whenToTakeAScreenshot>
 		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
+		<screenshotParams_isFullPageScreenshot>false</screenshotParams_isFullPageScreenshot>
+		<screenshotParams_skippedElementsFromScreenshot></screenshotParams_skippedElementsFromScreenshot>
 		<executionAddress>local</executionAddress>
-		<!-- <executionAddress>104.198.215.156:4444</executionAddress> -->
+		<!-- <executionAddress>localhost:4444</executionAddress> -->
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
@@ -29,7 +30,7 @@
 		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 
 		<!-- Version Numbers Properties -->
-		<shaft_engine.version>SHAFT_ENGINE-1.0.20180904</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-1.0.20180909</shaft_engine.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
