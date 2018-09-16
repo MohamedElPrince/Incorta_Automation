@@ -10,21 +10,21 @@ import com.shaftEngine.restAssuredActionLibrary.RestActions;
 import io.restassured.response.Response;
 
 public class APICertification {
-	//private final String serviceURI = "http://35.184.27.139:1230/incorta";
+//	private final String serviceURI = "http://35.184.27.139:1230/incorta";
 	private final String serviceURI = "http://35.184.27.139:9080/incorta";
 	private String serviceName;
 	private String requestType;
 	private String argument = "";
 	private Response response;
 	private final static String successStatusCode = "200";
-	
+
 	@Test(priority = 0, description = "TC000 - Authenticate")
 	public void authenticate() {
 		// Defining request parameters
 		String tenantName = "demo";
-		serviceName = "/bff/v1/authentication/"+tenantName+"/accessTokens";
+		serviceName = "/bff/v1/authentication/" + tenantName + "/accessTokens";
 		requestType = "POST";
-		//argument = "tenant=demo&user=admin&pass=admin";
+		//argument = "user=admin&pass=admin";
 
 		// Performing Authentication
 		RestActions.performRequest(requestType, "201", serviceURI, serviceName, argument);
@@ -84,12 +84,12 @@ public class APICertification {
 		requestType = "GET";
 		argument = "schemaId=100";
 
-		// Performing Request
-		response = RestActions.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
-
+		// Performing Request and waiting for a certain state to be reported
 		Boolean isLoaded = false;
-		while (!isLoaded) {
+		while (isLoaded) {
 			try {
+				response = RestActions.performRequest(requestType, successStatusCode, serviceURI, serviceName,
+						argument);
 				RestActions.assertResponseJSONContainsValue(response, "lastLoadState", "Loading Finished");
 				isLoaded = true;
 			} catch (AssertionError e) {
@@ -97,7 +97,7 @@ public class APICertification {
 			}
 		}
 	}
-	
+
 	@Test(priority = 6, description = "TC006 - Get loading time")
 	public void getLoadingTime() {
 		// Defining request parameters
@@ -107,16 +107,7 @@ public class APICertification {
 
 		// Performing Request
 		response = RestActions.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
-
-		Boolean isLoaded = false;
-		while (!isLoaded) {
-			try {
-				RestActions.assertResponseJSONContainsValue(response, "lastLoadState", "Loading Finished");
-				isLoaded = true;
-			} catch (AssertionError e) {
-
-			}
-		}
+		ReportManager.log("Reported Load Time: [" + RestActions.getResponseJSONValue(response, "loadTime") + "].");
 	}
 
 	@Test(priority = 100, description = "TC005 - Logout from incorta")
