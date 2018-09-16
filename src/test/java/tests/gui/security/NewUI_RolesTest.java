@@ -85,9 +85,9 @@ public class NewUI_RolesTest {
 	String FolderNameToMoveTo = "Automation_Folder_MovedFolder";
 	String DashboardNameToBeDeleted = "Automation_Dashboard_DashboardtoBeDeleted";
 	String DashboardToBeShared = "Automation_Dashboard_DashboardToBeSharedOrSend";
-	String ToMail = "automation_robot@incorta.com";
-	String CcMail = "automation_robot@incorta.com";
-	String BccMail = "automation_robot@incorta.com";
+	String ToMail = "automation_robot1@incorta.com";
+	String CcMail = "automation_robot2@incorta.com";
+	String BccMail = "automation_robot3@incorta.com";
 	String newScheduledSendDashboardJobName;
 	// String FolderNameToBeMovedTo = "Folder";
 	String DashboardNameToBeCopied = "Automation_Dashboard_ToBeCopied";
@@ -614,38 +614,41 @@ public class NewUI_RolesTest {
 //		dashboardPage = new NewUI_Content_Dashboard(driver);
 //		dashboardPage.click_shareOptions_sendNow_button();
 //		dashboardPage.sendDashboard_addFields_clickSendDashboard("", "This is body area", "HTML", ToMail, CcMail, BccMail);
+//		newContentPage.assert_dashboardSentSuccessfullyMessage(DashboardToBeShared);
 //		//Need to check that mail is sent successfully
 //	}
-//
-//	@Test(priority = 16, description = "TC C60531_9 - Users permissions - Analyzer User")
-//	@Description("When I log in with Analyzer User, and I click on any dashboard, and I click on export and I click on schedule. Then dashboard will be shared via scheduled job successfully.")
-//	@Severity(SeverityLevel.NORMAL)
-//	public void Analyzer_Permissions_ShareDashboardViaMail_Scheduler() {
-//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-//				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
-//
-//		newHeaderObject = new NewUI_Header(driver);
+
+	@Test(priority = 16, description = "TC C60531_9 - Users permissions - Analyzer User")
+	@Description("When I log in with Analyzer User, and I click on any dashboard, and I click on export and I click on schedule. Then dashboard will be shared via scheduled job successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Analyzer_Permissions_ShareDashboardViaMail_Scheduler() {
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		newHeaderObject = new NewUI_Header(driver);
 //		newHeaderObject.assert_sectionHeader_isSelected("Content");
-//		
-//		newContentPage = new NewUI_Content(driver);
-//		//allContentPage.Click_Dashboard(DashboardToBeShared);
-//
-//		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_export();
-//		subHeaderObject.Click_FromExportMenu("Schedule");
-//
-//		dashboardPage = new AllContent_Dashboard(driver);
-//		newScheduledSendDashboardJobName = dashboardPage.scheduleSendDashboard(
-//				testDataReader.getCellData("SchemaLoadJobDescription"), testDataReader.getCellData("SchemaLoadJobDate"),
-//				testDataReader.getCellData("SchemaLoadJobTime"), testDataReader.getCellData("SchemaLoadJobTimeZone"),
-//				testDataReader.getCellData("SchemaLoadJobRecurrence"), ToMail, CcMail, BccMail);
-//		schedulerDashboardsPage = new NewUI_Dashboards(driver);
-//		schedulerDashboardsPage.Navigate_toURL();
-//
-//		schedulerDashboardsPage.Assert_jobNameIsDisplayed(newScheduledSendDashboardJobName);
-//		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newScheduledSendDashboardJobName, "Active");
-//	}
-//
+				
+		subHeaderObject = new NewUI_Skeleton(driver);
+		subHeaderObject.SearchForContentAndOpenResult_content(DashboardToBeShared);
+		
+		dashboardPage = new NewUI_Content_Dashboard(driver);
+		dashboardPage.click_shareOptions_scheduleDelivery_button();
+
+		newScheduledSendDashboardJobName = dashboardPage.scheduleDashboard_addFields_clickScheduleDashboard(
+				DashboardToBeShared, "", "This is the body area", "HTML", 
+				ToMail, CcMail, BccMail, 
+				"Day(s)", "5", 
+				"09:09 PM", "GMT-04:00", 
+				"3", "Saturday", "", "3rd",
+				"2018-09-18", "2018-09-20");
+	
+		schedulerDashboardsPage = new NewUI_Dashboards(driver);
+		schedulerDashboardsPage.Navigate_toURL();
+
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(newScheduledSendDashboardJobName);
+		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newScheduledSendDashboardJobName, "Active");
+	}
+
 //	// Prerequisites, Analyzer user + Dashboard to be deleted
 //	@Test(priority = 17, description = "TC C60531_7 - Users permissions - Analyzer User")
 //	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click delete. Then dashboard will be deleted successfully.")

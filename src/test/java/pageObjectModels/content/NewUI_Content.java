@@ -74,6 +74,10 @@ public class NewUI_Content {
 	
 	By popup_moveFolder_folderNameToMoveTo;
 	By popup_moveFolder_select_folderNameToMoveTo;
+	
+	//Others
+	By popup_dashboard_sentSuccessfully_message;
+	
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
 		this.driver = driver;
@@ -479,6 +483,12 @@ public class NewUI_Content {
 		
 		popup_moveFolder_select_folderNameToMoveTo = By.xpath("//li[@role='treeitem']//span[contains(text(),'"+FolderName+"')]");
 		ElementActions.click(driver, popup_moveFolder_select_folderNameToMoveTo);
+	}
+	
+	public void assert_dashboardSentSuccessfullyMessage(String DashboardName)
+	{
+		popup_dashboard_sentSuccessfully_message = By.xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully sent "+DashboardName+".')]");
+		Assertions.assertElementExists(driver, popup_dashboard_sentSuccessfully_message, true);
 	}
 	
 }
