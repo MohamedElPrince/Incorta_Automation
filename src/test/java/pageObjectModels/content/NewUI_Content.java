@@ -359,7 +359,7 @@ public class NewUI_Content {
 	
 	public void Click_DashboardProperties_ManageDashboardButtons(String Actions)
 	{
-		tableView_dashboardProperties_listOption = By.xpath("//div[@class='ant-dropdown ant-dropdown-placement-bottomLeft']//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"+Actions+"')]");
+		tableView_dashboardProperties_listOption = By.xpath("//div[contains(@class,'ant-dropdown ant-dropdown')]//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"+Actions+"')]");
 		ElementActions.click(driver, tableView_dashboardProperties_listOption);
 	}
 	
@@ -400,6 +400,7 @@ public class NewUI_Content {
 	
 	public void assert_dashboard_folder_notExist(String DashboardFolderName)
 	{
+		BrowserActions.refreshCurrentPage(driver);
 		body_dashboardName_folderName = By.xpath("//span[text()='"+DashboardFolderName+"']");
 		Assertions.assertElementExists(driver, body_dashboardName_folderName, false);
 	}
