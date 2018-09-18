@@ -198,7 +198,7 @@ public class NewUI_Content_Dashboard {
 		ElementActions.click(driver, popup_dashboard_folder_sendNow_button);
 	}
 	
-	public void sendDashboard_addFields_clickSendDashboard(String subjectArea, String bodyArea, String dataFormat, String ToEmailAddress, String CcEmailAddress, String BccEmailAddress)
+	public void sendDashboard_addFields(String subjectArea, String bodyArea, String dataFormat, String ToEmailAddress, String CcEmailAddress, String BccEmailAddress)
 	{
 		body_sendDashboard_addRecipientsTo_recipientsTypeMenu = By.xpath("//span[contains(.,'"+ToEmailAddress+"')]"
 				+ "//following-sibling::span//span[@class='recipient-menu']//button//i");
@@ -211,11 +211,11 @@ public class NewUI_Content_Dashboard {
 		body_sendDashboard_addRecipientsTypeMenu_selectRecipientBcc = By.xpath("//li[@type='emails'][contains(.,'"+BccEmailAddress+"')]");
 		//Subject
 		if(subjectArea!=null) {
-		ElementActions.typeAppend(driver, body_sendDashboard_subjectField, subjectArea);
+		ElementActions.type(driver, body_sendDashboard_subjectField, subjectArea);
 		}
 		//Body
 		if(bodyArea!=null) {
-		ElementActions.typeAppend(driver, body_sendDashboard_bodyField, bodyArea);
+		ElementActions.type(driver, body_sendDashboard_bodyField, bodyArea);
 		}
 		//Data format
 		body_sendDashboard_dataFormat = By.xpath("//div/label[contains(@class,'ant-radio-button-wrapper')][contains(.,'"+dataFormat+"')]");
@@ -276,7 +276,7 @@ public class NewUI_Content_Dashboard {
 	 * Format "2018-09-16"
 	 *@return
  */
-	public String scheduleDashboard_addFields_clickScheduleDashboard(String JobName, String subjectArea, String bodyArea, 
+	public String scheduleDashboard_addFields(String JobName, String subjectArea, String bodyArea, 
 			String dataFormat, String ToEmailAddress, String CcEmailAddress, String BccEmailAddress, 
 			String Recurrence, String RecurrenceNumber,
 			String Time, String TimeZone, String dayOfTheWeek,
@@ -320,7 +320,7 @@ public class NewUI_Content_Dashboard {
 			ElementActions.type(driver, selectDate, CalanderFrom);
 		}
 
-		sendDashboard_addFields_clickSendDashboard(subjectArea, bodyArea, dataFormat, ToEmailAddress, CcEmailAddress, BccEmailAddress);
+		sendDashboard_addFields(subjectArea, bodyArea, dataFormat, ToEmailAddress, CcEmailAddress, BccEmailAddress);
 		return JobName;
 	}
 	
@@ -399,6 +399,5 @@ public class NewUI_Content_Dashboard {
 		By body_sendDashboard_sendSchedule_button = By.xpath("//button[.='"+Actions+"']");
 		ElementActions.click(driver, body_sendDashboard_sendSchedule_button);
 	}
-	
 	
 }

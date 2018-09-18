@@ -102,8 +102,12 @@ public class NewUI_SchemaList_SchemaView {
 
 	public String GetNewestTableName() {
 		ElementActions.switchToIframe(driver, body_iframe);
-		ElementActions.switchToDefaultContent(driver);
 		return ElementActions.getText(driver, body_lastTableName_label);
+	}
+	
+	public void switchToDefaultContent()
+	{
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Assert_tableNameIsDisplayed(String tableName) {
@@ -153,9 +157,7 @@ public class NewUI_SchemaList_SchemaView {
 	}
 
 	public void Assert_wizardWelcomeTextIsDisplayed() {
-		ElementActions.switchToIframe(driver, body_iframe);
 		Assertions.assertElementExists(driver, popup_schemaWizard_welcomeText_label, true);
-		ElementActions.switchToDefaultContent(driver);
 	}
 
 	// public void Assert_WizardWelcomeTextIsCorrect() {}

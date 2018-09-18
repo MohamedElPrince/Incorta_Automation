@@ -31,9 +31,11 @@ public class NewUI_Skeleton {
 	By header_actions_button = By.xpath("//span[text()='Actions']");
 	By header_export_button = By.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]");
 	// header_settings_button
-	By header_add_content_button = By.xpath("//i[@class='anticon anticon-plus']//parent::span//parent::span//parent::button");
+	By header_add_content_button = By.xpath("//i[@class='anticon anticon-plus']//parent::span");
 	By header_add_security_button = By.xpath("//a[@class='btn ']/img[contains(@src,'plus_icon')]");
-	
+	By header_add_dataSource_button = By.id("createNewDatasourceButton");
+	By header_add_schema_button = By.xpath("//button[contains(@class,'schemaAddBtn')]");
+	By header_add_schema_insideTheSchema_button = By.xpath("//a[@title='Add tables and joins']");
 	
 	By header_genericMenuItem_link;
 	By header_user_button = By
@@ -41,8 +43,8 @@ public class NewUI_Skeleton {
 	By header_chooseVisualization_button = By.id("charts-button");
 	By header_userMenuItem_link;
 	By header_done_link = By.id("saveButton_Charts");
-	By header_exportStatus_button = By
-			.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]/parent::button/parent::div");
+	By header_exportStatus_button = By.xpath("//a[@class='ant-dropdown-trigger']//i[contains(@class,'share-alt')]");
+
 	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
 	By header_export_button_ExportOptions;
 	By header_settings_list = By.id("settings-button");
@@ -121,6 +123,24 @@ public class NewUI_Skeleton {
 		ElementActions.switchToDefaultContent(driver);
 	}
 
+	public void Click_add_dataSource() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver, header_add_dataSource_button);
+		ElementActions.switchToDefaultContent(driver);
+	}
+	
+	public void Click_add_schema() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver, header_add_schema_button);
+		ElementActions.switchToDefaultContent(driver);
+	}
+	
+	public void Click_add_schema_insideTheSchema() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver,header_add_schema_insideTheSchema_button);
+		ElementActions.switchToDefaultContent(driver);
+	}
+	
 	public void Click_done() {
 		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, header_done_link);

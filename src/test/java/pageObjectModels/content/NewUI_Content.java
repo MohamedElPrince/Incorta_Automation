@@ -8,6 +8,8 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
+import io.restassured.internal.assertion.Assertion;
+
 public class NewUI_Content {
 	//// Variables
 	WebDriver driver;
@@ -77,6 +79,7 @@ public class NewUI_Content {
 	
 	//Others
 	By popup_dashboard_sentSuccessfully_message;
+	By popup_dashboard_scheduledSuccessfully_message;
 	
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
@@ -363,6 +366,12 @@ public class NewUI_Content {
 		ElementActions.click(driver, tableView_dashboardProperties_listOption);
 	}
 	
+	public void assert_dashboardProperties_manageDashboardButtons_notExist(String Actions)
+	{
+		tableView_dashboardProperties_listOption = By.xpath("//div[contains(@class,'ant-dropdown ant-dropdown')]//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"+Actions+"')]");
+		Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, false);
+	}
+	
 	public void dashboard_folder_properties_delete_confirmationButtons(String button)
 	{
 		popup_folderDashboardProperties_delete_confirmationButtons = By.xpath("//button[@type='button']//span[contains(text(),'"+button+"')]");
@@ -490,6 +499,12 @@ public class NewUI_Content {
 	{
 		popup_dashboard_sentSuccessfully_message = By.xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully sent "+DashboardName+".')]");
 		Assertions.assertElementExists(driver, popup_dashboard_sentSuccessfully_message, true);
+	}
+	
+	public void assert_dashboardScheduledSuccessfullyMessage(String DashboardName)
+	{
+		popup_dashboard_scheduledSuccessfully_message = By.xpath("//div[@class='ant-notification-notice-description'][contains(text(),'Successfully created schedule for "+DashboardName+".')]");
+		Assertions.assertElementExists(driver, popup_dashboard_scheduledSuccessfully_message, true);
 	}
 	
 }

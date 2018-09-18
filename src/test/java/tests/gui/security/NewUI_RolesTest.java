@@ -7,9 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
 
@@ -17,10 +15,12 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
-import pageObjectModels.content.AllContent_Dashboard;
 import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content;
+import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.data.NewUI_DataSources;
 import pageObjectModels.login.NewUI_Login;
+import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
 import pageObjectModels.main.NewUI_Skeleton;
 import pageObjectModels.scheduler.NewUI_Dashboards;
@@ -30,8 +30,6 @@ import pageObjectModels.schemas.NewUI_SchemaList_SchemaView;
 import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
 import pageObjectModels.security.NewUI_Users;
-import pageObjectModels.content.NewUI_Content;
-import pageObjectModels.content.NewUI_Content_Dashboard;
 
 public class NewUI_RolesTest {
 
@@ -108,7 +106,7 @@ public class NewUI_RolesTest {
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 		
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_content();
+		subHeaderObject.Click_add_dataSource();
 	
 		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
 		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(DataSourceName);
@@ -128,7 +126,7 @@ public class NewUI_RolesTest {
 		schemasPage.Navigate_toURL();
 		
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_content();
+		subHeaderObject.Click_add_schema();
 		subHeaderObject.Select_fromDropdownMenu("Create Schema");
 
 		NewSchemaName = schemasPage.createNewSchema();
@@ -153,7 +151,7 @@ public class NewUI_RolesTest {
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 		
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_content();
+		subHeaderObject.Click_add_dataSource();
 
 		dataSourcesPage = new NewUI_DataSources(driver);
 		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
@@ -165,7 +163,7 @@ public class NewUI_RolesTest {
 		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(ExistingSchemaNAME);
 
-		subHeaderObject.Click_add_content();
+		subHeaderObject.Click_add_schema_insideTheSchema();
 		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
 
 		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
@@ -173,6 +171,7 @@ public class NewUI_RolesTest {
 				testDataReader.getCellData("DatabaseTableName"));
 
 		NewDataSourceTableName = schemasViewPage.GetNewestTableName();
+		schemasViewPage.switchToDefaultContent();
 		schemasViewPage.Assert_tableNameIsDisplayed(NewDataSourceTableName);
 	}
 
@@ -229,84 +228,78 @@ public class NewUI_RolesTest {
 		schemasViewPage.Assertion_UserPermission(UserToShareWith, "Can Edit");
 	}
 
-//	@Test(priority = 6, description = "C60533 - Individual Analyzer")
-//	@Description("Given I login With Individual Analyzer , When I CreateDashboard,Then Dashboardis Created sucessfully,And I can'tshare,schedular or send it")
-//	@Severity(SeverityLevel.CRITICAL)
-//	public void IndividualAnalyzerRole() {
-//
-//		/*
-//		 * prerequisite to this test case you need to create a user and add the user to
-//		 * Individual analyzer role to him by adding the user to the group.
-//		 *
-//		 * Steps: - user created with name: Individual Analyzer and password:
-//		 * IndividualAnalyzer --> user data added to excel sheet - user added to
-//		 * Individual Group that has an Individual Analyzer role assigned to that group
-//		 * Share Schema with that user in my case "HR"
-//		 *
-//		 * -----------------------------------------------------------------------------
-//		 * ---
-//		 *
-//		 * -----------------------------------------------------------------------------
-//		 * test case steps: 1- logout from the previous user. 2- login with the
-//		 * pre-created user. 3- navigate to content section. 4- create dashboard, add
-//		 * table from the shared schema, select Aggregated table insight type. 5- Assert
-//		 * Export icon(this icon let user to share/send/schedule) not displayed in
-//		 * dashboard page. 6- Assert that dashboard and insight name are correct.
-//		 * 7-assert that share icon in dashboard settings is dimmed.
-//		 */
-//
-//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data2"),
-//				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
-//
-//		// Navigate to Content page and create dashboard
-//		allContentPage = new AllContent(driver);
-//		allContentPage.Navigate_toURL();
-//
-//		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_add_content();
-//		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
-//
-//		newDashboardName = allContentPage.setNewDashboardName();
-//
-//		NewUI_allContentPage = new NewUI_Content(driver);
-//		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
-//		
-//		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
-//		analyzeInsightPage.clickOn_addInsight_button();
-//		analyzeInsightPage.selectVisualization("Aggregated");
-//		
-//		analyzeInsightPage.addTableorSchemaToInsight("HR");
-//
-//		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
-//		analyzeInsightPage.addColumnToInsight("EMPLOYEES", "Employee Salary");
-//
-////		subHeaderObject.Click_ChooseVisualization();
-////		analyzeInsightPage.selectVisualization("Aggregated");
-//
-//		newInsightName = analyzeInsightPage.setInsightName();
-//		subHeaderObject.Click_done();
-//
-//		allContentPage.Navigate_toURL();
-//		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
-//
-//
-//		// Assert that Export icon(this icon let user to share/send/schedule) is not
-//		// displayed in dashboard page
-//		//Update below function to work...
-//		subHeaderObject.assertExportIconIsNotDisplayed();
-//		
-//		// assert that dashboard and insight name are correct
-//		dashboardPage = new NewUI_Content_Dashboard(driver);
-//		dashboardPage.assert_dashboardName_isCorrect(newDashboardName);
-//		dashboardPage.assert_insightName_isCorrect(newInsightName);
-//
-//		allContentPage.Navigate_toURL();
-//		// assert that share icon in dashboard settings is dimmed
-//		//allContentPage.selectDashboardMenuButton(newDashboardName);
-//		NewUI_allContentPage.Click_Folder_Dashboard_Properties(newDashboardName);
-//		//Need to check below function...
-//		dashboardPage.assert_shared_button_dimmed();
-//	}
+	@Test(priority = 6, description = "C60533 - Individual Analyzer")
+	@Description("Given I login With Individual Analyzer , When I CreateDashboard,Then Dashboards Created sucessfully,And I can't share, schedule or send it")
+	@Severity(SeverityLevel.CRITICAL)
+	public void IndividualAnalyzerRole() {
+
+		/*
+		 * prerequisite to this test case you need to create a user and add the user to
+		 * Individual analyzer role to him by adding the user to the group.
+		 *
+		 * Steps: - user created with name: Individual Analyzer and password:
+		 * IndividualAnalyzer --> user data added to excel sheet - user added to
+		 * Individual Group that has an Individual Analyzer role assigned to that group
+		 * Share Schema with that user in my case "HR"
+		 *
+		 * -----------------------------------------------------------------------------
+		 * ---
+		 *
+		 * -----------------------------------------------------------------------------
+		 * test case steps: 1- logout from the previous user. 2- login with the
+		 * pre-created user. 3- navigate to content section. 4- create dashboard, add
+		 * table from the shared schema, select Aggregated table insight type. 5- Assert
+		 * Export icon(this icon let user to share/send/schedule) not displayed in
+		 * dashboard page. 6- Assert that dashboard and insight name are correct.
+		 * 7-assert that share icon in dashboard settings is dimmed.
+		 */
+
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data2"),
+				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
+
+		// Navigate to Content page and create dashboard
+		allContentPage = new AllContent(driver);
+		allContentPage.Navigate_toURL();
+
+		subHeaderObject = new NewUI_Skeleton(driver);
+		subHeaderObject.Click_add_content();
+		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+
+		newDashboardName = allContentPage.setNewDashboardName();
+
+		NewUI_allContentPage = new NewUI_Content(driver);
+		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
+		
+		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage.clickOn_addInsight_button();
+		analyzeInsightPage.selectVisualization("Aggregated");
+		
+		analyzeInsightPage.addTableorSchemaToInsight("HR");
+
+		analyzeInsightPage.addColumnToInsight("DEPARTMENTS", "Mgr. First Name");
+		analyzeInsightPage.addColumnToInsight("EMPLOYEES", "Employee Salary");
+
+		newInsightName = analyzeInsightPage.setInsightName();
+		subHeaderObject.Click_done();
+
+		allContentPage.Navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
+
+		// Assert that Export icon(this icon let user to share/send/schedule) is not
+		// displayed in dashboard page
+		subHeaderObject.assertExportIconIsNotDisplayed();
+		
+		// assert that dashboard and insight name are correct
+		dashboardPage = new NewUI_Content_Dashboard(driver);
+		dashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+		dashboardPage.assert_insightName_isCorrect(newInsightName);
+
+		allContentPage.Navigate_toURL();
+		// assert that share icon in dashboard settings is dimmed
+		NewUI_allContentPage.Click_Folder_Dashboard_Properties(newDashboardName);
+		//Waiting Nouran to check if the button should be hidden or it will just send an error that user not authorized to share.
+		NewUI_allContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Share Access");
+	}
 
 	@Test(priority = 7, description = "C60535 - User Manager")
 	@Description("Given I login With User Manager, When I Create new User andGroup,Then userand groupcreated successfullyand ICan adduser androle to that group")
@@ -615,7 +608,10 @@ public class NewUI_RolesTest {
 		
 		dashboardPage = new NewUI_Content_Dashboard(driver);
 		dashboardPage.click_shareOptions_sendNow_button();
-		dashboardPage.sendDashboard_addFields_clickSendDashboard("", "This is body area", "HTML", ToMail, CcMail, BccMail);
+		dashboardPage.sendDashboard_addFields("", "This is body area", "HTML", ToMail, CcMail, BccMail);
+		dashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
+
+		newContentPage = new NewUI_Content(driver);
 		newContentPage.assert_dashboardSentSuccessfullyMessage(DashboardToBeShared);
 		//Need to check that mail is sent successfully
 	}
@@ -637,7 +633,7 @@ public class NewUI_RolesTest {
 		dashboardPage = new NewUI_Content_Dashboard(driver);
 		dashboardPage.click_shareOptions_scheduleDelivery_button();
 		//Under construction
-		newScheduledSendDashboardJobName = dashboardPage.scheduleDashboard_addFields_clickScheduleDashboard(
+		newScheduledSendDashboardJobName = dashboardPage.scheduleDashboard_addFields(
 				DashboardToBeShared, "", "This is the body area", "HTML", 
 				ToMail, CcMail, BccMail, 
 				"Minute(s)", "10", 
@@ -645,6 +641,9 @@ public class NewUI_RolesTest {
 				"3", "Saturday", "20", "3rd",
 				"2020-12-12");
 		dashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
+		
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.assert_dashboardScheduledSuccessfullyMessage(DashboardToBeShared);
 	
 		schedulerDashboardsPage = new NewUI_Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -793,6 +792,11 @@ public class NewUI_RolesTest {
 
 	@AfterMethod
 	public void afterMethod() {
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+		loginPage = new NewUI_Login(driver);
+		loginPage.goToSignInPage_fromSignOutPage();
 		ReportManager.getTestLog();
 	}
 
