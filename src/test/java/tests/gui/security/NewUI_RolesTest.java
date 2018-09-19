@@ -20,7 +20,6 @@ import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.data.NewUI_DataSources;
 import pageObjectModels.login.NewUI_Login;
-import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
 import pageObjectModels.main.NewUI_Skeleton;
 import pageObjectModels.scheduler.NewUI_Dashboards;
@@ -127,7 +126,7 @@ public class NewUI_RolesTest {
 		
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add_schema();
-		subHeaderObject.Select_fromDropdownMenu("Create Schema");
+		subHeaderObject.Select_fromDropdownMenu_iFrame("Create Schema");
 
 		NewSchemaName = schemasPage.createNewSchema();
 
@@ -164,7 +163,7 @@ public class NewUI_RolesTest {
 		schemasPage.click_schemaName(ExistingSchemaNAME);
 
 		subHeaderObject.Click_add_schema_insideTheSchema();
-		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
+		subHeaderObject.Select_fromDropdownMenu_iFrame("Schema Wizard");
 
 		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
 		schemasViewPage.Wizard_AddDataSourceTable(DataSourceName, true, "MySQL",
@@ -194,7 +193,7 @@ public class NewUI_RolesTest {
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_load();
 		subHeaderObject.Hover_overDropdownMenu("Load now");
-		subHeaderObject.Select_fromDropdownMenu("Full");
+		subHeaderObject.Select_fromDropdownMenu_iFrame("Full");
 
 		schemasViewPage.confirmLoadingData();
 		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);

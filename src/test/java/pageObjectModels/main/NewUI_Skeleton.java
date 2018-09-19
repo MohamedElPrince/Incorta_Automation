@@ -188,6 +188,15 @@ public class NewUI_Skeleton {
 						+ functionName + "')][@role='menuitem' or @class='importExport']");
 		ElementActions.click(driver, header_genericMenuItem_link);
 	}
+	
+	public void Select_fromDropdownMenu_iFrame(String functionName) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		header_genericMenuItem_link = By
+				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//*[contains(normalize-space(.),'"
+						+ functionName + "')][@role='menuitem' or @class='importExport']");
+		ElementActions.click(driver, header_genericMenuItem_link);
+		ElementActions.switchToDefaultContent(driver);
+	}
 
 	public void Hover_overDropdownMenu(String functionName) {
 		ElementActions.switchToIframe(driver, body_iframe);
