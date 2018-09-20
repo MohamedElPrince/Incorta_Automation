@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="AI-Driven Automation" verbose="10">
+	<test name="Dashboard Crawler">
+		<classes>
+			<class
+				name="tests.gui.certification.NewUI_Dashboards_ScreenshotsComparer">
+				<methods>
+					<include name="dashboardCrawler" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
