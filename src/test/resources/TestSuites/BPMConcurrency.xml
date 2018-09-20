@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="BPM Concurrency" verbose="-1" parallel="instances" data-provider-thread-count="100000" thread-count="100000">
+	<listeners>
+		<listener class-name="tests.api.BPMConcurrency.InvocationTransformer" />
+	</listeners>
+	<test name="BPM Concurrency Load Test">
+		<classes>
+			<class name="tests.api.BPMConcurrency.BPMConcurrencyTest" />
+		</classes>
+	</test>
+</suite>

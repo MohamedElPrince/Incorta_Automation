@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaftEngine.ioActionLibrary.ReportManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class NewUI_SchemaList_SchemaView {
@@ -104,9 +105,8 @@ public class NewUI_SchemaList_SchemaView {
 		ElementActions.switchToIframe(driver, body_iframe);
 		return ElementActions.getText(driver, body_lastTableName_label);
 	}
-	
-	public void switchToDefaultContent()
-	{
+
+	public void switchToDefaultContent() {
 		ElementActions.switchToDefaultContent(driver);
 	}
 
@@ -164,7 +164,7 @@ public class NewUI_SchemaList_SchemaView {
 
 	public String GetLastLoadStatus() {
 		ElementActions.switchToIframe(driver, body_iframe);
-		String status =  ElementActions.getText(driver, header_lastLoadStatus_link);
+		String status = ElementActions.getText(driver, header_lastLoadStatus_link);
 		ElementActions.switchToDefaultContent(driver);
 		return status;
 	}
@@ -179,7 +179,7 @@ public class NewUI_SchemaList_SchemaView {
 		ElementActions.switchToIframe(driver, body_iframe);
 		String currentLoadStatus = initialLoadStatus;
 		do {
-			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, currentLoadStatus, 10);
+			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, currentLoadStatus, 2);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
 		} while (currentLoadStatus.equals(initialLoadStatus) || currentLoadStatus.matches("(.*Loading Data.*)")
 				|| currentLoadStatus.matches("(.*Please load data.*)"));
