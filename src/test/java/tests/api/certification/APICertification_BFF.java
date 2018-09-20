@@ -18,6 +18,8 @@ public class APICertification_BFF {
 	String username = "admin";
 	String password = "admin";
 
+	RestActions restObject = new RestActions();
+
 	@Test(priority = 0, description = "TC000 - Authenticate")
 	public void authenticate() {
 		// Defining request parameters
@@ -26,7 +28,7 @@ public class APICertification_BFF {
 		argument = "";
 
 		// Performing Authentication
-		RestActions.performRequest(requestType, "201", serviceURI, serviceName, argument,
+		restObject.performRequest(requestType, "201", serviceURI, serviceName, argument,
 				new String[] { username, password });
 	}
 
@@ -38,7 +40,7 @@ public class APICertification_BFF {
 		argument = "";
 
 		// Performing Request
-		RestActions.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
 		// authenticate();
 
 	}
@@ -49,7 +51,7 @@ public class APICertification_BFF {
 		requestType = "GET";
 		argument = "";
 
-		RestActions.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
 	}
 
 	@Test(priority = 100, description = "TC003 - Logout from incorta")
@@ -60,7 +62,7 @@ public class APICertification_BFF {
 		argument = "";
 
 		// Performing Request
-		RestActions.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
 	}
 
 	@AfterMethod
