@@ -22,14 +22,17 @@ public class ExportDashboardTest {
 
 	// String metadataDBType = "derby"; // oracle | mysql | derby [if derby need to
 	// close incorta first]
-	String hostname = "72.55.136.10";
-	int sshPortNumber = 5022;
-	int apiPortNumber = 7010;
+	String hostname = "35.184.27.139";
+	int sshPortNumber = 22;
+	int apiPortNumber = 9080;
 	String username = "incorta";
 	String keyFileFolderName = System.getProperty("testDataFolderPath");
-	String keyFileName = "iWebQALast.key";
+	String keyFileName = "newAutomationEnvironment.key";
 
-	String installationDirectory = "incorta_4_Typical/IncortaNode";
+	String dockerName = "analytics-mysql";
+	String dockerUsername = "incorta";
+
+	String installationDirectory = "home/incorta/IncortaAnalytics_Analytics_Mysql/IncortaNode"; // issue
 	String tenantName = "cli";
 	String tenantUsername = "admin";
 	String tenantPassword = "admin";
@@ -45,8 +48,7 @@ public class ExportDashboardTest {
 		// Arrays.asList("*"));
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "*"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 2, description = "C83335 - MYSQL: Export a dashboard with Bookmarks")
@@ -55,8 +57,7 @@ public class ExportDashboardTest {
 	public void test_exportDashboardWithBookmarks() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "false", "*"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 3, description = "C83336 - MYSQL: Export a dashboard with Scheduled Jobs")
@@ -65,8 +66,7 @@ public class ExportDashboardTest {
 	public void test_exportDashboardWithScheduledJobs() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("false", "true", "*"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 4, description = "C83337 - MYSQL: Export a dashboard Without Bookmarks or Scheduled Jobs")
@@ -75,8 +75,7 @@ public class ExportDashboardTest {
 	public void test_exportDashboardWithoutBookmarksOrScheduledJobs() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("false", "false", "*"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	// requires a dashboard that has been created under a specific folder, should be
@@ -87,8 +86,7 @@ public class ExportDashboardTest {
 	public void test_exportDashboardUnderFolder() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationDashboard"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	// requires two dashboards that have been created under a specific subfolder,
@@ -100,8 +98,7 @@ public class ExportDashboardTest {
 	public void test_exportMultipleDashboardUnderSubFolder() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationSubFolder/*"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	// requires three dashboards that have been created should be read from test
@@ -115,8 +112,7 @@ public class ExportDashboardTest {
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationDashboard",
 						"/AutomationFolder/AutomationSubFolder/AutomationDashboardA",
 						"/AutomationFolder/AutomationSubFolder/AutomationDashboardB"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 8, description = "C83343 - MYSQL: Export a dashboard that doesn't exsist")
@@ -125,8 +121,7 @@ public class ExportDashboardTest {
 	public void test_exportNonExistingDashboard() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "NonExistingDashboard"));
-		py_instance.assert_noFileWasExported(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 9, description = "C83345 - MYSQL: Export a dashboard having a long name")
@@ -136,8 +131,7 @@ public class ExportDashboardTest {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments", Arrays.asList("true",
 				"true",
 				"/AutomationFolder/AutomationDashboardAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 10, description = "C83347 - MYSQL: Export a dashboard having Special characters")
@@ -146,8 +140,7 @@ public class ExportDashboardTest {
 	public void test_exportSpecialCharactersDashboard() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationDashboard&%@"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 11, description = "C83350 - MYSQL: Export a dashboard having Arabic Characters")
@@ -156,8 +149,7 @@ public class ExportDashboardTest {
 	public void test_exportArabicCharactersDashboard() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationDashboardأوتوميشن"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 12, description = "C83351 - MYSQL: Export a dashboard having French characters")
@@ -166,8 +158,7 @@ public class ExportDashboardTest {
 	public void test_exportFrenchCharactersDashboard() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationDashboardâêîôû"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 13, description = "C83352 - MYSQL: Export a dashboard having Chinese characters")
@@ -176,8 +167,7 @@ public class ExportDashboardTest {
 	public void test_exportChineseCharactersDashboard() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationDashboard自动化"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@Test(priority = 14, description = "C83353 - MYSQL: Export a dashboard having numbers")
@@ -186,14 +176,13 @@ public class ExportDashboardTest {
 	public void test_exportNumbersDashboard() {
 		String response = py_instance.performPythonCommand("export_dashboards_with_attachments",
 				Arrays.asList("true", "true", "/AutomationFolder/AutomationDashboard1234"));
-		py_instance.assert_fileExportedSuccessfully(response, py_instance.getPathToAutomationOutputFolder(),
-				py_instance.getAutomationOutputFileName());
+		py_instance.assert_fileExportedSuccessfully(response, py_instance.getAutomationOutputFileName());
 	}
 
 	@BeforeClass // Setup method, to be run once before the first test
 	public void beforeClass() {
-		cli_instance = new CLI(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-				installationDirectory);
+		cli_instance = new CLI(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, dockerName,
+				dockerUsername, installationDirectory);
 		py_instance = new Python(cli_instance, "http://" + hostname + ":" + apiPortNumber + "/incorta", tenantName,
 				tenantUsername, tenantPassword, false, installationDirectory + "/bin");
 	}

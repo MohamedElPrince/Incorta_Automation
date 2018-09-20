@@ -1,5 +1,8 @@
 package tests.gui.certification;
 
+import java.io.File;
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -8,6 +11,7 @@ import org.testng.annotations.Test;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.browserActionLibrary.BrowserFactory;
+import com.shaftEngine.imageProcessingActionLibrary.ImageProcessingActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.ioActionLibrary.ReportManager;
 
@@ -29,6 +33,7 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 	int totalDashboardsCounter = 0;
 	int totalFoldersCounter = 0;
 	int totalInsightsCounter = 0;
+	boolean isRegularFolder = false;
 
 	// Declaring Page Objects that will be used throughout the test
 	NewUI_Login newLoginPage;
@@ -40,18 +45,34 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 	// Declaring public variables that will be shared between tests
 
 	// Test Method / Dashboard Crawler
-	@Test(priority = 1, description = "Dashboard Crawler...")
+	@Test(priority = 1, description = "TC001 - Dynamically Crawl all Folders, Dashboards, and Insights.")
 	@Description("Crawl all dashboards in all root and subfolders of a certain tenant, and take screenshots.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void dashboardCrawler() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
-		newContentPage.changeCatalogView("Card");
+		// newContentPage.changeCatalogView("Card");
 
 		crawlDashboards();
 
 		ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], Total Dashboards Crawled: ["
 				+ totalDashboardsCounter + "], and Total Insights Crawled: [" + totalInsightsCounter + "].");
+	}
+
+	@Test(priority = 2, description = "TC002 - Compare newly taken screenshots against refrence images.")
+	public void compareFolders() {
+		String refrenceFolderPath = System.getProperty("testDataFolderPath")
+				+ "dashboards_ScreenshotsComparer/reference";
+
+		String testDirectoryPath = System.getProperty("allureResultsFolderPath") + "screenshots/";
+		File testDirectory = new File(testDirectoryPath);
+		String[] testFolders = testDirectory.list();
+		Arrays.sort(testFolders);
+
+		String testFolderPath = System.getProperty("allureResultsFolderPath") + "screenshots/"
+				+ testFolders[testFolders.length - 1];
+
+		ImageProcessingActions.compareFolders(refrenceFolderPath, testFolderPath, 100);
 	}
 
 	public void crawlDashboards() {
@@ -75,7 +96,10 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 	}
 
 	private void crawlDashboardsInCurrentFolder() {
-		BrowserActions.refreshCurrentPage(driver);
+		if (isRegularFolder) {
+			BrowserActions.refreshCurrentPage(driver);
+		}
+		isRegularFolder = true;
 		newContentPage = new NewUI_Content(driver);
 		int dashboardsCount = newContentPage.cardView_countDashboards();
 		if (dashboardsCount > 0) {

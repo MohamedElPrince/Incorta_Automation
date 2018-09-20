@@ -15,7 +15,7 @@ public class NewUI_Content {
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_content");
-	int customElementIdentificationTimeout = 2;
+	int customElementIdentificationTimeout = 4;
 
 	//// Elements
 	// first nested header
