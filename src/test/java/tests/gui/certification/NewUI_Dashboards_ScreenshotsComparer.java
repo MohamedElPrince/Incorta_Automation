@@ -54,9 +54,6 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 		// newContentPage.changeCatalogView("Card");
 
 		crawlDashboards();
-
-		ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], Total Dashboards Crawled: ["
-				+ totalDashboardsCounter + "], and Total Insights Crawled: [" + totalInsightsCounter + "].");
 	}
 
 	@Test(priority = 2, description = "TC002 - Compare newly taken screenshots against refrence images.")
@@ -149,6 +146,9 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 
 	@AfterClass
 	public void afterClass() {
+		ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], Total Dashboards Crawled: ["
+				+ totalDashboardsCounter + "], and Total Insights Crawled: [" + totalInsightsCounter + "].");
+
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();
 	}
