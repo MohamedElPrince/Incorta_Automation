@@ -634,8 +634,8 @@ public class NewUI_RolesTest {
 		dashboardPage.click_shareOptions_scheduleDelivery_button();
 
 		newScheduledSendDashboardJobName = dashboardPage.scheduleDashboard_addFields(DashboardToBeShared, "",
-				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "10:10 AM", "GMT+05:00",
-				"3", "Saturday", "20", "3rd", "2020-12-12");
+				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "08", "09", "AM",
+				"GMT+05:00", "3", "Saturday", "20", "3rd", "2020-12-12");
 		dashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
 
 		newContentPage = new NewUI_Content(driver);

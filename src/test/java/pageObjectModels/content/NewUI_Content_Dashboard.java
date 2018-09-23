@@ -102,6 +102,10 @@ public class NewUI_Content_Dashboard {
 			.xpath("//div[contains(@class,'date-pickers')]//span[@class='ant-checkbox-inner']");
 	By selectDate = By.xpath("//input[@class='ant-calendar-input ']");
 
+	By body_scheduleDashboard_startingPicker_time_hour = By.xpath("//div[@class='ant-time-picker-panel-select'][1]");
+	By body_scheduleDashboard_startingPicker_time_minute = By.xpath("//div[@class='ant-time-picker-panel-select'][2]");
+	By body_scheduleDashboard_startingPicker_time_AmPm = By.xpath("//div[@class='ant-time-picker-panel-select'][3]");
+
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -293,8 +297,8 @@ public class NewUI_Content_Dashboard {
 	 */
 	public String scheduleDashboard_addFields(String JobName, String subjectArea, String bodyArea, String dataFormat,
 			String ToEmailAddress, String CcEmailAddress, String BccEmailAddress, String Recurrence,
-			String RecurrenceNumber, String Time, String TimeZone, String dayOfTheWeek, String day, String MonthlyDay,
-			String SpecificDay, String CalanderFrom) {
+			String RecurrenceNumber, String Hour, String Minute, String AmPm, String TimeZone, String dayOfTheWeek,
+			String day, String MonthlyDay, String SpecificDay, String CalanderFrom) {
 
 		// Add Job Name
 		ElementActions.type(driver, body_scheduleDashboard_jobNameField, JobName);
@@ -312,7 +316,7 @@ public class NewUI_Content_Dashboard {
 		}
 		// Starting at
 		if (Recurrence == "Minute(s)" || Recurrence == "Hour(s)" || Recurrence == "Day(s)") {
-			scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(Time, TimeZone);
+			scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(Hour, Minute, AmPm, TimeZone);
 		} else if (Recurrence == "Week(s)") {
 			scheduleDashboard_addFields_delivery_weeklyRecurrence_startingAtSection(dayOfTheWeek);
 		} else if (Recurrence == "Month(s)") {
@@ -338,9 +342,25 @@ public class NewUI_Content_Dashboard {
 	 * @param TimeZone
 	 *            Should have the format of "GMT-04:00" OR "GMT+02:00"
 	 */
-	public void scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(String Time,
-			String TimeZone) {
-		ElementActions.type(driver, body_scheduleDashboard_startingPicker_time, Time);
+	public void scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(String Hour,
+			String Minute, String AmPm, String TimeZone) {
+		
+		body_scheduleDashboard_startingPicker_time_hour = By.xpath("//div[@class='ant-time-picker-panel-select'][1]//li[contains(string(),'"+Hour+"')]");
+		body_scheduleDashboard_startingPicker_time_minute = By.xpath("//div[@class='ant-time-picker-panel-select'][2]//li[contains(string(),'"+Minute+"')]");
+		body_scheduleDashboard_startingPicker_time_AmPm = By.xpath("//div[@class='ant-time-picker-panel-select'][3]//li[contains(string(),'"+AmPm+"')]");
+		
+		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time);
+		
+		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_hour);
+		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_minute);
+		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_AmPm);
+
+//		ElementActions.select(driver, body_scheduleDashboard_startingPicker_time_hour, Hour);
+//		ElementActions.select(driver, body_scheduleDashboard_startingPicker_time_minute, Minute);
+//		ElementActions.select(driver, body_scheduleDashboard_startingPicker_time_AmPm, AmPm);
+
+//		 ElementActions.type(driver, body_scheduleDashboard_startingPicker_time,
+		// Time);
 		ElementActions.type(driver, body_scheduleDashboard_startingPicker_timeZone, TimeZone);
 	}
 
@@ -377,8 +397,7 @@ public class NewUI_Content_Dashboard {
 		}
 		if (day == "Saturday" || day == "Sunday" || day == "Monday" || day == "Tuesday" || day == "Friday"
 				|| day == "Wednesday" || day == "Thursday") {
-			ElementActions.type(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth_specificday,
-					SpecificDay);
+			ElementActions.type(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth_specificday, SpecificDay);
 		}
 	}
 
