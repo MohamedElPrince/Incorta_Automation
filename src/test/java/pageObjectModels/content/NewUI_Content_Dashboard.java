@@ -297,7 +297,7 @@ public class NewUI_Content_Dashboard {
 			String SpecificDay, String CalanderFrom) {
 
 		// Add Job Name
-		ElementActions.typeAppend(driver, body_scheduleDashboard_jobNameField, JobName);
+		ElementActions.type(driver, body_scheduleDashboard_jobNameField, JobName);
 
 		// Delivery Section
 		// Every
@@ -308,7 +308,7 @@ public class NewUI_Content_Dashboard {
 		} else {
 			ElementActions.click(driver, body_scheduleDashboard_everyPicker_recurrence_clickOnDropDown);
 			ElementActions.click(driver, body_scheduleDashboard_everyPicker_recurrence);
-			ElementActions.typeAppend(driver, body_scheduleDashboard_everyPicker_number, RecurrenceNumber);
+			ElementActions.type(driver, body_scheduleDashboard_everyPicker_number, RecurrenceNumber);
 		}
 		// Starting at
 		if (Recurrence == "Minute(s)" || Recurrence == "Hour(s)" || Recurrence == "Day(s)") {
@@ -340,8 +340,8 @@ public class NewUI_Content_Dashboard {
 	 */
 	public void scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(String Time,
 			String TimeZone) {
-		ElementActions.typeAppend(driver, body_scheduleDashboard_startingPicker_time, Time);
-		ElementActions.typeAppend(driver, body_scheduleDashboard_startingPicker_timeZone, TimeZone);
+		ElementActions.type(driver, body_scheduleDashboard_startingPicker_time, Time);
+		ElementActions.type(driver, body_scheduleDashboard_startingPicker_timeZone, TimeZone);
 	}
 
 	/**
@@ -370,14 +370,14 @@ public class NewUI_Content_Dashboard {
 	public void scheduleDashboard_addFields_delivery_monthlyRecurrence_startingAtSection_DaySelection(String day,
 			String MonthlyDay, String SpecificDay) {
 
-		ElementActions.typeAppend(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth, day);
+		ElementActions.type(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth, day);
 
 		if (day == "Day") {
-			ElementActions.typeAppend(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth_number, MonthlyDay);
+			ElementActions.type(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth_number, MonthlyDay);
 		}
 		if (day == "Saturday" || day == "Sunday" || day == "Monday" || day == "Tuesday" || day == "Friday"
 				|| day == "Wednesday" || day == "Thursday") {
-			ElementActions.typeAppend(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth_specificday,
+			ElementActions.type(driver, body_scheduleDashboard_startingPicker_dayOfTheMonth_specificday,
 					SpecificDay);
 		}
 	}

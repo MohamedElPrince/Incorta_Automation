@@ -120,10 +120,12 @@ public class NewUI_Dashboards {
 		ElementActions.switchToDefaultContent(driver);
 	}
 
-	public void Assert_jobNameIsDisplayed(String name) {
+	public void Assert_jobNameIsDisplayed(String DashboardName, String JobName) {
 		ElementActions.switchToIframe(driver, body_iframe);
-		body_name_link = By.xpath("//div[contains(@class,'usersPanel')]//p[@title='" + name + "']");
-		Assertions.assertElementExists(driver, body_name_link, true);
+		body_name_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[@class='userName left ellipsis'][contains(.,'"
+						+ JobName+"')]/preceding-sibling::div[@class='userName left MainNav ellipsis']/p[@title='"+DashboardName+"']");
+		Assertions.assertElementAttribute(driver, body_name_link, "Text", JobName, true);
 		ElementActions.switchToDefaultContent(driver);
 	}
 

@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
-import com.shaftEngine.ioActionLibrary.ReportManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
 public class NewUI_SchemaList_SchemaView {

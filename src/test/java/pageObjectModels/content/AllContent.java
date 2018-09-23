@@ -27,8 +27,8 @@ public class AllContent {
 	By body_FolderName_InsideFolder;
 	By body_dashboardName_Button;
 	By dashboards_menu_button;	
-	By popup_newDashboard_dashboardName_textBox = By.name("reportName");
-	By popup_newDashboard_create_button = By.xpath("//button[@type='submit'][normalize-space()='Create']");
+	By popup_newDashboard_dashboardName_textBox = By.xpath("//label[contains(.,'Name')]/input");
+	By popup_newDashboard_create_button = By.xpath("//button[@type='button'][normalize-space()='Add']");
 	By popup_newFolder_folderName = By.xpath("//div[@class='inputGroup newItemModal']/input");
 	By popup_folderProperties_manageFolder;
 	By popup_folderProperties_manageFolder_confirmationButton;

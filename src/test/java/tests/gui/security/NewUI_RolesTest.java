@@ -282,7 +282,7 @@ public class NewUI_RolesTest {
 		subHeaderObject.Click_done();
 
 		allContentPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
+		subHeaderObject.SearchForContentAndOpenResult_content(newDashboardName);
 
 		// Assert that Export icon(this icon let user to share/send/schedule) is not
 		// displayed in dashboard page
@@ -632,7 +632,7 @@ public class NewUI_RolesTest {
 
 		dashboardPage = new NewUI_Content_Dashboard(driver);
 		dashboardPage.click_shareOptions_scheduleDelivery_button();
-		// Under construction
+
 		newScheduledSendDashboardJobName = dashboardPage.scheduleDashboard_addFields(DashboardToBeShared, "",
 				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "10:10 AM", "GMT+05:00",
 				"3", "Saturday", "20", "3rd", "2020-12-12");
@@ -644,7 +644,7 @@ public class NewUI_RolesTest {
 		schedulerDashboardsPage = new NewUI_Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 
-		schedulerDashboardsPage.Assert_jobNameIsDisplayed(newScheduledSendDashboardJobName);
+		schedulerDashboardsPage.Assert_jobNameIsDisplayed(DashboardToBeShared, newScheduledSendDashboardJobName);
 		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newScheduledSendDashboardJobName, "Active");
 	}
 
