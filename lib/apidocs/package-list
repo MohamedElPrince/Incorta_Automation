@@ -1,5 +1,6 @@
 com.shaftEngine.browserActionLibrary
 com.shaftEngine.elementActionLibrary
+com.shaftEngine.imageProcessingActionLibrary
 com.shaftEngine.ioActionLibrary
 com.shaftEngine.restAssuredActionLibrary
 com.shaftEngine.supportActionLibrary
