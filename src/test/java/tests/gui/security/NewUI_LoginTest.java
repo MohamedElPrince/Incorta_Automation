@@ -48,8 +48,8 @@ public class NewUI_LoginTest {
 				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
 
 		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Content");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Scheduler");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Content");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Scheduler");
 	}
 
 	// Prerequisites, Manually created 'Individual User' [User name/Pass:
@@ -62,8 +62,8 @@ public class NewUI_LoginTest {
 				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
 
 		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Content");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Scheduler");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Content");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Scheduler");
 	}
 
 	// Prerequisites, Manually created 'Normal User' [User name/Pass:
@@ -76,8 +76,8 @@ public class NewUI_LoginTest {
 				testDataReader.getCellData("Username", "Data4"), testDataReader.getCellData("Password", "Data4"));
 
 		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Content");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Scheduler");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Content");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Scheduler");
 	}
 
 	// Prerequisites, Manually created 'Schema Manager' [User name/Pass:
@@ -90,11 +90,11 @@ public class NewUI_LoginTest {
 				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
 
 		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Content");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Scheduler");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Data");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Business Schema");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Schema");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Content");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Scheduler");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Data");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Business Schema");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Schema");
 	}
 
 	// Prerequisites, Manually created 'User Manager' [User name/Pass:
@@ -107,9 +107,9 @@ public class NewUI_LoginTest {
 				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
 
 		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Content");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Scheduler");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Security");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Content");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Scheduler");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Security");
 	}
 
 	// Prerequisites, Manually created 'Super User' [User name/Pass:
@@ -122,12 +122,12 @@ public class NewUI_LoginTest {
 				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
 
 		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Content");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Scheduler");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Security");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Data");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Business Schema");
-		newHeaderObject.assert_oneSectionHeader_isDisplayed("Schema");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Content");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Scheduler");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Security");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Data");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Business Schema");
+		newHeaderObject.assert_sectionHeader_isDisplayed("Schema");
 	}
 
 	@Test(priority = 7, description = "C1275 - Successful Login")

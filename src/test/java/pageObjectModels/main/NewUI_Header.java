@@ -133,7 +133,7 @@ public class NewUI_Header {
 	 * "Data"
 	 * "Security"
 	 */
-	public void assert_oneSectionHeader_isDisplayed(String sectionName)
+	public void assert_sectionHeader_isDisplayed(String sectionName)
 	{
 		navigationWrapper_sectionHeader_link = By
 				.xpath("// li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='"
