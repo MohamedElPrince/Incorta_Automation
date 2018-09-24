@@ -59,8 +59,7 @@ public class NewUI_Header {
 	 */
 	public void assert_sectionHeader_isSelected(String sectionName) {
 		navigationWrapper_sectionHeader_link = By
-				.xpath("// li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='"
-						+ sectionName + "']");
+				.xpath("//li[@class='inc-header-item']/a[contains(@href,'#/')][normalize-space(.)='"+sectionName+"']");
 		Assertions.assertElementAttribute(driver, navigationWrapper_sectionHeader_link, "class", ".*selected.*", true);
 	}
 
@@ -122,6 +121,24 @@ public class NewUI_Header {
 	 */
 	public void signOut() {
 		ElementActions.click(driver, navigationWrapper_userMenu_signOut_button);
+	}
+	
+	/**
+	 * 
+	 * @param sectionName --> Could have one of the following options:
+	 * "Content"
+	 * "Scheduler"
+	 * "Business Schema"
+	 * "Schema"
+	 * "Data"
+	 * "Security"
+	 */
+	public void assert_sectionHeader_isDisplayed(String sectionName)
+	{
+		navigationWrapper_sectionHeader_link = By
+				.xpath("// li[@class='inc-header-item']/a[contains(@href,'incorta/new')][normalize-space(.)='"
+						+ sectionName + "']");
+		Assertions.assertElementExists(driver, navigationWrapper_sectionHeader_link, true);
 	}
 
 }

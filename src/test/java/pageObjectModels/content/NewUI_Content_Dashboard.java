@@ -44,6 +44,70 @@ public class NewUI_Content_Dashboard {
 	By aggregatedTable_columnHeader_link;
 	By aggregatedTable_cellValue_link;
 
+	// popup settings dashboard menu
+	By popup_dashboard_folder_shareAccess_button = By.xpath("//a/span[contains(text(),'Share Access')]");
+	By popup_dashboard_folder_sendNow_button = By.xpath("//a/span[contains(text(),'Send Now')]");
+	By popup_dashboard_folder_scheduleDelivery_button = By.xpath("//a/span[contains(text(),'Schedule Delivery')]");
+
+	// body Dashboard
+	By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
+
+	// Send Dashboard
+	By body_sendDashboard_bodyField = By.xpath("//div[@class='input-group body-box']//textarea");
+	By body_sendDashboard_dataFormat;
+	By body_sendDashboard_subjectField = By.xpath("//div[@class='inc-schedule-email']//input[@type='text']");
+	By body_sendDashboard_addRecipients = By.xpath("//span[@class='recipients-search']//input");
+	By body_sendDashboard_addRecipientsTo_recipientsTypeMenu;
+	By body_sendDashboard_addRecipientsCc_recipientsTypeMenu;
+	By body_sendDashboard_addRecipientsBcc_recipientsTypeMenu;
+	By body_sendDashboard_addRecipientsTypeMenu_selectRecipientTo;
+	By body_sendDashboard_addRecipientsTypeMenu_selectRecipientCc;
+	By body_sendDashboard_addRecipientsTypeMenu_selectRecipientBcc;
+	By body_sendDashboard_sendSchedule_button;
+
+	// Schedule Dashboard
+	By body_scheduleDashboard_jobNameField = By.id("jobName");
+
+	By body_scheduleDashboard_startingPicker_time = By
+			.xpath("//div[contains(@class,'starting-picker')]//input[@placeholder='Select time']");
+	By body_scheduleDashboard_startingPicker_timeZone_clickOnDropdownMenu = By
+			.xpath("//div[contains(@class,'starting-picker')]//div[@role='combobox']");
+	By body_scheduleDashboard_startingPicker_timeZone_selectTimeZone;
+	
+	
+	By body_scheduleDashboard_startingPicker_dayOfTheMonth = By
+			.xpath("//div[@class='input-group months-picker']//div[@role='combobox']");
+	By body_scheduleDashboard_startingPicker_dayOfTheMonth_number = By
+			.xpath("//div[@class='input-group months-picker']//input[contains(@class,'input-number')]");
+	By body_scheduleDashboard_startingPicker_dayOfTheMonth_specificday = By.xpath(
+			"//div[@class='input-group-inputs months-picker-inputs']//div[@class='ant-select-selection-selected-value'][contains(.,'1st')]");
+
+	By body_scheduleDashboard_startingPicker_days;
+
+	By body_scheduleDashboard_everyPicker_selectNoRecurrence = By
+			.xpath("//label[contains(@class,'no-recurrence ')]//input[@type='checkbox']");
+	By body_scheduleDashboard_everyPicker_recurrence = By
+			.xpath("//div[contains(@class,'select-recurrence')]//div[contains(@class,'selected-value')]");
+	By body_scheduleDashboard_everyPicker_number = By.xpath("//input[@class='ant-input-number-input']");
+	By body_scheduleDashboard_everyPicker_recurrence_clickOnDropDown = By
+			.xpath("//div[contains(@class,'select-recurrence')]//span");
+
+	By body_sendDashboard_addRecipients_selectRecipientsType_To;
+	By body_sendDashboard_addRecipients_selectRecipientsType_Cc;
+	By body_sendDashboard_addRecipients_selectRecipientsType_Bcc;
+
+	By body_scheduleDashboard_datePicker_calanderFrom = By
+			.xpath("(//div[contains(@class,'date-pickers-inputs')]//input[@placeholder='Select date'])[1]");
+	By body_scheduleDashboard_datePicker_calanderTo = By
+			.xpath("(//div[contains(@class,'date-pickers-inputs')]//input[@placeholder='Select date'])[2]");
+	By body_scheduleDashboard_datePicker_doesNotEnd_checkbox = By
+			.xpath("//div[contains(@class,'date-pickers')]//span[@class='ant-checkbox-inner']");
+	By selectDate = By.xpath("//input[@class='ant-calendar-input ']");
+
+	By body_scheduleDashboard_startingPicker_time_hour = By.xpath("//div[@class='ant-time-picker-panel-select'][1]");
+	By body_scheduleDashboard_startingPicker_time_minute = By.xpath("//div[@class='ant-time-picker-panel-select'][2]");
+	By body_scheduleDashboard_startingPicker_time_AmPm = By.xpath("//div[@class='ant-time-picker-panel-select'][3]");
+
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -135,6 +199,24 @@ public class NewUI_Content_Dashboard {
 		}
 
 		Assertions.assertElementAttribute(driver, aggregatedTable_cellValue_link, "text", cellValue, true);
+	}
+
+	public void assert_shared_button_active() {
+		Assertions.assertElementExists(driver, popup_dashboard_folder_shareAccess_button, true);
+	}
+
+	public void assert_shared_button_disabled() {
+		Assertions.assertElementExists(driver, popup_dashboard_folder_shareAccess_button, false);
+	}
+
+	public void click_shareOptions_sendNow_button() {
+		ElementActions.click(driver, body_shareButton);
+		ElementActions.click(driver, popup_dashboard_folder_sendNow_button);
+	}
+
+	public void click_shareOptions_scheduleDelivery_button() {
+		ElementActions.click(driver, body_shareButton);
+		ElementActions.click(driver, popup_dashboard_folder_scheduleDelivery_button);
 	}
 
 }
