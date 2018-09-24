@@ -124,17 +124,17 @@ public class NewUI_Dashboards {
 		ElementActions.switchToIframe(driver, body_iframe);
 		body_name_link = By
 				.xpath("//div[contains(@class,'usersPanel')]//div[@class='userName left ellipsis'][contains(.,'"
-						+ JobName+"')]/preceding-sibling::div[@class='userName left MainNav ellipsis']/p[@title='"+DashboardName+"']");
+						+ JobName + "')]/preceding-sibling::div[@class='userName left MainNav ellipsis']/p[@title='"
+						+ DashboardName + "']");
 		Assertions.assertElementAttribute(driver, body_name_link, "Text", JobName, true);
 		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Assert_jobStatusIsCorrect(String name, String expectedStatus) {
 		ElementActions.switchToIframe(driver, body_iframe);
-		body_Status_label = By.xpath(
-				"//div[contains(@class,'usersPanel')]//div[contains(@class,'userName')][contains(normalize-space(.),'"
-						+ name + "')]/following-sibling::div[contains(@class,'dataConnectionLink')]");
-		Assertions.assertElementAttribute(driver, body_Status_label, "Text", expectedStatus, true);
+		body_Status_label = By.xpath("//div[contains(@class,'userName')][contains(normalize-space(.),"
+				+ "'"+name+"')]/following-sibling::div[contains(@class,'dataConnectionLink')][contains(.,'"+expectedStatus+"')]");
+		Assertions.assertElementExists(driver, body_Status_label, true);
 		ElementActions.switchToDefaultContent(driver);
 	}
 

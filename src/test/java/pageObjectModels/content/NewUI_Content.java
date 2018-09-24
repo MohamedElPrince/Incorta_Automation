@@ -8,8 +8,6 @@ import com.shaftEngine.elementActionLibrary.ElementActions;
 import com.shaftEngine.ioActionLibrary.ExcelFileManager;
 import com.shaftEngine.validationsLibrary.Assertions;
 
-import io.restassured.internal.assertion.Assertion;
-
 public class NewUI_Content {
 	//// Variables
 	WebDriver driver;

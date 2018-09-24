@@ -18,6 +18,8 @@ import pageObjectModels.content.AllContent;
 import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
+import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
+import pageObjectModels.content.NewUI_Content_Dashboard_SendDashboard;
 import pageObjectModels.data.NewUI_DataSources;
 import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.main.NewUI_Header;
@@ -54,7 +56,9 @@ public class NewUI_RolesTest {
 	NewUI_Content newContentPage;
 	NewUI_Groups_Group groups_groupPage;
 	NewUI_Content_Dashboard dashboardPage;
-
+	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
+	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
+	
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
 	String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
@@ -606,10 +610,11 @@ public class NewUI_RolesTest {
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.SearchForContentAndOpenResult_content(DashboardToBeShared);
 
+		sendDashboardPage = new NewUI_Content_Dashboard_SendDashboard(driver);
 		dashboardPage = new NewUI_Content_Dashboard(driver);
 		dashboardPage.click_shareOptions_sendNow_button();
-		dashboardPage.sendDashboard_addFields("", "This is body area", "HTML", ToMail, CcMail, BccMail);
-		dashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
+		sendDashboardPage.sendDashboard_addFields("", "This is body area", "HTML", ToMail, CcMail, BccMail);
+		sendDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
 
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.assert_dashboardSentSuccessfullyMessage(DashboardToBeShared);
@@ -632,12 +637,13 @@ public class NewUI_RolesTest {
 
 		dashboardPage = new NewUI_Content_Dashboard(driver);
 		dashboardPage.click_shareOptions_scheduleDelivery_button();
-
-		newScheduledSendDashboardJobName = dashboardPage.scheduleDashboard_addFields(DashboardToBeShared, "",
+		
+		scheduleDashboardPage = new NewUI_Content_Dashboard_ScheduleDashboard(driver);
+		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared, "LOLO",
 				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "08", "09", "AM",
-				"GMT+05:00", "3", "Saturday", "20", "3rd", "2020-12-12");
-		dashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
-
+				"GMT+02:00", "3", "Saturday", "20", "3rd", "2018-12-12");
+		scheduleDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
+//GMT±00:00
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.assert_dashboardScheduledSuccessfullyMessage(DashboardToBeShared);
 
