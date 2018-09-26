@@ -75,6 +75,28 @@ public class NewUI_Content {
 	By popup_moveFolder_folderNameToMoveTo;
 	By popup_moveFolder_select_folderNameToMoveTo;
 
+	// Make a Copy
+	By popup_makeACopyScreen = By.xpath(
+			"//span[contains(.,'Make a Copy')]/parent::div[contains(@class,'title')]/parent::div[contains(@class,'header')]/parent::div[@class='ant-modal-content']");
+	By popup_makeACopyScreen_headerLabel = By
+			.xpath("//div[@class='ant-modal-header']//span[contains(.,'Make a Copy')]");
+	By popup_makeACopyScreen_newNameLabel = By.xpath("//div[@class='ant-modal-body']//span[contains(.,'New Name')]");
+	By popup_makeACopyScreen_selectFolderLabel = By
+			.xpath("//div[@class='ant-modal-body']//span[contains(.,'Select Folder')]");
+	By popup_makeACopyScreen_foldersSection = By
+			.xpath("//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']");
+
+	By popup_makeACopyScreen_newFolderButton = By
+			.xpath("//div[@class='ant-modal-footer']//button[contains(.,'New Folder')]");
+	By popup_makeACopyScreen_cancelButton = By.xpath("//div[@class='ant-modal-footer']//button[contains(.,'Cancel')]");
+	By popup_makeACopyScreen_copyAndOpenButton = By
+			.xpath("//div[@class='ant-modal-footer']//button[contains(.,'Copy  & Open')]");
+	By popup_makeACopyScreen_copyButton = By
+			.xpath("//div[@class='ant-modal-footer']//button[@class='ant-btn ant-btn-primary'][contains(.,'Copy')]");
+
+	By popup_makeACopyScreen_searchField = By.xpath("//input[@placeholder='Search Folders']");
+	By popup_makeACopyScreen_selectFolder;
+
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
@@ -353,8 +375,7 @@ public class NewUI_Content {
 	}
 
 	public void Click_Folder_Dashboard_Properties(String FolderName) {
-		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[contains(text(), '"
-				+ FolderName + "')]//parent::div//following-sibling::div//button");
+		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"+FolderName+"']//parent::div//following-sibling::div//button");
 		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
 	}
 
@@ -370,6 +391,13 @@ public class NewUI_Content {
 				"//div[contains(@class,'ant-dropdown ant-dropdown')]//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"
 						+ Actions + "')]");
 		Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, false);
+	}
+
+	public void assert_dashboardProperties_manageDashboardButtons_displayed(String Actions) {
+		tableView_dashboardProperties_listOption = By.xpath(
+				"//div[contains(@class,'ant-dropdown ant-dropdown')]//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"
+						+ Actions + "')]");
+		Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, true);
 	}
 
 	public void dashboard_folder_properties_delete_confirmationButtons(String button) {
@@ -498,6 +526,53 @@ public class NewUI_Content {
 				"//div[@class='ant-notification-notice-description'][contains(text(),'Successfully created schedule for "
 						+ DashboardName + ".')]");
 		Assertions.assertElementExists(driver, popup_dashboard_scheduledSuccessfully_message, true);
+	}
+
+	// Make a Copy
+	public void assert_makeACopy_popup_displayed() {
+		Assertions.assertElementExists(driver, popup_makeACopyScreen, true);
+	}
+	
+	public void assert_makeACopy_popup_notDisplayed() {
+		Assertions.assertElementExists(driver, popup_makeACopyScreen, false);
+	}
+
+	public void assert_makeACopy_popupScreen_screenContentDisplayed() {
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_headerLabel, true);
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_newNameLabel, true);
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_selectFolderLabel, true);
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection, true);
+
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_newFolderButton, true);
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_cancelButton, true);
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_copyAndOpenButton, true);
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_copyButton, true);
+	}
+
+	public void makeACopy_searchAndSelectFolder(String FolderName) {
+		popup_makeACopyScreen_selectFolder = By
+				.xpath("//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='"+FolderName+"']");
+
+		ElementActions.type(driver, popup_makeACopyScreen_searchField, FolderName);
+		ElementActions.click(driver, popup_makeACopyScreen_selectFolder);
+	}
+
+	public String makeACopy_getDashboard_newName() {
+		By popup_makeACopyScreen_newNameField = By.xpath("//input[@placeholder='New Name']");
+		String NewDashboardName = ElementActions.getText(driver, popup_makeACopyScreen_newNameField);
+		return NewDashboardName;
+	}
+
+	public void makeACopy_clickCopyButton() {
+		ElementActions.click(driver, popup_makeACopyScreen_copyButton);
+	}
+	
+	public void makeACopy_clickCopyAndOpenButton() {
+		ElementActions.click(driver, popup_makeACopyScreen_copyAndOpenButton);
+	}
+	
+	public void makeACopy_clickCancelButton() {
+		ElementActions.click(driver, popup_makeACopyScreen_cancelButton);
 	}
 
 }

@@ -65,9 +65,9 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 			.xpath("//div[contains(@class,'date-pickers')]//span[@class='ant-checkbox-inner']");
 	By selectDate = By.xpath("//input[@class='ant-calendar-input ']");
 
-	By body_scheduleDashboard_startingPicker_time_hour;
-	By body_scheduleDashboard_startingPicker_time_minute;
-	By body_scheduleDashboard_startingPicker_time_AmPm;
+	By body_scheduleDashboard_startingPicker_time_hour = By.xpath("//div[@class='ant-time-picker-panel-select'][1]");
+	By body_scheduleDashboard_startingPicker_time_minute = By.xpath("//div[@class='ant-time-picker-panel-select'][2]");
+	By body_scheduleDashboard_startingPicker_time_AmPm = By.xpath("//div[@class='ant-time-picker-panel-select'][3]");
 
 	//// Functions
 	public NewUI_Content_Dashboard_ScheduleDashboard(WebDriver driver) {
@@ -197,6 +197,8 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 	public void scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(String Hour,
 			String Minute, String AmPm, String TimeZone) {
 
+		body_scheduleDashboard_startingPicker_timeZone_selectTimeZone = By
+				.xpath("//ul/li[contains(.,'" + TimeZone + "')]");
 		body_scheduleDashboard_startingPicker_time_hour = By
 				.xpath("//div[@class='ant-time-picker-panel-select'][1]//li[contains(string(),'" + Hour + "')]");
 		body_scheduleDashboard_startingPicker_time_minute = By
@@ -204,15 +206,12 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 		body_scheduleDashboard_startingPicker_time_AmPm = By
 				.xpath("//div[@class='ant-time-picker-panel-select'][3]//li[contains(string(),'" + AmPm + "')]");
 
-		body_scheduleDashboard_startingPicker_timeZone_selectTimeZone = By
-				.xpath("//ul/li[contains(.,'" + TimeZone + "')]");
 		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time);
-
+		
 		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_hour);
 		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_minute);
 		try {
 			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_AmPm);
-
 		} catch (AssertionError e) {
 			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_AmPm);
 		}
