@@ -97,6 +97,10 @@ public class NewUI_Content {
 	By popup_makeACopyScreen_searchField = By.xpath("//input[@placeholder='Search Folders']");
 	By popup_makeACopyScreen_selectFolder;
 
+	By popup_makeACopyScreen_newNameField = By.xpath("//input[@placeholder='New Name']");
+
+	By popup_makeACopyScreen_foldersSection_folders = By.xpath(
+			"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'Automation_Folder_Shared_ToAnalyzer')]");
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
@@ -375,28 +379,26 @@ public class NewUI_Content {
 	}
 
 	public void Click_Folder_Dashboard_Properties(String FolderName) {
-		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"+FolderName+"']//parent::div//following-sibling::div//button");
+		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"
+				+ FolderName + "']//parent::div//following-sibling::div//button");
 		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
 	}
 
 	public void Click_DashboardProperties_ManageDashboardButtons(String Actions) {
 		tableView_dashboardProperties_listOption = By.xpath(
-				"//div[contains(@class,'ant-dropdown ant-dropdown')]//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"
-						+ Actions + "')]");
+				"//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
 		ElementActions.click(driver, tableView_dashboardProperties_listOption);
 	}
 
 	public void assert_dashboardProperties_manageDashboardButtons_notExist(String Actions) {
 		tableView_dashboardProperties_listOption = By.xpath(
-				"//div[contains(@class,'ant-dropdown ant-dropdown')]//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"
-						+ Actions + "')]");
+				"//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
 		Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, false);
 	}
 
 	public void assert_dashboardProperties_manageDashboardButtons_displayed(String Actions) {
 		tableView_dashboardProperties_listOption = By.xpath(
-				"//div[contains(@class,'ant-dropdown ant-dropdown')]//li[@class='ant-dropdown-menu-item']//span[contains(text(),'"
-						+ Actions + "')]");
+				"//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
 		Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, true);
 	}
 
@@ -532,7 +534,7 @@ public class NewUI_Content {
 	public void assert_makeACopy_popup_displayed() {
 		Assertions.assertElementExists(driver, popup_makeACopyScreen, true);
 	}
-	
+
 	public void assert_makeACopy_popup_notDisplayed() {
 		Assertions.assertElementExists(driver, popup_makeACopyScreen, false);
 	}
@@ -550,29 +552,59 @@ public class NewUI_Content {
 	}
 
 	public void makeACopy_searchAndSelectFolder(String FolderName) {
-		popup_makeACopyScreen_selectFolder = By
-				.xpath("//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='"+FolderName+"']");
+		popup_makeACopyScreen_selectFolder = By.xpath(
+				"//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='"
+						+ FolderName + "']");
 
 		ElementActions.type(driver, popup_makeACopyScreen_searchField, FolderName);
 		ElementActions.click(driver, popup_makeACopyScreen_selectFolder);
 	}
 
 	public String makeACopy_getDashboard_newName() {
-		By popup_makeACopyScreen_newNameField = By.xpath("//input[@placeholder='New Name']");
 		String NewDashboardName = ElementActions.getText(driver, popup_makeACopyScreen_newNameField);
 		return NewDashboardName;
+	}
+
+	public void makeACopy_addDashboard_newName(String NewDashboardName) {
+		ElementActions.type(driver, popup_makeACopyScreen_newNameField, NewDashboardName);
 	}
 
 	public void makeACopy_clickCopyButton() {
 		ElementActions.click(driver, popup_makeACopyScreen_copyButton);
 	}
-	
+
 	public void makeACopy_clickCopyAndOpenButton() {
 		ElementActions.click(driver, popup_makeACopyScreen_copyAndOpenButton);
 	}
-	
+
 	public void makeACopy_clickCancelButton() {
 		ElementActions.click(driver, popup_makeACopyScreen_cancelButton);
+	}
+
+	public void assert_makeACopy_foldersExist(String FolderName) {
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+						+ FolderName + "')]");
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, true);
+	}
+
+	public void assert_makeACopy_folderButtonEnabled(String FolderName) {
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+						+ FolderName + "')]");
+		String Disabled = "disbaled";
+		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
+				"([\\s\\S]*" + Disabled + ".*[\\s\\S]*)", false);
+
+	}
+
+	public void assert_makeACopy_folderButtonDisabled(String FolderName) {
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+						+ FolderName + "')]");
+		String Disabled = "disbaled";
+		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
+				"([\\s\\S]*" + Disabled + ".*[\\s\\S]*)", true);
 	}
 
 }

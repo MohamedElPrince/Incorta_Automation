@@ -159,6 +159,8 @@ public class NewUI_MakeACopy {
 		newUI_folderPage.Assert_DashboardExist(New_DashboardName);
 	}
 
+	// Issue in assertion element not exist for Make A Copy screen
+	// java.lang.AssertionError: Assertion Failed; an unhandled exception occured.
 	@Test(priority = 6, description = "C82990 - Chrome: Testing the 'Cancel' option")
 	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and I select a folder to copy to and I click 'Copy & Open'. Then Dashboard is copied and opened successfully")
 	@Severity(SeverityLevel.NORMAL)
@@ -176,7 +178,7 @@ public class NewUI_MakeACopy {
 				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
 		newUI_allContentPage.makeACopy_clickCancelButton();
 		newUI_allContentPage.assert_makeACopy_popup_notDisplayed();
-	
+
 		newUI_allContentPage.navigate_toURL();
 		newUI_allContentPage
 				.click_on_folder_dashboard(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
@@ -185,6 +187,183 @@ public class NewUI_MakeACopy {
 		newUI_folderPage.Assert_DashboardNotExist(New_DashboardName);
 	}
 
+	@Test(priority = 7, description = "C82976 - Chrome: Name the copied dashboard with a long name")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and add a long name to the copied dashbaord. Then It will be copied with It's displayed name normally")
+	@Severity(SeverityLevel.NORMAL)
+	public void Change_CopiedDashboardName_WithLongName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_CopyDashboard_LongDashboardName"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.makeACopy_addDashboard_newName(testDataReader.getCellData("LongDashboardName"));
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("LongDashboardName"));
+	}
+
+	// Need to check function [assert_dashboardName_isCorrect] as assertion is not
+	// working with special characters.
+	// java.lang.AssertionError: Assertion Failed; an unhandled exception occured.
+	@Test(priority = 8, description = "C82977 - Chrome: Name the copied dashboard with special characters / numbers")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and add a special characters and numbers name to the copied dashbaord. Then It will be copied with It's displayed name normally")
+	@Severity(SeverityLevel.NORMAL)
+	public void Change_CopiedDashboardName_WithSpecialCharactersAndNumbers() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_CopyDashboard_SpecialCharactersDashboardName"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage
+				.makeACopy_addDashboard_newName(testDataReader.getCellData("SpecialCharactersDashboardName"));
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage
+				.assert_dashboardName_isCorrect(testDataReader.getCellData("SpecialCharactersDashboardName"));
+	}
+
+	@Test(priority = 9, description = "C82978 - Chrome: Name the copied dashboard with Arabic name")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and add a Arabic name to the copied dashbaord. Then It will be copied with It's displayed name normally")
+	@Severity(SeverityLevel.NORMAL)
+	public void Change_CopiedDashboardName_WithArabicDashboardName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_CopyDashboard_ArabicName"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.makeACopy_addDashboard_newName(testDataReader.getCellData("ArabicDashboardName"));
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("ArabicDashboardName"));
+	}
+
+	@Test(priority = 10, description = "C82979 - Chrome: Name the copied dashboard with french name")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and add a french name to the copied dashbaord. Then It will be copied with It's displayed name normally")
+	@Severity(SeverityLevel.NORMAL)
+	public void Change_CopiedDashboardName_WithFrenchDashboardName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_CopyDashboard_FrenchName"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.makeACopy_addDashboard_newName(testDataReader.getCellData("FrenchDashboardName"));
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("FrenchDashboardName"));
+	}
+
+	@Test(priority = 11, description = "C82980 - Chrome: Name the copied dashboard with Chinese name")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and add a Chinese name to the copied dashbaord. Then It will be copied with It's displayed name normally")
+	@Severity(SeverityLevel.NORMAL)
+	public void Change_CopiedDashboardName_WithChineseDashboardName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_CopyDashboard_ChineseName"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.makeACopy_addDashboard_newName(testDataReader.getCellData("ChineseDashboardName"));
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("ChineseDashboardName"));
+	}
+
+	@Test(priority = 12, description = "C82981 - Chrome: Testing the folders displayed in the pop up")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy. Then 'created and shared' folders will be displayed in the popup")
+	@Severity(SeverityLevel.NORMAL)
+	public void Check_CreatedAndSharedFolders_DisplayedNormally() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage
+				.assert_makeACopy_foldersExist(testDataReader.getCellData("Automation_Folder_SharedEdit_ToAnalyzer"));
+		newUI_allContentPage
+				.assert_makeACopy_foldersExist(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+	}
+
+	@Test(priority = 13, description = "C82983 - Chrome: Copying a dashboard in a folder shared with user as 'View'")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and copy dashboard to folder shared as 'View'. Then dashboared will not be shared as button is dimmed. ")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_FolderSharedAsView_ButtonDimmed() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.assert_makeACopy_folderButtonDisabled(testDataReader.getCellData("Automation_Folder_SharedView_ToAnalyzer"));
+	}
+	
+	@Test(priority = 14, description = "C82984 - Chrome: Copying a dashboard in a folder shared with user as 'Edit'")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and copy dashboard to folder shared as 'Edit'. Then dashboared will not be shared as button is dimmed. ")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_FolderSharedAsEdit_ButtonNotDimmed() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.assert_makeACopy_folderButtonEnabled(
+				testDataReader.getCellData("Automation_Folder_SharedEdit_ToAnalyzer"));
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
+	}
+
+	@Test(priority = 15, description = "C82985 - Chrome: Copying a dashboard in a folder shared with user as 'Share'")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and copy dashboard to folder shared as 'Share'. Then dashboared will not be shared as button is dimmed. ")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_FolderSharedAsShare_ButtonDimmed() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.assert_makeACopy_folderButtonDisabled(testDataReader.getCellData("Automation_Folder_SharedShare_ToAnalyzer"));
+	}
+	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
