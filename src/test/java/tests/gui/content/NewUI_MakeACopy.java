@@ -325,9 +325,10 @@ public class NewUI_MakeACopy {
 				testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
-		newUI_allContentPage.assert_makeACopy_folderButtonDisabled(testDataReader.getCellData("Automation_Folder_SharedView_ToAnalyzer"));
+		newUI_allContentPage.assert_makeACopy_folderButtonDisabled(
+				testDataReader.getCellData("Automation_Folder_SharedView_ToAnalyzer"));
 	}
-	
+
 	@Test(priority = 14, description = "C82984 - Chrome: Copying a dashboard in a folder shared with user as 'Edit'")
 	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy and copy dashboard to folder shared as 'Edit'. Then dashboared will not be shared as button is dimmed. ")
 	@Severity(SeverityLevel.NORMAL)
@@ -342,12 +343,13 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage.assert_makeACopy_folderButtonEnabled(
 				testDataReader.getCellData("Automation_Folder_SharedEdit_ToAnalyzer"));
 
+		String New_DashboardName = newUI_allContentPage.makeACopy_getDashboard_newName();
 		newUI_allContentPage
 				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
 		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
 
 		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
-		newUI_dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
+		newUI_dashboardPage.assert_dashboardName_isCorrect(New_DashboardName);
 	}
 
 	@Test(priority = 15, description = "C82985 - Chrome: Copying a dashboard in a folder shared with user as 'Share'")
@@ -361,9 +363,134 @@ public class NewUI_MakeACopy {
 				testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
-		newUI_allContentPage.assert_makeACopy_folderButtonDisabled(testDataReader.getCellData("Automation_Folder_SharedShare_ToAnalyzer"));
+		newUI_allContentPage.assert_makeACopy_folderButtonDisabled(
+				testDataReader.getCellData("Automation_Folder_SharedShare_ToAnalyzer"));
+	}
+
+	@Test(priority = 16, description = "C82986 - Chrome: Testing that folders can expand and collapse in the pop up")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy. Then folders will not be shared as button is dimmed. ")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MakeACopyScreen_FoldersCollapseAndExpand() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_MakeACopyOptionDisplayed"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.makeACopy_expandIconFolders(
+				testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"), "plus");
+		newUI_allContentPage.assert_makeACopy_foldersInsideFolderExist(
+				testDataReader.getCellData("Automation_Folder_Inside_AutomationFolder"));
+
+		newUI_allContentPage.makeACopy_expandIconFolders(
+				testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"), "minus");
+		newUI_allContentPage.assert_makeACopy_foldersInsideFolderNotExist(
+				testDataReader.getCellData("Automation_Folder_Inside_AutomationFolder"));
+	}
+
+	@Test(priority = 17, description = "C82991 - Chrome: Testing that user can search for copied dashboard from the content page search bar")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy And I copy a dashboard and I search for the copied dashboard in the content page. Then folder will be found normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_ContantPage_SearchForCopiedFolder_WorkingNormally() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_CopiedAndFoundInSearch"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		String New_DashboardName = newUI_allContentPage.makeACopy_getDashboard_newName();
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage.makeACopy_clickCopyButton();
+
+		newUI_allContentPage.makeACopy_searchContentPageAndAssertAndClick(New_DashboardName);
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(New_DashboardName);
+	}
+
+	@Test(priority = 18, description = "C82999 - Chrome: Naming a copied dashboard with an existing dashboard name in the same folder")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy And I copy a dashboard and I search for the copied dashboard in the content page. Then folder will be found normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MakeACopyScreen_CannotCopyWithDuplicateDashboardName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_DuplicateError"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+		newUI_allContentPage
+				.makeACopy_addDashboard_newName(testDataReader.getCellData("Automation_Dashboard_DuplicateError Copy"));
+		newUI_allContentPage.makeACopy_clickCopyButton();
+
+		newUI_allContentPage.makeACopy_assertErrorIsDisplayed_DuplicateDashboardName();
 	}
 	
+	@Test(priority = 19, description = "C83004 - Chrome: Naming a copied dashboard with an existing dashboard name in a different folder")
+	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy And I copy a dashboard 1 in folder 2 with the name of dashboard 2 wich already exist in folder 1. Then folder will be copied normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MakeACopyScreen_CanCopyDashboardWithSameNameInDifferentFolders() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Copy1"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.makeACopy_addDashboard_newName(testDataReader.getCellData("Automation_Dashboard_Copy2"));
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_Copy2"));
+
+		newUI_allContentPage.makeACopy_clickCopyButton();
+
+		newUI_allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Automation_Folder_Copy2"));
+		
+		newUI_folderPage = new NewUI_Content_Folder(driver);
+		newUI_folderPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Dashboard_Copy2"));
+	}
+
+	//In Progress
+	@Test(priority = 20, description = "C83000 - Chrome: Copying a dashboard that has bookmarks / filters")
+	@Description("When I navigate to the dashboared properties and I copy it to folder. Then Dashboard will be copied with filters and prompts successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MakeACopyScreen_CopyDashboardWithFiltersAndPrompts() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Copy_WithBookMarksAndFilters"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage
+				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
+
+		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
+		
+	//In Progress...
+	}
+	//Need to check below assertion
+	//java.lang.AssertionError: Assertion Failed; an unhandled exception occured.
+	@Test(priority = 21, description = "C83200 - Chrome: Verify that When Copying a dashboard , The default selection will be the folder they are currently in")
+	@Description("When I navigate to the dashboared properties and I copy it to folder. Then Dashboard will be copied with filters and prompts successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void Assert_MakeACopyScreen_DefaultSelectionWillBeFolderTheyCurrentlyIn() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+
+		newUI_allContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_CopyAndOpen"));
+		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
+
+		newUI_allContentPage.assert_makeACopy_defaultSelectedFolder("Content");
+	}
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",

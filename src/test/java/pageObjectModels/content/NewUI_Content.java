@@ -2,6 +2,7 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.Assertion;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
@@ -84,7 +85,7 @@ public class NewUI_Content {
 	By popup_makeACopyScreen_selectFolderLabel = By
 			.xpath("//div[@class='ant-modal-body']//span[contains(.,'Select Folder')]");
 	By popup_makeACopyScreen_foldersSection = By
-			.xpath("//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']");
+			.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]");
 
 	By popup_makeACopyScreen_newFolderButton = By
 			.xpath("//div[@class='ant-modal-footer']//button[contains(.,'New Folder')]");
@@ -99,8 +100,12 @@ public class NewUI_Content {
 
 	By popup_makeACopyScreen_newNameField = By.xpath("//input[@placeholder='New Name']");
 
-	By popup_makeACopyScreen_foldersSection_folders = By.xpath(
-			"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'Automation_Folder_Shared_ToAnalyzer')]");
+	By popup_makeACopyScreen_foldersSection_folders;
+	By popup_makeACopy_foldersExapandIcon;
+	By body_searchContent;
+	By body_searchContent_resultFound;
+	By popup_makeACopy_errorDuplicateDashboardName;
+
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
@@ -560,6 +565,15 @@ public class NewUI_Content {
 		ElementActions.click(driver, popup_makeACopyScreen_selectFolder);
 	}
 
+	public void makeACopy_searchAndSelectAndAssertFolderDisplayed(String FolderName) {
+		popup_makeACopyScreen_selectFolder = By.xpath(
+				"//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='"
+						+ FolderName + "']");
+
+		ElementActions.type(driver, popup_makeACopyScreen_searchField, FolderName);
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_searchField, true);
+	}
+
 	public String makeACopy_getDashboard_newName() {
 		String NewDashboardName = ElementActions.getText(driver, popup_makeACopyScreen_newNameField);
 		return NewDashboardName;
@@ -588,23 +602,82 @@ public class NewUI_Content {
 		Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, true);
 	}
 
+	public void assert_makeACopy_foldersNotExist(String FolderName) {
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+						+ FolderName + "')]");
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, false);
+	}
+
+	public void assert_makeACopy_foldersInsideFolderExist(String FolderName) {
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li//ul[contains(.,'"
+						+ FolderName + "')]");
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, true);
+	}
+
+	public void assert_makeACopy_foldersInsideFolderNotExist(String FolderName) {
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li//ul[contains(.,'"
+						+ FolderName + "')]");
+		Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, false);
+	}
+
 	public void assert_makeACopy_folderButtonEnabled(String FolderName) {
 		popup_makeACopyScreen_foldersSection_folders = By.xpath(
 				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
 						+ FolderName + "')]");
-		String Disabled = "disbaled";
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
-				"([\\s\\S]*" + Disabled + ".*[\\s\\S]*)", false);
-
+				"ant-tree-treenode-disabled", false);
 	}
 
 	public void assert_makeACopy_folderButtonDisabled(String FolderName) {
+		// popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		// "//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+		// + FolderName + "')]");
 		popup_makeACopyScreen_foldersSection_folders = By.xpath(
-				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//span[contains(@class,'ant-tree-node-content-wrapper')][contains(.,'"
 						+ FolderName + "')]");
-		String Disabled = "disbaled";
+
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
-				"([\\s\\S]*" + Disabled + ".*[\\s\\S]*)", true);
+				"ant-tree-treenode-disabled", true);
+	}
+	
+	public void assert_makeACopy_defaultSelectedFolder(String FolderName)
+	{
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//span[contains(@class,'ant-tree-node-content-wrapper')][contains(.,'"
+						+ FolderName + "')]");
+		String Selected = "selected";
+		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders,"class", "'([\\s\\S]*' + '"+Selected+"'", true);
+	}
+
+	/**
+	 * 
+	 * @param FolderName
+	 *            Folder To expand OR Collapse
+	 * @param ExpandOrCollapse
+	 *            minus for collapse OR plus for expand
+	 */
+	public void makeACopy_expandIconFolders(String FolderName, String ExpandOrCollapse) {
+		popup_makeACopy_foldersExapandIcon = By.xpath("//ul[@role='group']//li[contains(.,'" + FolderName
+				+ "')]//i[contains(@class,'" + ExpandOrCollapse + "')]");
+		ElementActions.click(driver, popup_makeACopy_foldersExapandIcon);
+	}
+
+	public void makeACopy_searchContentPageAndAssertAndClick(String SearchText) {
+		body_searchContent = By.xpath("//input[@placeholder='Search content']");
+		ElementActions.type(driver, body_searchContent, SearchText);
+		body_searchContent_resultFound = By
+				.xpath("//span[@class='inc-search-option__item--left'][contains(.,'" + SearchText + "')]");
+		Assertions.assertElementExists(driver, body_searchContent_resultFound, true);
+		ElementActions.click(driver, body_searchContent_resultFound);
+	}
+
+	public void makeACopy_assertErrorIsDisplayed_DuplicateDashboardName() {
+		popup_makeACopy_errorDuplicateDashboardName = By
+				.xpath("//label[contains(@class,'error')][contains(.,'Name already exists!')]");
+		Assertions.assertElementExists(driver, popup_makeACopy_errorDuplicateDashboardName, true);
 	}
 
 }
