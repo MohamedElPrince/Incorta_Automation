@@ -18,6 +18,7 @@ public class NewUI_Content {
 	//// Elements
 	// first nested header
 	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
+	By body_dashboardName;
 	By body_dashboardName_folderName;
 	By body_folderName_dashboardName_insideFolder;
 	By pageDetails_title_label = By.xpath("//span[@class='page-details-title']/h1");
@@ -78,6 +79,10 @@ public class NewUI_Content {
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
+	
+	
+	
+
 
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
@@ -100,8 +105,7 @@ public class NewUI_Content {
 	/**
 	 * Changes the current catalogView to the desired one
 	 * 
-	 * @param catalogView
-	 *            Card | Table
+	 * @param catalogView Card | Table
 	 */
 	public void changeCatalogView(String catalogView) {
 		switch (catalogView.toLowerCase().trim()) {
@@ -125,8 +129,7 @@ public class NewUI_Content {
 	/**
 	 * Asserts that the correct catalogView is selected
 	 * 
-	 * @param catalogView
-	 *            Card | Table
+	 * @param catalogView Card | Table
 	 */
 	public void assert_correctCatalogView_isSelected(String catalogView) {
 
@@ -148,10 +151,9 @@ public class NewUI_Content {
 	/**
 	 * Asserts that the correct searchCount is displayed
 	 * 
-	 * @param searchCount
-	 *            sample text is [You're looking at 4 Folders and 8 Dashboards] but
-	 *            you can also use regular expressions such as [.*4 Folders and 8
-	 *            Dashboards]
+	 * @param searchCount sample text is [You're looking at 4 Folders and 8
+	 *                    Dashboards] but you can also use regular expressions such
+	 *                    as [.*4 Folders and 8 Dashboards]
 	 */
 	public void assert_correctSearchCount_isDisplayed(String searchCount) {
 		Assertions.assertElementAttribute(driver, searchWrapper_searchCount_label, "text", searchCount, true);
@@ -188,8 +190,7 @@ public class NewUI_Content {
 	/**
 	 * Navigates to a sub page of the "Content" section
 	 * 
-	 * @param subPageName
-	 *            All Content | Shared | Owned
+	 * @param subPageName All Content | Shared | Owned
 	 */
 	public void navigate_toSubPage(String subPageName) {
 		ElementActions.click(driver, searchWrapper_searchDropDown_button);
@@ -443,8 +444,7 @@ public class NewUI_Content {
 
 	/**
 	 * 
-	 * @param Email
-	 *            Can Share Can Edit Can View
+	 * @param Email Can Share Can Edit Can View
 	 */
 	public void folderProperties_shareAccess_typeAndSelectInSearchField(String Email, String shareType) {
 		popup_share_searchField = By.xpath("//input[@placeholder='Search names, emails, and groups']");
@@ -463,8 +463,7 @@ public class NewUI_Content {
 	/**
 	 * 
 	 * @param Email
-	 * @param shareType
-	 *            Can Edit Can Share Can View
+	 * @param shareType Can Edit Can Share Can View
 	 */
 	public void assert_folder_dashboard_sharedSuccessfully(String Email, String shareType) {
 		popup_shareAccessScreen_shareDropDownMenuForUser_button = By
@@ -498,6 +497,13 @@ public class NewUI_Content {
 				"//div[@class='ant-notification-notice-description'][contains(text(),'Successfully created schedule for "
 						+ DashboardName + ".')]");
 		Assertions.assertElementExists(driver, popup_dashboard_scheduledSuccessfully_message, true);
+	}
+
+	public void Click_Dashboard(String DashboradName) {
+		body_dashboardName = By.xpath("//div[@class='ant-card-body']//span[contains(text(), '" + DashboradName +"')]//ancestor::div[@class='ant-card-body']");
+		
+		
+		ElementActions.click(driver, body_dashboardName);
 	}
 
 }
