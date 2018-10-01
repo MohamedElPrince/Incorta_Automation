@@ -640,7 +640,7 @@ public class NewUI_RolesTest {
 		
 		scheduleDashboardPage = new NewUI_Content_Dashboard_ScheduleDashboard(driver);
 		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared, "LOLO",
-				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "08", "09", "AM",
+				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
 				"GMT+02:00", "3", "Saturday", "20", "3rd", "2018-12-12");
 		scheduleDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
 //GMT±00:00
