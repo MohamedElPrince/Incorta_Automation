@@ -51,66 +51,18 @@ public class NewUI_Content_Dashboard {
 
 	// body Dashboard
 	By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
-	//set_default Dashboard pin
-	By body_unpushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
-	By body_pushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
-
-	// Send Dashboard
-	By body_sendDashboard_bodyField = By.xpath("//div[@class='input-group body-box']//textarea");
-	By body_sendDashboard_dataFormat;
-	By body_sendDashboard_subjectField = By.xpath("//div[@class='inc-schedule-email']//input[@type='text']");
-	By body_sendDashboard_addRecipients = By.xpath("//span[@class='recipients-search']//input");
-	By body_sendDashboard_addRecipientsTo_recipientsTypeMenu;
-	By body_sendDashboard_addRecipientsCc_recipientsTypeMenu;
-	By body_sendDashboard_addRecipientsBcc_recipientsTypeMenu;
-	By body_sendDashboard_addRecipientsTypeMenu_selectRecipientTo;
-	By body_sendDashboard_addRecipientsTypeMenu_selectRecipientCc;
-	By body_sendDashboard_addRecipientsTypeMenu_selectRecipientBcc;
-	By body_sendDashboard_sendSchedule_button;
-
-	// Schedule Dashboard
-	By body_scheduleDashboard_jobNameField = By.id("jobName");
-
-	By body_scheduleDashboard_startingPicker_time = By
-			.xpath("//div[contains(@class,'starting-picker')]//input[@placeholder='Select time']");
-	By body_scheduleDashboard_startingPicker_timeZone_clickOnDropdownMenu = By
-			.xpath("//div[contains(@class,'starting-picker')]//div[@role='combobox']");
-	By body_scheduleDashboard_startingPicker_timeZone_selectTimeZone;
+	// set_default Dashboard pin
+	By body_unpushed_pin = By.xpath(
+			"//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
+	By body_pushed_pin = By.xpath(
+			"//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
 	
+	By body_bookmark = By.xpath("//i[@class='anticon anticon-book']");
+	By popup_bookmarksName;
 	
-	By body_scheduleDashboard_startingPicker_dayOfTheMonth = By
-			.xpath("//div[@class='input-group months-picker']//div[@role='combobox']");
-	By body_scheduleDashboard_startingPicker_dayOfTheMonth_number = By
-			.xpath("//div[@class='input-group months-picker']//input[contains(@class,'input-number')]");
-	By body_scheduleDashboard_startingPicker_dayOfTheMonth_specificday = By.xpath(
-			"//div[@class='input-group-inputs months-picker-inputs']//div[@class='ant-select-selection-selected-value'][contains(.,'1st')]");
-
-	By body_scheduleDashboard_startingPicker_days;
-
-	By body_scheduleDashboard_everyPicker_selectNoRecurrence = By
-			.xpath("//label[contains(@class,'no-recurrence ')]//input[@type='checkbox']");
-	By body_scheduleDashboard_everyPicker_recurrence = By
-			.xpath("//div[contains(@class,'select-recurrence')]//div[contains(@class,'selected-value')]");
-	By body_scheduleDashboard_everyPicker_number = By.xpath("//input[@class='ant-input-number-input']");
-	By body_scheduleDashboard_everyPicker_recurrence_clickOnDropDown = By
-			.xpath("//div[contains(@class,'select-recurrence')]//span");
-
-	By body_sendDashboard_addRecipients_selectRecipientsType_To;
-	By body_sendDashboard_addRecipients_selectRecipientsType_Cc;
-	By body_sendDashboard_addRecipients_selectRecipientsType_Bcc;
-
-	By body_scheduleDashboard_datePicker_calanderFrom = By
-			.xpath("(//div[contains(@class,'date-pickers-inputs')]//input[@placeholder='Select date'])[1]");
-	By body_scheduleDashboard_datePicker_calanderTo = By
-			.xpath("(//div[contains(@class,'date-pickers-inputs')]//input[@placeholder='Select date'])[2]");
-	By body_scheduleDashboard_datePicker_doesNotEnd_checkbox = By
-			.xpath("//div[contains(@class,'date-pickers')]//span[@class='ant-checkbox-inner']");
-	By selectDate = By.xpath("//input[@class='ant-calendar-input ']");
-
-	By body_scheduleDashboard_startingPicker_time_hour = By.xpath("//div[@class='ant-time-picker-panel-select'][1]");
-	By body_scheduleDashboard_startingPicker_time_minute = By.xpath("//div[@class='ant-time-picker-panel-select'][2]");
-	By body_scheduleDashboard_startingPicker_time_AmPm = By.xpath("//div[@class='ant-time-picker-panel-select'][3]");
-
+	By body_filter = By.xpath("//i[@class='anticon anticon-filter']");
+	By popup_filtersName;
+	
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -148,7 +100,7 @@ public class NewUI_Content_Dashboard {
 	 * @param name
 	 */
 	public void assert_dashboardName_isCorrect(String dashboardName) {
-		//replaceRegex
+		// replaceRegex
 		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
 	}
 
@@ -222,21 +174,42 @@ public class NewUI_Content_Dashboard {
 		ElementActions.click(driver, body_shareButton);
 		ElementActions.click(driver, popup_dashboard_folder_scheduleDelivery_button);
 	}
-	
+
 	// Set default dashboard pin
-	
-	public	void assert_SetDefault_DashboardPin_Displayed() {
-		
+
+	public void assert_SetDefault_DashboardPin_Displayed() {
+
 		Assertions.assertElementExists(driver, body_unpushed_pin, true);
-		
+
 	}
-	
+
 	public void click_SetDefault_Dashboardpin() {
-	
+
 		ElementActions.click(driver, body_unpushed_pin);
 		Assertions.assertElementExists(driver, body_pushed_pin, true);
 
 	}
+	
+	public void click_bookmarkButton()
+	{
+		ElementActions.click(driver, body_bookmark);
+	}
+	
+	public void assert_bookmarksExist(String BookmarkName)
+	{
+		popup_bookmarksName = By.xpath("//div[@class='inc-bookmarks-list-item'][contains(.,'"+BookmarkName+"')]");
+		Assertions.assertElementExists(driver, popup_bookmarksName, true);
+	}
+	
+	public void click_filterButton()
+	{
+		ElementActions.click(driver, body_filter);
+	}
 
+	public void assert_filterApplied(String FilterName)
+	{
+		popup_filtersName = By.xpath("//span[@class='inc-filter-master__menu-item'][contains(.,'"+FilterName+"')]/span");
+		Assertions.assertElementAttribute(driver, popup_filtersName, "class", "([\\s\\S]*)applied", true);
+	}
 
 }

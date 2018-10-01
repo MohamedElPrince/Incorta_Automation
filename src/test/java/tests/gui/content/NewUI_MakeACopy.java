@@ -431,7 +431,7 @@ public class NewUI_MakeACopy {
 
 		newUI_allContentPage.makeACopy_assertErrorIsDisplayed_DuplicateDashboardName();
 	}
-	
+
 	@Test(priority = 19, description = "C83004 - Chrome: Naming a copied dashboard with an existing dashboard name in a different folder")
 	@Description("When I navigate to the content screen, and I click on dashboard properties --> Make a Copy And I copy a dashboard 1 in folder 2 with the name of dashboard 2 wich already exist in folder 1. Then folder will be copied normally.")
 	@Severity(SeverityLevel.NORMAL)
@@ -445,37 +445,44 @@ public class NewUI_MakeACopy {
 
 		newUI_allContentPage.makeACopy_addDashboard_newName(testDataReader.getCellData("Automation_Dashboard_Copy2"));
 
-		newUI_allContentPage
-				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_Copy2"));
+		newUI_allContentPage.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_Copy2"));
 
 		newUI_allContentPage.makeACopy_clickCopyButton();
 
 		newUI_allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Automation_Folder_Copy2"));
-		
+
 		newUI_folderPage = new NewUI_Content_Folder(driver);
 		newUI_folderPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Dashboard_Copy2"));
 	}
 
-	//In Progress
 	@Test(priority = 20, description = "C83000 - Chrome: Copying a dashboard that has bookmarks / filters")
 	@Description("When I navigate to the dashboared properties and I copy it to folder. Then Dashboard will be copied with filters and prompts successfully.")
 	@Severity(SeverityLevel.NORMAL)
-	public void Assert_MakeACopyScreen_CopyDashboardWithFiltersAndPrompts() {
+	public void Assert_MakeACopyScreen_CopyDashboardWithFiltersAndBookmarks() {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Copy_WithBookMarksAndFilters"));
+		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+				testDataReader.getCellData("Automation_Dashboard_Copy_WithBookMarksAndFilters"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		newUI_allContentPage
 				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
 
+		String New_DashboardName = newUI_allContentPage.makeACopy_getDashboard_newName();
+
 		newUI_allContentPage.makeACopy_clickCopyAndOpenButton();
-		
-	//In Progress...
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(New_DashboardName);
+
+		newUI_dashboardPage.click_bookmarkButton();
+		newUI_dashboardPage.assert_bookmarksExist("Filter [Months]");
+
+		newUI_dashboardPage.click_filterButton();
+		newUI_dashboardPage.assert_filterApplied("Months");
 	}
-	
+
 	@Test(priority = 21, description = "C83200 - Chrome: Verify that When Copying a dashboard , The default selection will be the folder they are currently in")
 	@Description("When I navigate to the dashboared properties and I copy it to folder. Then Dashboard will be copied with filters and prompts successfully.")
 	@Severity(SeverityLevel.NORMAL)
