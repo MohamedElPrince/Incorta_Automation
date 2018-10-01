@@ -391,7 +391,8 @@ public class NewUI_Content {
 
 	public void Click_DashboardProperties_ManageDashboardButtons(String Actions) {
 		tableView_dashboardProperties_listOption = By.xpath(
-				"//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
+				"//div[contains(@class,'ant-dropdown')][not(contains(@class,'ant-dropdown-hidden'))]//span[text()='"
+						+ Actions + "']");
 		ElementActions.click(driver, tableView_dashboardProperties_listOption);
 	}
 
@@ -642,14 +643,13 @@ public class NewUI_Content {
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
 				"ant-tree-treenode-disabled", true);
 	}
-	
-	public void assert_makeACopy_defaultSelectedFolder(String FolderName)
-	{
+
+	public void assert_makeACopy_defaultSelectedFolder(String FolderName) {
 		popup_makeACopyScreen_foldersSection_folders = By.xpath(
 				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//span[contains(@class,'ant-tree-node-content-wrapper')][contains(.,'"
 						+ FolderName + "')]");
-		String Selected = "selected";
-		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders,"class", "'([\\s\\S]*' + '"+Selected+"'", true);
+		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
+				"([\\s\\S]*)selected", true);
 	}
 
 	/**

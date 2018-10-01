@@ -475,8 +475,7 @@ public class NewUI_MakeACopy {
 		
 	//In Progress...
 	}
-	//Need to check below assertion
-	//java.lang.AssertionError: Assertion Failed; an unhandled exception occured.
+	
 	@Test(priority = 21, description = "C83200 - Chrome: Verify that When Copying a dashboard , The default selection will be the folder they are currently in")
 	@Description("When I navigate to the dashboared properties and I copy it to folder. Then Dashboard will be copied with filters and prompts successfully.")
 	@Severity(SeverityLevel.NORMAL)

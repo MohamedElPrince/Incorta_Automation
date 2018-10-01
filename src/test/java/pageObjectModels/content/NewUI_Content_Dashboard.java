@@ -145,6 +145,7 @@ public class NewUI_Content_Dashboard {
 	 * @param name
 	 */
 	public void assert_dashboardName_isCorrect(String dashboardName) {
+		//replaceRegex
 		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
 	}
 
