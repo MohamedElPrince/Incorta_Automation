@@ -3,8 +3,9 @@ package pageObjectModels.content;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.ioActionLibrary.ExcelFileManager;
+import com.shaft.element.ElementActions;
+import com.shaft.io.ExcelFileManager;
+
 
 public class NewUI_Content_Dashboard_ScheduleDashboard {
 	//// Variables

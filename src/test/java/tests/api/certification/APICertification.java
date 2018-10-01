@@ -7,9 +7,9 @@ import java.util.function.Consumer;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-import com.shaftEngine.ioActionLibrary.ReportManager;
-import com.shaftEngine.restAssuredActionLibrary.RestActions;
-import com.shaftEngine.validationsLibrary.Assertions;
+import com.shaft.api.RestActions;
+import com.shaft.io.ReportManager;
+import com.shaft.validation.Assertions;
 
 import io.restassured.response.Response;
 
@@ -25,7 +25,7 @@ public class APICertification {
 	String username = "admin";
 	String password = "admin";
 
-	RestActions restObject = new RestActions();
+	RestActions restObject = new RestActions(serviceURI);
 
 	@Test(priority = 1, description = "TC001 - Login to incorta via API")
 	public void login() {
@@ -35,7 +35,7 @@ public class APICertification {
 		argument = "tenant=" + tenantName + "&user=" + username + "&pass=" + password;
 
 		// Performing Authentication
-		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
 
 	@Test(priority = 2, description = "TC002 - Is User Logged In", dependsOnMethods = { "login" })
@@ -46,7 +46,7 @@ public class APICertification {
 		argument = "";
 
 		// Performing Request
-		response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		// authenticate();
 		// restObject.assertResponseJSONContainsValue(response, "users.name", "Super
 		// User");
@@ -62,7 +62,7 @@ public class APICertification {
 		argument = "pageSize=1000";
 
 		// Performing Request
-		response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		Assertions.assertEquals(restObject.getResponseJSONValue(response, "users.name"), "Super User", true);
 	}
 
@@ -74,7 +74,7 @@ public class APICertification {
 		argument = "name=Audit&incremental=false&snapshot=false&staging=false&testRun=";
 
 		// Performing Request
-		response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
 
 	@Test(priority = 5, description = "TC005 - Wait for schema to finish loading", dependsOnMethods = { "loadSchema" })
@@ -88,7 +88,7 @@ public class APICertification {
 		Boolean isLoaded = false;
 		while (isLoaded) {
 			try {
-				response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+				response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 				Assertions.assertEquals(restObject.getResponseJSONValue(response, "lastLoadState"), "Loading Finished",
 						true);
 				isLoaded = true;
@@ -106,7 +106,7 @@ public class APICertification {
 		argument = "schemaId=100";
 
 		// Performing Request
-		response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		ReportManager.log("Reported Load Time: [" + restObject.getResponseJSONValue(response, "loadTime") + "].");
 	}
 
@@ -118,7 +118,7 @@ public class APICertification {
 		argument = "guid=4375a80c-e51b-4088-bdf5-82dea28f34e7";
 
 		// Performing Request
-		response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		Assertions.assertEquals(restObject.getResponseXMLValue(response, "response.report.@name"), "Audit Dashboard",
 				true);
 	}
@@ -141,7 +141,7 @@ public class APICertification {
 		// Performing Requests
 		arguments.forEach(new Consumer<String>() {
 			public void accept(String argument) {
-				response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+				response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 			}
 		});
 	}
@@ -154,7 +154,7 @@ public class APICertification {
 		argument = "";
 
 		// Performing Request
-		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
 
 	// @AfterMethod(lastTimeOnly = true)

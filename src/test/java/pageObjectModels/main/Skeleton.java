@@ -3,9 +3,9 @@ package pageObjectModels.main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.validationsLibrary.Assertions;
+import com.shaft.browser.BrowserActions;
+import com.shaft.element.ElementActions;
+import com.shaft.validation.Assertions;
 
 public class Skeleton {
 	//// Variables

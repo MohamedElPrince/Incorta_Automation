@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.shaftEngine.ioActionLibrary.ReportManager;
+import com.shaft.io.ReportManager;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;

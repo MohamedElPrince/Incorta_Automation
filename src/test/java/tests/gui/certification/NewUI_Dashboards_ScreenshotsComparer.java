@@ -9,11 +9,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.imageProcessingActionLibrary.ImageProcessingActions;
-import com.shaftEngine.ioActionLibrary.ExcelFileManager;
-import com.shaftEngine.ioActionLibrary.ReportManager;
+import com.shaft.browser.BrowserActions;
+import com.shaft.browser.BrowserFactory;
+import com.shaft.image.ImageProcessingActions;
+import com.shaft.io.ExcelFileManager;
+import com.shaft.io.ReportManager;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -69,7 +69,7 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 		String testFolderPath = System.getProperty("allureResultsFolderPath") + "screenshots/"
 				+ testFolders[testFolders.length - 1];
 
-		ImageProcessingActions.compareFolders(refrenceFolderPath, testFolderPath, 100);
+		ImageProcessingActions.compareImageFolders(refrenceFolderPath, testFolderPath, 100);
 	}
 
 	public void crawlDashboards() {

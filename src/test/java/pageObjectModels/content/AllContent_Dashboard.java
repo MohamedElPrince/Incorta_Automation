@@ -3,11 +3,11 @@ package pageObjectModels.content;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.ioActionLibrary.ExcelFileManager;
-import com.shaftEngine.supportActionLibrary.JavaActions;
-import com.shaftEngine.validationsLibrary.Assertions;
-import com.shaftEngine.validationsLibrary.Verifications;
+import com.shaft.element.ElementActions;
+import com.shaft.io.ExcelFileManager;
+import com.shaft.support.JavaActions;
+import com.shaft.validation.Assertions;
+import com.shaft.validation.Verifications;
 
 public class AllContent_Dashboard {
 	//// Variables

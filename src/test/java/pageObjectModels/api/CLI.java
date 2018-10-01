@@ -1,7 +1,7 @@
 package pageObjectModels.api;
 
-import com.shaftEngine.ioActionLibrary.ReportManager;
-import com.shaftEngine.supportActionLibrary.SSHActions;
+import com.shaft.io.ReportManager;
+import com.shaft.support.SSHActions;
 
 public class CLI {
 	//// Variables
@@ -50,12 +50,13 @@ public class CLI {
 	//// Functions
 	protected String performCommand(String command) {
 		if (!dockerName.equals("")) {
-			return SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-					dockerName, dockerUsername, command).trim();
+			SSHActions dockerActionsObject = new SSHActions(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
+					dockerName, dockerUsername);
+			return dockerActionsObject.performSSHcommand(command).trim();
 		} else {
-			return SSHActions
-					.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, command)
-					.trim();
+			SSHActions sshActionsObject = new SSHActions(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
+					dockerName, dockerUsername);
+			return sshActionsObject.performSSHcommand(command).trim();
 		}
 	}
 

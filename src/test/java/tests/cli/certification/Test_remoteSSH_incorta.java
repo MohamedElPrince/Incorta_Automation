@@ -5,8 +5,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.shaftEngine.ioActionLibrary.ReportManager;
-import com.shaftEngine.supportActionLibrary.SSHActions;
+import com.shaft.io.ReportManager;
+import com.shaft.support.SSHActions;
 
 public class Test_remoteSSH_incorta {
 
@@ -17,6 +17,7 @@ public class Test_remoteSSH_incorta {
 		String username = "incorta";
 		String keyFileFolderName = System.getProperty("testDataFolderPath");
 		String keyFileName = "iWebQALast.key";
+		SSHActions sshObject = new SSHActions(hostname, sshPortNumber, username, keyFileFolderName, keyFileName);
 
 		// SSH commands
 
@@ -48,39 +49,30 @@ public class Test_remoteSSH_incorta {
 		// https://docs.google.com/document/d/1MSDnGHarQ595pp9Dk4DBTbCQcNeUBQnifT-DP-J7k6g/edit
 
 		// Stop Incorta
-		String incortaPID = SSHActions
-				.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, getIncortaPID)
-				.trim();
+		String incortaPID = sshObject.performSSHcommand(getIncortaPID).trim();
 
 		getCommandOfRunningIncortaInstance = "cat /proc/" + incortaPID + "/cmdline";
-		String commandOfRunningIncortaInstance = SSHActions.performSSHcommand(hostname, sshPortNumber, username,
-				keyFileFolderName, keyFileName, getCommandOfRunningIncortaInstance);
+		String commandOfRunningIncortaInstance = sshObject.performSSHcommand(getCommandOfRunningIncortaInstance);
 
 		if (commandOfRunningIncortaInstance.contains("No such file or directory")) {
 			ReportManager.log("Incorta instance is already stopped.");
 		} else {
-			SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-					stopIncorta);
+			sshObject.performSSHcommand(stopIncorta);
 		}
 
 		// perform tmt commands as needed ++insert needed check to confirm that incorta
 		// has been completely stopped
 
-		SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-				listIncortaTenants);
+		sshObject.performSSHcommand(listIncortaTenants);
 
 		// Start Incorta
-		incortaPID = SSHActions
-				.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName, getIncortaPID)
-				.trim();
+		incortaPID = sshObject.performSSHcommand(getIncortaPID).trim();
 
 		getCommandOfRunningIncortaInstance = "cat /proc/" + incortaPID + "/cmdline";
-		commandOfRunningIncortaInstance = SSHActions.performSSHcommand(hostname, sshPortNumber, username,
-				keyFileFolderName, keyFileName, getCommandOfRunningIncortaInstance);
+		commandOfRunningIncortaInstance = sshObject.performSSHcommand(getCommandOfRunningIncortaInstance);
 
 		if (commandOfRunningIncortaInstance.contains("No such file or directory")) {
-			SSHActions.performSSHcommand(hostname, sshPortNumber, username, keyFileFolderName, keyFileName,
-					startIncorta);
+			sshObject.performSSHcommand(startIncorta);
 		} else {
 			ReportManager.log("Incorta instance is already started.");
 

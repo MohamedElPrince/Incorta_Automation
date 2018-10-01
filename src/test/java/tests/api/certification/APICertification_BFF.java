@@ -4,8 +4,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import com.shaftEngine.ioActionLibrary.ReportManager;
-import com.shaftEngine.restAssuredActionLibrary.RestActions;
+import com.shaft.io.ReportManager;
+import com.shaft.api.RestActions;
 
 public class APICertification_BFF {
 	private final String serviceURI = "http://35.184.27.139:9091/incorta";
@@ -18,7 +18,7 @@ public class APICertification_BFF {
 	String username = "admin";
 	String password = "admin";
 
-	RestActions restObject = new RestActions();
+	RestActions restObject = new RestActions(serviceURI);
 
 	@Test(priority = 0, description = "TC000 - Authenticate")
 	public void authenticate() {
@@ -28,8 +28,7 @@ public class APICertification_BFF {
 		argument = "";
 
 		// Performing Authentication
-		restObject.performRequest(requestType, "201", serviceURI, serviceName, argument,
-				new String[] { username, password });
+		restObject.performRequest(requestType, "201", serviceName, argument, new String[] { username, password });
 	}
 
 	@Test(priority = 1, description = "TC001 - Is User Logged In")
@@ -40,7 +39,7 @@ public class APICertification_BFF {
 		argument = "";
 
 		// Performing Request
-		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		// authenticate();
 
 	}
@@ -51,7 +50,7 @@ public class APICertification_BFF {
 		requestType = "GET";
 		argument = "";
 
-		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
 
 	@Test(priority = 100, description = "TC003 - Logout from incorta")
@@ -62,7 +61,7 @@ public class APICertification_BFF {
 		argument = "";
 
 		// Performing Request
-		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
 
 	@AfterMethod

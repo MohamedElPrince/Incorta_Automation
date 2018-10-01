@@ -6,9 +6,9 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.validationsLibrary.Assertions;
-import com.shaftEngine.validationsLibrary.Verifications;
+import com.shaft.element.ElementActions;
+import com.shaft.validation.Assertions;
+import com.shaft.validation.Verifications;
 
 public class NewUI_Header {
 	//// Variables

@@ -5,11 +5,10 @@ import java.io.File;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.browserActionLibrary.BrowserActions;
-import com.shaftEngine.elementActionLibrary.ElementActions;
-import com.shaftEngine.elementActionLibrary.JSWaiter;
-import com.shaftEngine.ioActionLibrary.ExcelFileManager;
-import com.shaftEngine.validationsLibrary.Assertions;
+import com.shaft.browser.BrowserActions;
+import com.shaft.element.ElementActions;
+import com.shaft.io.ExcelFileManager;
+import com.shaft.validation.Assertions;
 
 import pageObjectModels.main.Skeleton;
 
@@ -184,7 +183,10 @@ public class Users {
 	}
 
 	public void ConfirmUserDeletion() {
-		JSWaiter.sleep(5000);
+		//JSWaiter.sleep(5000);
+		/**
+		 * Mohab: I commented this line as we're not supposed to use the JSWaiter, or any static sleep methods
+		 */
 		ElementActions.click(driver, popup_confirmDelete_delete_button);
 	}
 

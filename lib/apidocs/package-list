@@ -1,7 +1,7 @@
-com.shaftEngine.browserActionLibrary
-com.shaftEngine.elementActionLibrary
-com.shaftEngine.imageProcessingActionLibrary
-com.shaftEngine.ioActionLibrary
-com.shaftEngine.restAssuredActionLibrary
-com.shaftEngine.supportActionLibrary
-com.shaftEngine.validationsLibrary
+com.shaft.api
+com.shaft.browser
+com.shaft.element
+com.shaft.image
+com.shaft.io
+com.shaft.support
+com.shaft.validation

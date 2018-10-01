@@ -6,11 +6,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-import com.shaftEngine.ioActionLibrary.ExcelFileManager;
-import com.shaftEngine.ioActionLibrary.ReportManager;
-import com.shaftEngine.restAssuredActionLibrary.RestActions;
-import com.shaftEngine.validationsLibrary.Assertions;
-import com.shaftEngine.validationsLibrary.Verifications;
+import com.shaft.io.ExcelFileManager;
+import com.shaft.io.ReportManager;
+import com.shaft.api.RestActions;
+import com.shaft.validation.Assertions;
+import com.shaft.validation.Verifications;
 
 import io.restassured.response.Response;
 
@@ -34,8 +34,6 @@ public class BPMConcurrencyTest {
 		this.username = username;
 		this.password = password;
 		this.fullName = fullName;
-
-		restObject = new RestActions();
 	}
 
 	@DataProvider(parallel = true)
@@ -74,7 +72,7 @@ public class BPMConcurrencyTest {
 		String argument = "tenant=" + tenantName + "&user=" + username + "&pass=" + password;
 
 		// Performing Authentication
-		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
 
 	@Test(description = "TC002 - Is User Logged In", dependsOnMethods = { "login" })
@@ -85,8 +83,7 @@ public class BPMConcurrencyTest {
 		String argument = "";
 
 		// Performing Request
-		Response response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName,
-				argument);
+		Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		Assertions.assertEquals(fullName, restObject.getResponseJSONValue(response, "user.name"), true);
 	}
 
@@ -99,7 +96,7 @@ public class BPMConcurrencyTest {
 				+ "&incremental=false&snapshot=false&staging=false&testRun=";
 
 		// Performing Request
-		restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
 
 	@Test(description = "TC004 - Wait for schema to finish loading", dependsOnMethods = { "loadSchema" })
@@ -113,8 +110,7 @@ public class BPMConcurrencyTest {
 		Boolean isLoaded = false;
 		while (isLoaded) {
 			try {
-				Response response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName,
-						argument);
+				Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 				Assertions.assertEquals("Loading Finished", restObject.getResponseJSONValue(response, "lastLoadState"),
 						true);
 				isLoaded = true;
@@ -132,8 +128,7 @@ public class BPMConcurrencyTest {
 		String argument = "guid=" + testDataReader.getCellData("DashboardGUID");
 
 		// Performing Request
-		Response response = restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName,
-				argument);
+		Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		Assertions.assertEquals(testDataReader.getCellData("DashboardName"),
 				restObject.getResponseXMLValue(response, "response.report.@name"), true);
 
@@ -155,7 +150,7 @@ public class BPMConcurrencyTest {
 			String argument = "outputFormat=json&layout=" + dashboardID + "#" + insightIDs[i].trim();
 
 			// Performing Request
-			restObject.performRequest(requestType, successStatusCode, serviceURI, serviceName, argument);
+			restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 		}
 	}
 
@@ -166,6 +161,7 @@ public class BPMConcurrencyTest {
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 
 		serviceURI = testDataReader.getCellData("serviceURI");
+		restObject = new RestActions(serviceURI);
 	}
 
 	@AfterClass

@@ -2,9 +2,9 @@ package tests.gui.certification;
 
 import org.testng.annotations.Test;
 
-import com.shaftEngine.browserActionLibrary.BrowserFactory;
-import com.shaftEngine.ioActionLibrary.ExcelFileManager;
-import com.shaftEngine.ioActionLibrary.ReportManager;
+import com.shaft.browser.BrowserFactory;
+import com.shaft.io.ExcelFileManager;
+import com.shaft.io.ReportManager;
 
 import pageObjectModels.content.AllContent;
 import pageObjectModels.content.AllContent_Dashboard;

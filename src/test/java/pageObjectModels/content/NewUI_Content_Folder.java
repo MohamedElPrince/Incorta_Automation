@@ -3,8 +3,8 @@ package pageObjectModels.content;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.shaftEngine.ioActionLibrary.ExcelFileManager;
-import com.shaftEngine.validationsLibrary.Assertions;
+import com.shaft.io.ExcelFileManager;
+import com.shaft.validation.Assertions;
 
 public class NewUI_Content_Folder {
 	//// Variables
