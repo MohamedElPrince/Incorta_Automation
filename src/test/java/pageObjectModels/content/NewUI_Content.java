@@ -2,7 +2,6 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.asserts.Assertion;
 
 import com.shaftEngine.browserActionLibrary.BrowserActions;
 import com.shaftEngine.elementActionLibrary.ElementActions;
@@ -19,6 +18,7 @@ public class NewUI_Content {
 	//// Elements
 	// first nested header
 	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
+	By body_dashboardName;
 	By body_dashboardName_folderName;
 	By body_folderName_dashboardName_insideFolder;
 	By pageDetails_title_label = By.xpath("//span[@class='page-details-title']/h1");
@@ -679,5 +679,4 @@ public class NewUI_Content {
 				.xpath("//label[contains(@class,'error')][contains(.,'Name already exists!')]");
 		Assertions.assertElementExists(driver, popup_makeACopy_errorDuplicateDashboardName, true);
 	}
-
 }

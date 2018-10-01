@@ -51,6 +51,9 @@ public class NewUI_Content_Dashboard {
 
 	// body Dashboard
 	By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
+	//set_default Dashboard pin
+	By body_unpushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
+	By body_pushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
 
 	// Send Dashboard
 	By body_sendDashboard_bodyField = By.xpath("//div[@class='input-group body-box']//textarea");
@@ -219,5 +222,21 @@ public class NewUI_Content_Dashboard {
 		ElementActions.click(driver, body_shareButton);
 		ElementActions.click(driver, popup_dashboard_folder_scheduleDelivery_button);
 	}
+	
+	// Set default dashboard pin
+	
+	public	void assert_SetDefault_DashboardPin_Displayed() {
+		
+		Assertions.assertElementExists(driver, body_unpushed_pin, true);
+		
+	}
+	
+	public void click_SetDefault_Dashboardpin() {
+	
+		ElementActions.click(driver, body_unpushed_pin);
+		Assertions.assertElementExists(driver, body_pushed_pin, true);
+
+	}
+
 
 }
