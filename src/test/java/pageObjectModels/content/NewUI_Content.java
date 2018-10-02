@@ -633,12 +633,9 @@ public class NewUI_Content {
 	}
 
 	public void assert_makeACopy_folderButtonDisabled(String FolderName) {
-		// popup_makeACopyScreen_foldersSection_folders = By.xpath(
-		// "//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
-		// + FolderName + "')]");
-		popup_makeACopyScreen_foldersSection_folders = By.xpath(
-				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//span[contains(@class,'ant-tree-node-content-wrapper')][contains(.,'"
-						+ FolderName + "')]");
+		 popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		 "//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+		 + FolderName + "')]");
 
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
 				"ant-tree-treenode-disabled", true);
@@ -674,9 +671,14 @@ public class NewUI_Content {
 		ElementActions.click(driver, body_searchContent_resultFound);
 	}
 
-	public void makeACopy_assertErrorIsDisplayed_DuplicateDashboardName() {
+	public void assert_makeACopy_errorIsDisplayed_DuplicateDashboardName() {
 		popup_makeACopy_errorDuplicateDashboardName = By
 				.xpath("//label[contains(@class,'error')][contains(.,'Name already exists!')]");
 		Assertions.assertElementExists(driver, popup_makeACopy_errorDuplicateDashboardName, true);
+	}
+
+	public void assert_makeACopy_dashboardNewName_dashboardNamePlusCopyWord(String DashboardName) {
+		String DashboardNewName = DashboardName + " " + "Copy";
+		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_newNameField, "text", DashboardNewName, true);
 	}
 }
