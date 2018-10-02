@@ -54,6 +54,8 @@ public class NewUI_Content_Dashboard {
 	//set_default Dashboard pin
 	By body_unpushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 	By body_pushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
+	By body_SetAsDefaultDashboardPin_Tooltip = By.xpath("//div[@class='ant-tooltip-inner']/span[text()='Set as default dashboard']");
+	
 
 	// Send Dashboard
 	By body_sendDashboard_bodyField = By.xpath("//div[@class='input-group body-box']//textarea");
@@ -238,5 +240,14 @@ public class NewUI_Content_Dashboard {
 
 	}
 
+	
+	public void check_SetAsDefaultDashboardPin_tooltip() {
+		
+		ElementActions.hover(driver, body_unpushed_pin);
+		Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text", "Set as default dashboard", true);
+		
+	//	Assertions.assertEquals(body_SetAsDefaultDashboardPin_Tooltip, "Set as default dashboard", true);
+		
+	}
 
 }
