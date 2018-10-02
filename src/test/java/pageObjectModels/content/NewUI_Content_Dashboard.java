@@ -225,13 +225,13 @@ public class NewUI_Content_Dashboard {
 	
 	// Set default dashboard pin
 	
-	public	void assert_SetDefault_DashboardPin_Displayed() {
+	public	void assert_SetAsDefault_DashboardPin_Displayed() {
 		
 		Assertions.assertElementExists(driver, body_unpushed_pin, true);
 		
 	}
 	
-	public void click_SetDefault_Dashboardpin() {
+	public void clickOn_SetAsDefault_Dashboardpin() {
 	
 		ElementActions.click(driver, body_unpushed_pin);
 		Assertions.assertElementExists(driver, body_pushed_pin, true);
