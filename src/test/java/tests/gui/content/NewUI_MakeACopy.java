@@ -177,6 +177,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage
 				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
 		newUI_allContentPage.makeACopy_clickCancelButton();
+		
+		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.assert_makeACopy_popup_notDisplayed();
 
 		newUI_allContentPage.navigate_toURL();

@@ -101,7 +101,8 @@ public class NewUI_Content_Dashboard {
 	 */
 	public void assert_dashboardName_isCorrect(String dashboardName) {
 		// replaceRegex
-		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
+		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, 1, true);
+//		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
 	}
 
 	/**
