@@ -106,6 +106,11 @@ public class NewUI_Content {
 	By body_searchContent_resultFound;
 	By popup_makeACopy_errorDuplicateDashboardName;
 
+	// Rename
+	By popup_renameDashboard_field = By.id("inc-rename-catalog-item__control");
+	By popup_renameDashboard_renameCancel_buttons;
+	By popup_renameDashboard_confirmationMessage;
+
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
@@ -633,9 +638,9 @@ public class NewUI_Content {
 	}
 
 	public void assert_makeACopy_folderButtonDisabled(String FolderName) {
-		 popup_makeACopyScreen_foldersSection_folders = By.xpath(
-		 "//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
-		 + FolderName + "')]");
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+						+ FolderName + "')]");
 
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
 				"ant-tree-treenode-disabled", true);
@@ -680,5 +685,29 @@ public class NewUI_Content {
 	public void assert_makeACopy_dashboardNewName_dashboardNamePlusCopyWord(String DashboardName) {
 		String DashboardNewName = DashboardName + " " + "Copy";
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_newNameField, "text", DashboardNewName, true);
+	}
+
+	// Rename
+	/**
+	 * 
+	 * @param NewDashboardName
+	 * @param Button
+	 *            Rename OR Cancel
+	 */
+	public void renameDashboard_typeNewDashboardName(String NewDashboardName) {
+		ElementActions.type(driver, popup_renameDashboard_field, NewDashboardName);
+
+		popup_renameDashboard_confirmationMessage = By
+				.xpath("//div[@class='ant-notification ant-notification-topRight']/span[contains(.,'" + NewDashboardName
+						+ "')]/div");
+	}
+
+	public void renameDashboard_popup_clickOnActionButtons(String Action) {
+		popup_renameDashboard_renameCancel_buttons = By.xpath("//button[contains(.,'" + Action + "')]");
+		ElementActions.click(driver, popup_renameDashboard_renameCancel_buttons);
+	}
+
+	public void assert_renameDashboard_renamed_confirmationMessage() {
+		Assertions.assertElementExists(driver, popup_renameDashboard_confirmationMessage, true);
 	}
 }
