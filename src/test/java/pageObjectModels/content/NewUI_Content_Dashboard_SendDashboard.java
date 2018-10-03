@@ -31,44 +31,6 @@ public class NewUI_Content_Dashboard_SendDashboard {
 	By body_sendDashboard_addRecipients_selectRecipientsType_Cc;
 	By body_sendDashboard_addRecipients_selectRecipientsType_Bcc;
 
-	// Schedule Dashboard
-	By body_scheduleDashboard_jobNameField = By.id("jobName");
-
-	By body_scheduleDashboard_startingPicker_time = By
-			.xpath("//div[contains(@class,'starting-picker')]//input[@placeholder='Select time']");
-	By body_scheduleDashboard_startingPicker_timeZone_clickOnDropdownMenu = By
-			.xpath("//div[contains(@class,'starting-picker')]//div[@role='combobox']");
-	By body_scheduleDashboard_startingPicker_timeZone_selectTimeZone;
-
-	By body_scheduleDashboard_startingPicker_dayOfTheMonth = By
-			.xpath("//div[@class='input-group months-picker']//div[@role='combobox']");
-	By body_scheduleDashboard_startingPicker_dayOfTheMonth_number = By
-			.xpath("//div[@class='input-group months-picker']//input[contains(@class,'input-number')]");
-	By body_scheduleDashboard_startingPicker_dayOfTheMonth_specificday = By.xpath(
-			"//div[@class='input-group-inputs months-picker-inputs']//div[@class='ant-select-selection-selected-value'][contains(.,'1st')]");
-
-	By body_scheduleDashboard_startingPicker_days;
-
-	By body_scheduleDashboard_everyPicker_selectNoRecurrence = By
-			.xpath("//label[contains(@class,'no-recurrence ')]//input[@type='checkbox']");
-	By body_scheduleDashboard_everyPicker_recurrence = By
-			.xpath("//div[contains(@class,'select-recurrence')]//div[contains(@class,'selected-value')]");
-	By body_scheduleDashboard_everyPicker_number = By.xpath("//input[@class='ant-input-number-input']");
-	By body_scheduleDashboard_everyPicker_recurrence_clickOnDropDown = By
-			.xpath("//div[contains(@class,'select-recurrence')]//span");
-
-	By body_scheduleDashboard_datePicker_calanderFrom = By
-			.xpath("(//div[contains(@class,'date-pickers-inputs')]//input[@placeholder='Select date'])[1]");
-	By body_scheduleDashboard_datePicker_calanderTo = By
-			.xpath("(//div[contains(@class,'date-pickers-inputs')]//input[@placeholder='Select date'])[2]");
-	By body_scheduleDashboard_datePicker_doesNotEnd_checkbox = By
-			.xpath("//div[contains(@class,'date-pickers')]//span[@class='ant-checkbox-inner']");
-	By selectDate = By.xpath("//input[@class='ant-calendar-input ']");
-
-	By body_scheduleDashboard_startingPicker_time_hour = By.xpath("//div[@class='ant-time-picker-panel-select'][1]");
-	By body_scheduleDashboard_startingPicker_time_minute = By.xpath("//div[@class='ant-time-picker-panel-select'][2]");
-	By body_scheduleDashboard_startingPicker_time_AmPm = By.xpath("//div[@class='ant-time-picker-panel-select'][3]");
-
 	//// Functions
 	public NewUI_Content_Dashboard_SendDashboard(WebDriver driver) {
 		this.driver = driver;
