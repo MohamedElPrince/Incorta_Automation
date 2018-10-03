@@ -177,7 +177,7 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage
 				.makeACopy_searchAndSelectFolder(testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"));
 		newUI_allContentPage.makeACopy_clickCancelButton();
-		
+
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.assert_makeACopy_popup_notDisplayed();
 
@@ -387,6 +387,8 @@ public class NewUI_MakeACopy {
 
 		newUI_allContentPage.makeACopy_expandIconFolders(
 				testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"), "minus");
+		
+		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.assert_makeACopy_foldersInsideFolderNotExist(
 				testDataReader.getCellData("Automation_Folder_Inside_AutomationFolder"));
 	}
