@@ -110,6 +110,14 @@ public class NewUI_Content {
 	By popup_renameDashboard_field = By.id("inc-rename-catalog-item__control");
 	By popup_renameDashboard_renameCancel_buttons;
 	By popup_renameDashboard_confirmationMessage;
+	By popup_renameDashboard_rename_button;
+	By popup_renameDashboard_newNameField;
+	By popup_renameDashboard_newNameLabel;
+	By popup_renameDashboard_headerLabel;
+	By popup_renameDashboard_errorMessage = By
+			.xpath("//span[contains(@class,'error-message')][contains(.,'Name already exists!')]");
+	By popup_renameDashboard_closeIcon = By.xpath("//i[@class='anticon anticon-close ant-modal-close-icon']");
+	By popup_renameDashboard_screen = By.xpath("//div[@class='ant-modal-content']");
 
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
@@ -709,5 +717,39 @@ public class NewUI_Content {
 
 	public void assert_renameDashboard_renamed_confirmationMessage() {
 		Assertions.assertElementExists(driver, popup_renameDashboard_confirmationMessage, true);
+	}
+
+	public void assert_renameDashboard_renameButtonDisabled() {
+		popup_renameDashboard_rename_button = By.xpath("//button[contains(.,'Rename')]");
+		Assertions.assertElementAttribute(driver, popup_renameDashboard_rename_button, "disabled", "true", true);
+	}
+
+	public void assert_renameDashboard_popupScreen_screenContentDisplayed() {
+		popup_renameDashboard_headerLabel = By.xpath("//span[contains(text(),'Rename Dashboard')]");
+		Assertions.assertElementExists(driver, popup_renameDashboard_headerLabel, true);
+
+		popup_renameDashboard_newNameLabel = By.xpath("//span[contains(text(),'New Name')]");
+		Assertions.assertElementExists(driver, popup_renameDashboard_newNameLabel, true);
+
+		popup_renameDashboard_newNameField = By.id("inc-rename-catalog-item__control");
+		Assertions.assertElementExists(driver, popup_renameDashboard_newNameField, true);
+
+		popup_renameDashboard_renameCancel_buttons = By.xpath("//button[contains(.,'Rename')]");
+		Assertions.assertElementExists(driver, popup_renameDashboard_renameCancel_buttons, true);
+
+		popup_renameDashboard_renameCancel_buttons = By.xpath("//button[contains(.,'Cancel')]");
+		Assertions.assertElementExists(driver, popup_renameDashboard_renameCancel_buttons, true);
+	}
+
+	public void assert_renamedDashboard_duplicateName_errorMessageDisplayed() {
+		Assertions.assertElementExists(driver, popup_renameDashboard_errorMessage, true);
+	}
+
+	public void renameDashboard_clickCloseIcon() {
+		ElementActions.click(driver, popup_renameDashboard_closeIcon);
+	}
+
+	public void assert_renameDashboard_screenNotExist() {
+		Assertions.assertElementExists(driver, popup_renameDashboard_screen, false);
 	}
 }
