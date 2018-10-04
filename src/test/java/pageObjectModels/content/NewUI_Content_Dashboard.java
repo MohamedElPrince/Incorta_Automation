@@ -115,6 +115,18 @@ public class NewUI_Content_Dashboard {
 	By body_scheduleDashboard_startingPicker_time_minute = By.xpath("//div[@class='ant-time-picker-panel-select'][2]");
 	By body_scheduleDashboard_startingPicker_time_AmPm = By.xpath("//div[@class='ant-time-picker-panel-select'][3]");
 
+	// set_default Dashboard pin
+	By body_unpushed_pin = By.xpath(
+			"//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
+	By body_pushed_pin = By.xpath(
+			"//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
+	
+	By body_bookmark = By.xpath("//i[@class='anticon anticon-book']");
+	By popup_bookmarksName;
+	
+	By body_filter = By.xpath("//i[@class='anticon anticon-filter']");
+	By popup_filtersName;
+	
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -153,7 +165,8 @@ public class NewUI_Content_Dashboard {
 	 */
 	public void assert_dashboardName_isCorrect(String dashboardName) {
 		// replaceRegex
-		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
+		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, 1, true);
+//		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
 	}
 
 	/**
@@ -224,10 +237,39 @@ public class NewUI_Content_Dashboard {
 		ElementActions.click(driver, popup_dashboard_folder_scheduleDelivery_button);
 	}
 
+	// Set default dashboard pin
+
+	public void assert_SetDefault_DashboardPin_Displayed() {
+
+		Assertions.assertElementExists(driver, body_unpushed_pin, true);
+
+	}
+
+	public void click_SetDefault_Dashboardpin() {
+
+		ElementActions.click(driver, body_unpushed_pin);
+		Assertions.assertElementExists(driver, body_pushed_pin, true);
+	}
 	// Set As default dashboard pin Section
 
 	public void assert_SetAsDefault_DashboardPin_Displayed() {
 		Assertions.assertElementExists(driver, body_SetAsDefaultDashboard_Pin, true);
+	}
+	
+	public void click_bookmarkButton()
+	{
+		ElementActions.click(driver, body_bookmark);
+	}
+	
+	public void assert_bookmarksExist(String BookmarkName)
+	{
+		popup_bookmarksName = By.xpath("//div[@class='inc-bookmarks-list-item'][contains(.,'"+BookmarkName+"')]");
+		Assertions.assertElementExists(driver, popup_bookmarksName, true);
+	}
+	
+	public void click_filterButton()
+	{
+		ElementActions.click(driver, body_filter);
 	}
 
 	public void assert_SetAsDefaultDashboardPin_tooltip_message() {
@@ -264,7 +306,13 @@ public class NewUI_Content_Dashboard {
 				.contains("isDefault"))) {
 			ElementActions.click(driver, body_SetAsDefaultDashboard_Pin);
 		}
+	}
 
+
+	public void assert_filterApplied(String FilterName)
+	{
+		popup_filtersName = By.xpath("//span[@class='inc-filter-master__menu-item'][contains(.,'"+FilterName+"')]/span");
+		Assertions.assertElementAttribute(driver, popup_filtersName, "class", "([\\s\\S]*)applied", true);
 	}
 
 }
