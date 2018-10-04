@@ -51,11 +51,14 @@ public class NewUI_Content_Dashboard {
 
 	// body Dashboard
 	By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
-	//set_default Dashboard pin
-	By body_unpushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
-	By body_pushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
-	By body_SetAsDefaultDashboardPin_Tooltip = By.xpath("//div[@class='ant-tooltip-inner']/span[text()='Set as default dashboard']");
-	
+
+	// set_default Dashboard pin
+//	By body_unpushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
+//	By body_pushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
+	By body_SetAsDefaultDashboardPin_Tooltip = By
+			.xpath("//div[@class='ant-tooltip-inner']/span[text()='Set as default dashboard']");
+	By body_SetAsDefaultDashboard_Pin = By.xpath(
+			"//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 
 	// Send Dashboard
 	By body_sendDashboard_bodyField = By.xpath("//div[@class='input-group body-box']//textarea");
@@ -78,8 +81,7 @@ public class NewUI_Content_Dashboard {
 	By body_scheduleDashboard_startingPicker_timeZone_clickOnDropdownMenu = By
 			.xpath("//div[contains(@class,'starting-picker')]//div[@role='combobox']");
 	By body_scheduleDashboard_startingPicker_timeZone_selectTimeZone;
-	
-	
+
 	By body_scheduleDashboard_startingPicker_dayOfTheMonth = By
 			.xpath("//div[@class='input-group months-picker']//div[@role='combobox']");
 	By body_scheduleDashboard_startingPicker_dayOfTheMonth_number = By
@@ -150,7 +152,7 @@ public class NewUI_Content_Dashboard {
 	 * @param name
 	 */
 	public void assert_dashboardName_isCorrect(String dashboardName) {
-		//replaceRegex
+		// replaceRegex
 		Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
 	}
 
@@ -168,10 +170,9 @@ public class NewUI_Content_Dashboard {
 	 * Given that the insightType is aggregatedTable, Asserts that the actual
 	 * columnHeaderValue matches with the expected one
 	 * 
-	 * @param columnNumber
-	 *            the desired column number; 1 is the first column table header
-	 * @param columnHeaderValue
-	 *            the expected value of the target cell
+	 * @param columnNumber      the desired column number; 1 is the first column
+	 *                          table header
+	 * @param columnHeaderValue the expected value of the target cell
 	 */
 	public void aggregatedTable_assert_columnHeader_isCorrect(int columnNumber, String columnHeaderValue) {
 		aggregatedTable_columnHeader_link = By.xpath("(//thead//span[@class='colHeader']//a)[" + columnNumber + "]");
@@ -182,13 +183,11 @@ public class NewUI_Content_Dashboard {
 	 * Given that the insightType is aggregatedTable, Asserts that the actual
 	 * cellValue matches with the expected one
 	 * 
-	 * @param typeOrValue
-	 *            "type" refers to the first column, "value" refers to the second
-	 *            column
-	 * @param rowNumber
-	 *            the desired row number; 1 is the first row after the table header
-	 * @param cellValue
-	 *            the expected value of the target cell
+	 * @param typeOrValue "type" refers to the first column, "value" refers to the
+	 *                    second column
+	 * @param rowNumber   the desired row number; 1 is the first row after the table
+	 *                    header
+	 * @param cellValue   the expected value of the target cell
 	 */
 	public void aggregatedTable_assert_cellValue_isCorrect(String typeOrValue, int rowNumber, String cellValue) {
 		switch (typeOrValue.trim().toLowerCase()) {
@@ -224,30 +223,48 @@ public class NewUI_Content_Dashboard {
 		ElementActions.click(driver, body_shareButton);
 		ElementActions.click(driver, popup_dashboard_folder_scheduleDelivery_button);
 	}
-	
-	// Set default dashboard pin
-	
-	public	void assert_SetAsDefault_DashboardPin_Displayed() {
-		
-		Assertions.assertElementExists(driver, body_unpushed_pin, true);
-		
-	}
-	
-	public void clickOn_SetAsDefault_Dashboardpin() {
-	
-		ElementActions.click(driver, body_unpushed_pin);
-		Assertions.assertElementExists(driver, body_pushed_pin, true);
 
+	// Set As default dashboard pin Section
+
+	public void assert_SetAsDefault_DashboardPin_Displayed() {
+		Assertions.assertElementExists(driver, body_SetAsDefaultDashboard_Pin, true);
 	}
 
-	
-	public void check_SetAsDefaultDashboardPin_tooltip() {
-		
-		ElementActions.hover(driver, body_unpushed_pin);
-		Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text", "Set as default dashboard", true);
-		
-	//	Assertions.assertEquals(body_SetAsDefaultDashboardPin_Tooltip, "Set as default dashboard", true);
-		
+	public void assert_SetAsDefaultDashboardPin_tooltip_message() {
+		ElementActions.hover(driver, body_SetAsDefaultDashboard_Pin);
+		Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text",
+				"Set as default dashboard", true);
+	}
+
+	/**
+	 * Asserts that the target Set As Default dashboard pin button is set or not
+	 * 
+	 * 
+	 * @param stateType
+	 * 
+	 *                  True: check that the pin button is selected False: check
+	 *                  that the pin button
+	 */
+	public void assert_setAsDefaultPinIcon_state(Boolean stateType) {
+		Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboard_Pin, "class", "isDefault", 3, stateType);
+	}
+
+	/**
+	 * Take action click on set as default dasboard pin button
+	 * 
+	 * 
+	 * @param actionType
+	 * 
+	 *                   True: set default dashboard False: unset default dashboard
+	 */
+
+	public void click_SetAsDefaultPinIcon(Boolean actionType) {
+
+		if ((actionType != ElementActions.getAttribute(driver, body_SetAsDefaultDashboard_Pin, "class")
+				.contains("isDefault"))) {
+			ElementActions.click(driver, body_SetAsDefaultDashboard_Pin);
+		}
+
 	}
 
 }

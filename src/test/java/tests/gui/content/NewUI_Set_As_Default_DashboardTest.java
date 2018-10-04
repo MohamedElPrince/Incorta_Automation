@@ -92,7 +92,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 				testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Work", "Data1"));
 
 		// ----- Click on set as default dashboard
-		dashboardPage.clickOn_SetAsDefault_Dashboardpin();
+		dashboardPage.click_SetAsDefaultPinIcon(true);
 
 		// LogOut and login again to check that it works as expected
 		newHeaderObject = new NewUI_Header(driver);
@@ -138,7 +138,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 				testDataReader.getCellData("Set_As_Default_Dashboard_Pin_tooltip", "Data1"));
 
 		// ----- hover on set as default dashboard tooltip to check text
-		dashboardPage.check_SetAsDefaultDashboardPin_tooltip();
+		dashboardPage.assert_SetAsDefaultDashboardPin_tooltip_message();
 
 	}
 
@@ -166,7 +166,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 				testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Work", "Data1"));
 
 		// ----- Click on set as default dashboard
-		dashboardPage.clickOn_SetAsDefault_Dashboardpin();
+		dashboardPage.click_SetAsDefaultPinIcon(true);
 
 		// LogOut and login again to check that it works as expected
 		newHeaderObject = new NewUI_Header(driver);
@@ -187,7 +187,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 				testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Work", "Data1"));
 
 		// click on set as default dashboard again to remove the default dashbaord
-		dashboardPage.clickOn_SetAsDefault_Dashboardpin();
+		dashboardPage.click_SetAsDefaultPinIcon(false);
 
 		// LogOut and login again to check that it works as expected
 		newHeaderObject = new NewUI_Header(driver);
@@ -203,9 +203,153 @@ public class NewUI_Set_As_Default_DashboardTest {
 		loginPage.navigate_toURL();
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
 				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
-		
+
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+	}
+
+	@Test(priority = 5, description = "C82147 - Chrome: Set As Default Dashboard : Setting two dashboards as default")
+	@Description("Given I am logged in , When I navigate to two diffrent dashboard, And I set the two dashoard as default, then login again I found that the second dashbaord is set as a default and overwrite the secound one ]")
+	@Severity(SeverityLevel.CRITICAL)
+	public void SettingTwo_DashboardsAsDefault() {
+
+		// LogIn:
+		// ----------
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+
+		// --------------------Navigate to dashboard----------------------------
+
+		allContentPage = new NewUI_Content(driver);
+		allContentPage.navigate_toURL();
+		allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Set_Default_Dashboard_1"));
+
+		dashboardPage = new NewUI_Content_Dashboard(driver);
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_Default_Dashboard_1"));
+
+		// ----- Click on set as default dashboard pin
+		dashboardPage.click_SetAsDefaultPinIcon(true);
+
+		// Navigate to another dashbaord to set it as default
+		allContentPage.navigate_toURL();
+		allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Set_Default_Dashboard_2"));
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_Default_Dashboard_2"));
+
+		// ----- Click on set as default dashboard pin
+		dashboardPage.click_SetAsDefaultPinIcon(true);
+
+		// LogOut and login again to check that it works as expected check that
+		// dashboard two set as default and dashboard one set as default button
+		// unchecked
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+
+		// check that you signout successfully
+		newSignOutPage = new NewUI_SignOut(driver);
+		newSignOutPage.assert_signOutMessageHeaderAndBodyAreCorrect();
+		// ------------------------
+
+		// Login to check the dashboard 2 set as default
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
+				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_Default_Dashboard_2"));
+
+		// Navigate to 1st dashboard to check it
+		allContentPage.navigate_toURL();
+		allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Set_Default_Dashboard_1"));
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_Default_Dashboard_1"));
+
+		// assert that Set As Default Dashboard button is unset
+		dashboardPage.assert_setAsDefaultPinIcon_state(false);
+
+	}
+
+	@Test(priority = 6, description = "C83042 - Chrome: Set a dashboard as default and Share it with another user (view Permission)")
+	@Description("Given I am logged in with a user which has a shared dashboard , When I logged in , And navigate to content section, there is no dashbard seted as default")
+	@Severity(SeverityLevel.CRITICAL)
+	public void shareDashboard_SetAsDefaultWith_ViewPermission() {
+
+		// LogIn:
+
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data4"),
+				testDataReader.getCellData("Username", "Data4"), testDataReader.getCellData("Password", "Data4"));
+
+		// Assert that content tab open by default to make sure that no dashbaord set as
+		// default
+		allContentPage = new NewUI_Content(driver);
+		allContentPage.navigate_toURL();
+		allContentPage.assert_correctCatalogView_isSelected("Content");
+
+		//Navigate to dashboard to check SetAsDefaultPin
+		allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Set_Default_Dashboard_permission"));
+
+		dashboardPage = new NewUI_Content_Dashboard(driver);
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_Default_Dashboard_permission"));
 		
+		dashboardPage.assert_setAsDefaultPinIcon_state(false);
+
+	}
+	
+	@Test(priority = 7, description = "C83043 - Chrome: Set a dashboard as default and Share it with another user (Share Permission)")
+	@Description("Given I am logged in with a user which has a shared dashboard , When I logged in , And navigate to content section, there is no dashbard seted as default")
+	@Severity(SeverityLevel.CRITICAL)
+	public void shareDashboard_SetAsDefaultWith_SharePermission() {
+
+		// LogIn:
+
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
+				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
+
+		// Assert that content tab open by default to make sure that no dashbaord set as
+		// default
+		allContentPage = new NewUI_Content(driver);
+		allContentPage.navigate_toURL();
+		allContentPage.assert_correctCatalogView_isSelected("Content");
+
+		//Navigate to dashboard to check SetAsDefaultPin
+		allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Set_Default_Dashboard_permission"));
+
+		dashboardPage = new NewUI_Content_Dashboard(driver);
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_Default_Dashboard_permission"));
+		
+		dashboardPage.assert_setAsDefaultPinIcon_state(false);
+
+	}
+	
+	
+	@Test(priority = 8, description = "C83044 - Chrome: Set a dashboard as default and Share it with another user (Edit Permission)")
+	@Description("Given I am logged in with a user which has a shared dashboard , When I logged in , And navigate to content section, there is no dashbard seted as default")
+	@Severity(SeverityLevel.CRITICAL)
+	public void shareDashboard_SetAsDefaultWith_EditPermission() {
+
+		// LogIn:
+
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data6"),
+				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
+
+		// Assert that content tab open by default to make sure that no dashbaord set as
+		// default
+		allContentPage = new NewUI_Content(driver);
+		allContentPage.navigate_toURL();
+		allContentPage.assert_correctCatalogView_isSelected("Content");
+
+		//Navigate to dashboard to check SetAsDefaultPin
+		allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Set_Default_Dashboard_permission"));
+
+		dashboardPage = new NewUI_Content_Dashboard(driver);
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_Default_Dashboard_permission"));
+		
+		dashboardPage.assert_setAsDefaultPinIcon_state(false);
 
 	}
 
