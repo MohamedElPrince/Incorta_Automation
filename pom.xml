@@ -11,7 +11,7 @@
 		<incortaRoot>http://35.184.27.139:9091/incorta/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
 		<testSuite.name>newCertificationPath</testSuite.name>
-		<operatingSystem.version>Linux-64</operatingSystem.version>
+		<operatingSystem.version>Windows-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
