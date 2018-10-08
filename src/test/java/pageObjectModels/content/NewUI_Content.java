@@ -2,6 +2,7 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.Assertion;
 
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
@@ -55,7 +56,7 @@ public class NewUI_Content {
 			.xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
 
 	By popup_renameFolder;
-	By popup_Rename_RenameButton = By.xpath("//button//span[contains(text(),'Rename')]");
+	By popup_Rename_RenameButton = By.xpath("//button[contains(.,'Rename')]");
 	By popup_manageDashboard_copy_folderToCopyTo;
 	By popup_manageDashboard_move_moveButton = By.xpath("//button//span[contains(text(),'Move')]");
 
@@ -106,6 +107,10 @@ public class NewUI_Content {
 	By body_searchContent_resultFound;
 	By popup_makeACopy_errorDuplicateDashboardName;
 
+	// Rename Folder
+	By popup_renameFolder_newNameField = By.xpath("//input[@placeholder='Name']");
+	By renameFolder_successfullyRenamedMessage;
+	
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
@@ -633,9 +638,9 @@ public class NewUI_Content {
 	}
 
 	public void assert_makeACopy_folderButtonDisabled(String FolderName) {
-		 popup_makeACopyScreen_foldersSection_folders = By.xpath(
-		 "//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
-		 + FolderName + "')]");
+		popup_makeACopyScreen_foldersSection_folders = By.xpath(
+				"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+						+ FolderName + "')]");
 
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
 				"ant-tree-treenode-disabled", true);
@@ -681,4 +686,21 @@ public class NewUI_Content {
 		String DashboardNewName = DashboardName + " " + "Copy";
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_newNameField, "text", DashboardNewName, true);
 	}
+
+	// Rename Folder
+	public void renameFolder_popup_typeNewFolderName(String NewFolderName) {
+		ElementActions.type(driver, popup_renameFolder_newNameField, NewFolderName);
+	}
+
+	public void renameFolder_popup_clickRename() {
+		ElementActions.click(driver, popup_Rename_RenameButton);
+	}
+
+	public void assert_renameFolder_successMessage(String NewFolderName) {
+		renameFolder_successfullyRenamedMessage = By.xpath(
+				"//div[@class='ant-notification-notice-description']/span[contains(.,\"You've successfully renamed the Folder to\")]/a[contains(.,'"
+						+ NewFolderName + "')]");
+		Assertions.assertElementExists(driver, renameFolder_successfullyRenamedMessage, true);
+	}
+
 }
