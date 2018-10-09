@@ -2,7 +2,6 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.asserts.Assertion;
 
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
@@ -57,6 +56,8 @@ public class NewUI_Content {
 
 	By popup_renameFolder;
 	By popup_Rename_RenameButton = By.xpath("//button[contains(.,'Rename')]");
+	By popup_Rename_CancelButton = By.xpath("//button[contains(.,'Cancel')]");
+
 	By popup_manageDashboard_copy_folderToCopyTo;
 	By popup_manageDashboard_move_moveButton = By.xpath("//button//span[contains(text(),'Move')]");
 
@@ -110,7 +111,11 @@ public class NewUI_Content {
 	// Rename Folder
 	By popup_renameFolder_newNameField = By.xpath("//input[@placeholder='Name']");
 	By renameFolder_successfullyRenamedMessage;
-	
+
+	By popup_renameFolder_headerLabel = By.xpath("//span[contains(.,'Rename Folder')]");
+	By popup_renameFolder_newNameLabel = By.xpath("//span[contains(.,'New Name')]");
+	By popup_renameFolder_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
+
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
@@ -695,12 +700,29 @@ public class NewUI_Content {
 	public void renameFolder_popup_clickRename() {
 		ElementActions.click(driver, popup_Rename_RenameButton);
 	}
+	
+	public void renameFolder_popup_clickCancel() {
+		ElementActions.click(driver, popup_Rename_CancelButton);
+	}
+
+	public void assert_renameFolder_popup_renameButtonDimmed() {
+		Assertions.assertElementAttribute(driver, popup_Rename_RenameButton, "disabled", "true", true);
+	}
 
 	public void assert_renameFolder_successMessage(String NewFolderName) {
 		renameFolder_successfullyRenamedMessage = By.xpath(
 				"//div[@class='ant-notification-notice-description']/span[contains(.,\"You've successfully renamed the Folder to\")]/a[contains(.,'"
 						+ NewFolderName + "')]");
 		Assertions.assertElementExists(driver, renameFolder_successfullyRenamedMessage, true);
+	}
+
+	public void assert_renameFolder_popupScreen_screenContentDisplayed() {
+		Assertions.assertElementExists(driver, popup_renameFolder_screen, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_headerLabel, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_newNameLabel, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_newNameField, true);
+		Assertions.assertElementExists(driver, popup_Rename_RenameButton, true);
+		Assertions.assertElementExists(driver, popup_Rename_CancelButton, true);
 	}
 
 }

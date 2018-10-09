@@ -138,6 +138,58 @@ public class NewUI_RenameFolder {
 		newContentPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Folder_Rename_Chinese_Renamed"));
 	}
 
+	@Test(priority = 6, description = "C83180 - Chrome: Folder : Testing if no change done to the name.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename. Then rename button will be dimmed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_NoChangeInFolderName_RenameButtonDimmed() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+
+		newContentPage.assert_renameFolder_popup_renameButtonDimmed();
+	}
+
+	@Test(priority = 7, description = "C83182 - Chrome: Folder: if Rename bar is empty.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename and delete folder name. Then rename button will be dimmed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_RenameBarIsEmpty_RenameButtonDimmed() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+
+		newContentPage.renameFolder_popup_typeNewFolderName("");
+		newContentPage.assert_renameFolder_popup_renameButtonDimmed();
+	}
+
+	@Test(priority = 8, description = "C83184 - Chrome: Rename folder window layout.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename. Then rename screen will be displayed correctly.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_RenameScreen_DisplayedCorrectly() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+
+		newContentPage.assert_renameFolder_popupScreen_screenContentDisplayed();
+	}
+	
+	@Test(priority = 9, description = "C83186 - Chrome: Rename a folder Cancel button.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename -> Add new name and cancel. Then name will not be changed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_CancelButton_FolderNotRenamed() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+
+		newContentPage.renameFolder_popup_typeNewFolderName(
+				testDataReader.getCellData("Automation_Folder_Rename_Chinese_Renamed"));
+		newContentPage.renameFolder_popup_clickCancel();
+		newContentPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+	}
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
