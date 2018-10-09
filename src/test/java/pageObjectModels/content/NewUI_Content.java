@@ -117,7 +117,7 @@ public class NewUI_Content {
 	By popup_renameDashboard_errorMessage = By
 			.xpath("//span[contains(@class,'error-message')][contains(.,'Name already exists!')]");
 	By popup_renameDashboard_closeIcon = By.xpath("//i[@class='anticon anticon-close ant-modal-close-icon']");
-	By popup_renameDashboard_screen = By.xpath("//div[@class='ant-modal-content']");
+	By popup_renameDashboard_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
 
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
