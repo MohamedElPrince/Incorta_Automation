@@ -190,6 +190,61 @@ public class NewUI_RenameFolder {
 		newContentPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
 	}
 
+	@Test(priority = 10, description = "C83188 - Chrome: User can Rename a folder with a long name.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename - write new folder name [Long Name] and I click on Rename. Then Folder will be renamed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_LongName_Working() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_LongName"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+		newContentPage.renameFolder_popup_typeNewFolderName(
+				testDataReader.getCellData("Automation_Folder_Rename_LongNameRenamed"));
+		newContentPage.renameFolder_popup_clickRename();
+		newContentPage.assert_renameFolder_successMessage(
+				testDataReader.getCellData("Automation_Folder_Rename_LongNameRenamed"));
+		newContentPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Folder_Rename_LongNameRenamed"));
+	}
+
+	@Test(priority = 11, description = "C83192 - Chrome: Verify that User can rename the Folder with a Name contains Spaces.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename - write new folder name [With Spaces] and I click on Rename. Then Folder will be renamed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_WithSpaces_Working() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_WithSpaces"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+		newContentPage.renameFolder_popup_typeNewFolderName(
+				testDataReader.getCellData("Automation_Folder_Rename_WithSpaces_Renamed"));
+		newContentPage.renameFolder_popup_clickRename();
+		newContentPage.assert_renameFolder_successMessage(
+				testDataReader.getCellData("Automation_Folder_Rename_WithSpaces_Renamed"));
+		newContentPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Folder_Rename_WithSpaces_Renamed"));
+	}
+	
+	@Test(priority = 12, description = "C83194 - Chrome: Verify that the user cannot Rename a Folder with an existing Name.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename - write existing folder name and I click on Rename. Then an error will be displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_WithExistingFolderName_ErrorMessageDisplayed() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename1"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+		newContentPage.renameFolder_popup_typeNewFolderName(
+				testDataReader.getCellData("Automation_Folder_Rename2"));
+		newContentPage.renameFolder_popup_clickRename();
+		newContentPage.assert_renameFolder_errorMessageDisplayed();
+	}
+	
+	@Test(priority = 13, description = "C83196 - Chrome: Verify that Close Icon in 'Rename Folder' window is working.")
+	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename - wand I click on close Icon. Then screen will be closed successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void RenameFolder_CloseIcon_Working() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
+
+		newContentPage.renameFolder_clickCloseIcon();
+		newContentPage.assert_renameFolder_screen_notExist();
+	}
+	
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",

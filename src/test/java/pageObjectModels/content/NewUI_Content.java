@@ -2,6 +2,7 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.Assertion;
 
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
@@ -115,6 +116,8 @@ public class NewUI_Content {
 	By popup_renameFolder_headerLabel = By.xpath("//span[contains(.,'Rename Folder')]");
 	By popup_renameFolder_newNameLabel = By.xpath("//span[contains(.,'New Name')]");
 	By popup_renameFolder_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
+	By popup_renameFolder_errorMessage_nameAlreadyExist = By.xpath("//span[contains(@class,'error-message')][contains(text(),'Name already exists!')]");
+	By popup_renameFolder_closeIcon = By.xpath("//button[@class='ant-modal-close']");
 
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
@@ -725,4 +728,18 @@ public class NewUI_Content {
 		Assertions.assertElementExists(driver, popup_Rename_CancelButton, true);
 	}
 
+	public void assert_renameFolder_errorMessageDisplayed()
+	{
+		Assertions.assertElementExists(driver, popup_renameFolder_errorMessage_nameAlreadyExist, true);
+	}
+	
+	public void renameFolder_clickCloseIcon()
+	{
+		ElementActions.click(driver, popup_renameFolder_closeIcon);
+	}
+	
+	public void assert_renameFolder_screen_notExist()
+	{
+		Assertions.assertElementExists(driver, popup_renameFolder_screen, false);
+	}
 }
