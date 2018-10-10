@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
@@ -174,7 +175,7 @@ public class NewUI_RenameFolder {
 
 		newContentPage.assert_renameFolder_popupScreen_screenContentDisplayed();
 	}
-	
+
 	@Test(priority = 9, description = "C83186 - Chrome: Rename a folder Cancel button.")
 	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename -> Add new name and cancel. Then name will not be changed.")
 	@Severity(SeverityLevel.NORMAL)
@@ -195,7 +196,8 @@ public class NewUI_RenameFolder {
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_LongName_Working() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_LongName"));
+		newContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_LongName"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
 				testDataReader.getCellData("Automation_Folder_Rename_LongNameRenamed"));
@@ -210,7 +212,8 @@ public class NewUI_RenameFolder {
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_WithSpaces_Working() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_WithSpaces"));
+		newContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_WithSpaces"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
 				testDataReader.getCellData("Automation_Folder_Rename_WithSpaces_Renamed"));
@@ -219,7 +222,7 @@ public class NewUI_RenameFolder {
 				testDataReader.getCellData("Automation_Folder_Rename_WithSpaces_Renamed"));
 		newContentPage.Assert_DashboardExist(testDataReader.getCellData("Automation_Folder_Rename_WithSpaces_Renamed"));
 	}
-	
+
 	@Test(priority = 12, description = "C83194 - Chrome: Verify that the user cannot Rename a Folder with an existing Name.")
 	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename - write existing folder name and I click on Rename. Then an error will be displayed.")
 	@Severity(SeverityLevel.NORMAL)
@@ -227,24 +230,30 @@ public class NewUI_RenameFolder {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename1"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
-		newContentPage.renameFolder_popup_typeNewFolderName(
-				testDataReader.getCellData("Automation_Folder_Rename2"));
+		newContentPage.renameFolder_popup_typeNewFolderName(testDataReader.getCellData("Automation_Folder_Rename2"));
 		newContentPage.renameFolder_popup_clickRename();
 		newContentPage.assert_renameFolder_errorMessageDisplayed();
 	}
-	
+
 	@Test(priority = 13, description = "C83196 - Chrome: Verify that Close Icon in 'Rename Folder' window is working.")
 	@Description("When I navigate to the content screen, and I click on Folder properties -> Rename - wand I click on close Icon. Then screen will be closed successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_CloseIcon_Working() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+		newContentPage
+				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newContentPage.renameFolder_clickCloseIcon();
 		newContentPage.assert_renameFolder_screen_notExist();
 	}
-	
+
+	@BeforeMethod
+	public void beforeMethod() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+	}
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
