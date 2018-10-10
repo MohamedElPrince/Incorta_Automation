@@ -55,8 +55,7 @@ public class NewUI_Content_Dashboard {
 	// set_default Dashboard pin
 //	By body_unpushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 //	By body_pushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
-	By body_SetAsDefaultDashboardPin_Tooltip = By
-			.xpath("//div[@class='ant-tooltip-inner']/span[text()='Set as default dashboard']");
+	By body_SetAsDefaultDashboardPin_Tooltip = By.xpath("//div[@class='ant-tooltip-inner']");
 	By body_SetAsDefaultDashboard_Pin = By.xpath(
 			"//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 
@@ -120,13 +119,13 @@ public class NewUI_Content_Dashboard {
 			"//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 	By body_pushed_pin = By.xpath(
 			"//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
-	
+
 	By body_bookmark = By.xpath("//i[@class='anticon anticon-book']");
 	By popup_bookmarksName;
-	
+
 	By body_filter = By.xpath("//i[@class='anticon anticon-filter']");
 	By popup_filtersName;
-	
+
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
 		this.driver = driver;
@@ -255,27 +254,32 @@ public class NewUI_Content_Dashboard {
 	public void assert_SetAsDefault_DashboardPin_Displayed() {
 		Assertions.assertElementExists(driver, body_SetAsDefaultDashboard_Pin, true);
 	}
-	
-	public void click_bookmarkButton()
-	{
+
+	public void click_bookmarkButton() {
 		ElementActions.click(driver, body_bookmark);
 	}
-	
-	public void assert_bookmarksExist(String BookmarkName)
-	{
-		popup_bookmarksName = By.xpath("//div[@class='inc-bookmarks-list-item'][contains(.,'"+BookmarkName+"')]");
+
+	public void assert_bookmarksExist(String BookmarkName) {
+		popup_bookmarksName = By.xpath("//div[@class='inc-bookmarks-list-item'][contains(.,'" + BookmarkName + "')]");
 		Assertions.assertElementExists(driver, popup_bookmarksName, true);
 	}
-	
-	public void click_filterButton()
-	{
+
+	public void click_filterButton() {
 		ElementActions.click(driver, body_filter);
 	}
 
-	public void assert_SetAsDefaultDashboardPin_tooltip_message() {
+	/**
+	 * 
+	 * @param isSelected
+	 */
+	public void assert_SetAsDefaultDashboardPin_tooltip_message(Boolean isSelected) {
 		ElementActions.hover(driver, body_SetAsDefaultDashboard_Pin);
-		Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text",
-				"Set as default dashboard", true);
+
+		if (isSelected) {
+			Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text", "Remove", 3, true);
+		} else {
+			Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text", "Set", 3, true);
+		}
 	}
 
 	/**
@@ -308,10 +312,9 @@ public class NewUI_Content_Dashboard {
 		}
 	}
 
-
-	public void assert_filterApplied(String FilterName)
-	{
-		popup_filtersName = By.xpath("//span[@class='inc-filter-master__menu-item'][contains(.,'"+FilterName+"')]/span");
+	public void assert_filterApplied(String FilterName) {
+		popup_filtersName = By
+				.xpath("//span[@class='inc-filter-master__menu-item'][contains(.,'" + FilterName + "')]/span");
 		Assertions.assertElementAttribute(driver, popup_filtersName, "class", "([\\s\\S]*)applied", true);
 	}
 

@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
+import com.shaft.element.JSWaiter;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
@@ -90,7 +91,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 				.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Displayed"));
 
 		// ----- hover on set as default dashboard tooltip to check text
-		dashboardPage.assert_SetAsDefaultDashboardPin_tooltip_message();
+		dashboardPage.assert_SetAsDefaultDashboardPin_tooltip_message(false);
 
 	}
 
@@ -155,12 +156,10 @@ public class NewUI_Set_As_Default_DashboardTest {
 
 		allContentPage = new NewUI_Content(driver);
 		allContentPage.navigate_toURL();
-		allContentPage
-				.click_on_folder_dashboard(testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Remove"));
+		allContentPage.click_on_folder_dashboard(testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Remove"));
 
 		dashboardPage = new NewUI_Content_Dashboard(driver);
-		dashboardPage.assert_dashboardName_isCorrect(
-				testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Remove"));
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Remove"));
 
 		// ----- Click on set as default dashboard
 		dashboardPage.click_SetAsDefaultPinIcon(true);
@@ -180,8 +179,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data6"),
 				testDataReader.getCellData("Username", "Data6"), testDataReader.getCellData("Password", "Data6"));
 
-		dashboardPage.assert_dashboardName_isCorrect(
-				testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Remove"));
+		dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Remove"));
 
 		// click on set as default dashboard again to remove the default dashbaord
 		dashboardPage.click_SetAsDefaultPinIcon(false);
@@ -353,6 +351,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 	@BeforeMethod
 	public void beforeMethod() {
 
+
 	}
 
 	@BeforeClass
@@ -360,7 +359,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 		System.setProperty("testDataFilePath",
 				System.getProperty("testDataFolderPath") + "Set_As_Default_Dashboard_NewUI_Content/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
-		driver = BrowserFactory.getBrowser(testDataReader);
+		driver = BrowserFactory.getBrowser();
 
 	}
 
@@ -370,10 +369,10 @@ public class NewUI_Set_As_Default_DashboardTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.expandUserMenu();
 		newHeaderObject.signOut();
-
-//		// check that you signout successfully
-//		newSignOutPage = new NewUI_SignOut(driver);
-//		newSignOutPage.assert_signOutMessageHeaderAndBodyAreCorrect();
+		//JSWaiter.sleep(1000);
+		// check that you signout successfully
+		newSignOutPage = new NewUI_SignOut(driver);
+		newSignOutPage.assert_signOutMessageHeaderAndBodyAreCorrect();
 
 		ReportManager.getTestLog();
 	}
