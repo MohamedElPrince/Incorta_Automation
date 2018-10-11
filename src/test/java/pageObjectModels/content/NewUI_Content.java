@@ -2,7 +2,6 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.asserts.Assertion;
 
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
@@ -119,7 +118,8 @@ public class NewUI_Content {
 	By popup_renameFolder_errorMessage_nameAlreadyExist = By
 			.xpath("//span[contains(@class,'error-message')][contains(text(),'Name already exists!')]");
 	By popup_renameFolder_closeIcon = By.xpath("//button[@class='ant-modal-close']");
-	// Rename
+
+	// Rename Dashboard
 	By popup_renameDashboard_field = By.id("inc-rename-catalog-item__control");
 	By popup_renameDashboard_renameCancel_buttons;
 	By popup_renameDashboard_confirmationMessage;
@@ -132,6 +132,17 @@ public class NewUI_Content {
 	By popup_renameDashboard_closeIcon = By.xpath("//i[@class='anticon anticon-close ant-modal-close-icon']");
 	By popup_renameDashboard_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
 
+	// Delete Dashboard
+	By popup_deleteDashboard_questionCircle = By.xpath("//i[@class='anticon anticon-question-circle']");
+	By popup_deleteDashboard_confirmTitle = By
+			.xpath("//span[@class='ant-confirm-title'][contains(.,'Delete Dashboard?')]");
+	By popup_deleteDashboard_confirmContent = By.xpath("//div[@class='ant-confirm-content']/div");
+	By popup_deleteDashboard_neverMind_Button = By.xpath("//button[contains(.,'Never Mind')]");
+	By popup_deleteDashboard_delete_Button = By.xpath("//button[contains(.,'Delete')]");
+	By deleteDashboard_confirmationMessage = By.xpath(
+			"//div[@class='ant-notification-notice-description'][contains(.,\"You've successfully deleted one dashboard.\")]");
+	By popup_deleteDashboard_delete_Button_loading = By
+			.xpath("//button[contains(.,’Delete’)][@class=‘ant-btn ant-btn-primary ant-btn-loading']");
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
@@ -409,9 +420,14 @@ public class NewUI_Content {
 				customElementIdentificationTimeout);
 	}
 
-	public void Click_Folder_Dashboard_Properties(String FolderName) {
+	public void click_dashboardFolder_properties_fromGridView(String FolderName) {
 		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"
 				+ FolderName + "']//parent::div//following-sibling::div//button");
+		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
+	}
+
+	public void click_dashboardFolder_properties_fromListView(String FolderName) {
+		tableView_folderDashboardProperties_Button = By.xpath("//tr[contains(.,'" + FolderName + "')]//button");
 		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
 	}
 
@@ -429,8 +445,8 @@ public class NewUI_Content {
 	}
 
 	public void assert_dashboardProperties_manageDashboardButtons_displayed(String Actions) {
-		tableView_dashboardProperties_listOption = By.xpath(
-				"//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
+		tableView_dashboardProperties_listOption = By
+				.xpath("//div[contains(@class,'ant-dropdown ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
 		Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, true);
 	}
 
@@ -753,7 +769,7 @@ public class NewUI_Content {
 		Assertions.assertElementExists(driver, popup_renameFolder_screen, false);
 	}
 
-	// Rename
+	// Rename Dashboard
 	/**
 	 * 
 	 * @param NewDashboardName
@@ -810,4 +826,39 @@ public class NewUI_Content {
 	public void assert_renameDashboard_screenNotExist() {
 		Assertions.assertElementExists(driver, popup_renameDashboard_screen, false);
 	}
+
+	// Delete Dashbaord
+	public void assert_deleteDashboard_popup_screenContentDisplayed(String DashboardName) {
+		Assertions.assertElementExists(driver, popup_deleteDashboard_questionCircle, true);
+		Assertions.assertElementExists(driver, popup_deleteDashboard_confirmTitle, true);
+		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
+		Assertions.assertElementExists(driver, popup_deleteDashboard_neverMind_Button, true);
+		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button, true);
+	}
+
+	public void deleteDashboard_popup_click_confirmationButton_delete() {
+		ElementActions.click(driver, popup_deleteDashboard_delete_Button);
+	}
+
+	public void deleteDashboard_popup_click_confirmationButton_neverMind() {
+		ElementActions.click(driver, popup_deleteDashboard_neverMind_Button);
+	}
+
+	public void assert_deleteDashboard_popup_confirmationMessageDisplayed() {
+		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button_loading, false);
+		Assertions.assertElementExists(driver, deleteDashboard_confirmationMessage, true);
+	}
+
+	public void assert_deleteDashboard_popup_dashboardNameIsCorrect(String DashboardName) {
+		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
+	}
+	
+	public void assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(String DashboardName) {
+		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
+		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text", "Heads up! Deleting " + DashboardName + " can't be undone.", 2, true);
+	}
+
 }
