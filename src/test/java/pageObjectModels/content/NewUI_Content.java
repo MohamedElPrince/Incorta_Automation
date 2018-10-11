@@ -2,6 +2,7 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.Assertion;
 
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
@@ -55,7 +56,9 @@ public class NewUI_Content {
 			.xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
 
 	By popup_renameFolder;
-	By popup_Rename_RenameButton = By.xpath("//button//span[contains(text(),'Rename')]");
+	By popup_Rename_RenameButton = By.xpath("//button[contains(.,'Rename')]");
+	By popup_Rename_CancelButton = By.xpath("//button[contains(.,'Cancel')]");
+
 	By popup_manageDashboard_copy_folderToCopyTo;
 	By popup_manageDashboard_move_moveButton = By.xpath("//button//span[contains(text(),'Move')]");
 
@@ -106,6 +109,16 @@ public class NewUI_Content {
 	By body_searchContent_resultFound;
 	By popup_makeACopy_errorDuplicateDashboardName;
 
+	// Rename Folder
+	By popup_renameFolder_newNameField = By.xpath("//input[@placeholder='Name']");
+	By renameFolder_successfullyRenamedMessage;
+
+	By popup_renameFolder_headerLabel = By.xpath("//span[contains(.,'Rename Folder')]");
+	By popup_renameFolder_newNameLabel = By.xpath("//span[contains(.,'New Name')]");
+	By popup_renameFolder_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
+	By popup_renameFolder_errorMessage_nameAlreadyExist = By
+			.xpath("//span[contains(@class,'error-message')][contains(text(),'Name already exists!')]");
+	By popup_renameFolder_closeIcon = By.xpath("//button[@class='ant-modal-close']");
 	// Rename
 	By popup_renameDashboard_field = By.id("inc-rename-catalog-item__control");
 	By popup_renameDashboard_renameCancel_buttons;
@@ -693,6 +706,51 @@ public class NewUI_Content {
 	public void assert_makeACopy_dashboardNewName_dashboardNamePlusCopyWord(String DashboardName) {
 		String DashboardNewName = DashboardName + " " + "Copy";
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_newNameField, "text", DashboardNewName, true);
+	}
+
+	// Rename Folder
+	public void renameFolder_popup_typeNewFolderName(String NewFolderName) {
+		ElementActions.type(driver, popup_renameFolder_newNameField, NewFolderName);
+	}
+
+	public void renameFolder_popup_clickRename() {
+		ElementActions.click(driver, popup_Rename_RenameButton);
+	}
+
+	public void renameFolder_popup_clickCancel() {
+		ElementActions.click(driver, popup_Rename_CancelButton);
+	}
+
+	public void assert_renameFolder_popup_renameButtonDimmed() {
+		Assertions.assertElementAttribute(driver, popup_Rename_RenameButton, "disabled", "true", true);
+	}
+
+	public void assert_renameFolder_successMessage(String NewFolderName) {
+		renameFolder_successfullyRenamedMessage = By.xpath(
+				"//div[@class='ant-notification-notice-description']/span[contains(.,\"You've successfully renamed the Folder to\")]/a[contains(.,'"
+						+ NewFolderName + "')]");
+		Assertions.assertElementExists(driver, renameFolder_successfullyRenamedMessage, true);
+	}
+
+	public void assert_renameFolder_popupScreen_screenContentDisplayed() {
+		Assertions.assertElementExists(driver, popup_renameFolder_screen, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_headerLabel, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_newNameLabel, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_newNameField, true);
+		Assertions.assertElementExists(driver, popup_Rename_RenameButton, true);
+		Assertions.assertElementExists(driver, popup_Rename_CancelButton, true);
+	}
+
+	public void assert_renameFolder_errorMessageDisplayed() {
+		Assertions.assertElementExists(driver, popup_renameFolder_errorMessage_nameAlreadyExist, true);
+	}
+
+	public void renameFolder_clickCloseIcon() {
+		ElementActions.click(driver, popup_renameFolder_closeIcon);
+	}
+
+	public void assert_renameFolder_screen_notExist() {
+		Assertions.assertElementExists(driver, popup_renameFolder_screen, false);
 	}
 
 	// Rename
