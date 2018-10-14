@@ -854,11 +854,10 @@ public class NewUI_Content {
 		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
 				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
 	}
-	
+
 	public void assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(String DashboardName) {
 		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
-				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
-		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text", "Heads up! Deleting " + DashboardName + " can't be undone.", 2, true);
+				"Heads up! Deleting " + DashboardName + " can't be undone.", 1, true);
 	}
 
 }

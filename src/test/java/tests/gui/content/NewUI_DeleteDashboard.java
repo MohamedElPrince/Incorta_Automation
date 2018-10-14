@@ -182,6 +182,128 @@ public class NewUI_DeleteDashboard {
 				testDataReader.getCellData("Automation_Dashboard_Delete_SpecialCharecters"));
 	}
 
+	@Test(priority = 9, description = "C84215 - Testing that user can delete a dashboard were the data is not loaded.")
+	@Description("When I navigate to the content screen, and I click on dashboard properties -> Delete and I click on delete button. Then dashboard [with no insights] will be deleted.")
+	@Severity(SeverityLevel.NORMAL)
+	public void DeleteDashboard_NoInsights_WorkingNormally() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.click_dashboardFolder_properties_fromGridView(
+				testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
+				testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
+		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
+
+		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newContentPage
+				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
+	}
+
+	@Test(priority = 10, description = "C84215 - Testing that user can delete a dashboard were the data is not loaded.")
+	@Description("When I navigate to the content screen, and I click on dashboard properties -> Delete and I click on delete button. Then dashboard [with schema not loaded] will be deleted.")
+	@Severity(SeverityLevel.NORMAL)
+	public void DeleteDashboard_SchemaNotLoaded_WorkingNormally() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.click_dashboardFolder_properties_fromGridView(
+				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
+				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
+		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
+
+		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newContentPage.assert_dashboard_folder_notExist(
+				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
+	}
+
+	@Test(priority = 11, description = "C84216 - Testing that user can delete a dashboard with Share with Edit Access.")
+	@Description("When I navigate to the content screen, and I click on dashboard properties -> Delete and I click on delete button. Then dashboard [Shared Edit] will be deleted.")
+	@Severity(SeverityLevel.NORMAL)
+	public void DeleteDashboard_SharedEdit_WorkingNormally() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.click_dashboardFolder_properties_fromGridView(
+				testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
+				testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
+		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
+
+		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newContentPage
+				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
+	}
+
+	@Test(priority = 12, description = "C84217 - Testing that user cannot delete a dashboard shared with Share Access.")
+	@Description("When I navigate to the content screen, and I click on dashboard properties -> Delete and I click on delete button. Then dashboard [Shared Share] will not be deleted.")
+	@Severity(SeverityLevel.NORMAL)
+	public void DeleteDashboard_SharedShare_WorkingNormally() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.click_dashboardFolder_properties_fromGridView(
+				testDataReader.getCellData("Automation_Dashboard_Delete_SharedShare"));
+		newContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Delete");
+	}
+
+	@Test(priority = 13, description = "C84218 - Testing that user cannot delete a dashboard share with View Access.")
+	@Description("When I navigate to the content screen, and I click on dashboard properties -> Delete and I click on delete button. Then dashboard [Shared View] will not be deleted.")
+	@Severity(SeverityLevel.NORMAL)
+	public void DeleteDashboard_SharedView_WorkingNormally() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.click_dashboardFolder_properties_fromGridView(
+				testDataReader.getCellData("Automation_Dashboard_Delete_SharedView"));
+		newContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Delete");
+	}
+
+	@Test(priority = 14, description = "C84219 - Testing that user can delete a dashboard created under a folder.")
+	@Description("When I navigate to the content screen, and I click on folder -> dashboard properties -> Delete and I click on delete button. Then dashboard [under folder] will be deleted.")
+	@Severity(SeverityLevel.NORMAL)
+	public void DeleteDashboard_CreatedUnderFolder_WorkingNormally() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.click_on_folder_dashboard(testDataReader.getCellData("Automation_Folder_Delete"));
+		newUI_folderPage = new NewUI_Content_Folder(driver);
+
+		newUI_folderPage.click_dashboardFolder_properties(
+				testDataReader.getCellData("Automation_Dashboard_Delete_UnderFolder"));
+		newUI_folderPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+		newUI_folderPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
+				testDataReader.getCellData("Automation_Dashboard_Delete_UnderFolder"));
+		newUI_folderPage.deleteDashboard_popup_click_confirmationButton_delete();
+
+		newUI_folderPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newUI_folderPage.assert_dashboard_folder_notExist(
+				testDataReader.getCellData("Automation_Dashboard_Delete_UnderFolder"));
+	}
+
+	@Test(priority = 15, description = "C84221 - Testing that Delete Modal can handle a dashboard with Long name.")
+	@Description("When I navigate to the content screen, and I click on dashboard properties -> Delete and I click on delete button. Then dashboard [with long name] will be deleted.")
+	@Severity(SeverityLevel.NORMAL)
+	public void DeleteDashboard_LongName_WorkingNormally() {
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.click_dashboardFolder_properties_fromGridView(
+				testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
+		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
+				testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));
+		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
+
+		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newContentPage
+				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));
+	}
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("testDataFilePath",
