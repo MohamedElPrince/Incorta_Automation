@@ -31,7 +31,7 @@ import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
 import pageObjectModels.security.NewUI_Users;
 
-public class NewUI_MakeACopy {
+public class NewUI_MakeACopyDashboard {
 
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;

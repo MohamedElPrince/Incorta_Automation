@@ -2,7 +2,6 @@ package pageObjectModels.content;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.asserts.Assertion;
 
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
