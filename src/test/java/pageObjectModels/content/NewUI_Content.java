@@ -809,4 +809,12 @@ public class NewUI_Content {
 	public void assert_renameDashboard_screenNotExist() {
 		Assertions.assertElementExists(driver, popup_renameDashboard_screen, false);
 	}
+
+	// Catalog of Content
+	public void catalog_searchAndOpenResults_contentSearchBox(String contentName) {
+		By seachResult_search = By.xpath("//li[@text='"+contentName+"']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		ElementActions.click(driver, seachResult_search);
+	}
+
 }
