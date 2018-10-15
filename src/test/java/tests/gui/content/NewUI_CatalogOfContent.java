@@ -66,14 +66,154 @@ public class NewUI_CatalogOfContent {
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_CreatedBySameUser() {
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage
-				.searchForContentUsingSearchBox(testDataReader.getCellData("Automation_Dashboard_CatalogOfContent"));
 		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent"));
 
 		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
 		newUI_dashboardPage
 				.assert_dashboardName_isCorrect(testDataReader.getCellData("Automation_Dashboard_CatalogOfContent"));
+	}
+
+	@Test(priority = 2, description = "C82753 - Chrome: Testing that the user can search for a specific dashboard Shared with him as 'View'")
+	@Description("When I navigate to the content screen, and I search for dashboard Shared view with me. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_SharedAsViewWithUser() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedView"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedView"));
+	}
+
+	@Test(priority = 3, description = "C82757 - Chrome: Testing that the user can search for a specific dashboard Shared with him as 'Share'")
+	@Description("When I navigate to the content screen, and I search for dashboard Shared share with me. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_SharedAsShareWithUser() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedShare"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedShare"));
+	}
+
+	@Test(priority = 4, description = "C82758 - Chrome: Testing that the user can search for a specific dashboard Shared with him as 'Edit'")
+	@Description("When I navigate to the content screen, and I search for dashboard Shared view with me. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_SharedAsEditWithUser() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedEdit"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedEdit"));
+	}
+
+	@Test(priority = 5, description = "C82759 - Chrome: Testing that the user can search for a dashboard created inside nested folders")
+	@Description("When I navigate to the content screen, and I search for dashboard created inside a nested folder. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_CreatedInsideNestedFolder() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_InsideNestedFolder"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_InsideNestedFolder"));
+	}
+
+	@Test(priority = 6, description = "C82760 - Chrome: Testing that the user can search for a dashboard created with Arabic name")
+	@Description("When I navigate to the content screen, and I search for dashboard created with Arabic name. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_WithArabicName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Arabic"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Arabic"));
+	}
+
+	@Test(priority = 7, description = "C82761 - Chrome: Testing that the user can search for a dashboard created with Special Characters name")
+	@Description("When I navigate to the content screen, and I search for dashboard created with special characters name. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_WithSpecialCharactersName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SpecialCharacters"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SpecialCharacters"));
+	}
+
+	@Test(priority = 8, description = "C82762 - Chrome: Testing that the user can search for a dashboard created with French Characters")
+	@Description("When I navigate to the content screen, and I search for dashboard created with French name. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_WithFrenchName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_French"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_French"));
+	}
+
+	@Test(priority = 9, description = "C82763 - Chrome: Testing that the user can search for a dashboard created with Chinese characters")
+	@Description("When I navigate to the content screen, and I search for dashboard created with Chinese name. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_WithChineseName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
+	}
+
+	@Test(priority = 10, description = "C82768 - Chrome: Testing that the user can search for a dashboard when the page is in 'List' view")
+	@Description("When I navigate to the content screen, and I search for dashboard created in list view. Then dashboard is found successfully.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_FromListView() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.changeCatalogView("table");
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
+	}
+
+	@Test(priority = 11, description = "C82769 - Chrome: Testing that when searching for a deleted dashboard , no data will be displayed")
+	@Description("When I navigate to the content screen, and I search for dashboard after deleting it. Then dashboard is not found.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboard_Deleted() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
 	}
 
 	@BeforeMethod

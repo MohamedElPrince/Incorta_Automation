@@ -29,9 +29,9 @@ public class NewUI_Content {
 	By searchWrapper_searchCount_label = By.className("inc-search-count");
 	By searchWrapper_searchDropDown_button = By.xpath("//span[@class='inc-search-dropdown']//button");
 	By searchWrapper_searchDropDownOption_label; // span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='']
-	By searchWrapper_catalogViewSwitchCard_button = By.xpath("//button[contains(@class,'inc-show-card')]");
-	By searchWrapper_catalogViewSwitchTable_button = By.xpath("//button[contains(@class,'inc-show-table')]");
-
+	By searchWrapper_catalogViewSwitchCard_button = By.xpath("//button[contains(@class,'inc-show-card')]//i");
+	By searchWrapper_catalogViewSwitchTable_button = By.xpath("//button[contains(@class,'inc-show-table')]//i");
+	By seachResult_search;
 	// body-cardView
 	By cardView_contentCard_label; // div[@class='inc-card-title'][text()='']
 	By cardView_contentCardFolder_link;
@@ -812,8 +812,9 @@ public class NewUI_Content {
 
 	// Catalog of Content
 	public void catalog_searchAndOpenResults_contentSearchBox(String contentName) {
-		By seachResult_search = By.xpath("//li[@text='"+contentName+"']");
+		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
 		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, seachResult_search, true);
 		ElementActions.click(driver, seachResult_search);
 	}
 
