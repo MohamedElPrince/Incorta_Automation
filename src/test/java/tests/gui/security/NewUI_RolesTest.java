@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
+import com.shaft.element.JSWaiter;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
@@ -58,7 +59,7 @@ public class NewUI_RolesTest {
 	NewUI_Content_Dashboard dashboardPage;
 	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
 	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
-	
+
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
 	String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
@@ -569,10 +570,9 @@ public class NewUI_RolesTest {
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
-
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add_content();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		subHeaderObject.Select_fromDropdownMenu_iFrame("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
 		String NewDashBoradName = newContentPage.setNewDashboardName();
@@ -637,10 +637,10 @@ public class NewUI_RolesTest {
 
 		dashboardPage = new NewUI_Content_Dashboard(driver);
 		dashboardPage.click_shareOptions_scheduleDelivery_button();
-		
+
 		scheduleDashboardPage = new NewUI_Content_Dashboard_ScheduleDashboard(driver);
-		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared, "LOLO",
-				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
+		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared,
+				"LOLO", "This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
 				"GMT+02:00", "3", "Saturday", "20", "3rd", "2018-12-12");
 		scheduleDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
 //GMT±00:00

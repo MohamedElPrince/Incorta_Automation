@@ -114,7 +114,11 @@ public class NewUI_Skeleton {
 	}
 
 	public void Click_add_content() {
-		ElementActions.click(driver, header_add_content_button);
+		//ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.select(driver, header_add_security_button, "Add Dashboard");
+		//ElementActions.click(driver, header_add_content_button);
+		//ElementActions.switchToDefaultContent(driver);
+
 	}
 	
 	public void Click_add_security() {
@@ -158,7 +162,9 @@ public class NewUI_Skeleton {
 	}
 
 	public void Click_actions() {
+		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, header_actions_button);
+		ElementActions.switchToDefaultContent(driver);
 	}
 	
 	public void Click_ChooseVisualization() {
