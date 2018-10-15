@@ -828,11 +828,17 @@ public class NewUI_Content {
 	}
 
 	// Catalog of Content
-	public void catalog_searchAndOpenResults_contentSearchBox(String contentName) {
+	public void catalog_searchAssertAndOpenResults_contentSearchBox(String contentName) {
 		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
 		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
 		Assertions.assertElementExists(driver, seachResult_search, true);
 		ElementActions.click(driver, seachResult_search);
+	}
+
+	public void catalog_searchAndAssertResultNotExist_contentSearchBox(String contentName) {
+		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, seachResult_search, false);
 	}
 
 	// Delete Dashbaord
