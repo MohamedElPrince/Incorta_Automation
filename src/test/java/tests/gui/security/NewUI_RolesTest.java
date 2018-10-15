@@ -299,7 +299,7 @@ public class NewUI_RolesTest {
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is dimmed
-		NewUI_allContentPage.Click_Folder_Dashboard_Properties(newDashboardName);
+		NewUI_allContentPage.click_dashboardFolder_properties_fromGridView(newDashboardName);
 		// Waiting Nouran to check if the button should be hidden or it will just send
 		// an error that user not authorized to share.
 		NewUI_allContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Share Access");
@@ -444,7 +444,7 @@ public class NewUI_RolesTest {
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is active
-		newContentPage.Click_Folder_Dashboard_Properties(newDashboardName);
+		newContentPage.click_dashboardFolder_properties_fromGridView(newDashboardName);
 		dashboardPage.assert_shared_button_active();
 	}
 
@@ -483,7 +483,7 @@ public class NewUI_RolesTest {
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToDelete);
+		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToDelete);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.dashboard_folder_properties_delete_confirmationButtons("Delete");
 		newContentPage.assert_dashboard_folder_notExist(FolderNameToDelete);
@@ -501,7 +501,7 @@ public class NewUI_RolesTest {
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToShare);
+		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToShare);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share Access");
 		newContentPage.folderProperties_shareAccess_typeAndSelectInSearchField(UserToShareWithFolder, "Can Edit");
 		newContentPage.assert_folder_dashboard_sharedSuccessfully(UserToShareWithFolder, "Can Edit");
@@ -521,7 +521,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.Click_Folder_Dashboard_Properties(FolderToBeRenamed);
+		newContentPage.click_dashboardFolder_properties_fromGridView(FolderToBeRenamed);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
@@ -546,7 +546,7 @@ public class NewUI_RolesTest {
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.Click_Folder_Dashboard_Properties(FolderNameToBeMoved);
+		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToBeMoved);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move to...");
 
 		newContentPage.Click_FolderProperties_MoveFolder_FolderNameToMoveTo(FolderNameToMoveTo);
@@ -668,7 +668,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeDeleted);
+		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToBeDeleted);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 
@@ -690,7 +690,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.Click_Folder_Dashboard_Properties(DashboardToBeShared);
+		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardToBeShared);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share Access");
 
 		newContentPage.folderProperties_shareAccess_typeAndSelectInSearchField(UserToShareWithFolder, "Can Edit");
@@ -711,7 +711,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToBeCopied);
+		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToBeCopied);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
@@ -740,7 +740,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToMove);
+		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToMove);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
 
@@ -768,7 +768,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.Click_Folder_Dashboard_Properties(DashboardNameToRename);
+		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToRename);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");// can't detect xpath of 'rename'
 																					// option
