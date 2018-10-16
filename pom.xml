@@ -8,7 +8,7 @@
 
 	<properties>
 		<!-- Execution Properties -->
-		<incortaRoot>http://35.184.27.139:9091/incorta/</incortaRoot>
+		<incortaRoot>http://35.184.27.139:9080/incorta/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
 		<testSuite.name>newCertificationPath</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
