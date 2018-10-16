@@ -180,6 +180,9 @@ public class NewUI_LoginTest {
 
     @AfterMethod
     public void afterMethod() {
+	newHeaderObject = new NewUI_Header(driver);
+	newHeaderObject.expandUserMenu();
+	newHeaderObject.signOut();
 	ReportManager.getTestLog();
     }
 
