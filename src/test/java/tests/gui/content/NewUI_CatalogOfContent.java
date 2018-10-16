@@ -415,6 +415,35 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_FolderNotCreated"));
 	}
 
+	@Test(priority = 27, description = "C81618 - Chrome: Details : Testing that the dashboard details are displayed")
+	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then details section is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_DashboardScreen_DetailsSectionDisplayed() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_DashboardDetailsSection"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.click_detailsButton();
+		newUI_dashboardPage.assert_detailsSectionContentDisplayed(
+				testDataReader.getCellData("This information is for Automation testing purposes."));
+	}
+
+	@Test(priority = 28, description = "C81617 - Chrome: Details : Testing that the dashboard detail 'Owned by' is displayed")
+	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Owned By is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_DashboardScreen_DetailsSection_OwnedByDisplayed() {
+		newUI_allContentPage = new NewUI_Content(driver);
+
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_DashboardDetailsSection_OwnedBy"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.click_detailsButton();
+		newUI_dashboardPage.assert_detailsSection_ownedByDisplayed(testDataReader.getCellData("Username"));
+	}
+
 	@BeforeMethod
 	public void beforeMethod() {
 		newUI_allContentPage = new NewUI_Content(driver);
