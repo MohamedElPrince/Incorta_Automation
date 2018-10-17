@@ -14,6 +14,7 @@ public class NewUI_Content_Dashboard {
     WebDriver driver;
     ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
     int customElementIdentificationTimeout = 1;
+    int customNumberOfRetries = 1;
 
     //// Elements
     // first nested header
@@ -69,14 +70,14 @@ public class NewUI_Content_Dashboard {
     }
 
     public void waitForDashboardToFullyLoad() {
-	int loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner, customElementIdentificationTimeout);
+	int loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner, customElementIdentificationTimeout, customNumberOfRetries);
 	while (loadingSpinners > 0) {
-	    loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner, customElementIdentificationTimeout);
+	    loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner, customElementIdentificationTimeout, customNumberOfRetries);
 	}
     }
 
     public int countInsights() {
-	return ElementActions.getElementsCount(driver, genericInsight_div, customElementIdentificationTimeout);
+	return ElementActions.getElementsCount(driver, genericInsight_div, customElementIdentificationTimeout, customNumberOfRetries);
     }
 
     public void assert_insightContent_isDisplayed(int insightIndex) {
