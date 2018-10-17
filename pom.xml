@@ -74,6 +74,14 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/${shaft_engine.version}.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>com.mohies</groupId>
+			<artifactId>SHAFT_ENGINE-core</artifactId>
+			<version>${shaft_engine.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/${shaft_engine.version}-javadoc.jar</systemPath>
+			<classifier>javadoc</classifier>
+		</dependency>
 
 		<!-- remote ssh commands -->
 		<dependency>
