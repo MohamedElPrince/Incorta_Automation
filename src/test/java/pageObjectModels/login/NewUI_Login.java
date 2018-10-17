@@ -32,7 +32,7 @@ public class NewUI_Login {
 	By body_newPassword_textBox = By.id("newPassword");
 	By body_confirmNewPassword_textBox = By.id("confirmNewPassword");
 	By body_updatePassword_button = By.xpath("//button[@type='submit'][contains(.,'Create & Go')]");
-	By body_goToSignInPage= By.xpath("//a[@onclick='login()']");
+	By body_goToSignInPage= By.xpath("//a[@href='/incorta#/login']");
 
 	//// Functions
 	public NewUI_Login(WebDriver driver) {

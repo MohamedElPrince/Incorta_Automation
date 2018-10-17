@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
-import com.shaft.element.JSWaiter;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
@@ -560,7 +559,7 @@ public class NewUI_RolesTest {
 	}
 
 	// Prerequisites, Analyzer user
-	@Test(priority = 1, description = "TC C60531_6 - Users permissions - Analyzer User")
+	//@Test(priority = 1, description = "TC C60531_6 - Users permissions - Analyzer User")
 	@Description("When I log in with Analyzer User, navigate to content tab, click on create new dashboard and create a new insight. Then dashboard and insight are created successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_CreateDashboardAndInsight() {
@@ -570,6 +569,7 @@ public class NewUI_RolesTest {
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
+		
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_add_content();
 		subHeaderObject.Select_fromDropdownMenu_iFrame("Add Dashboard");

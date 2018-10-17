@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+ <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -11,7 +11,7 @@
 		<incortaRoot>http://35.184.27.139:9091/incorta/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
 		<testSuite.name>newCertificationPath</testSuite.name>
-		<operatingSystem.version>Linux-64</operatingSystem.version>
+		<operatingSystem.version>Windows-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
@@ -25,7 +25,7 @@
 		<!-- <executionAddress>localhost:4444</executionAddress> -->
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
-		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
+		<defaultElementIdentificationTimeout>1</defaultElementIdentificationTimeout>
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
 		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 

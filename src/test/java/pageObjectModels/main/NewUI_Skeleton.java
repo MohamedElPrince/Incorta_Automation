@@ -108,16 +108,15 @@ public class NewUI_Skeleton {
 	// }
 	
 	public void Click_load() {
-		ElementActions.switchToIframe(driver, body_iframe);
+		//ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, header_load_button);		
-		ElementActions.switchToDefaultContent(driver);
+		//ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Click_add_content() {
-		//ElementActions.switchToIframe(driver, body_iframe);
-		ElementActions.select(driver, header_add_security_button, "Add Dashboard");
-		//ElementActions.click(driver, header_add_content_button);
-		//ElementActions.switchToDefaultContent(driver);
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver, header_add_content_button);
+		ElementActions.switchToDefaultContent(driver);
 
 	}
 	
@@ -205,12 +204,12 @@ public class NewUI_Skeleton {
 	}
 
 	public void Hover_overDropdownMenu(String functionName) {
-		ElementActions.switchToIframe(driver, body_iframe);
+		//ElementActions.switchToIframe(driver, body_iframe);
 		header_genericMenuItem_link = By
 				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//*[contains(normalize-space(.),'"
 						+ functionName + "')][@role='menuitem' or @class='importExport']");
 		ElementActions.hover(driver, header_genericMenuItem_link);
-		ElementActions.switchToDefaultContent(driver);
+		//ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Select_fromUserMenu(String functionName) {

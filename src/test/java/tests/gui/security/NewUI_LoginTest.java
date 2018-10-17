@@ -16,9 +16,10 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.login.NewUI_Login;
+import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
-import pageObjectModels.main.Skeleton;
-import pageObjectModels.security.Users;
+import pageObjectModels.main.NewUI_Skeleton;
+import pageObjectModels.security.NewUI_Users;
 
 @Epic("Incorta -> Login")
 public class NewUI_LoginTest {
@@ -29,9 +30,10 @@ public class NewUI_LoginTest {
 
     // Declaring Page Objects that will be used in the tests
     NewUI_Login loginPage;
+    NewUI_SignOut logoutpage;
     NewUI_Header newHeaderObject;
-    Skeleton subHeaderObject;
-    Users usersPage;
+    NewUI_Skeleton subHeaderObject;
+    NewUI_Users usersPage;
 
     // Declaring public variables that will be shared between tests
     String[] newUserData;
@@ -105,8 +107,7 @@ public class NewUI_LoginTest {
 	newHeaderObject.assert_sectionHeader_isDisplayed("Security");
     }
 
-    // Prerequisites, Manually created 'Super User' [User name/Pass:
-    // AbdelsalamSuper/AbdelsalamSuper1]
+    // Prerequisites, Manually created 'Super User' [User name/Pass: AbdelsalamSuper/AbdelsalamSuper1]
     @Test(priority = 6, description = "TC C60554_6 - Users permissions - SUPER user")
     @Description("When I log in with Super User. Then all tabs will exist.")
     @Severity(SeverityLevel.CRITICAL)
@@ -144,24 +145,30 @@ public class NewUI_LoginTest {
     public void loginUsingNewlyCreatedUserAccount() {
 	loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"), testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
-	usersPage = new Users(driver);
-	usersPage.Navigate_toURL_with_iframe();
+	usersPage = new NewUI_Users(driver);
+	usersPage.Navigate_toURL();
 	// Create New User
 
-	subHeaderObject = new Skeleton(driver);
-	subHeaderObject.Click_add();
+	subHeaderObject = new NewUI_Skeleton(driver);
+	subHeaderObject.Click_add_security();
 
 	newUserData = usersPage.AddNewUser();
 	usersPage.Assert_nameIsDisplayed(newUserData[2]);
+	
+	newHeaderObject = new NewUI_Header(driver);
+	newHeaderObject.expandUserMenu();
+	newHeaderObject.signOut();
+	
+	logoutpage = new NewUI_SignOut(driver);
+	logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
 
 	// Navigate to login page, and login using the new created user.
 	loginPage.navigate_toURL();
 	loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
 
 	// Actions for first time login
-	loginPage.firstTimeLogin(newUserData[1], newUserData[0], newUserData[0]); // take user name as input for the new
-										  // password
-	newHeaderObject = new NewUI_Header(driver);
+	loginPage.firstTimeLogin(newUserData[1], newUserData[0], newUserData[0]); // take user name as input for the new password
+	
 	newHeaderObject.assert_sectionHeader_isSelected("Content");
     }
 
@@ -184,6 +191,9 @@ public class NewUI_LoginTest {
 	newHeaderObject.expandUserMenu();
 	newHeaderObject.signOut();
 	ReportManager.getTestLog();
+	
+	logoutpage = new NewUI_SignOut(driver);
+	logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
     }
 
     @AfterClass

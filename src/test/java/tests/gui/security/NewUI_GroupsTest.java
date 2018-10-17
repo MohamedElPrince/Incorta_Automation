@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
-import com.shaft.element.JSWaiter;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
@@ -15,7 +14,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.login.NewUI_Login;
+import pageObjectModels.main.NewUI_Header;
 import pageObjectModels.main.NewUI_Skeleton;
 import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
@@ -34,6 +35,9 @@ public class NewUI_GroupsTest {
 	NewUI_Skeleton subHeaderObject;
 	NewUI_Users usersPage;
 	NewUI_Groups_Group groupPage;
+	NewUI_Content newContentPage;
+	NewUI_Header newHeaderObject;
+
 
 	// Declaring Variables that will be used in below tests
 	String newGroupName;
@@ -72,7 +76,7 @@ public class NewUI_GroupsTest {
 
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_actions();
-		subHeaderObject.Select_fromDropdownMenu("Add to group");
+		subHeaderObject.Select_fromDropdownMenu_iFrame("Add to group");
 
 		usersPage.SelectGroupForUserFromUsersPage(groupNameForTheUser);
 		usersPage.ClickAddToSelectGroupForUser();
@@ -90,13 +94,12 @@ public class NewUI_GroupsTest {
 	@Description("Given I've logged in. When I navigate to Security Tab, And go to Groups and select any groups, Click on delete. Then groups is deleted.")
 	@Severity(SeverityLevel.NORMAL)
 	public void DeleteGroup() {
-		JSWaiter.sleep(10000);
 		groupsPage = new NewUI_Groups(driver);
 		groupsPage.Navigate_toURL();
 		groupsPage.ClickOnGroupCheckBox(groupNameToBeSelected);
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_actions();
-		subHeaderObject.Select_fromDropdownMenu("Delete selection");
+		subHeaderObject.Select_fromDropdownMenu_iFrame("Delete selection");
 		groupsPage.ClickOnDeleteButton();
 		groupsPage.Assert_groupIsNotDisplayed(groupNameToBeSelected);
 	}
@@ -125,6 +128,11 @@ public class NewUI_GroupsTest {
 		loginPage.navigate_toURL();
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
+		
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+		
 	}
 
 	@AfterMethod
