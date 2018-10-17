@@ -1,17 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mohies</groupId>
 	<artifactId>SHAFT_ENGINE</artifactId>
-	<version>2.0.20181016</version>
+	<version>2.0.20181017</version>
 	<name>SHAFT_ENGINE</name>
 	<description>Selenium Hybrid Automation Framework for Testing [SHAFT]</description>
 
 	<properties>
-		<shaft_engine.version>SHAFT_ENGINE-2.0.20181016</shaft_engine.version>
+		<shaft_engine.version>SHAFT_ENGINE-2.0.20181017</shaft_engine.version>
 
 		<!-- Execution Properties -->
 		<!-- <testSuite.name>cucumber_testSuite</testSuite.name> -->
-		<testSuite.name>testSuite01</testSuite.name>
+		<testSuite.name>unitTestSuite</testSuite.name>
 		<operatingSystem.version>Linux-64</operatingSystem.version>
 		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name>
@@ -25,8 +27,10 @@
 		<executionAddress>local</executionAddress>
 		<!-- <executionAddress>localhost:4444</executionAddress> -->
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
+		<jsonFolderPath>src/test/resources/TestJsonFiles/</jsonFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
-		<defaultElementIdentificationTimeout>30</defaultElementIdentificationTimeout>
+		<defaultElementIdentificationTimeout>10</defaultElementIdentificationTimeout>
+		<attemptsBeforeThrowingElementNotFoundException>6</attemptsBeforeThrowingElementNotFoundException>
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
 		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
 
@@ -40,6 +44,8 @@
 		<aspectj.version>1.9.1</aspectj.version>
 
 		<rest-assured.version>3.1.1</rest-assured.version>
+		<json-simple.version>1.1.1</json-simple.version>
+		<skyscreamer-jsonassert.version>1.5.0</skyscreamer-jsonassert.version>
 
 		<testng.version>6.14.3</testng.version>
 
@@ -122,7 +128,20 @@
 			<version>${cucumber.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>${json-simple.version}</version>
+		</dependency>
+
 		<!-- Other Dependencies -->
+		<dependency>
+			<groupId>org.skyscreamer</groupId>
+			<artifactId>jsonassert</artifactId>
+			<version>${skyscreamer-jsonassert.version}</version>
+			<!-- <scope>test</scope> -->
+		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -206,8 +225,10 @@
 							<executionAddress>${executionAddress}</executionAddress>
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
 							<testDataFolderPath>${testDataFolderPath}</testDataFolderPath>
+							<jsonFolderPath>${jsonFolderPath}</jsonFolderPath>
 							<testDataColumnNamePrefix>${testDataColumnNamePrefix}</testDataColumnNamePrefix>
 							<defaultElementIdentificationTimeout>${defaultElementIdentificationTimeout}</defaultElementIdentificationTimeout>
+							<attemptsBeforeThrowingElementNotFoundException>${attemptsBeforeThrowingElementNotFoundException}</attemptsBeforeThrowingElementNotFoundException>
 							<allureResultsFolderPath>${allureResultsFolderPath}</allureResultsFolderPath>
 							<automaticallyGenerateAllureReport>${automaticallyGenerateAllureReport}</automaticallyGenerateAllureReport>
 						</systemPropertyVariables>
