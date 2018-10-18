@@ -18,6 +18,8 @@ public class NewUI_Content {
 
     //// Elements
     // first nested header
+    By body_add_button = By.xpath("//span[@class='inc-toolbar-button']//*[@data-icon='plus']");
+    By body_add_menuItem; // li[@class='ant-dropdown-menu-item'][contains(.,'Add Folder')]
     By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
     By body_dashboardName;
     By body_dashboardName_folderName;
@@ -26,7 +28,7 @@ public class NewUI_Content {
 
     // second_nested_header
     By searchWrapper_search_textBox = By.xpath("//div[@class='ant-select-search__field__wrap']//input");
-    By searchWrapper_searchResult_label = By.className("inc-search-option__item");
+    By searchWrapper_searchResult_label = By.className("inc-search-option__item--left__name--highLighted"); // inc-search-option__item
     By searchWrapper_searchCount_label = By.className("inc-search-count");
     By searchWrapper_searchDropDown_button = By.xpath("//span[@class='inc-search-dropdown']//button");
     By searchWrapper_searchDropDownOption_label; // span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='']
@@ -38,8 +40,10 @@ public class NewUI_Content {
     By cardView_contentCardFolder_link;
     By cardView_contentCardDashboard_link;
 
-    By cardView_contentCardGenericFolder_link = By.xpath("//div[contains(@class,'inc-folder-view--cards')]//span[@class='inc-card-title-text']");
-    By cardView_contentCardGenericDashboard_link = By.xpath("//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text']");
+    By cardView_contentCardGenericFolder_link = By
+	    .xpath("//div[contains(@class,'inc-folder-view--cards')]//span[@class='inc-card-title-text']");
+    By cardView_contentCardGenericDashboard_link = By
+	    .xpath("//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text']");
 
     // body-tableView
     By tableView_contentTableEntry_link; // tbody[@class='ant-table-tbody']//a
@@ -48,8 +52,13 @@ public class NewUI_Content {
     By tableView_folderDashboardProperties_Button;
     By tableView_dashboardProperties_listOption;
 
-    By tableView_contentTableGenericFolder_link = By.xpath("//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a");
-    By tableView_contentTableGenericDashboard_link = By.xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
+    By tableView_contentTableGenericFolder_link = By
+	    .xpath("//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a");
+    By tableView_contentTableGenericDashboard_link = By
+	    .xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
+
+    // popup_addDashboardOrFolder
+    By popup_addDashboardOrFolder_name_textBox = By.id("name");
 
     By popup_renameFolder;
     By popup_Rename_RenameButton = By.xpath("//button[contains(.,'Rename')]");
@@ -76,16 +85,23 @@ public class NewUI_Content {
     By popup_moveFolder_select_folderNameToMoveTo;
 
     // Make a Copy
-    By popup_makeACopyScreen = By.xpath("//span[contains(.,'Make a Copy')]/parent::div[contains(@class,'title')]/parent::div[contains(@class,'header')]/parent::div[@class='ant-modal-content']");
-    By popup_makeACopyScreen_headerLabel = By.xpath("//div[@class='ant-modal-header']//span[contains(.,'Make a Copy')]");
+    By popup_makeACopyScreen = By.xpath(
+	    "//span[contains(.,'Make a Copy')]/parent::div[contains(@class,'title')]/parent::div[contains(@class,'header')]/parent::div[@class='ant-modal-content']");
+    By popup_makeACopyScreen_headerLabel = By
+	    .xpath("//div[@class='ant-modal-header']//span[contains(.,'Make a Copy')]");
     By popup_makeACopyScreen_newNameLabel = By.xpath("//div[@class='ant-modal-body']//span[contains(.,'New Name')]");
-    By popup_makeACopyScreen_selectFolderLabel = By.xpath("//div[@class='ant-modal-body']//span[contains(.,'Select Folder')]");
-    By popup_makeACopyScreen_foldersSection = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]");
+    By popup_makeACopyScreen_selectFolderLabel = By
+	    .xpath("//div[@class='ant-modal-body']//span[contains(.,'Select Folder')]");
+    By popup_makeACopyScreen_foldersSection = By
+	    .xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]");
 
-    By popup_makeACopyScreen_newFolderButton = By.xpath("//div[@class='ant-modal-footer']//button[contains(.,'New Folder')]");
+    By popup_makeACopyScreen_newFolderButton = By
+	    .xpath("//div[@class='ant-modal-footer']//button[contains(.,'New Folder')]");
     By popup_makeACopyScreen_cancelButton = By.xpath("//div[@class='ant-modal-footer']//button[contains(.,'Cancel')]");
-    By popup_makeACopyScreen_copyAndOpenButton = By.xpath("//div[@class='ant-modal-footer']//button[contains(.,'Copy  & Open')]");
-    By popup_makeACopyScreen_copyButton = By.xpath("//div[@class='ant-modal-footer']//button[@class='ant-btn ant-btn-primary'][contains(.,'Copy')]");
+    By popup_makeACopyScreen_copyAndOpenButton = By
+	    .xpath("//div[@class='ant-modal-footer']//button[contains(.,'Copy  & Open')]");
+    By popup_makeACopyScreen_copyButton = By
+	    .xpath("//div[@class='ant-modal-footer']//button[@class='ant-btn ant-btn-primary'][contains(.,'Copy')]");
 
     By popup_makeACopyScreen_searchField = By.xpath("//input[@placeholder='Search Folders']");
     By popup_makeACopyScreen_selectFolder;
@@ -105,7 +121,8 @@ public class NewUI_Content {
     By popup_renameFolder_headerLabel = By.xpath("//span[contains(.,'Rename Folder')]");
     By popup_renameFolder_newNameLabel = By.xpath("//span[contains(.,'New Name')]");
     By popup_renameFolder_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
-    By popup_renameFolder_errorMessage_nameAlreadyExist = By.xpath("//span[contains(@class,'error-message')][contains(text(),'Name already exists!')]");
+    By popup_renameFolder_errorMessage_nameAlreadyExist = By
+	    .xpath("//span[contains(@class,'error-message')][contains(text(),'Name already exists!')]");
     By popup_renameFolder_closeIcon = By.xpath("//button[@class='ant-modal-close']");
 
     // Rename Dashboard
@@ -116,21 +133,29 @@ public class NewUI_Content {
     By popup_renameDashboard_newNameField;
     By popup_renameDashboard_newNameLabel;
     By popup_renameDashboard_headerLabel;
-    By popup_renameDashboard_errorMessage = By.xpath("//span[contains(@class,'error-message')][contains(.,'Name already exists!')]");
+    By popup_renameDashboard_errorMessage = By
+	    .xpath("//span[contains(@class,'error-message')][contains(.,'Name already exists!')]");
     By popup_renameDashboard_closeIcon = By.xpath("//i[@class='anticon anticon-close ant-modal-close-icon']");
     By popup_renameDashboard_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
 
     // Delete Dashboard
     By popup_deleteDashboard_questionCircle = By.xpath("//i[@class='anticon anticon-question-circle']");
-    By popup_deleteDashboard_confirmTitle = By.xpath("//span[@class='ant-confirm-title'][contains(.,'Delete Dashboard?')]");
+    By popup_deleteDashboard_confirmTitle = By
+	    .xpath("//span[@class='ant-confirm-title'][contains(.,'Delete Dashboard?')]");
     By popup_deleteDashboard_confirmContent = By.xpath("//div[@class='ant-confirm-content']/div");
     By popup_deleteDashboard_neverMind_Button = By.xpath("//button[contains(.,'Never Mind')]");
     By popup_deleteDashboard_delete_Button = By.xpath("//button[contains(.,'Delete')]");
-    By deleteDashboard_confirmationMessage = By.xpath("//div[@class='ant-notification-notice-description'][contains(.,\"You've successfully deleted one dashboard.\")]");
-    By popup_deleteDashboard_delete_Button_loading = By.xpath("//button[contains(.,’Delete’)][@class=‘ant-btn ant-btn-primary ant-btn-loading']");
+    By deleteDashboard_confirmationMessage = By.xpath(
+	    "//div[@class='ant-notification-notice-description'][contains(.,\"You've successfully deleted one dashboard.\")]");
+    By popup_deleteDashboard_delete_Button_loading = By
+	    .xpath("//button[contains(.,’Delete’)][@class=‘ant-btn ant-btn-primary ant-btn-loading']");
     // Others
     By popup_dashboard_sentSuccessfully_message;
     By popup_dashboard_scheduledSuccessfully_message;
+
+    // Splash notification
+    By splash_notificationMessage_text = By.xpath("//div[contains(@class,'ant-notification-notice-message')]");
+    By splash_notificationDescription_text = By.xpath("//div[contains(@class,'ant-notification-notice-description')]");
 
     //// Functions
     public NewUI_Content(WebDriver driver) {
@@ -151,6 +176,59 @@ public class NewUI_Content {
     }
 
     /**
+     * Clicks on the add button, and adds a new item type
+     * 
+     * @param itemType
+     *            accepts "dashboard" or "folder"
+     * @return string value representing the name of the newly created catalog item
+     */
+    public String addNewCatalogItem(String itemType) {
+	String newItemName = "";
+	ElementActions.click(driver, body_add_button);
+	switch (itemType.toLowerCase().trim()) {
+	case "folder":
+	    body_add_menuItem = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Add Folder')]");
+	    newItemName = "Automation" + "_Folder_" + String.valueOf(System.currentTimeMillis());
+	    break;
+	case "dashboard":
+	    body_add_menuItem = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Add Dashboard')]");
+	    newItemName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+	    break;
+	default:
+	    break;
+	}
+	ElementActions.click(driver, body_add_menuItem);
+	ElementActions.type(driver, popup_addDashboardOrFolder_name_textBox, newItemName);
+	ElementActions.keyPress(driver, popup_addDashboardOrFolder_name_textBox, "ENTER");
+	return newItemName;
+    }
+
+    /**
+     * Asserts that the splash notification message contains the provided
+     * expectedMessage
+     * 
+     * @param expectedMessage
+     *            a subset of the message that is expected to show up in the splash
+     *            notification
+     */
+    public void assert_splashNotificationMessage_equalsExpected(String expectedMessage) {
+	Assertions.assertElementAttribute(driver, splash_notificationMessage_text, "text", expectedMessage, 3, true);
+    }
+
+    /**
+     * Asserts that the splash notification description contains the provided
+     * expectedDescription
+     * 
+     * @param expectedDescription
+     *            a subset of the description that is expected to show up in the
+     *            splash notification
+     */
+    public void assert_splashNotificationDescription_equalsExpected(String expectedDescription) {
+	Assertions.assertElementAttribute(driver, splash_notificationDescription_text, "text", expectedDescription, 3,
+		true);
+    }
+
+    /**
      * Changes the current catalogView to the desired one
      * 
      * @param catalogView
@@ -159,12 +237,14 @@ public class NewUI_Content {
     public void changeCatalogView(String catalogView) {
 	switch (catalogView.toLowerCase().trim()) {
 	case "card":
-	    if (!ElementActions.getAttribute(driver, searchWrapper_catalogViewSwitchCard_button, "class").contains("selected")) {
+	    if (!ElementActions.getAttribute(driver, searchWrapper_catalogViewSwitchCard_button, "class")
+		    .contains("selected")) {
 		ElementActions.click(driver, searchWrapper_catalogViewSwitchCard_button);
 	    }
 	    break;
 	case "table":
-	    if (!ElementActions.getAttribute(driver, searchWrapper_catalogViewSwitchTable_button, "class").contains("selected")) {
+	    if (!ElementActions.getAttribute(driver, searchWrapper_catalogViewSwitchTable_button, "class")
+		    .contains("selected")) {
 		ElementActions.click(driver, searchWrapper_catalogViewSwitchTable_button);
 	    }
 	    break;
@@ -183,10 +263,12 @@ public class NewUI_Content {
 
 	switch (catalogView.toLowerCase().trim()) {
 	case "card":
-	    Assertions.assertElementAttribute(driver, searchWrapper_catalogViewSwitchCard_button, "class", "*selected*", true);
+	    Assertions.assertElementAttribute(driver, searchWrapper_catalogViewSwitchCard_button, "class", "*selected*",
+		    true);
 	    break;
 	case "table":
-	    Assertions.assertElementAttribute(driver, searchWrapper_catalogViewSwitchTable_button, "class", "*selected*", true);
+	    Assertions.assertElementAttribute(driver, searchWrapper_catalogViewSwitchTable_button, "class",
+		    "*selected*", true);
 	    break;
 	default:
 	    break;
@@ -242,7 +324,9 @@ public class NewUI_Content {
      */
     public void navigate_toSubPage(String subPageName) {
 	ElementActions.click(driver, searchWrapper_searchDropDown_button);
-	searchWrapper_searchDropDownOption_label = By.xpath("//span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='" + subPageName + "']");
+	searchWrapper_searchDropDownOption_label = By
+		.xpath("//span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='"
+			+ subPageName + "']");
 	ElementActions.click(driver, searchWrapper_searchDropDownOption_label);
     }
 
@@ -282,7 +366,9 @@ public class NewUI_Content {
      * @param dashboardIndex
      */
     public void cardView_navigate_toContentTableDashboard(int dashboardIndex) {
-	cardView_contentCardDashboard_link = By.xpath("(//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text'])[" + dashboardIndex + "]");
+	cardView_contentCardDashboard_link = By
+		.xpath("(//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text'])["
+			+ dashboardIndex + "]");
 	ElementActions.click(driver, cardView_contentCardDashboard_link);
 
     }
@@ -294,7 +380,9 @@ public class NewUI_Content {
      * @param folderIndex
      */
     public void cardView_navigate_toContentTableFolder(int folderIndex) {
-	cardView_contentCardFolder_link = By.xpath("(//div[contains(@class,'inc-folder-view--cards')]//span[@class='inc-card-title-text'])[" + folderIndex + "]");
+	cardView_contentCardFolder_link = By
+		.xpath("(//div[contains(@class,'inc-folder-view--cards')]//span[@class='inc-card-title-text'])["
+			+ folderIndex + "]");
 	ElementActions.click(driver, cardView_contentCardFolder_link);
 
     }
@@ -305,7 +393,8 @@ public class NewUI_Content {
      * @return tableDashboards count
      */
     public int cardView_countDashboards() {
-	return ElementActions.getElementsCount(driver, cardView_contentCardGenericDashboard_link, customElementIdentificationTimeout, customNumberOfRetries);
+	return ElementActions.getElementsCount(driver, cardView_contentCardGenericDashboard_link,
+		customElementIdentificationTimeout, customNumberOfRetries);
     }
 
     /**
@@ -314,7 +403,8 @@ public class NewUI_Content {
      * @return tableFolders count
      */
     public int cardView_countFolders() {
-	return ElementActions.getElementsCount(driver, cardView_contentCardGenericFolder_link, customElementIdentificationTimeout, customNumberOfRetries);
+	return ElementActions.getElementsCount(driver, cardView_contentCardGenericFolder_link,
+		customElementIdentificationTimeout, customNumberOfRetries);
     }
 
     /**
@@ -330,7 +420,8 @@ public class NewUI_Content {
      * @param contentName
      */
     public void tableView_assert_contentTableEntry_exists(String contentName) {
-	tableView_contentTableEntry_link = By.xpath("//tbody[@class='ant-table-tbody']//a[text()='" + contentName + "']");
+	tableView_contentTableEntry_link = By
+		.xpath("//tbody[@class='ant-table-tbody']//a[text()='" + contentName + "']");
 	Assertions.assertElementExists(driver, tableView_contentTableEntry_link, true);
     }
 
@@ -341,7 +432,8 @@ public class NewUI_Content {
      * @param contentName
      */
     public void tableView_navigate_toContentTableEntry(String contentName) {
-	tableView_contentTableEntry_link = By.xpath("//tbody[@class='ant-table-tbody']//a[text()='" + contentName + "']");
+	tableView_contentTableEntry_link = By
+		.xpath("//tbody[@class='ant-table-tbody']//a[text()='" + contentName + "']");
 	ElementActions.click(driver, tableView_contentTableEntry_link);
     }
 
@@ -352,7 +444,8 @@ public class NewUI_Content {
      * @param dashboardIndex
      */
     public void tableView_navigate_toContentTableDashboard(int dashboardIndex) {
-	tableView_contentTableDashboard_link = By.xpath("(//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a)[" + dashboardIndex + "]");
+	tableView_contentTableDashboard_link = By
+		.xpath("(//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a)[" + dashboardIndex + "]");
 	ElementActions.click(driver, tableView_contentTableDashboard_link);
 
     }
@@ -364,7 +457,8 @@ public class NewUI_Content {
      * @param folderIndex
      */
     public void tableView_navigate_toContentTableFolder(int folderIndex) {
-	tableView_contentTableFolder_link = By.xpath("(//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a)[" + folderIndex + "]");
+	tableView_contentTableFolder_link = By
+		.xpath("(//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a)[" + folderIndex + "]");
 	ElementActions.click(driver, tableView_contentTableFolder_link);
 
     }
@@ -375,7 +469,8 @@ public class NewUI_Content {
      * @return tableDashboards count
      */
     public int tableView_countDashboards() {
-	return ElementActions.getElementsCount(driver, tableView_contentTableGenericDashboard_link, customElementIdentificationTimeout, customNumberOfRetries);
+	return ElementActions.getElementsCount(driver, tableView_contentTableGenericDashboard_link,
+		customElementIdentificationTimeout, customNumberOfRetries);
     }
 
     /**
@@ -384,11 +479,13 @@ public class NewUI_Content {
      * @return tableFolders count
      */
     public int tableView_countFolders() {
-	return ElementActions.getElementsCount(driver, tableView_contentTableGenericFolder_link, customElementIdentificationTimeout, customNumberOfRetries);
+	return ElementActions.getElementsCount(driver, tableView_contentTableGenericFolder_link,
+		customElementIdentificationTimeout, customNumberOfRetries);
     }
 
     public void click_dashboardFolder_properties_fromGridView(String FolderName) {
-	tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '" + FolderName + "']//parent::div//following-sibling::div//button");
+	tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"
+		+ FolderName + "']//parent::div//following-sibling::div//button");
 	ElementActions.click(driver, tableView_folderDashboardProperties_Button);
     }
 
@@ -398,22 +495,27 @@ public class NewUI_Content {
     }
 
     public void Click_DashboardProperties_ManageDashboardButtons(String Actions) {
-	tableView_dashboardProperties_listOption = By.xpath("//div[contains(@class,'ant-dropdown')][not(contains(@class,'ant-dropdown-hidden'))]//span[text()='" + Actions + "']");
+	tableView_dashboardProperties_listOption = By.xpath(
+		"//div[contains(@class,'ant-dropdown')][not(contains(@class,'ant-dropdown-hidden'))]//span[text()='"
+			+ Actions + "']");
 	ElementActions.click(driver, tableView_dashboardProperties_listOption);
     }
 
     public void assert_dashboardProperties_manageDashboardButtons_notExist(String Actions) {
-	tableView_dashboardProperties_listOption = By.xpath("//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
+	tableView_dashboardProperties_listOption = By.xpath(
+		"//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
 	Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, false);
     }
 
     public void assert_dashboardProperties_manageDashboardButtons_displayed(String Actions) {
-	tableView_dashboardProperties_listOption = By.xpath("//div[contains(@class,'ant-dropdown ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
+	tableView_dashboardProperties_listOption = By
+		.xpath("//div[contains(@class,'ant-dropdown ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
 	Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, true);
     }
 
     public void dashboard_folder_properties_delete_confirmationButtons(String button) {
-	popup_folderDashboardProperties_delete_confirmationButtons = By.xpath("//button[@type='button']//span[contains(text(),'" + button + "')]");
+	popup_folderDashboardProperties_delete_confirmationButtons = By
+		.xpath("//button[@type='button']//span[contains(text(),'" + button + "')]");
 	ElementActions.click(driver, popup_folderDashboardProperties_delete_confirmationButtons);
     }
 
@@ -434,7 +536,8 @@ public class NewUI_Content {
     }
 
     public void dashboard_popup_clickOnFolder(String FolderName) {
-	popup_manageDashboard_copy_folderToCopyTo = By.xpath("//span[@class='ant-tree-title']//span[text()='" + FolderName + "']");
+	popup_manageDashboard_copy_folderToCopyTo = By
+		.xpath("//span[@class='ant-tree-title']//span[text()='" + FolderName + "']");
 	ElementActions.click(driver, popup_manageDashboard_copy_folderToCopyTo);
     }
 
@@ -487,10 +590,12 @@ public class NewUI_Content {
     public void folderProperties_shareAccess_typeAndSelectInSearchField(String Email, String shareType) {
 	popup_share_searchField = By.xpath("//input[@placeholder='Search names, emails, and groups']");
 	ElementActions.type(driver, popup_share_searchField, Email);
-	popup_share_searchField_selectUser = By.xpath("//div[@class='inc-search-option']//span/mark[text()='" + Email + "']");
+	popup_share_searchField_selectUser = By
+		.xpath("//div[@class='inc-search-option']//span/mark[text()='" + Email + "']");
 	ElementActions.click(driver, popup_share_searchField_selectUser);
 	ElementActions.click(driver, popup_share_shareTypeOptionsMenu);
-	popup_share_selectShareType = By.xpath("//button[@class='inc-clickable share-dropdown ant-dropdown-trigger']" + "//following-sibling::div//li[@class='ant-dropdown-menu-item']//span[text()='" + shareType + "']");
+	popup_share_selectShareType = By.xpath("//button[@class='inc-clickable share-dropdown ant-dropdown-trigger']"
+		+ "//following-sibling::div//li[@class='ant-dropdown-menu-item']//span[text()='" + shareType + "']");
 	ElementActions.click(driver, popup_share_selectShareType);
 	popup_share_clickOnShareButton = By.xpath("//a[@class='share-button']//span");
 	ElementActions.click(driver, popup_share_clickOnShareButton);
@@ -503,27 +608,36 @@ public class NewUI_Content {
      *            Can Edit Can Share Can View
      */
     public void assert_folder_dashboard_sharedSuccessfully(String Email, String shareType) {
-	popup_shareAccessScreen_shareDropDownMenuForUser_button = By.xpath("//div[@class='inc-search-option__item'][contains(.,'" + Email + "')]//button[contains(@class,'share-dropdown')]");
+	popup_shareAccessScreen_shareDropDownMenuForUser_button = By
+		.xpath("//div[@class='inc-search-option__item'][contains(.,'" + Email
+			+ "')]//button[contains(@class,'share-dropdown')]");
 	ElementActions.click(driver, popup_shareAccessScreen_shareDropDownMenuForUser_button);
-	popup_shareAccess_shareDropDown_shareType = By.xpath("//div[@class='inc-search-option__item'][contains(.,'" + Email + "')]//li[.='" + shareType + "']");
-	Assertions.assertElementAttribute(driver, popup_shareAccess_shareDropDown_shareType, "aria-disabled", "true", true);
+	popup_shareAccess_shareDropDown_shareType = By.xpath(
+		"//div[@class='inc-search-option__item'][contains(.,'" + Email + "')]//li[.='" + shareType + "']");
+	Assertions.assertElementAttribute(driver, popup_shareAccess_shareDropDown_shareType, "aria-disabled", "true",
+		true);
     }
 
     public void Click_FolderProperties_MoveFolder_FolderNameToMoveTo(String FolderName) {
 	popup_moveFolder_folderNameToMoveTo = By.xpath("//input[@placeholder='Search Folders']");
 	ElementActions.type(driver, popup_moveFolder_folderNameToMoveTo, FolderName);
 
-	popup_moveFolder_select_folderNameToMoveTo = By.xpath("//li[@role='treeitem']//span[contains(text(),'" + FolderName + "')]");
+	popup_moveFolder_select_folderNameToMoveTo = By
+		.xpath("//li[@role='treeitem']//span[contains(text(),'" + FolderName + "')]");
 	ElementActions.click(driver, popup_moveFolder_select_folderNameToMoveTo);
     }
 
-    public void assert_dashboardSentSuccessfullyMessage(String DashboardName) {
-	popup_dashboard_sentSuccessfully_message = By.xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully sent " + DashboardName + ".')]");
-	Assertions.assertElementExists(driver, popup_dashboard_sentSuccessfully_message, true);
-    }
+//    public void assert_dashboardSentSuccessfullyMessage(String DashboardName) {
+//	popup_dashboard_sentSuccessfully_message = By
+//		.xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully sent "
+//			+ DashboardName + ".')]");
+//	Assertions.assertElementExists(driver, popup_dashboard_sentSuccessfully_message, true);
+//    }
 
     public void assert_dashboardScheduledSuccessfullyMessage(String DashboardName) {
-	popup_dashboard_scheduledSuccessfully_message = By.xpath("//div[@class='ant-notification-notice-description'][contains(text(),'Successfully created schedule for " + DashboardName + ".')]");
+	popup_dashboard_scheduledSuccessfully_message = By.xpath(
+		"//div[@class='ant-notification-notice-description'][contains(text(),'Successfully created schedule for "
+			+ DashboardName + ".')]");
 	Assertions.assertElementExists(driver, popup_dashboard_scheduledSuccessfully_message, true);
     }
 
@@ -549,14 +663,18 @@ public class NewUI_Content {
     }
 
     public void makeACopy_searchAndSelectFolder(String FolderName) {
-	popup_makeACopyScreen_selectFolder = By.xpath("//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='" + FolderName + "']");
+	popup_makeACopyScreen_selectFolder = By.xpath(
+		"//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='"
+			+ FolderName + "']");
 
 	ElementActions.type(driver, popup_makeACopyScreen_searchField, FolderName);
 	ElementActions.click(driver, popup_makeACopyScreen_selectFolder);
     }
 
     public void makeACopy_searchAndSelectAndAssertFolderDisplayed(String FolderName) {
-	popup_makeACopyScreen_selectFolder = By.xpath("//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='" + FolderName + "']");
+	popup_makeACopyScreen_selectFolder = By.xpath(
+		"//div[@class='ant-modal-body']//li[@class='ant-tree-treenode-switcher-open']//li[@role='treeitem']//span[@class='inc-overflow-tooltip inc-tree-node-title']//span[text()='"
+			+ FolderName + "']");
 
 	ElementActions.type(driver, popup_makeACopyScreen_searchField, FolderName);
 	Assertions.assertElementExists(driver, popup_makeACopyScreen_searchField, true);
@@ -584,39 +702,56 @@ public class NewUI_Content {
     }
 
     public void assert_makeACopy_foldersExist(String FolderName) {
-	popup_makeACopyScreen_foldersSection_folders = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'" + FolderName + "')]");
+	popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+			+ FolderName + "')]");
 	Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, true);
     }
 
     public void assert_makeACopy_foldersNotExist(String FolderName) {
-	popup_makeACopyScreen_foldersSection_folders = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'" + FolderName + "')]");
+	popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+			+ FolderName + "')]");
 	Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, false);
     }
 
     public void assert_makeACopy_foldersInsideFolderExist(String FolderName) {
-	popup_makeACopyScreen_foldersSection_folders = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li//ul[contains(.,'" + FolderName + "')]");
+	popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li//ul[contains(.,'"
+			+ FolderName + "')]");
 	Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, true);
     }
 
     public void assert_makeACopy_foldersInsideFolderNotExist(String FolderName) {
-	popup_makeACopyScreen_foldersSection_folders = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li//ul[contains(.,'" + FolderName + "')]");
+	popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li//ul[contains(.,'"
+			+ FolderName + "')]");
 	Assertions.assertElementExists(driver, popup_makeACopyScreen_foldersSection_folders, false);
     }
 
     public void assert_makeACopy_folderButtonEnabled(String FolderName) {
-	popup_makeACopyScreen_foldersSection_folders = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'" + FolderName + "')]");
-	Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class", "ant-tree-treenode-disabled", false);
+	popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+			+ FolderName + "')]");
+	Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
+		"ant-tree-treenode-disabled", false);
     }
 
     public void assert_makeACopy_folderButtonDisabled(String FolderName) {
-	popup_makeACopyScreen_foldersSection_folders = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'" + FolderName + "')]");
+	popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//li[contains(.,'"
+			+ FolderName + "')]");
 
-	Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class", "ant-tree-treenode-disabled", true);
+	Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
+		"ant-tree-treenode-disabled", true);
     }
 
     public void assert_makeACopy_defaultSelectedFolder(String FolderName) {
-	popup_makeACopyScreen_foldersSection_folders = By.xpath("//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//span[contains(@class,'ant-tree-node-content-wrapper')][contains(.,'" + FolderName + "')]");
-	Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class", "([\\s\\S]*)selected", true);
+	popup_makeACopyScreen_foldersSection_folders = By.xpath(
+		"//div[@class='ant-modal-body']//li[contains(@class,'ant-tree-treenode-switcher-open')]//span[contains(@class,'ant-tree-node-content-wrapper')][contains(.,'"
+			+ FolderName + "')]");
+	Assertions.assertElementAttribute(driver, popup_makeACopyScreen_foldersSection_folders, "class",
+		"([\\s\\S]*)selected", true);
     }
 
     /**
@@ -627,20 +762,23 @@ public class NewUI_Content {
      *            minus for collapse OR plus for expand
      */
     public void makeACopy_expandIconFolders(String FolderName, String ExpandOrCollapse) {
-	popup_makeACopy_foldersExapandIcon = By.xpath("//ul[@role='group']//li[contains(.,'" + FolderName + "')]//i[contains(@class,'" + ExpandOrCollapse + "')]");
+	popup_makeACopy_foldersExapandIcon = By.xpath("//ul[@role='group']//li[contains(.,'" + FolderName
+		+ "')]//i[contains(@class,'" + ExpandOrCollapse + "')]");
 	ElementActions.click(driver, popup_makeACopy_foldersExapandIcon);
     }
 
     public void makeACopy_searchContentPageAndAssertAndClick(String SearchText) {
 	body_searchContent = By.xpath("//input[@placeholder='Search content']");
 	ElementActions.type(driver, body_searchContent, SearchText);
-	body_searchContent_resultFound = By.xpath("//span[@class='inc-search-option__item--left'][contains(.,'" + SearchText + "')]");
+	body_searchContent_resultFound = By
+		.xpath("//span[@class='inc-search-option__item--left'][contains(.,'" + SearchText + "')]");
 	Assertions.assertElementExists(driver, body_searchContent_resultFound, true);
 	ElementActions.click(driver, body_searchContent_resultFound);
     }
 
     public void assert_makeACopy_errorIsDisplayed_DuplicateDashboardName() {
-	popup_makeACopy_errorDuplicateDashboardName = By.xpath("//label[contains(@class,'error')][contains(.,'Name already exists!')]");
+	popup_makeACopy_errorDuplicateDashboardName = By
+		.xpath("//label[contains(@class,'error')][contains(.,'Name already exists!')]");
 	Assertions.assertElementExists(driver, popup_makeACopy_errorDuplicateDashboardName, true);
     }
 
@@ -667,7 +805,9 @@ public class NewUI_Content {
     }
 
     public void assert_renameFolder_successMessage(String NewFolderName) {
-	renameFolder_successfullyRenamedMessage = By.xpath("//div[@class='ant-notification-notice-description']/span[contains(.,\"You've successfully renamed the Folder to\")]/a[contains(.,'" + NewFolderName + "')]");
+	renameFolder_successfullyRenamedMessage = By.xpath(
+		"//div[@class='ant-notification-notice-description']/span[contains(.,\"You've successfully renamed the Folder to\")]/a[contains(.,'"
+			+ NewFolderName + "')]");
 	Assertions.assertElementExists(driver, renameFolder_successfullyRenamedMessage, true);
     }
 
@@ -702,7 +842,9 @@ public class NewUI_Content {
     public void renameDashboard_typeNewDashboardName(String NewDashboardName) {
 	ElementActions.type(driver, popup_renameDashboard_field, NewDashboardName);
 
-	popup_renameDashboard_confirmationMessage = By.xpath("//div[@class='ant-notification ant-notification-topRight']/span[contains(.,'" + NewDashboardName + "')]/div");
+	popup_renameDashboard_confirmationMessage = By
+		.xpath("//div[@class='ant-notification ant-notification-topRight']/span[contains(.,'" + NewDashboardName
+			+ "')]/div");
     }
 
     public void renameDashboard_popup_clickOnActionButtons(String Action) {
@@ -752,7 +894,8 @@ public class NewUI_Content {
     public void assert_deleteDashboard_popup_screenContentDisplayed(String DashboardName) {
 	Assertions.assertElementExists(driver, popup_deleteDashboard_questionCircle, true);
 	Assertions.assertElementExists(driver, popup_deleteDashboard_confirmTitle, true);
-	Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text", "Heads up! Deleting " + DashboardName + " can't be undone.", true);
+	Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+		"Heads up! Deleting " + DashboardName + " can't be undone.", true);
 	Assertions.assertElementExists(driver, popup_deleteDashboard_neverMind_Button, true);
 	Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button, true);
     }
@@ -771,11 +914,13 @@ public class NewUI_Content {
     }
 
     public void assert_deleteDashboard_popup_dashboardNameIsCorrect(String DashboardName) {
-	Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text", "Heads up! Deleting " + DashboardName + " can't be undone.", true);
+	Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+		"Heads up! Deleting " + DashboardName + " can't be undone.", true);
     }
 
     public void assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(String DashboardName) {
-	Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text", "Heads up! Deleting " + DashboardName + " can't be undone.", 1, true);
+	Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+		"Heads up! Deleting " + DashboardName + " can't be undone.", 1, true);
     }
 
 }

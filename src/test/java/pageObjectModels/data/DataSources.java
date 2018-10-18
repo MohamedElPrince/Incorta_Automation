@@ -54,11 +54,6 @@ public class DataSources {
 	public void Navigate_toURL() {
 		BrowserActions.navigateToURL(driver, url);
 	}
-	
-	public void Navigate_toURL_with_iframe() {
-		BrowserActions.navigateToURL(driver, url);
-		ElementActions.switchToIframe(driver, body_iframe);
-	}
 
 	public void Assert_dataSourcesTabIsSelected() {
 		Assertions.assertElementAttribute(driver, header_dataSourcesTabHeader_link, "class", "selectedTab", true);
