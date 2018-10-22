@@ -15,7 +15,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
-import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
@@ -47,7 +47,7 @@ public class NewUI_RolesTest {
 	AllContent allContentPage;
 	NewUI_Content NewUI_allContentPage;
 	NewUI_Users usersPage;
-	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 	// AllContent_Dashboard dashboardPage;
 	NewUI_Groups groupsPage;
 	NewUI_SchemaLoads schedulerSchemaLoadsPage;
@@ -58,7 +58,7 @@ public class NewUI_RolesTest {
 	NewUI_Content_Dashboard dashboardPage;
 	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
 	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
-	
+
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
 	String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
@@ -109,7 +109,7 @@ public class NewUI_RolesTest {
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_dataSource();
+		subHeaderObject.click_add();
 
 		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
 		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(DataSourceName);
@@ -129,7 +129,7 @@ public class NewUI_RolesTest {
 		schemasPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_schema();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu_iFrame("Create Schema");
 
 		NewSchemaName = schemasPage.createNewSchema();
@@ -154,7 +154,7 @@ public class NewUI_RolesTest {
 		dataSourcesPage.Assert_dataSourcesTabIsSelected();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_dataSource();
+		subHeaderObject.click_add();
 
 		dataSourcesPage = new NewUI_DataSources(driver);
 		DataSourceName = dataSourcesPage.AddDataSource("MySQL");
@@ -166,7 +166,7 @@ public class NewUI_RolesTest {
 		schemasPage.Navigate_toURL();
 		schemasPage.click_schemaName(ExistingSchemaNAME);
 
-		subHeaderObject.Click_add_schema_insideTheSchema();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu_iFrame("Schema Wizard");
 
 		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
@@ -265,7 +265,7 @@ public class NewUI_RolesTest {
 		allContentPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_content();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newDashboardName = allContentPage.setNewDashboardName();
@@ -273,7 +273,7 @@ public class NewUI_RolesTest {
 		NewUI_allContentPage = new NewUI_Content(driver);
 		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
 
-		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
 		analyzeInsightPage.selectVisualization("Aggregated");
 
@@ -334,7 +334,7 @@ public class NewUI_RolesTest {
 		usersPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
@@ -344,7 +344,7 @@ public class NewUI_RolesTest {
 		groupsPage = new NewUI_Groups(driver);
 		groupsPage.Navigate_toURL();
 
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 
 		newGroupName = groupsPage.AddNewGroup();
 		groupsPage.Navigate_toURL();
@@ -378,7 +378,7 @@ public class NewUI_RolesTest {
 		usersPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
@@ -388,7 +388,7 @@ public class NewUI_RolesTest {
 		groupsPage = new NewUI_Groups(driver);
 		groupsPage.Navigate_toURL();
 
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 
 		newGroupName = groupsPage.AddNewGroup();
 		groupsPage.Navigate_toURL();
@@ -413,7 +413,7 @@ public class NewUI_RolesTest {
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 
-		subHeaderObject.Click_add_content();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
@@ -421,7 +421,7 @@ public class NewUI_RolesTest {
 		NewUI_allContentPage = new NewUI_Content(driver);
 		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
 
-		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
 		analyzeInsightPage.selectVisualization("Aggregated");
 
@@ -462,7 +462,7 @@ public class NewUI_RolesTest {
 		allContentPage = new AllContent(driver);
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_content();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu("Add Folder");
 
 		newContentPage = new NewUI_Content(driver);
@@ -571,7 +571,7 @@ public class NewUI_RolesTest {
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_content();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
@@ -579,7 +579,7 @@ public class NewUI_RolesTest {
 
 		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
-		analyzeInsightPage = new NewUI_AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
 		analyzeInsightPage.selectVisualization("Aggregated");
 		analyzeInsightPage.addTableorSchemaToInsight(SchemaNameForInsight);
@@ -617,7 +617,9 @@ public class NewUI_RolesTest {
 		sendDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
 
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.assert_dashboardSentSuccessfullyMessage(DashboardToBeShared);
+		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
+		newContentPage.assert_splashNotificationDescription_equalsExpected(
+				"You've successfully sent " + DashboardToBeShared + " via Email.");
 		// Need to check that mail is sent successfully
 	}
 
@@ -637,13 +639,13 @@ public class NewUI_RolesTest {
 
 		dashboardPage = new NewUI_Content_Dashboard(driver);
 		dashboardPage.click_shareOptions_scheduleDelivery_button();
-		
+
 		scheduleDashboardPage = new NewUI_Content_Dashboard_ScheduleDashboard(driver);
-		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared, "LOLO",
-				"This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
+		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared,
+				"LOLO", "This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
 				"GMT+02:00", "3", "Saturday", "20", "3rd", "2018-12-12");
 		scheduleDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
-//GMT±00:00
+		// GMT±00:00
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.assert_dashboardScheduledSuccessfullyMessage(DashboardToBeShared);
 

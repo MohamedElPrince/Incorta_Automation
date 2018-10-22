@@ -102,7 +102,9 @@ public class NewUI_SchemaList_SchemaView {
 
 	public String GetNewestTableName() {
 		ElementActions.switchToIframe(driver, body_iframe);
-		return ElementActions.getText(driver, body_lastTableName_label);
+		String newestTableName = ElementActions.getText(driver, body_lastTableName_label);
+		ElementActions.switchToDefaultContent(driver);
+		return newestTableName;
 	}
 
 	public void switchToDefaultContent() {

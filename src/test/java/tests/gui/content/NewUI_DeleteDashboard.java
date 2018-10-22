@@ -13,7 +13,7 @@ import com.shaft.io.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
@@ -45,7 +45,7 @@ public class NewUI_DeleteDashboard {
 	NewUI_SchemaList_SchemaView schemasViewPage;
 	NewUI_Users usersPage;
 
-	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 	NewUI_Content_Dashboard newUI_dashboardPage;
 	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
 	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;

@@ -15,7 +15,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.login.NewUI_Login;
@@ -43,7 +43,7 @@ public class Set_Open_Default_DashboardTest {
 	Skeleton mainPage;
 	NewUI_Content allContentPage;
 	NewUI_Content_Dashboard dashboardPage;
-	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 	
 
 	

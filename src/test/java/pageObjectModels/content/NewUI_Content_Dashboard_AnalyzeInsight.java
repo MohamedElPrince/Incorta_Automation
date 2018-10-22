@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaft.element.ElementActions;
 import com.shaft.io.ExcelFileManager;
 
-public class NewUI_AllContent_Dashboard_AnalyzeInsight {
+public class NewUI_Content_Dashboard_AnalyzeInsight {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
@@ -32,7 +32,7 @@ public class NewUI_AllContent_Dashboard_AnalyzeInsight {
 	By popup_chooseAVisualization_visualizationType_text;
 
 	//// Functions
-	public NewUI_AllContent_Dashboard_AnalyzeInsight(WebDriver driver) {
+	public NewUI_Content_Dashboard_AnalyzeInsight(WebDriver driver) {
 		this.driver = driver;
 	}
 
