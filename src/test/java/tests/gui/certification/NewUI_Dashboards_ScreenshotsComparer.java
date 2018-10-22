@@ -132,6 +132,7 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 				System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
+		BrowserActions.setWindowSize(driver, 1920, 1080);
 
 		newLoginPage = new NewUI_Login(driver);
 		newLoginPage.navigate_toURL();
