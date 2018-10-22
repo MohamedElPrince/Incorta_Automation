@@ -14,7 +14,7 @@ public class Folders_bff_Test {
 	private final static String successStatusCode = "200";
 	JsonObject body = new JsonObject();
 
-	String tenantName = "demo";
+	String tenantName = "demobff";
 	String username = "admin";
 	String password = "admin";
 
@@ -57,7 +57,7 @@ public class Folders_bff_Test {
 	@Test(priority = 3, description = "TC003 - Get Folder")
 	public void createDashboard() {
 		// Defining request parameters
-		serviceName = "/bff/v1/folders/254";
+		serviceName = "/bff/v1/folders/476";
 		requestType = "GET";
 		argument = "";
 		// Performing Request
@@ -67,19 +67,18 @@ public class Folders_bff_Test {
 	@Test(priority = 4, description = "TC004 - update folder")
 	public void updateDashboard() {
 		// Defining request parameters
-				serviceName = "/bff/v1/folders/254";
+				serviceName = "/bff/v1/folders/478";
 				requestType = "PATCH";
 				argument = "";
 				// Performing Request
-				body.addProperty("name", "BFF_Automation_Dashboard_updated_shdsgfdyt");
-				//body.addProperty("parentId", "112");
+				body.addProperty("name", "test");
 				restObject.performRequest(requestType, successStatusCode, serviceName, argument, body);
 	}
 	
 	@Test(priority = 5, description = "TC005 - Delete folder")
 	public void deleteDashboard() {
 		// Defining request parameters
-		serviceName = "/bff/v1/folders/254";
+		serviceName = "/bff/v1/folders/476";
 		requestType = "DELETE";
 		argument = "";
 		// Performing Request
