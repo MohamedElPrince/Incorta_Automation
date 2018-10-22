@@ -59,7 +59,7 @@ public class NewUI_GroupsTest {
 		groupsPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 		newGroupName = groupsPage.AddNewGroup();
 		groupsPage.Navigate_toURL();
 		groupsPage.Assert_groupIsDisplayed(newGroupName);
@@ -76,7 +76,7 @@ public class NewUI_GroupsTest {
 
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_actions();
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Add to group");
+		subHeaderObject.Select_fromDropdownMenu("Add to group");
 
 		usersPage.SelectGroupForUserFromUsersPage(groupNameForTheUser);
 		usersPage.ClickAddToSelectGroupForUser();
@@ -99,7 +99,7 @@ public class NewUI_GroupsTest {
 		groupsPage.ClickOnGroupCheckBox(groupNameToBeSelected);
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_actions();
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Delete selection");
+		subHeaderObject.Select_fromDropdownMenu("Delete selection");
 		groupsPage.ClickOnDeleteButton();
 		groupsPage.Assert_groupIsNotDisplayed(groupNameToBeSelected);
 	}

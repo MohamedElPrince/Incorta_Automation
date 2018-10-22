@@ -150,7 +150,7 @@ public class NewUI_LoginTest {
 	// Create New User
 
 	subHeaderObject = new NewUI_Skeleton(driver);
-	subHeaderObject.Click_add_security();
+	subHeaderObject.click_add();
 
 	newUserData = usersPage.AddNewUser();
 	usersPage.Assert_nameIsDisplayed(newUserData[2]);

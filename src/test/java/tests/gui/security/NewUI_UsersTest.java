@@ -76,7 +76,7 @@ public class NewUI_UsersTest {
 	@Severity(SeverityLevel.CRITICAL)
 	public void createNewUser() {
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
@@ -98,7 +98,7 @@ public class NewUI_UsersTest {
 		usersPage.Select_nameCheckbox(TempUser); // manually created user till be automated as prerequisites
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_actions();
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Delete selection");
+		subHeaderObject.Select_fromDropdownMenu("Delete selection");
 		usersPage.ConfirmUserDeletion();
 		usersPage.Assert_nameIsNotDisplayed(TempUser);
 	}
@@ -143,7 +143,7 @@ public class NewUI_UsersTest {
 
 		// Create New User
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
 
@@ -168,19 +168,23 @@ public class NewUI_UsersTest {
 		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
 		logoutpage.navigate_toLoginPage();
 
-		// loginPage.navigate_toURL();
+		loginPage.navigate_toURL();
 		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
 
 		// Actions for first time login
 		newPassword = "Automation";
 		loginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
-		// newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		// Create new data source
 		dataSourcesPage = new NewUI_DataSources(driver);
 		dataSourcesPage.Navigate_toURL();
 
-		subHeaderObject.Click_add_dataSource();
+		dataSourcesPage.Assert_dataSourcesTabIsSelected();
+
+
+		subHeaderObject.click_add();
 
 		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
 		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
@@ -189,11 +193,12 @@ public class NewUI_UsersTest {
 		// Create Schema
 
 		schemasPage = new NewUI_SchemaList(driver);
+
 		schemasPage.Navigate_toURL();
 		schemasPage.Assert_schemaListTabIsSelected();
 
-		subHeaderObject.Click_add_schema();
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Create Schema");
+		subHeaderObject.click_add();
+		subHeaderObject.Select_fromDropdownMenu("Create Schema");
 
 		newSchemaName = schemasPage.createNewSchema();
 
@@ -204,13 +209,15 @@ public class NewUI_UsersTest {
 		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
 		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		subHeaderObject.Click_add_schema_insideTheSchema();
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Schema Wizard");
+
+		subHeaderObject.click_add();
+		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
 
 		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
 				testDataReader.getCellData("DatabaseTableName")); // need
 		
 		// to check if condition after this function call
+
 		// "Assert_wizardWelcomeTextIsDisplayed()"
 		newDataSourceTableName = schemasViewPage.GetNewestTableName();
 		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
@@ -218,22 +225,22 @@ public class NewUI_UsersTest {
 		// Full Load the created schema
 
 		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
+
+		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
+		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
 		subHeaderObject.Click_load();
 		subHeaderObject.Hover_overDropdownMenu("Load now");
 		subHeaderObject.Select_fromDropdownMenu("Full");
 		schemasViewPage.confirmLoadingData();
 
-		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
-		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
-
 		// Create Folder
-
 		allContentPage = new NewUI_Content(driver);
 		allContentPage.navigate_toURL();
-		subHeaderObject.Click_add_content();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu("Create Folder");
 		newFolderName = allContentPage.SetNewFolderName();/////Need to check share button active or notNOOOOOOTTTTTEEEEEEEEEE
 		//allContentPage.selectContentOptionButton(newFolderName);
+
 
 		dashboardPage = new AllContent_Dashboard(driver);
 		dashboardPage.assert_shared_button_active();
@@ -241,21 +248,21 @@ public class NewUI_UsersTest {
 		dashboardPage.selectShareButton();
 		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
 
+
 		// Create Dashboard and add insight
 		allContentPage.navigate_toURL();
 
-		subHeaderObject.Click_add_security();
+		subHeaderObject.click_add();
 		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
 
 		newDashboardName = allContentPage.setNewDashboardName();
 
+		subHeaderObject.Click_ChooseVisualization();
+		analyzeInsightPage.selectVisualization("Aggregated");
 		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
 		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
 		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
-
-		subHeaderObject.Click_ChooseVisualization();
-		analyzeInsightPage.selectVisualization("Aggregated");
 
 		newInsightName = analyzeInsightPage.setInsightName();
 		subHeaderObject.Click_done();
@@ -266,8 +273,6 @@ public class NewUI_UsersTest {
 		dashboardPage.assert_dashboardName(newDashboardName);
 		dashboardPage.assert_insightName(newInsightName);
 
-		allContentPage.navigate_toURL();
-
 		// assert that share icon in dashboard settings is active
 		//allContentPage.selectContentOptionButton(newDashboardName);
 		dashboardPage.assert_shared_button_active();
@@ -277,8 +282,8 @@ public class NewUI_UsersTest {
 		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
 
 		// Switch to another admin account
-		subHeaderObject.Select_fromUserMenu("Logout");
-		loginPage.navigate_toURL();
+				subHeaderObject.Select_fromUserMenu("Logout");
+				loginPage.navigate_toURL();
 
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
