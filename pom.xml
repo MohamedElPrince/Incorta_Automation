@@ -1,38 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mohies</groupId>
 	<artifactId>incorta</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 
 	<properties>
-		<!-- Execution Properties -->
+		<!-- incorta Test Run Parameters -->
 		<incortaRoot>http://qa.incorta.com:7010/incorta/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
-		<testSuite.name>newCertificationPath</testSuite.name>
-		<operatingSystem.version>Linux-64</operatingSystem.version>
-		<!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
-		<targetBrowser.name>GoogleChrome</targetBrowser.name>
-		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
-			| GoogleChrome | MicrosoftEdge | Safari -->
-		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow>
-		<screenshotParams_whenToTakeAScreenshot>ValidationPointsOnly</screenshotParams_whenToTakeAScreenshot>
-		<!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
-		<screenshotParams_isFullPageScreenshot>false</screenshotParams_isFullPageScreenshot>
-		<screenshotParams_skippedElementsFromScreenshot></screenshotParams_skippedElementsFromScreenshot>
-		<executionAddress>local</executionAddress>
-		<!-- <executionAddress>localhost:4444</executionAddress> -->
+		
+		<!-- SHAFT Test Run Parameters -->
+		<testSuite.name>unitTestSuite</testSuite.name>
+		
+		<executionAddress>local</executionAddress> <!-- Acceptable Values: local | seleniumGridHubIP:port -->
+		<operatingSystem.version>Linux-64</operatingSystem.version> <!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
+		<targetBrowser.name>GoogleChrome</targetBrowser.name> 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer | GoogleChrome | MicrosoftEdge | Safari -->
+		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow> <!-- Acceptable Values: true | false -->
+		
+		<defaultElementIdentificationTimeout>10</defaultElementIdentificationTimeout> <!-- Accepts integer values that represent the default timeout for finding a webElement -->
+		<attemptsBeforeThrowingElementNotFoundException>6</attemptsBeforeThrowingElementNotFoundException> <!-- Accepts integer values that represent the number of attempts before failing to find a webElement -->
+		
+		<screenshotParams_whenToTakeAScreenshot>ValidationPointsOnly</screenshotParams_whenToTakeAScreenshot> <!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
+		<screenshotParams_highlightElements>true</screenshotParams_highlightElements> <!-- Acceptable Values: true | false -->
+		<screenshotParams_screenshotType>Regular</screenshotParams_screenshotType> <!-- Acceptable Values: Regular | FullPage | Element -->
+		<screenshotParams_skippedElementsFromScreenshot></screenshotParams_skippedElementsFromScreenshot> <!-- The above element will be skipped in case of persistent elements/menus that show up multiple times in the full page screenshots -->
+		
+		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport> <!-- Acceptable Values: true | false -->
+		
+		<!-- SHAFT Configuration Parameters -->
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<jsonFolderPath>src/test/resources/TestJsonFiles/</jsonFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
-		<defaultElementIdentificationTimeout>10</defaultElementIdentificationTimeout>
-		<attemptsBeforeThrowingElementNotFoundException>6</attemptsBeforeThrowingElementNotFoundException>
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
-		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport>
-
-		<!-- Version Numbers Properties -->
-		<shaft_engine.version>2.0.20181022</shaft_engine.version>
+		
+		<!-- Dependencies/Plugins Version Numbers Parameters -->
+		<shaft_engine.version>2.0.20181023</shaft_engine.version>
 		<jdk.version>1.8</jdk.version>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
@@ -70,7 +72,6 @@
 
 	<build>
 		<pluginManagement>
-			<!--Plugins -->
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -81,7 +82,6 @@
 						<target>${jdk.version}</target>
 					</configuration>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -94,7 +94,8 @@
 							<targetOperatingSystem>${operatingSystem.version}</targetOperatingSystem>
 							<targetBrowserName>${targetBrowser.name}</targetBrowserName>
 							<screenshotParams_whenToTakeAScreenshot>${screenshotParams_whenToTakeAScreenshot}</screenshotParams_whenToTakeAScreenshot>
-							<screenshotParams_isFullPageScreenshot>${screenshotParams_isFullPageScreenshot}</screenshotParams_isFullPageScreenshot>
+							<screenshotParams_highlightElements>${screenshotParams_highlightElements}</screenshotParams_highlightElements>
+							<screenshotParams_screenshotType>${screenshotParams_screenshotType}</screenshotParams_screenshotType>
 							<screenshotParams_skippedElementsFromScreenshot>${screenshotParams_skippedElementsFromScreenshot}</screenshotParams_skippedElementsFromScreenshot>
 							<executionAddress>${executionAddress}</executionAddress>
 							<autoMaximizeBrowserWindow>${autoMaximizeBrowserWindow}</autoMaximizeBrowserWindow>
@@ -106,8 +107,6 @@
 							<allureResultsFolderPath>${allureResultsFolderPath}</allureResultsFolderPath>
 							<automaticallyGenerateAllureReport>${automaticallyGenerateAllureReport}</automaticallyGenerateAllureReport>
 						</systemPropertyVariables>
-						<!-- To continue execution after validation errors are thrown in the 
-							before method -->
 						<configfailurepolicy>continue</configfailurepolicy>
 						<suiteXmlFiles>
 							<suiteXmlFile>src\test\resources\TestSuites\${testSuite.name}.xml</suiteXmlFile>
@@ -130,7 +129,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
 	<repositories>
 		<repository>
 			<snapshots>
@@ -151,5 +149,4 @@
 			<url>https://dl.bintray.com/mohabmohie/SHAFT</url>
 		</pluginRepository>
 	</pluginRepositories>
-
 </project>
