@@ -109,12 +109,8 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 		// newDashboardPage.waitForDashboardToFullyLoad(); //called inside the
 		// constructor
 		newDashboardPage.reportcurrentDashboardURL();
-		try {
-		    newDashboardPage.assert_dashboardName_matches(".*");
-		    crawlInsightsInCurrentDashboard();
-		} catch (AssertionError e) {
-		    ReportManager.log("FAILED TO LOAD THIS DASHBOARD");
-		}
+		newDashboardPage.verify_dashboardName_matches(".*");
+		crawlInsightsInCurrentDashboard();
 		BrowserActions.navigateBack(driver);
 	    }
 	}
