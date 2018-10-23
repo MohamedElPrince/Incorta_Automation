@@ -51,12 +51,16 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 	public void dashboardCrawler() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
 		// newContentPage.changeCatalogView("Card");
 
 		crawlDashboards();
 	}
 
-	@Test(priority = 2, description = "TC002 - Compare newly taken screenshots against refrence images.")
+	// @Test(priority = 2, description = "TC002 - Compare newly taken screenshots
+	// against refrence images.")
 	public void compareFolders() {
 		String refrenceFolderPath = System.getProperty("testDataFolderPath")
 				+ "dashboards_ScreenshotsComparer/reference";
@@ -132,11 +136,12 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 				System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
-		BrowserActions.setWindowSize(driver, 1920, 1080);
+		// BrowserActions.setWindowSize(driver, 1920, 1080);
 
 		newLoginPage = new NewUI_Login(driver);
 		newLoginPage.navigate_toURL();
 		newLoginPage.verify_correctVersionNumberIsDisplayed();
+		// newLoginPage.userLogin("demo", "admin", "admin");
 		newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 				testDataReader.getCellData("Password"));
 	}
