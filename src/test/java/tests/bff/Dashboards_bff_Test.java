@@ -25,6 +25,7 @@ public class Dashboards_bff_Test {
 	String password = "admin";
 	String name;
 	String id;
+	List<Integer> foldersIds;
 
 	RestActions restObject;
 
@@ -36,12 +37,47 @@ public class Dashboards_bff_Test {
 		restObject.performRequest(requestType, "201", serviceName, argument, new String[] { username, password });
 	}
 
-	@Test(priority = 1, description = "TC001 - List All Dashboards")
-	public void get_update_Dashboards() {
+	@Test(priority = 1, description = "TC001 - Get All folders & sub folders, then get all dashboards at all folders & update their names")
+	public void get_update_Dashboards_FromAllFolders() {
+		getAllFolders();
 		serviceName = "/bff/v1/dashboards";
 		requestType = "GET";
+		// argument = "";
+		// updateDashboards(restObject.performRequest(requestType, successStatusCode,
+		// serviceName, argument));
+		for (int i = 0; i < foldersIds.size(); i++) {
+			argument = "folderId=" + (foldersIds.get(i)).toString();
+			Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
+			if (!response.jsonPath().getList("dashboards").isEmpty()) {
+				updateDashboards(response);
+			}
+		}
+	}
+
+	public void getAllFolders() {
+		serviceName = "/bff/v1/folders";
+		requestType = "GET";
 		argument = "";
-		updateDashboards(restObject.performRequest(requestType, successStatusCode, serviceName, argument));
+		Response response = requestAllFolders(serviceName, requestType, argument);
+		foldersIds = response.jsonPath().getList("folders.id");
+
+		if (!foldersIds.isEmpty()) {
+			for (int i = 0; i < foldersIds.size(); i++) {
+				serviceName = "/bff/v1/folders";
+				requestType = "GET";
+				argument = "id=" + (foldersIds.get(i)).toString();
+				List<Integer> tempList = requestAllFolders(serviceName, requestType, argument).jsonPath()
+						.getList("folders.id");
+				if (!tempList.isEmpty()) {
+					foldersIds.addAll(tempList);
+				}
+			}
+		}
+	}
+
+	public Response requestAllFolders(String serviceName, String requestType, String argument) {
+		Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
+		return response;
 	}
 
 	public void updateDashboards(Response response) {
@@ -56,7 +92,7 @@ public class Dashboards_bff_Test {
 			requestType = "PATCH";
 			argument = "";
 
-			body.addProperty("name", name + "_18oct");
+			body.addProperty("name", name + "_" + String.valueOf(System.currentTimeMillis()));
 			restObject.performRequest(requestType, successStatusCode, serviceName, argument, body);
 		});
 	}
