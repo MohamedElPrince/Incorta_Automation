@@ -42,10 +42,11 @@ public class Dashboards_bff_Test {
 		getAllFolders();
 		serviceName = "/bff/v1/dashboards";
 		requestType = "GET";
-		// argument = "";
-		// updateDashboards(restObject.performRequest(requestType, successStatusCode,
-		// serviceName, argument));
+		argument = "";
+		updateDashboards(restObject.performRequest(requestType, successStatusCode,serviceName, argument));
 		for (int i = 0; i < foldersIds.size(); i++) {
+			serviceName = "/bff/v1/dashboards";
+			requestType = "GET";
 			argument = "folderId=" + (foldersIds.get(i)).toString();
 			Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 			if (!response.jsonPath().getList("dashboards").isEmpty()) {
@@ -92,7 +93,7 @@ public class Dashboards_bff_Test {
 			requestType = "PATCH";
 			argument = "";
 
-			body.addProperty("name", name + "_" + String.valueOf(System.currentTimeMillis()));
+			body.addProperty("name", name + "_BFFupdated");
 			restObject.performRequest(requestType, successStatusCode, serviceName, argument, body);
 		});
 	}
