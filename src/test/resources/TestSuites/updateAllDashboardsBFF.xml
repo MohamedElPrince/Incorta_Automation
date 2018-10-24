@@ -3,8 +3,7 @@
 <suite name="BFF Automation" verbose="10">
 	<test name="Update Dashboards With BFF">
 		<classes>
-			<class
-				name="tests.bff.Dashboards_bff_Test">
+			<class name="tests.bff.Dashboards_bff_Test">
 			</class>
 		</classes>
 	</test>
