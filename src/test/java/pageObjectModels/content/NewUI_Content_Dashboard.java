@@ -72,6 +72,8 @@ public class NewUI_Content_Dashboard {
 
 	By body_filter = By.xpath("//i[@class='anticon anticon-filter']");
 	By popup_filtersName;
+	By body_insightSettigns = By.xpath("//Button[@class='insight__header-menu ant-dropdown-trigger']");
+	By body_insightSettigns_menueItemButtons;
 
 	//// Functions
 	public NewUI_Content_Dashboard(WebDriver driver) {
@@ -262,8 +264,23 @@ public class NewUI_Content_Dashboard {
 				true);
 	}
 
+	public void assert_detailsSection_modifiedByDisplayed(String DashboardUpdater) {
+		Assertions.assertElementAttribute(driver, body_detailsSection_modifiedBy, "text",
+				"Modified by " + DashboardUpdater, true);
+	}
+
+	public void assert_detailsSection_lastModifiedDisplayed() {
+		Assertions.assertElementExists(driver, body_detailsSection_lastModified, true);
+	}
+
+	// "([\\s\\S]*" + Empty + ".*[\\s\\S]*)"
 	public void addNewInsight() {
 		ElementActions.click(driver, pageDetails_add_button);
 	}
 
+	public void insightSettings_clickOnMenuItem(String MenuItem) {
+		ElementActions.click(driver, body_insightSettigns);
+		body_insightSettigns_menueItemButtons = By.xpath("//li[@role='menuitem'][contains(.,'" + MenuItem + "')]");
+		ElementActions.click(driver, body_insightSettigns_menueItemButtons);
+	}
 }

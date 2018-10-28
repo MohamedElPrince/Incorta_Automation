@@ -250,7 +250,7 @@ public class NewUI_CatalogOfContent {
 				.assert_dashboardName_isCorrect(testDataReader.getCellData("Automation_Folder_CatalogOfContent"));
 	}
 
-	@Test(priority = 15, description = "C82774 - Chrome: Testing that the user can search for a specific Folder Shared with him as \"View\"")
+	@Test(priority = 15, description = "C82774 - Chrome: Testing that the user can search for a specific Folder Shared with him as 'View'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared view with me. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_SharedAsViewWithUser() {
@@ -264,7 +264,7 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedView"));
 	}
 
-	@Test(priority = 16, description = "Chrome: Testing that the user can search for a specific Folder Shared with him as \"Share\"")
+	@Test(priority = 16, description = "Chrome: Testing that the user can search for a specific Folder Shared with him as 'Share'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared share with me. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_SharedAsShareWithUser() {
@@ -278,7 +278,7 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedShare"));
 	}
 
-	@Test(priority = 17, description = "C82776 - Chrome: Testing that the user can search for a specific Folder Shared with him as \"Edit\"")
+	@Test(priority = 17, description = "C82776 - Chrome: Testing that the user can search for a specific Folder Shared with him as 'Edit'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared view with me. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_SharedAsEditWithUser() {
@@ -362,7 +362,7 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Chinese"));
 	}
 
-	@Test(priority = 23, description = "C82786 - Chrome: Testing that the user can search for a Folder when the page is in \"List\" view")
+	@Test(priority = 23, description = "C82786 - Chrome: Testing that the user can search for a Folder when the page is in 'List' view")
 	@Description("When I navigate to the content screen, and I search for folder created in list view.Then Folder is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_FromListView() {
@@ -421,7 +421,7 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage = new NewUI_Content(driver);
 
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
-				testDataReader.getCellData("Automation_Folder_CatalogOfContent_DashboardDetailsSection"));
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardDetailsSection"));
 
 		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
 		newUI_dashboardPage.click_detailsButton();
@@ -430,17 +430,58 @@ public class NewUI_CatalogOfContent {
 	}
 
 	@Test(priority = 28, description = "C81617 - Chrome: Details : Testing that the dashboard detail 'Owned by' is displayed")
-	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Owned By is displayed.")
+	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Owned By detail is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_DashboardScreen_DetailsSection_OwnedByDisplayed() {
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		String dashboardName = newUI_allContentPage.addNewCatalogItem("dashboard");
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.assert_dashboardName_isCorrect(dashboardName);
+		newUI_dashboardPage.click_detailsButton();
+		newUI_dashboardPage.assert_detailsSection_ownedByDisplayed(testDataReader.getCellData("Username"));
+	}
+
+	@Test(priority = 29, description = "C81619 - Chrome: Details : Testing that the dashboard detail 'Last modified' is displayed")
+	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then  By detail is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_DashboardScreen_DetailsSection_ModifiedByDisplayed() {
+
 		newUI_allContentPage = new NewUI_Content(driver);
 
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
-				testDataReader.getCellData("Automation_Folder_CatalogOfContent_DashboardDetailsSection_OwnedBy"));
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardDetailsSection_ModifiedBy"));
+
+		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
+		newUI_dashboardPage.insightSettings_clickOnMenuItem("Edit");
+
+		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage.setInsightName();
+
+		subHeaderObject = new NewUI_Skeleton(driver);
+		subHeaderObject.Click_done();
+
+		newUI_allContentPage.navigate_toURL();
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardDetailsSection_ModifiedBy"));
+
+		newUI_dashboardPage.click_detailsButton();
+		newUI_dashboardPage.assert_detailsSection_modifiedByDisplayed(testDataReader.getCellData("Username"));
+	}
+
+	@Test(priority = 30, description = "C81620 - Chrome: Details : Testing that the dashboard detail 'Modified by' is displayed")
+	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Owned By detail is displayed.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_DashboardScreen_DetailsSection_LastModifiedDisplayed() {
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardDetailsSection_ModifiedBy"));
 
 		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
 		newUI_dashboardPage.click_detailsButton();
-		newUI_dashboardPage.assert_detailsSection_ownedByDisplayed(testDataReader.getCellData("Username"));
+		newUI_dashboardPage.assert_detailsSection_lastModifiedDisplayed();
 	}
 
 	@BeforeMethod
