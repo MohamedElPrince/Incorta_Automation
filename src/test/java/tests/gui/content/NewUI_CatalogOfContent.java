@@ -1,5 +1,10 @@
 package tests.gui.content;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
@@ -9,9 +14,9 @@ import com.shaft.io.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
 import pageObjectModels.content.NewUI_Content_Dashboard_SendDashboard;
 import pageObjectModels.content.NewUI_Content_Folder;
@@ -27,12 +32,6 @@ import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
 import pageObjectModels.security.NewUI_Users;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-
 public class NewUI_CatalogOfContent {
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
@@ -46,7 +45,7 @@ public class NewUI_CatalogOfContent {
 	NewUI_SchemaList_SchemaView schemasViewPage;
 	NewUI_Users usersPage;
 
-	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 	NewUI_Content_Dashboard newUI_dashboardPage;
 	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
 	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
