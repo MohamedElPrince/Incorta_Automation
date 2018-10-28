@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
 import com.shaft.io.ExcelFileManager;
+import com.shaft.io.ReportManager;
 import com.shaft.validation.Assertions;
 
 public class NewUI_Content {
@@ -14,9 +15,12 @@ public class NewUI_Content {
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_content");
 	int customElementIdentificationTimeout = 4;
+	int customNumberOfRetries = 1;
 
 	//// Elements
 	// first nested header
+	By body_add_button = By.xpath("//span[@class='inc-toolbar-button']//*[@data-icon='plus']");
+	By body_add_menuItem; // li[@class='ant-dropdown-menu-item'][contains(.,'Add Folder')]
 	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
 	By body_dashboardName;
 	By body_dashboardName_folderName;
@@ -25,7 +29,7 @@ public class NewUI_Content {
 
 	// second_nested_header
 	By searchWrapper_search_textBox = By.xpath("//div[@class='ant-select-search__field__wrap']//input");
-	By searchWrapper_searchResult_label = By.className("inc-search-option__item");
+	By searchWrapper_searchResult_label = By.className("inc-search-option__item--left__name--highLighted"); // inc-search-option__item
 	By searchWrapper_searchCount_label = By.className("inc-search-count");
 	By searchWrapper_searchDropDown_button = By.xpath("//span[@class='inc-search-dropdown']//button");
 	By searchWrapper_searchDropDownOption_label; // span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='']
@@ -53,6 +57,9 @@ public class NewUI_Content {
 			.xpath("//div[@class='inc-folder-table']//tbody[@class='ant-table-tbody']//a");
 	By tableView_contentTableGenericDashboard_link = By
 			.xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
+
+	// popup_addDashboardOrFolder
+	By popup_addDashboardOrFolder_name_textBox = By.id("name");
 
 	By popup_renameFolder;
 	By popup_Rename_RenameButton = By.xpath("//button[contains(.,'Rename')]");
@@ -147,6 +154,10 @@ public class NewUI_Content {
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
 
+	// Splash notification
+	By splash_notificationMessage_text = By.xpath("//div[contains(@class,'ant-notification-notice-message')]");
+	By splash_notificationDescription_text = By.xpath("//div[contains(@class,'ant-notification-notice-description')]");
+
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
 		this.driver = driver;
@@ -163,6 +174,59 @@ public class NewUI_Content {
 	 */
 	public void assert_pageTitle_isCorrect(String pageTitle) {
 		Assertions.assertElementAttribute(driver, pageDetails_title_label, "text", pageTitle, true);
+	}
+
+	/**
+	 * Clicks on the add button, and adds a new item type
+	 * 
+	 * @param itemType
+	 *            accepts "dashboard" or "folder"
+	 * @return string value representing the name of the newly created catalog item
+	 */
+	public String addNewCatalogItem(String itemType) {
+		String newItemName = "";
+		ElementActions.click(driver, body_add_button);
+		switch (itemType.toLowerCase().trim()) {
+		case "folder":
+			body_add_menuItem = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Add Folder')]");
+			newItemName = "Automation" + "_Folder_" + String.valueOf(System.currentTimeMillis());
+			break;
+		case "dashboard":
+			body_add_menuItem = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Add Dashboard')]");
+			newItemName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+			break;
+		default:
+			break;
+		}
+		ElementActions.click(driver, body_add_menuItem);
+		ElementActions.type(driver, popup_addDashboardOrFolder_name_textBox, newItemName);
+		ElementActions.keyPress(driver, popup_addDashboardOrFolder_name_textBox, "ENTER");
+		return newItemName;
+	}
+
+	/**
+	 * Asserts that the splash notification message contains the provided
+	 * expectedMessage
+	 * 
+	 * @param expectedMessage
+	 *            a subset of the message that is expected to show up in the splash
+	 *            notification
+	 */
+	public void assert_splashNotificationMessage_equalsExpected(String expectedMessage) {
+		Assertions.assertElementAttribute(driver, splash_notificationMessage_text, "text", expectedMessage, 3, true);
+	}
+
+	/**
+	 * Asserts that the splash notification description contains the provided
+	 * expectedDescription
+	 * 
+	 * @param expectedDescription
+	 *            a subset of the description that is expected to show up in the
+	 *            splash notification
+	 */
+	public void assert_splashNotificationDescription_equalsExpected(String expectedDescription) {
+		Assertions.assertElementAttribute(driver, splash_notificationDescription_text, "text", expectedDescription, 3,
+				true);
 	}
 
 	/**
@@ -306,8 +370,9 @@ public class NewUI_Content {
 		cardView_contentCardDashboard_link = By
 				.xpath("(//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text'])["
 						+ dashboardIndex + "]");
+		ReportManager.log("Navigating to [" + ElementActions.getText(driver, cardView_contentCardDashboard_link)
+				+ "] Dashboard.");
 		ElementActions.click(driver, cardView_contentCardDashboard_link);
-
 	}
 
 	/**
@@ -331,7 +396,7 @@ public class NewUI_Content {
 	 */
 	public int cardView_countDashboards() {
 		return ElementActions.getElementsCount(driver, cardView_contentCardGenericDashboard_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
 	/**
@@ -341,7 +406,7 @@ public class NewUI_Content {
 	 */
 	public int cardView_countFolders() {
 		return ElementActions.getElementsCount(driver, cardView_contentCardGenericFolder_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
 	/**
@@ -383,8 +448,9 @@ public class NewUI_Content {
 	public void tableView_navigate_toContentTableDashboard(int dashboardIndex) {
 		tableView_contentTableDashboard_link = By
 				.xpath("(//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a)[" + dashboardIndex + "]");
+		ReportManager.log("Navigating to [" + ElementActions.getText(driver, cardView_contentCardDashboard_link)
+		+ "] Dashboard.");
 		ElementActions.click(driver, tableView_contentTableDashboard_link);
-
 	}
 
 	/**
@@ -407,7 +473,7 @@ public class NewUI_Content {
 	 */
 	public int tableView_countDashboards() {
 		return ElementActions.getElementsCount(driver, tableView_contentTableGenericDashboard_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
 	/**
@@ -417,7 +483,7 @@ public class NewUI_Content {
 	 */
 	public int tableView_countFolders() {
 		return ElementActions.getElementsCount(driver, tableView_contentTableGenericFolder_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
 	public void click_dashboardFolder_properties_fromGridView(String FolderName) {
@@ -564,12 +630,14 @@ public class NewUI_Content {
 		ElementActions.click(driver, popup_moveFolder_select_folderNameToMoveTo);
 	}
 
-	public void assert_dashboardSentSuccessfullyMessage(String DashboardName) {
-		popup_dashboard_sentSuccessfully_message = By
-				.xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully sent "
-						+ DashboardName + ".')]");
-		Assertions.assertElementExists(driver, popup_dashboard_sentSuccessfully_message, true);
-	}
+	// public void assert_dashboardSentSuccessfullyMessage(String DashboardName) {
+	// popup_dashboard_sentSuccessfully_message = By
+	// .xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully
+	// sent "
+	// + DashboardName + ".')]");
+	// Assertions.assertElementExists(driver,
+	// popup_dashboard_sentSuccessfully_message, true);
+	// }
 
 	public void assert_dashboardScheduledSuccessfullyMessage(String DashboardName) {
 		popup_dashboard_scheduledSuccessfully_message = By.xpath(

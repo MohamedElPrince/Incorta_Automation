@@ -45,11 +45,6 @@ public class NewUI_DataSources {
 	public NewUI_DataSources(WebDriver driver) {
 		this.driver = driver;
 	}
-	
-	public void navigate_toURL_notIFrame()
-	{
-		BrowserActions.navigateToURL(driver, "http://35.184.27.139:9091/incorta/#/datasources/datasource");
-	}
 
 	public void Navigate_toURL() {
 		BrowserActions.navigateToURL(driver, url);
@@ -98,7 +93,6 @@ public class NewUI_DataSources {
 		ElementActions.switchToDefaultContent(driver);
 		return dataSourceName;
 	}
-	
 
 	public void Assert_dataSourceCreationWasSuccessful(String dataSourceName) {
 		ElementActions.switchToIframe(driver, body_iframe);

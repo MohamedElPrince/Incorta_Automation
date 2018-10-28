@@ -51,6 +51,9 @@ public class NewUI_Dashboards_ScreenshotsComparer {
     public void dashboardCrawler() {
 	newContentPage = new NewUI_Content(driver);
 	newContentPage.navigate_toURL();
+
+	newHeaderObject = new NewUI_Header(driver);
+	newHeaderObject.assert_sectionHeader_isSelected("Content");
 	// newContentPage.changeCatalogView("Card");
 
 	crawlDashboards();
@@ -58,7 +61,7 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 
     @Test(priority = 2, description = "TC002 - Compare newly taken screenshots against refrence images.")
     public void compareFolders() {
-	String refrenceFolderPath = System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/reference";
+	String refrenceFolderPath = System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/20181024-233430";
 
 	String testDirectoryPath = System.getProperty("allureResultsFolderPath") + "screenshots/";
 	File testDirectory = new File(testDirectoryPath);
@@ -67,7 +70,7 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 
 	String testFolderPath = System.getProperty("allureResultsFolderPath") + "screenshots/" + testFolders[testFolders.length - 1];
 
-	ImageProcessingActions.compareImageFolders(refrenceFolderPath, testFolderPath, 100);
+	ImageProcessingActions.compareImageFolders(refrenceFolderPath, testFolderPath, 98);
     }
 
     public void crawlDashboards() {
@@ -102,9 +105,10 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 		totalDashboardsCounter++;
 		newContentPage.cardView_navigate_toContentTableDashboard(dashboardIndex);
 		newDashboardPage = new NewUI_Content_Dashboard(driver);
-		newDashboardPage.waitForDashboardToFullyLoad();
+		// newDashboardPage.waitForDashboardToFullyLoad(); //called inside the
+		// constructor
 		newDashboardPage.reportcurrentDashboardURL();
-		newDashboardPage.assert_dashboardName_matches(".*");
+		newDashboardPage.verify_dashboardName_matches(".*");
 		crawlInsightsInCurrentDashboard();
 		BrowserActions.navigateBack(driver);
 	    }
@@ -128,10 +132,12 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 	System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/TestData.xlsx");
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	driver = BrowserFactory.getBrowser(testDataReader);
+	// BrowserActions.setWindowSize(driver, 1920, 1080);
 
 	newLoginPage = new NewUI_Login(driver);
 	newLoginPage.navigate_toURL();
 	newLoginPage.verify_correctVersionNumberIsDisplayed();
+	// newLoginPage.userLogin("demo", "admin", "admin");
 	newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"), testDataReader.getCellData("Password"));
     }
 
@@ -140,7 +146,7 @@ public class NewUI_Dashboards_ScreenshotsComparer {
 	ReportManager.getTestLog();
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
 	ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], Total Dashboards Crawled: [" + totalDashboardsCounter + "], and Total Insights Crawled: [" + totalInsightsCounter + "].");
 

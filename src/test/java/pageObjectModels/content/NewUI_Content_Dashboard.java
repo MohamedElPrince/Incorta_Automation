@@ -8,12 +8,15 @@ import com.shaft.element.ElementActions;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 import com.shaft.validation.Assertions;
+import com.shaft.validation.Verifications;
 
 public class NewUI_Content_Dashboard {
+
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	int customElementIdentificationTimeout = 1;
+	int customNumberOfRetries = 1;
 
 	//// Elements
 	// first nested header
@@ -24,6 +27,8 @@ public class NewUI_Content_Dashboard {
 			.xpath("//i[contains(@class,'anticon-pushpin-o')]/ancestor::button");
 	By pageDetails_dashboardActionMenu_button = By
 			.xpath("//div[@class='inc-dashboard__actions']//button[contains(@class,'dashboard-action-menu')]");
+	By pageDetails_add_button = By
+			.xpath("//span[@class='inc-toolbar-button']//*[@data-icon='plus']/ancestor::a[contains(@href,'analyze')]");
 
 	// second nested header
 	By filterBar_bookmark_button = By.xpath("//div[@class='inc-filter-bar']//button[contains(@class,'bm-icon')]");
@@ -73,6 +78,22 @@ public class NewUI_Content_Dashboard {
 		this.driver = driver;
 		waitForDashboardToFullyLoad();
 	}
+
+	/**
+	 * Verifies that the displayed dashboardName matches the desired one
+	 * 
+	 * @param dashboardName
+	 */
+	public void verify_dashboardName_matches(String dashboardName) {
+		Verifications.verifyElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
+	}
+
+	/**
+	 * Asserts that the target insightName is correctly displayed in the
+	 * insightName_label
+	 * 
+	 * @param insightName
+	 */
 
 	public void reportcurrentDashboardURL() {
 		ReportManager.log("Dashboard URL: [" + BrowserActions.getCurrentURL(driver) + "].");
@@ -239,6 +260,10 @@ public class NewUI_Content_Dashboard {
 	public void assert_detailsSection_ownedByDisplayed(String DashboardCreator) {
 		Assertions.assertElementAttribute(driver, body_detailsSection_ownedBy, "text", "Owned By " + DashboardCreator,
 				true);
+	}
+
+	public void addNewInsight() {
+		ElementActions.click(driver, pageDetails_add_button);
 	}
 
 }
