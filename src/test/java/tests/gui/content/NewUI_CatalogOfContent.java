@@ -201,12 +201,11 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
 	}
 
-	@Test(priority = 11, description = "C82769 - Chrome: Testing that whensearching for a deleted dashboard,no datawill be displayed")
+	@Test(priority = 11, description = "C82769 - Chrome: Testing that when searching for a deleted dashboard,no data will be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard after deleting it.Then dashboard is not found.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_Deleted() {
 		newUI_allContentPage = new NewUI_Content(driver);
-
 		newUI_allContentPage.click_dashboardFolder_properties_fromGridView(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Deleted"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
@@ -444,7 +443,7 @@ public class NewUI_CatalogOfContent {
 	}
 
 	@Test(priority = 29, description = "C81619 - Chrome: Details : Testing that the dashboard detail 'Last modified' is displayed")
-	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then  By detail is displayed.")
+	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Modified By detail is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_DashboardScreen_DetailsSection_ModifiedByDisplayed() {
 
@@ -471,7 +470,7 @@ public class NewUI_CatalogOfContent {
 	}
 
 	@Test(priority = 30, description = "C81620 - Chrome: Details : Testing that the dashboard detail 'Modified by' is displayed")
-	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Owned By detail is displayed.")
+	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Last Modified detail is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_DashboardScreen_DetailsSection_LastModifiedDisplayed() {
 
@@ -482,6 +481,136 @@ public class NewUI_CatalogOfContent {
 		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
 		newUI_dashboardPage.click_detailsButton();
 		newUI_dashboardPage.assert_detailsSection_lastModifiedDisplayed();
+	}
+
+	@Test(priority = 31, description = "C82772_1 - Chrome: Testing that All user types can search for dashboards in content page")
+	@Description("When I login with Analyzer, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_AnalyzerUser_CanSearchForDashboards() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 32, description = "C82772_2 - Chrome: Testing that All user types can search for dashboards in content page")
+	@Description("When I login with Admin, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_AdminUserCanSearchForDashboards() {
+		navigateToLogInPageAndLogIn("Data2");
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 33, description = "C82772_3 - Chrome: Testing that All user types can search for dashboards in content page")
+	@Description("When I login with Individual, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_IndividualUserCanSearchForDashboards() {
+		navigateToLogInPageAndLogIn("Data3");
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 34, description = "C82772_4 - Chrome: Testing that All user types can search for dashboards in content page")
+	@Description("When I login with Schema Manager, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SchemaManagerUserCanSearchForDashboards() {
+		navigateToLogInPageAndLogIn("Data4");
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 35, description = "C82772_5 - Chrome: Testing that All user types can search for dashboards in content page")
+	@Description("When I login with normal user, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_userUserCanSearchForDashboards() {
+		navigateToLogInPageAndLogIn("Data5");
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 36, description = "C82790_1 - Chrome: Testing that All user types can search for Folder in content page")
+	@Description("When I login with Analyzer, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_AnalyzerUser_CanSearchForFolders() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+
+		newUI_folderPage = new NewUI_Content_Folder(driver);
+		newUI_folderPage.assert_folderName_correct(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 37, description = "C82790_2 - Chrome: Testing that All user types can search for Folder in content page")
+	@Description("When I login with Admin, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_AdminUserCanSearchForFolders() {
+		navigateToLogInPageAndLogIn("Data2");
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+
+		newUI_folderPage = new NewUI_Content_Folder(driver);
+		newUI_folderPage.assert_folderName_correct(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 38, description = "C82790_3 - Chrome: Testing that All user types can search for Folder in content page")
+	@Description("When I login with Individual, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_IndividualUserCanSearchForFolders() {
+		navigateToLogInPageAndLogIn("Data3");
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+
+		newUI_folderPage = new NewUI_Content_Folder(driver);
+		newUI_folderPage.assert_folderName_correct(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 39, description = "C82790_4 - Chrome: Testing that All user types can search for Folder in content page")
+	@Description("When I login with Schema Manager, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SchemaManagerUserCanSearchForFolders() {
+		navigateToLogInPageAndLogIn("Data4");
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+
+		newUI_folderPage = new NewUI_Content_Folder(driver);
+		newUI_folderPage.assert_folderName_correct(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	@Test(priority = 40, description = "C82790_5 - Chrome: Testing that All user types can search for Folder in content page")
+	@Description("When I login with normal user, And I search for dashboard. Then search is working normally.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_userUserCanSearchForFolders() {
+		navigateToLogInPageAndLogIn("Data5");
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+
+		newUI_folderPage = new NewUI_Content_Folder(driver);
+		newUI_folderPage.assert_folderName_correct(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
+	}
+
+	public void navigateToLogInPageAndLogIn(String ColumnName) {
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+		loginPage = new NewUI_Login(driver);
+		loginPage.userLogin(testDataReader.getCellData("Tenant", ColumnName),
+				testDataReader.getCellData("Username", ColumnName), testDataReader.getCellData("Password", ColumnName));
 	}
 
 	@BeforeMethod

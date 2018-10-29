@@ -449,7 +449,7 @@ public class NewUI_Content {
 		tableView_contentTableDashboard_link = By
 				.xpath("(//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a)[" + dashboardIndex + "]");
 		ReportManager.log("Navigating to [" + ElementActions.getText(driver, cardView_contentCardDashboard_link)
-		+ "] Dashboard.");
+				+ "] Dashboard.");
 		ElementActions.click(driver, tableView_contentTableDashboard_link);
 	}
 
@@ -907,6 +907,12 @@ public class NewUI_Content {
 		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
 		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
 		Assertions.assertElementExists(driver, seachResult_search, false);
+	}
+
+	public void catalog_searchAndAssertResultsDisplayed_contentSearchBox(String contentName) {
+		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, seachResult_search, true);
 	}
 
 	// Delete Dashbaord

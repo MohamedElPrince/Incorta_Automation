@@ -26,6 +26,8 @@ public class NewUI_Content_Folder {
 			.xpath("//button[contains(.,’Delete’)][@class=‘ant-btn ant-btn-primary ant-btn-loading']");
 	By body_dashboardName_folderName;
 
+	By subHeader_folderName;
+
 	//// Functions
 	public NewUI_Content_Folder(WebDriver driver) {
 		this.driver = driver;
@@ -72,6 +74,11 @@ public class NewUI_Content_Folder {
 		BrowserActions.refreshCurrentPage(driver);
 		body_dashboardName_folderName = By.xpath("//span[text()='" + DashboardFolderName + "']");
 		Assertions.assertElementExists(driver, body_dashboardName_folderName, false);
+	}
+
+	public void assert_folderName_correct(String FolderName) {
+		subHeader_folderName = By.xpath("//h1[contains(.,'" + FolderName + "')]");
+		Assertions.assertElementExists(driver, subHeader_folderName, true);
 	}
 
 }
