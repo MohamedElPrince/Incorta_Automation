@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mohies</groupId>
 	<artifactId>incorta</artifactId>
@@ -6,36 +8,43 @@
 
 	<properties>
 		<!-- incorta Test Run Parameters -->
-		<incortaRoot>http://qa.incorta.com:7010/incorta/</incortaRoot>
+		<incortaRoot>http://35.184.27.139:9080/incorta/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
-		
+
 		<!-- SHAFT Test Run Parameters -->
 		<testSuite.name>unitTestSuite</testSuite.name>
-		
+
 		<executionAddress>local</executionAddress> <!-- Acceptable Values: local | seleniumGridHubIP:port -->
 		<operatingSystem.version>Linux-64</operatingSystem.version> <!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
-		<targetBrowser.name>GoogleChrome</targetBrowser.name> 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer | GoogleChrome | MicrosoftEdge | Safari -->
+		<targetBrowser.name>GoogleChrome</targetBrowser.name> 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
+			| GoogleChrome | MicrosoftEdge | Safari -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow> <!-- Acceptable Values: true | false -->
-		
-		<defaultElementIdentificationTimeout>10</defaultElementIdentificationTimeout> <!-- Accepts integer values that represent the default timeout for finding a webElement -->
-		<attemptsBeforeThrowingElementNotFoundException>6</attemptsBeforeThrowingElementNotFoundException> <!-- Accepts integer values that represent the number of attempts before failing to find a webElement -->
-		
+
+		<defaultElementIdentificationTimeout>10</defaultElementIdentificationTimeout> <!-- Accepts integer values that represent the default timeout for finding 
+			a webElement -->
+		<attemptsBeforeThrowingElementNotFoundException>6</attemptsBeforeThrowingElementNotFoundException> <!-- Accepts integer values that represent the number of attempts before 
+			failing to find a webElement -->
+
 		<screenshotParams_whenToTakeAScreenshot>ValidationPointsOnly</screenshotParams_whenToTakeAScreenshot> <!-- Acceptable Values: Always | Never | ValidationPointsOnly | FailuresOnly -->
-		<screenshotParams_highlightElements>true</screenshotParams_highlightElements> <!-- Acceptable Values: true | false -->
-		<screenshotParams_screenshotType>Regular</screenshotParams_screenshotType> <!-- Acceptable Values: Regular | FullPage | Element -->
-		<screenshotParams_skippedElementsFromScreenshot></screenshotParams_skippedElementsFromScreenshot> <!-- The above element will be skipped in case of persistent elements/menus that show up multiple times in the full page screenshots -->
-		
+		<screenshotParams_highlightElements>false</screenshotParams_highlightElements> <!-- Acceptable Values: true | false -->
+		<screenshotParams_screenshotType>Element</screenshotParams_screenshotType> <!-- Acceptable Values: Regular | FullPage | Element -->
+		<screenshotParams_skippedElementsFromScreenshot></screenshotParams_skippedElementsFromScreenshot> <!-- The above element will be skipped in case of persistent elements/menus 
+			that show up multiple times in the full page screenshots -->
+		<recordVideo>false</recordVideo>
+
 		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport> <!-- Acceptable Values: true | false -->
-		
+
 		<!-- SHAFT Configuration Parameters -->
 		<testDataFolderPath>src/test/resources/TestDataFiles/</testDataFolderPath>
 		<jsonFolderPath>src/test/resources/TestJsonFiles/</jsonFolderPath>
 		<testDataColumnNamePrefix>Data</testDataColumnNamePrefix>
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
-		
+
 		<!-- Dependencies/Plugins Version Numbers Parameters -->
-		<shaft_engine.version>2.0.20181023</shaft_engine.version>
+		<shaft_engine.version>2.0.20181031</shaft_engine.version>
+		<encoding.type>UTF-8</encoding.type>
 		<jdk.version>1.8</jdk.version>
+		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
 		<aspectj.version>1.9.1</aspectj.version>
@@ -75,11 +84,24 @@
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+					<configuration>
+						<encoding>${encoding.type}</encoding>
+						<inputEncoding>${encoding.type}</inputEncoding>
+						<outputEncoding>${encoding.type}</outputEncoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
 						<source>${jdk.version}</source>
 						<target>${jdk.version}</target>
+						<encoding>${encoding.type}</encoding>
+						<inputEncoding>${encoding.type}</inputEncoding>
+						<outputEncoding>${encoding.type}</outputEncoding>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -106,14 +128,15 @@
 							<attemptsBeforeThrowingElementNotFoundException>${attemptsBeforeThrowingElementNotFoundException}</attemptsBeforeThrowingElementNotFoundException>
 							<allureResultsFolderPath>${allureResultsFolderPath}</allureResultsFolderPath>
 							<automaticallyGenerateAllureReport>${automaticallyGenerateAllureReport}</automaticallyGenerateAllureReport>
+							<recordVideo>${recordVideo}</recordVideo>
 						</systemPropertyVariables>
 						<configfailurepolicy>continue</configfailurepolicy>
 						<suiteXmlFiles>
 							<suiteXmlFile>src\test\resources\TestSuites\${testSuite.name}.xml</suiteXmlFile>
 						</suiteXmlFiles>
-						<encoding>UTF-8</encoding>
-						<inputEncoding>UTF-8</inputEncoding>
-						<outputEncoding>UTF-8</outputEncoding>
+						<encoding>${encoding.type}</encoding>
+						<inputEncoding>${encoding.type}</inputEncoding>
+						<outputEncoding>${encoding.type}</outputEncoding>
 						<argLine>
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
