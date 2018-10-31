@@ -69,6 +69,7 @@ public class NewUI_UsersTest {
 	AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
 	NewUI_Header newHeaderObject;
 	NewUI_Content newContentPage;
+	NewUI_Header newsubHeaderObject;
 
 	//// Test Cases
 	@Test(priority = 1, description = "C478 - Create User")
@@ -111,228 +112,234 @@ public class NewUI_UsersTest {
 		usersPage.Assert_nameIsDisplayed(impersonationUserName);
 		usersPage.Click_name(impersonationUserName);
 		usersPage.Click_impersonation();
-		usersPage.Assert_impersonationUIElementsAreDisplayed();
+
+		newsubHeaderObject = new NewUI_Header(driver);
+		newsubHeaderObject.assert_splashNotificationMessage_equalsExpected("Signed in as");
+		newsubHeaderObject.assert_splashNotificationDescription_equalsExpected("temporarily signed in");
+
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.assert_userMenuItem("Switch Back");
 	}
-//
-//	@Test(priority = 4, description = "C647   - Testing Deleting user with option transfer ownership to another user ")
-//	@Description("Given I have two Super User Accounts, when I share content whith other user \"User1\", And I Delete \"User0\" and transferrer all his content to another user \"User2\", then all content ownership transfered to that user and shared content doesn`t get affected ")
-//	@Severity(SeverityLevel.CRITICAL)
-//	public void deletingUserWithOptionTransferOwnershipToAnotherUser() {
-//
-//		/*
-//		 * prerequisite to this test case you need to create a Two users and assign
-//		 * Super role to them by adding the users to the group that have super user
-//		 * role.
-//		 * 
-//		 * Steps: - user created with name: farid and password: farid, another user
-//		 * name: ahmed and password: ahmed --> users data added to excel sheet - users
-//		 * added to Super Group that has a SuperRole role assigned to that group
-//		 * -----------------------------------------------------------------------------
-//		 * -----------------------------------------------------------------------------
-//		 * 1- create new user 2- Add the new created user to Super Group 3- logout and
-//		 * login using the new account created user 4- Create new data source 5- Create
-//		 * Schema new schema using data source 6- Load the created schema "Full load" 7-
-//		 * Create Folder 8- Create Dashboard and add insight 9- assert that share icon
-//		 * in dashboard settings is active 10-Share Folder with another user 11- share
-//		 * dashboard with another user 12- Switch to another admin account 13- Delete
-//		 * User and Transfer Ownership to another super user 14- Switch to another admin
-//		 * account user in data5 and check the transfered content. 15- Check data source
-//		 * owner after transfer 16- Check schema owner after transfer 17- Check
-//		 * Dashboard owner after transfer 18- Check Folder owner after transfer
-//		 */
-//
-//		// Create New User
-//		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.click_add();
-//		newUserData = usersPage.AddNewUser();
-//		usersPage.Assert_nameIsDisplayed(newUserData[2]);
-//
-//		// Add the new created user to Super Group
-//		groupsPage = new Groups(driver);
-//		groupsPage.Navigate_toURL();
-//
-//		subHeaderObject.SearchForContentAndOpenResult_security("Automation_Group_SuperRole");
-//		groups_groupPage = new NewUI_Groups_Group(driver);
-//		groups_groupPage.AddUsers(new String[] { newUserData[2] });
-//		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
-//
-//		// logout and login using the new account created
-//		newContentPage = new NewUI_Content(driver);
-//		newContentPage.navigate_toURL();
-//
-//		newHeaderObject = new NewUI_Header(driver);
-//		newHeaderObject.expandUserMenu();
-//		newHeaderObject.signOut();
-//
-//		logoutpage = new NewUI_SignOut(driver);
-//		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
-//		logoutpage.navigate_toLoginPage();
-//
-//		loginPage.navigate_toURL();
-//		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
-//
-//		// Actions for first time login
-//		newPassword = "Automation";
-//		loginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
-//
-//		newHeaderObject.assert_sectionHeader_isSelected("Content");
-//
-//		// Create new data source
-//		dataSourcesPage = new NewUI_DataSources(driver);
-//		dataSourcesPage.Navigate_toURL();
-//
-//		dataSourcesPage.Assert_dataSourcesTabIsSelected();
-//
-//
-//		subHeaderObject.click_add();
-//
-//		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
-//		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
-//		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
-//
-//		// Create Schema
-//
-//		schemasPage = new NewUI_SchemaList(driver);
-//
-//		schemasPage.Navigate_toURL();
-//		schemasPage.Assert_schemaListTabIsSelected();
-//
-//		subHeaderObject.click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Create Schema");
-//
-//		newSchemaName = schemasPage.createNewSchema();
-//
-//		schemasPage.Navigate_toURL();
-//		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
-//		schemasPage.click_schemaName(newSchemaName);
-//
-//		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
-//		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
-//
-//
-//		subHeaderObject.click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
-//
-//		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
-//				testDataReader.getCellData("DatabaseTableName")); // need
-//		
-//		// to check if condition after this function call
-//
-//		// "Assert_wizardWelcomeTextIsDisplayed()"
-//		newDataSourceTableName = schemasViewPage.GetNewestTableName();
-//		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
-//
-//		// Full Load the created schema
-//
-//		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
-//
-//		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
-//		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
-//		subHeaderObject.Click_load();
-//		subHeaderObject.Hover_overDropdownMenu("Load now");
-//		subHeaderObject.Select_fromDropdownMenu("Full");
-//		schemasViewPage.confirmLoadingData();
-//
-//		// Create Folder
-//		allContentPage = new NewUI_Content(driver);
-//		allContentPage.navigate_toURL();
-//		subHeaderObject.click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Create Folder");
-//		newFolderName = allContentPage.SetNewFolderName();/////Need to check share button active or notNOOOOOOTTTTTEEEEEEEEEE
-//		//allContentPage.selectContentOptionButton(newFolderName);
-//
-//
-//		dashboardPage = new AllContent_Dashboard(driver);
-//		dashboardPage.assert_shared_button_active();
-//		// share Folder with another user with Can View
-//		dashboardPage.selectShareButton();
-//		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
-//
-//
-//		// Create Dashboard and add insight
-//		allContentPage.navigate_toURL();
-//
-//		subHeaderObject.click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
-//
-//		newDashboardName = allContentPage.setNewDashboardName();
-//
-//		subHeaderObject.Click_ChooseVisualization();
-//		analyzeInsightPage.selectVisualization("Aggregated");
-//		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
-//		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
-//		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
-//		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
-//
-//		newInsightName = analyzeInsightPage.setInsightName();
-//		subHeaderObject.Click_done();
-//
-//		allContentPage.navigate_toURL();
-//		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
-//
-//		dashboardPage.assert_dashboardName(newDashboardName);
-//		dashboardPage.assert_insightName(newInsightName);
-//
-//		// assert that share icon in dashboard settings is active
-//		//allContentPage.selectContentOptionButton(newDashboardName);
-//		dashboardPage.assert_shared_button_active();
-//
-//		// share dashboard with another user with Can View
-//		dashboardPage.selectShareButton();
-//		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
-//
-//		// Switch to another admin account
-//				subHeaderObject.Select_fromUserMenu("Logout");
-//				loginPage.navigate_toURL();
-//
-//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
-//				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
-//
-//		// Delete User and Transfer Ownership to another user
-//		usersPage.Navigate_toURL();
-//		usersPage.Select_nameCheckbox(newUserData[2]);
-//
-//		subHeaderObject.Click_actions();
-//		subHeaderObject.Select_fromDropdownMenu("Delete selection");
-//		// Transfer ownership to user in data5
-//		usersPage.ConfirmUserDeletionAndTransferOwnershipToAnother(testDataReader.getCellData("Username", "Data8"));
-//		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
-//
-//		// Switch to another admin account user in data5 and check the transfered
-//		// content.
-//		subHeaderObject.Select_fromUserMenu("Logout");
-//		loginPage.navigate_toURL();
-//
-//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data8"),
-//				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
-//
-//		String Owner = testDataReader.getCellData("Username", "Data8");
-//
-//		// check data source owner after transfer
-//		dataSourcesPage.Navigate_toURL();
-//		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
-//		dataSourcesPage.Assert_DSnameAndOwnerIsDisplayed(newDataSourceName, Owner);
-//
-//		// check schema owner after transfer
-//		schemasPage.Navigate_toURL();
-//		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
-//		schemasPage.Assert_schemaNameIsDisplayedAndItsOwnerName(newSchemaName, Owner);
-//
-//		// Check Dashboard owner after transfer
-//		allContentPage.navigate_toURL();
-//		subHeaderObject.SearchForContentAndAssertResultIsDisplayed_security(newDashboardName);
-//		//allContentPage.selectContentOptionButton(newDashboardName);
-//		dashboardPage.assert_content_userPermission(Owner, "Owner");
-//		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View");
-//		// do we need to add click on Done after assert the permission for the user,will
-//		// result an issue if i use this method to check more than one user
-//
-//		// Check Folder owner after transfer
-//		allContentPage.navigate_toURL();
-//		//allContentPage.selectContentOptionButton(newFolderName);
-//		dashboardPage.assert_content_userPermission(Owner, "Owner");
-//		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View");
-//	}
+
+	@Test(priority = 4, description = "C647   - Testing Deleting user with option transfer ownership to another user ")
+	@Description("Given I have two Super User Accounts, when I share content whith other user \"User1\", And I Delete \"User0\" and transferrer all his content to another user \"User2\", then all content ownership transfered to that user and shared content doesn`t get affected ")
+	@Severity(SeverityLevel.CRITICAL)
+	public void deletingUserWithOptionTransferOwnershipToAnotherUser() {
+
+		/*
+		 * prerequisite to this test case you need to create a Two users and assign
+		 * Super role to them by adding the users to the group that have super user
+		 * role.
+		 * 
+		 * Steps: - user created with name: farid and password: farid, another user
+		 * name: ahmed and password: ahmed --> users data added to excel sheet - users
+		 * added to Super Group that has a SuperRole role assigned to that group
+		 * -----------------------------------------------------------------------------
+		 * -----------------------------------------------------------------------------
+		 * 1- create new user 2- Add the new created user to Super Group 3- logout and
+		 * login using the new account created user 4- Create new data source 5- Create
+		 * Schema new schema using data source 6- Load the created schema "Full load" 7-
+		 * Create Folder 8- Create Dashboard and add insight 9- assert that share icon
+		 * in dashboard settings is active 10-Share Folder with another user 11- share
+		 * dashboard with another user 12- Switch to another admin account 13- Delete
+		 * User and Transfer Ownership to another super user 14- Switch to another admin
+		 * account user in data5 and check the transfered content. 15- Check data source
+		 * owner after transfer 16- Check schema owner after transfer 17- Check
+		 * Dashboard owner after transfer 18- Check Folder owner after transfer
+		 */
+
+		// Create New User
+		subHeaderObject = new NewUI_Skeleton(driver);
+		subHeaderObject.click_add();
+		newUserData = usersPage.AddNewUser();
+		usersPage.Assert_nameIsDisplayed(newUserData[2]);
+
+		// Add the new created user to Super Group
+		groupsPage = new Groups(driver);
+		groupsPage.Navigate_toURL();
+
+		subHeaderObject.SearchForContentAndOpenResult_security("Automation_Group_SuperRole");
+		groups_groupPage = new NewUI_Groups_Group(driver);
+		groups_groupPage.AddUsers(new String[] { newUserData[2] });
+		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
+
+		// logout and login using the new account created
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+
+		logoutpage = new NewUI_SignOut(driver);
+		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
+		logoutpage.navigate_toLoginPage();
+
+		loginPage.navigate_toURL();
+		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
+
+		// Actions for first time login
+		newPassword = "Automation";
+		loginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
+
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+		// Create new data source
+		dataSourcesPage = new NewUI_DataSources(driver);
+		dataSourcesPage.Navigate_toURL();
+
+		dataSourcesPage.Assert_dataSourcesTabIsSelected();
+
+
+		subHeaderObject.click_add();
+
+		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
+		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
+		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
+
+		// Create Schema
+
+		schemasPage = new NewUI_SchemaList(driver);
+
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaListTabIsSelected();
+
+		subHeaderObject.click_add();
+		subHeaderObject.Select_fromDropdownMenu("Create Schema");
+
+		newSchemaName = schemasPage.createNewSchema();
+
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+		schemasPage.click_schemaName(newSchemaName);
+
+		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
+		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+
+
+		subHeaderObject.click_add();
+		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
+
+		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
+				testDataReader.getCellData("DatabaseTableName")); // need
+		
+		// to check if condition after this function call
+
+		// "Assert_wizardWelcomeTextIsDisplayed()"
+		newDataSourceTableName = schemasViewPage.GetNewestTableName();
+		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
+
+		// Full Load the created schema
+
+		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
+
+		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
+		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
+		subHeaderObject.Click_load();
+		subHeaderObject.Hover_overDropdownMenu("Load now");
+		subHeaderObject.Select_fromDropdownMenu("Full");
+		schemasViewPage.confirmLoadingData();
+
+		// Create Folder
+		allContentPage = new NewUI_Content(driver);
+		allContentPage.navigate_toURL();
+		subHeaderObject.click_add();
+		subHeaderObject.Select_fromDropdownMenu("Create Folder");
+		newFolderName = allContentPage.SetNewFolderName();/////Need to check share button active or notNOOOOOOTTTTTEEEEEEEEEE
+		//allContentPage.selectContentOptionButton(newFolderName);
+
+
+		dashboardPage = new AllContent_Dashboard(driver);
+		dashboardPage.assert_shared_button_active();
+		// share Folder with another user with Can View
+		dashboardPage.selectShareButton();
+		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
+
+
+		// Create Dashboard and add insight
+		allContentPage.navigate_toURL();
+
+		subHeaderObject.click_add();
+		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
+
+		newDashboardName = allContentPage.setNewDashboardName();
+
+		subHeaderObject.Click_ChooseVisualization();
+		analyzeInsightPage.selectVisualization("Aggregated");
+		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
+		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
+		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
+		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
+
+		newInsightName = analyzeInsightPage.setInsightName();
+		subHeaderObject.Click_done();
+
+		allContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
+
+		dashboardPage.assert_dashboardName(newDashboardName);
+		dashboardPage.assert_insightName(newInsightName);
+
+		// assert that share icon in dashboard settings is active
+		//allContentPage.selectContentOptionButton(newDashboardName);
+		dashboardPage.assert_shared_button_active();
+
+		// share dashboard with another user with Can View
+		dashboardPage.selectShareButton();
+		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
+
+		// Switch to another admin account
+				subHeaderObject.Select_fromUserMenu("Logout");
+				loginPage.navigate_toURL();
+
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
+				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
+
+		// Delete User and Transfer Ownership to another user
+		usersPage.Navigate_toURL();
+		usersPage.Select_nameCheckbox(newUserData[2]);
+
+		subHeaderObject.Click_actions();
+		subHeaderObject.Select_fromDropdownMenu("Delete selection");
+		// Transfer ownership to user in data5
+		usersPage.ConfirmUserDeletionAndTransferOwnershipToAnother(testDataReader.getCellData("Username", "Data8"));
+		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
+
+		// Switch to another admin account user in data5 and check the transfered
+		// content.
+		subHeaderObject.Select_fromUserMenu("Logout");
+		loginPage.navigate_toURL();
+
+		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data8"),
+				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
+
+		String Owner = testDataReader.getCellData("Username", "Data8");
+
+		// check data source owner after transfer
+		dataSourcesPage.Navigate_toURL();
+		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
+		dataSourcesPage.Assert_DSnameAndOwnerIsDisplayed(newDataSourceName, Owner);
+
+		// check schema owner after transfer
+		schemasPage.Navigate_toURL();
+		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+		schemasPage.Assert_schemaNameIsDisplayedAndItsOwnerName(newSchemaName, Owner);
+
+		// Check Dashboard owner after transfer
+		allContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndAssertResultIsDisplayed_security(newDashboardName);
+		//allContentPage.selectContentOptionButton(newDashboardName);
+		dashboardPage.assert_content_userPermission(Owner, "Owner");
+		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View");
+		// do we need to add click on Done after assert the permission for the user,will
+		// result an issue if i use this method to check more than one user
+
+		// Check Folder owner after transfer
+		allContentPage.navigate_toURL();
+		//allContentPage.selectContentOptionButton(newFolderName);
+		dashboardPage.assert_content_userPermission(Owner, "Owner");
+		dashboardPage.assert_content_userPermission(testDataReader.getCellData("Username", "Data9"), "Can View");
+	}
 
 	//// Testng Annotations
 

@@ -12,6 +12,7 @@ import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
@@ -32,6 +33,7 @@ import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
 import pageObjectModels.security.NewUI_Users;
 
+@Epic("Incorta -> Roles")
 public class NewUI_RolesTest {
 
 	// Declaring web-driver and excel reader instances
@@ -265,13 +267,16 @@ public class NewUI_RolesTest {
 		allContentPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		//subHeaderObject.click_add();
+		//subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		//newDashboardName = allContentPage.setNewDashboardName();
+		//newContentPage.click_on_folder_dashboard(newDashboardName);
 
-		newDashboardName = allContentPage.setNewDashboardName();
+		newContentPage = new NewUI_Content(driver);
+		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
+		newContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
-		NewUI_allContentPage = new NewUI_Content(driver);
-		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
@@ -286,7 +291,7 @@ public class NewUI_RolesTest {
 		subHeaderObject.Click_done();
 
 		allContentPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult_content(newDashboardName);
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
 		// Assert that Export icon(this icon let user to share/send/schedule) is not
 		// displayed in dashboard page
@@ -294,15 +299,15 @@ public class NewUI_RolesTest {
 
 		// assert that dashboard and insight name are correct
 		dashboardPage = new NewUI_Content_Dashboard(driver);
-		dashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+		dashboardPage.assert_dashboardName_isCorrect(NewDashBoradName);
 		dashboardPage.assert_insightName_isCorrect(newInsightName);
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is dimmed
-		NewUI_allContentPage.click_dashboardFolder_properties_fromGridView(newDashboardName);
+		newContentPage.click_dashboardFolder_properties_fromGridView(NewDashBoradName);
 		// Waiting Nouran to check if the button should be hidden or it will just send
 		// an error that user not authorized to share.
-		NewUI_allContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Share Access");
+		newContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Share Access");
 	}
 
 	@Test(priority = 7, description = "C60535 - User Manager")
@@ -410,16 +415,20 @@ public class NewUI_RolesTest {
 
 		// Navigate to Content page and create dashboard
 
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
-
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+//		allContentPage = new AllContent(driver);
+//		allContentPage.Navigate_toURL();
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
-		newDashboardName = newContentPage.setNewDashboardName();
-		NewUI_allContentPage = new NewUI_Content(driver);
-		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
+		newContentPage.navigate_toURL();
+		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
+		newContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
+		
+//		newDashboardName = newContentPage.setNewDashboardName();
+//		NewUI_allContentPage = new NewUI_Content(driver);
+//		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
@@ -433,18 +442,19 @@ public class NewUI_RolesTest {
 		newInsightName = analyzeInsightPage.setInsightName();
 		subHeaderObject.Click_done();
 
-		allContentPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult_content(newDashboardName);
+		newContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
 		// assert that dashboard and insight name are correct
 
 		dashboardPage = new NewUI_Content_Dashboard(driver);
-		dashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+		dashboardPage.assert_dashboardName_isCorrect(NewDashBoradName);
 		dashboardPage.assert_insightName_isCorrect(newInsightName);
 
-		allContentPage.Navigate_toURL();
+		newContentPage.navigate_toURL();
+		
 		// assert that share icon in dashboard settings is active
-		newContentPage.click_dashboardFolder_properties_fromGridView(newDashboardName);
+		newContentPage.click_dashboardFolder_properties_fromGridView(NewDashBoradName);
 		dashboardPage.assert_shared_button_active();
 	}
 
@@ -461,12 +471,15 @@ public class NewUI_RolesTest {
 
 		allContentPage = new AllContent(driver);
 
-		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Folder");
+//		subHeaderObject = new NewUI_Skeleton(driver);
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Add Folder");
+//		NewFolderName = newContentPage.SetNewFolderName();
 
 		newContentPage = new NewUI_Content(driver);
-		NewFolderName = newContentPage.SetNewFolderName();
+		String NewFolderName = newContentPage.addNewCatalogItem("folder");
+		newContentPage.navigate_toURL();		
+
 		newContentPage.Assert_DashboardExist(NewFolderName);
 		// allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
 	}
@@ -559,7 +572,7 @@ public class NewUI_RolesTest {
 	}
 
 	// Prerequisites, Analyzer user
-	//@Test(priority = 1, description = "TC C60531_6 - Users permissions - Analyzer User")
+	@Test(priority = 1, description = "TC C60531_6 - Users permissions - Analyzer User")
 	@Description("When I log in with Analyzer User, navigate to content tab, click on create new dashboard and create a new insight. Then dashboard and insight are created successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_CreateDashboardAndInsight() {
@@ -569,15 +582,14 @@ public class NewUI_RolesTest {
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
-		
-		subHeaderObject = new NewUI_Skeleton(driver);
 
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		subHeaderObject = new NewUI_Skeleton(driver);
+		// subHeaderObject.click_add();
+		// subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
-		String NewDashBoradName = newContentPage.setNewDashboardName();
-
+		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
+		newContentPage.navigate_toURL();
 		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
@@ -617,9 +629,8 @@ public class NewUI_RolesTest {
 		sendDashboardPage.sendDashboard_addFields("", "This is body area", "HTML", ToMail, CcMail, BccMail);
 		sendDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
 
-		newContentPage = new NewUI_Content(driver);
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
-		newContentPage.assert_splashNotificationDescription_equalsExpected(
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected(
 				"You've successfully sent " + DashboardToBeShared + " via Email.");
 		// Need to check that mail is sent successfully
 	}
@@ -645,11 +656,14 @@ public class NewUI_RolesTest {
 		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared,
 				"LOLO", "This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
 				"GMT+02:00", "3", "Saturday", "20", "3rd", "2018-12-12");
+				
 		scheduleDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
 		// GMT±00:00
-		newContentPage = new NewUI_Content(driver);
-		newContentPage.assert_dashboardScheduledSuccessfullyMessage(DashboardToBeShared);
-
+		
+		
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Delivery Scheduled");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected("successfully scheduled");
+		
 		schedulerDashboardsPage = new NewUI_Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 
@@ -745,7 +759,7 @@ public class NewUI_RolesTest {
 
 		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToMove);
 
-		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move to...");
 
 		newContentPage.dashboard_popup_clickOnFolder(FolderNameToMoveTo);
 

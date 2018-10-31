@@ -344,10 +344,12 @@ public class NewUI_CertificationPath {
 	public void createDashboardAndInsight() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
-
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newHeaderObject = new NewUI_Header(driver);
+		
 		newDashboardName = newContentPage.addNewCatalogItem("dashboard");
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Added");
-		newContentPage.assert_splashNotificationDescription_equalsExpected(
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Added");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected(
 				"You've successfully added a dashboard named " + newDashboardName + ".");
 
 		newDashboardPage = new NewUI_Content_Dashboard(driver);
@@ -361,7 +363,6 @@ public class NewUI_CertificationPath {
 
 		newInsightName = newAnalyzeInsightPage.setInsightName();
 
-		newsubHeaderObject = new NewUI_Skeleton(driver);
 		newsubHeaderObject.Click_done();
 
 		newContentPage = new NewUI_Content(driver);
@@ -434,9 +435,10 @@ public class NewUI_CertificationPath {
 				testDataReader.getCellData("EmailAddress"), "", "");
 		newSendDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
 
-		newContentPage = new NewUI_Content(driver);
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
-		newContentPage.assert_splashNotificationDescription_equalsExpected(
+		newHeaderObject = new NewUI_Header(driver);
+
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected(
 				"You've successfully sent " + newDashboardName + " via Email.");
 
 		newSchedulerDashboardsPage = new NewUI_Dashboards(driver);

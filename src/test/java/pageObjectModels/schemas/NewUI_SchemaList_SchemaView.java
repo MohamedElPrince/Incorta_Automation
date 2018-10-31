@@ -112,11 +112,11 @@ public class NewUI_SchemaList_SchemaView {
 	}
 
 	public void Assert_tableNameIsDisplayed(String tableName) {
-		//ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.switchToIframe(driver, body_iframe);
 		body_tableName_label = By
 				.xpath("//div[@id='" + tableName + "']//div[contains(@class,'SchemaTable')]//p[@class='ng-binding']");
 		Assertions.assertElementExists(driver, body_tableName_label, true);
-		//ElementActions.switchToDefaultContent(driver);
+		ElementActions.switchToDefaultContent(driver);
 	}
 
 	public void Assert_tableAttributeIsCorrect(String tableName, String tableAttribute, String expectedValue) {

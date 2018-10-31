@@ -10,8 +10,6 @@ import com.shaft.element.ElementActions;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.validation.Assertions;
 
-import pageObjectModels.main.Skeleton;
-
 public class NewUI_Users {
 	//// Variables
 	WebDriver driver;
@@ -207,18 +205,7 @@ public class NewUI_Users {
 		ElementActions.switchToDefaultContent(driver);
 	}
 
-	public void Assert_impersonationUIElementsAreDisplayed() {
-		ElementActions.switchToIframe(driver, body_iframe);
-		Assertions.assertElementExists(driver, popup_impersonationMessage, true);
-		Assertions.assertElementAttribute(driver, popup_impersonationMessage, "text",
-				testDataReader.getCellData("ImpersonationMessage"), true);
 
-		Skeleton mainPage;
-		mainPage = new Skeleton(driver);
-		mainPage.Assert_impersonation_switchBack_link_IsDisplayed();
-		mainPage.Assert_fromUserMenu("Switch Back");
-		ElementActions.switchToDefaultContent(driver);
-	}
 
 	public void SelectGroupForUserFromUsersPage(String GroupName) {
 		ElementActions.switchToIframe(driver, body_iframe);
