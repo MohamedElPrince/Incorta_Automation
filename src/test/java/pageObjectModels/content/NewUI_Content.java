@@ -36,6 +36,10 @@ public class NewUI_Content {
 	By searchWrapper_catalogViewSwitchCard_button = By.xpath("//button[contains(@class,'inc-show-card')]//i");
 	By searchWrapper_catalogViewSwitchTable_button = By.xpath("//button[contains(@class,'inc-show-table')]//i");
 	By seachResult_search;
+	By searchResult_profilePicture = By.xpath(
+			"//li[@text='Automation_Folder_CatalogOfContent_ProfilePicture']//span[@class='inc-search-option__item--user']/img[contains(@src,'user/getUserPicture')]");
+	By searchResult_loadingIcon = By.xpath("//i[@class='anticon anticon-loading']");
+
 	// body-cardView
 	By cardView_contentCard_label; // div[@class='inc-card-title'][text()='']
 	By cardView_contentCardFolder_link;
@@ -148,6 +152,8 @@ public class NewUI_Content {
 	By popup_deleteDashboard_delete_Button = By.xpath("//button[contains(.,'Delete')]");
 	By deleteDashboard_confirmationMessage = By.xpath(
 			"//div[@class='ant-notification-notice-description'][contains(.,\"You've successfully deleted one dashboard.\")]");
+	By deleteFolder_confirmationMessage = By.xpath(
+			"//div[@class='ant-notification-notice-message'][contains(.,'Folder Deleted')]/following-sibling::div[contains(.,\"You've successfully deleted one folder.\")]");
 	By popup_deleteDashboard_delete_Button_loading = By
 			.xpath("//button[contains(.,’Delete’)][@class=‘ant-btn ant-btn-primary ant-btn-loading']");
 	// Others
@@ -915,6 +921,18 @@ public class NewUI_Content {
 		Assertions.assertElementExists(driver, seachResult_search, true);
 	}
 
+	/**
+	 * Below function only used when adding profile picture for the user.
+	 * 
+	 * @param contentName
+	 */
+	public void catalog_searchAndAssert_resultsDisplayProfilePicture_contentSearchBox(String contentName) {
+		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, seachResult_search, true);
+		Assertions.assertElementExists(driver, searchResult_profilePicture, true);
+	}
+
 	// Delete Dashbaord
 	public void assert_deleteDashboard_popup_screenContentDisplayed(String DashboardName) {
 		Assertions.assertElementExists(driver, popup_deleteDashboard_questionCircle, true);
@@ -948,4 +966,8 @@ public class NewUI_Content {
 				"Heads up! Deleting " + DashboardName + " can't be undone.", 1, true);
 	}
 
+	public void assert_deleteFolder_popup_confirmationMessageDisplayed() {
+		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button_loading, false);
+		Assertions.assertElementExists(driver, deleteFolder_confirmationMessage, true);
+	}
 }

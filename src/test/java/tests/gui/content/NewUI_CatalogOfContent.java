@@ -387,8 +387,8 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Deleted"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newUI_allContentPage.deleteDashboard_popup_click_confirmationButton_delete();
-		newUI_allContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
 
+		newUI_allContentPage.assert_deleteFolder_popup_confirmationMessageDisplayed();
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Deleted"));
 	}
@@ -406,7 +406,7 @@ public class NewUI_CatalogOfContent {
 	@Test(priority = 26, description = "C82789 - Chrome: Testing that when searching for a Folder that doesn't exist , no data will be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard created by admin and not shared.Then dashboard is not found.")
 	@Severity(SeverityLevel.NORMAL)
-	public void CatalogOfContent_SearchForFolder_DashboardNotCreated() {
+	public void CatalogOfContent_SearchForFolder_FolderNotCreated() {
 		newUI_allContentPage = new NewUI_Content(driver);
 
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
@@ -605,10 +605,35 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
 	}
 
+	@Test(priority = 41, description = "C83985_1 - Chrome: Testing That the profile pic of the dashboard/Folder owner is displayed when searching.")
+	@Description("When I login, And I search for Folder. Then search result will display profile picture of the creator of the Folder.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForFolders_ProfilePictureDisplayedInSearchBar() {
+		navigateToLogInPageAndLogIn("Data6");
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAndAssert_resultsDisplayProfilePicture_contentSearchBox(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_ProfilePicture"));
+	}
+
+	@Test(priority = 42, description = "C83985_2 - Chrome: Testing That the profile pic of the dashboard/Folder owner is displayed when searching.")
+	@Description("When I login, And I search for dashboard. Then search result will display profile picture of the creator of the dashboard.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_SearchForDashboards_ProfilePictureDisplayedInSearchBar() {
+		navigateToLogInPageAndLogIn("Data6");
+
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.catalog_searchAndAssert_resultsDisplayProfilePicture_contentSearchBox(
+				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_ProfilePicture"));
+	}
+
 	public void navigateToLogInPageAndLogIn(String ColumnName) {
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+
 		loginPage = new NewUI_Login(driver);
-		loginPage.navigate_toURL();
-		loginPage = new NewUI_Login(driver);
+		loginPage.goToSignInPage_fromSignOutPage();
 		loginPage.userLogin(testDataReader.getCellData("Tenant", ColumnName),
 				testDataReader.getCellData("Username", ColumnName), testDataReader.getCellData("Password", ColumnName));
 	}
