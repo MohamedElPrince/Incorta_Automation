@@ -1,4 +1,4 @@
-package tests.bff;
+package tests.api.certification;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
