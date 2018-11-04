@@ -147,161 +147,162 @@ public class NewUI_UsersTest {
 		 * owner after transfer 16- Check schema owner after transfer 17- Check
 		 * Dashboard owner after transfer 18- Check Folder owner after transfer
 		 */
-
-		// Create New User
+//
+//		// Create New User
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.click_add();
-		newUserData = usersPage.AddNewUser();
-		usersPage.Assert_nameIsDisplayed(newUserData[2]);
-
-		// Add the new created user to Super Group
-		groupsPage = new Groups(driver);
-		groupsPage.Navigate_toURL();
-
-		subHeaderObject.SearchForContentAndOpenResult_security("Automation_Group_SuperRole");
-		groups_groupPage = new NewUI_Groups_Group(driver);
-		groups_groupPage.AddUsers(new String[] { newUserData[2] });
-		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
-
-		// logout and login using the new account created
+//		subHeaderObject.click_add();
+//		newUserData = usersPage.AddNewUser();
+//		usersPage.Assert_nameIsDisplayed(newUserData[2]);
+//
+//		// Add the new created user to Super Group
+//		groupsPage = new Groups(driver);
+//		groupsPage.Navigate_toURL();
+//
+//		subHeaderObject.SearchForContentAndOpenResult_security("Automation_Group_SuperRole");
+//		groups_groupPage = new NewUI_Groups_Group(driver);
+//		groups_groupPage.AddUsers(new String[] { newUserData[2] });
+//		groups_groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
+//
+//		// logout and login using the new account created
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.navigate_toURL();
-
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.expandUserMenu();
-		newHeaderObject.signOut();
-
+//		newContentPage.navigate_toURL();
+//
+//		newHeaderObject = new NewUI_Header(driver);
+//		newHeaderObject.expandUserMenu();
+//		newHeaderObject.signOut();
+//
 		logoutpage = new NewUI_SignOut(driver);
-		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
-		logoutpage.navigate_toLoginPage();
-
-		loginPage.navigate_toURL();
-		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
-
-		// Actions for first time login
-		newPassword = "Automation";
-		loginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
-
-		newHeaderObject.assert_sectionHeader_isSelected("Content");
-
-		// Create new data source
-		dataSourcesPage = new NewUI_DataSources(driver);
-		dataSourcesPage.Navigate_toURL();
-
-		dataSourcesPage.Assert_dataSourcesTabIsSelected();
-
-
-		subHeaderObject.click_add();
-
-		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
-		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
-		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
-
-		// Create Schema
-
+//		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
+//		logoutpage.navigate_toLoginPage();
+//
+//		loginPage.navigate_toURL();
+//		loginPage.userLogin(testDataReader.getCellData("Tenant"), newUserData[0], newUserData[1]);
+//
+//		// Actions for first time login
+//		newPassword = "Automation";
+//		loginPage.firstTimeLogin(newUserData[1], newPassword, newPassword);
+//
+//		newHeaderObject.assert_sectionHeader_isSelected("Content");
+//
+//		// Create new data source
+//		dataSourcesPage = new NewUI_DataSources(driver);
+//		dataSourcesPage.Navigate_toURL();
+//
+//		dataSourcesPage.Assert_dataSourcesTabIsSelected();
+//
+//
+//		subHeaderObject.click_add();
+//
+//		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
+//		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
+//		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
+//
+//		// Create Schema
+//
 		schemasPage = new NewUI_SchemaList(driver);
-
-		schemasPage.Navigate_toURL();
-		schemasPage.Assert_schemaListTabIsSelected();
-
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Create Schema");
-
-		newSchemaName = schemasPage.createNewSchema();
-
-		schemasPage.Navigate_toURL();
-		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
-		schemasPage.click_schemaName(newSchemaName);
-
+//
+//		schemasPage.Navigate_toURL();
+//		schemasPage.Assert_schemaListTabIsSelected();
+//
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Create Schema");
+//
+//		newSchemaName = schemasPage.createNewSchema();
+//
+//		schemasPage.Navigate_toURL();
+//		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+//		schemasPage.click_schemaName(newSchemaName);
+//
 		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
-		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
-
-
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
-
-		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
-				testDataReader.getCellData("DatabaseTableName")); // need
-		
-		// to check if condition after this function call
-
-		// "Assert_wizardWelcomeTextIsDisplayed()"
-		newDataSourceTableName = schemasViewPage.GetNewestTableName();
-		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
-
-		// Full Load the created schema
-
-		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
-
-		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
-		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
-		subHeaderObject.Click_load();
-		subHeaderObject.Hover_overDropdownMenu("Load now");
-		subHeaderObject.Select_fromDropdownMenu("Full");
-		schemasViewPage.confirmLoadingData();
-
-		// Create Folder
+//		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+//
+//
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
+//
+//		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
+//				testDataReader.getCellData("DatabaseTableName")); // need
+//		
+//		// to check if condition after this function call
+//
+//		// "Assert_wizardWelcomeTextIsDisplayed()"
+//		newDataSourceTableName = schemasViewPage.GetNewestTableName();
+//		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
+//
+//		// Full Load the created schema
+//
+//		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
+//
+//		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
+//		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
+//		subHeaderObject.Click_load();
+//		subHeaderObject.Hover_overDropdownMenu("Load now");
+//		subHeaderObject.Select_fromDropdownMenu("Full");
+//		schemasViewPage.confirmLoadingData();
+//
+//		// Create Folder
 		allContentPage = new NewUI_Content(driver);
-		allContentPage.navigate_toURL();
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Create Folder");
-		newFolderName = allContentPage.SetNewFolderName();/////Need to check share button active or notNOOOOOOTTTTTEEEEEEEEEE
-		//allContentPage.selectContentOptionButton(newFolderName);
-
-
+//		allContentPage.navigate_toURL();
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Create Folder");
+//		newFolderName = allContentPage.SetNewFolderName();/////Need to check share button active or notNOOOOOOTTTTTEEEEEEEEEE
+//		//allContentPage.selectContentOptionButton(newFolderName);
+//
+//
 		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.assert_shared_button_active();
+//		dashboardPage.assert_shared_button_active();
+//		
 		// share Folder with another user with Can View
-		dashboardPage.selectShareButton();
-		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
-
-
-		// Create Dashboard and add insight
-		allContentPage.navigate_toURL();
-
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
-
-		newDashboardName = allContentPage.setNewDashboardName();
-
-		subHeaderObject.Click_ChooseVisualization();
-		analyzeInsightPage.selectVisualization("Aggregated");
+//		dashboardPage.selectShareButton();
+//		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
+//
+//
+//		// Create Dashboard and add insight
+//		allContentPage.navigate_toURL();
+//
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
+//
+//		newDashboardName = allContentPage.setNewDashboardName();
+//
+//		subHeaderObject.Click_ChooseVisualization();
+//		analyzeInsightPage.selectVisualization("Aggregated");
 		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
-		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
-		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
-		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
-
-		newInsightName = analyzeInsightPage.setInsightName();
-		subHeaderObject.Click_done();
-
-		allContentPage.navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
-
-		dashboardPage.assert_dashboardName(newDashboardName);
-		dashboardPage.assert_insightName(newInsightName);
-
-		// assert that share icon in dashboard settings is active
-		//allContentPage.selectContentOptionButton(newDashboardName);
-		dashboardPage.assert_shared_button_active();
-
-		// share dashboard with another user with Can View
-		dashboardPage.selectShareButton();
-		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
-
+//		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
+//		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
+//		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
+//
+//		newInsightName = analyzeInsightPage.setInsightName();
+//		subHeaderObject.Click_done();
+//
+//		allContentPage.navigate_toURL();
+//		subHeaderObject.SearchForContentAndOpenResult_security(newDashboardName);
+//
+//		dashboardPage.assert_dashboardName(newDashboardName);
+//		dashboardPage.assert_insightName(newInsightName);
+//
+//		// assert that share icon in dashboard settings is active
+//		//allContentPage.selectContentOptionButton(newDashboardName);
+//		dashboardPage.assert_shared_button_active();
+//
+//		// share dashboard with another user with Can View
+//		dashboardPage.selectShareButton();
+//		dashboardPage.selectUsertoShareFromList(testDataReader.getCellData("Username", "Data9"));
+//
 		// Switch to another admin account
-				subHeaderObject.Select_fromUserMenu("Logout");
-				loginPage.navigate_toURL();
-
+		//		subHeaderObject.Select_fromUserMenu("Logout");
+				
+		loginPage.navigate_toURL();
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
 		// Delete User and Transfer Ownership to another user
 		usersPage.Navigate_toURL();
-		usersPage.Select_nameCheckbox(newUserData[2]);
+		usersPage.Select_nameCheckbox(testDataReader.getCellData("Username", "Data10"));
 
 		subHeaderObject.Click_actions();
 		subHeaderObject.Select_fromDropdownMenu("Delete selection");
-		// Transfer ownership to user in data5
+		// Transfer ownership to user in data8
 		usersPage.ConfirmUserDeletionAndTransferOwnershipToAnother(testDataReader.getCellData("Username", "Data8"));
 		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
 
