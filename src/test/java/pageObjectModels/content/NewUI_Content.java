@@ -160,6 +160,7 @@ public class NewUI_Content {
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
 
+	By body_folderCardDescription;
 	// Splash notification
 	By splash_notificationMessage_text = By.xpath("//div[contains(@class,'ant-notification-notice-message')]");
 	By splash_notificationDescription_text = By.xpath("//div[contains(@class,'ant-notification-notice-description')]");
@@ -970,4 +971,19 @@ public class NewUI_Content {
 		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button_loading, false);
 		Assertions.assertElementExists(driver, deleteFolder_confirmationMessage, true);
 	}
+
+	// Catalog of content
+
+	/**
+	 * Function only check for specific scenario which folder has 1 folder and 1
+	 * dashboard inside it.
+	 * 
+	 * @param FolderName
+	 */
+	public void assert_folderCardDescription_grammerAndCountCorrect(String FolderName) {
+		body_folderCardDescription = By.xpath("//span[text()='" + FolderName + "']"
+				+ "/parent::div/following-sibling::div/div[@class='inc-card-description'][text()='1 Folder and 1 Dashboard']");
+		Assertions.assertElementExists(driver, body_folderCardDescription, true);
+	}
+
 }

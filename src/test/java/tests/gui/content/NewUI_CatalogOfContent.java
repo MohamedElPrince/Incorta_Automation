@@ -627,6 +627,15 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_ProfilePicture"));
 	}
 
+	@Test(priority = 43, description = "C83986 - Chrome: Testing that in case the number of folders / Dashboards under a folder is 1, the grammar is correct.")
+	@Description("When I navigate to the content page, Then I'll find that folders written under them how many folders and dahsboards with the right grammer.")
+	@Severity(SeverityLevel.NORMAL)
+	public void CatalogOfContent_RightGrammerAndNumberOfFoldersAndDashboardsWrittenUnderFolderName() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.assert_folderCardDescription_grammerAndCountCorrect(
+				testDataReader.getCellData("Automation_Folder_CatalogOfContent_GrammerAndCountUnderFolder"));
+	}
+
 	public void navigateToLogInPageAndLogIn(String ColumnName) {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.expandUserMenu();
