@@ -35,7 +35,7 @@ public class NewUI_Content {
 	By searchWrapper_searchDropDownOption_label; // span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='']
 	By searchWrapper_catalogViewSwitchCard_button = By.xpath("//button[contains(@class,'inc-show-card')]//i");
 	By searchWrapper_catalogViewSwitchTable_button = By.xpath("//button[contains(@class,'inc-show-table')]//i");
-	By seachResult_search;
+	By searchResult_search;
 	By searchResult_profilePicture = By.xpath(
 			"//li[@text='Automation_Folder_CatalogOfContent_ProfilePicture']//span[@class='inc-search-option__item--user']/img[contains(@src,'user/getUserPicture')]");
 	By searchResult_loadingIcon = By.xpath("//i[@class='anticon anticon-loading']");
@@ -159,8 +159,19 @@ public class NewUI_Content {
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
-
 	By body_folderCardDescription;
+
+	// Catalog Of Content Sorting
+	By body_firstDashboard_inTheList = By
+			.xpath("//span[@class='inc-card inc-dashboard-card inline medium'][1]//span[@class='inc-card-title-text']");
+	By body_secondDashboard_inTheList = By
+			.xpath("//span[@class='inc-card inc-dashboard-card inline medium'][2]//span[@class='inc-card-title-text']");
+	By body_thirdDashboard_inTheList = By
+			.xpath("//span[@class='inc-card inc-dashboard-card inline medium'][3]//span[@class='inc-card-title-text']");
+
+	// Folder section
+	By body_sortButton = By.xpath("//i[@class='anticon anticon-down']");
+
 	// Splash notification
 	By splash_notificationMessage_text = By.xpath("//div[contains(@class,'ant-notification-notice-message')]");
 	By splash_notificationDescription_text = By.xpath("//div[contains(@class,'ant-notification-notice-description')]");
@@ -904,22 +915,22 @@ public class NewUI_Content {
 
 	// Catalog of Content
 	public void catalog_searchAssertAndOpenResults_contentSearchBox(String contentName) {
-		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
 		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
-		Assertions.assertElementExists(driver, seachResult_search, true);
-		ElementActions.click(driver, seachResult_search);
+		Assertions.assertElementExists(driver, searchResult_search, true);
+		ElementActions.click(driver, searchResult_search);
 	}
 
 	public void catalog_searchAndAssertResultNotExist_contentSearchBox(String contentName) {
-		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
 		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
-		Assertions.assertElementExists(driver, seachResult_search, false);
+		Assertions.assertElementExists(driver, searchResult_search, false);
 	}
 
 	public void catalog_searchAndAssertResultsDisplayed_contentSearchBox(String contentName) {
-		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
 		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
-		Assertions.assertElementExists(driver, seachResult_search, true);
+		Assertions.assertElementExists(driver, searchResult_search, true);
 	}
 
 	/**
@@ -928,9 +939,9 @@ public class NewUI_Content {
 	 * @param contentName
 	 */
 	public void catalog_searchAndAssert_resultsDisplayProfilePicture_contentSearchBox(String contentName) {
-		seachResult_search = By.xpath("//li[@text='" + contentName + "']");
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
 		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
-		Assertions.assertElementExists(driver, seachResult_search, true);
+		Assertions.assertElementExists(driver, searchResult_search, true);
 		Assertions.assertElementExists(driver, searchResult_profilePicture, true);
 	}
 
@@ -952,11 +963,6 @@ public class NewUI_Content {
 		ElementActions.click(driver, popup_deleteDashboard_neverMind_Button);
 	}
 
-	public void assert_deleteDashboard_popup_confirmationMessageDisplayed() {
-		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button_loading, false);
-		Assertions.assertElementExists(driver, deleteDashboard_confirmationMessage, true);
-	}
-
 	public void assert_deleteDashboard_popup_dashboardNameIsCorrect(String DashboardName) {
 		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
 				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
@@ -967,11 +973,6 @@ public class NewUI_Content {
 				"Heads up! Deleting " + DashboardName + " can't be undone.", 1, true);
 	}
 
-	public void assert_deleteFolder_popup_confirmationMessageDisplayed() {
-		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button_loading, false);
-		Assertions.assertElementExists(driver, deleteFolder_confirmationMessage, true);
-	}
-
 	// Catalog of content
 
 	/**
@@ -980,10 +981,58 @@ public class NewUI_Content {
 	 * 
 	 * @param FolderName
 	 */
-	public void assert_folderCardDescription_grammerAndCountCorrect(String FolderName) {
-		body_folderCardDescription = By.xpath("//span[text()='" + FolderName + "']"
-				+ "/parent::div/following-sibling::div/div[@class='inc-card-description'][text()='1 Folder and 1 Dashboard']");
-		Assertions.assertElementExists(driver, body_folderCardDescription, true);
+	public void assert_folderCardDescription_grammerAndCountCorrect(String FolderName, String NoOfFolderAndDashboards) {
+		body_folderCardDescription = By.xpath("//span[text()='" + FolderName
+				+ "']/parent::div/following-sibling::div/div[@class='inc-card-description']");
+		Assertions.assertElementAttribute(driver, body_folderCardDescription, "text", NoOfFolderAndDashboards, true);
+	}
+
+	public void assert_sortingIsCorrect(String SortingType, String firstDashboard, String secondDashboard,
+			String thirdDashboard) {
+		switch (SortingType) {
+		case "Owner":
+			assert_sorting(firstDashboard, secondDashboard, thirdDashboard);
+			break;
+
+		case "Modified By":
+			assert_sorting(firstDashboard, secondDashboard, thirdDashboard);
+			break;
+
+		case "Name":
+			assert_sorting(firstDashboard, secondDashboard, thirdDashboard);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * Function will get the dashboards name and compare them with the expected
+	 * result retrieved from Excel sheet
+	 * 
+	 * @param firstDashboard
+	 *            Will be retrieved from excel sheet
+	 * @param secondDashboard
+	 *            Will be retrieved from excel sheet
+	 * @param thirdDashboard
+	 *            Will be retrieved from excel sheet
+	 */
+	public void assert_sorting(String firstDashboard, String secondDashboard, String thirdDashboard) {
+		Assertions.assertElementAttribute(driver, body_firstDashboard_inTheList, "text", firstDashboard, true);
+		Assertions.assertElementAttribute(driver, body_secondDashboard_inTheList, "text", secondDashboard, true);
+		Assertions.assertElementAttribute(driver, body_thirdDashboard_inTheList, "text", thirdDashboard, true);
+	}
+
+	/**
+	 * "Name" "Last Modified" "Owner"
+	 * 
+	 * @param SortType
+	 */
+	public void click_onSorting(String SortType) {
+		ElementActions.click(driver, body_sortButton);
+		By body_sortButton_types = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'" + SortType + "')]");
+		ElementActions.click(driver, body_sortButton_types);
 	}
 
 }
