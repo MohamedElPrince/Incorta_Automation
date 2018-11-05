@@ -126,16 +126,16 @@ public class NewUI_UsersTest {
 	@Severity(SeverityLevel.CRITICAL)
 	public void deletingUserWithOptionTransferOwnershipToAnotherUser() {
 
-//		// select user to be deleted and transfer ownership to another user
-//		usersPage.Select_nameCheckbox(testDataReader.getCellData("Username", "Data10")); // Data10 "Automation_User_SuperUser4"--> Owner
-//
+		// select user to be deleted and transfer ownership to another user
+		usersPage.Select_nameCheckbox(testDataReader.getCellData("Username", "Data10")); // Data10 "Automation_User_SuperUser4"--> Owner
+
 		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.Click_actions();
-//		subHeaderObject.Select_fromDropdownMenu("Delete selection");
-//
-//		// Transfer ownership to another user in data8 "Automation_User_SuperUser1"
-//		usersPage.ConfirmUserDeletionAndTransferOwnershipToAnother(testDataReader.getCellData("Username", "Data8"));
-//		usersPage.Assert_nameIsNotDisplayed(testDataReader.getCellData("Username", "Data10"));
+		subHeaderObject.Click_actions();
+		subHeaderObject.Select_fromDropdownMenu("Delete selection");
+
+		// Transfer ownership to another user in data8 "Automation_User_SuperUser1"
+		usersPage.ConfirmUserDeletionAndTransferOwnershipToAnother(testDataReader.getCellData("Username", "Data8"));
+		usersPage.Assert_nameIsNotDisplayed(testDataReader.getCellData("Username", "Data10"));
 
 		// Switch to another admin account user in data9 "Automation_User_SuperUser2" and check the transfered content
 		newHeaderObject = new NewUI_Header(driver);
