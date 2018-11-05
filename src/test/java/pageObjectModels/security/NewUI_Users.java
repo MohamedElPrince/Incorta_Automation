@@ -222,7 +222,6 @@ public class NewUI_Users {
 
 	public void ConfirmUserDeletionAndTransferOwnershipToAnother(String name) {
 		ElementActions.switchToIframe(driver, body_iframe);
-		ElementActions.switchToIframe(driver, body_iframe);
 		ElementActions.click(driver, popup_confirmDelete_transferOwnership_button);
 		popup_transferOwnership_targetuser_radioButton = By.xpath(
 				"//p[contains(normalize-space(),'Transfer ownership to another user')]/preceding-sibling::input[@type='radio']");
