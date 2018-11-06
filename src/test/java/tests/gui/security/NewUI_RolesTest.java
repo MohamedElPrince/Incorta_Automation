@@ -23,6 +23,7 @@ import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
 import pageObjectModels.content.NewUI_Content_Dashboard_SendDashboard;
 import pageObjectModels.data.NewUI_DataSources;
 import pageObjectModels.login.NewUI_Login;
+import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
 import pageObjectModels.main.NewUI_Skeleton;
 import pageObjectModels.scheduler.NewUI_Dashboards;
@@ -60,6 +61,7 @@ public class NewUI_RolesTest {
 	NewUI_Content_Dashboard dashboardPage;
 	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
 	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
+	NewUI_SignOut logoutpage;
 
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
@@ -267,16 +269,15 @@ public class NewUI_RolesTest {
 		allContentPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		//subHeaderObject.click_add();
-		//subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
-		//newDashboardName = allContentPage.setNewDashboardName();
-		//newContentPage.click_on_folder_dashboard(newDashboardName);
+		// subHeaderObject.click_add();
+		// subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		// newDashboardName = allContentPage.setNewDashboardName();
+		// newContentPage.click_on_folder_dashboard(newDashboardName);
 
 		newContentPage = new NewUI_Content(driver);
 		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
 		newContentPage.navigate_toURL();
 		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
-
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
@@ -425,7 +426,7 @@ public class NewUI_RolesTest {
 		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
 		newContentPage.navigate_toURL();
 		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
-		
+
 //		newDashboardName = newContentPage.setNewDashboardName();
 //		NewUI_allContentPage = new NewUI_Content(driver);
 //		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
@@ -452,7 +453,7 @@ public class NewUI_RolesTest {
 		dashboardPage.assert_insightName_isCorrect(newInsightName);
 
 		newContentPage.navigate_toURL();
-		
+
 		// assert that share icon in dashboard settings is active
 		newContentPage.click_dashboardFolder_properties_fromGridView(NewDashBoradName);
 		dashboardPage.assert_shared_button_active();
@@ -478,7 +479,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 		String NewFolderName = newContentPage.addNewCatalogItem("folder");
-		newContentPage.navigate_toURL();		
+		newContentPage.navigate_toURL();
 
 		newContentPage.Assert_DashboardExist(NewFolderName);
 		// allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
@@ -656,14 +657,13 @@ public class NewUI_RolesTest {
 		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared,
 				"LOLO", "This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
 				"GMT+02:00", "3", "Saturday", "20", "3rd", "2018-12-12");
-				
+
 		scheduleDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
 		// GMT±00:00
-		
-		
+
 		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Delivery Scheduled");
 		newHeaderObject.assert_splashNotificationDescription_equalsExpected("successfully scheduled");
-		
+
 		schedulerDashboardsPage = new NewUI_Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
 
@@ -811,17 +811,17 @@ public class NewUI_RolesTest {
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.expandUserMenu();
 		newHeaderObject.signOut();
-		loginPage = new NewUI_Login(driver);
-		loginPage.goToSignInPage_fromSignOutPage();
+		logoutpage = new NewUI_SignOut(driver);
+		logoutpage.navigate_toLoginPage();
 		ReportManager.getTestLog();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();

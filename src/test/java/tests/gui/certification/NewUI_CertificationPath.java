@@ -346,7 +346,7 @@ public class NewUI_CertificationPath {
 		newContentPage.navigate_toURL();
 		newsubHeaderObject = new NewUI_Skeleton(driver);
 		newHeaderObject = new NewUI_Header(driver);
-		
+
 		newDashboardName = newContentPage.addNewCatalogItem("dashboard");
 		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Added");
 		newHeaderObject.assert_splashNotificationDescription_equalsExpected(
@@ -547,12 +547,12 @@ public class NewUI_CertificationPath {
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
 		ReportManager.getTestLog();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();

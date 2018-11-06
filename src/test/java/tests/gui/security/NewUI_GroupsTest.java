@@ -38,7 +38,6 @@ public class NewUI_GroupsTest {
 	NewUI_Content newContentPage;
 	NewUI_Header newHeaderObject;
 
-
 	// Declaring Variables that will be used in below tests
 	String newGroupName;
 	String AddedRoles[];
@@ -128,19 +127,18 @@ public class NewUI_GroupsTest {
 		loginPage.navigate_toURL();
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
-		
+
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
-		
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
 		ReportManager.getTestLog();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();
