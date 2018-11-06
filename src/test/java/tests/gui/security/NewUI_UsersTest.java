@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
@@ -76,6 +75,8 @@ public class NewUI_UsersTest {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I create a new user, And I navigate back to the security.users page, Then the new user will be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createNewUser() {
+		
+		logInWithUserAndNavigateToSecurity("Data7");
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.click_add();
 
@@ -87,6 +88,8 @@ public class NewUI_UsersTest {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I change profile picture of existing user, And I save changes, Then the new profile picture sill be displayed")
 	@Severity(SeverityLevel.CRITICAL)
 	public void changeProfilePicture() {
+		logInWithUserAndNavigateToSecurity("Data7");
+		
 		usersPage.Click_name(TempUser);
 		usersPage.UploadProfilePicture(Picture);
 		usersPage.Assert_imageIsDisplayed(TempUser);
@@ -96,6 +99,9 @@ public class NewUI_UsersTest {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I select existing user, And I delete this selected user, Then user will not be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void deleteUser() {
+		
+		logInWithUserAndNavigateToSecurity("Data7");
+		
 		usersPage.Select_nameCheckbox(TempUser); // manually created user till be automated as prerequisites
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_actions();
@@ -108,6 +114,9 @@ public class NewUI_UsersTest {
 	@Description("Given I am logged in with an admin account, When I navigate to the security.users page, And I click on a user (not super user), And I click on Login As User, Then a message should be displayed to state that I'm impersonating the user, And a link should be present in the users dropdown menu to take me back, And a link should be displayed in the side menu to take me back.")
 	@Severity(SeverityLevel.NORMAL)
 	public void impersonationUI() {
+		
+		logInWithUserAndNavigateToSecurity("Data7");
+		
 		String impersonationUserName = testDataReader.getCellData("ImpersonationUserName");
 		usersPage.Assert_nameIsDisplayed(impersonationUserName);
 		usersPage.Click_name(impersonationUserName);
@@ -119,12 +128,15 @@ public class NewUI_UsersTest {
 
 		newHeaderObject.expandUserMenu();
 		newHeaderObject.assert_userMenuItem("Switch Back");
+
 	}
 
 	@Test(priority = 5, description = "C647   - Testing Deleting user with option transfer ownership to another user ")
 	@Description("Given I have two Super User Accounts, when I share content whith other user \"User1\", And I Delete \"User0\" and transferrer all his content to another user \"User2\", then all content ownership transfered to that user and shared content doesn`t get affected ")
 	@Severity(SeverityLevel.CRITICAL)
 	public void deletingUserWithOptionTransferOwnershipToAnotherUser() {
+		
+		logInWithUserAndNavigateToSecurity("Data7");
 
 		// select user to be deleted and transfer ownership to another user
 		usersPage.Select_nameCheckbox(testDataReader.getCellData("Username", "Data10"));
@@ -194,16 +206,26 @@ public class NewUI_UsersTest {
 		newContentPage.assert_contentSearchResult_isDisplayed(testDataReader.getCellData("newFolderName"));
 	}
 
-	//// Testng Annotations
+	private void logInWithUserAndNavigateToSecurity(String UserData) {
 
-	@BeforeMethod
-	public void beforeMethod() {
+		loginPage = new NewUI_Login(driver);
+		loginPage.navigate_toURL();
+
+		loginPage.userLogin(testDataReader.getCellData("Tenant", UserData),
+				testDataReader.getCellData("Username", UserData), testDataReader.getCellData("Password", UserData));
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
 		usersPage = new NewUI_Users(driver);
 		usersPage.Navigate_toURL();
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Security");
+
 	}
+
+	//// Testng Annotations
 
 	@BeforeClass
 	public void beforeClass() {
@@ -211,18 +233,19 @@ public class NewUI_UsersTest {
 				System.getProperty("testDataFolderPath") + "security_newUI/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
-
-		loginPage = new NewUI_Login(driver);
-		loginPage.navigate_toURL();
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
-				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
-
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_sectionHeader_isSelected("Content");
 	}
 
 	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+
+		// Assert in signout message.
+		logoutpage = new NewUI_SignOut(driver);
+		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
+
 		ReportManager.getTestLog();
 	}
 
