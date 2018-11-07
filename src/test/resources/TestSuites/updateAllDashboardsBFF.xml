@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="AI-Driven BFF Automation" verbose="10">
+	<test name="Rename All Dashboards">
+		<classes>
+			<class name="tests.api.certification.Dashboards_bff_Test"></class>
+		</classes>
+	</test>
+</suite>

@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
-import com.shaft.element.JSWaiter;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
@@ -16,9 +15,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
@@ -44,7 +43,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 	Skeleton mainPage;
 	NewUI_Content allContentPage;
 	NewUI_Content_Dashboard dashboardPage;
-	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 
 	//// Test Cases
 	@Test(priority = 1, description = "C82144 - Chrome: Set As Default Dashboard: Testing that the icon is displayed in the dashboard")

@@ -15,11 +15,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.AllContent;
 import pageObjectModels.login.NewUI_Login;
+import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
-import pageObjectModels.main.Skeleton;
-import pageObjectModels.security.Users;
+import pageObjectModels.main.NewUI_Skeleton;
+import pageObjectModels.security.NewUI_Users;
 
 @Epic("Incorta -> Login")
 public class NewUI_LoginTest {
@@ -30,10 +30,10 @@ public class NewUI_LoginTest {
 
 	// Declaring Page Objects that will be used in the tests
 	NewUI_Login loginPage;
+	NewUI_SignOut logoutpage;
 	NewUI_Header newHeaderObject;
-	Skeleton subHeaderObject;
-	AllContent allContentPage;
-	Users usersPage;
+	NewUI_Skeleton subHeaderObject;
+	NewUI_Users usersPage;
 
 	// Declaring public variables that will be shared between tests
 	String[] newUserData;
@@ -136,7 +136,7 @@ public class NewUI_LoginTest {
 	public void assertLoginWorksAsExpected() {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
-		
+
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.verify_allSectionHeaders_areDisplayed();
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -154,15 +154,24 @@ public class NewUI_LoginTest {
 		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data7"),
 				testDataReader.getCellData("Username", "Data7"), testDataReader.getCellData("Password", "Data7"));
 
-		usersPage = new Users(driver);
-		usersPage.Navigate_toURL_with_iframe();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+		usersPage = new NewUI_Users(driver);
+		usersPage.Navigate_toURL();
 		// Create New User
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
+		subHeaderObject = new NewUI_Skeleton(driver);
+		subHeaderObject.click_add();
 
 		newUserData = usersPage.AddNewUser();
 		usersPage.Assert_nameIsDisplayed(newUserData[2]);
+
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
+
+		logoutpage = new NewUI_SignOut(driver);
+		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
 
 		// Navigate to login page, and login using the new created user.
 		loginPage.navigate_toURL();
@@ -171,7 +180,7 @@ public class NewUI_LoginTest {
 		// Actions for first time login
 		loginPage.firstTimeLogin(newUserData[1], newUserData[0], newUserData[0]); // take user name as input for the new
 																					// password
-		newHeaderObject = new NewUI_Header(driver);
+
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 	}
 
@@ -183,17 +192,24 @@ public class NewUI_LoginTest {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "security_newUI/TestData.xlsx");
+		System.setProperty("testDataFilePath",
+				System.getProperty("testDataFolderPath") + "security_newUI/TestData.xlsx");
 		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
 		ReportManager.getTestLog();
+
+		logoutpage = new NewUI_SignOut(driver);
+		logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();

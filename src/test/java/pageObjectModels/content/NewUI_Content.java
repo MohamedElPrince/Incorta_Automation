@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
 import com.shaft.io.ExcelFileManager;
+import com.shaft.io.ReportManager;
 import com.shaft.validation.Assertions;
 
 public class NewUI_Content {
@@ -14,9 +15,12 @@ public class NewUI_Content {
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_content");
 	int customElementIdentificationTimeout = 4;
+	int customNumberOfRetries = 1;
 
 	//// Elements
 	// first nested header
+	By body_add_button = By.xpath("//span[@class='inc-toolbar-button']//*[@data-icon='plus']");
+	By body_add_menuItem; // li[@class='ant-dropdown-menu-item'][contains(.,'Add Folder')]
 	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
 	By body_dashboardName;
 	By body_dashboardName_folderName;
@@ -25,7 +29,7 @@ public class NewUI_Content {
 
 	// second_nested_header
 	By searchWrapper_search_textBox = By.xpath("//div[@class='ant-select-search__field__wrap']//input");
-	By searchWrapper_searchResult_label = By.className("inc-search-option__item");
+	By searchWrapper_searchResult_label = By.className("inc-search-option__item--left__name--highLighted"); // inc-search-option__item
 	By searchWrapper_searchCount_label = By.className("inc-search-count");
 	By searchWrapper_searchDropDown_button = By.xpath("//span[@class='inc-search-dropdown']//button");
 	By searchWrapper_searchDropDownOption_label; // span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='']
@@ -54,8 +58,13 @@ public class NewUI_Content {
 	By tableView_contentTableGenericDashboard_link = By
 			.xpath("//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a");
 
+	// popup_addDashboardOrFolder
+	By popup_addDashboardOrFolder_name_textBox = By.id("name");
+
 	By popup_renameFolder;
-	By popup_Rename_RenameButton = By.xpath("//button//span[contains(text(),'Rename')]");
+	By popup_Rename_RenameButton = By.xpath("//button[contains(.,'Rename')]");
+	By popup_Rename_CancelButton = By.xpath("//button[contains(.,'Cancel')]");
+
 	By popup_manageDashboard_copy_folderToCopyTo;
 	By popup_manageDashboard_move_moveButton = By.xpath("//button//span[contains(text(),'Move')]");
 
@@ -106,7 +115,18 @@ public class NewUI_Content {
 	By body_searchContent_resultFound;
 	By popup_makeACopy_errorDuplicateDashboardName;
 
-	// Rename
+	// Rename Folder
+	By popup_renameFolder_newNameField = By.xpath("//input[@placeholder='Name']");
+	By renameFolder_successfullyRenamedMessage;
+
+	By popup_renameFolder_headerLabel = By.xpath("//span[contains(.,'Rename Folder')]");
+	By popup_renameFolder_newNameLabel = By.xpath("//span[contains(.,'New Name')]");
+	By popup_renameFolder_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
+	By popup_renameFolder_errorMessage_nameAlreadyExist = By
+			.xpath("//span[contains(@class,'error-message')][contains(text(),'Name already exists!')]");
+	By popup_renameFolder_closeIcon = By.xpath("//button[@class='ant-modal-close']");
+
+	// Rename Dashboard
 	By popup_renameDashboard_field = By.id("inc-rename-catalog-item__control");
 	By popup_renameDashboard_renameCancel_buttons;
 	By popup_renameDashboard_confirmationMessage;
@@ -119,9 +139,21 @@ public class NewUI_Content {
 	By popup_renameDashboard_closeIcon = By.xpath("//i[@class='anticon anticon-close ant-modal-close-icon']");
 	By popup_renameDashboard_screen = By.xpath("//div[@class='ant-modal']/div[@class='ant-modal-content']");
 
+	// Delete Dashboard
+	By popup_deleteDashboard_questionCircle = By.xpath("//i[@class='anticon anticon-question-circle']");
+	By popup_deleteDashboard_confirmTitle = By
+			.xpath("//span[@class='ant-confirm-title'][contains(.,'Delete Dashboard?')]");
+	By popup_deleteDashboard_confirmContent = By.xpath("//div[@class='ant-confirm-content']/div");
+	By popup_deleteDashboard_neverMind_Button = By.xpath("//button[contains(.,'Never Mind')]");
+	By popup_deleteDashboard_delete_Button = By.xpath("//button[contains(.,'Delete')]");
+	By deleteDashboard_confirmationMessage = By.xpath(
+			"//div[@class='ant-notification-notice-description'][contains(.,\"You've successfully deleted one dashboard.\")]");
+	By popup_deleteDashboard_delete_Button_loading = By
+			.xpath("//button[contains(.,’Delete’)][@class=‘ant-btn ant-btn-primary ant-btn-loading']");
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
+
 
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
@@ -142,10 +174,38 @@ public class NewUI_Content {
 	}
 
 	/**
+	 * Clicks on the add button, and adds a new item type
+	 * 
+	 * @param itemType accepts "dashboard" or "folder"
+	 * @return string value representing the name of the newly created catalog item
+	 */
+	public String addNewCatalogItem(String itemType) {
+		String newItemName = "";
+		ElementActions.click(driver, body_add_button);
+		switch (itemType.toLowerCase().trim()) {
+		case "folder":
+			body_add_menuItem = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Add Folder')]");
+			newItemName = "Automation" + "_Folder_" + String.valueOf(System.currentTimeMillis());
+			break;
+		case "dashboard":
+			body_add_menuItem = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'Add Dashboard')]");
+			newItemName = "Automation" + "_Dashboard_" + String.valueOf(System.currentTimeMillis());
+			break;
+		default:
+			break;
+		}
+		ElementActions.click(driver, body_add_menuItem);
+		ElementActions.type(driver, popup_addDashboardOrFolder_name_textBox, newItemName);
+		ElementActions.keyPress(driver, popup_addDashboardOrFolder_name_textBox, "ENTER");
+		return newItemName;
+	}
+
+
+
+	/**
 	 * Changes the current catalogView to the desired one
 	 * 
-	 * @param catalogView
-	 *            Card | Table
+	 * @param catalogView Card | Table
 	 */
 	public void changeCatalogView(String catalogView) {
 		switch (catalogView.toLowerCase().trim()) {
@@ -169,8 +229,7 @@ public class NewUI_Content {
 	/**
 	 * Asserts that the correct catalogView is selected
 	 * 
-	 * @param catalogView
-	 *            Card | Table
+	 * @param catalogView Card | Table
 	 */
 	public void assert_correctCatalogView_isSelected(String catalogView) {
 
@@ -192,10 +251,9 @@ public class NewUI_Content {
 	/**
 	 * Asserts that the correct searchCount is displayed
 	 * 
-	 * @param searchCount
-	 *            sample text is [You're looking at 4 Folders and 8 Dashboards] but
-	 *            you can also use regular expressions such as [.*4 Folders and 8
-	 *            Dashboards]
+	 * @param searchCount sample text is [You're looking at 4 Folders and 8
+	 *                    Dashboards] but you can also use regular expressions such
+	 *                    as [.*4 Folders and 8 Dashboards]
 	 */
 	public void assert_correctSearchCount_isDisplayed(String searchCount) {
 		Assertions.assertElementAttribute(driver, searchWrapper_searchCount_label, "text", searchCount, true);
@@ -232,8 +290,7 @@ public class NewUI_Content {
 	/**
 	 * Navigates to a sub page of the "Content" section
 	 * 
-	 * @param subPageName
-	 *            All Content | Shared | Owned
+	 * @param subPageName All Content | Shared | Owned
 	 */
 	public void navigate_toSubPage(String subPageName) {
 		ElementActions.click(driver, searchWrapper_searchDropDown_button);
@@ -282,8 +339,9 @@ public class NewUI_Content {
 		cardView_contentCardDashboard_link = By
 				.xpath("(//div[contains(@class,'inc-dashboard-view--cards')]//span[@class='inc-card-title-text'])["
 						+ dashboardIndex + "]");
+		ReportManager.log("Navigating to [" + ElementActions.getText(driver, cardView_contentCardDashboard_link)
+				+ "] Dashboard.");
 		ElementActions.click(driver, cardView_contentCardDashboard_link);
-
 	}
 
 	/**
@@ -307,7 +365,7 @@ public class NewUI_Content {
 	 */
 	public int cardView_countDashboards() {
 		return ElementActions.getElementsCount(driver, cardView_contentCardGenericDashboard_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
 	/**
@@ -317,7 +375,7 @@ public class NewUI_Content {
 	 */
 	public int cardView_countFolders() {
 		return ElementActions.getElementsCount(driver, cardView_contentCardGenericFolder_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
 	/**
@@ -359,8 +417,9 @@ public class NewUI_Content {
 	public void tableView_navigate_toContentTableDashboard(int dashboardIndex) {
 		tableView_contentTableDashboard_link = By
 				.xpath("(//div[@class='inc-db-table']//tbody[@class='ant-table-tbody']//a)[" + dashboardIndex + "]");
+		ReportManager.log("Navigating to [" + ElementActions.getText(driver, cardView_contentCardDashboard_link)
+				+ "] Dashboard.");
 		ElementActions.click(driver, tableView_contentTableDashboard_link);
-
 	}
 
 	/**
@@ -383,7 +442,7 @@ public class NewUI_Content {
 	 */
 	public int tableView_countDashboards() {
 		return ElementActions.getElementsCount(driver, tableView_contentTableGenericDashboard_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
 	/**
@@ -393,12 +452,17 @@ public class NewUI_Content {
 	 */
 	public int tableView_countFolders() {
 		return ElementActions.getElementsCount(driver, tableView_contentTableGenericFolder_link,
-				customElementIdentificationTimeout);
+				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
-	public void Click_Folder_Dashboard_Properties(String FolderName) {
+	public void click_dashboardFolder_properties_fromGridView(String FolderName) {
 		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"
 				+ FolderName + "']//parent::div//following-sibling::div//button");
+		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
+	}
+
+	public void click_dashboardFolder_properties_fromListView(String FolderName) {
+		tableView_folderDashboardProperties_Button = By.xpath("//tr[contains(.,'" + FolderName + "')]//button");
 		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
 	}
 
@@ -416,8 +480,8 @@ public class NewUI_Content {
 	}
 
 	public void assert_dashboardProperties_manageDashboardButtons_displayed(String Actions) {
-		tableView_dashboardProperties_listOption = By.xpath(
-				"//div[contains(@class,'ant-dropdown  ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
+		tableView_dashboardProperties_listOption = By
+				.xpath("//div[contains(@class,'ant-dropdown ant-dropdown')]//span[text()='" + Actions + "']/parent::a");
 		Assertions.assertElementExists(driver, tableView_dashboardProperties_listOption, true);
 	}
 
@@ -492,8 +556,7 @@ public class NewUI_Content {
 
 	/**
 	 * 
-	 * @param Email
-	 *            Can Share Can Edit Can View
+	 * @param Email Can Share Can Edit Can View
 	 */
 	public void folderProperties_shareAccess_typeAndSelectInSearchField(String Email, String shareType) {
 		popup_share_searchField = By.xpath("//input[@placeholder='Search names, emails, and groups']");
@@ -512,8 +575,7 @@ public class NewUI_Content {
 	/**
 	 * 
 	 * @param Email
-	 * @param shareType
-	 *            Can Edit Can Share Can View
+	 * @param shareType Can Edit Can Share Can View
 	 */
 	public void assert_folder_dashboard_sharedSuccessfully(String Email, String shareType) {
 		popup_shareAccessScreen_shareDropDownMenuForUser_button = By
@@ -535,19 +597,6 @@ public class NewUI_Content {
 		ElementActions.click(driver, popup_moveFolder_select_folderNameToMoveTo);
 	}
 
-	public void assert_dashboardSentSuccessfullyMessage(String DashboardName) {
-		popup_dashboard_sentSuccessfully_message = By
-				.xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully sent "
-						+ DashboardName + ".')]");
-		Assertions.assertElementExists(driver, popup_dashboard_sentSuccessfully_message, true);
-	}
-
-	public void assert_dashboardScheduledSuccessfullyMessage(String DashboardName) {
-		popup_dashboard_scheduledSuccessfully_message = By.xpath(
-				"//div[@class='ant-notification-notice-description'][contains(text(),'Successfully created schedule for "
-						+ DashboardName + ".')]");
-		Assertions.assertElementExists(driver, popup_dashboard_scheduledSuccessfully_message, true);
-	}
 
 	// Make a Copy
 	public void assert_makeACopy_popup_displayed() {
@@ -664,10 +713,8 @@ public class NewUI_Content {
 
 	/**
 	 * 
-	 * @param FolderName
-	 *            Folder To expand OR Collapse
-	 * @param ExpandOrCollapse
-	 *            minus for collapse OR plus for expand
+	 * @param FolderName       Folder To expand OR Collapse
+	 * @param ExpandOrCollapse minus for collapse OR plus for expand
 	 */
 	public void makeACopy_expandIconFolders(String FolderName, String ExpandOrCollapse) {
 		popup_makeACopy_foldersExapandIcon = By.xpath("//ul[@role='group']//li[contains(.,'" + FolderName
@@ -695,12 +742,56 @@ public class NewUI_Content {
 		Assertions.assertElementAttribute(driver, popup_makeACopyScreen_newNameField, "text", DashboardNewName, true);
 	}
 
-	// Rename
+	// Rename Folder
+	public void renameFolder_popup_typeNewFolderName(String NewFolderName) {
+		ElementActions.type(driver, popup_renameFolder_newNameField, NewFolderName);
+	}
+
+	public void renameFolder_popup_clickRename() {
+		ElementActions.click(driver, popup_Rename_RenameButton);
+	}
+
+	public void renameFolder_popup_clickCancel() {
+		ElementActions.click(driver, popup_Rename_CancelButton);
+	}
+
+	public void assert_renameFolder_popup_renameButtonDimmed() {
+		Assertions.assertElementAttribute(driver, popup_Rename_RenameButton, "disabled", "true", true);
+	}
+
+	public void assert_renameFolder_successMessage(String NewFolderName) {
+		renameFolder_successfullyRenamedMessage = By.xpath(
+				"//div[@class='ant-notification-notice-description']/span[contains(.,\"You've successfully renamed the Folder to\")]/a[contains(.,'"
+						+ NewFolderName + "')]");
+		Assertions.assertElementExists(driver, renameFolder_successfullyRenamedMessage, true);
+	}
+
+	public void assert_renameFolder_popupScreen_screenContentDisplayed() {
+		Assertions.assertElementExists(driver, popup_renameFolder_screen, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_headerLabel, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_newNameLabel, true);
+		Assertions.assertElementExists(driver, popup_renameFolder_newNameField, true);
+		Assertions.assertElementExists(driver, popup_Rename_RenameButton, true);
+		Assertions.assertElementExists(driver, popup_Rename_CancelButton, true);
+	}
+
+	public void assert_renameFolder_errorMessageDisplayed() {
+		Assertions.assertElementExists(driver, popup_renameFolder_errorMessage_nameAlreadyExist, true);
+	}
+
+	public void renameFolder_clickCloseIcon() {
+		ElementActions.click(driver, popup_renameFolder_closeIcon);
+	}
+
+	public void assert_renameFolder_screen_notExist() {
+		Assertions.assertElementExists(driver, popup_renameFolder_screen, false);
+	}
+
+	// Rename Dashboard
 	/**
 	 * 
 	 * @param NewDashboardName
-	 * @param Button
-	 *            Rename OR Cancel
+	 * @param Button           Rename OR Cancel
 	 */
 	public void renameDashboard_typeNewDashboardName(String NewDashboardName) {
 		ElementActions.type(driver, popup_renameDashboard_field, NewDashboardName);
@@ -752,4 +843,38 @@ public class NewUI_Content {
 	public void assert_renameDashboard_screenNotExist() {
 		Assertions.assertElementExists(driver, popup_renameDashboard_screen, false);
 	}
+
+	// Delete Dashbaord
+	public void assert_deleteDashboard_popup_screenContentDisplayed(String DashboardName) {
+		Assertions.assertElementExists(driver, popup_deleteDashboard_questionCircle, true);
+		Assertions.assertElementExists(driver, popup_deleteDashboard_confirmTitle, true);
+		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
+		Assertions.assertElementExists(driver, popup_deleteDashboard_neverMind_Button, true);
+		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button, true);
+	}
+
+	public void deleteDashboard_popup_click_confirmationButton_delete() {
+		ElementActions.click(driver, popup_deleteDashboard_delete_Button);
+	}
+
+	public void deleteDashboard_popup_click_confirmationButton_neverMind() {
+		ElementActions.click(driver, popup_deleteDashboard_neverMind_Button);
+	}
+
+	public void assert_deleteDashboard_popup_confirmationMessageDisplayed() {
+		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button_loading, false);
+		Assertions.assertElementExists(driver, deleteDashboard_confirmationMessage, true);
+	}
+
+	public void assert_deleteDashboard_popup_dashboardNameIsCorrect(String DashboardName) {
+		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
+	}
+
+	public void assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(String DashboardName) {
+		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
+				"Heads up! Deleting " + DashboardName + " can't be undone.", 1, true);
+	}
+
 }

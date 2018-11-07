@@ -11,7 +11,7 @@ public class AllContent {
 	//// Variables
 	WebDriver driver;
 	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
-	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_content_allContent");
+	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_content");
 
 	//// Elements
 	By header_allContentTabHeader_link = By

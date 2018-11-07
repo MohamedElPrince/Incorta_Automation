@@ -14,25 +14,24 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.AllContent;
-import pageObjectModels.content.AllContent_Dashboard;
-import pageObjectModels.content.AllContent_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
-import pageObjectModels.data.DataFiles;
-import pageObjectModels.data.DataSources;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content_Dashboard_SendDashboard;
+import pageObjectModels.data.NewUI_DataFiles;
+import pageObjectModels.data.NewUI_DataSources;
 import pageObjectModels.login.NewUI_Login;
 import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
-import pageObjectModels.main.Skeleton;
-import pageObjectModels.scheduler.Dashboards;
-import pageObjectModels.scheduler.SchemaLoads;
-import pageObjectModels.schemas.SchemaList;
-import pageObjectModels.schemas.SchemaList_SchemaView;
-import pageObjectModels.schemas.SchemaList_Table;
-import pageObjectModels.security.Groups;
-import pageObjectModels.security.Groups_Group;
-import pageObjectModels.security.Users;
+import pageObjectModels.main.NewUI_Skeleton;
+import pageObjectModels.scheduler.NewUI_Dashboards;
+import pageObjectModels.scheduler.NewUI_SchemaLoads;
+import pageObjectModels.schemas.NewUI_SchemaList;
+import pageObjectModels.schemas.NewUI_SchemaList_SchemaView;
+import pageObjectModels.schemas.NewUI_SchemaList_Table;
+import pageObjectModels.security.NewUI_Groups;
+import pageObjectModels.security.NewUI_Groups_Group;
+import pageObjectModels.security.NewUI_Users;
 
 @Epic("incorta Certification Path - New UI.")
 public class NewUI_CertificationPath {
@@ -46,20 +45,19 @@ public class NewUI_CertificationPath {
 	NewUI_Header newHeaderObject;
 	NewUI_Content newContentPage;
 	NewUI_Content_Dashboard newDashboardPage;
-	Skeleton subHeaderObject;
-	Users usersPage;
-	Groups groupsPage;
-	Groups_Group groupPage;
-	DataSources dataSourcesPage;
-	DataFiles dataFilesPage;
-	AllContent contentPage;
-	SchemaList schemasPage;
-	SchemaList_SchemaView schemasViewPage;
-	SchemaList_Table schemaTablePage;
-	AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
-	AllContent_Dashboard dashboardPage;
-	Dashboards schedulerDashboardsPage;
-	SchemaLoads schedulerSchemaLoadsPage;
+	NewUI_Content_Dashboard_AnalyzeInsight newAnalyzeInsightPage;
+	NewUI_Skeleton newsubHeaderObject;
+	NewUI_Content_Dashboard_SendDashboard newSendDashboardPage;
+	NewUI_Users newUsersPage;
+	NewUI_Groups newGroupsPage;
+	NewUI_Groups_Group newGroupPage;
+	NewUI_DataSources newDataSourcesPage;
+	NewUI_Dashboards newSchedulerDashboardsPage;
+	NewUI_SchemaLoads newSchedulerSchemaLoadsPage;
+	NewUI_SchemaList newSchemasPage;
+	NewUI_SchemaList_SchemaView newSchemasViewPage;
+	NewUI_DataFiles newDataFilesPage;
+	NewUI_SchemaList_Table newSchemaTablePage;
 
 	// Declaring public variables that will be shared between tests
 	String[] newUserData; // username, password, displayname
@@ -90,33 +88,30 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in, When I navigate to the security.users page, And I create a new user, And I navigate back to the security.users page, Then the new user will be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createUser() {
-		usersPage = new Users(driver);
-		usersPage.Navigate_toURL();
+		newUsersPage = new NewUI_Users(driver);
+		newUsersPage.Navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
 
-		newUserData = usersPage.AddNewUser();
+		newUserData = newUsersPage.AddNewUser();
 		// usersPage.Navigate_toURL();
-		usersPage.Assert_nameIsDisplayed(newUserData[2]);
+		newUsersPage.Assert_nameIsDisplayed(newUserData[2]);
 	}
 
 	@Test(priority = 3, description = "TC003 - Create Group.", dependsOnMethods = { "loginUsingAdmin" })
 	@Description("Given I am logged in, When I navigate to the security.groups page, And I create a new group, And I navigate to the security.groups page, Then the new group will be displayed in the groups list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createGroup() {
-		groupsPage = new Groups(driver);
-		groupsPage.Navigate_toURL();
+		newGroupsPage = new NewUI_Groups(driver);
+		newGroupsPage.Navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
 
-		newGroupName = groupsPage.AddNewGroup();
-		groupsPage.Navigate_toURL();
-		// groupsPage.Assert_groupIsDisplayed(newGroupName);
-		// using search instead as the name is not found on the list after reaching 200
-		// entries
-		subHeaderObject.SearchForContentAndAssertResultIsDisplayed(newGroupName);
+		newGroupName = newGroupsPage.AddNewGroup();
+		newGroupsPage.Navigate_toURL();
+		newsubHeaderObject.SearchForContentAndAssertResultIsDisplayed_security(newGroupName);
 	}
 
 	@Test(priority = 4, description = "TC004 - Add Roles to Group.", dependsOnMethods = { "loginUsingAdmin",
@@ -124,20 +119,17 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in, And I have created a new group, When navigate to the groups page, An I click on the new group, And I click on add role, And I select all the roles I want to add, And I click on add, Then the new roles will be displayed in the roles list inside that group.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addRolesToGroup() {
-		groupsPage = new Groups(driver);
-		groupsPage.Navigate_toURL();
-		// groupsPage.Click_group(newGroupName);
-		// using search instead as the name is not found on the list after reaching 200
-		// entries
+		newGroupsPage = new NewUI_Groups(driver);
+		newGroupsPage.Navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.SearchForContentAndOpenResult_security(newGroupName);
 
-		groupPage = new Groups_Group(driver);
+		newGroupPage = new NewUI_Groups_Group(driver);
 		String AddedRoles[] = new String[] { testDataReader.getCellData("GroupRoles", "Data1"),
 				testDataReader.getCellData("GroupRoles", "Data2") };
-		groupPage.AddRoles(AddedRoles);
-		groupPage.Assert_rolesAreDisplayed(AddedRoles);
+		newGroupPage.AddRoles(AddedRoles);
+		newGroupPage.Assert_rolesAreDisplayed(AddedRoles);
 	}
 
 	@Test(priority = 5, description = "TC005 - Add User to Group.", dependsOnMethods = { "loginUsingAdmin",
@@ -145,19 +137,16 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in, And I have created a new group, When navigate to the groups page, An I click on the new group, And I click on add user, And I select all the users I want to add, And I click on add, Then the new users will be displayed in the roles list inside that group.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addUserToGroup() {
-		groupsPage = new Groups(driver);
-		groupsPage.Navigate_toURL();
-		// groupsPage.Click_group(newGroupName);
-		// using search instead as the name is not found on the list after reaching 200
-		// entries
+		newGroupsPage = new NewUI_Groups(driver);
+		newGroupsPage.Navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.SearchForContentAndOpenResult(newGroupName);
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.SearchForContentAndOpenResult_security(newGroupName);
 
-		groupPage = new Groups_Group(driver);
+		newGroupPage = new NewUI_Groups_Group(driver);
 
-		groupPage.AddUsers(new String[] { newUserData[2] });
-		groupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
+		newGroupPage.AddUsers(new String[] { newUserData[2] });
+		newGroupPage.Assert_usersAreDisplayed(new String[] { newUserData[2] });
 	}
 
 	@Test(priority = 6, description = "TC006 - SignOut from Admin Account.", dependsOnMethods = { "loginUsingAdmin" })
@@ -198,16 +187,16 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the DataSources page, And click add, And create a new dataSource, Then dataSource creation popup will be displayed, And dataSource name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createDatasource() {
-		dataSourcesPage = new DataSources(driver);
-		dataSourcesPage.Navigate_toURL();
-		dataSourcesPage.Assert_dataSourcesTabIsSelected();
+		newDataSourcesPage = new NewUI_DataSources(driver);
+		newDataSourcesPage.Navigate_toURL();
+		newDataSourcesPage.Assert_dataSourcesTabIsSelected();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
 
-		newDataSourceName = dataSourcesPage.AddDataSource("MySQL");
-		dataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
-		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
+		newDataSourceName = newDataSourcesPage.AddDataSource("MySQL");
+		newDataSourcesPage.Assert_dataSourceCreationWasSuccessful(newDataSourceName);
+		newDataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
 	}
 
 	@Test(priority = 9, description = "TC009 - Upload DataFile.", dependsOnMethods = {
@@ -215,19 +204,19 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"DataFiles\" page, And click add, And upload a new dataFile, Then dataFile upload success message will be displayed, And dataFile name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void uploadDataFile() {
-		dataFilesPage = new DataFiles(driver);
-		dataFilesPage.Navigate_toURL();
-		dataFilesPage.Assert_dataFilesTabIsSelected();
+		newDataFilesPage = new NewUI_DataFiles(driver);
+		newDataFilesPage.Navigate_toURL();
+		newDataFilesPage.Assert_dataFilesTabIsSelected();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
 
 		newDataFileExtension = testDataReader.getCellData("DataFileExtension");
-		newDataFileName = dataFilesPage.AddDataFile(testDataReader.getCellData("DataFileName"),
+		newDataFileName = newDataFilesPage.AddDataFile(testDataReader.getCellData("DataFileName"),
 				testDataReader.getCellData("DataFileExtension"));
 
-		dataFilesPage.Assert_dataFileUploadingWasSuccessful(newDataFileName);
-		dataFilesPage.Assert_nameIsDisplayed(newDataFileName);
+		newDataFilesPage.Assert_dataFileUploadingWasSuccessful(newDataFileName);
+		newDataFilesPage.Assert_nameIsDisplayed(newDataFileName);
 	}
 
 	@Test(priority = 10, description = "TC010 - Create Schema.", dependsOnMethods = {
@@ -235,18 +224,18 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click add, And create a new schema, And navigate back to the schemas page, Then the newly created schema name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createSchema() {
-		schemasPage = new SchemaList(driver);
-		schemasPage.Navigate_toURL();
-		schemasPage.Assert_schemaListTabIsSelected();
+		newSchemasPage = new NewUI_SchemaList(driver);
+		newSchemasPage.Navigate_toURL();
+		newSchemasPage.Assert_schemaListTabIsSelected();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
-		subHeaderObject.Select_fromDropdownMenu("Create Schema");
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
+		newsubHeaderObject.Select_fromDropdownMenu("Create Schema");
 
-		newSchemaName = schemasPage.createNewSchema();
+		newSchemaName = newSchemasPage.createNewSchema();
 
-		schemasPage.Navigate_toURL();
-		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+		newSchemasPage.Navigate_toURL();
+		newSchemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
 	}
 
 	@Test(priority = 11, description = "TC011 - Add DataSource to Schema using Wizard.", dependsOnMethods = {
@@ -254,21 +243,21 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And use the schema wizard to add a new data source, Then the newly added data source table name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addDatasourceToSchemaUsingWizard() {
-		schemasPage = new SchemaList(driver);
-		schemasPage.Navigate_toURL();
-		schemasPage.click_schemaName(newSchemaName);
+		newSchemasPage = new NewUI_SchemaList(driver);
+		newSchemasPage.Navigate_toURL();
+		newSchemasPage.click_schemaName(newSchemaName);
 
-		schemasViewPage = new SchemaList_SchemaView(driver);
-		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+		newSchemasViewPage = new NewUI_SchemaList_SchemaView(driver);
+		newSchemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
-		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
+		newsubHeaderObject.Select_fromDropdownMenu("Schema Wizard");
 
-		schemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
+		newSchemasViewPage.Wizard_AddDataSourceTable(newDataSourceName, true, "MySQL",
 				testDataReader.getCellData("DatabaseTableName"));
-		newDataSourceTableName = schemasViewPage.GetNewestTableName();
-		schemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
+		newDataSourceTableName = newSchemasViewPage.GetNewestTableName();
+		newSchemasViewPage.Assert_tableNameIsDisplayed(newDataSourceTableName);
 	}
 
 	@Test(priority = 12, description = "TC012 - Add DataFile to Schema (with load filter).", dependsOnMethods = {
@@ -276,28 +265,30 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And add a new data file, Then the newly added data file table name will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void addDatafileToSchemaWithLoadFilter() {
-		schemasPage = new SchemaList(driver);
-		schemasPage.Navigate_toURL();
-		schemasPage.click_schemaName(newSchemaName);
+		newSchemasPage = new NewUI_SchemaList(driver);
+		newSchemasPage.Navigate_toURL();
+		newSchemasPage.click_schemaName(newSchemaName);
 
-		schemasViewPage = new SchemaList_SchemaView(driver);
-		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+		newSchemasViewPage = new NewUI_SchemaList_SchemaView(driver);
+		newSchemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
-		subHeaderObject.Hover_overDropdownMenu("Table");
-		subHeaderObject.Select_fromDropdownMenu("File System");
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
+		newsubHeaderObject.Hover_overDropdownMenu("Table");
+		newsubHeaderObject.Select_fromDropdownMenu("File System");
 
-		schemaTablePage = new SchemaList_Table(driver);
-		schemaTablePage.Assert_AddDatasourcePopupIsDisplayed();
-		schemaTablePage.Assert_correctDatasourceIsSelected("File System");
-		schemaTablePage.AddDataFile("LocalFiles", "Text (csv, tsv, tab, txt)", false, newDataFileName,
+		newSchemaTablePage = new NewUI_SchemaList_Table(driver);
+		newSchemaTablePage.Assert_AddDatasourcePopupIsDisplayed();
+		newSchemaTablePage.Assert_correctDatasourceIsSelected("File System");
+		newSchemaTablePage.AddDataFile("LocalFiles", "Text (csv, tsv, tab, txt)", false, newDataFileName,
 				newDataFileExtension, "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "UTF-8", "Comma");
 
-		newDataFileTableName = schemaTablePage.SetTableName();
-		schemaTablePage.SetLoadFilter();
-		subHeaderObject.Click_done();
-		schemasViewPage.Assert_tableNameIsDisplayed(newDataFileTableName);
+		newDataFileTableName = newSchemaTablePage.SetTableName();
+		newSchemaTablePage.SetLoadFilter();
+		newsubHeaderObject.Click_done();
+
+		newSchemasViewPage = new NewUI_SchemaList_SchemaView(driver);
+		newSchemasViewPage.Assert_tableNameIsDisplayed(newDataFileTableName);
 	}
 
 	@Test(priority = 13, description = "TC013 - Full load Schema.", dependsOnMethods = {
@@ -305,23 +296,23 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"Schemas\" page, And click on a schema, And trigger a full data load, Then the data will be loaded, And the last load status will be updated.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void fullLoadSchema() {
-		schemasPage = new SchemaList(driver);
-		schemasPage.Navigate_toURL();
-		schemasPage.click_schemaName(newSchemaName);
+		newSchemasPage = new NewUI_SchemaList(driver);
+		newSchemasPage.Navigate_toURL();
+		newSchemasPage.click_schemaName(newSchemaName);
 
-		schemasViewPage = new SchemaList_SchemaView(driver);
-		schemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
+		newSchemasViewPage = new NewUI_SchemaList_SchemaView(driver);
+		newSchemasViewPage.Assert_schemaNameIsDisplayed(newSchemaName);
 
-		String initialLoadStatus = schemasViewPage.GetLastLoadStatus();
+		String initialLoadStatus = newSchemasViewPage.GetLastLoadStatus();
 		// String initialLoadStatus = "Please load data";
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_load();
-		subHeaderObject.Hover_overDropdownMenu("Load now");
-		subHeaderObject.Select_fromDropdownMenu("Full");
-		schemasViewPage.confirmLoadingData();
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.Click_load();
+		newsubHeaderObject.Hover_overDropdownMenu("Load now");
+		newsubHeaderObject.Select_fromDropdownMenu("Full");
+		newSchemasViewPage.confirmLoadingData();
 
-		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
-		schemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
+		newSchemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
+		newSchemasViewPage.Assert_lastLoadStatusIsUpdated(initialLoadStatus);
 	}
 
 	@Test(priority = 15, description = "TC015 - Schedule Schema Incremental load.", dependsOnMethods = {
@@ -329,21 +320,21 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"Schedule.SchemaLoad\" page, And create a new Incremental load job, Then the job will be displayed in the list, And the job's status will be active.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void scheduleSchemaIncremnetalLoad() {
-		schedulerSchemaLoadsPage = new SchemaLoads(driver);
-		schedulerSchemaLoadsPage.Navigate_toURL();
-		schedulerSchemaLoadsPage.Assert_schemasTabIsSelected();
+		newSchedulerSchemaLoadsPage = new NewUI_SchemaLoads(driver);
+		newSchedulerSchemaLoadsPage.Navigate_toURL();
+		newSchedulerSchemaLoadsPage.Assert_schemasTabIsSelected();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.click_add();
 
-		newScheduledSchemaLoadJobName = schedulerSchemaLoadsPage.scheduleSchemaLoad(
+		newScheduledSchemaLoadJobName = newSchedulerSchemaLoadsPage.scheduleSchemaLoad(
 				testDataReader.getCellData("SchemaLoadJobDescription"), newSchemaName,
 				testDataReader.getCellData("SchemaLoadJobType"), testDataReader.getCellData("SchemaLoadJobDate"),
 				testDataReader.getCellData("SchemaLoadJobTime"), testDataReader.getCellData("SchemaLoadJobTimeZone"),
 				testDataReader.getCellData("SchemaLoadJobRecurrence"));
 
-		schedulerSchemaLoadsPage.Assert_nameIsDisplayed(newScheduledSchemaLoadJobName);
-		schedulerSchemaLoadsPage.Assert_jobStatusIsCorrect(newScheduledSchemaLoadJobName, "Active");
+		newSchedulerSchemaLoadsPage.Assert_nameIsDisplayed(newScheduledSchemaLoadJobName);
+		newSchedulerSchemaLoadsPage.Assert_jobStatusIsCorrect(newScheduledSchemaLoadJobName, "Active");
 	}
 
 	@Test(priority = 16, description = "TC016 - Create Dashboard and Insight (Aggregated Table).", dependsOnMethods = {
@@ -351,45 +342,41 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"Content.AllContent\" page, And click on add, And create a dashboard, And add all the tables of the schema that was created previously to a new insight, Then the dashboard will be displayed in the list, And the insight will be displayed inside it.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void createDashboardAndInsight() {
-		contentPage = new AllContent(driver);
-		contentPage.Navigate_toURL();
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newHeaderObject = new NewUI_Header(driver);
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_add();
-		subHeaderObject.Select_fromDropdownMenu("Create Dashboard");
+		newDashboardName = newContentPage.addNewCatalogItem("dashboard");
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Added");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected(
+				"You've successfully added a dashboard named " + newDashboardName + ".");
 
-		newDashboardName = contentPage.setNewDashboardName();
+		newDashboardPage = new NewUI_Content_Dashboard(driver);
+		newDashboardPage.addNewInsight();
 
-		analyzeInsightPage = new AllContent_Dashboard_AnalyzeInsight(driver);
-		analyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
-		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
-		analyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
+		newAnalyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
+		newAnalyzeInsightPage.selectVisualization("Aggregated");
+		newAnalyzeInsightPage.addTableorSchemaToInsight(newSchemaName);
+		newAnalyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Quarter");
+		newAnalyzeInsightPage.addColumnToInsight(newDataSourceTableName, "Units");
 
-		subHeaderObject.Click_ChooseVisualization();
-		analyzeInsightPage.selectVisualization("Aggregated");
+		newInsightName = newAnalyzeInsightPage.setInsightName();
 
-		newInsightName = analyzeInsightPage.setInsightName();
-		subHeaderObject.Click_done();
-
-		// contentPage.Navigate_toURL(); // do this on new ui
-		// subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
-		// dashboardPage = new AllContent_Dashboard(driver);
-		// dashboardPage.Assert_dashboardName(newDashboardName);
-		// dashboardPage.Assert_insightName(newInsightName);
+		newsubHeaderObject.Click_done();
 
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
-		// newContentPage.searchForContentUsingSearchBox(newDashboardName);
-		// newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
-		// newContentPage.navigate_toContentSearchResult(newDashboardName);
-		newContentPage.changeCatalogView("Table");
-		newContentPage.tableView_assert_contentTableEntry_exists(newDashboardName);
-		newContentPage.tableView_navigate_toContentTableEntry(newDashboardName);
+		newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName); // why did this fail?
+		newContentPage.navigate_toContentSearchResult(newDashboardName);
+		// newContentPage.changeCatalogView("Table");
+		// newContentPage.tableView_assert_contentTableEntry_exists(newDashboardName);
+		// newContentPage.tableView_navigate_toContentTableEntry(newDashboardName);
 
 		newDashboardPage = new NewUI_Content_Dashboard(driver);
 		newDashboardPage.assert_dashboardName_isCorrect(newDashboardName);
 		newDashboardPage.assert_insightName_isCorrect(newInsightName);
-
 	}
 
 	@Test(priority = 17, description = "TC017 - Validate Insight Data (Aggregated Table).", dependsOnMethods = {
@@ -397,39 +384,15 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the newly created insight, Then the insight will be displayed, And the data within it will be correct.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void validateInsightData() {
-		// contentPage = new AllContent(driver);
-		// contentPage.Navigate_toURL();
-		// subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
-		// newContentPage.searchForContentUsingSearchBox(newDashboardName);
-		// newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
-		// newContentPage.navigate_toContentSearchResult(newDashboardName);
-		newContentPage.changeCatalogView("Card");
-		newContentPage.cardView_navigate_toContentCard(newDashboardName);
+		newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
+		newContentPage.navigate_toContentSearchResult(newDashboardName);
+		// newContentPage.changeCatalogView("Card");
+		// newContentPage.cardView_navigate_toContentCard(newDashboardName);
 
-		// dashboardPage = new AllContent_Dashboard(driver);
-		// dashboardPage.Assert_dashboardName(newDashboardName);
-		// dashboardPage.Assert_insightName(newInsightName);
 		newDashboardPage = new NewUI_Content_Dashboard(driver);
-
-		// dashboardPage.AssertData_AggregatedTableContent("row", 1,
-		// testDataReader.getCellData("InsightDataRows", "Data1"));
-		// dashboardPage.AssertData_AggregatedTableContent("row", 2,
-		// testDataReader.getCellData("InsightDataRows", "Data2"));
-		// dashboardPage.AssertData_AggregatedTableContent("row", 3,
-		// testDataReader.getCellData("InsightDataRows", "Data3"));
-		// dashboardPage.AssertData_AggregatedTableContent("row", 4,
-		// testDataReader.getCellData("InsightDataRows", "Data4"));
-		//
-		// dashboardPage.AssertData_AggregatedTableContent("measure", 1,
-		// testDataReader.getCellData("InsightDataMeasures", "Data1"));
-		// dashboardPage.AssertData_AggregatedTableContent("measure", 2,
-		// testDataReader.getCellData("InsightDataMeasures", "Data2"));
-		// dashboardPage.AssertData_AggregatedTableContent("measure", 3,
-		// testDataReader.getCellData("InsightDataMeasures", "Data3"));
-		// dashboardPage.AssertData_AggregatedTableContent("measure", 4,
-		// testDataReader.getCellData("InsightDataMeasures", "Data4"));
 
 		newDashboardPage.aggregatedTable_assert_columnHeader_isCorrect(1, "Quarter");
 		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("type", 1,
@@ -450,7 +413,6 @@ public class NewUI_CertificationPath {
 				testDataReader.getCellData("InsightDataMeasures", "Data3"));
 		newDashboardPage.aggregatedTable_assert_cellValue_isCorrect("value", 4,
 				testDataReader.getCellData("InsightDataMeasures", "Data4"));
-
 	}
 
 	@Test(priority = 18, description = "TC018 - Send Dashboard via email.", dependsOnMethods = {
@@ -458,25 +420,33 @@ public class NewUI_CertificationPath {
 	@Description("When I navigate to the \"Content.AllContent\" page, And open a dashboard, And send it to an email address, Then a completed scheduled task will be displayed in the scheduled tasks list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void sendDashboardViaEmail() {
-		contentPage = new AllContent(driver);
-		contentPage.Navigate_toURL();
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.SearchForContentAndOpenResult(newDashboardName);
-		subHeaderObject.Click_export();
-		subHeaderObject.Select_fromDropdownMenu("Send");
+		newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
+		newContentPage.navigate_toContentSearchResult(newDashboardName);
 
-		dashboardPage = new AllContent_Dashboard(driver);
-		dashboardPage.selectEmailFormat(testDataReader.getCellData("EmailFormat"));
-		dashboardPage.addUserEmailToRecieversList(testDataReader.getCellData("EmailAddress"));
-		dashboardPage.scheduleEmailSending();
+		newDashboardPage = new NewUI_Content_Dashboard(driver);
+		newDashboardPage.click_shareOptions_sendNow_button();
 
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ChangeJobStatus("All");
+		newSendDashboardPage = new NewUI_Content_Dashboard_SendDashboard(driver);
+		newSendDashboardPage.sendDashboard_addFields("Subject", "Body", "HTML",
+				testDataReader.getCellData("EmailAddress"), "", "");
+		newSendDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
 
-		schedulerDashboardsPage.Assert_nameIsDisplayed(newDashboardName);
-		schedulerDashboardsPage.Assert_jobStatusIsCorrect(newDashboardName, "Completed");
+		newHeaderObject = new NewUI_Header(driver);
+
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected(
+				"You've successfully sent " + newDashboardName + " via Email.");
+
+		newSchedulerDashboardsPage = new NewUI_Dashboards(driver);
+		newSchedulerDashboardsPage.Navigate_toURL();
+		newSchedulerDashboardsPage.ChangeJobStatus("All");
+
+		newSchedulerDashboardsPage.Assert_nameIsDisplayed(newDashboardName);
+		newSchedulerDashboardsPage.Assert_jobStatusIsCorrect(newDashboardName, "Completed");
 	}
 
 	@Test(priority = 19, description = "TC019 - Switch to admin Account.", dependsOnMethods = {
@@ -500,16 +470,16 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in as an administrator, When I delete a user account that has content, And I transfer ownership to myself, Then the user will no longer be displayed in the users list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void deleteUserAndTransferOwnershipToSelf() {
-		usersPage = new Users(driver);
-		usersPage.Navigate_toURL();
-		usersPage.Select_nameCheckbox(newUserData[2]);
+		newUsersPage = new NewUI_Users(driver);
+		newUsersPage.Navigate_toURL();
+		newUsersPage.Select_nameCheckbox(newUserData[2]);
 
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.Click_actions();
-		subHeaderObject.Select_fromDropdownMenu("Delete selection");
+		newsubHeaderObject = new NewUI_Skeleton(driver);
+		newsubHeaderObject.Click_actions();
+		newsubHeaderObject.Select_fromDropdownMenu("Delete selection");
 
-		usersPage.ConfirmUserDeletionAndTransferOwnershipToSelf();
-		usersPage.Assert_nameIsNotDisplayed(newUserData[2]);
+		newUsersPage.ConfirmUserDeletionAndTransferOwnershipToSelf();
+		newUsersPage.Assert_nameIsNotDisplayed(newUserData[2]);
 	}
 
 	@Test(priority = 21, description = "TC021 - Search for Transfered Ownership Elements: Schema", dependsOnMethods = {
@@ -521,9 +491,9 @@ public class NewUI_CertificationPath {
 		 * 1 SCHEMA(s) 1 DASHBOARD(s) 1 DATASOURCE(s) 1 DATAFILE(s) 1of2 SCHEDULER(s)
 		 */
 
-		schemasPage = new SchemaList(driver);
-		schemasPage.Navigate_toURL();
-		schemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
+		newSchemasPage = new NewUI_SchemaList(driver);
+		newSchemasPage.Navigate_toURL();
+		newSchemasPage.Assert_schemaNameIsDisplayed(newSchemaName);
 	}
 
 	@Test(priority = 22, description = "TC022 - Search for Transfered Ownership Elements: Dashboard", dependsOnMethods = {
@@ -531,11 +501,11 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsDashboard() {
-		contentPage = new AllContent(driver);
-		contentPage.Navigate_toURL();
-		// allContentPage.Assert_dashboardIsDisplayed(newDashboardName);
-		subHeaderObject = new Skeleton(driver);
-		subHeaderObject.SearchForContentAndAssertResultIsDisplayed(newDashboardName);
+		newContentPage = new NewUI_Content(driver);
+		newContentPage.navigate_toURL();
+
+		newContentPage.searchForContentUsingSearchBox(newDashboardName);
+		newContentPage.assert_contentSearchResult_isDisplayed(newDashboardName);
 	}
 
 	@Test(priority = 23, description = "TC023 - Search for Transfered Ownership Elements: Datasource", dependsOnMethods = {
@@ -543,9 +513,9 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsDatasource() {
-		dataSourcesPage = new DataSources(driver);
-		dataSourcesPage.Navigate_toURL();
-		dataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
+		newDataSourcesPage = new NewUI_DataSources(driver);
+		newDataSourcesPage.Navigate_toURL();
+		newDataSourcesPage.Assert_nameIsDisplayed(newDataSourceName);
 	}
 
 	@Test(priority = 24, description = "TC024 - Search for Transfered Ownership Elements: DataFile", dependsOnMethods = {
@@ -553,9 +523,9 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsDataFile() {
-		dataFilesPage = new DataFiles(driver);
-		dataFilesPage.Navigate_toURL();
-		dataFilesPage.Assert_nameIsDisplayed(newDataFileName);
+		newDataFilesPage = new NewUI_DataFiles(driver);
+		newDataFilesPage.Navigate_toURL();
+		newDataFilesPage.Assert_nameIsDisplayed(newDataFileName);
 	}
 
 	@Test(priority = 25, description = "TC025 - Search for Transfered Ownership Elements: Scheduler", dependsOnMethods = {
@@ -563,10 +533,10 @@ public class NewUI_CertificationPath {
 	@Description("Given I am logged in as an administrator, And I deleted a user account that has content, And I transfered ownership to myself, When I search in the relevant lists, Then the transfered elements will be displayed in the list.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void searchForTransferedOwnershipElementsScheduler() {
-		schedulerDashboardsPage = new Dashboards(driver);
-		schedulerDashboardsPage.Navigate_toURL();
-		schedulerDashboardsPage.ChangeJobStatus("All");
-		schedulerDashboardsPage.Assert_nameIsDisplayed(newDashboardName);
+		newSchedulerDashboardsPage = new NewUI_Dashboards(driver);
+		newSchedulerDashboardsPage.Navigate_toURL();
+		newSchedulerDashboardsPage.ChangeJobStatus("All");
+		newSchedulerDashboardsPage.Assert_nameIsDisplayed(newDashboardName);
 	}
 
 	@BeforeClass
@@ -577,12 +547,12 @@ public class NewUI_CertificationPath {
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
 		ReportManager.getTestLog();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();

@@ -102,7 +102,9 @@ public class NewUI_SchemaList_SchemaView {
 
 	public String GetNewestTableName() {
 		ElementActions.switchToIframe(driver, body_iframe);
-		return ElementActions.getText(driver, body_lastTableName_label);
+		String newestTableName = ElementActions.getText(driver, body_lastTableName_label);
+		ElementActions.switchToDefaultContent(driver);
+		return newestTableName;
 	}
 
 	public void switchToDefaultContent() {
@@ -178,7 +180,7 @@ public class NewUI_SchemaList_SchemaView {
 		ElementActions.switchToIframe(driver, body_iframe);
 		String currentLoadStatus = initialLoadStatus;
 		do {
-			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, currentLoadStatus, 2);
+			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, currentLoadStatus, 10);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
 		} while (currentLoadStatus.equals(initialLoadStatus) || currentLoadStatus.matches("(.*Loading Data.*)")
 				|| currentLoadStatus.matches("(.*Please load data.*)"));

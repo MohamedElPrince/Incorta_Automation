@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import com.shaft.element.ElementActions;
 import com.shaft.io.ExcelFileManager;
 
-
 public class NewUI_Content_Dashboard_ScheduleDashboard {
 	//// Variables
 	WebDriver driver;
@@ -40,6 +39,9 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 	By body_scheduleDashboard_startingPicker_timeZone_clickOnDropdownMenu = By
 			.xpath("//div[contains(@class,'starting-picker')]//div[@role='combobox']");
 	By body_scheduleDashboard_startingPicker_timeZone_selectTimeZone;
+	By body_scheduleDashboard_startingAtTimeExternal_textBox = By.xpath("//input[@class='ant-time-picker-input']");
+	By body_scheduleDashboard_startingAtTimeInternal_textBox = By
+			.xpath("//input[contains(@class,'ant-time-picker-panel-input')]");
 
 	By body_scheduleDashboard_startingPicker_dayOfTheMonth = By
 			.xpath("//div[@class='input-group months-picker']//div[@role='combobox']");
@@ -132,25 +134,20 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 	 * @param JobName
 	 * @param subjectArea
 	 * @param bodyArea
-	 * @param dataFormat
-	 *            HTML - CSV - XLSX
+	 * @param dataFormat       HTML - CSV - XLSX
 	 * @param ToEmailAddress
 	 * @param CcEmailAddress
 	 * @param BccEmailAddress
-	 * @param Recurrence
-	 *            Minute(s) Hour(s) Day(s) Week(s) Month(s)
-	 * @param RecurrenceNumber
-	 *            Minimum 1
+	 * @param Recurrence       Minute(s) Hour(s) Day(s) Week(s) Month(s)
+	 * @param RecurrenceNumber Minimum 1
 	 * @param Time
 	 * @param TimeZone
 	 * @param dayOfTheWeek
 	 * @param day
 	 * @param MonthlyDay
 	 * @param SpecificDay
-	 * @param CalanderFrom
-	 *            Format "2018-09-16"
-	 * @param CalanderTo
-	 *            Format "2018-09-16"
+	 * @param CalanderFrom     Format "2018-09-16"
+	 * @param CalanderTo       Format "2018-09-16"
 	 * @return
 	 */
 	public String scheduleDashboard_addFields(String JobName, String subjectArea, String bodyArea, String dataFormat,
@@ -172,6 +169,7 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 		// Starting at
 		if (Recurrence == "Minute(s)" || Recurrence == "Hour(s)" || Recurrence == "Day(s)") {
 			scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(Hour, Minute, AmPm, TimeZone);
+
 		} else if (Recurrence == "Week(s)") {
 			scheduleDashboard_addFields_delivery_weeklyRecurrence_startingAtSection(dayOfTheWeek);
 		} else if (Recurrence == "Month(s)") {
@@ -190,32 +188,59 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 	/**
 	 * used with Minute / Hours / Days
 	 * 
-	 * @param Time
-	 *            Should have the format of "12:00 PM"
-	 * @param TimeZone
-	 *            Should have the format of "GMT-04:00" OR "GMT+02:00"
+	 * @param Time Should have the format of "12:00 PM" Or "12:00 AM"
+	 * @farid
+	 */
+
+	private void scheduleDashboard_addFields_delivery_setSchedulerTime(String timeValue) {		
+		ElementActions.click(driver, body_scheduleDashboard_startingAtTimeExternal_textBox);
+		ElementActions.type(driver, body_scheduleDashboard_startingAtTimeInternal_textBox, "");
+		
+		// substring, remove the last letter M
+		
+		ElementActions.typeAppend(driver, body_scheduleDashboard_startingAtTimeInternal_textBox, timeValue.substring(0, timeValue.indexOf('M')));
+
+	}
+
+	/**
+	 * used with Minute / Hours / Days
+	 * 
+	 * @param Time     Should have the format of "12:00 PM"
+	 * @param TimeZone Should have the format of "GMT-04:00" OR "GMT+02:00"
 	 */
 	public void scheduleDashboard_addFields_delivery_dailyHourMinRecurrence_startingAtSection(String Hour,
 			String Minute, String AmPm, String TimeZone) {
 
 		body_scheduleDashboard_startingPicker_timeZone_selectTimeZone = By
 				.xpath("//ul/li[contains(.,'" + TimeZone + "')]");
-		body_scheduleDashboard_startingPicker_time_hour = By
-				.xpath("//div[@class='ant-time-picker-panel-select'][1]//li[contains(string(),'" + Hour + "')]");
-		body_scheduleDashboard_startingPicker_time_minute = By
-				.xpath("//div[@class='ant-time-picker-panel-select'][2]//li[contains(string(),'" + Minute + "')]");
-		body_scheduleDashboard_startingPicker_time_AmPm = By
-				.xpath("//div[@class='ant-time-picker-panel-select'][3]//li[contains(string(),'" + AmPm + "')]");
+//		body_scheduleDashboard_startingPicker_time_hour = By
+//				.xpath("//div[@class='ant-time-picker-panel-select'][1]//li[contains(string(),'" + Hour + "')]");
+//		body_scheduleDashboard_startingPicker_time_minute = By
+//				.xpath("//div[@class='ant-time-picker-panel-select'][2]//li[contains(string(),'" + Minute + "')]");
+//		body_scheduleDashboard_startingPicker_time_AmPm = By
+//				.xpath("//div[@class='ant-time-picker-panel-select'][3]//li[contains(string(),'" + AmPm + "')]");
 
-		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time);
-		
-		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_hour);
-		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_minute);
-		try {
-			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_AmPm);
-		} catch (AssertionError e) {
-			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_AmPm);
-		}
+//		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time);
+
+//		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_hour);
+//		ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_minute);
+
+//		try {
+//			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_hour);
+//		} catch (AssertionError e) {
+//			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_hour);
+//		}
+//		try {
+//			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_minute);
+//		} catch (AssertionError e) {
+//			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_minute);
+//		}
+//		try {
+//			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_AmPm);
+//		} catch (AssertionError e) {
+//			ElementActions.click(driver, body_scheduleDashboard_startingPicker_time_AmPm);
+//		}
+		scheduleDashboard_addFields_delivery_setSchedulerTime(Hour + ":" + Minute + " " + AmPm);
 
 		ElementActions.click(driver, body_scheduleDashboard_startingPicker_timeZone_clickOnDropdownMenu);
 		ElementActions.click(driver, body_scheduleDashboard_startingPicker_timeZone_selectTimeZone);
@@ -223,9 +248,8 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 
 	/**
 	 * 
-	 * @param dayOfTheWeek
-	 *            1 for Sun 2 for Mon 3 for Tue 4 for Wed 5 for Thur 6 for Fri 7 for
-	 *            Sat
+	 * @param dayOfTheWeek 1 for Sun 2 for Mon 3 for Tue 4 for Wed 5 for Thur 6 for
+	 *                     Fri 7 for Sat
 	 */
 	public void scheduleDashboard_addFields_delivery_weeklyRecurrence_startingAtSection(String dayOfTheWeek) {
 		body_scheduleDashboard_startingPicker_days = By.xpath(
@@ -235,14 +259,12 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 
 	/**
 	 * 
-	 * @param day
-	 *            Day Saturday Sunday Monday Tuesday Wednesday Thursday Friday
-	 * @param MonthlyDay
-	 *            It will be used only with @param day = day Min value = 1 -- Max
-	 *            value = 31
-	 * @param specificDay
-	 *            It will be used with all other options except with @param day =
-	 *            day 1st 2nd 3rd 4th 5th
+	 * @param day         Day Saturday Sunday Monday Tuesday Wednesday Thursday
+	 *                    Friday
+	 * @param MonthlyDay  It will be used only with @param day = day Min value = 1
+	 *                    -- Max value = 31
+	 * @param specificDay It will be used with all other options except with @param
+	 *                    day = day 1st 2nd 3rd 4th 5th
 	 */
 	public void scheduleDashboard_addFields_delivery_monthlyRecurrence_startingAtSection_DaySelection(String day,
 			String MonthlyDay, String SpecificDay) {

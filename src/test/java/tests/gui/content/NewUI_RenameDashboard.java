@@ -13,7 +13,7 @@ import com.shaft.io.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.NewUI_AllContent_Dashboard_AnalyzeInsight;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
 import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
@@ -46,7 +46,7 @@ public class NewUI_RenameDashboard {
 	NewUI_Users usersPage;
 
 	NewUI_Content newUI_allContentPage;
-	NewUI_AllContent_Dashboard_AnalyzeInsight analyzeInsightPage;
+	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 	NewUI_Content_Dashboard newUI_dashboardPage;
 	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
 	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
@@ -69,7 +69,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.renameDashboard_typeNewDashboardName(
@@ -87,7 +87,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+		newUI_allContentPage.click_dashboardFolder_properties_fromGridView(
 				testDataReader.getCellData("Automation_Dashboard_Rename_SpecialCharacters"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
@@ -108,7 +108,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_Arabic"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_Arabic"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.renameDashboard_typeNewDashboardName(
@@ -128,7 +128,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_French"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_French"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.renameDashboard_typeNewDashboardName(
@@ -148,7 +148,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_Chinese"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_Chinese"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.renameDashboard_typeNewDashboardName(
@@ -168,7 +168,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.assert_renameDashboard_renameButtonDisabled();
@@ -182,7 +182,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.renameDashboard_typeNewDashboardName(testDataReader.getCellData(""));
@@ -197,7 +197,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.assert_renameDashboard_popupScreen_screenContentDisplayed();
@@ -211,7 +211,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_NoRename"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.renameDashboard_typeNewDashboardName(
@@ -229,7 +229,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage.navigate_toURL();
 
 		newUI_allContentPage
-				.Click_Folder_Dashboard_Properties(testDataReader.getCellData("Automation_Dashboard_Rename_LongName"));
+				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Dashboard_Rename_LongName"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newUI_allContentPage.renameDashboard_typeNewDashboardName(
@@ -248,7 +248,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+		newUI_allContentPage.click_dashboardFolder_properties_fromGridView(
 				testDataReader.getCellData("Automation_Dashboard_Rename_WithSpaces"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
@@ -268,7 +268,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+		newUI_allContentPage.click_dashboardFolder_properties_fromGridView(
 				testDataReader.getCellData("Automation_Dashboard_Rename_Duplicate1"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
@@ -286,7 +286,7 @@ public class NewUI_RenameDashboard {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage.Click_Folder_Dashboard_Properties(
+		newUI_allContentPage.click_dashboardFolder_properties_fromGridView(
 				testDataReader.getCellData("Automation_Dashboard_Rename_CloseIcon"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
