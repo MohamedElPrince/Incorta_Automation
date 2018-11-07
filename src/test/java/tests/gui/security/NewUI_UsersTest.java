@@ -128,6 +128,7 @@ public class NewUI_UsersTest {
 
 		newHeaderObject.expandUserMenu();
 		newHeaderObject.assert_userMenuItem("Switch Back");
+		newHeaderObject.expandUserMenu();
 
 	}
 
