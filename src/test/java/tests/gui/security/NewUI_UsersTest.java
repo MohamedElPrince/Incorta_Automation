@@ -152,13 +152,13 @@ public class NewUI_UsersTest {
 		usersPage.Assert_nameIsNotDisplayed(testDataReader.getCellData("Username", "Data10"));
 
 		// Switch to another admin account user in data8 "Automation_User_SuperUser1"
-		switchToAnotherUser("data8");
+		switchToAnotherUser("Data8");
 
 		// check [schema, dashboard, folder].
 		checkTransfaredContent();
 
 		// Switch to another admin account user in data9 "Automation_User_SuperUser2"
-		switchToAnotherUser("data9");
+		switchToAnotherUser("Data9");
 
 		// check the shared content with the user[ schema, dashboard, folder].
 		checkTransfaredContent();
