@@ -5,14 +5,14 @@
 		<classes>
 			<class
 				name="tests.gui.content.NewUI_Set_As_Default_DashboardTest">
-				<!-- <methods> -->
-				<!-- <include name="Analyzer_Permissions_CopyDashboard" /> -->
-				<!-- <include name="createSchema" /> -->
-				<!-- <include name="addDatasourceToSchemaUsingWizard" /> -->
-				<!-- </methods> -->
 			</class>
+		</classes>
+	</test>
+	<test name="Test02">
+		<classes>
 			<class
-				name="tests.gui.content.NewUI_Set_Open_Default_DashboardTest"></class>
+				name="tests.gui.content.NewUI_Set_Open_Default_DashboardTest">
+			</class>
 		</classes>
 	</test>
 </suite>

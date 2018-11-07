@@ -96,7 +96,7 @@ public class NewUI_Set_Open_Default_DashboardTest {
 
     @BeforeClass
     public void beforeClass() {
-	System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "Content_NewUI_Set_Open_Default_Dashboard/TestData.xlsx");
+	System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "Set_As_Default_Dashboard_NewUI_Content/TestData.xlsx");
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	driver = BrowserFactory.getBrowser(testDataReader);
 
