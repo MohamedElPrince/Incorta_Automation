@@ -8,14 +8,14 @@
 
 	<properties>
 		<!-- incorta Test Run Parameters -->
-		<incortaRoot>http://35.184.27.139:9080/incorta/</incortaRoot>
+		<incortaRoot>http://35.184.27.139:9091/incorta/</incortaRoot>
 		<incortaVersion>Release4.0_automation</incortaVersion>
 
 		<!-- SHAFT Test Run Parameters -->
 		<testSuite.name>unitTestSuite</testSuite.name>
 
 		<executionAddress>local</executionAddress> <!-- Acceptable Values: local | seleniumGridHubIP:port -->
-		<operatingSystem.version>Linux-64</operatingSystem.version> <!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
+		<operatingSystem.version>Windows-64</operatingSystem.version> <!-- Acceptable Values: Windows-64 | Linux-64 | Mac-64 -->
 		<targetBrowser.name>GoogleChrome</targetBrowser.name> 		<!-- Acceptable Values: Default | MozillaFirefox | MicrosoftInternetExplorer 
 			| GoogleChrome | MicrosoftEdge | Safari -->
 		<autoMaximizeBrowserWindow>true</autoMaximizeBrowserWindow> <!-- Acceptable Values: true | false -->

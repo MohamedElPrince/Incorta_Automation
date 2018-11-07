@@ -19,7 +19,7 @@ public class NewUI_SignOut {
 			.xpath("//div[@class='inc-login__forget-password-conf-container-reset-conf-text']/span");
 	By body_signedOutMessageBody_label = By
 			.xpath("//div[@class='inc-login__forget-password-conf-container-reset-conf-text-body']/span");
-	By body_goToSignInPage_link = By.xpath("//a[@onclick='login()']");
+	By body_goToSignInPage_link = By.xpath("//a[@href='/incorta#/login']");
 
 	//// Functions
 	public NewUI_SignOut(WebDriver driver) {

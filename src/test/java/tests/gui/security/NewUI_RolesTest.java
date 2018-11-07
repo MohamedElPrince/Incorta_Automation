@@ -12,6 +12,7 @@ import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.AllContent;
@@ -22,6 +23,7 @@ import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
 import pageObjectModels.content.NewUI_Content_Dashboard_SendDashboard;
 import pageObjectModels.data.NewUI_DataSources;
 import pageObjectModels.login.NewUI_Login;
+import pageObjectModels.login.NewUI_SignOut;
 import pageObjectModels.main.NewUI_Header;
 import pageObjectModels.main.NewUI_Skeleton;
 import pageObjectModels.scheduler.NewUI_Dashboards;
@@ -32,6 +34,7 @@ import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
 import pageObjectModels.security.NewUI_Users;
 
+@Epic("Incorta -> Roles")
 public class NewUI_RolesTest {
 
 	// Declaring web-driver and excel reader instances
@@ -58,6 +61,7 @@ public class NewUI_RolesTest {
 	NewUI_Content_Dashboard dashboardPage;
 	NewUI_Content_Dashboard_SendDashboard sendDashboardPage;
 	NewUI_Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
+	NewUI_SignOut logoutpage;
 
 	// Declaring public variables that will be shared between tests
 	String NewFolderName;
@@ -101,8 +105,8 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Schema manager user and click add data source, then a new data source will be created.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void SchemaManager_Permissions_AddDataSource() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
-				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
+
+		logInWithUserAndAssertContentSection("Data3");
 
 		dataSourcesPage = new NewUI_DataSources(driver);
 		dataSourcesPage.Navigate_toURL();
@@ -122,15 +126,18 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Schema manager user and click add to createa new schema,then a newschema will be created")
 	@Severity(SeverityLevel.CRITICAL)
 	public void SchemaManager_Permissions_CreateSchema() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
-				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
+
+		logInWithUserAndAssertContentSection("Data3");
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		schemasPage = new NewUI_SchemaList(driver);
 		schemasPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Create Schema");
+		subHeaderObject.Select_fromDropdownMenu("Create Schema");
 
 		NewSchemaName = schemasPage.createNewSchema();
 
@@ -144,8 +151,7 @@ public class NewUI_RolesTest {
 	@Description("Given I've a data source and schema, When I log in with Schema manager user, and add data source to schema using schema wizard, Then data source will be added to the schema.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void SchemaManager_Permissions_AddDataSourceToSchema() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
-				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
+		logInWithUserAndAssertContentSection("Data3");
 
 		// Create new data source as a prerequisite.
 
@@ -167,7 +173,7 @@ public class NewUI_RolesTest {
 		schemasPage.click_schemaName(ExistingSchemaNAME);
 
 		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Schema Wizard");
+		subHeaderObject.Select_fromDropdownMenu("Schema Wizard");
 
 		schemasViewPage = new NewUI_SchemaList_SchemaView(driver);
 		schemasViewPage.Wizard_AddDataSourceTable(DataSourceName, true, "MySQL",
@@ -184,8 +190,8 @@ public class NewUI_RolesTest {
 	@Description("Given I logged in with Schema manager user, and I've added a data source with schema, When I click load data from the schema.Then Data is loaded successfully.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void SchemaManager_Permissions_LoadData() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
-				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
+
+		logInWithUserAndAssertContentSection("Data3");
 
 		schemasPage = new NewUI_SchemaList(driver);
 		schemasPage.Navigate_toURL();
@@ -197,7 +203,7 @@ public class NewUI_RolesTest {
 		subHeaderObject = new NewUI_Skeleton(driver);
 		subHeaderObject.Click_load();
 		subHeaderObject.Hover_overDropdownMenu("Load now");
-		subHeaderObject.Select_fromDropdownMenu_iFrame("Full");
+		subHeaderObject.Select_fromDropdownMenu("Full");
 
 		schemasViewPage.confirmLoadingData();
 		schemasViewPage.waitForDataToBeLoaded(initialLoadStatus);
@@ -210,8 +216,8 @@ public class NewUI_RolesTest {
 			+ "schema settings, and share schema with any user to[To Edit]. Then schema is shared successfully with Edit feature.")
 	@Severity(SeverityLevel.CRITICAL)
 	public void SchemaManager_Permissions_ShareSchemaToEdit() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data3"),
-				testDataReader.getCellData("Username", "Data3"), testDataReader.getCellData("Password", "Data3"));
+
+		logInWithUserAndAssertContentSection("Data3");
 
 		schemasPage = new NewUI_SchemaList(driver);
 		schemasPage.Navigate_toURL();
@@ -257,21 +263,21 @@ public class NewUI_RolesTest {
 		 * 7-assert that share icon in dashboard settings is dimmed.
 		 */
 
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data2"),
-				testDataReader.getCellData("Username", "Data2"), testDataReader.getCellData("Password", "Data2"));
-
+		logInWithUserAndAssertContentSection("Data2");
 		// Navigate to Content page and create dashboard
 		allContentPage = new AllContent(driver);
 		allContentPage.Navigate_toURL();
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		// subHeaderObject.click_add();
+		// subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		// newDashboardName = allContentPage.setNewDashboardName();
+		// newContentPage.click_on_folder_dashboard(newDashboardName);
 
-		newDashboardName = allContentPage.setNewDashboardName();
-
-		NewUI_allContentPage = new NewUI_Content(driver);
-		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
+		newContentPage = new NewUI_Content(driver);
+		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
+		newContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
@@ -286,7 +292,7 @@ public class NewUI_RolesTest {
 		subHeaderObject.Click_done();
 
 		allContentPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult_content(newDashboardName);
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
 		// Assert that Export icon(this icon let user to share/send/schedule) is not
 		// displayed in dashboard page
@@ -294,15 +300,15 @@ public class NewUI_RolesTest {
 
 		// assert that dashboard and insight name are correct
 		dashboardPage = new NewUI_Content_Dashboard(driver);
-		dashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+		dashboardPage.assert_dashboardName_isCorrect(NewDashBoradName);
 		dashboardPage.assert_insightName_isCorrect(newInsightName);
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is dimmed
-		NewUI_allContentPage.click_dashboardFolder_properties_fromGridView(newDashboardName);
+		newContentPage.click_dashboardFolder_properties_fromGridView(NewDashBoradName);
 		// Waiting Nouran to check if the button should be hidden or it will just send
 		// an error that user not authorized to share.
-		NewUI_allContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Share Access");
+		newContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Share Access");
 	}
 
 	@Test(priority = 7, description = "C60535 - User Manager")
@@ -326,9 +332,9 @@ public class NewUI_RolesTest {
 		 * new user. 3- Create new group. 4- Assign user to the group.
 		 *
 		 */
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
-				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
-
+//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
+//				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
+		logInWithUserAndAssertContentSection("Data5");
 		// Create New User
 		usersPage = new NewUI_Users(driver);
 		usersPage.Navigate_toURL();
@@ -370,9 +376,7 @@ public class NewUI_RolesTest {
 	@Severity(SeverityLevel.CRITICAL)
 	public void superUserRole() {
 
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data8"),
-				testDataReader.getCellData("Username", "Data8"), testDataReader.getCellData("Password", "Data8"));
-
+		logInWithUserAndAssertContentSection("Data8");
 		// Create New User
 		usersPage = new NewUI_Users(driver);
 		usersPage.Navigate_toURL();
@@ -410,16 +414,20 @@ public class NewUI_RolesTest {
 
 		// Navigate to Content page and create dashboard
 
-		allContentPage = new AllContent(driver);
-		allContentPage.Navigate_toURL();
-
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+//		allContentPage = new AllContent(driver);
+//		allContentPage.Navigate_toURL();
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
-		newDashboardName = newContentPage.setNewDashboardName();
-		NewUI_allContentPage = new NewUI_Content(driver);
-		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
+		newContentPage.navigate_toURL();
+		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
+		newContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
+
+//		newDashboardName = newContentPage.setNewDashboardName();
+//		NewUI_allContentPage = new NewUI_Content(driver);
+//		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
@@ -433,18 +441,19 @@ public class NewUI_RolesTest {
 		newInsightName = analyzeInsightPage.setInsightName();
 		subHeaderObject.Click_done();
 
-		allContentPage.Navigate_toURL();
-		subHeaderObject.SearchForContentAndOpenResult_content(newDashboardName);
+		newContentPage.navigate_toURL();
+		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
 		// assert that dashboard and insight name are correct
 
 		dashboardPage = new NewUI_Content_Dashboard(driver);
-		dashboardPage.assert_dashboardName_isCorrect(newDashboardName);
+		dashboardPage.assert_dashboardName_isCorrect(NewDashBoradName);
 		dashboardPage.assert_insightName_isCorrect(newInsightName);
 
-		allContentPage.Navigate_toURL();
+		newContentPage.navigate_toURL();
+
 		// assert that share icon in dashboard settings is active
-		newContentPage.click_dashboardFolder_properties_fromGridView(newDashboardName);
+		newContentPage.click_dashboardFolder_properties_fromGridView(NewDashBoradName);
 		dashboardPage.assert_shared_button_active();
 	}
 
@@ -453,20 +462,20 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on create new folder. Then new folder will be created successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_CreateFolder() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
 
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_sectionHeader_isSelected("Content");
+		logInWithUserAndAssertContentSection("Data1");
 
 		allContentPage = new AllContent(driver);
 
-		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Folder");
+//		subHeaderObject = new NewUI_Skeleton(driver);
+//		subHeaderObject.click_add();
+//		subHeaderObject.Select_fromDropdownMenu("Add Folder");
+//		NewFolderName = newContentPage.SetNewFolderName();
 
 		newContentPage = new NewUI_Content(driver);
-		NewFolderName = newContentPage.SetNewFolderName();
+		String NewFolderName = newContentPage.addNewCatalogItem("folder");
+		newContentPage.navigate_toURL();
+
 		newContentPage.Assert_DashboardExist(NewFolderName);
 		// allContentPage.Assert_folder_Dashboard_IsDisplayed(NewFolderName);
 	}
@@ -476,11 +485,8 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click delete. Then folder will be deleted successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_DeleteFolder() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
 
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_sectionHeader_isSelected("Content");
+		logInWithUserAndAssertContentSection("Data1");
 
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToDelete);
@@ -494,11 +500,8 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and click share and select any person to share with. Then folder will be shared successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_ShareFolder() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
 
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_sectionHeader_isSelected("Content");
+		logInWithUserAndAssertContentSection("Data1");
 
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToShare);
@@ -513,8 +516,7 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on folder options and update folder name. Then folder will be updated successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_UpdateFolder() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -539,8 +541,7 @@ public class NewUI_RolesTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_MoveFolder() {
 
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -564,19 +565,18 @@ public class NewUI_RolesTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_CreateDashboardAndInsight() {
 
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		subHeaderObject = new NewUI_Skeleton(driver);
-		subHeaderObject.click_add();
-		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		// subHeaderObject.click_add();
+		// subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
-		String NewDashBoradName = newContentPage.setNewDashboardName();
-
+		String NewDashBoradName = newContentPage.addNewCatalogItem("dashboard");
+		newContentPage.navigate_toURL();
 		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
@@ -601,8 +601,7 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and I click on any dashboard, and I click on export and I click on send. Then dashboard will be sent via mail successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_ShareDashboardViaMail_Direct() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -616,9 +615,8 @@ public class NewUI_RolesTest {
 		sendDashboardPage.sendDashboard_addFields("", "This is body area", "HTML", ToMail, CcMail, BccMail);
 		sendDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Send");
 
-		newContentPage = new NewUI_Content(driver);
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
-		newContentPage.assert_splashNotificationDescription_equalsExpected(
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Sent");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected(
 				"You've successfully sent " + DashboardToBeShared + " via Email.");
 		// Need to check that mail is sent successfully
 	}
@@ -628,8 +626,7 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and I click on any dashboard, and I click on export and I click on schedule. Then dashboard will be shared via scheduled job successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_ShareDashboardViaMail_Scheduler() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -644,10 +641,12 @@ public class NewUI_RolesTest {
 		newScheduledSendDashboardJobName = scheduleDashboardPage.scheduleDashboard_addFields(DashboardToBeShared,
 				"LOLO", "This is the body area", "HTML", ToMail, CcMail, BccMail, "Minute(s)", "10", "11", "11", "PM",
 				"GMT+02:00", "3", "Saturday", "20", "3rd", "2018-12-12");
+
 		scheduleDashboardPage.sendScheduleDashboard_click_send_schedule_buttons("Schedule");
 		// GMT±00:00
-		newContentPage = new NewUI_Content(driver);
-		newContentPage.assert_dashboardScheduledSuccessfullyMessage(DashboardToBeShared);
+
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Delivery Scheduled");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected("successfully scheduled");
 
 		schedulerDashboardsPage = new NewUI_Dashboards(driver);
 		schedulerDashboardsPage.Navigate_toURL();
@@ -662,8 +661,7 @@ public class NewUI_RolesTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_DeleteDashboard() {
 
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -684,8 +682,7 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click sharing and select any user to 'Can Edit' and click save. Then dashboard will be shared successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_ShareDashboard() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -705,8 +702,7 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click copy and select any to copy to and click on copy. Then dashboard will be copied successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_CopyDashboard() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -734,9 +730,8 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click move and select any to move to and click on move. Then dashboard will be moved successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_MoveDashboard() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
-
+		logInWithUserAndAssertContentSection("Data1");
+		
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
@@ -744,7 +739,7 @@ public class NewUI_RolesTest {
 
 		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToMove);
 
-		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move");
+		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move to...");
 
 		newContentPage.dashboard_popup_clickOnFolder(FolderNameToMoveTo);
 
@@ -762,8 +757,7 @@ public class NewUI_RolesTest {
 	@Description("When I log in with Analyzer User, and navigate to content tab, and click on dashboard options and click rename and type new name and click on rename. Then dashboard will be renamed successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_RenameDashboard() {
-		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"),
-				testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
+		logInWithUserAndAssertContentSection("Data1");
 
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
@@ -782,6 +776,16 @@ public class NewUI_RolesTest {
 		newContentPage.Assert_DashboardExist(newDashboardName);
 	}
 
+	private void logInWithUserAndAssertContentSection(String UserData) {
+
+		loginPage.userLogin(testDataReader.getCellData("Tenant", UserData),
+				testDataReader.getCellData("Username", UserData), testDataReader.getCellData("Password", UserData));
+
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+	}
+
 	@BeforeMethod
 	public void beforeMethod() {
 		loginPage = new NewUI_Login(driver);
@@ -796,17 +800,17 @@ public class NewUI_RolesTest {
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.expandUserMenu();
 		newHeaderObject.signOut();
-		loginPage = new NewUI_Login(driver);
-		loginPage.goToSignInPage_fromSignOutPage();
+		logoutpage = new NewUI_SignOut(driver);
+		logoutpage.navigate_toLoginPage();
 		ReportManager.getTestLog();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		BrowserFactory.closeAllDrivers();
 		ReportManager.getFullLog();

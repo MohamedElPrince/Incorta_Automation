@@ -14,48 +14,40 @@ public class NewUI_Skeleton {
 	//// Elements
 
 	// header_incortaLogo_image
-	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
+	private By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
 
-	By SideMenu_GenericSideMenuItem_Link;
+	private By SideMenu_GenericSideMenuItem_Link;
 
-	By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
+	private By sideMenu_impersonation_switchBack_link = By.xpath("//img[contains(@src,'icon-switch-back')]");
 
-	By header_search_textBox_security = By.xpath("//input[@placeholder='Search']");
-	By header_search_textBox_content = By.xpath("//input[@placeholder='Search content']");
+	private By header_search_textBox_security = By.xpath("//input[@placeholder='Search']");
+	private By header_search_textBox_content = By.xpath("//input[@placeholder='Search content']");
 
-	By header_searchResult_link_security;
-	By header_searchResult_link_content;
+	private By header_searchResult_link_security;
+	private By header_searchResult_link_content;
 
-	By header_load_button = By.id("load_types_btn");
-	By header_loadMenuItem_link;
-	By header_actions_button = By.xpath("//span[text()='Actions']");
-	By header_export_button = By.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]");
+	private By header_load_button = By.id("load_types_btn");
+	private By header_actions_button = By.xpath("//span[text()='Actions']");
+	private By header_export_button = By.xpath("//button[@id='dropdownMenu1']/img[contains(@src,'export')]");
 	// header_settings_button
-	By header_add_button = By.xpath("//img [contains(@src,'plus')]");
+	private By header_add_button = By.xpath("//img [contains(@src,'plus')]");
 
-	// By header_add_content_button = By.xpath("//i[@class='anticon
-	// anticon-plus']//parent::span");
-	// By header_add_security_button = By.xpath("//a[@class='btn
-	// ']/img[contains(@src,'plus_icon')]");
-	// By header_add_dataSource_button = By.id("createNewDatasourceButton");
-	// By header_add_schema_button =
-	// By.xpath("//button[contains(@class,'schemaAddBtn')]");
-	// By header_add_schema_insideTheSchema_button = By.xpath("//a[@title='Add
-	// tables and joins']");
-
-	By header_genericMenuItem_link;
-	By header_user_button = By
+	private By header_genericMenuItem_link;
+	private By header_user_button = By
 			.xpath("//img[contains(@ng-src,'getUserPicture')]//ancestor::a[@class='dropdown-toggle']");
-	By header_chooseVisualization_button = By.id("charts-button");
-	By header_userMenuItem_link;
-	By header_done_link = By.id("saveButton_Charts");
-	By header_exportStatus_button = By.xpath("//a[@class='ant-dropdown-trigger']//i[contains(@class,'share-alt')]");
+	private By header_chooseVisualization_button = By.id("charts-button");
+	private By header_userMenuItem_link;
+	private By header_done_link = By.id("saveButton_Charts");
+	private By header_exportStatus_button = By.xpath("//a[@class='ant-dropdown-trigger']//i[contains(@class,'share-alt')]");
 
-	By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
-	By header_export_button_ExportOptions;
-	By header_settings_list = By.id("settings-button");
-	By header_allContentDashboard_Settings_Button = By
+	private By header_settings_button = By.xpath("//a[@class='btn right ng-scope'][@ng-click='openSettings()']");
+	private By header_export_button_ExportOptions;
+	private By header_settings_list = By.id("settings-button");
+	private By header_allContentDashboard_Settings_Button = By
 			.xpath("//button[@id='dropdownMenu1']//img[contains(@src,'settings')]");
+	
+
+	
 
 	//// Functions
 	public NewUI_Skeleton(WebDriver driver) {
@@ -207,15 +199,6 @@ public class NewUI_Skeleton {
 		ElementActions.switchToDefaultContent(driver);
 	}
 
-	public void Select_fromDropdownMenu_iFrame(String functionName) {
-		ElementActions.switchToIframe(driver, body_iframe);
-		header_genericMenuItem_link = By
-				.xpath("//ul[contains(@class,'dropdown-menu') and @role='menu']//*[contains(normalize-space(.),'"
-						+ functionName + "')][@role='menuitem' or @class='importExport']");
-		ElementActions.click(driver, header_genericMenuItem_link);
-		ElementActions.switchToDefaultContent(driver);
-	}
-
 	public void Hover_overDropdownMenu(String functionName) {
 		ElementActions.switchToIframe(driver, body_iframe);
 		header_genericMenuItem_link = By
@@ -238,13 +221,6 @@ public class NewUI_Skeleton {
 
 	public void Click_impersonation_switchBack_link() {
 		ElementActions.click(driver, sideMenu_impersonation_switchBack_link);
-	}
-
-	public void Assert_fromUserMenu(String functionName) {
-		ElementActions.click(driver, header_user_button);
-		header_userMenuItem_link = By.xpath(
-				"//ul[contains(@class,'UserDropdown')]//li[contains(normalize-space(.),'" + functionName + "')]");
-		Assertions.assertElementExists(driver, header_userMenuItem_link, true);
 	}
 
 	/**
@@ -281,4 +257,8 @@ public class NewUI_Skeleton {
 				.xpath("//li[@class = \"importExport\"][contains(string(),'" + ExportOptions + "')]");
 		ElementActions.click(driver, header_export_button_ExportOptions);
 	}
+	
+
+
+	
 }
