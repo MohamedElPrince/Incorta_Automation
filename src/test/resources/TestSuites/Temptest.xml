@@ -11,6 +11,8 @@
 				<!-- <include name="addDatasourceToSchemaUsingWizard" /> -->
 				<!-- </methods> -->
 			</class>
+			<class
+				name="tests.gui.content.NewUI_Set_Open_Default_DashboardTest"></class>
 		</classes>
 	</test>
 </suite>
