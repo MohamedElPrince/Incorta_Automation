@@ -714,12 +714,13 @@ public class NewUI_CatalogOfContent {
 	public void logIn(String ColumnName) {
 		loginPage = new NewUI_Login(driver);
 		loginPage.navigate_toURL();
-		loginPage.assert_loginPageOpened();
+		loginPage.verify_correctVersionNumberIsDisplayed();
+
 		loginPage.userLogin(testDataReader.getCellData("Tenant", ColumnName),
 				testDataReader.getCellData("Username", ColumnName), testDataReader.getCellData("Password", ColumnName));
 
-		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
 	}
 
 	@BeforeClass
@@ -732,13 +733,6 @@ public class NewUI_CatalogOfContent {
 
 	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
-		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.assert_sectionHeader_isSelected("Content");
-
-//		newUI_allContentPage.assert_pageTitle_isCorrect("All");
-
 		newHeaderObject.expandUserMenu();
 		newHeaderObject.signOut();
 		ReportManager.getTestLog();

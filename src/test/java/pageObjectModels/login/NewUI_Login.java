@@ -17,22 +17,19 @@ public class NewUI_Login {
 	String incortaVersion = System.getProperty("incortaVersion");
 
 	//// Elements
-	By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");
-	By body_tenant_textBox = By.id("tenant");
-	By body_username_textBox = By.id("username");
-	By body_password_textBox = By.id("password");
-	By body_forgotPassword_link = By.xpath("//button[@type='button'][contains(.,'Forgot Password?')]");
-	By body_signIn_button = By.xpath("//button[@type='submit'][contains(.,'Sign In')]");
-	By footer_incortaCopyrights_label = By.xpath("//div[contains(@class,'footer')]");
-	By body_loginForm = By.xpath("//form[@data-testid='login-form']");
+	private By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");
+	private By body_tenant_textBox = By.id("tenant");
+	private By body_username_textBox = By.id("username");
+	private By body_password_textBox = By.id("password");
+	private By body_forgotPassword_link = By.xpath("//button[@type='button'][contains(.,'Forgot Password?')]");
+	private By body_signIn_button = By.xpath("//button[@type='submit'][contains(.,'Sign In')]");
+	private By footer_incortaCopyrights_label = By.xpath("//div[contains(@class,'footer')]");
 
 	// First Time Login
-	By body_changePasswordMessageHeader_label;
-	By body_changePasswordMessageBody_label;
-	By body_oldPassword_textBox = By.id("oldPassword");
-	By body_newPassword_textBox = By.id("newPassword");
-	By body_confirmNewPassword_textBox = By.id("confirmNewPassword");
-	By body_updatePassword_button = By.xpath("//button[@type='submit'][contains(.,'Create & Go')]");
+	private By body_oldPassword_textBox = By.id("oldPassword");
+	private By body_newPassword_textBox = By.id("newPassword");
+	private By body_confirmNewPassword_textBox = By.id("confirmNewPassword");
+	private By body_updatePassword_button = By.xpath("//button[@type='submit'][contains(.,'Create & Go')]");
 
 	//// Functions
 	public NewUI_Login(WebDriver driver) {
@@ -72,10 +69,6 @@ public class NewUI_Login {
 		ElementActions.type(driver, body_newPassword_textBox, newPassword);
 		ElementActions.type(driver, body_confirmNewPassword_textBox, confirmNewPassword);
 		ElementActions.click(driver, body_updatePassword_button);
-	}
-
-	public void assert_loginPageOpened() {
-		Assertions.assertElementExists(driver, body_loginForm, true);
 	}
 
 }
