@@ -3,13 +3,14 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.security.NewUI_RolesTest">
-				<methods>
-				<include name="Analyzer_Permissions_CopyDashboard" />
+			<class
+				name="tests.gui.content.NewUI_Set_As_Default_DashboardTest">
+				<!-- <methods> -->
+				<!-- <include name="Analyzer_Permissions_CopyDashboard" /> -->
 				<!-- <include name="createSchema" /> -->
 				<!-- <include name="addDatasourceToSchemaUsingWizard" /> -->
-				</methods>
-			</class>			
+				<!-- </methods> -->
+			</class>
 		</classes>
 	</test>
 </suite>

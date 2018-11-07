@@ -25,7 +25,7 @@ import pageObjectModels.main.Skeleton;
 
 @Epic("incorta -> Security -> Users")
 
-public class Set_Open_Default_DashboardTest {
+public class NewUI_Set_Open_Default_DashboardTest {
 
     //// Variables
     WebDriver driver;
