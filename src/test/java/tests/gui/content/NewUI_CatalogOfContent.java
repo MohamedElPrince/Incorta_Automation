@@ -2,10 +2,8 @@ package tests.gui.content;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
@@ -61,12 +59,12 @@ public class NewUI_CatalogOfContent {
 
 	// Declaring public variables that will be shared between tests
 
-	@Test(priority = 1, groups = "groupA", description = "C82751 - Chrome: Testing That the user can search for a specific Dashboard owned by him")
+	@Test(priority = 1, description = "C82751 - Chrome: Testing That the user can search for a specific Dashboard owned by him")
 	@Description("When I navigate to the content screen, and I search for dashboard created by me.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_CreatedBySameUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent"));
 
@@ -75,13 +73,12 @@ public class NewUI_CatalogOfContent {
 				.assert_dashboardName_isCorrect(testDataReader.getCellData("Automation_Dashboard_CatalogOfContent"));
 	}
 
-	@Test(priority = 2, groups = "groupA", description = "C82753 - Chrome: Testing that the user cansearch for a specificdashboard Sharedwith him as'View'")
+	@Test(priority = 2, description = "C82753 - Chrome: Testing that the user cansearch for a specificdashboard Sharedwith him as'View'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared view with me.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_SharedAsViewWithUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedView"));
 
@@ -90,13 +87,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedView"));
 	}
 
-	@Test(priority = 3, groups = "groupA", description = "C82757 - Chrome: Testing that the user cansearch for a specificdashboard Sharedwith him as'Share'")
+	@Test(priority = 3, description = "C82757 - Chrome: Testing that the user cansearch for a specificdashboard Sharedwith him as'Share'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared share with me.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_SharedAsShareWithUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedShare"));
 
@@ -105,13 +101,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedShare"));
 	}
 
-	@Test(priority = 4, groups = "groupA", description = "C82758 - Chrome: Testing that the user cansearch for a specificdashboard Sharedwith him as'Edit'")
+	@Test(priority = 4, description = "C82758 - Chrome: Testing that the user cansearch for a specificdashboard Sharedwith him as'Edit'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared view withme.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_SharedAsEditWithUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedEdit"));
 
@@ -120,13 +115,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SharedEdit"));
 	}
 
-	@Test(priority = 5, groups = "groupA", description = "C82759 - Chrome: Testing that the user cansearch for a dashboardcreated inside nested folders")
+	@Test(priority = 5, description = "C82759 - Chrome: Testing that the user cansearch for a dashboardcreated inside nested folders")
 	@Description("When I navigate to the content screen, and I search for dashboard created inside a nested folder.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_CreatedInsideNestedFolder() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_InsideNestedFolder"));
 
@@ -135,13 +129,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_InsideNestedFolder"));
 	}
 
-	@Test(priority = 6, groups = "groupA", description = "C82760 - Chrome: Testing that the user cansearch for a dashboardcreated with Arabic name")
+	@Test(priority = 6, description = "C82760 - Chrome: Testing that the user cansearch for a dashboardcreated with Arabic name")
 	@Description("When I navigate to the content screen, and I search fordashboard created with Arabic name.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_WithArabicName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Arabic"));
 
@@ -150,13 +143,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Arabic"));
 	}
 
-	@Test(priority = 7, groups = "groupA", description = "C82761 - Chrome: Testing that the user cansearch for a dashboardcreated withSpecial Characters name")
+	@Test(priority = 7, description = "C82761 - Chrome: Testing that the user cansearch for a dashboardcreated withSpecial Characters name")
 	@Description("When I navigate to the content screen, and I search for dashboard created with special characters name.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_WithSpecialCharactersName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SpecialCharacters"));
 
@@ -165,13 +157,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_SpecialCharacters"));
 	}
 
-	@Test(priority = 8, groups = "groupA", description = "C82762 - Chrome: Testing that the user cansearch for a dashboardcreated with French Characters")
+	@Test(priority = 8, description = "C82762 - Chrome: Testing that the user cansearch for a dashboardcreated with French Characters")
 	@Description("When I navigate to the content screen, and I search for dashboard created with French name.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_WithFrenchName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_French"));
 
@@ -180,13 +171,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_French"));
 	}
 
-	@Test(priority = 9, groups = "groupA", description = "C82763 - Chrome: Testing that the user cansearch for a dashboardcreated with Chinese characters")
+	@Test(priority = 9, description = "C82763 - Chrome: Testing that the user cansearch for a dashboardcreated with Chinese characters")
 	@Description("When I navigate to the content screen, and I search for dashboard created with Chinese name.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_WithChineseName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
 
@@ -195,14 +185,13 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
 	}
 
-	@Test(priority = 10, groups = "groupA", description = "C82768 - Chrome: Testing that the usercan search fora dashboardwhen thepage is in'List'view")
+	@Test(priority = 10, description = "C82768 - Chrome: Testing that the usercan search fora dashboardwhen thepage is in'List'view")
 	@Description("When I navigate to the content screen, and I search for dashboard created in list view.Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_FromListView() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
-		newUI_allContentPage.changeCatalogView("table");
+		newUI_allContentPage.changeCatalogView("list");
 
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
@@ -212,15 +201,14 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Chinese"));
 	}
 
-	@Test(priority = 1, groups = "groupA", description = "C82769 - Chrome: Testing that when searching for a deleted dashboard,no data will be displayed")
+	@Test(priority = 11, description = "C82769 - Chrome: Testing that when searching for a deleted dashboard,no data will be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard after deleting it.Then dashboard is not found.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_Deleted() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.changeCatalogView("Card");
-		newUI_allContentPage.click_dashboardFolder_properties_fromGridView(
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Deleted"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newUI_allContentPage.deleteDashboard_popup_click_confirmationButton_delete();
@@ -232,35 +220,32 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Deleted"));
 	}
 
-	@Test(priority = 12, groups = "groupA", description = "C82770 - Chrome: Testing that whensearching for a dashboardthat isnot sharedwith the user,no datawill be displayed")
+	@Test(priority = 12, description = "C82770 - Chrome: Testing that whensearching for a dashboardthat isnot sharedwith the user,no datawill be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard created by admin and not shared.Then dashboard is not found.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_NotSharedWithAnalyzer() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_NotShared"));
 	}
 
-	@Test(priority = 13, groups = "groupA", description = "C82771 - Chrome: Testing that whensearching for a dashboardthat isnot sharedwith the user,no datawill be displayed")
+	@Test(priority = 13, description = "C82771 - Chrome: Testing that whensearching for a dashboardthat isnot sharedwith the user,no datawill be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard created by adminand not shared.Then dashboard is not found.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForDashboard_DashboardNotCreated() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardNotCreated"));
 	}
 
-	@Test(priority = 14, groups = "groupA", description = "C82773 - Chrome: Testing That the user can search for a specific Folder owned by him")
+	@Test(priority = 14, description = "C82773 - Chrome: Testing That the user can search for a specific Folder owned by him")
 	@Description("When I navigate to the content screen, and I search for dashboard created by me. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_CreatedBySameUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent"));
 
@@ -269,13 +254,12 @@ public class NewUI_CatalogOfContent {
 				.assert_dashboardName_isCorrect(testDataReader.getCellData("Automation_Folder_CatalogOfContent"));
 	}
 
-	@Test(priority = 15, groups = "groupA", description = "C82774 - Chrome: Testing that the user can search for a specific Folder Shared with him as 'View'")
+	@Test(priority = 15, description = "C82774 - Chrome: Testing that the user can search for a specific Folder Shared with him as 'View'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared view with me. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_SharedAsViewWithUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedView"));
 
@@ -284,13 +268,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedView"));
 	}
 
-	@Test(priority = 16, groups = "groupA", description = "Chrome: Testing that the user can search for a specific Folder Shared with him as 'Share'")
+	@Test(priority = 16, description = "Chrome: Testing that the user can search for a specific Folder Shared with him as 'Share'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared share with me. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_SharedAsShareWithUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedShare"));
 
@@ -299,13 +282,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedShare"));
 	}
 
-	@Test(priority = 17, groups = "groupA", description = "C82776 - Chrome: Testing that the user can search for a specific Folder Shared with him as 'Edit'")
+	@Test(priority = 17, description = "C82776 - Chrome: Testing that the user can search for a specific Folder Shared with him as 'Edit'")
 	@Description("When I navigate to the content screen, and I search for dashboard Shared view with me. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_SharedAsEditWithUser() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedEdit"));
 
@@ -314,13 +296,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SharedEdit"));
 	}
 
-	@Test(priority = 18, groups = "groupA", description = "C82777 - Chrome: Testing that the user can search for a Folder created inside nested folders")
+	@Test(priority = 18, description = "C82777 - Chrome: Testing that the user can search for a Folder created inside nested folders")
 	@Description("When I navigate to the content screen, and I search for dashboard created inside a nested folder. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_CreatedInsideNestedFolder() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_InsideNestedFolder"));
 
@@ -329,13 +310,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_InsideNestedFolder"));
 	}
 
-	@Test(priority = 19, groups = "groupA", description = "C82778 - Chrome: Testing that the user can search for a Folder created with Arabic name")
+	@Test(priority = 19, description = "C82778 - Chrome: Testing that the user can search for a Folder created with Arabic name")
 	@Description("When I navigate to the content screen, and I search for dashboard created with Arabic name. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_WithArabicName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Arabic"));
 
@@ -344,13 +324,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Arabic"));
 	}
 
-	@Test(priority = 20, groups = "groupA", description = "C82779 - Chrome: Testing that the user can search for a Folder created with Special Characters name")
+	@Test(priority = 20, description = "C82779 - Chrome: Testing that the user can search for a Folder created with Special Characters name")
 	@Description("When I navigate to the content screen, and I search for dashboard created with special characters name. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_WithSpecialCharactersName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SpecialCharacters"));
 
@@ -359,13 +338,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_SpecialCharacters"));
 	}
 
-	@Test(priority = 21, groups = "groupA", description = "C82780 - Chrome: Testing that the user can search for a Folder created with French Characters")
+	@Test(priority = 21, description = "C82780 - Chrome: Testing that the user can search for a Folder created with French Characters")
 	@Description("When I navigate to the content screen, and I search for dashboard created with French name. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_WithFrenchName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_French"));
 
@@ -374,13 +352,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_French"));
 	}
 
-	@Test(priority = 22, groups = "groupA", description = "C82781 - Chrome: Testing that the user can search for a Folder created with Chinese characters")
+	@Test(priority = 22, description = "C82781 - Chrome: Testing that the user can search for a Folder created with Chinese characters")
 	@Description("When I navigate to the content screen, and I search for dashboard created with Chinese name. Then dashboard is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_WithChineseName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Chinese"));
 
@@ -389,14 +366,13 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Chinese"));
 	}
 
-	@Test(priority = 23, groups = "groupA", description = "C82786 - Chrome: Testing that the user can search for a Folder when the page is in 'List' view")
+	@Test(priority = 23, description = "C82786 - Chrome: Testing that the user can search for a Folder when the page is in 'List' view")
 	@Description("When I navigate to the content screen, and I search for folder created in list view.Then Folder is found successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_FromListView() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
-		newUI_allContentPage.changeCatalogView("table");
+		newUI_allContentPage.changeCatalogView("list");
 
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Chinese"));
@@ -406,15 +382,14 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Chinese"));
 	}
 
-	@Test(priority = 24, groups = "groupA", description = "C82787 - Chrome: Testing that when searching for a deleted Folder , no data will be displayed")
+	@Test(priority = 24, description = "C82787 - Chrome: Testing that when searching for a deleted Folder , no data will be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard after deleting it.Then Folder is not found.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_Deleted() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.changeCatalogView("Card");
-		newUI_allContentPage.click_dashboardFolder_properties_fromGridView(
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Deleted"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newUI_allContentPage.deleteDashboard_popup_click_confirmationButton_delete();
@@ -428,35 +403,32 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Deleted"));
 	}
 
-	@Test(priority = 25, groups = "groupA", description = "C82788 - Chrome: Testing that when searching for a Folder that is not shared with the user, no data will be displayed")
+	@Test(priority = 25, description = "C82788 - Chrome: Testing that when searching for a Folder that is not shared with the user, no data will be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard created by admin and not shared.Then dashboard is not found.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_NotSharedWithAnalyzer() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_NotShared"));
 	}
 
-	@Test(priority = 26, groups = "groupA", description = "C82789 - Chrome: Testing that when searching for a Folder that doesn't exist , no data will be displayed")
+	@Test(priority = 26, description = "C82789 - Chrome: Testing that when searching for a Folder that doesn't exist , no data will be displayed")
 	@Description("When I navigate to the content screen, and I search for dashboard created by admin and not shared.Then dashboard is not found.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_SearchForFolder_FolderNotCreated() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_FolderNotCreated"));
 	}
 
-	@Test(priority = 27, groups = "groupA", description = "C81618 - Chrome: Details : Testing that the dashboard details are displayed")
+	@Test(priority = 27, description = "C81618 - Chrome: Details : Testing that the dashboard details are displayed")
 	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then details section is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_DashboardScreen_DetailsSectionDisplayed() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardDetailsSection"));
 
@@ -466,13 +438,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("This information is for Automation testing purposes."));
 	}
 
-	@Test(priority = 28, groups = "groupA", description = "C81617 - Chrome: Details : Testing that the dashboard detail 'Owned by' is displayed")
+	@Test(priority = 28, description = "C81617 - Chrome: Details : Testing that the dashboard detail 'Owned by' is displayed")
 	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Owned By detail is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_DashboardScreen_DetailsSection_OwnedByDisplayed() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		String dashboardName = newUI_allContentPage.addNewCatalogItem("dashboard");
 
 		newUI_dashboardPage = new NewUI_Content_Dashboard(driver);
@@ -481,13 +452,12 @@ public class NewUI_CatalogOfContent {
 		newUI_dashboardPage.assert_detailsSection_ownedByDisplayed(testDataReader.getCellData("Username"));
 	}
 
-	@Test(priority = 29, groups = "groupA", description = "C81619 - Chrome: Details : Testing that the dashboard detail 'Last modified' is displayed")
+	@Test(priority = 29, description = "C81619 - Chrome: Details : Testing that the dashboard detail 'Last modified' is displayed")
 	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Modified By detail is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_DashboardScreen_DetailsSection_ModifiedByDisplayed() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardDetailsSection_ModifiedBy"));
 
@@ -508,13 +478,12 @@ public class NewUI_CatalogOfContent {
 		newUI_dashboardPage.assert_detailsSection_modifiedByDisplayed(testDataReader.getCellData("Username"));
 	}
 
-	@Test(priority = 30, groups = "groupA", description = "C81620 - Chrome: Details : Testing that the dashboard detail 'Modified by' is displayed")
+	@Test(priority = 30, description = "C81620 - Chrome: Details : Testing that the dashboard detail 'Modified by' is displayed")
 	@Description("When I navigate to the content screen, and I open dashboard and I click on details. Then Last Modified detail is displayed.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_DashboardScreen_DetailsSection_LastModifiedDisplayed() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_DashboardDetailsSection_ModifiedBy"));
 
@@ -523,24 +492,22 @@ public class NewUI_CatalogOfContent {
 		newUI_dashboardPage.assert_detailsSection_lastModifiedDisplayed();
 	}
 
-	@Test(priority = 31, groups = "groupA", description = "C82772_1 - Chrome: Testing that All user types can search for dashboards in content page")
+	@Test(priority = 31, description = "C82772_1 - Chrome: Testing that All user types can search for dashboards in content page")
 	@Description("When I login with Analyzer, And I search for dashboard. Then search is working normally.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_AnalyzerUser_CanSearchForDashboards() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
 	}
 
-	@Test(priority = 32, groups = "groupA", description = "C82790_1 - Chrome: Testing that All user types can search for Folder in content page")
+	@Test(priority = 32, description = "C82790_1 - Chrome: Testing that All user types can search for Folder in content page")
 	@Description("When I login with Analyzer, And I search for dashboard. Then search is working normally.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_AnalyzerUser_CanSearchForFolders() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.catalog_searchAssertAndOpenResults_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
 
@@ -549,37 +516,34 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
 	}
 
-	@Test(priority = 33, groups = "groupA", description = "C83986 - Chrome: Testing that in case the number of folders / Dashboards under a folder is 1, the grammar is correct.")
+	@Test(priority = 33, description = "C83986 - Chrome: Testing that in case the number of folders / Dashboards under a folder is 1, the grammar is correct.")
 	@Description("When I navigate to the content page, Then I'll find that folders written under them how many folders and dahsboards with the right grammer.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_RightGrammerAndNumberOfFoldersAndDashboardsWrittenUnderFolderName_IsOne() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.assert_folderCardDescription_grammerAndCountCorrect(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_GrammerAndCountUnderFolder"),
 				testDataReader.getCellData("FoldersIsOneAndDashboardsIsOne"));
 	}
 
-	@Test(priority = 34, groups = "groupA", description = "C83987 - Chrome: Testing that the meta data displayed under a folder reflects the correct # of folders and dashboards.")
+	@Test(priority = 34, description = "C83987 - Chrome: Testing that the meta data displayed under a folder reflects the correct # of folders and dashboards.")
 	@Description("When I navigate to the content page, Then I'll find that folders written under them how many folders and dahsboards with the right grammer.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_RightGrammerAndNumberOfFoldersAndDashboardsWrittenUnderFolderName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage.assert_folderCardDescription_grammerAndCountCorrect(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_GrammerAndCountUnderFolder_Number2"),
 				testDataReader.getCellData("FoldersIsZeroAndDashboardsIsTwo"));
 	}
 
-	@Test(priority = 35, groups = "groupA", description = "C83988 - Chrome: Testing that User can sort dashboard by Owner.")
+	@Test(priority = 35, description = "C83988 - Chrome: Testing that User can sort dashboard by Owner.")
 	@Description("When I navigate to the content page, and I sort dahsboards by owner, Then dashboard witll be sorted successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_Sort_ByOwner() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage
 				.click_on_folder_dashboard(testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Sort"));
 
@@ -590,13 +554,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("SortDashboardByOwner", "Data3"));
 	}
 
-	@Test(priority = 36, groups = "groupA", description = "C83989 - Chrome: Testing that user can sort dashboard by Name.")
+	@Test(priority = 36, description = "C83989 - Chrome: Testing that user can sort dashboard by Name.")
 	@Description("When I navigate to the content page, and I sort dahsboards by NAme, Then dashboard witll be sorted successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_Sort_ByName() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage
 				.click_on_folder_dashboard(testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Sort"));
 
@@ -606,13 +569,12 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("SortDashboardByName", "Data3"));
 	}
 
-	@Test(priority = 37, groups = "groupA", description = "C83990 - Chrome: Testing that user can sort dashboard by Last Modified.")
+	@Test(priority = 37, description = "C83990 - Chrome: Testing that user can sort dashboard by Last Modified.")
 	@Description("When I navigate to the content page, and I sort dahsboards by Last Modified, Then dashboard witll be sorted successfully.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_Sort_ByLastModified() {
+		logIn("Data1");
 		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
 		newUI_allContentPage
 				.click_on_folder_dashboard(testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Sort"));
 
@@ -622,7 +584,6 @@ public class NewUI_CatalogOfContent {
 				testDataReader.getCellData("SortDashboardByLastModified", "Data2"),
 				testDataReader.getCellData("SortDashboardByLastModified", "Data3"));
 	}
-	/// =================/=================/=================/=================
 
 	@Test(priority = 38, description = "C83985_2 - Chrome: Testing That the profile pic of the dashboard/Folder owner is displayed when searching.")
 	@Description("When I login, And I search for dashboard. Then search result will display profile picture of the creator of the dashboard.")
@@ -632,10 +593,10 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.catalog_searchAndAssert_resultsDisplayProfilePicture_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_ProfilePicture"));
-		logOut();
+
 	}
 
-	@Test(priority = 39, groups = "group", description = "C82772_2 - Chrome: Testing that All user types can search for dashboards in content page")
+	@Test(priority = 39, description = "C82772_2 - Chrome: Testing that All user types can search for dashboards in content page")
 	@Description("When I login with Admin, And I search for dashboard. Then search is working normally.")
 	@Severity(SeverityLevel.NORMAL)
 	public void CatalogOfContent_AdminUserCanSearchForDashboards() {
@@ -643,7 +604,7 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
 	@Test(priority = 40, description = "C82772_3 - Chrome: Testing that All user types can search for dashboards in content page")
@@ -654,7 +615,7 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
 	@Test(priority = 41, description = "C82772_4 - Chrome: Testing that All user types can search for dashboards in content page")
@@ -665,7 +626,7 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
 	@Test(priority = 42, description = "C82772_5 - Chrome: Testing that All user types can search for dashboards in content page")
@@ -676,7 +637,7 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.catalog_searchAndAssertResultsDisplayed_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
 	@Test(priority = 43, description = "C82790_2 - Chrome: Testing that All user types can search for Folder in content page")
@@ -691,7 +652,7 @@ public class NewUI_CatalogOfContent {
 		newUI_folderPage = new NewUI_Content_Folder(driver);
 		newUI_folderPage.assert_folderName_correct(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
 	@Test(priority = 44, description = "C82790_3 - Chrome: Testing that All user types can search for Folder in content page")
@@ -706,7 +667,7 @@ public class NewUI_CatalogOfContent {
 		newUI_folderPage = new NewUI_Content_Folder(driver);
 		newUI_folderPage.assert_folderName_correct(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
 	@Test(priority = 45, description = "C82790_4 - Chrome: Testing that All user types can search for Folder in content page")
@@ -721,7 +682,7 @@ public class NewUI_CatalogOfContent {
 		newUI_folderPage = new NewUI_Content_Folder(driver);
 		newUI_folderPage.assert_folderName_correct(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
 	@Test(priority = 46, description = "C83985_1 - Chrome: Testing That the profile pic of the dashboard/Folder owner is displayed when searching.")
@@ -732,7 +693,7 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.catalog_searchAndAssert_resultsDisplayProfilePicture_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_ProfilePicture"));
-		logOut();
+
 	}
 
 	@Test(priority = 47, description = "C82790_5 - Chrome: Testing that All user types can search for Folder in content page")
@@ -747,47 +708,18 @@ public class NewUI_CatalogOfContent {
 		newUI_folderPage = new NewUI_Content_Folder(driver);
 		newUI_folderPage.assert_folderName_correct(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_TestingSearchWithAllUsers"));
-		logOut();
+
 	}
 
-	/// =================/=================/=================/=================
 	public void logIn(String ColumnName) {
 		loginPage = new NewUI_Login(driver);
 		loginPage.navigate_toURL();
+		loginPage.assert_loginPageOpened();
 		loginPage.userLogin(testDataReader.getCellData("Tenant", ColumnName),
 				testDataReader.getCellData("Username", ColumnName), testDataReader.getCellData("Password", ColumnName));
-	}
 
-	public void logOut() {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
-
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.expandUserMenu();
-		newHeaderObject.signOut();
-		loginPage = new NewUI_Login(driver);
-		loginPage.goToSignInPage_fromSignOutPage();
-	}
-
-	@BeforeGroups("groupA")
-	public void beforeGroup() {
-		loginPage = new NewUI_Login(driver);
-		loginPage.navigate_toURL();
-		loginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
-				testDataReader.getCellData("Password"));
-	}
-
-	@AfterGroups("groupA")
-	public void afterGroup() {
-		newUI_allContentPage = new NewUI_Content(driver);
-		newUI_allContentPage.navigate_toURL();
-
-		newHeaderObject = new NewUI_Header(driver);
-		newHeaderObject.expandUserMenu();
-		newHeaderObject.signOut();
-		loginPage = new NewUI_Login(driver);
-		loginPage.goToSignInPage_fromSignOutPage();
-		loginPage.navigate_toURL();
 	}
 
 	@BeforeClass
@@ -798,8 +730,17 @@ public class NewUI_CatalogOfContent {
 		driver = BrowserFactory.getBrowser(testDataReader);
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
+		newUI_allContentPage = new NewUI_Content(driver);
+		newUI_allContentPage.navigate_toURL();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_sectionHeader_isSelected("Content");
+
+//		newUI_allContentPage.assert_pageTitle_isCorrect("All");
+
+		newHeaderObject.expandUserMenu();
+		newHeaderObject.signOut();
 		ReportManager.getTestLog();
 	}
 

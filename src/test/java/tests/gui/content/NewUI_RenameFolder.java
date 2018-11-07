@@ -66,7 +66,7 @@ public class NewUI_RenameFolder {
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_Working() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename"));
+		newContentPage.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage
 				.renameFolder_popup_typeNewFolderName(testDataReader.getCellData("Automation_Folder_Rename_Renamed"));
@@ -81,7 +81,7 @@ public class NewUI_RenameFolder {
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_SpecialCharacters_Working() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Folder_Rename_SpecialCharacters"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
@@ -98,7 +98,7 @@ public class NewUI_RenameFolder {
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_Arabic_Working() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_Arabic"));
+		newContentPage.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_Arabic"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
 				testDataReader.getCellData("Automation_Folder_Rename_Arabic_Renamed"));
@@ -113,7 +113,7 @@ public class NewUI_RenameFolder {
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_French_Working() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_French"));
+		newContentPage.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_French"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
 				testDataReader.getCellData("Automation_Folder_Rename_French_Renamed"));
@@ -129,7 +129,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_Chinese_Working() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_Chinese"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_Chinese"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
 				testDataReader.getCellData("Automation_Folder_Rename_Chinese_Renamed"));
@@ -145,7 +145,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_NoChangeInFolderName_RenameButtonDimmed() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newContentPage.assert_renameFolder_popup_renameButtonDimmed();
@@ -157,7 +157,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_RenameBarIsEmpty_RenameButtonDimmed() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newContentPage.renameFolder_popup_typeNewFolderName("");
@@ -170,7 +170,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_RenameScreen_DisplayedCorrectly() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newContentPage.assert_renameFolder_popupScreen_screenContentDisplayed();
@@ -182,7 +182,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_CancelButton_FolderNotRenamed() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newContentPage.renameFolder_popup_typeNewFolderName(
@@ -197,7 +197,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_LongName_Working() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_LongName"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_LongName"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
 				testDataReader.getCellData("Automation_Folder_Rename_LongNameRenamed"));
@@ -213,7 +213,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_WithSpaces_Working() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_WithSpaces"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_WithSpaces"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(
 				testDataReader.getCellData("Automation_Folder_Rename_WithSpaces_Renamed"));
@@ -228,7 +228,7 @@ public class NewUI_RenameFolder {
 	@Severity(SeverityLevel.NORMAL)
 	public void RenameFolder_WithExistingFolderName_ErrorMessageDisplayed() {
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename1"));
+		newContentPage.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename1"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 		newContentPage.renameFolder_popup_typeNewFolderName(testDataReader.getCellData("Automation_Folder_Rename2"));
 		newContentPage.renameFolder_popup_clickRename();
@@ -241,7 +241,7 @@ public class NewUI_RenameFolder {
 	public void RenameFolder_CloseIcon_Working() {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage
-				.click_dashboardFolder_properties_fromGridView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Folder_Rename_NoRename"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
 		newContentPage.renameFolder_clickCloseIcon();

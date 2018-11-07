@@ -36,8 +36,10 @@ public class NewUI_Content {
 	By searchWrapper_catalogViewSwitchCard_button = By.xpath("//button[contains(@class,'inc-show-card')]//i");
 	By searchWrapper_catalogViewSwitchTable_button = By.xpath("//button[contains(@class,'inc-show-table')]//i");
 	By searchResult_search;
-	By searchResult_profilePicture = By.xpath(
-			"//li[@text='Automation_Folder_CatalogOfContent_ProfilePicture']//span[@class='inc-search-option__item--user']/img[contains(@src,'user/getUserPicture')]");
+
+	By searchResult_profilePicture = By
+			.xpath("//div[@class='inc-search-option__item']//img[contains(@class,'inc-catalog-search-user-icon')]");
+
 	By searchResult_loadingIcon = By.xpath("//i[@class='anticon anticon-loading']");
 
 	// body-cardView
@@ -261,7 +263,7 @@ public class NewUI_Content {
 				ElementActions.click(driver, searchWrapper_catalogViewSwitchCard_button);
 			}
 			break;
-		case "table":
+		case "list":
 			if (!ElementActions.getAttribute(driver, searchWrapper_catalogViewSwitchTable_button, "class")
 					.contains("selected")) {
 				ElementActions.click(driver, searchWrapper_catalogViewSwitchTable_button);
@@ -504,7 +506,7 @@ public class NewUI_Content {
 				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
-	public void click_dashboardFolder_properties_fromGridView(String FolderName) {
+	public void click_dashboardFolder_properties_fromCardView(String FolderName) {
 		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"
 				+ FolderName + "']//parent::div//following-sibling::div//button");
 		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
@@ -578,7 +580,7 @@ public class NewUI_Content {
 	}
 
 	public void click_on_folder_dashboard(String DashboardFolderName) {
-		BrowserActions.refreshCurrentPage(driver);
+//		BrowserActions.refreshCurrentPage(driver);
 		body_folderName_dashboardName_insideFolder = By.xpath("//span[text()='" + DashboardFolderName + "']");
 		ElementActions.click(driver, body_folderName_dashboardName_insideFolder);
 	}

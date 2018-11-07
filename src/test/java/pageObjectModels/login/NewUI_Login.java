@@ -24,7 +24,7 @@ public class NewUI_Login {
 	By body_forgotPassword_link = By.xpath("//button[@type='button'][contains(.,'Forgot Password?')]");
 	By body_signIn_button = By.xpath("//button[@type='submit'][contains(.,'Sign In')]");
 	By footer_incortaCopyrights_label = By.xpath("//div[contains(@class,'footer')]");
-	By body_signIn_Page = By.xpath("//div[@class='inc-login__left-pane-container']");
+	By body_loginForm = By.xpath("//form[@data-testid='login-form']");
 
 	// First Time Login
 	By body_changePasswordMessageHeader_label;
@@ -33,7 +33,6 @@ public class NewUI_Login {
 	By body_newPassword_textBox = By.id("newPassword");
 	By body_confirmNewPassword_textBox = By.id("confirmNewPassword");
 	By body_updatePassword_button = By.xpath("//button[@type='submit'][contains(.,'Create & Go')]");
-	By body_goToSignInPage = By.xpath("//span[contains(.,'Go to the Sign-in Page')]");
 
 	//// Functions
 	public NewUI_Login(WebDriver driver) {
@@ -42,7 +41,6 @@ public class NewUI_Login {
 
 	public void navigate_toURL() {
 		BrowserActions.navigateToURL(driver, url);
-		Assertions.assertElementExists(driver, body_signIn_Page, true);
 	}
 
 	public void assert_logoIsDisplayed() {
@@ -76,7 +74,8 @@ public class NewUI_Login {
 		ElementActions.click(driver, body_updatePassword_button);
 	}
 
-	public void goToSignInPage_fromSignOutPage() {
-		ElementActions.click(driver, body_goToSignInPage);
+	public void assert_loginPageOpened() {
+		Assertions.assertElementExists(driver, body_loginForm, true);
 	}
+
 }

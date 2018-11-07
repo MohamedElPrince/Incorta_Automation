@@ -19,7 +19,7 @@ public class NewUI_SignOut {
 			.xpath("//div[@class='inc-login__forget-password-conf-container-reset-conf-text']/span");
 	By body_signedOutMessageBody_label = By
 			.xpath("//div[@class='inc-login__forget-password-conf-container-reset-conf-text-body']/span");
-	By body_goToSignInPage_link = By.xpath("//a[@onclick='login()']");
+	By body_goToSignInPage = By.xpath("//span[contains(.,'Go to the Sign-in Page')]");
 
 	//// Functions
 	public NewUI_SignOut(WebDriver driver) {
@@ -32,7 +32,8 @@ public class NewUI_SignOut {
 		Assertions.assertElementAttribute(driver, body_signedOutMessageBody_label, "text", signedOutMessageBody, true);
 	}
 
-	public void navigate_toLoginPage() {
-		ElementActions.click(driver, body_goToSignInPage_link);
+	public void goToSignInPage_button() {
+		ElementActions.click(driver, body_goToSignInPage);
 	}
+
 }
