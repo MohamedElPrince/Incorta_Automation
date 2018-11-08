@@ -90,7 +90,7 @@ public class NewUI_Set_As_Default_DashboardTest {
 
     }
 
-    @Test(priority = 3, description = "C82145 - Chrome: Set As Default Dashboard: Testing that the icon is displayed in the dashboard and  dashboard \"set as default\" should be displayed after login")
+    @Test(priority = 3, description = "C82145 - Chrome: Set As Default Dashboard: Testing that the icon is displayed and works properly")
     @Description("Given I am logged in, When I navigate to the dashboard page, And I click on  the set as default icon, icon is displayed and work correctly,dashoard set as a default dashboard.")
     @Severity(SeverityLevel.CRITICAL)
     public void setAsDefault_DashboardPin_Displayed_AndWork_Correctly() {
@@ -130,6 +130,9 @@ public class NewUI_Set_As_Default_DashboardTest {
 	loginPage.userLogin(testDataReader.getCellData("Tenant", "Data1"), testDataReader.getCellData("Username", "Data1"), testDataReader.getCellData("Password", "Data1"));
 
 	dashboardPage.assert_dashboardName_isCorrect(testDataReader.getCellData("Set_As_Default_Dashboard_Pin_Work"));
+	//uncheck the set as default dashboard pin, to prevent any issue that may occur
+	dashboardPage.click_SetAsDefaultPinIcon(true);
+
 
     }
 
