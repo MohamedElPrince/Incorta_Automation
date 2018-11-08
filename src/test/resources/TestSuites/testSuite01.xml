@@ -3,7 +3,7 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.certification.CertificationPath">
+			<class name="tests.gui.content.NewUI_NX_SignIn_Test">
 				<!-- <methods> -->
 				<!-- <include name="loginUsingAdmin" /> -->
 				<!-- <include name="createDatasource" /> -->
