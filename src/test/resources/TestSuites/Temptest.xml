@@ -3,9 +3,9 @@
 <suite name="Suite01" verbose="10">
 	<test name="Test01">
 		<classes>
-			<class name="tests.gui.security.NewUI_RolesTest">
+			<class name="tests.gui.content.NewUI_NX_SignIn_Test">
 				<methods>
-				<include name="Analyzer_Permissions_CopyDashboard" />
+				<!-- include name="Analyzer_Permissions_CopyDashboard" /> -->
 				<!-- <include name="createSchema" /> -->
 				<!-- <include name="addDatasourceToSchemaUsingWizard" /> -->
 				</methods>
