@@ -174,9 +174,6 @@ public class NewUI_Content {
 	// Folder section
 	By body_sortButton = By.xpath("//i[@class='anticon anticon-down']");
 
-	// Splash notification
-	By splash_notificationMessage_text = By.xpath("//div[contains(@class,'ant-notification-notice-message')]");
-	By splash_notificationDescription_text = By.xpath("//div[contains(@class,'ant-notification-notice-description')]");
 
 	//// Functions
 	public NewUI_Content(WebDriver driver) {
@@ -199,8 +196,7 @@ public class NewUI_Content {
 	/**
 	 * Clicks on the add button, and adds a new item type
 	 * 
-	 * @param itemType
-	 *            accepts "dashboard" or "folder"
+	 * @param itemType accepts "dashboard" or "folder"
 	 * @return string value representing the name of the newly created catalog item
 	 */
 	public String addNewCatalogItem(String itemType) {
@@ -224,36 +220,12 @@ public class NewUI_Content {
 		return newItemName;
 	}
 
-	/**
-	 * Asserts that the splash notification message contains the provided
-	 * expectedMessage
-	 * 
-	 * @param expectedMessage
-	 *            a subset of the message that is expected to show up in the splash
-	 *            notification
-	 */
-	public void assert_splashNotificationMessage_equalsExpected(String expectedMessage) {
-		Assertions.assertElementAttribute(driver, splash_notificationMessage_text, "text", expectedMessage, 3, true);
-	}
 
-	/**
-	 * Asserts that the splash notification description contains the provided
-	 * expectedDescription
-	 * 
-	 * @param expectedDescription
-	 *            a subset of the description that is expected to show up in the
-	 *            splash notification
-	 */
-	public void assert_splashNotificationDescription_equalsExpected(String expectedDescription) {
-		Assertions.assertElementAttribute(driver, splash_notificationDescription_text, "text", expectedDescription, 3,
-				true);
-	}
 
 	/**
 	 * Changes the current catalogView to the desired one
 	 * 
-	 * @param catalogView
-	 *            Card | Table
+	 * @param catalogView Card | Table
 	 */
 	public void changeCatalogView(String catalogView) {
 		switch (catalogView.toLowerCase().trim()) {
@@ -277,8 +249,7 @@ public class NewUI_Content {
 	/**
 	 * Asserts that the correct catalogView is selected
 	 * 
-	 * @param catalogView
-	 *            Card | Table
+	 * @param catalogView Card | Table
 	 */
 	public void assert_correctCatalogView_isSelected(String catalogView) {
 
@@ -300,10 +271,9 @@ public class NewUI_Content {
 	/**
 	 * Asserts that the correct searchCount is displayed
 	 * 
-	 * @param searchCount
-	 *            sample text is [You're looking at 4 Folders and 8 Dashboards] but
-	 *            you can also use regular expressions such as [.*4 Folders and 8
-	 *            Dashboards]
+	 * @param searchCount sample text is [You're looking at 4 Folders and 8
+	 *                    Dashboards] but you can also use regular expressions such
+	 *                    as [.*4 Folders and 8 Dashboards]
 	 */
 	public void assert_correctSearchCount_isDisplayed(String searchCount) {
 		Assertions.assertElementAttribute(driver, searchWrapper_searchCount_label, "text", searchCount, true);
@@ -340,8 +310,7 @@ public class NewUI_Content {
 	/**
 	 * Navigates to a sub page of the "Content" section
 	 * 
-	 * @param subPageName
-	 *            All Content | Shared | Owned
+	 * @param subPageName All Content | Shared | Owned
 	 */
 	public void navigate_toSubPage(String subPageName) {
 		ElementActions.click(driver, searchWrapper_searchDropDown_button);
@@ -607,8 +576,7 @@ public class NewUI_Content {
 
 	/**
 	 * 
-	 * @param Email
-	 *            Can Share Can Edit Can View
+	 * @param Email Can Share Can Edit Can View
 	 */
 	public void folderProperties_shareAccess_typeAndSelectInSearchField(String Email, String shareType) {
 		popup_share_searchField = By.xpath("//input[@placeholder='Search names, emails, and groups']");
@@ -627,8 +595,7 @@ public class NewUI_Content {
 	/**
 	 * 
 	 * @param Email
-	 * @param shareType
-	 *            Can Edit Can Share Can View
+	 * @param shareType Can Edit Can Share Can View
 	 */
 	public void assert_folder_dashboard_sharedSuccessfully(String Email, String shareType) {
 		popup_shareAccessScreen_shareDropDownMenuForUser_button = By
@@ -650,21 +617,6 @@ public class NewUI_Content {
 		ElementActions.click(driver, popup_moveFolder_select_folderNameToMoveTo);
 	}
 
-	// public void assert_dashboardSentSuccessfullyMessage(String DashboardName) {
-	// popup_dashboard_sentSuccessfully_message = By
-	// .xpath("//div[contains(text(),'Send')]//following-sibling::div[contains(text(),'Successfully
-	// sent "
-	// + DashboardName + ".')]");
-	// Assertions.assertElementExists(driver,
-	// popup_dashboard_sentSuccessfully_message, true);
-	// }
-
-	public void assert_dashboardScheduledSuccessfullyMessage(String DashboardName) {
-		popup_dashboard_scheduledSuccessfully_message = By.xpath(
-				"//div[@class='ant-notification-notice-description'][contains(text(),'Successfully created schedule for "
-						+ DashboardName + ".')]");
-		Assertions.assertElementExists(driver, popup_dashboard_scheduledSuccessfully_message, true);
-	}
 
 	// Make a Copy
 	public void assert_makeACopy_popup_displayed() {
@@ -781,10 +733,8 @@ public class NewUI_Content {
 
 	/**
 	 * 
-	 * @param FolderName
-	 *            Folder To expand OR Collapse
-	 * @param ExpandOrCollapse
-	 *            minus for collapse OR plus for expand
+	 * @param FolderName       Folder To expand OR Collapse
+	 * @param ExpandOrCollapse minus for collapse OR plus for expand
 	 */
 	public void makeACopy_expandIconFolders(String FolderName, String ExpandOrCollapse) {
 		popup_makeACopy_foldersExapandIcon = By.xpath("//ul[@role='group']//li[contains(.,'" + FolderName
@@ -861,8 +811,7 @@ public class NewUI_Content {
 	/**
 	 * 
 	 * @param NewDashboardName
-	 * @param Button
-	 *            Rename OR Cancel
+	 * @param Button           Rename OR Cancel
 	 */
 	public void renameDashboard_typeNewDashboardName(String NewDashboardName) {
 		ElementActions.type(driver, popup_renameDashboard_field, NewDashboardName);

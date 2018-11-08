@@ -141,8 +141,9 @@ public class NewUI_DeleteDashboard {
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 	}
 
@@ -160,8 +161,9 @@ public class NewUI_DeleteDashboard {
 				testDataReader.getCellData("Automation_Dashboard_Delete_Arabic"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_Arabic"));
@@ -181,8 +183,9 @@ public class NewUI_DeleteDashboard {
 				testDataReader.getCellData("Automation_Dashboard_Delete_SpecialCharecters"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage.assert_dashboard_folder_notExist(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SpecialCharecters"));
@@ -202,8 +205,9 @@ public class NewUI_DeleteDashboard {
 				testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
@@ -223,8 +227,9 @@ public class NewUI_DeleteDashboard {
 				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage.assert_dashboard_folder_notExist(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
@@ -244,8 +249,9 @@ public class NewUI_DeleteDashboard {
 				testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
@@ -311,8 +317,9 @@ public class NewUI_DeleteDashboard {
 				testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));

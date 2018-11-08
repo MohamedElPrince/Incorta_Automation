@@ -180,7 +180,7 @@ public class NewUI_SchemaList_SchemaView {
 		ElementActions.switchToIframe(driver, body_iframe);
 		String currentLoadStatus = initialLoadStatus;
 		do {
-			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, currentLoadStatus, 2);
+			ElementActions.waitForTextToChange(driver, header_lastLoadStatus_link, currentLoadStatus, 10);
 			currentLoadStatus = ElementActions.getText(driver, header_lastLoadStatus_link);
 		} while (currentLoadStatus.equals(initialLoadStatus) || currentLoadStatus.matches("(.*Loading Data.*)")
 				|| currentLoadStatus.matches("(.*Please load data.*)"));

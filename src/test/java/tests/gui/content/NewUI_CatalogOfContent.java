@@ -213,8 +213,9 @@ public class NewUI_CatalogOfContent {
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newUI_allContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newUI_allContentPage.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
-		newUI_allContentPage
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
 				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
 				testDataReader.getCellData("Automation_Dashboard_CatalogOfContent_Deleted"));
@@ -396,9 +397,9 @@ public class NewUI_CatalogOfContent {
 
 		newUI_allContentPage = new NewUI_Content(driver);
 
-		newUI_allContentPage.assert_splashNotificationMessage_equalsExpected("Folder Deleted");
-		newUI_allContentPage
-				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one folder.");
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Folder Deleted");
+		newHeaderObject.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one folder.");
 		newUI_allContentPage.catalog_searchAndAssertResultNotExist_contentSearchBox(
 				testDataReader.getCellData("Automation_Folder_CatalogOfContent_Deleted"));
 	}
