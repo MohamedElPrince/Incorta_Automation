@@ -13,9 +13,9 @@ import com.shaft.io.ReportManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content;
 import pageObjectModels.content.NewUI_Content_Dashboard;
+import pageObjectModels.content.NewUI_Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.content.NewUI_Content_Dashboard_ScheduleDashboard;
 import pageObjectModels.content.NewUI_Content_Dashboard_SendDashboard;
 import pageObjectModels.content.NewUI_Content_Folder;
@@ -31,7 +31,7 @@ import pageObjectModels.security.NewUI_Groups;
 import pageObjectModels.security.NewUI_Groups_Group;
 import pageObjectModels.security.NewUI_Users;
 
-public class NewUI_MakeACopy {
+public class NewUI_MakeACopyDashboard {
 
 	// Declaring web-driver and excel reader instances
 	WebDriver driver;
@@ -56,7 +56,6 @@ public class NewUI_MakeACopy {
 	NewUI_SchemaLoads schedulerSchemaLoadsPage;
 	NewUI_Dashboards schedulerDashboardsPage;
 	NewUI_Header newHeaderObject;
-	NewUI_Content newContentPage;
 	NewUI_Groups_Group groups_groupPage;
 
 	// Declaring public variables that will be shared between tests
@@ -108,7 +107,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_Copy"));
+		newUI_allContentPage
+				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_Copy"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		String New_DashboardName = newUI_allContentPage.makeACopy_getDashboard_newName();
@@ -138,8 +138,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage
-				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_CopyAndOpen"));
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
+				testDataReader.getCellData("Automation_Dashboard_CopyAndOpen"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		String New_DashboardName = newUI_allContentPage.makeACopy_getDashboard_newName();
@@ -168,8 +168,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage
-				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_CancelCopy"));
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
+				testDataReader.getCellData("Automation_Dashboard_CancelCopy"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		String New_DashboardName = newUI_allContentPage.makeACopy_getDashboard_newName();
@@ -387,7 +387,7 @@ public class NewUI_MakeACopy {
 
 		newUI_allContentPage.makeACopy_expandIconFolders(
 				testDataReader.getCellData("Automation_Folder_ToCopyDashboardToIt"), "minus");
-		
+
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.assert_makeACopy_foldersInsideFolderNotExist(
 				testDataReader.getCellData("Automation_Folder_Inside_AutomationFolder"));
@@ -400,8 +400,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage
-				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_CopyAndOpen"));
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
+				testDataReader.getCellData("Automation_Dashboard_CopyAndOpen"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		newUI_allContentPage
@@ -442,8 +442,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage
-				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_DuplicateError"));
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
+				testDataReader.getCellData("Automation_Dashboard_DuplicateError"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		newUI_allContentPage
@@ -462,8 +462,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage
-				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_Copy1"));
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
+				testDataReader.getCellData("Automation_Dashboard_Copy1"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		newUI_allContentPage.makeACopy_addDashboard_newName(testDataReader.getCellData("Automation_Dashboard_Copy2"));
@@ -513,8 +513,8 @@ public class NewUI_MakeACopy {
 		newUI_allContentPage = new NewUI_Content(driver);
 		newUI_allContentPage.navigate_toURL();
 
-		newUI_allContentPage
-				.click_dashboardFolder_properties_fromCardView(testDataReader.getCellData("Automation_Dashboard_CopyAndOpen"));
+		newUI_allContentPage.click_dashboardFolder_properties_fromCardView(
+				testDataReader.getCellData("Automation_Dashboard_CopyAndOpen"));
 		newUI_allContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
 		newUI_allContentPage.assert_makeACopy_defaultSelectedFolder("Content");

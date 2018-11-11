@@ -25,22 +25,22 @@ public class NewUI_Content_Dashboard_AnalyzeInsight {
 	By submenuBody_done_button = By.className("done-button");
 	By popup_submenuHeader_addInsight_button = By.xpath("//i[@class='anticon anticon-plus']");
 
-
 	By body_insightName_textBox = By.xpath("//input[@ng-model='component.title']");
 	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
 
 	By popup_chooseAVisualization_visualizationType_text;
+
+	By body_insightNameField;
 
 	//// Functions
 	public NewUI_Content_Dashboard_AnalyzeInsight(WebDriver driver) {
 		this.driver = driver;
 	}
 
-	public void clickOn_addInsight_button()
-	{
+	public void clickOn_addInsight_button() {
 		ElementActions.click(driver, popup_submenuHeader_addInsight_button);
 	}
-	
+
 	public void addTableorSchemaToInsight(String name) {
 		ElementActions.switchToIframe(driver, body_iframe);
 		addTableorViewToInsight("Table", name);
@@ -53,7 +53,7 @@ public class NewUI_Content_Dashboard_AnalyzeInsight {
 		ElementActions.switchToDefaultContent(driver);
 	}
 
-	private void addTableorViewToInsight(String tableOrView, String name ) {
+	private void addTableorViewToInsight(String tableOrView, String name) {
 		ElementActions.click(driver, menuHeader_add_button);
 		ElementActions.click(driver, submenuHeader_viewOrTable_list);
 
@@ -102,8 +102,15 @@ public class NewUI_Content_Dashboard_AnalyzeInsight {
 
 	public void selectVisualization(String visualizationType) {
 		ElementActions.switchToIframe(driver, body_iframe);
-		popup_chooseAVisualization_visualizationType_text = By.xpath("//div[text()='"+visualizationType+"']//preceding-sibling::a");
+		popup_chooseAVisualization_visualizationType_text = By
+				.xpath("//div[text()='" + visualizationType + "']//preceding-sibling::a");
 		ElementActions.click(driver, popup_chooseAVisualization_visualizationType_text);
 		ElementActions.switchToDefaultContent(driver);
 	}
+
+	public void addInsightName(String insightName) {
+		body_insightNameField = By.xpath("//input[@placeholder='Click to Edit Insight Title']");
+		ElementActions.type(driver, body_insightNameField, insightName);
+	}
+
 }

@@ -67,7 +67,7 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_ForVerification"));
 		newContentPage.assert_dashboardProperties_manageDashboardButtons_displayed("Delete");
 	}
@@ -79,7 +79,7 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.changeCatalogView("Table");
+		newContentPage.changeCatalogView("list");
 		newContentPage.click_dashboardFolder_properties_fromListView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_ForVerification"));
 		newContentPage.assert_dashboardProperties_manageDashboardButtons_displayed("Delete");
@@ -92,7 +92,7 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_ForVerification"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.assert_deleteDashboard_popup_screenContentDisplayed(
@@ -106,7 +106,7 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
@@ -121,7 +121,7 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_NeverMind"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.deleteDashboard_popup_click_confirmationButton_neverMind();
@@ -136,12 +136,15 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_ConfirmationMessage"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
+				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 	}
 
 	@Test(priority = 7, description = "C84212 - Testing that User can delete a dashboard with Arabic Name.")
@@ -151,14 +154,17 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_Arabic"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.assert_deleteDashboard_popup_dashboardNameIsCorrect(
 				testDataReader.getCellData("Automation_Dashboard_Delete_Arabic"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
+				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_Arabic"));
 	}
@@ -170,14 +176,17 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SpecialCharecters"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SpecialCharecters"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
+				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage.assert_dashboard_folder_notExist(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SpecialCharecters"));
 	}
@@ -189,14 +198,17 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
 				testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
+				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_NoInsights"));
 	}
@@ -208,14 +220,17 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
+				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage.assert_dashboard_folder_notExist(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SchemaNotLoaded"));
 	}
@@ -227,14 +242,17 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
+				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_SharedEdit"));
 	}
@@ -246,7 +264,7 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SharedShare"));
 		newContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Delete");
 	}
@@ -258,7 +276,7 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_SharedView"));
 		newContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Delete");
 	}
@@ -292,14 +310,17 @@ public class NewUI_DeleteDashboard {
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(
+		newContentPage.click_dashboardFolder_properties_fromCardView(
 				testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(
 				testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));
 		newContentPage.deleteDashboard_popup_click_confirmationButton_delete();
 
-		newContentPage.assert_deleteDashboard_popup_confirmationMessageDisplayed();
+		newHeaderObject = new NewUI_Header(driver);
+		newHeaderObject.assert_splashNotificationMessage_equalsExpected("Dashboard Deleted");
+		newHeaderObject
+				.assert_splashNotificationDescription_equalsExpected("You've successfully deleted one dashboard.");
 		newContentPage
 				.assert_dashboard_folder_notExist(testDataReader.getCellData("Automation_Dashboard_Delete_LongName"));
 	}

@@ -33,8 +33,14 @@ public class NewUI_Content {
 	By searchWrapper_searchCount_label = By.className("inc-search-count");
 	By searchWrapper_searchDropDown_button = By.xpath("//span[@class='inc-search-dropdown']//button");
 	By searchWrapper_searchDropDownOption_label; // span[@class='inc-search-dropdown']//li[@class='ant-dropdown-menu-item']/a[text()='']
-	By searchWrapper_catalogViewSwitchCard_button = By.xpath("//button[contains(@class,'inc-show-card')]");
-	By searchWrapper_catalogViewSwitchTable_button = By.xpath("//button[contains(@class,'inc-show-table')]");
+	By searchWrapper_catalogViewSwitchCard_button = By.xpath("//button[contains(@class,'inc-show-card')]//i");
+	By searchWrapper_catalogViewSwitchTable_button = By.xpath("//button[contains(@class,'inc-show-table')]//i");
+	By searchResult_search;
+
+	By searchResult_profilePicture = By
+			.xpath("//div[@class='inc-search-option__item']//img[contains(@class,'inc-catalog-search-user-icon')]");
+
+	By searchResult_loadingIcon = By.xpath("//i[@class='anticon anticon-loading']");
 
 	// body-cardView
 	By cardView_contentCard_label; // div[@class='inc-card-title'][text()='']
@@ -148,11 +154,25 @@ public class NewUI_Content {
 	By popup_deleteDashboard_delete_Button = By.xpath("//button[contains(.,'Delete')]");
 	By deleteDashboard_confirmationMessage = By.xpath(
 			"//div[@class='ant-notification-notice-description'][contains(.,\"You've successfully deleted one dashboard.\")]");
+	By deleteFolder_confirmationMessage = By.xpath(
+			"//div[@class='ant-notification-notice-message'][contains(.,'Folder Deleted')]/following-sibling::div[contains(.,\"You've successfully deleted one folder.\")]");
 	By popup_deleteDashboard_delete_Button_loading = By
 			.xpath("//button[contains(.,’Delete’)][@class=‘ant-btn ant-btn-primary ant-btn-loading']");
 	// Others
 	By popup_dashboard_sentSuccessfully_message;
 	By popup_dashboard_scheduledSuccessfully_message;
+	By body_folderCardDescription;
+
+	// Catalog Of Content Sorting
+	By body_firstDashboard_inTheList = By
+			.xpath("//span[@class='inc-card inc-dashboard-card inline medium'][1]//span[@class='inc-card-title-text']");
+	By body_secondDashboard_inTheList = By
+			.xpath("//span[@class='inc-card inc-dashboard-card inline medium'][2]//span[@class='inc-card-title-text']");
+	By body_thirdDashboard_inTheList = By
+			.xpath("//span[@class='inc-card inc-dashboard-card inline medium'][3]//span[@class='inc-card-title-text']");
+
+	// Folder section
+	By body_sortButton = By.xpath("//i[@class='anticon anticon-down']");
 
 
 	//// Functions
@@ -215,7 +235,7 @@ public class NewUI_Content {
 				ElementActions.click(driver, searchWrapper_catalogViewSwitchCard_button);
 			}
 			break;
-		case "table":
+		case "list":
 			if (!ElementActions.getAttribute(driver, searchWrapper_catalogViewSwitchTable_button, "class")
 					.contains("selected")) {
 				ElementActions.click(driver, searchWrapper_catalogViewSwitchTable_button);
@@ -455,7 +475,7 @@ public class NewUI_Content {
 				customElementIdentificationTimeout, customNumberOfRetries);
 	}
 
-	public void click_dashboardFolder_properties_fromGridView(String FolderName) {
+	public void click_dashboardFolder_properties_fromCardView(String FolderName) {
 		tableView_folderDashboardProperties_Button = By.xpath("//div[@class='inc-card-title']//span[text()= '"
 				+ FolderName + "']//parent::div//following-sibling::div//button");
 		ElementActions.click(driver, tableView_folderDashboardProperties_Button);
@@ -529,7 +549,7 @@ public class NewUI_Content {
 	}
 
 	public void click_on_folder_dashboard(String DashboardFolderName) {
-		BrowserActions.refreshCurrentPage(driver);
+//		BrowserActions.refreshCurrentPage(driver);
 		body_folderName_dashboardName_insideFolder = By.xpath("//span[text()='" + DashboardFolderName + "']");
 		ElementActions.click(driver, body_folderName_dashboardName_insideFolder);
 	}
@@ -844,6 +864,38 @@ public class NewUI_Content {
 		Assertions.assertElementExists(driver, popup_renameDashboard_screen, false);
 	}
 
+	// Catalog of Content
+	public void catalog_searchAssertAndOpenResults_contentSearchBox(String contentName) {
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, searchResult_search, true);
+		ElementActions.click(driver, searchResult_search);
+	}
+
+	public void catalog_searchAndAssertResultNotExist_contentSearchBox(String contentName) {
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, searchResult_search, false);
+	}
+
+	public void catalog_searchAndAssertResultsDisplayed_contentSearchBox(String contentName) {
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, searchResult_search, true);
+	}
+
+	/**
+	 * Below function only used when adding profile picture for the user.
+	 * 
+	 * @param contentName
+	 */
+	public void catalog_searchAndAssert_resultsDisplayProfilePicture_contentSearchBox(String contentName) {
+		searchResult_search = By.xpath("//li[@text='" + contentName + "']");
+		ElementActions.type(driver, searchWrapper_search_textBox, contentName);
+		Assertions.assertElementExists(driver, searchResult_search, true);
+		Assertions.assertElementExists(driver, searchResult_profilePicture, true);
+	}
+
 	// Delete Dashbaord
 	public void assert_deleteDashboard_popup_screenContentDisplayed(String DashboardName) {
 		Assertions.assertElementExists(driver, popup_deleteDashboard_questionCircle, true);
@@ -862,11 +914,6 @@ public class NewUI_Content {
 		ElementActions.click(driver, popup_deleteDashboard_neverMind_Button);
 	}
 
-	public void assert_deleteDashboard_popup_confirmationMessageDisplayed() {
-		Assertions.assertElementExists(driver, popup_deleteDashboard_delete_Button_loading, false);
-		Assertions.assertElementExists(driver, deleteDashboard_confirmationMessage, true);
-	}
-
 	public void assert_deleteDashboard_popup_dashboardNameIsCorrect(String DashboardName) {
 		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
 				"Heads up! Deleting " + DashboardName + " can't be undone.", true);
@@ -875,6 +922,68 @@ public class NewUI_Content {
 	public void assert_deleteDashboard_popup_dashboardName_specialCharachters_IsCorrect(String DashboardName) {
 		Assertions.assertElementAttribute(driver, popup_deleteDashboard_confirmContent, "text",
 				"Heads up! Deleting " + DashboardName + " can't be undone.", 1, true);
+	}
+
+	// Catalog of content
+
+	/**
+	 * Function only check for specific scenario which folder has 1 folder and 1
+	 * dashboard inside it.
+	 * 
+	 * @param FolderName
+	 */
+	public void assert_folderCardDescription_grammerAndCountCorrect(String FolderName, String NoOfFolderAndDashboards) {
+		body_folderCardDescription = By.xpath("//span[text()='" + FolderName
+				+ "']/parent::div/following-sibling::div/div[@class='inc-card-description']");
+		Assertions.assertElementAttribute(driver, body_folderCardDescription, "text", NoOfFolderAndDashboards, true);
+	}
+
+	public void assert_sortingIsCorrect(String SortingType, String firstDashboard, String secondDashboard,
+			String thirdDashboard) {
+		switch (SortingType) {
+		case "Owner":
+			assert_sorting(firstDashboard, secondDashboard, thirdDashboard);
+			break;
+
+		case "Modified By":
+			assert_sorting(firstDashboard, secondDashboard, thirdDashboard);
+			break;
+
+		case "Name":
+			assert_sorting(firstDashboard, secondDashboard, thirdDashboard);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * Function will get the dashboards name and compare them with the expected
+	 * result retrieved from Excel sheet
+	 * 
+	 * @param firstDashboard
+	 *            Will be retrieved from excel sheet
+	 * @param secondDashboard
+	 *            Will be retrieved from excel sheet
+	 * @param thirdDashboard
+	 *            Will be retrieved from excel sheet
+	 */
+	public void assert_sorting(String firstDashboard, String secondDashboard, String thirdDashboard) {
+		Assertions.assertElementAttribute(driver, body_firstDashboard_inTheList, "text", firstDashboard, true);
+		Assertions.assertElementAttribute(driver, body_secondDashboard_inTheList, "text", secondDashboard, true);
+		Assertions.assertElementAttribute(driver, body_thirdDashboard_inTheList, "text", thirdDashboard, true);
+	}
+
+	/**
+	 * "Name" "Last Modified" "Owner"
+	 * 
+	 * @param SortType
+	 */
+	public void click_onSorting(String SortType) {
+		ElementActions.click(driver, body_sortButton);
+		By body_sortButton_types = By.xpath("//li[@class='ant-dropdown-menu-item'][contains(.,'" + SortType + "')]");
+		ElementActions.click(driver, body_sortButton_types);
 	}
 
 }

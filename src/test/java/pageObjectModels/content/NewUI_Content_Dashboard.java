@@ -22,18 +22,27 @@ public class NewUI_Content_Dashboard {
     By pageDetails_dashboardName_label = By.xpath("//div[@class='page-details--headerwrap']//h1");
     By pageDetails_back_button = By.xpath("//a[contains(@class,'page-details-back-button')]");
     By pageDetails_details_link = By.xpath("//button[contains(@class,'page-details--link')]");
-    By pageDetails_setAsDefaultDashboard_button = By.xpath("//i[contains(@class,'anticon-pushpin-o')]/ancestor::button");
-    By pageDetails_dashboardActionMenu_button = By.xpath("//div[@class='inc-dashboard__actions']//button[contains(@class,'dashboard-action-menu')]");
-    By pageDetails_add_button = By.xpath("//span[@class='inc-toolbar-button']//*[@data-icon='plus']/ancestor::a[contains(@href,'analyze')]");
+    By pageDetails_setAsDefaultDashboard_button = By
+	    .xpath("//i[contains(@class,'anticon-pushpin-o')]/ancestor::button");
+    By pageDetails_dashboardActionMenu_button = By
+	    .xpath("//div[@class='inc-dashboard__actions']//button[contains(@class,'dashboard-action-menu')]");
+    By pageDetails_add_button = By
+	    .xpath("//span[@class='inc-toolbar-button']//*[@data-icon='plus']/ancestor::a[contains(@href,'analyze')]");
 
     // second nested header
     By filterBar_bookmark_button = By.xpath("//div[@class='inc-filter-bar']//button[contains(@class,'bm-icon')]");
     By filterBar_filter_button = By.xpath("//div[@class='inc-filter-bar']//button[contains(@class,'filter-icon')]");
     By filterBar_search_textBox = By.xpath("//div[@class='inc-filter-bar']//input");
+    By body_detailsButton = By.xpath("//button[contains(.,'Details')]");
+    By body_detailsSection_description = By.xpath("//div[@class='page-details--description']");
+    By body_detailsSection_ownedBy = By.xpath("//span[@class='detail-key'][contains(.,('Owned By'))]");
+    By body_detailsSection_lastModified = By.xpath("//span[@class='detail-key'][contains(.,('Last Modified'))]");
+    By body_detailsSection_modifiedBy = By.xpath("//span[@class='detail-key'][contains(.,('Modified by'))]");
 
     // spinner
     By loadingSpinner = By.xpath("//span[contains(@class,'ant-spin-dot')]");
-    By genericInsight_div = By.xpath("//div[@class='insight__body']/ancestor::div[@class='draggable-insight-wrapper']|//div[@class='error-loading-wrapper__error']/ancestor::div[@class='draggable-insight-wrapper']");
+    By genericInsight_div = By.xpath(
+	    "//div[@class='insight__body']/ancestor::div[@class='draggable-insight-wrapper']|//div[@class='error-loading-wrapper__error']/ancestor::div[@class='draggable-insight-wrapper']");
     By insight_div;
 
     // body-insightHeader
@@ -52,14 +61,22 @@ public class NewUI_Content_Dashboard {
     // body Dashboard
     By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
     // set_default Dashboard pin
+    By body_unpushed_pin = By.xpath(
+	    "//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
+    By body_pushed_pin = By.xpath(
+	    "//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
+    // set_default Dashboard pin
     By body_SetAsDefaultDashboardPin_Tooltip = By.xpath("//div[@class='ant-tooltip-inner']");
-    By body_SetAsDefaultDashboard_Pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
+    By body_SetAsDefaultDashboard_Pin = By.xpath(
+	    "//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 
     By body_bookmark = By.xpath("//i[@class='anticon anticon-book']");
     By popup_bookmarksName;
 
     By body_filter = By.xpath("//i[@class='anticon anticon-filter']");
     By popup_filtersName;
+    By body_insightSettigns = By.xpath("//Button[@class='insight__header-menu ant-dropdown-trigger']");
+    By body_insightSettigns_menueItemButtons;
 
     //// Functions
     public NewUI_Content_Dashboard(WebDriver driver) {
@@ -67,26 +84,43 @@ public class NewUI_Content_Dashboard {
 	waitForDashboardToFullyLoad();
     }
 
+    /**
+     * Verifies that the displayed dashboardName matches the desired one
+     * 
+     * @param dashboardName
+     */
+    public void verify_dashboardName_matches(String dashboardName) {
+	Verifications.verifyElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
+    }
+
+    /**
+     * Asserts that the target insightName is correctly displayed in the
+     * insightName_label
+     * 
+     * @param insightName
+     */
+
     public void reportcurrentDashboardURL() {
 	ReportManager.log("Dashboard URL: [" + BrowserActions.getCurrentURL(driver) + "].");
     }
 
     public void waitForDashboardToFullyLoad() {
-	int loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner, customElementIdentificationTimeout, customNumberOfRetries);
-	if (loadingSpinners > 0) {
-	    ReportManager.log("Waiting for dashboard and all insights to fully load.");
-	}
+	int loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner,
+		customElementIdentificationTimeout);
 	while (loadingSpinners > 0) {
-	    loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner, customElementIdentificationTimeout, customNumberOfRetries);
+	    loadingSpinners = ElementActions.getElementsCount(driver, loadingSpinner,
+		    customElementIdentificationTimeout);
 	}
     }
 
     public int countInsights() {
-	return ElementActions.getElementsCount(driver, genericInsight_div, customElementIdentificationTimeout, customNumberOfRetries);
+	return ElementActions.getElementsCount(driver, genericInsight_div, customElementIdentificationTimeout);
     }
 
     public void assert_insightContent_isDisplayed(int insightIndex) {
-	insight_div = By.xpath("(//div[@class='insight__body']/ancestor::div[@class='draggable-insight-wrapper']|//div[@class='error-loading-wrapper__error']/ancestor::div[@class='draggable-insight-wrapper'])[" + insightIndex + "]");
+	insight_div = By.xpath(
+		"(//div[@class='insight__body']/ancestor::div[@class='draggable-insight-wrapper']|//div[@class='error-loading-wrapper__error']/ancestor::div[@class='draggable-insight-wrapper'])["
+			+ insightIndex + "]");
 	Assertions.assertElementExists(driver, insight_div, true);
     }
 
@@ -110,15 +144,6 @@ public class NewUI_Content_Dashboard {
      */
     public void assert_dashboardName_matches(String dashboardName) {
 	Assertions.assertElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
-    }
-
-    /**
-     * Verifies that the displayed dashboardName matches the desired one
-     * 
-     * @param dashboardName
-     */
-    public void verify_dashboardName_matches(String dashboardName) {
-	Verifications.verifyElementAttribute(driver, pageDetails_dashboardName_label, "text", dashboardName, true);
     }
 
     /**
@@ -160,10 +185,12 @@ public class NewUI_Content_Dashboard {
     public void aggregatedTable_assert_cellValue_isCorrect(String typeOrValue, int rowNumber, String cellValue) {
 	switch (typeOrValue.trim().toLowerCase()) {
 	case "type":
-	    aggregatedTable_cellValue_link = By.xpath("//tbody/tr[" + rowNumber + "]//a[contains(@class,'table__body-cell--aggregated')]");
+	    aggregatedTable_cellValue_link = By
+		    .xpath("//tbody/tr[" + rowNumber + "]//a[contains(@class,'table__body-cell--aggregated')]");
 	    break;
 	case "value":
-	    aggregatedTable_cellValue_link = By.xpath("//tbody/tr[" + rowNumber + "]//a[contains(@class,'table__body-cell--basic')]");
+	    aggregatedTable_cellValue_link = By
+		    .xpath("//tbody/tr[" + rowNumber + "]//a[contains(@class,'table__body-cell--basic')]");
 	    break;
 	default:
 	    break;
@@ -191,6 +218,20 @@ public class NewUI_Content_Dashboard {
     }
 
     // Set default dashboard pin
+
+    public void assert_SetDefault_DashboardPin_Displayed() {
+
+	Assertions.assertElementExists(driver, body_unpushed_pin, true);
+
+    }
+
+    public void click_SetDefault_Dashboardpin() {
+
+	ElementActions.click(driver, body_unpushed_pin);
+	Assertions.assertElementExists(driver, body_pushed_pin, true);
+
+    }
+
     public void click_bookmarkButton() {
 	ElementActions.click(driver, body_bookmark);
     }
@@ -204,13 +245,46 @@ public class NewUI_Content_Dashboard {
 	ElementActions.click(driver, body_filter);
     }
 
+    public void assert_filterApplied(String FilterName) {
+	popup_filtersName = By
+		.xpath("//span[@class='inc-filter-master__menu-item'][contains(.,'" + FilterName + "')]/span");
+	Assertions.assertElementAttribute(driver, popup_filtersName, "class", "([\\s\\S]*)applied", true);
+    }
+
+    public void click_detailsButton() {
+	ElementActions.click(driver, body_detailsButton);
+    }
+
+    public void assert_detailsSectionContentDisplayed(String Description) {
+	Assertions.assertElementAttribute(driver, body_detailsSection_description, "text", Description, true);
+	Assertions.assertElementExists(driver, body_detailsSection_ownedBy, true);
+	Assertions.assertElementExists(driver, body_detailsSection_lastModified, true);
+	Assertions.assertElementExists(driver, body_detailsSection_modifiedBy, true);
+    }
+
+    public void assert_detailsSection_ownedByDisplayed(String DashboardCreator) {
+	Assertions.assertElementAttribute(driver, body_detailsSection_ownedBy, "text", "Owned By " + DashboardCreator,
+		true);
+    }
+
+    public void assert_detailsSection_modifiedByDisplayed(String DashboardUpdater) {
+	Assertions.assertElementAttribute(driver, body_detailsSection_modifiedBy, "text",
+		"Modified by " + DashboardUpdater, true);
+    }
+
+    public void assert_detailsSection_lastModifiedDisplayed() {
+	Assertions.assertElementExists(driver, body_detailsSection_lastModified, true);
+    }
+
+    // "([\\s\\S]*" + Empty + ".*[\\s\\S]*)"
     public void addNewInsight() {
 	ElementActions.click(driver, pageDetails_add_button);
     }
 
-    public void assert_filterApplied(String FilterName) {
-	popup_filtersName = By.xpath("//span[@class='inc-filter-master__menu-item'][contains(.,'" + FilterName + "')]/span");
-	Assertions.assertElementAttribute(driver, popup_filtersName, "class", "([\\s\\S]*)applied", true);
+    public void insightSettings_clickOnMenuItem(String MenuItem) {
+	ElementActions.click(driver, body_insightSettigns);
+	body_insightSettigns_menueItemButtons = By.xpath("//li[@role='menuitem'][contains(.,'" + MenuItem + "')]");
+	ElementActions.click(driver, body_insightSettigns_menueItemButtons);
     }
 
     public void assert_SetAsDefault_DashboardPin_Displayed() {
@@ -238,7 +312,8 @@ public class NewUI_Content_Dashboard {
 
     public void click_SetAsDefaultPinIcon(Boolean actionType) {
 
-	if ((actionType != ElementActions.getAttribute(driver, body_SetAsDefaultDashboard_Pin, "class").contains("isDefault"))) {
+	if ((actionType != ElementActions.getAttribute(driver, body_SetAsDefaultDashboard_Pin, "class")
+		.contains("isDefault"))) {
 	    ElementActions.click(driver, body_SetAsDefaultDashboard_Pin);
 	}
     }
@@ -255,5 +330,4 @@ public class NewUI_Content_Dashboard {
     public void assert_setAsDefaultPinIcon_state(Boolean stateType) {
 	Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboard_Pin, "class", "isDefault", 3, stateType);
     }
-
 }

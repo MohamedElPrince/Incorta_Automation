@@ -43,12 +43,12 @@ public class NewUI_RolesTest {
 
 	// Declaring Page Objects that will be used in the tests
 	NewUI_Login loginPage;
+	NewUI_SignOut logoutPage;
 	NewUI_Skeleton subHeaderObject;
 	NewUI_DataSources dataSourcesPage;
 	NewUI_SchemaList schemasPage;
 	NewUI_SchemaList_SchemaView schemasViewPage;
 	AllContent allContentPage;
-	NewUI_Content NewUI_allContentPage;
 	NewUI_Users usersPage;
 	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 	// AllContent_Dashboard dashboardPage;
@@ -305,7 +305,7 @@ public class NewUI_RolesTest {
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is dimmed
-		newContentPage.click_dashboardFolder_properties_fromGridView(NewDashBoradName);
+		newContentPage.click_dashboardFolder_properties_fromCardView(NewDashBoradName);
 		// Waiting Nouran to check if the button should be hidden or it will just send
 		// an error that user not authorized to share.
 		newContentPage.assert_dashboardProperties_manageDashboardButtons_notExist("Share Access");
@@ -332,8 +332,9 @@ public class NewUI_RolesTest {
 		 * new user. 3- Create new group. 4- Assign user to the group.
 		 *
 		 */
-//		loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
-//				testDataReader.getCellData("Username", "Data5"), testDataReader.getCellData("Password", "Data5"));
+		// loginPage.userLogin(testDataReader.getCellData("Tenant", "Data5"),
+		// testDataReader.getCellData("Username", "Data5"),
+		// testDataReader.getCellData("Password", "Data5"));
 		logInWithUserAndAssertContentSection("Data5");
 		// Create New User
 		usersPage = new NewUI_Users(driver);
@@ -414,10 +415,10 @@ public class NewUI_RolesTest {
 
 		// Navigate to Content page and create dashboard
 
-//		allContentPage = new AllContent(driver);
-//		allContentPage.Navigate_toURL();
-//		subHeaderObject.click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
+		// allContentPage = new AllContent(driver);
+		// allContentPage.Navigate_toURL();
+		// subHeaderObject.click_add();
+		// subHeaderObject.Select_fromDropdownMenu("Add Dashboard");
 
 		newContentPage = new NewUI_Content(driver);
 		newContentPage.navigate_toURL();
@@ -425,9 +426,9 @@ public class NewUI_RolesTest {
 		newContentPage.navigate_toURL();
 		subHeaderObject.SearchForContentAndOpenResult_content(NewDashBoradName);
 
-//		newDashboardName = newContentPage.setNewDashboardName();
-//		NewUI_allContentPage = new NewUI_Content(driver);
-//		NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
+		// newDashboardName = newContentPage.setNewDashboardName();
+		// NewUI_allContentPage = new NewUI_Content(driver);
+		// NewUI_allContentPage.click_on_folder_dashboard(newDashboardName);
 
 		analyzeInsightPage = new NewUI_Content_Dashboard_AnalyzeInsight(driver);
 		analyzeInsightPage.clickOn_addInsight_button();
@@ -453,7 +454,8 @@ public class NewUI_RolesTest {
 		newContentPage.navigate_toURL();
 
 		// assert that share icon in dashboard settings is active
-		newContentPage.click_dashboardFolder_properties_fromGridView(NewDashBoradName);
+		newContentPage.click_dashboardFolder_properties_fromCardView(newDashboardName);
+
 		dashboardPage.assert_shared_button_active();
 	}
 
@@ -467,10 +469,10 @@ public class NewUI_RolesTest {
 
 		allContentPage = new AllContent(driver);
 
-//		subHeaderObject = new NewUI_Skeleton(driver);
-//		subHeaderObject.click_add();
-//		subHeaderObject.Select_fromDropdownMenu("Add Folder");
-//		NewFolderName = newContentPage.SetNewFolderName();
+		// subHeaderObject = new NewUI_Skeleton(driver);
+		// subHeaderObject.click_add();
+		// subHeaderObject.Select_fromDropdownMenu("Add Folder");
+		// NewFolderName = newContentPage.SetNewFolderName();
 
 		newContentPage = new NewUI_Content(driver);
 		String NewFolderName = newContentPage.addNewCatalogItem("folder");
@@ -489,7 +491,7 @@ public class NewUI_RolesTest {
 		logInWithUserAndAssertContentSection("Data1");
 
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToDelete);
+		newContentPage.click_dashboardFolder_properties_fromCardView(FolderNameToDelete);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 		newContentPage.dashboard_folder_properties_delete_confirmationButtons("Delete");
 		newContentPage.assert_dashboard_folder_notExist(FolderNameToDelete);
@@ -504,7 +506,7 @@ public class NewUI_RolesTest {
 		logInWithUserAndAssertContentSection("Data1");
 
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToShare);
+		newContentPage.click_dashboardFolder_properties_fromCardView(FolderNameToShare);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share Access");
 		newContentPage.folderProperties_shareAccess_typeAndSelectInSearchField(UserToShareWithFolder, "Can Edit");
 		newContentPage.assert_folder_dashboard_sharedSuccessfully(UserToShareWithFolder, "Can Edit");
@@ -523,7 +525,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(FolderToBeRenamed);
+		newContentPage.click_dashboardFolder_properties_fromCardView(FolderToBeRenamed);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");
 
@@ -547,7 +549,7 @@ public class NewUI_RolesTest {
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		newContentPage = new NewUI_Content(driver);
-		newContentPage.click_dashboardFolder_properties_fromGridView(FolderNameToBeMoved);
+		newContentPage.click_dashboardFolder_properties_fromCardView(FolderNameToBeMoved);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move to...");
 
 		newContentPage.Click_FolderProperties_MoveFolder_FolderNameToMoveTo(FolderNameToMoveTo);
@@ -668,7 +670,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToBeDeleted);
+		newContentPage.click_dashboardFolder_properties_fromCardView(DashboardNameToBeDeleted);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Delete");
 
@@ -689,7 +691,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardToBeShared);
+		newContentPage.click_dashboardFolder_properties_fromCardView(DashboardToBeShared);
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Share Access");
 
 		newContentPage.folderProperties_shareAccess_typeAndSelectInSearchField(UserToShareWithFolder, "Can Edit");
@@ -709,7 +711,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToBeCopied);
+		newContentPage.click_dashboardFolder_properties_fromCardView(DashboardNameToBeCopied);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Make a Copy");
 
@@ -731,13 +733,13 @@ public class NewUI_RolesTest {
 	@Severity(SeverityLevel.NORMAL)
 	public void Analyzer_Permissions_MoveDashboard() {
 		logInWithUserAndAssertContentSection("Data1");
-		
+
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.assert_sectionHeader_isSelected("Content");
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToMove);
+		newContentPage.click_dashboardFolder_properties_fromCardView(DashboardNameToMove);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Move to...");
 
@@ -764,7 +766,7 @@ public class NewUI_RolesTest {
 
 		newContentPage = new NewUI_Content(driver);
 
-		newContentPage.click_dashboardFolder_properties_fromGridView(DashboardNameToRename);
+		newContentPage.click_dashboardFolder_properties_fromCardView(DashboardNameToRename);
 
 		newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");// can't detect xpath of 'rename'
 																					// option
@@ -805,8 +807,9 @@ public class NewUI_RolesTest {
 		newHeaderObject = new NewUI_Header(driver);
 		newHeaderObject.expandUserMenu();
 		newHeaderObject.signOut();
-		logoutpage = new NewUI_SignOut(driver);
-		logoutpage.navigate_toLoginPage();
+		logoutPage = new NewUI_SignOut(driver);
+		logoutPage.goToSignInPage_button();
+
 		ReportManager.getTestLog();
 	}
 
