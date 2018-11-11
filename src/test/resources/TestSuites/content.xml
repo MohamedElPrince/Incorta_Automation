@@ -1,0 +1,52 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Security" verbose="10">
+	<test name="CatalogOfContent">
+		<classes>
+			<class name="tests.gui.content.CatalogOfContent">
+			</class>
+		</classes>
+	</test>
+	<test name="DeleteDashboard">
+		<classes>
+			<class name="tests.gui.content.DeleteDashboard">
+			</class>
+		</classes>
+	</test>
+	<test name="MakeACopy">
+		<classes>
+			<class name="tests.gui.content.MakeACopy">
+			</class>
+		</classes>
+	</test>
+	<test name="MakeACopyDashboard">
+		<classes>
+			<class name="tests.gui.content.MakeACopyDashboard">
+			</class>
+		</classes>
+	</test>
+	<test name="NXSignInTest">
+		<classes>
+			<class name="tests.gui.content.NXSignInTest">
+			</class>
+		</classes>
+	</test>
+	<test name="RenameDashboard">
+		<classes>
+			<class name="tests.gui.content.RenameDashboard">
+			</class>
+		</classes>
+	</test>
+	<test name="RenameFolder">
+		<classes>
+			<class name="tests.gui.content.RenameFolder">
+			</class>
+		</classes>
+	</test>
+	<test name="SetAsDefaultDashboardTest">
+		<classes>
+			<class name="tests.gui.content.SetAsDefaultDashboardTest">
+			</class>
+		</classes>
+	</test>
+</suite>

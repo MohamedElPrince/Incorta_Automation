@@ -16,7 +16,7 @@ import pageObjectModels.login.SignOut;
 import pageObjectModels.main.Header;
 
 @Epic("Content -> NX SignIn")
-public class NX_SignIn_Test {
+public class NXSignInTest {
 
     // Declaring web-driver and excel reader instances
     private WebDriver driver;

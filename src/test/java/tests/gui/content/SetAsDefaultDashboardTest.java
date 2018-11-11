@@ -20,7 +20,7 @@ import pageObjectModels.login.SignOut;
 import pageObjectModels.main.Header;
 
 @Epic("Content -> Set as default dashboard")
-public class Set_As_Default_DashboardTest {
+public class SetAsDefaultDashboardTest {
 
     //// Variables
     private WebDriver driver;
