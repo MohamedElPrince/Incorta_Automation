@@ -26,10 +26,10 @@ public class UsersTest {
     private WebDriver driver;
     private ExcelFileManager testDataReader;
     private String[] newUserData;
-    private String TempUser = "Automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one
+    private String tempUser = "Automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one
 									   // created at
     // prepare test data phase
-    private String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data
+    private String picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data
 						   // phase
 
     //// Page Objects
@@ -62,9 +62,9 @@ public class UsersTest {
     public void changeProfilePicture() {
 	logInWithUserAndNavigateToSecurity("Data7");
 
-	usersPage.Click_name(TempUser);
-	usersPage.UploadProfilePicture(Picture);
-	usersPage.Assert_imageIsDisplayed(TempUser);
+	usersPage.Click_name(tempUser);
+	usersPage.UploadProfilePicture(picture);
+	usersPage.Assert_imageIsDisplayed(tempUser);
     }
 
     @Test(priority = 3, description = "C471 - Delete Users")
@@ -74,12 +74,12 @@ public class UsersTest {
 
 	logInWithUserAndNavigateToSecurity("Data7");
 
-	usersPage.Select_nameCheckbox(TempUser); // manually created user till be automated as prerequisites
+	usersPage.Select_nameCheckbox(tempUser); // manually created user till be automated as prerequisites
 	subHeaderObject = new OldUI_SubHeader(driver);
 	subHeaderObject.Click_actions();
 	subHeaderObject.Select_fromDropdownMenu("Delete selection");
 	usersPage.ConfirmUserDeletion();
-	usersPage.Assert_nameIsNotDisplayed(TempUser);
+	usersPage.Assert_nameIsNotDisplayed(tempUser);
     }
 
     @Test(priority = 4, description = "C53308 - Testing that during the impersonation session, the UI will be always showing a message indicating that this is an impersonated session")

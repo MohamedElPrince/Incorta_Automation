@@ -88,7 +88,7 @@ public class RolesTest {
     private String newScheduledSendDashboardJobName;
     private String DashboardNameToBeCopied = "Automation_Dashboard_ToBeCopied";
     private String DashboardNameToMove = "Automation_Dashboard_Move";
-    private String DashboardNameToRename = "Automation_Dashboard_Rename";
+    private String dashboardNameToRename = "Automation_Dashboard_Rename";
 
     // Prerequisites, Schema Manager user + Connection credentials to data source
     @Test(priority = 14, description = "TC C60535_1 - Schema Manager Permissions")
@@ -727,7 +727,7 @@ public class RolesTest {
 
 	newContentPage = new Content(driver);
 
-	newContentPage.click_dashboardFolder_properties_fromCardView(DashboardNameToRename);
+	newContentPage.click_dashboardFolder_properties_fromCardView(dashboardNameToRename);
 
 	newContentPage.Click_DashboardProperties_ManageDashboardButtons("Rename");// can't detect xpath of 'rename'
 										  // option
