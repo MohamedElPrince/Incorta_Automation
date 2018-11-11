@@ -70,7 +70,6 @@ public class Content_Dashboard {
     //// Functions
     public Content_Dashboard(WebDriver driver) {
 	this.driver = driver;
-	waitForDashboardToFullyLoad();
     }
 
     /**

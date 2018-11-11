@@ -460,6 +460,9 @@ public class CertificationPath {
 	newLoginPage.navigate_toURL();
 	newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 		testDataReader.getCellData("Password"));
+
+	newHeaderObject = new Header(driver);
+	newHeaderObject.assert_sectionHeader_isSelected("Content");
     }
 
     @Test(priority = 20, description = "TC020 - Delete User and Transfer Ownership to self.", dependsOnMethods = {
