@@ -18,6 +18,11 @@ public class NewUI_Login {
 
 	//// Elements
 	By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");
+	By header_incorta_website_logo = By.xpath("//span[text()='Website']/parent::a");
+	By header_incorta_twitter_logo = By.xpath("//*[@data-icon='twitter']/ancestor::a");
+	By header_incorta_linkedin_logo = By.xpath("//i[contains(@class,'linkedin')]/parent::a");
+	By body_WarningMessage = By.xpath("//span[@class='error-message']");
+	By body_incorta_support_logo = By.xpath("//span[contains(.,'Support')]/parent::a");
 	By body_tenant_textBox = By.id("tenant");
 	By body_username_textBox = By.id("username");
 	By body_password_textBox = By.id("password");
@@ -72,5 +77,94 @@ public class NewUI_Login {
 		ElementActions.type(driver, body_confirmNewPassword_textBox, confirmNewPassword);
 		ElementActions.click(driver, body_updatePassword_button);
 	}
+	
+	
+	public void verifyThat_All_logosAreDisplayed() {
+
+		Verifications.verifyElementExists(driver, header_incortaLogo_image, true);
+		Verifications.verifyElementExists(driver, header_incorta_website_logo, true);
+		Verifications.verifyElementExists(driver, header_incorta_twitter_logo, true);
+		Verifications.verifyElementExists(driver, header_incorta_linkedin_logo, true);
+		Verifications.verifyElementExists(driver, body_incorta_support_logo, true);
+		Verifications.verifyElementExists(driver, body_forgotPassword_link, true);
+
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param logoURlCheck --> Could have one of the following options: "website"
+	 *                     "twitter" "linkedin" "support"
+	 */
+
+	public void assert_PageIconURLsAreCorrect(String logoURlCheck) {
+
+		switch (logoURlCheck) {
+		case "website":
+			Assertions.assertElementAttribute(driver, header_incorta_website_logo, "href",
+					testDataReader.getCellData("website"), 1, true);
+			break;
+		case "twitter":
+			Assertions.assertElementAttribute(driver, header_incorta_twitter_logo, "href",
+					testDataReader.getCellData("twitter"), 1, true);
+			break;
+		case "linkedin":
+			Assertions.assertElementAttribute(driver, header_incorta_linkedin_logo, "href",
+					testDataReader.getCellData("linkedin"), 1, true);
+			break;
+		case "support":
+			Assertions.assertElementAttribute(driver, body_incorta_support_logo, "href",
+					testDataReader.getCellData("support"), 1, true);
+			break;
+		}
+	}
+
+	
+	/**
+	 * 
+	 * @param ErrorCheck --> Could have one of the following options: "wrongTenant"
+	 *                   "wronguser" "wrongpassword"
+	 */
+	public void assert_errorMessage(String ErrorCheck) {
+
+		if (ErrorCheck == "wrongTenant") {
+
+			Assertions.assertElementAttribute(driver, body_WarningMessage, "text",
+					testDataReader.getCellData("WrongTenantNameError"), 1, true);
+		}
+
+		else {
+
+			Assertions.assertElementAttribute(driver, body_WarningMessage, "text",
+					testDataReader.getCellData("WrongUser_passwordError"), 1, true);
+
+		}
+
+	}
+
+	
+	/**
+	 * 
+	 * @param ButtonCheck --> Could have one of the following options: "true": check that the button enabled
+	 *                   "false": check that button is disabled
+	 */
+  public void assert_SignIn_Button(boolean ButtonCheck) {
+	  
+	  if(ButtonCheck) {
+		  Assertions.assertElementAttribute(driver, body_signIn_button, "disabled","true" , 3, false);  
+	  }
+	  else{
+		  Assertions.assertElementAttribute(driver, body_signIn_button, "disabled","true", 3, true);
+	  }
+	  
+  }
+  
+  
+  
+  
+  
+  
+	
 
 }

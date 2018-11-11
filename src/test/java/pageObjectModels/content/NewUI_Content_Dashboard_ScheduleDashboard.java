@@ -189,7 +189,7 @@ public class NewUI_Content_Dashboard_ScheduleDashboard {
 	 * used with Minute / Hours / Days
 	 * 
 	 * @param Time Should have the format of "12:00 PM" Or "12:00 AM"
-	 * @farid
+	 * 
 	 */
 
 	private void scheduleDashboard_addFields_delivery_setSchedulerTime(String timeValue) {		
