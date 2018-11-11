@@ -49,7 +49,6 @@ public class NewUI_RolesTest {
 	NewUI_SchemaList schemasPage;
 	NewUI_SchemaList_SchemaView schemasViewPage;
 	AllContent allContentPage;
-	NewUI_Content NewUI_allContentPage;
 	NewUI_Users usersPage;
 	NewUI_Content_Dashboard_AnalyzeInsight analyzeInsightPage;
 	// AllContent_Dashboard dashboardPage;
@@ -306,7 +305,6 @@ public class NewUI_RolesTest {
 
 		allContentPage.Navigate_toURL();
 		// assert that share icon in dashboard settings is dimmed
-		NewUI_allContentPage.click_dashboardFolder_properties_fromCardView(newDashboardName);
 		newContentPage.click_dashboardFolder_properties_fromCardView(NewDashBoradName);
 		// Waiting Nouran to check if the button should be hidden or it will just send
 		// an error that user not authorized to share.
