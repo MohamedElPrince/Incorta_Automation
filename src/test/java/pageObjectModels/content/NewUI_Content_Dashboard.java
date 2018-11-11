@@ -52,8 +52,8 @@ public class NewUI_Content_Dashboard {
     // body Dashboard
     By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
     // set_default Dashboard pin
-    By body_unpushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
-    By body_pushed_pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
+    By body_SetAsDefaultDashboardPin_Tooltip = By.xpath("//div[@class='ant-tooltip-inner']");
+    By body_SetAsDefaultDashboard_Pin = By.xpath("//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 
     By body_bookmark = By.xpath("//i[@class='anticon anticon-book']");
     By popup_bookmarksName;
@@ -191,20 +191,6 @@ public class NewUI_Content_Dashboard {
     }
 
     // Set default dashboard pin
-
-    public void assert_SetDefault_DashboardPin_Displayed() {
-
-	Assertions.assertElementExists(driver, body_unpushed_pin, true);
-
-    }
-
-    public void click_SetDefault_Dashboardpin() {
-
-	ElementActions.click(driver, body_unpushed_pin);
-	Assertions.assertElementExists(driver, body_pushed_pin, true);
-
-    }
-
     public void click_bookmarkButton() {
 	ElementActions.click(driver, body_bookmark);
     }
@@ -225,6 +211,49 @@ public class NewUI_Content_Dashboard {
     public void assert_filterApplied(String FilterName) {
 	popup_filtersName = By.xpath("//span[@class='inc-filter-master__menu-item'][contains(.,'" + FilterName + "')]/span");
 	Assertions.assertElementAttribute(driver, popup_filtersName, "class", "([\\s\\S]*)applied", true);
+    }
+
+    public void assert_SetAsDefault_DashboardPin_Displayed() {
+	Assertions.assertElementExists(driver, body_SetAsDefaultDashboard_Pin, true);
+    }
+
+    public void assert_SetAsDefaultDashboardPin_tooltip_message(Boolean isSelected) {
+	ElementActions.hover(driver, body_SetAsDefaultDashboard_Pin);
+
+	if (isSelected) {
+	    Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text", "Remove", 3, true);
+	} else {
+	    Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboardPin_Tooltip, "text", "Set", 3, true);
+	}
+    }
+
+    /**
+     * Take action click on set as default dasboard pin button
+     * 
+     * 
+     * @param actionType
+     * 
+     *            True: set default dashboard False: unset default dashboard
+     */
+
+    public void click_SetAsDefaultPinIcon(Boolean actionType) {
+
+	if ((actionType != ElementActions.getAttribute(driver, body_SetAsDefaultDashboard_Pin, "class").contains("isDefault"))) {
+	    ElementActions.click(driver, body_SetAsDefaultDashboard_Pin);
+	}
+    }
+
+    /**
+     * Asserts that the target Set As Default dashboard pin button is set or not
+     * 
+     * 
+     * @param stateType
+     * 
+     *            True: check that the pin button is selected False: check that the
+     *            pin button
+     */
+    public void assert_setAsDefaultPinIcon_state(Boolean stateType) {
+	Assertions.assertElementAttribute(driver, body_SetAsDefaultDashboard_Pin, "class", "isDefault", 3, stateType);
     }
 
 }
