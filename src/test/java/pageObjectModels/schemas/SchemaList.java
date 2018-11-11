@@ -1,0 +1,275 @@
+package pageObjectModels.schemas;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import com.shaft.browser.BrowserActions;
+import com.shaft.element.ElementActions;
+import com.shaft.io.ExcelFileManager;
+import com.shaft.support.JavaActions;
+import com.shaft.validation.Assertions;
+
+public class SchemaList {
+	//// Variables
+	WebDriver driver;
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+	String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_schemas_schemaList");
+	String popup_schema_schedule_Error_Message = replace_regularExpression(
+			"INC_004010050:Another SCHEDULER with the same name [Automation_ScheduleSchema_Load] already exists.");
+	//// Elements
+	By header_schemaListTabHeader_link = By
+			.xpath("//*[@id='content']//div[contains(@class,'secHeaderTitle')]//a[normalize-space(.)='Schemas']");
+
+	// header_schemaList_label;
+	// body_tableHeader_label;
+	By body_schemaName_link;
+	By body_schemaDetails_button;
+	// body_status_label;
+	// body_permission_label;
+	// body_owner_label;
+	// body_lastLoadStatus_label;
+	// body_memoryUsed_label;
+	By body_OwnerName_link;
+	By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
+
+	By popup_scheduleSchema_header = By.xpath("//span[contains(@class,'ng-scope')][text()='Schedule Schema Load']");
+	By popup_scheduleSchema_view = By.id("send-dashboard-modal");
+	By popup_scheduleSchema_label;
+	By popup_scheduleSchema_label_textBox;
+	By popup_scheduleSchema_JobName_textBox = By.xpath("//input[contains(@placeholder,'Job Name')]");
+	By popup_scheduleSchema_description_textBox;
+	By popup_scheduleSchema_button = By.xpath("//button[@type='button'][contains(text(),'Schedule')]");
+	By popup_scheduleSchema_button_disabled = By
+			.xpath("//button[@type='button'][@disabled='disabled'][contains(text(),'Schedule')]");
+	By popup_scheduleSchema_errorMessageBody_label = By
+			.xpath("//div[contains(@class,'text-center')]/child::div[@class='ng-binding']");
+	By popup_scheduleSchema_radioButton;
+	By popup_scheduleSchema_weeklyDay_checkBox;
+	By popup_scheduleSchema_loadType_dropDownMenu;
+	By popup_scheduleSchema_dailyRecurrence_Type;
+	By popup_scheduleSchema_dailyRecurrence_minute = By
+			.xpath("//div[@ng-switch-when='Daily']//select[@ng-options='value as value for value in $ctrl.minutes']");
+	By popup_scheduleSchema_dailyRecurrence_day_hour = By
+			.xpath("//div[@ng-switch-when='Daily']//input[@type='number']");
+
+	By popup_newSchema_schemaName_textBox = By.xpath("//input[@ng-model='$parent.schemaName']");
+	By popup_newSchema_schemaDescription_textBox = By.xpath("//textarea[@ng-model='$parent.schemaDescription']");
+	By popup_newSchema_create_button = By.xpath("//button[@type='submit'][contains(text(),'Create')]");
+	By popup_newSchema_cancel_button = By.xpath("//button[@ng-click='modal.closeMe()']");
+
+	//// Functions
+	public SchemaList(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public void Navigate_toURL() {
+		BrowserActions.navigateToURL(driver, url);
+	}
+
+	public void Assert_schemaListTabIsSelected() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		Assertions.assertElementAttribute(driver, header_schemaListTabHeader_link, "class", "selectedTab", true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Assert_schemaSchedule_popup_is_displayed() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		Assertions.assertElementExists(driver, popup_scheduleSchema_view, true);
+		Assertions.assertElementExists(driver, popup_scheduleSchema_header, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void assert_schemaSchedule_labelName(String schedule_label_field) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_scheduleSchema_label = By.xpath("//label[contains(text(),'" + schedule_label_field + "')]");
+		Assertions.assertElementExists(driver, popup_scheduleSchema_label, true);
+		popup_scheduleSchema_label_textBox = By.xpath("//input[contains(@placeholder,'" + schedule_label_field + "')]");
+		Assertions.assertElementExists(driver, popup_scheduleSchema_label_textBox, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Assert_scheduleSchema_radioButton_selected(String Radio_Button_Name) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_scheduleSchema_radioButton = By.xpath("//input[@type='radio'][@value= '" + Radio_Button_Name + "']");
+		Assertions.assertElementAttribute(driver, popup_scheduleSchema_radioButton, "checked", "true", true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Select_scheduleSchema_radioButton(String Radio_button_name) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_scheduleSchema_radioButton = By.xpath("//input[@type='radio'][@value= '" + Radio_button_name + "']");
+		ElementActions.click(driver, popup_scheduleSchema_radioButton);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Select_scheduleSchema_weeklyDay_CheckBox(String Day) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_scheduleSchema_weeklyDay_checkBox = By
+				.xpath("//div//input[@ng-model='w.selected'][@value='" + Day + "']");
+
+		ElementActions.click(driver, popup_scheduleSchema_weeklyDay_checkBox);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void select_scheduleSchema_loadType_dropDownMenu(String LoadType) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_scheduleSchema_loadType_dropDownMenu = By
+				.xpath("//select[@name='loadType']//option[@value='" + LoadType + "']");
+		// ElementActions.select(driver, popup_schema_schedule_LoadType_dropdownMenu,
+		// LoadType);
+		ElementActions.click(driver, popup_scheduleSchema_loadType_dropDownMenu);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Assert_scheduleSchema_textBox_empty(String label_name) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		
+
+		popup_scheduleSchema_label_textBox = By
+				.xpath("//input[contains(@class,'ng-empty')][contains(@placeholder,'" + label_name + "')]");
+		Assertions.assertElementExists(driver, popup_scheduleSchema_label_textBox, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Type_scheduleSchema_jobNameOrDescription(String schedule_label_field, String schedule_label_data) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_scheduleSchema_label_textBox = By.xpath("//input[contains(@placeholder,'" + schedule_label_field + "')]");
+		ElementActions.type(driver, popup_scheduleSchema_label_textBox, schedule_label_data);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public String autoType_scheduleSchema_jobName() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		String newScheduleSchema_jobName = "Automation" + "_Schedule_Schema_"
+				+ String.valueOf(System.currentTimeMillis());
+		ElementActions.click(driver, popup_scheduleSchema_JobName_textBox);
+		ElementActions.type(driver, popup_scheduleSchema_JobName_textBox, newScheduleSchema_jobName);
+		ElementActions.switchToDefaultContent(driver);
+		return newScheduleSchema_jobName;
+	}
+
+	public void click_scheduleSchema_scheduleButton() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.click(driver, popup_scheduleSchema_button);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Assert_scheduleSchema_scheduleButton_disabled() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		Assertions.assertElementExists(driver, popup_scheduleSchema_button_disabled, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Assert_scheduleSchema_jobNameDublicate_errorMessage() {
+		ElementActions.switchToIframe(driver, body_iframe);
+		Assertions.assertElementAttribute(driver, popup_scheduleSchema_errorMessageBody_label, "text",
+				popup_schema_schedule_Error_Message, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void Assert_schemaNameIsDisplayed(String schemaName) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p");
+		Assertions.assertElementExists(driver, body_schemaName_link, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+	// Assert_statusIsDisplayed
+	// Assert_permissionIsDisplayed
+	// Assert_ownerIsDisplayed
+	// Assert_lastLoadStatusIsDisplayed
+	// Assert_memoryUsedIsDisplayed
+
+	public void click_schemaName(String schemaName) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p");
+		ElementActions.click(driver, body_schemaName_link);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void select_schemaName(String schemaName) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p/parent::div/preceding-sibling::div");
+		ElementActions.click(driver, body_schemaName_link);	
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public void hoverOnSchemaAndClickDetails(String schemaName) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p");
+		ElementActions.hover(driver, body_schemaName_link);
+
+		body_schemaDetails_button = By
+				.xpath("//div[contains(@class,'usersPanel')]//button[contains(text(),'Details') and contains(@href,'/"
+						+ schemaName + "/')]");
+		ElementActions.click(driver, body_schemaDetails_button);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public String createNewSchema() {
+		return createNewSchema("Automation" + "_Schema_" + String.valueOf(System.currentTimeMillis()), "");
+	}
+
+	public String createNewSchema(String schemaName, String schemaDesription) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		ElementActions.type(driver, popup_newSchema_schemaName_textBox, schemaName);
+		ElementActions.type(driver, popup_newSchema_schemaDescription_textBox, schemaDesription);
+		ElementActions.click(driver, popup_newSchema_create_button);
+		ElementActions.switchToDefaultContent(driver);
+		return schemaName;
+}
+
+	public void Assert_schemaNameIsDisplayedAndItsOwnerName(String schemaName, String name) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		body_schemaName_link = By
+				.xpath("//div[contains(@class,'usersPanel')]//div[contains(@class,'userName') and contains(.,'"
+						+ schemaName + "')]/p");
+		Assertions.assertElementExists(driver, body_schemaName_link, true);
+
+		body_OwnerName_link = By.xpath("//div[contains(@class,'userName') and contains(.,'" + schemaName
+				+ "')]/following-sibling::div/p[@class=\"ng-binding\"][contains(.,'" + name + "')]");
+		Assertions.assertElementExists(driver, body_OwnerName_link, true);
+		ElementActions.switchToDefaultContent(driver);
+	}
+
+	public String replace_regularExpression(String text) {
+		String arr[] = { "[", "]" };
+		text = JavaActions.replaceRegex(arr, text);
+		return text;
+	}
+
+	/**
+	 * 
+	 * @param Type
+	 *            Minute Hour Day
+	 * @param Number
+	 *            Min "min='1' - max='59'" Hour"min='1' - max='23'" Days"min='1' -
+	 *            max='31'"
+	 */
+	public void scheduleSchema_dailyRecurrence_repeatType(String Type, String Number) {
+		ElementActions.switchToIframe(driver, body_iframe);
+		popup_scheduleSchema_dailyRecurrence_Type = By
+				.xpath("//div[@ng-switch-when='Daily']//select//option[@value='" + Type + "']");
+		ElementActions.click(driver, popup_scheduleSchema_dailyRecurrence_Type);
+		switch (Type) {
+		case ("Minute"):
+			ElementActions.select(driver, popup_scheduleSchema_dailyRecurrence_minute, Number);
+			break;
+		case ("Day"):
+			ElementActions.type(driver, popup_scheduleSchema_dailyRecurrence_day_hour, Number);
+			break;
+		case ("Hour"):
+			ElementActions.type(driver, popup_scheduleSchema_dailyRecurrence_day_hour, Number);
+			break;
+		}
+		ElementActions.switchToDefaultContent(driver);
+	}
+}

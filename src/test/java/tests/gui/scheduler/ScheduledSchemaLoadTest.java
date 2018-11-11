@@ -14,9 +14,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.login.NewUI_Login;
-import pageObjectModels.main.NewUI_Skeleton;
-import pageObjectModels.scheduler.NewUI_SchemaLoads;
+import pageObjectModels.login.Login;
+import pageObjectModels.main.OldUI_SubHeader;
+import pageObjectModels.scheduler.SchemaLoads;
 
 @Epic("ScheduledSchemaLoadTest")
 
@@ -27,9 +27,9 @@ public class ScheduledSchemaLoadTest {
     ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used throughout the test
-    NewUI_Skeleton mainPage;
-    NewUI_SchemaLoads scheduledSchema;
-    NewUI_Login loginPage;
+    OldUI_SubHeader mainPage;
+    SchemaLoads scheduledSchema;
+    Login loginPage;
     // Declaring public variables that will be shared between tests
 
     // String SchemaName;
@@ -44,7 +44,7 @@ public class ScheduledSchemaLoadTest {
     @Severity(SeverityLevel.NORMAL)
     public void ScheduledSchemaCanBeEdited() {
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	// schema_Schedule_View_Status.Assert_SchemaJob_Created(testDataReader.getCellData("SchemaJobName_C77127"),
@@ -77,12 +77,12 @@ public class ScheduledSchemaLoadTest {
     @Severity(SeverityLevel.NORMAL)
     public void ScheduledSchemaCanJobBeDeleted() {
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.select_schemaNameCheckBox(testDataReader.getCellData("SchemaJobName_C77128"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Delete selection");
 
@@ -103,7 +103,7 @@ public class ScheduledSchemaLoadTest {
     @Severity(SeverityLevel.NORMAL)
     public void ScheduledSchemaStatusCanBeChange() {
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	// schema_Schedule_View_Status.Schedule_Schema_JobStatus_Check(testDataReader.getCellData("SchemaName"),testDataReader.getCellData("SchemaJobName_C77129"),
@@ -124,7 +124,7 @@ public class ScheduledSchemaLoadTest {
     @Severity(SeverityLevel.NORMAL)
     public void ALLScheduledSchema_statusFilters_verification() {
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.verify_jobStatusOptionIsDisplayed("All");
@@ -141,7 +141,7 @@ public class ScheduledSchemaLoadTest {
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	driver = BrowserFactory.getBrowser(testDataReader);
 
-	loginPage = new NewUI_Login(driver);
+	loginPage = new Login(driver);
 	loginPage.navigate_toURL();
 	loginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 		testDataReader.getCellData("Password"));

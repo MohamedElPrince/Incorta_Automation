@@ -3,7 +3,7 @@
 <suite name="Certification Path" verbose="10">
 	<test name="NewUI Certification Path" >
 		<classes>
-			<class name="tests.gui.certification.NewUI_CertificationPath">
+			<class name="tests.gui.certification.CertificationPath">
 			</class>
 		</classes>
 	</test>

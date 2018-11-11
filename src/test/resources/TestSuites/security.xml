@@ -3,25 +3,25 @@
 <suite name="Security" verbose="10">
 	<test name="LoginTest">
 		<classes>
-			<class name="tests.gui.security.NewUI_LoginTest">
+			<class name="tests.gui.security.LoginTest">
 			</class>
 		</classes>
 	</test>
 	<test name="UsersTest">
 		<classes>
-			<class name="tests.gui.security.NewUI_UsersTest">
+			<class name="tests.gui.security.UsersTest">
 			</class>
 		</classes>
 	</test>
 	<test name="RolesTest">
 		<classes>
-			<class name="tests.gui.security.NewUI_RolesTest">
+			<class name="tests.gui.security.RolesTest">
 			</class>
 		</classes>
 	</test>
 	<test name="GroupsTest">
 		<classes>
-			<class name="tests.gui.security.NewUI_GroupsTest">
+			<class name="tests.gui.security.GroupsTest">
 			</class>
 		</classes>
 	</test>

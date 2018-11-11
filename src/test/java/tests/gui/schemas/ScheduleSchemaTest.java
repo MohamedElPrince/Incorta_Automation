@@ -15,10 +15,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.login.NewUI_Login;
-import pageObjectModels.main.NewUI_Skeleton;
-import pageObjectModels.scheduler.NewUI_SchemaLoads;
-import pageObjectModels.schemas.NewUI_SchemaList;
+import pageObjectModels.login.Login;
+import pageObjectModels.main.OldUI_SubHeader;
+import pageObjectModels.scheduler.SchemaLoads;
+import pageObjectModels.schemas.SchemaList;
 
 @Epic("ScheduleSchema Test")
 
@@ -29,10 +29,10 @@ public class ScheduleSchemaTest {
     ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used throughout the test
-    NewUI_Login loginPage;
-    NewUI_SchemaList schemasPage;
-    NewUI_SchemaLoads scheduledSchema;
-    NewUI_Skeleton mainPage;
+    Login loginPage;
+    SchemaList schemasPage;
+    SchemaLoads scheduledSchema;
+    OldUI_SubHeader mainPage;
 
     // Declaring public variables that will be shared between tests
     // String SchemaName;
@@ -44,7 +44,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -59,7 +59,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -74,7 +74,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -94,7 +94,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("OtherSchema"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -102,7 +102,7 @@ public class ScheduleSchemaTest {
 		testDataReader.getCellData("SchemaLoadJobName_C77216"));
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 	scheduledSchema.assert_schemaJob_created(testDataReader.getCellData("SchemaLoadJobName_C77216"),
 		testDataReader.getCellData("OtherSchema"));
@@ -115,7 +115,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -135,7 +135,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -150,7 +150,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
@@ -158,7 +158,7 @@ public class ScheduleSchemaTest {
 	String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 	scheduledSchema.select_schemaName(NewSchduleJobName);
@@ -173,7 +173,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -183,7 +183,7 @@ public class ScheduleSchemaTest {
 	String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
@@ -200,7 +200,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -209,7 +209,7 @@ public class ScheduleSchemaTest {
 	String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
@@ -225,7 +225,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Select_scheduleSchema_radioButton("No Recurrence");
@@ -233,7 +233,7 @@ public class ScheduleSchemaTest {
 	String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.changeJobStatusFilter("All");
@@ -250,7 +250,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 
@@ -261,7 +261,7 @@ public class ScheduleSchemaTest {
 	schemasPage.select_scheduleSchema_loadType_dropDownMenu("Full");
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
@@ -278,7 +278,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Select_scheduleSchema_radioButton("Daily");
@@ -287,7 +287,7 @@ public class ScheduleSchemaTest {
 	schemasPage.select_scheduleSchema_loadType_dropDownMenu("Incremental");
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
@@ -304,7 +304,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Select_scheduleSchema_radioButton("Daily");
@@ -313,7 +313,7 @@ public class ScheduleSchemaTest {
 	schemasPage.select_scheduleSchema_loadType_dropDownMenu("Staging");
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
@@ -331,7 +331,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Select_scheduleSchema_radioButton("Daily");
@@ -340,7 +340,7 @@ public class ScheduleSchemaTest {
 	schemasPage.select_scheduleSchema_loadType_dropDownMenu("Snapshot");
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
@@ -360,7 +360,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
@@ -369,7 +369,7 @@ public class ScheduleSchemaTest {
 	String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 	scheduledSchema.select_schemaName(NewSchduleJobName);
@@ -386,7 +386,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
@@ -395,7 +395,7 @@ public class ScheduleSchemaTest {
 	String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 	scheduledSchema.select_schemaName(NewSchduleJobName);
@@ -412,7 +412,7 @@ public class ScheduleSchemaTest {
 
 	schemasPage.select_schemaName(testDataReader.getCellData("SchemaName"));
 
-	mainPage = new NewUI_Skeleton(driver);
+	mainPage = new OldUI_SubHeader(driver);
 	mainPage.Click_actions();
 	mainPage.Select_fromDropdownMenu("Schedule");
 	schemasPage.Assert_scheduleSchema_radioButton_selected("Daily");
@@ -421,7 +421,7 @@ public class ScheduleSchemaTest {
 	String NewSchduleJobName = schemasPage.autoType_scheduleSchema_jobName();
 	schemasPage.click_scheduleSchema_scheduleButton();
 
-	scheduledSchema = new NewUI_SchemaLoads(driver);
+	scheduledSchema = new SchemaLoads(driver);
 	scheduledSchema.Navigate_toURL();
 	scheduledSchema.assert_schemaJob_created(NewSchduleJobName, testDataReader.getCellData("SchemaName"));
 	scheduledSchema.select_schemaName(NewSchduleJobName);
@@ -433,7 +433,7 @@ public class ScheduleSchemaTest {
 
     public void navigateToSchemaListPage() {
 
-	schemasPage = new NewUI_SchemaList(driver);
+	schemasPage = new SchemaList(driver);
 	schemasPage.Navigate_toURL();
 	schemasPage.Assert_schemaListTabIsSelected();
 
@@ -446,7 +446,7 @@ public class ScheduleSchemaTest {
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	driver = BrowserFactory.getBrowser(testDataReader);
 
-	loginPage = new NewUI_Login(driver);
+	loginPage = new Login(driver);
 	loginPage.navigate_toURL();
 	loginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 		testDataReader.getCellData("Password"));
