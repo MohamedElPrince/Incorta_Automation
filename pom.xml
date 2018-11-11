@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mohies</groupId>
 	<artifactId>incorta</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>4.1.0</version>
 
 	<properties>
 		<!-- incorta Test Run Parameters -->
@@ -42,7 +42,7 @@
 		<allureResultsFolderPath>allure-results/</allureResultsFolderPath>
 
 		<!-- Dependencies/Plugins Version Numbers Parameters -->
-		<shaft_engine.version>2.0.20181105</shaft_engine.version>
+		<shaft_engine.version>2.1.20181109</shaft_engine.version>
 		<encoding.type>UTF-8</encoding.type>
 		<jdk.version>1.8</jdk.version>
 		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>

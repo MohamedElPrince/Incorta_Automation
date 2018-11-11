@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -61,14 +60,16 @@ public class Dashboards_ScreenshotsComparer {
 
     @Test(priority = 2, description = "TC002 - Compare newly taken screenshots against refrence images.")
     public void compareFolders() {
-	String refrenceFolderPath = System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/20181024-233430";
+	String refrenceFolderPath = System.getProperty("testDataFolderPath")
+		+ "dashboards_ScreenshotsComparer/20181024-233430";
 
 	String testDirectoryPath = System.getProperty("allureResultsFolderPath") + "screenshots/";
 	File testDirectory = new File(testDirectoryPath);
 	String[] testFolders = testDirectory.list();
 	Arrays.sort(testFolders);
 
-	String testFolderPath = System.getProperty("allureResultsFolderPath") + "screenshots/" + testFolders[testFolders.length - 1];
+	String testFolderPath = System.getProperty("allureResultsFolderPath") + "screenshots/"
+		+ testFolders[testFolders.length - 1];
 
 	ImageProcessingActions.compareImageFolders(refrenceFolderPath, testFolderPath, 98);
     }
@@ -129,7 +130,8 @@ public class Dashboards_ScreenshotsComparer {
 
     @BeforeClass
     public void beforeClass() {
-	System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/TestData.xlsx");
+	System.setProperty("testDataFilePath",
+		System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/TestData.xlsx");
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	driver = BrowserFactory.getBrowser(testDataReader);
 	// BrowserActions.setWindowSize(driver, 1920, 1080);
@@ -138,20 +140,14 @@ public class Dashboards_ScreenshotsComparer {
 	newLoginPage.navigate_toURL();
 	newLoginPage.verify_correctVersionNumberIsDisplayed();
 	// newLoginPage.userLogin("demo", "admin", "admin");
-	newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"), testDataReader.getCellData("Password"));
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-	ReportManager.getTestLog();
+	newLoginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
+		testDataReader.getCellData("Password"));
     }
 
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-	ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], Total Dashboards Crawled: [" + totalDashboardsCounter + "], and Total Insights Crawled: [" + totalInsightsCounter + "].");
-
-	BrowserFactory.closeAllDrivers();
-	ReportManager.getFullLog();
+	ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], Total Dashboards Crawled: ["
+		+ totalDashboardsCounter + "], and Total Insights Crawled: [" + totalInsightsCounter + "].");
     }
 
 }

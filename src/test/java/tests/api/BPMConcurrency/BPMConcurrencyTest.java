@@ -1,172 +1,164 @@
 package tests.api.BPMConcurrency;
 
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-import com.shaft.io.ExcelFileManager;
-import com.shaft.io.ReportManager;
 import com.shaft.api.RestActions;
+import com.shaft.io.ExcelFileManager;
 import com.shaft.validation.Assertions;
 import com.shaft.validation.Verifications;
 
 import io.restassured.response.Response;
 
 public class BPMConcurrencyTest {
-	ExcelFileManager testDataReader;
-	private final static String successStatusCode = "200";
-	private String serviceURI = "";
-	RestActions restObject;
+    ExcelFileManager testDataReader;
+    private final static String successStatusCode = "200";
+    private String serviceURI = "";
+    RestActions restObject;
 
-	String tenantName = "";
-	String username = "";
-	String password = "";
-	String fullName = "";
+    String tenantName = "";
+    String username = "";
+    String password = "";
+    String fullName = "";
 
-	String dashboardID = "";
-	String[] insightIDs;
+    String dashboardID = "";
+    String[] insightIDs;
 
-	@Factory(dataProvider = "dataProviderMethod")
-	public BPMConcurrencyTest(String tenantName, String username, String password, String fullName) {
-		this.tenantName = tenantName;
-		this.username = username;
-		this.password = password;
-		this.fullName = fullName;
+    @Factory(dataProvider = "dataProviderMethod")
+    public BPMConcurrencyTest(String tenantName, String username, String password, String fullName) {
+	this.tenantName = tenantName;
+	this.username = username;
+	this.password = password;
+	this.fullName = fullName;
+    }
+
+    @DataProvider(parallel = true)
+    public static Object[][] dataProviderMethod() {
+	System.setProperty("testDataFilePath",
+		System.getProperty("testDataFolderPath") + "BPMConcurrency/TestData.xlsx");
+	ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+
+	String tenantName;
+	String username;
+	String password;
+	String fullName;
+
+	Object[][] testData = new Object[testDataReader.getLastColumnNumber()][4];
+
+	for (int i = 0; i < testDataReader.getLastColumnNumber(); i++) {
+	    tenantName = testDataReader.getCellData("Tenant", "Data" + (i + 1));
+	    username = testDataReader.getCellData("Username", "Data" + (i + 1));
+	    password = testDataReader.getCellData("Password", "Data" + (i + 1));
+	    fullName = testDataReader.getCellData("FullName", "Data" + (i + 1));
+
+	    testData[i][0] = tenantName;
+	    testData[i][1] = username;
+	    testData[i][2] = password;
+	    testData[i][3] = fullName;
 	}
 
-	@DataProvider(parallel = true)
-	public static Object[][] dataProviderMethod() {
-		System.setProperty("testDataFilePath",
-				System.getProperty("testDataFolderPath") + "BPMConcurrency/TestData.xlsx");
-		ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+	return testData;
+    }
 
-		String tenantName;
-		String username;
-		String password;
-		String fullName;
+    @Test(description = "TC001 - Login to incorta via API")
+    public void login() {
+	// Defining request parameters
+	String serviceName = "/authservice/login";
+	String requestType = "POST";
+	String argument = "tenant=" + tenantName + "&user=" + username + "&pass=" + password;
 
-		Object[][] testData = new Object[testDataReader.getLastColumnNumber()][4];
+	// Performing Authentication
+	restObject.performRequest(requestType, successStatusCode, serviceName, argument);
+    }
 
-		for (int i = 0; i < testDataReader.getLastColumnNumber(); i++) {
-			tenantName = testDataReader.getCellData("Tenant", "Data" + (i + 1));
-			username = testDataReader.getCellData("Username", "Data" + (i + 1));
-			password = testDataReader.getCellData("Password", "Data" + (i + 1));
-			fullName = testDataReader.getCellData("FullName", "Data" + (i + 1));
+    @Test(description = "TC002 - Is User Logged In", dependsOnMethods = { "login" })
+    public void isUserLoggedIn() {
+	// Defining request parameters
+	String serviceName = "/service/user/isLoggedIn";
+	String requestType = "GET";
+	String argument = "";
 
-			testData[i][0] = tenantName;
-			testData[i][1] = username;
-			testData[i][2] = password;
-			testData[i][3] = fullName;
-		}
+	// Performing Request
+	Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
+	Assertions.assertEquals(fullName, restObject.getResponseJSONValue(response, "user.name"), true);
+    }
 
-		return testData;
-	}
+    @Test(description = "TC003 - Load Schema", dependsOnMethods = { "isUserLoggedIn" })
+    public void loadSchema() {
+	// Defining request parameters
+	String serviceName = "/service/schema/loadData";
+	String requestType = "POST";
+	String argument = "name=" + testDataReader.getCellData("SchemaName")
+		+ "&incremental=false&snapshot=false&staging=false&testRun=";
 
-	@Test(description = "TC001 - Login to incorta via API")
-	public void login() {
-		// Defining request parameters
-		String serviceName = "/authservice/login";
-		String requestType = "POST";
-		String argument = "tenant=" + tenantName + "&user=" + username + "&pass=" + password;
+	// Performing Request
+	restObject.performRequest(requestType, successStatusCode, serviceName, argument);
+    }
 
-		// Performing Authentication
-		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
-	}
+    @Test(description = "TC004 - Wait for schema to finish loading", dependsOnMethods = { "loadSchema" })
+    public void waitForSchemaLoad() {
+	// Defining request parameters
+	String serviceName = "/service/schema/getSchemaStatus";
+	String requestType = "GET";
+	String argument = "schemaId=" + testDataReader.getCellData("SchemaID");
 
-	@Test(description = "TC002 - Is User Logged In", dependsOnMethods = { "login" })
-	public void isUserLoggedIn() {
-		// Defining request parameters
-		String serviceName = "/service/user/isLoggedIn";
-		String requestType = "GET";
-		String argument = "";
-
-		// Performing Request
+	// Performing Request and waiting for a certain state to be reported
+	Boolean isLoaded = false;
+	while (isLoaded) {
+	    try {
 		Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
-		Assertions.assertEquals(fullName, restObject.getResponseJSONValue(response, "user.name"), true);
+		Assertions.assertEquals("Loading Finished", restObject.getResponseJSONValue(response, "lastLoadState"),
+			true);
+		isLoaded = true;
+	    } catch (AssertionError e) {
+
+	    }
 	}
+    }
 
-	@Test(description = "TC003 - Load Schema", dependsOnMethods = { "isUserLoggedIn" })
-	public void loadSchema() {
-		// Defining request parameters
-		String serviceName = "/service/schema/loadData";
-		String requestType = "POST";
-		String argument = "name=" + testDataReader.getCellData("SchemaName")
-				+ "&incremental=false&snapshot=false&staging=false&testRun=";
+    @Test(description = "TC005 - Get Dashboard", dependsOnMethods = { "waitForSchemaLoad" })
+    public void getDashboard() {
+	// Defining request parameters
+	String serviceName = "/service/catalogreport/getByGUID";
+	String requestType = "GET";
+	String argument = "guid=" + testDataReader.getCellData("DashboardGUID");
 
-		// Performing Request
-		restObject.performRequest(requestType, successStatusCode, serviceName, argument);
+	// Performing Request
+	Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
+	Assertions.assertEquals(testDataReader.getCellData("DashboardName"),
+		restObject.getResponseXMLValue(response, "response.report.@name"), true);
+
+	dashboardID = restObject.getResponseXMLValue(response, "response.report.@id");
+
+	insightIDs = restObject.getResponseXMLValue(response, "**.findAll {it.@autoRefresh == 'true' }.@id").split(",");
+
+	Verifications.verifyEquals(testDataReader.getCellData("NumberOfInsights"), insightIDs.length, true);
+    }
+
+    @Test(description = "TC006 - Get Insight", dependsOnMethods = {
+	    "getDashboard" }, invocationCount = 1, threadPoolSize = 1, groups = { "parallel" })
+    public void getInsight() {
+	// Defining request parameters
+	String serviceName = "/service/viewer";
+	String requestType = "POST";
+
+	for (int i = 0; i < insightIDs.length - 1; i++) {
+	    String argument = "outputFormat=json&layout=" + dashboardID + "#" + insightIDs[i].trim();
+
+	    // Performing Request
+	    restObject.performRequest(requestType, successStatusCode, serviceName, argument);
 	}
+    }
 
-	@Test(description = "TC004 - Wait for schema to finish loading", dependsOnMethods = { "loadSchema" })
-	public void waitForSchemaLoad() {
-		// Defining request parameters
-		String serviceName = "/service/schema/getSchemaStatus";
-		String requestType = "GET";
-		String argument = "schemaId=" + testDataReader.getCellData("SchemaID");
+    @BeforeClass
+    public void beforeClass() {
+	System.setProperty("testDataFilePath",
+		System.getProperty("testDataFolderPath") + "BPMConcurrency/TestData.xlsx");
+	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 
-		// Performing Request and waiting for a certain state to be reported
-		Boolean isLoaded = false;
-		while (isLoaded) {
-			try {
-				Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
-				Assertions.assertEquals("Loading Finished", restObject.getResponseJSONValue(response, "lastLoadState"),
-						true);
-				isLoaded = true;
-			} catch (AssertionError e) {
-
-			}
-		}
-	}
-
-	@Test(description = "TC005 - Get Dashboard", dependsOnMethods = { "waitForSchemaLoad" })
-	public void getDashboard() {
-		// Defining request parameters
-		String serviceName = "/service/catalogreport/getByGUID";
-		String requestType = "GET";
-		String argument = "guid=" + testDataReader.getCellData("DashboardGUID");
-
-		// Performing Request
-		Response response = restObject.performRequest(requestType, successStatusCode, serviceName, argument);
-		Assertions.assertEquals(testDataReader.getCellData("DashboardName"),
-				restObject.getResponseXMLValue(response, "response.report.@name"), true);
-
-		dashboardID = restObject.getResponseXMLValue(response, "response.report.@id");
-
-		insightIDs = restObject.getResponseXMLValue(response, "**.findAll {it.@autoRefresh == 'true' }.@id").split(",");
-
-		Verifications.verifyEquals(testDataReader.getCellData("NumberOfInsights"), insightIDs.length, true);
-	}
-
-	@Test(description = "TC006 - Get Insight", dependsOnMethods = {
-			"getDashboard" }, invocationCount = 1, threadPoolSize = 1, groups = { "parallel" })
-	public void getInsight() {
-		// Defining request parameters
-		String serviceName = "/service/viewer";
-		String requestType = "POST";
-
-		for (int i = 0; i < insightIDs.length - 1; i++) {
-			String argument = "outputFormat=json&layout=" + dashboardID + "#" + insightIDs[i].trim();
-
-			// Performing Request
-			restObject.performRequest(requestType, successStatusCode, serviceName, argument);
-		}
-	}
-
-	@BeforeClass
-	public void beforeClass() {
-		System.setProperty("testDataFilePath",
-				System.getProperty("testDataFolderPath") + "BPMConcurrency/TestData.xlsx");
-		testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
-
-		serviceURI = testDataReader.getCellData("serviceURI");
-		restObject = new RestActions(serviceURI);
-	}
-
-	@AfterClass
-	public void getFullLog() {
-		ReportManager.getFullLog();
-	}
-
+	serviceURI = testDataReader.getCellData("serviceURI");
+	restObject = new RestActions(serviceURI);
+    }
 }

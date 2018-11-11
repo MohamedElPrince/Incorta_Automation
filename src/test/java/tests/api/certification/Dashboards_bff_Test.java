@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -85,7 +84,8 @@ public class Dashboards_bff_Test {
 		serviceName = serviceName_folders;
 		requestType = "GET";
 		argument = "id=" + (foldersIds.get(i)).toString();
-		List<Integer> tempList = requestAllFolders(serviceName, requestType, argument).jsonPath().getList("folders.id");
+		List<Integer> tempList = requestAllFolders(serviceName, requestType, argument).jsonPath()
+			.getList("folders.id");
 		if (!tempList.isEmpty()) {
 		    foldersIds.addAll(tempList);
 		}
@@ -120,21 +120,17 @@ public class Dashboards_bff_Test {
     @BeforeClass
     public void beforeClass() {
 	restObject = new RestActions(serviceURI);
-	System.setProperty("testDataFilePath", System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/TestData.xlsx");
+	System.setProperty("testDataFilePath",
+		System.getProperty("testDataFolderPath") + "dashboards_ScreenshotsComparer/TestData.xlsx");
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	tenantName = testDataReader.getCellData("Tenant");
 	username = testDataReader.getCellData("Username");
 	password = testDataReader.getCellData("Password");
     }
 
-    @AfterMethod
-    public void afterMethod() {
-	ReportManager.getTestLog();
-    }
-
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-	ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], and Total Dashboards Crawled: [" + totalDashboardsCounter + "].");
-	ReportManager.getFullLog();
+	ReportManager.log("Total Folders Crawled: [" + totalFoldersCounter + "], and Total Dashboards Crawled: ["
+		+ totalDashboardsCounter + "].");
     }
 }

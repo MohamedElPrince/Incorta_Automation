@@ -1,7 +1,6 @@
 package tests.gui.content;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -9,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
 import com.shaft.io.ExcelFileManager;
-import com.shaft.io.ReportManager;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -358,7 +356,6 @@ public class Set_As_Default_DashboardTest {
 		System.getProperty("testDataFolderPath") + "Set_As_Default_Dashboard_NewUI_Content/TestData.xlsx");
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	driver = BrowserFactory.getBrowser();
-
     }
 
     @AfterMethod
@@ -367,18 +364,8 @@ public class Set_As_Default_DashboardTest {
 	newHeaderObject = new Header(driver);
 	newHeaderObject.expandUserMenu();
 	newHeaderObject.signOut();
-	// JSWaiter.sleep(1000);
 	// check that you signout successfully
 	newSignOutPage = new SignOut(driver);
 	newSignOutPage.assert_signOutMessageHeaderAndBodyAreCorrect();
-
-	ReportManager.getTestLog();
     }
-
-    @AfterClass
-    public void afterClass() {
-	BrowserFactory.closeAllDrivers();
-	ReportManager.getFullLog();
-    }
-
 }

@@ -1,14 +1,11 @@
 package tests.gui.scheduler;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
 import com.shaft.io.ExcelFileManager;
-import com.shaft.io.ReportManager;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -147,16 +144,4 @@ public class ScheduledSchemaLoadTest {
 		testDataReader.getCellData("Password"));
 
     }
-
-    @AfterMethod
-    public void afterMethod() {
-	ReportManager.getTestLog();
-    }
-
-    @AfterClass
-    public void afterClass() {
-	BrowserFactory.closeAllDrivers();
-	ReportManager.getFullLog();
-    }
-
 }

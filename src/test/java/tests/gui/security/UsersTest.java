@@ -1,14 +1,12 @@
 package tests.gui.security;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.shaft.browser.BrowserFactory;
 import com.shaft.io.ExcelFileManager;
-import com.shaft.io.ReportManager;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -232,7 +230,6 @@ public class UsersTest {
 
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-
 	newHeaderObject = new Header(driver);
 	newHeaderObject.expandUserMenu();
 	newHeaderObject.signOut();
@@ -240,14 +237,5 @@ public class UsersTest {
 	// Assert in signout message.
 	logoutpage = new SignOut(driver);
 	logoutpage.assert_signOutMessageHeaderAndBodyAreCorrect();
-
-	ReportManager.getTestLog();
     }
-
-    @AfterClass(alwaysRun = true)
-    public void afterClass() {
-	BrowserFactory.closeAllDrivers();
-	ReportManager.getFullLog();
-    }
-
 }
