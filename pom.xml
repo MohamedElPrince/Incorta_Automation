@@ -31,6 +31,7 @@
 		<screenshotParams_skippedElementsFromScreenshot></screenshotParams_skippedElementsFromScreenshot> <!-- The above element will be skipped in case of persistent elements/menus 
 			that show up multiple times in the full page screenshots -->
 		<recordVideo>false</recordVideo>
+		<createAnimatedGif>true</createAnimatedGif>
 
 		<automaticallyGenerateAllureReport>false</automaticallyGenerateAllureReport> <!-- Acceptable Values: true | false -->
 
@@ -129,6 +130,7 @@
 							<allureResultsFolderPath>${allureResultsFolderPath}</allureResultsFolderPath>
 							<automaticallyGenerateAllureReport>${automaticallyGenerateAllureReport}</automaticallyGenerateAllureReport>
 							<recordVideo>${recordVideo}</recordVideo>
+							<createAnimatedGif>${createAnimatedGif}</createAnimatedGif>
 						</systemPropertyVariables>
 						<configfailurepolicy>continue</configfailurepolicy>
 						<suiteXmlFiles>
@@ -140,6 +142,16 @@
 						<argLine>
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
+						<properties>
+							<property>
+								<name>usedefaultlisteners</name>
+								<value>true</value> <!-- disabling default listeners is optional -->
+							</property>
+							<property>
+								<name>listener</name>
+								<value>com.shaft.listeners.SuiteListener,com.shaft.listeners.InvokedMethodListener</value>
+							</property>
+						</properties>
 					</configuration>
 					<dependencies>
 						<dependency>
