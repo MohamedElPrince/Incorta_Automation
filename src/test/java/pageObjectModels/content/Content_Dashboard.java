@@ -5,78 +5,67 @@ import org.openqa.selenium.WebDriver;
 
 import com.shaft.browser.BrowserActions;
 import com.shaft.element.ElementActions;
-import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 import com.shaft.validation.Assertions;
 import com.shaft.validation.Verifications;
 
 public class Content_Dashboard {
     //// Variables
-    WebDriver driver;
-    ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
-    int customElementIdentificationTimeout = 1;
-    int customNumberOfRetries = 1;
+    private WebDriver driver;
+    private int customElementIdentificationTimeout = 1;
 
     //// Elements
     // first nested header
-    By pageDetails_dashboardName_label = By.xpath("//div[@class='page-details--headerwrap']//h1");
-    By pageDetails_back_button = By.xpath("//a[contains(@class,'page-details-back-button')]");
-    By pageDetails_details_link = By.xpath("//button[contains(@class,'page-details--link')]");
-    By pageDetails_setAsDefaultDashboard_button = By
-	    .xpath("//i[contains(@class,'anticon-pushpin-o')]/ancestor::button");
-    By pageDetails_dashboardActionMenu_button = By
-	    .xpath("//div[@class='inc-dashboard__actions']//button[contains(@class,'dashboard-action-menu')]");
-    By pageDetails_add_button = By
+    private By pageDetails_dashboardName_label = By.xpath("//div[@class='page-details--headerwrap']//h1");
+    private By pageDetails_add_button = By
 	    .xpath("//span[@class='inc-toolbar-button']//*[@data-icon='plus']/ancestor::a[contains(@href,'analyze')]");
 
     // second nested header
-    By filterBar_bookmark_button = By.xpath("//div[@class='inc-filter-bar']//button[contains(@class,'bm-icon')]");
-    By filterBar_filter_button = By.xpath("//div[@class='inc-filter-bar']//button[contains(@class,'filter-icon')]");
-    By filterBar_search_textBox = By.xpath("//div[@class='inc-filter-bar']//input");
-    By body_detailsButton = By.xpath("//button[contains(.,'Details')]");
-    By body_detailsSection_description = By.xpath("//div[@class='page-details--description']");
-    By body_detailsSection_ownedBy = By.xpath("//span[@class='detail-key'][contains(.,('Owned By'))]");
-    By body_detailsSection_lastModified = By.xpath("//span[@class='detail-key'][contains(.,('Last Modified'))]");
-    By body_detailsSection_modifiedBy = By.xpath("//span[@class='detail-key'][contains(.,('Modified by'))]");
+    private By body_detailsButton = By.xpath("//button[contains(.,'Details')]");
+    private By body_detailsSection_description = By.xpath("//div[@class='page-details--description']");
+    private By body_detailsSection_ownedBy = By.xpath("//span[@class='detail-key'][contains(.,('Owned By'))]");
+    private By body_detailsSection_lastModified = By
+	    .xpath("//span[@class='detail-key'][contains(.,('Last Modified'))]");
+    private By body_detailsSection_modifiedBy = By.xpath("//span[@class='detail-key'][contains(.,('Modified by'))]");
 
     // spinner
-    By loadingSpinner = By.xpath("//span[contains(@class,'ant-spin-dot')]");
-    By genericInsight_div = By.xpath(
+    private By loadingSpinner = By.xpath("//span[contains(@class,'ant-spin-dot')]");
+    private By genericInsight_div = By.xpath(
 	    "//div[@class='insight__body']/ancestor::div[@class='draggable-insight-wrapper']|//div[@class='error-loading-wrapper__error']/ancestor::div[@class='draggable-insight-wrapper']");
-    By insight_div;
+    private By insight_div;
 
     // body-insightHeader
-    By insightHeader_insightName_label = By.className("insight__header-title");
-    By insightHeader_insightActions_button = By.xpath("//span[@class='insight__header-actions']/button");
+    private By insightHeader_insightName_label = By.className("insight__header-title");
 
     // body-insightBody-aggregatedTable
-    By aggregatedTable_columnHeader_link;
-    By aggregatedTable_cellValue_link;
+    private By aggregatedTable_columnHeader_link;
+    private By aggregatedTable_cellValue_link;
 
     // popup settings dashboard menu
-    By popup_dashboard_folder_shareAccess_button = By.xpath("//a/span[contains(text(),'Share Access')]");
-    By popup_dashboard_folder_sendNow_button = By.xpath("//a/span[contains(text(),'Send Now')]");
-    By popup_dashboard_folder_scheduleDelivery_button = By.xpath("//a/span[contains(text(),'Schedule Delivery')]");
+    private By popup_dashboard_folder_shareAccess_button = By.xpath("//a/span[contains(text(),'Share Access')]");
+    private By popup_dashboard_folder_sendNow_button = By.xpath("//a/span[contains(text(),'Send Now')]");
+    private By popup_dashboard_folder_scheduleDelivery_button = By
+	    .xpath("//a/span[contains(text(),'Schedule Delivery')]");
 
     // body Dashboard
-    By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
+    private By body_shareButton = By.xpath("//i[@class='anticon anticon-share-alt']");
     // set_default Dashboard pin
-    By body_unpushed_pin = By.xpath(
+    private By body_unpushed_pin = By.xpath(
 	    "//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
-    By body_pushed_pin = By.xpath(
+    private By body_pushed_pin = By.xpath(
 	    "//button[contains(@class, 'inc-clickable') and contains(@class ,'isDefault')] | //svg[@data-icon='pushpin']");
     // set_default Dashboard pin
-    By body_SetAsDefaultDashboardPin_Tooltip = By.xpath("//div[@class='ant-tooltip-inner']");
-    By body_SetAsDefaultDashboard_Pin = By.xpath(
+    private By body_SetAsDefaultDashboardPin_Tooltip = By.xpath("//div[@class='ant-tooltip-inner']");
+    private By body_SetAsDefaultDashboard_Pin = By.xpath(
 	    "//button[contains(@class, 'inc-clickable') and contains(@class ,'page-details-default')] | //svg[@data-icon='pushpin']");
 
-    By body_bookmark = By.xpath("//i[@class='anticon anticon-book']");
-    By popup_bookmarksName;
+    private By body_bookmark = By.xpath("//i[@class='anticon anticon-book']");
+    private By popup_bookmarksName;
 
-    By body_filter = By.xpath("//i[@class='anticon anticon-filter']");
-    By popup_filtersName;
-    By body_insightSettigns = By.xpath("//Button[@class='insight__header-menu ant-dropdown-trigger']");
-    By body_insightSettigns_menueItemButtons;
+    private By body_filter = By.xpath("//i[@class='anticon anticon-filter']");
+    private By popup_filtersName;
+    private By body_insightSettigns = By.xpath("//Button[@class='insight__header-menu ant-dropdown-trigger']");
+    private By body_insightSettigns_menueItemButtons;
 
     //// Functions
     public Content_Dashboard(WebDriver driver) {

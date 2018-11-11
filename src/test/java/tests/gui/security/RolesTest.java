@@ -24,74 +24,71 @@ import pageObjectModels.login.SignOut;
 import pageObjectModels.main.Header;
 import pageObjectModels.main.OldUI_SubHeader;
 import pageObjectModels.scheduler.Dashboards;
-import pageObjectModels.scheduler.SchemaLoads;
 import pageObjectModels.schemas.SchemaList;
 import pageObjectModels.schemas.SchemaList_SchemaView;
 import pageObjectModels.security.Groups;
 import pageObjectModels.security.Groups_Group;
 import pageObjectModels.security.Users;
 
-@Epic("Incorta -> Roles")
+@Epic("Security -> Roles")
 public class RolesTest {
 
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used in the tests
-    Login loginPage;
-    SignOut logoutPage;
-    OldUI_SubHeader subHeaderObject;
-    DataSources dataSourcesPage;
-    SchemaList schemasPage;
-    SchemaList_SchemaView schemasViewPage;
-    Users usersPage;
-    Content_Dashboard_AnalyzeInsight analyzeInsightPage;
-    Groups groupsPage;
-    SchemaLoads schedulerSchemaLoadsPage;
-    Dashboards schedulerDashboardsPage;
-    Header newHeaderObject;
-    Content newContentPage;
-    Groups_Group groups_groupPage;
-    Content_Dashboard dashboardPage;
-    Content_Dashboard_SendDashboard sendDashboardPage;
-    Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
-    SignOut logoutpage;
+    private Login loginPage;
+    private SignOut logoutPage;
+    private OldUI_SubHeader subHeaderObject;
+    private DataSources dataSourcesPage;
+    private SchemaList schemasPage;
+    private SchemaList_SchemaView schemasViewPage;
+    private Users usersPage;
+    private Content_Dashboard_AnalyzeInsight analyzeInsightPage;
+    private Groups groupsPage;
+    private Dashboards schedulerDashboardsPage;
+    private Header newHeaderObject;
+    private Content newContentPage;
+    private Groups_Group groups_groupPage;
+    private Content_Dashboard dashboardPage;
+    private Content_Dashboard_SendDashboard sendDashboardPage;
+    private Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
 
     // Declaring public variables that will be shared between tests
-    String NewFolderName;
-    String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
-    String FolderNameToShare = "Automation_Folder_FolderToBeShared";
-    String UserToShareWithFolder = "Automation_User_UserToShareFolderWith";
-    String newDashboardName, newInsightName;
-    String NewSchemaName;
-    String ExistingSchemaNAME = "Automation_Schema_SchemaAddDataSource"; // Existing Schema to be used as predefined
-    String NewDataSourceTableName; // Table name to be used in assertion
-    String LoadDataSchema = "Automation_Schema_SchemaLoad";// Predefined Schema with data source to load data into it.
-    String ShareSchema = "Automaton_Schema_SchemaShare";
-    String UserToShareWith = "Automation_User_UserToShareSchemaWith"; // User To Share With as a predefined, he should
-								      // be super user or schema
+    private String FolderNameToDelete = "Automation_Folder_FolderToBeDeleted";
+    private String FolderNameToShare = "Automation_Folder_FolderToBeShared";
+    private String UserToShareWithFolder = "Automation_User_UserToShareFolderWith";
+    private String newDashboardName, newInsightName;
+    private String NewSchemaName;
+    private String ExistingSchemaNAME = "Automation_Schema_SchemaAddDataSource"; // Existing Schema to be used as
+										 // predefined
+    private String NewDataSourceTableName; // Table name to be used in assertion
+    private String LoadDataSchema = "Automation_Schema_SchemaLoad";// Predefined Schema with data source to load data
+								   // into it.
+    private String ShareSchema = "Automaton_Schema_SchemaShare";
+    private String UserToShareWith = "Automation_User_UserToShareSchemaWith"; // User To Share With as a predefined, he
+									      // should
+    // be super user or schema
     // manager to grant 'Can Edit' permission
-    String DataSourceName;
-    String initialLoadStatus;
-    String newGroupName;
-    String[] newUserData;
-    String NewSchemaDescription = "Created by a script in class LoginTest.java";
-    String FolderToBeRenamed = "Automation_Folder_FolderToBeRenamed";
-    String newFolderName;
-    String NewDashboardName = "New Dashboard";
-    String SchemaNameForInsight = "Automaton_Schema_SchemaShare";
-    String FolderNameToBeMoved = "Automation_Folder_FolderToBeMoved";
-    String FolderNameToMoveTo = "Automation_Folder_MovedFolder";
-    String DashboardNameToBeDeleted = "Automation_Dashboard_DashboardtoBeDeleted";
-    String DashboardToBeShared = "Automation_Dashboard_DashboardToBeSharedOrSend";
-    String ToMail = "automation_robot1@incorta.com";
-    String CcMail = "automation_robot2@incorta.com";
-    String BccMail = "automation_robot3@incorta.com";
-    String newScheduledSendDashboardJobName;
-    String DashboardNameToBeCopied = "Automation_Dashboard_ToBeCopied";
-    String DashboardNameToMove = "Automation_Dashboard_Move";
-    String DashboardNameToRename = "Automation_Dashboard_Rename";
+    private String DataSourceName;
+    private String initialLoadStatus;
+    private String newGroupName;
+    private String[] newUserData;
+    private String FolderToBeRenamed = "Automation_Folder_FolderToBeRenamed";
+    private String newFolderName;
+    private String SchemaNameForInsight = "Automaton_Schema_SchemaShare";
+    private String FolderNameToBeMoved = "Automation_Folder_FolderToBeMoved";
+    private String FolderNameToMoveTo = "Automation_Folder_MovedFolder";
+    private String DashboardNameToBeDeleted = "Automation_Dashboard_DashboardtoBeDeleted";
+    private String DashboardToBeShared = "Automation_Dashboard_DashboardToBeSharedOrSend";
+    private String ToMail = "automation_robot1@incorta.com";
+    private String CcMail = "automation_robot2@incorta.com";
+    private String BccMail = "automation_robot3@incorta.com";
+    private String newScheduledSendDashboardJobName;
+    private String DashboardNameToBeCopied = "Automation_Dashboard_ToBeCopied";
+    private String DashboardNameToMove = "Automation_Dashboard_Move";
+    private String DashboardNameToRename = "Automation_Dashboard_Rename";
 
     // Prerequisites, Schema Manager user + Connection credentials to data source
     @Test(priority = 14, description = "TC C60535_1 - Schema Manager Permissions")

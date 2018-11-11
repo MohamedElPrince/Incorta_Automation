@@ -11,7 +11,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import pageObjectModels.content.Content;
 import pageObjectModels.login.Login;
 import pageObjectModels.main.Header;
 import pageObjectModels.main.OldUI_SubHeader;
@@ -19,32 +18,31 @@ import pageObjectModels.security.Groups;
 import pageObjectModels.security.Groups_Group;
 import pageObjectModels.security.Users;
 
-@Epic("Incorta -> Security -> Groups")
+@Epic("Security -> Groups")
 public class GroupsTest {
 
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used in the tests
-    Groups groupsPage;
-    Login loginPage;
-    OldUI_SubHeader subHeaderObject;
-    Users usersPage;
-    Groups_Group groupPage;
-    Content newContentPage;
-    Header newHeaderObject;
+    private Groups groupsPage;
+    private Login loginPage;
+    private OldUI_SubHeader subHeaderObject;
+    private Users usersPage;
+    private Groups_Group groupPage;
+    private Header newHeaderObject;
 
     // Declaring Variables that will be used in below tests
-    String newGroupName;
-    String AddedRoles[];
+    private String newGroupName;
+    private String AddedRoles[];
 
     // Prerequisite, Login using Admin + A predefined group, user, role
     // Prerequisites, To be created manually for now
-    String groupNameToBeSelected = "Automation_Group_GroupToBeDeleted";
-    String userNameAddedToTheGroup = "Automation_User_NormalUser";
-    String groupNameForTheUser = "Automation_Group_AddUserToGroup";
-    String clickOnGroupName = "Automation_Group_AddRoleToGroup";
+    private String groupNameToBeSelected = "Automation_Group_GroupToBeDeleted";
+    private String userNameAddedToTheGroup = "Automation_User_NormalUser";
+    private String groupNameForTheUser = "Automation_Group_AddUserToGroup";
+    private String clickOnGroupName = "Automation_Group_AddRoleToGroup";
 
     @Test(priority = 1, description = "TC_C474 - Create New Group.")
     @Description("Given I've logged in. When I navigate to Security Tab, And go to Groups and click on the "

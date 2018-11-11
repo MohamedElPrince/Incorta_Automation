@@ -13,54 +13,34 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.Content;
-import pageObjectModels.data.DataSources;
 import pageObjectModels.login.Login;
 import pageObjectModels.login.SignOut;
 import pageObjectModels.main.Header;
 import pageObjectModels.main.OldUI_SubHeader;
 import pageObjectModels.schemas.SchemaList;
-import pageObjectModels.schemas.SchemaList_SchemaView;
-import pageObjectModels.security.Groups_Group;
 import pageObjectModels.security.Users;
 
-@Epic("incorta -> Security -> Users")
-
+@Epic("Security -> Users")
 public class UsersTest {
-
-    //// Prerequisites
-    /**
-     * - Manually Add user with name "Test_User" till automating test data - Add
-     * profile picture image at prepare test data phase
-     */
-
     //// Variables
-    WebDriver driver;
-    ExcelFileManager testDataReader;
-    String[] newUserData;
-    String TempUser = "Automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one created at
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
+    private String[] newUserData;
+    private String TempUser = "Automation_user_user_toBeEditedAndDeleted"; // to be replaced later with dynamic one
+									   // created at
     // prepare test data phase
-    String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data phase
-    String newPassword;
-    String newDataSourceName;
-    String newSchemaName;
-    String newDataSourceTableName;
-    String newFolderName;
-    String newDashboardName;
-    String newInsightName;
+    private String Picture = "ProfilePicture.jpg"; // to be replaced later with dynamic one created at prepare test data
+						   // phase
 
     //// Page Objects
-    Login loginPage;
-    SignOut logoutpage;
-    Users usersPage;
-    OldUI_SubHeader subHeaderObject;
-    Groups_Group groups_groupPage;
-    Content allContentPage;
-    DataSources dataSourcesPage;
-    SchemaList schemasPage;
-    SchemaList_SchemaView schemasViewPage;
-    Header newHeaderObject;
-    Content newContentPage;
-    Header newsubHeaderObject;
+    private Login loginPage;
+    private SignOut logoutpage;
+    private Users usersPage;
+    private OldUI_SubHeader subHeaderObject;
+    private SchemaList schemasPage;
+    private Header newHeaderObject;
+    private Content newContentPage;
+    private Header newsubHeaderObject;
 
     //// Test Cases
     @Test(priority = 1, description = "C478 - Create User")

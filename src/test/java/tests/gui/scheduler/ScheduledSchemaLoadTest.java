@@ -15,21 +15,17 @@ import pageObjectModels.login.Login;
 import pageObjectModels.main.OldUI_SubHeader;
 import pageObjectModels.scheduler.SchemaLoads;
 
-@Epic("ScheduledSchemaLoadTest")
-
+@Epic("Scheduler -> Scheduled Schema Load")
 public class ScheduledSchemaLoadTest {
 
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used throughout the test
-    OldUI_SubHeader mainPage;
-    SchemaLoads scheduledSchema;
-    Login loginPage;
-    // Declaring public variables that will be shared between tests
-
-    // String SchemaName;
+    private OldUI_SubHeader mainPage;
+    private SchemaLoads scheduledSchema;
+    private Login loginPage;
 
     // Admin user // Per-created schema // Per-created schema schedule job with
     // diff. name. //here i open existing schema job created and edit its recurrence

@@ -12,11 +12,13 @@ import com.shaft.api.RestActions;
 import com.shaft.io.ExcelFileManager;
 import com.shaft.io.ReportManager;
 
+import io.qameta.allure.Epic;
 import io.restassured.response.Response;
 
+@Epic("API Certification -> BFF Dashboards")
 public class Dashboards_bff_Test {
 
-    ExcelFileManager testDataReader;
+    private ExcelFileManager testDataReader;
 
     private final String serviceURI = System.getProperty("incortaRoot");
     // private final String serviceURI = "http://35.184.27.139:9091/incorta/";
@@ -27,23 +29,21 @@ public class Dashboards_bff_Test {
     private String requestType;
     private String argument = "";
     private final static String successStatusCode = "200";
-    JsonObject body = new JsonObject();
+    private JsonObject body = new JsonObject();
 
-    String tenantName;
-    String username;
-    String password;
-    // String tenantName = "demobff";
-    // String username = "admin";
-    // String password = "admin";
-    String name;
-    String id;
-    List<Integer> foldersIds;
-    String namePostfix = "_BFFupdated";
+    private String tenantName;
+    private String username;
+    private String password;
 
-    int totalFoldersCounter = 0;
-    int totalDashboardsCounter = 0;
+    private String name;
+    private String id;
+    private List<Integer> foldersIds;
+    private String namePostfix = "_BFFupdated";
 
-    RestActions restObject;
+    private int totalFoldersCounter = 0;
+    private int totalDashboardsCounter = 0;
+
+    private RestActions restObject;
 
     @Test(priority = 0, description = "TC000 - Authenticate")
     public void authenticate() {

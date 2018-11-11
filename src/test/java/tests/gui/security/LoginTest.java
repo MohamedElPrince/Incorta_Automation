@@ -19,22 +19,22 @@ import pageObjectModels.main.Header;
 import pageObjectModels.main.OldUI_SubHeader;
 import pageObjectModels.security.Users;
 
-@Epic("Incorta -> Login")
+@Epic("Security -> Login")
 public class LoginTest {
 
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used in the tests
-    Login loginPage;
-    SignOut logoutpage;
-    Header newHeaderObject;
-    OldUI_SubHeader subHeaderObject;
-    Users usersPage;
+    private Login loginPage;
+    private SignOut logoutpage;
+    private Header newHeaderObject;
+    private OldUI_SubHeader subHeaderObject;
+    private Users usersPage;
 
     // Declaring public variables that will be shared between tests
-    String[] newUserData;
+    private String[] newUserData;
 
     // Prerequisites, Manually created 'Analyzer User' [User name/Pass:
     // AbdelsalamAnalyzer/AbdelsalamAnalyzer1]

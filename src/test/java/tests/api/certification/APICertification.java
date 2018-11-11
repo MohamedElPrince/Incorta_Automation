@@ -10,8 +10,10 @@ import com.shaft.api.RestActions;
 import com.shaft.io.ReportManager;
 import com.shaft.validation.Assertions;
 
+import io.qameta.allure.Epic;
 import io.restassured.response.Response;
 
+@Epic("API Certification -> POC")
 public class APICertification {
     private final String serviceURI = "http://35.184.27.139:1230/incorta";
     private String serviceName;
@@ -20,9 +22,9 @@ public class APICertification {
     private Response response;
     private final static String successStatusCode = "200";
 
-    String tenantName = "demo";
-    String username = "admin";
-    String password = "admin";
+    private String tenantName = "demo";
+    private String username = "admin";
+    private String password = "admin";
 
     RestActions restObject = new RestActions(serviceURI);
 

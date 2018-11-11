@@ -13,28 +13,28 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.api.CLI;
 import pageObjectModels.api.Python;
 
-@Epic("incorta CLI > Export Dashboard")
+@Epic("CLI Certification -> Export dashboard")
 public class ExportDashboardTest {
 
     // String metadataDBType = "derby"; // oracle | mysql | derby [if derby need to
     // close incorta first]
-    String hostname = "35.184.27.139";
-    int sshPortNumber = 22;
-    int apiPortNumber = 9080;
-    String username = "incorta";
-    String keyFileFolderName = System.getProperty("testDataFolderPath");
-    String keyFileName = "newAutomationEnvironment.key";
+    private String hostname = "35.184.27.139";
+    private int sshPortNumber = 22;
+    private int apiPortNumber = 9080;
+    private String username = "incorta";
+    private String keyFileFolderName = System.getProperty("testDataFolderPath");
+    private String keyFileName = "newAutomationEnvironment.key";
 
-    String dockerName = "analytics-mysql";
-    String dockerUsername = "incorta";
+    private String dockerName = "analytics-mysql";
+    private String dockerUsername = "incorta";
 
-    String installationDirectory = "home/incorta/IncortaAnalytics_Analytics_Mysql/IncortaNode"; // issue
-    String tenantName = "cli";
-    String tenantUsername = "admin";
-    String tenantPassword = "admin";
+    private String installationDirectory = "home/incorta/IncortaAnalytics_Analytics_Mysql/IncortaNode"; // issue
+    private String tenantName = "cli";
+    private String tenantUsername = "admin";
+    private String tenantPassword = "admin";
 
-    CLI cli_instance;
-    Python py_instance;
+    private CLI cli_instance;
+    private Python py_instance;
 
     @Test(priority = 1, description = "C83334 - MYSQL: Export a dashboard is working from CLI")
     @Description("When I export a dashboard using the specified parameters, then it will be exported successfully.")

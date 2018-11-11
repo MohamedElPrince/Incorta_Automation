@@ -13,27 +13,25 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.api.CLI;
 import pageObjectModels.api.Python;
 
-@Epic("incorta CLI > Export Dashboard")
+@Epic("CLI Certification -> Import dashboard")
 public class ImportDashboardTest {
 
     // String metadataDBType = "derby"; // oracle | mysql | derby [if derby need to
     // close incorta first]
+    private String hostname = "35.184.27.139";
+    private int sshPortNumber = 22;
+    private int apiPortNumber = 9091;
+    private String username = "incorta";
+    private String keyFileFolderName = System.getProperty("testDataFolderPath");
+    private String keyFileName = "newAutomationEnvironment.key";
 
-    // http://35.184.27.139:9091/incorta/new/
-    String hostname = "35.184.27.139";
-    int sshPortNumber = 22;
-    int apiPortNumber = 9091;
-    String username = "incorta";
-    String keyFileFolderName = System.getProperty("testDataFolderPath");
-    String keyFileName = "newAutomationEnvironment.key";
+    private String installationDirectory = "IncortaAnalytics_Typical_Mysql/IncortaNode"; // issue
+    private String tenantName = "cli";
+    private String tenantUsername = "admin";
+    private String tenantPassword = "admin";
 
-    String installationDirectory = "IncortaAnalytics_Typical_Mysql/IncortaNode"; // issue
-    String tenantName = "cli";
-    String tenantUsername = "admin";
-    String tenantPassword = "admin";
-
-    CLI cli_instance;
-    Python py_instance;
+    private CLI cli_instance;
+    private Python py_instance;
 
     @Test(priority = 1, description = "C84789 - Linux:MySQL:Testing that user can import dashboard without overwrite option")
     @Description("When I import a dashboard using the specified parameters, then it will be imported successfully.")

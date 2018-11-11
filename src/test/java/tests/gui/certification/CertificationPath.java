@@ -30,41 +30,41 @@ import pageObjectModels.security.Groups;
 import pageObjectModels.security.Groups_Group;
 import pageObjectModels.security.Users;
 
-@Epic("incorta Certification Path - New UI.")
+@Epic("UI Certification -> Certification path")
 public class CertificationPath {
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used throughout the test
-    Login newLoginPage;
-    SignOut newSignOutPage;
-    Header newHeaderObject;
-    Content newContentPage;
-    Content_Dashboard newDashboardPage;
-    Content_Dashboard_AnalyzeInsight newAnalyzeInsightPage;
-    OldUI_SubHeader newsubHeaderObject;
-    Content_Dashboard_SendDashboard newSendDashboardPage;
-    Users newUsersPage;
-    Groups newGroupsPage;
-    Groups_Group newGroupPage;
-    DataSources newDataSourcesPage;
-    Dashboards newSchedulerDashboardsPage;
-    SchemaLoads newSchedulerSchemaLoadsPage;
-    SchemaList newSchemasPage;
-    SchemaList_SchemaView newSchemasViewPage;
-    DataFiles newDataFilesPage;
-    SchemaList_Table newSchemaTablePage;
+    private Login newLoginPage;
+    private SignOut newSignOutPage;
+    private Header newHeaderObject;
+    private Content newContentPage;
+    private Content_Dashboard newDashboardPage;
+    private Content_Dashboard_AnalyzeInsight newAnalyzeInsightPage;
+    private OldUI_SubHeader newsubHeaderObject;
+    private Content_Dashboard_SendDashboard newSendDashboardPage;
+    private Users newUsersPage;
+    private Groups newGroupsPage;
+    private Groups_Group newGroupPage;
+    private DataSources newDataSourcesPage;
+    private Dashboards newSchedulerDashboardsPage;
+    private SchemaLoads newSchedulerSchemaLoadsPage;
+    private SchemaList newSchemasPage;
+    private SchemaList_SchemaView newSchemasViewPage;
+    private DataFiles newDataFilesPage;
+    private SchemaList_Table newSchemaTablePage;
 
     // Declaring public variables that will be shared between tests
-    String[] newUserData; // username, password, displayname
-    String newGroupName;
-    String newDataSourceName;
-    String newDataFileName, newDataFileExtension;
-    String newSchemaName;
-    String newScheduledSchemaLoadJobName;
-    String newDataSourceTableName, newDataFileTableName;
-    String newDashboardName, newInsightName;
+    private String[] newUserData; // username, password, displayname
+    private String newGroupName;
+    private String newDataSourceName;
+    private String newDataFileName, newDataFileExtension;
+    private String newSchemaName;
+    private String newScheduledSchemaLoadJobName;
+    private String newDataSourceTableName, newDataFileTableName;
+    private String newDashboardName, newInsightName;
 
     @Test(priority = 1, description = "TC001 - Login using Admin Account.")
     @Description("When I navigate to the login page, And I login using valid credentials Then all the section headers will be displayed, and the content tab is selected.")

@@ -17,22 +17,18 @@ import pageObjectModels.main.OldUI_SubHeader;
 import pageObjectModels.scheduler.SchemaLoads;
 import pageObjectModels.schemas.SchemaList;
 
-@Epic("ScheduleSchema Test")
-
+@Epic("Schemas -> Schedule Schemas")
 public class ScheduleSchemaTest {
 
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used throughout the test
-    Login loginPage;
-    SchemaList schemasPage;
-    SchemaLoads scheduledSchema;
-    OldUI_SubHeader mainPage;
-
-    // Declaring public variables that will be shared between tests
-    // String SchemaName;
+    private Login loginPage;
+    private SchemaList schemasPage;
+    private SchemaLoads scheduledSchema;
+    private OldUI_SubHeader mainPage;
 
     @Test(priority = 1, description = "C77115 - Firefox: Fresh Installation: Testing that the new Scheduler Schema UI is correctly displayed.")
     @Description("When I navigate to the schema list page, And I select a schema and select schedule, Then scheduler view displayed correctly.")

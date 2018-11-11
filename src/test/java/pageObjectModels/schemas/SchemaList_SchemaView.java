@@ -9,84 +9,53 @@ import com.shaft.validation.Assertions;
 
 public class SchemaList_SchemaView {
     //// Variables
-    WebDriver driver;
-    ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+    private WebDriver driver;
+    private ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 
     //// Elements
-    // By header_schemaIcon_image;
-    By header_schemaName_label = By.xpath("//div[@class='schema-header']//div[@class='schemaName']");
-    // By header_schemaDiscription_label;
-    // By header_lastLoadStatusHeader_label;
-    By header_lastLoadStatus_link = By.xpath("//*[contains(@ng-if,'schemaStatus.lastLoadState')]");
-    // By header_loadingTimeHeader_label;
-    // By header_loadingTime_label;
-    // By header_tablesHeader_label;
-    // By header_tables_label;
-    // By header_joinsHeader_label;
-    // By header_joins_label;
-    // By header_rowsHeader_label;
-    // By header_rows_label;
-    // By header_dataSizeHeader_label;
-    // By header_dataSize_label;
+    private By header_schemaName_label = By.xpath("//div[@class='schema-header']//div[@class='schemaName']");
+    private By header_lastLoadStatus_link = By.xpath("//*[contains(@ng-if,'schemaStatus.lastLoadState')]");
 
-    // By body_schemaWizard_button;
-    By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
-    By body_sqlDatabase_button;
-    By body_fileSystem_button;
-    // By body_kafka_button;
-    // By body_netSuite_button;
-    // By body_salesForce_button;
-    // By body_serviceNow_button;
-    // By body_zuora_button;
-    // By body_materialized_button;
-    // By body_alias_button;
+    private By body_iframe = By.xpath("//iframe[@title='Legacy Web']");
 
-    By body_tableType_image; // div[@id='sales']//img[contains(@class,'fileTypeImg')]
-    By body_tableName_label; // div[@id='sales']//div[contains(@class,'SchemaTable')]//p[@class='ng-binding']
-    By body_tableAttribute_label;
-    By body_dropDownToggle_link; // div[@id='sales']//a[@class='dropdown-toggle']
-    By body_dropDownMenuItem_link; // div[@id='sales']//ul[contains(@class,'dropdown-menu')]//a[normalize-space(.)='Table
-				   // Details']
-    By body_lastTableName_label = By.xpath(
+    private By body_tableName_label; // div[@id='sales']//div[contains(@class,'SchemaTable')]//p[@class='ng-binding']
+    private By body_tableAttribute_label;
+
+    private By body_lastTableName_label = By.xpath(
 	    "//section[@id='schemaWrapper']/div[contains(@class,'schemaContent')]/div[last()]//div[contains(@class,'SchemaTable')]//p[@class='ng-binding']");
 
-    By popup_schemaWizard_header_label = By.xpath("//div[@class='btf-modal-title']/h1");
-    By popup_schemaWizard_dataSource_list = By
+    private By popup_schemaWizard_dataSource_list = By
 	    .xpath("//ng-include/div[contains(@class,'wizardFirstStep')]//select[@name='dataSourceId']");
-    By popup_schemaWizard_createImplicitJoins_checkbox = By
+    private By popup_schemaWizard_createImplicitJoins_checkbox = By
 	    .xpath("//ng-include/div[contains(@class,'wizardFirstStep')]//input[@type='checkbox']"); // when selected
 												     // the class
 												     // contains
 												     // [ng-not-empty]
 
-    By popup_schemaWizard_search_textBox = By.xpath("//input[@ng-model='searchText']");
-    By popup_schemaWizard_dataName_label; // span[contains(@class,'dataName')][text()='salesdb']
-    By popup_schemaWizard_selectAll_link = By.xpath("//a[@ng-click='selectAllTables()']");
+    private By popup_schemaWizard_search_textBox = By.xpath("//input[@ng-model='searchText']");
+    private By popup_schemaWizard_dataName_label; // span[contains(@class,'dataName')][text()='salesdb']
 
-    By popup_schemaWizard_welcomeText_label = By.xpath("//p[@class='wizardWelcomeTxt']"); // p[@class='wizardWelcomeTxt'][contains(normalize-space(.),'Schema
-											  // verification finished!
-											  // Click Finish to save your
-											  // schema.')]
+    private By popup_schemaWizard_welcomeText_label = By.xpath("//p[@class='wizardWelcomeTxt']");
+    // p[@class='wizardWelcomeTxt'][contains(normalize-space(.),'Schema verification
+    // finished! Click Finish to save your schema.')]
 
-    By popup_schemaWizard_next_button = By.xpath("//button[@type='submit'][contains(normalize-space(),'Next')]");
-    By popup_schemaWizard_finish_button = By.xpath("//button[@type='submit'][@ng-click='doFinish()']");
+    private By popup_schemaWizard_next_button = By
+	    .xpath("//button[@type='submit'][contains(normalize-space(),'Next')]");
+    private By popup_schemaWizard_finish_button = By.xpath("//button[@type='submit'][@ng-click='doFinish()']");
 
-    By popup_dataLoading_load_button = By.xpath("//button[normalize-space(.)='Load']");
+    private By popup_dataLoading_load_button = By.xpath("//button[normalize-space(.)='Load']");
 
-    // By popup_SchemaSettings_SharingTab =
-    // By.xpath("//ul[@class='modalTabLinks']//a[@ng-click='tabState =
-    // 'sharing'']");
-    By popup_SchemaSettings_SharingTab = By
+    private By popup_SchemaSettings_SharingTab = By
 	    .xpath("//ul[@class='modalTabLinks']//a[contains(string(),'Sharing')]/parent::li");
 
-    By popup_SchemaSettings_SharingTab_Add_Button = By.xpath("//a[contains(@class,'usersHeadAdd right')]");
-    By popup_SchemaSettings_SharingTab_Permission;
-    By popup_SchemaSettings_SharingTab_ClickSearchField = By
+    private By popup_SchemaSettings_SharingTab_Add_Button = By.xpath("//a[contains(@class,'usersHeadAdd right')]");
+    private By popup_SchemaSettings_SharingTab_Permission;
+    private By popup_SchemaSettings_SharingTab_ClickSearchField = By
 	    .xpath("//div[@class='shareSearch ng-scope']/input[@type=\"text\"]");
-    By popup_SchemaSettings_SharingTab_SelectFromSearchField;
-    By popup_SchemaSettings_SharingTab_SaveButton = By.xpath("//button[contains(string(), 'Save')]");
-    By popup_SchemaSettings_SharingTab_UsersSharedWith;
-    By popup_SchemaSettings_SharingTab_UsersPermission;
+    private By popup_SchemaSettings_SharingTab_SelectFromSearchField;
+    private By popup_SchemaSettings_SharingTab_SaveButton = By.xpath("//button[contains(string(), 'Save')]");
+    private By popup_SchemaSettings_SharingTab_UsersSharedWith;
+    private By popup_SchemaSettings_SharingTab_UsersPermission;
 
     //// Functions
     public SchemaList_SchemaView(WebDriver driver) {

@@ -4,6 +4,9 @@ import org.testng.annotations.Test;
 
 import com.shaft.api.RestActions;
 
+import io.qameta.allure.Epic;
+
+@Epic("API Certification -> BFF POC")
 public class APICertification_BFF {
     private final String serviceURI = "http://35.184.27.139:9091/incorta";
     private String serviceName;
@@ -11,11 +14,11 @@ public class APICertification_BFF {
     private String argument = "";
     private final static String successStatusCode = "200";
 
-    String tenantName = "demo";
-    String username = "admin";
-    String password = "admin";
+    private String tenantName = "demo";
+    private String username = "admin";
+    private String password = "admin";
 
-    RestActions restObject = new RestActions(serviceURI);
+    private RestActions restObject = new RestActions(serviceURI);
 
     @Test(priority = 0, description = "TC000 - Authenticate")
     public void authenticate() {

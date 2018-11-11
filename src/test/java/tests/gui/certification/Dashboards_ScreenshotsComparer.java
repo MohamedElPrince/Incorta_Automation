@@ -21,25 +21,23 @@ import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.Content;
 import pageObjectModels.content.Content_Dashboard;
 import pageObjectModels.login.Login;
-import pageObjectModels.login.SignOut;
 import pageObjectModels.main.Header;
 
-@Epic("incorta New UI Certification - Dashboards_ScreenshotsComparer.")
+@Epic("UI Certification -> Screenshots Comparer")
 public class Dashboards_ScreenshotsComparer {
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
-    int totalDashboardsCounter = 0;
-    int totalFoldersCounter = 0;
-    int totalInsightsCounter = 0;
-    boolean isRegularFolder = false;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
+    private int totalDashboardsCounter = 0;
+    private int totalFoldersCounter = 0;
+    private int totalInsightsCounter = 0;
+    private boolean isRegularFolder = false;
 
     // Declaring Page Objects that will be used throughout the test
-    Login newLoginPage;
-    SignOut newSignOutPage;
-    Header newHeaderObject;
-    Content newContentPage;
-    Content_Dashboard newDashboardPage;
+    private Login newLoginPage;
+    private Header newHeaderObject;
+    private Content newContentPage;
+    private Content_Dashboard newDashboardPage;
 
     // Declaring public variables that will be shared between tests
 

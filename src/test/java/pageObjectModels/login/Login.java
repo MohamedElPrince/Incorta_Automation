@@ -11,32 +11,30 @@ import com.shaft.validation.Verifications;
 
 public class Login {
     //// Variables
-    WebDriver driver;
-    ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
-    String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_login_login");
-    String incortaVersion = System.getProperty("incortaVersion");
+    private WebDriver driver;
+    private ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+    private String url = System.getProperty("incortaRoot") + testDataReader.getCellData("URL_login_login");
+    private String incortaVersion = System.getProperty("incortaVersion");
 
     //// Elements
-    By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");
-    By header_incorta_website_logo = By.xpath("//span[text()='Website']/parent::a");
-    By header_incorta_twitter_logo = By.xpath("//*[@data-icon='twitter']/ancestor::a");
-    By header_incorta_linkedin_logo = By.xpath("//i[contains(@class,'linkedin')]/parent::a");
-    By body_WarningMessage = By.xpath("//span[@class='error-message']");
-    By body_incorta_support_logo = By.xpath("//span[contains(.,'Support')]/parent::a");
-    By body_tenant_textBox = By.id("tenant");
-    By body_username_textBox = By.id("username");
-    By body_password_textBox = By.id("password");
-    By body_forgotPassword_link = By.xpath("//button[@type='button'][contains(.,'Forgot Password?')]");
-    By body_signIn_button = By.xpath("//button[@type='submit'][contains(.,'Sign In')]");
-    By footer_incortaCopyrights_label = By.xpath("//div[contains(@class,'footer')]");
+    private By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");
+    private By header_incorta_website_logo = By.xpath("//span[text()='Website']/parent::a");
+    private By header_incorta_twitter_logo = By.xpath("//*[@data-icon='twitter']/ancestor::a");
+    private By header_incorta_linkedin_logo = By.xpath("//i[contains(@class,'linkedin')]/parent::a");
+    private By body_WarningMessage = By.xpath("//span[@class='error-message']");
+    private By body_incorta_support_logo = By.xpath("//span[contains(.,'Support')]/parent::a");
+    private By body_tenant_textBox = By.id("tenant");
+    private By body_username_textBox = By.id("username");
+    private By body_password_textBox = By.id("password");
+    private By body_forgotPassword_link = By.xpath("//button[@type='button'][contains(.,'Forgot Password?')]");
+    private By body_signIn_button = By.xpath("//button[@type='submit'][contains(.,'Sign In')]");
+    private By footer_incortaCopyrights_label = By.xpath("//div[contains(@class,'footer')]");
 
     // First Time Login
-    By body_changePasswordMessageHeader_label;
-    By body_changePasswordMessageBody_label;
-    By body_oldPassword_textBox = By.id("oldPassword");
-    By body_newPassword_textBox = By.id("newPassword");
-    By body_confirmNewPassword_textBox = By.id("confirmNewPassword");
-    By body_updatePassword_button = By.xpath("//button[@type='submit'][contains(.,'Create & Go')]");
+    private By body_oldPassword_textBox = By.id("oldPassword");
+    private By body_newPassword_textBox = By.id("newPassword");
+    private By body_confirmNewPassword_textBox = By.id("confirmNewPassword");
+    private By body_updatePassword_button = By.xpath("//button[@type='submit'][contains(.,'Create & Go')]");
 
     //// Functions
     public Login(WebDriver driver) {

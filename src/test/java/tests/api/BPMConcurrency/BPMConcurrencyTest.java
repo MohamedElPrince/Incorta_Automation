@@ -10,21 +10,23 @@ import com.shaft.io.ExcelFileManager;
 import com.shaft.validation.Assertions;
 import com.shaft.validation.Verifications;
 
+import io.qameta.allure.Epic;
 import io.restassured.response.Response;
 
+@Epic("Apple performance requirements -> BPMConcurrency")
 public class BPMConcurrencyTest {
-    ExcelFileManager testDataReader;
+    private ExcelFileManager testDataReader;
     private final static String successStatusCode = "200";
     private String serviceURI = "";
-    RestActions restObject;
+    private RestActions restObject;
 
-    String tenantName = "";
-    String username = "";
-    String password = "";
-    String fullName = "";
+    private String tenantName = "";
+    private String username = "";
+    private String password = "";
+    private String fullName = "";
 
-    String dashboardID = "";
-    String[] insightIDs;
+    private String dashboardID = "";
+    private String[] insightIDs;
 
     @Factory(dataProvider = "dataProviderMethod")
     public BPMConcurrencyTest(String tenantName, String username, String password, String fullName) {

@@ -11,24 +11,24 @@ import com.shaft.validation.Verifications;
 public class SignOut {
 
     //// Variables
-    WebDriver driver;
-    ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
-    String signedOutMessageHeader = testDataReader.getCellData("signedOutMessageHeader");
-    String signedOutMessageBody = testDataReader.getCellData("signedOutMessageBody");
+    private WebDriver driver;
+    private ExcelFileManager testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
+    private String signedOutMessageHeader = testDataReader.getCellData("signedOutMessageHeader");
+    private String signedOutMessageBody = testDataReader.getCellData("signedOutMessageBody");
 
     //// Elements
-    By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");
-    By header_incorta_website_logo = By.xpath("//span[text()='Website']/parent::a");
-    By header_incorta_twitter_logo = By.xpath("//img[contains(@src,'twitter')]/parent::a");
-    By header_incorta_linkedin_logo = By.xpath("//img[contains(@src,'linkedin')]/parent::a");
-    By body_incorta_signOut_logo = By.xpath("//span[contains(@class,'container')]");
+    private By header_incortaLogo_image = By.xpath("//img[contains(@src,'incorta')]");
+    private By header_incorta_website_logo = By.xpath("//span[text()='Website']/parent::a");
+    private By header_incorta_twitter_logo = By.xpath("//img[contains(@src,'twitter')]/parent::a");
+    private By header_incorta_linkedin_logo = By.xpath("//img[contains(@src,'linkedin')]/parent::a");
+    private By body_incorta_signOut_logo = By.xpath("//span[contains(@class,'container')]");
 
-    By body_signedOutMessageHeader_label = By
+    private By body_signedOutMessageHeader_label = By
 	    .xpath("//div[@class='inc-login__forget-password-conf-container-reset-conf-text']/span");
-    By body_signedOutMessageBody_label = By
+    private By body_signedOutMessageBody_label = By
 	    .xpath("//div[@class='inc-login__forget-password-conf-container-reset-conf-text-body']/span");
-    By body_goToSignInPage = By.xpath("//span[contains(.,'Go to the Sign-in Page')]");
-    By body_goToSignInPage_link = By.xpath("//a[@href='/incorta#/login']");
+    private By body_goToSignInPage = By.xpath("//span[contains(.,'Go to the Sign-in Page')]");
+    private By body_goToSignInPage_link = By.xpath("//a[@href='/incorta#/login']");
 
     //// Functions
     public SignOut(WebDriver driver) {

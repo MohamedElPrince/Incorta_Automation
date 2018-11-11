@@ -8,24 +8,24 @@ import com.shaft.browser.BrowserFactory;
 import com.shaft.io.ExcelFileManager;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.login.Login;
 import pageObjectModels.login.SignOut;
 import pageObjectModels.main.Header;
 
+@Epic("Content -> NX SignIn")
 public class NX_SignIn_Test {
 
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used throughout the test
-    Login newLoginPage;
-    SignOut newSignOutPage;
-    Header newHeaderObject;
-
-    // Declaring public variables that will be shared between tests
+    private Login newLoginPage;
+    private SignOut newSignOutPage;
+    private Header newHeaderObject;
 
     @Test(priority = 1, description = "C82103 - Chrome: Testing that sign in page icons are displayed")
     @Description("When I navigate to the login page,Then all the icons will be displayed")

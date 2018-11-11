@@ -8,55 +8,22 @@ import com.shaft.browser.BrowserFactory;
 import com.shaft.io.ExcelFileManager;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.Content;
-import pageObjectModels.content.Content_Dashboard;
-import pageObjectModels.content.Content_Dashboard_AnalyzeInsight;
-import pageObjectModels.content.Content_Dashboard_ScheduleDashboard;
-import pageObjectModels.content.Content_Dashboard_SendDashboard;
-import pageObjectModels.content.Content_Folder;
-import pageObjectModels.data.DataSources;
 import pageObjectModels.login.Login;
-import pageObjectModels.main.Header;
-import pageObjectModels.main.OldUI_SubHeader;
-import pageObjectModels.scheduler.Dashboards;
-import pageObjectModels.scheduler.SchemaLoads;
-import pageObjectModels.schemas.SchemaList;
-import pageObjectModels.schemas.SchemaList_SchemaView;
-import pageObjectModels.security.Groups;
-import pageObjectModels.security.Groups_Group;
-import pageObjectModels.security.Users;
 
+@Epic("Content -> Rename Dashboard")
 public class RenameDashboard {
 
     // Declaring web-driver and excel reader instances
-    WebDriver driver;
-    ExcelFileManager testDataReader;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     // Declaring Page Objects that will be used throughout the test
-    Login loginPage;
-    OldUI_SubHeader subHeaderObject;
-    DataSources dataSourcesPage;
-    SchemaList schemasPage;
-    SchemaList_SchemaView schemasViewPage;
-    Users usersPage;
-
-    Content newUI_allContentPage;
-    Content_Dashboard_AnalyzeInsight analyzeInsightPage;
-    Content_Dashboard newUI_dashboardPage;
-    Content_Dashboard_SendDashboard sendDashboardPage;
-    Content_Dashboard_ScheduleDashboard scheduleDashboardPage;
-    Content_Folder newUI_folderPage;
-
-    Groups groupsPage;
-    SchemaLoads schedulerSchemaLoadsPage;
-    Dashboards schedulerDashboardsPage;
-    Header newHeaderObject;
-    Content newContentPage;
-    Groups_Group groups_groupPage;
-
-    // Declaring public variables that will be shared between tests
+    private Login loginPage;
+    private Content newUI_allContentPage;
 
     @Test(priority = 1, description = "C83005 - Chrome: Dashboard : Rename a dashboard is working.")
     @Description("When I navigate to the content screen, and I click on dashboard properties -> Rename - write new dahsboard name and I click on Rename. Then Dashboard will be renamed.")

@@ -15,31 +15,23 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageObjectModels.content.Content;
 import pageObjectModels.content.Content_Dashboard;
-import pageObjectModels.content.Content_Dashboard_AnalyzeInsight;
 import pageObjectModels.login.Login;
 import pageObjectModels.login.SignOut;
 import pageObjectModels.main.Header;
 
-@Epic("incorta -> Content -> Set_As_Default_Dashboard")
-
+@Epic("Content -> Set as default dashboard")
 public class Set_As_Default_DashboardTest {
 
     //// Variables
-    WebDriver driver;
-    ExcelFileManager testDataReader;
-    String[] UserData;
-
-    String FolderName;
-    String DashboardName;
-    String InsightName;
+    private WebDriver driver;
+    private ExcelFileManager testDataReader;
 
     //// Page Objects
-    Login loginPage;
-    SignOut newSignOutPage;
-    Header newHeaderObject;
-    Content allContentPage;
-    Content_Dashboard dashboardPage;
-    Content_Dashboard_AnalyzeInsight analyzeInsightPage;
+    private Login loginPage;
+    private SignOut newSignOutPage;
+    private Header newHeaderObject;
+    private Content allContentPage;
+    private Content_Dashboard dashboardPage;
 
     //// Test Cases
     @Test(priority = 1, description = "C82144 - Chrome: Set As Default Dashboard: Testing that the icon is displayed in the dashboard")

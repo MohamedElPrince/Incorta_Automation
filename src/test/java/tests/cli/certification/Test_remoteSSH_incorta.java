@@ -5,6 +5,9 @@ import org.testng.annotations.Test;
 import com.shaft.io.ReportManager;
 import com.shaft.support.SSHActions;
 
+import io.qameta.allure.Epic;
+
+@Epic("CLI Certification -> Testing remote SSH")
 public class Test_remoteSSH_incorta {
 
     @Test
