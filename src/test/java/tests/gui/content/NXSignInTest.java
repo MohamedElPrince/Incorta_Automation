@@ -1,5 +1,6 @@
 package tests.gui.content;
 
+import org.junit.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -261,5 +262,10 @@ public class NXSignInTest {
 		System.getProperty("testDataFolderPath") + "NewUI_NX_SignIn/TestData.xlsx");
 	testDataReader = new ExcelFileManager(System.getProperty("testDataFilePath"));
 	driver = BrowserFactory.getBrowser();
+    }
+    
+    @AfterClass
+    public void afterClass() {
+	BrowserFactory.closeAllDrivers();
     }
 }

@@ -1,5 +1,6 @@
 package tests.gui.content;
 
+import org.junit.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -716,5 +717,10 @@ public class CatalogOfContent {
     public void afterMethod() {
 	newHeaderObject.expandUserMenu();
 	newHeaderObject.signOut();
+    }
+
+    @AfterClass
+    public void afterClass() {
+	BrowserFactory.closeAllDrivers();
     }
 }

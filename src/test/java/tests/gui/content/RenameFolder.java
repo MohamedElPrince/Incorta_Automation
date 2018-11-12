@@ -1,5 +1,6 @@
 package tests.gui.content;
 
+import org.junit.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -234,5 +235,10 @@ public class RenameFolder {
 	loginPage.navigate_toURL();
 	loginPage.userLogin(testDataReader.getCellData("Tenant"), testDataReader.getCellData("Username"),
 		testDataReader.getCellData("Password"));
+    }
+    
+    @AfterClass
+    public void afterClass() {
+	BrowserFactory.closeAllDrivers();
     }
 }

@@ -1,5 +1,6 @@
 package tests.gui.content;
 
+import org.junit.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -359,5 +360,10 @@ public class SetAsDefaultDashboardTest {
 	// check that you signout successfully
 	newSignOutPage = new SignOut(driver);
 	newSignOutPage.assert_signOutMessageHeaderAndBodyAreCorrect();
+    }
+
+    @AfterClass
+    public void afterClass() {
+	BrowserFactory.closeAllDrivers();
     }
 }

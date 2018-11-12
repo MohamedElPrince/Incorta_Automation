@@ -13,12 +13,6 @@
 			</class>
 		</classes>
 	</test>
-	<test name="MakeACopy">
-		<classes>
-			<class name="tests.gui.content.MakeACopy">
-			</class>
-		</classes>
-	</test>
 	<test name="MakeACopyDashboard">
 		<classes>
 			<class name="tests.gui.content.MakeACopyDashboard">
